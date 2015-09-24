@@ -6,7 +6,7 @@ This repository is not the original repository for this tool. Here are some link
 * [The Official Project Page, including source code](http://pde.codeplex.com/)
 * The Tool on the Visual Studio Gallery
 * A Video of the Tool
-<br/>
+
 In this repository, for PDE you will find:
 
 :white_check_mark: The original tool (available)
