@@ -9,6 +9,7 @@ This repository is not the original repository for this tool. Here are some link
 
 In this repository, for PDE you will find:
 
-:white_check_mark: The original tool (available)
+:white_check_mark: Source Code used in the Video of the Tool (available)
+:white_check_mark: The original tool used in the Video Demo(available)
 
 This repository was constructed by [Craig Kimpel](https://github.com/cskimpel) under the supervision of [Emerson Murphy-Hill](https://github.com/CaptainEmerson).
