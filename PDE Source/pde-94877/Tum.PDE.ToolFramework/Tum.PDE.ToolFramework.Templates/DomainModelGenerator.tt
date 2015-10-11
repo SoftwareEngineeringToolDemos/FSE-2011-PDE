@@ -1,0 +1,941 @@
+﻿<#@ template language="C#" inherits="BaseTemplate"#> 
+<#@ import namespace="Tum.PDE.LanguageDSL"#>
+<#@ import namespace="Microsoft.VisualStudio.Modeling" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Collections.ObjectModel" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+using DslModeling = global::Microsoft.VisualStudio.Modeling;
+using DslDesign = global::Microsoft.VisualStudio.Modeling.Design;
+
+using DslEditorModeling = global::Tum.PDE.ToolFramework.Modeling;
+using DslEditorDiagrams = global::Tum.PDE.ToolFramework.Modeling.Diagrams;
+
+<# 
+GenerateDomainModel(this.MetaModel);
+#>
+
+<#+ 
+public void GenerateDomainModel(MetaModel dm)
+{
+#>
+namespace <#= dm.Namespace #>
+{
+	/// <summary>
+	/// DomainModel <#= dm.Name #>DomainModel
+<#+
+	PushIndent("\t");
+	this.Write(Utilities.Instance.GenerateComments(dm.Description));
+#>
+/// </summary>
+<#+
+	this.Write(Utilities.Instance.GenerateResourceAttributes(dm, GeneratedResourceName));
+	this.Write(Utilities.Instance.GenerateExtendsAttributes(dm));
+	PopIndent();
+#>
+	[global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling", Justification = "Generated code.")]
+	[DslModeling::DomainObjectId("<#= dm.Id.ToString("D") #>")]
+	[DslModeling::DependsOnDomainModel(typeof(DslEditorDiagrams::DiagramsDSLDomainModel))]
+	[DslModeling::DependsOnDomainModel(typeof(DslEditorModeling::DomainModelDslEditorModeling))]
+	public partial class <#= dm.Name #>DomainModel : DslEditorModeling::DomainModelBase
+	{
+		#region Constructor, domain model Id
+
+		/// <summary>
+		/// <#= dm.Name #>DomainModel domain model Id.
+		/// </summary>
+		public static readonly new global::System.Guid DomainModelId = new System.Guid("<#= dm.Id.ToString("D") #>");
+
+		/// <summary>
+		/// Constructor.
+		/// </summary>
+		/// <param name="store">Store containing the domain model.</param>
+		public <#= dm.Name #>DomainModel(DslModeling::Store store)
+			: base(store, DomainModelId)
+		{
+			// Call the partial method to allow any required serialization setup to be done.
+			this.InitializeSerialization(store);		
+		}
+	
+
+		///<Summary>
+		/// Defines a partial method that will be called from the constructor to
+		/// allow any necessary serialization setup to be done.
+		///</Summary>
+		///<remarks>
+		/// For a DSL created with the DSL Designer wizard, an implementation of this 
+		/// method will be generated in the GeneratedCode\SerializationHelper.cs class.
+		///</remarks>
+		partial void InitializeSerialization(DslModeling::Store store);
+		#endregion	
+		#region Domain model reflection
+		
+<#+
+	List<AttributedDomainElement> classes = new List<AttributedDomainElement>();
+	List<DomainRelationship> rels = new List<DomainRelationship>();
+	List<DomainProperty> properties = new List<DomainProperty>();
+	List<DomainClass> domainClasses = new List<DomainClass>();
+	List<DomainRole> roles = new List<DomainRole>();
+	int relationshipCount = 0;
+	int classCount = 0;
+	
+	foreach(BaseModelContext c in dm.ModelContexts)
+		if( c is LibraryModelContext )
+		{
+			LibraryModelContext modelContext = c as LibraryModelContext;
+			foreach(DomainClass d in modelContext.Classes )
+			{
+				domainClasses.Add(d);
+				classes.Add(d);
+				properties.AddRange(d.Properties);
+				classCount++;
+			}
+			
+			foreach(DiagramClass d in modelContext.DiagramClasses)
+				foreach(PresentationElementClass p in d.PresentationElements)
+				{
+					classes.Add(p);
+					classCount++;
+					
+					properties.AddRange(p.Properties);
+				}
+			
+			foreach(DomainRelationship r in modelContext.Relationships)
+			{
+				classes.Add(r);
+				properties.AddRange(r.Properties);
+				roles.AddRange(r.Roles);
+				rels.Add(r);
+			}
+		}
+		
+	
+
+	// If we have classes or relationships, override methods to return 
+	// the list of generated classes, relationships, properties and roles.
+	if(classes.Count > 0)
+	{
+#>
+		/// <summary>
+		/// Gets the list of generated domain model types (classes, rules, relationships).
+		/// </summary>
+		/// <returns>List of types.</returns>
+		[global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling", Justification = "Generated code.")]	
+		protected sealed override global::System.Type[] GetGeneratedDomainModelTypes()
+		{
+			return new global::System.Type[]
+			{
+<#+
+		foreach(AttributedDomainElement c in classes)
+		{
+#>
+				typeof(<#= c.GetRelativeName(dm.Namespace, true) #>),
+<#+
+		}
+		foreach(DiagramClass diagram in this.MetaModel.AllDiagramClasses)
+		{			
+			if( diagram is TemplatedDiagramViewModelOnly )
+				continue;
+#>
+				typeof(<#= diagram.Name #>),
+<#+
+
+		}
+			
+			if( CodeGenerationUtilities.NeedsShapeAddRule(dm) )
+			{
+#>
+				typeof(<#= dm.Name #>ElementForShapesAdded),
+<#+
+			}
+			if( CodeGenerationUtilities.NeedsShapeChangeRule(dm) )
+			{
+#>
+				typeof(<#= dm.Name #>ElementForShapesChanged),
+<#+				
+			}
+			if( CodeGenerationUtilities.NeedsShapeDeleteRule(dm) )
+			{
+#>
+				typeof(<#= dm.Name #>ElementForShapesDeleted),
+<#+
+			}
+			if( CodeGenerationUtilities.NeedsLinkRules(dm) )
+			{
+#>
+				typeof(<#= dm.Name #>LinkForShapesAdded),
+				typeof(<#= dm.Name #>LinkForShapesChanged),
+				typeof(<#= dm.Name #>LinkForShapesDeleted),
+<#+
+			}
+			if( CodeGenerationUtilities.NeedsMappingLinkRules(dm) )
+			{
+#>				
+				typeof(<#= dm.Name #>MappingLinkForShapesAdded),
+				typeof(<#= dm.Name #>MappingLinkForShapesChanged),
+				typeof(<#= dm.Name #>MappingLinkForShapesDeleted),				
+<#+
+			}		
+		
+#>
+			};
+		}
+		/// <summary>
+		/// Gets the list of generated domain properties.
+		/// </summary>
+		/// <returns>List of property data.</returns>
+		[global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling", Justification = "Generated code.")]	
+		protected sealed override DomainMemberInfo[] GetGeneratedDomainProperties()
+		{
+			return new DomainMemberInfo[]
+			{
+<#+
+		foreach(DomainProperty p in properties)
+		{
+#>
+				new DomainMemberInfo(typeof(<#= p.Element.GetRelativeName(dm.Namespace, true) #>), "<#= p.Name #>", <#= p.Element.GetRelativeName(dm.Namespace, true) #>.<#= p.Name #>DomainPropertyId, typeof(<#= p.Element.GetRelativeName(dm.Namespace, true) #>.<#= CodeGenerationUtilities.GetPropertyHandlerName(p) #>)),
+<#+
+		}
+		
+		
+#>
+			};
+		}
+<#+
+	}
+#>
+
+<#+
+	if(roles.Count > 0)
+	{
+#>
+		/// <summary>
+		/// Gets the list of generated domain roles.
+		/// </summary>
+		/// <returns>List of role data.</returns>
+		protected sealed override DomainRolePlayerInfo[] GetGeneratedDomainRoles()
+		{
+			return new DomainRolePlayerInfo[]
+			{
+<#+
+		foreach(DomainRole role in roles)
+		{
+#>
+				new DomainRolePlayerInfo(typeof(<#= role.Relationship.GetRelativeName(dm.Namespace, true) #>), "<#= role.Name #>", <#= role.Relationship.GetRelativeName(dm.Namespace, true) #>.<#= role.Name #>DomainRoleId),
+<#+
+		}
+#>
+			};
+		}
+<#+
+	}
+#>
+		#endregion
+		#region Domain model advanced reflection
+		/// <summary>
+        /// Gets domain classes advanced reflection information.
+        /// </summary>
+        public override DslEditorModeling::DomainClassAdvancedInfo[] GetDomainClassAdvancedInfo()
+		{
+			return new DslEditorModeling::DomainClassAdvancedInfo[]
+			{
+<#+
+	foreach(DomainClass d in domainClasses)
+	{
+#>
+				new DslEditorModeling::DomainClassAdvancedInfo(<#= d.GetFullName(true) #>.DomainClassId)
+				{
+					IsAbstract = <#= (d.InheritanceModifier == InheritanceModifier.Abstract).ToString().ToLower() #>
+				}
+				,
+<#+
+	}
+#>	
+			};
+		}
+		
+        /// <summary>
+        /// Gets domain relationships advanced reflection information.
+        /// </summary>
+        public override DslEditorModeling::DomainRelationshipAdvancedInfo[] GetDomainRelationshipAdvancedInfo()
+		{
+			return new DslEditorModeling::DomainRelationshipAdvancedInfo[]
+			{
+<#+
+	foreach(DomainRelationship r in rels )
+	{
+		if( r is EmbeddingRelationship )
+		{
+			EmbeddingRelationship emb = r as EmbeddingRelationship;
+#>
+				new DslEditorModeling::EmbeddingRelationshipAdvancedInfo(<#= emb.GetFullName(true) #>.DomainClassId, <#= emb.PropagatesCopyToChild.ToString().ToLower() #>, <#= emb.SerializedEmbeddingRelationship.IsTargetIncludedSubmodel.ToString().ToLower() #>)
+				{
+					IsAbstract = <#= (emb.InheritanceModifier == InheritanceModifier.Abstract).ToString().ToLower() #>,
+					SourceElementDomainClassId = <#= r.Source.RolePlayer.GetFullName(true) #>.DomainClassId,
+					TargetElementDomainClassId = <#= r.Target.RolePlayer.GetFullName(true) #>.DomainClassId,
+					SourceRoleId = <#= r.GetFullName(true) #>.<#= r.Source.Name #>DomainRoleId,
+					TargetRoleId = <#= r.GetFullName(true) #>.<#= r.Target.Name #>DomainRoleId,
+					SourceRoleMultiplicity = DslModeling::Multiplicity.<#= r.Source.Multiplicity.ToString() #>,
+					TargetRoleMultiplicity = DslModeling::Multiplicity.<#= r.Target.Multiplicity.ToString() #>,
+					SourceRoleIsUIBrowsable = <#= r.Source.IsPropertyBrowsable.ToString().ToLower() #>,
+					SourceRoleIsUIReadOnly = <#= r.Source.IsPropertyUIReadOnly.ToString().ToLower() #>,
+					SourceRoleIsGenerated = <#= r.Source.IsPropertyGenerator.ToString().ToLower() #>,
+					TargetRoleIsUIBrowsable = <#= r.Target.IsPropertyBrowsable.ToString().ToLower() #>,
+					TargetRoleIsUIReadOnly = <#= r.Target.IsPropertyUIReadOnly.ToString().ToLower() #>,
+					TargetRoleIsGenerated = <#= r.Target.IsPropertyGenerator.ToString().ToLower() #>,
+				}
+				,
+<#+
+		}
+		else if( r is ReferenceRelationship )
+		{
+			ReferenceRelationship reference = r as ReferenceRelationship;
+#>
+				new DslEditorModeling::ReferenceRelationshipAdvancedInfo(<#= reference.GetFullName(true) #>.DomainClassId, <#= reference.PropagatesCopyToSource.ToString().ToLower()#>, <#= reference.PropagatesCopyToTarget.ToString().ToLower()#>, <#= reference.PropagatesCopyOnDeniedElementCopy.ToString().ToLower()#>)
+				{
+					IsAbstract = <#= (reference.InheritanceModifier == InheritanceModifier.Abstract).ToString().ToLower() #>,
+					SourceElementDomainClassId = <#= r.Source.RolePlayer.GetFullName(true) #>.DomainClassId,
+					TargetElementDomainClassId = <#= r.Target.RolePlayer.GetFullName(true) #>.DomainClassId,
+					SourceRoleId = <#= r.GetFullName(true) #>.<#= r.Source.Name #>DomainRoleId,
+					TargetRoleId = <#= r.GetFullName(true) #>.<#= r.Target.Name #>DomainRoleId,
+					SourceRoleMultiplicity = DslModeling::Multiplicity.<#= r.Source.Multiplicity.ToString() #>,
+					TargetRoleMultiplicity = DslModeling::Multiplicity.<#= r.Target.Multiplicity.ToString() #>,
+					SourceRoleIsUIBrowsable = <#= r.Source.IsPropertyBrowsable.ToString().ToLower() #>,
+					SourceRoleIsUIReadOnly = <#= r.Source.IsPropertyUIReadOnly.ToString().ToLower() #>,
+					SourceRoleIsGenerated = <#= r.Source.IsPropertyGenerator.ToString().ToLower() #>,
+					TargetRoleIsUIBrowsable = <#= r.Target.IsPropertyBrowsable.ToString().ToLower() #>,
+					TargetRoleIsUIReadOnly = <#= r.Target.IsPropertyUIReadOnly.ToString().ToLower() #>,
+					TargetRoleIsGenerated = <#= r.Target.IsPropertyGenerator.ToString().ToLower() #>,
+				}
+				,
+<#+
+		}
+	}
+#>	
+			};
+		}
+		
+        /// <summary>
+        /// Gets the embedding relationships order information (parent-child mappings in the order of the serialization model).
+        /// </summary>
+        public override DslEditorModeling::EmbeddingRelationshipOrderInfo[] GetEmbeddingRelationshipOrderInfo()
+		{
+			return new DslEditorModeling::EmbeddingRelationshipOrderInfo[] 
+			{
+<#+
+	foreach(BaseModelContext c in dm.ModelContexts)
+		if( c is LibraryModelContext )
+		{
+			foreach(DomainClass dClass in (c as LibraryModelContext).Classes )
+			{
+#>
+				new DslEditorModeling::EmbeddingRelationshipOrderInfo(<#= dClass.GetFullName(true) #>.DomainClassId)
+				{
+					EmbeddingRelationships = new System.Guid[] 
+					{
+<#+
+				List<EmbeddingRelationship> includedSubmodels = new List<EmbeddingRelationship>();
+				SerializedDomainClass s = dClass.SerializedDomainClass;
+				foreach(SerializationElement sElem in s.Children)
+				{
+					if( sElem is SerializedEmbeddingRelationship )
+					{
+						SerializedEmbeddingRelationship emb = sElem as SerializedEmbeddingRelationship;
+						
+						if( emb.IsTargetIncludedSubmodel)
+							includedSubmodels.Add(emb.EmbeddingRelationship);
+
+#>
+						<#= emb.EmbeddingRelationship.GetFullName(true) #>.DomainClassId,
+<#+
+
+					}
+				}
+#>
+					},
+					
+					EmbeddingRelationshipsTargetIncludedSubmodel = new System.Guid[] 
+					{
+<#+
+				foreach(EmbeddingRelationship emb in includedSubmodels)
+				{
+#>
+						<#= emb.GetFullName(true) #>.DomainClassId,
+<#+
+				}
+#>
+					}
+				},
+<#+
+			}
+		}
+#>
+			};
+		}
+
+        /// <summary>
+        /// Gets the model context informations.
+        /// </summary>
+        public override DslEditorModeling::ModelContextInfo[] GetModelContextInfo()
+		{
+			return new DslEditorModeling::ModelContextInfo[] 
+			{
+<#+
+	foreach(BaseModelContext c in dm.ModelContexts)
+		if( c is ModelContext )
+		{
+			DomainClass contextDomainModel = null;
+			foreach(DomainClass d in (c as ModelContext).Classes )
+			{
+				if( d.IsDomainModel )
+				{
+					contextDomainModel = d;
+					break;
+				}
+			}
+			if( contextDomainModel == null )
+				continue;
+#>
+				new DslEditorModeling::ModelContextInfo(<#= c.Name #>ModelContext.DomainClassId, <#= contextDomainModel.GetFullName(true) #>.DomainClassId),
+<#+
+		}
+#>	
+			};
+		}
+		#endregion
+<#+
+		List<DiagramClass> diagramClassList = new List<DiagramClass>();
+		List<ShapeClass> shapeClassList = new List<ShapeClass>();
+		List<RelationshipShapeClass> rsShapeClassList = new List<RelationshipShapeClass>();
+		List<MappingRelationshipShapeClass> mapRsShapeClassList = new List<MappingRelationshipShapeClass>();
+		List<AttributedDomainElement> modelElementsList = new List<AttributedDomainElement>();
+		Dictionary<Guid, List<DomainRole>> relsSource = new Dictionary<Guid, List<DomainRole>>();
+		Dictionary<Guid, List<DomainRole>> relsTarget = new Dictionary<Guid, List<DomainRole>>();
+		Dictionary<Guid, List<DomainRole>> mapRelsSource = new Dictionary<Guid, List<DomainRole>>();
+		Dictionary<Guid, List<DomainRole>> mapRelsTarget = new Dictionary<Guid, List<DomainRole>>();
+		foreach(DiagramClass diagramClass in dm.AllDiagramClasses)
+		{
+			if( diagramClass is TemplatedDiagramViewModelOnly )
+				continue;			
+			
+			//if( !diagramClass.IsCustom )
+			diagramClassList.Add(diagramClass);
+			
+			// collect all shapes
+			foreach(PresentationElementClass p in diagramClass.PresentationElements)
+			{
+				if( p is ShapeClass )
+					if( (p as ShapeClass).DomainClass != null )
+					{
+						shapeClassList.Add(p as ShapeClass);
+						
+						List<DomainClass> sClasses = CodeGenerationUtilities.GetAllDerivedClassesWithSelf((p as ShapeClass).DomainClass);
+						foreach(DomainClass s in sClasses)
+						{
+							if( !modelElementsList.Contains(s))
+								modelElementsList.Add(s);
+						
+							if( !relsSource.ContainsKey((p as ShapeClass).DomainClass.Id) )
+								relsSource.Add((p as ShapeClass).DomainClass.Id, new List<DomainRole>());
+							if( !relsTarget.ContainsKey((p as ShapeClass).DomainClass.Id) )
+								relsTarget.Add((p as ShapeClass).DomainClass.Id, new List<DomainRole>());
+							if( !mapRelsSource.ContainsKey((p as ShapeClass).DomainClass.Id) )
+								mapRelsSource.Add((p as ShapeClass).DomainClass.Id, new List<DomainRole>());
+							if( !mapRelsTarget.ContainsKey((p as ShapeClass).DomainClass.Id) )
+								mapRelsTarget.Add((p as ShapeClass).DomainClass.Id, new List<DomainRole>());
+						}
+					}
+			}
+			foreach(PresentationElementClass p in diagramClass.PresentationElements)
+			{
+				if( p is MappingRelationshipShapeClass)
+					if( (p as MappingRelationshipShapeClass).DomainClass != null &&
+						(p as MappingRelationshipShapeClass).Source != null &&
+						(p as MappingRelationshipShapeClass).Target != null )
+					{
+						mapRsShapeClassList.Add(p as MappingRelationshipShapeClass);
+						if( !modelElementsList.Contains((p as MappingRelationshipShapeClass).DomainClass))
+							modelElementsList.Add((p as MappingRelationshipShapeClass).DomainClass);
+						
+						List<DomainRelationship> relsDe = CodeGenerationUtilities.GetAllDerivedRSWithSelf((p as MappingRelationshipShapeClass).Source);
+						foreach(DomainRelationship d in relsDe)
+						{
+							List<DomainClass> sClasses = CodeGenerationUtilities.GetAllDerivedClassesWithSelf(d.Target.RolePlayer as DomainClass);
+							foreach(DomainClass s in sClasses)
+								if(mapRelsSource.ContainsKey(s.Id) )
+									mapRelsSource[s.Id].Add(d.Target);
+						}
+						
+						relsDe = CodeGenerationUtilities.GetAllDerivedRSWithSelf((p as MappingRelationshipShapeClass).Target);
+						foreach(DomainRelationship d in relsDe)
+						{
+							List<DomainClass> sClasses = CodeGenerationUtilities.GetAllDerivedClassesWithSelf(d.Target.RolePlayer as DomainClass);
+							foreach(DomainClass s in sClasses)
+								if(mapRelsTarget.ContainsKey(s.Id) )
+									mapRelsTarget[s.Id].Add(d.Target);
+						}
+					}
+					
+				if( p is RelationshipShapeClass )
+					if( (p as RelationshipShapeClass).ReferenceRelationship != null )
+					{
+						rsShapeClassList.Add(p as RelationshipShapeClass);
+						List<DomainRelationship> relsDe = CodeGenerationUtilities.GetAllDerivedRSWithSelf((p as RelationshipShapeClass).ReferenceRelationship);
+						foreach(DomainRelationship d in relsDe)
+						{
+							if( !modelElementsList.Contains(d) )
+								modelElementsList.Add(d);
+						
+							if(relsSource.ContainsKey(d.Source.RolePlayer.Id) )
+								relsSource[d.Source.RolePlayer.Id].Add(d.Source);
+							if(relsTarget.ContainsKey(d.Target.RolePlayer.Id) )
+								relsTarget[d.Target.RolePlayer.Id].Add(d.Target);
+						}
+					}
+			}
+		}
+	
+#>
+		#region Diagrams model advanced reflection
+		private class <#= dm.Name #>DiagramDomainDataDirectory : DslEditorDiagrams::DiagramDomainDataDirectory
+		{
+			/// <summary>
+        	/// Gets the diagram class information.
+        	/// </summary>
+        	/// <returns>Diagram class info.</returns>
+        	public override DslEditorDiagrams::DiagramClassInfo[] GetDiagramClassInfo()
+			{
+				return new DslEditorDiagrams::DiagramClassInfo[]
+				{
+<#+
+			foreach(DiagramClass diagramClass in diagramClassList)
+			{
+#>
+					new DslEditorDiagrams::DiagramClassInfo(<#= dm.Namespace #>.<#= diagramClass.Name #>.DomainClassId, DslEditorDiagrams::DiagramVisualizationBehavior.<#= diagramClass.VisualizationBehavior #>),
+<#+
+			}
+#>
+				};
+			}
+
+			/// <summary>
+        	/// Gets the shape class information.
+        	/// </summary>
+        	/// <returns>Shape class info.</returns>
+        	public override DslEditorDiagrams::ShapeClassInfo[] GetShapeClassInfo()
+			{
+				return new DslEditorDiagrams::ShapeClassInfo[]
+				{
+<#+
+			foreach(ShapeClass shapeClass in shapeClassList)
+			{
+				DomainClass d = shapeClass.DomainClass;
+				//List<DomainClass> sClasses = CodeGenerationUtilities.GetAllDerivedClassesWithSelf(shapeClass.DomainClass);
+				//foreach(DomainClass d in sClasses)
+				//{
+					//if( d.InheritanceModifier == InheritanceModifier.Abstract )
+					//	continue;
+					
+					//if( d.ShapeClasses.Count > 0 )
+					//	continue;
+#>
+					new DslEditorDiagrams::ShapeClassInfo(<#= dm.Namespace #>.<#= shapeClass.DiagramClass.Name #>.DomainClassId, <#= shapeClass.GetFullName(true) #>.DomainClassId, <#= d.GetFullName(true) #>.DomainClassId, <#= shapeClass.UseInDependencyView.ToString().ToLower() #>)
+					{
+<#+
+				if( shapeClass.Parent != null )
+				{
+#>
+						ParentShapeClassType = <#= shapeClass.Parent.GetFullName(true) #>.DomainClassId,
+<#+
+				}
+				if( !String.IsNullOrEmpty(shapeClass.MenuIconUri) )
+				{
+#>
+						IconURL = "<#= shapeClass.MenuIconUri #>",
+<#+
+				}
+				if( shapeClass.BaseShape != null )
+				{
+#>
+						BaseShape = <#= shapeClass.BaseShape.GetFullName(true) #>.DomainClassId,
+<#+
+				}				
+					if( relsSource[shapeClass.DomainClass.Id].Count > 0 )
+					{
+#>
+						RelationshipSourceRoleTypes = new System.Collections.Generic.List<System.Guid>(new System.Guid[]
+                        {
+<#+
+						foreach(DomainRole dmr in relsSource[shapeClass.DomainClass.Id])
+						{
+#>
+							<#= dmr.Relationship.GetFullName(true) #>.<#= dmr.Name #>DomainRoleId,
+<#+
+						}
+#>
+                        }),
+<#+
+					}
+					if( relsTarget[shapeClass.DomainClass.Id].Count > 0 )
+					{
+#>
+						RelationshipTargetRoleTypes = new System.Collections.Generic.List<System.Guid>(new System.Guid[]
+                        {
+<#+
+						foreach(DomainRole dmr in relsTarget[shapeClass.DomainClass.Id])
+						{
+#>
+							<#= dmr.Relationship.GetFullName(true) #>.<#= dmr.Name #>DomainRoleId,
+<#+
+						}
+#>
+                        }),
+<#+
+					}	
+					if( mapRelsSource[shapeClass.DomainClass.Id].Count > 0 )
+					{
+#>
+						MappingRelationshipSourceRoleTypes = new System.Collections.Generic.List<System.Guid>(new System.Guid[]
+                        {
+<#+
+						foreach(DomainRole dmr in mapRelsSource[shapeClass.DomainClass.Id])
+						{
+#>
+							<#= dmr.Relationship.GetFullName(true) #>.<#= dmr.Name #>DomainRoleId,
+<#+
+						}
+#>
+                        }),
+<#+
+					}
+					if( mapRelsTarget[shapeClass.DomainClass.Id].Count > 0 )
+					{
+#>
+						MappingRelationshipTargetRoleTypes = new System.Collections.Generic.List<System.Guid>(new System.Guid[]
+                        {
+<#+
+						foreach(DomainRole dmr in mapRelsTarget[shapeClass.DomainClass.Id])
+						{
+#>
+							<#= dmr.Relationship.GetFullName(true) #>.<#= dmr.Name #>DomainRoleId,
+<#+
+						}
+#>
+                        }),
+<#+
+					}
+					
+				
+#>
+					},
+<#+
+				//}
+			}
+#>				
+				};
+			}
+
+        	/// <summary>
+        	/// Gets the rs shape class information.
+        	/// </summary>
+        	/// <returns>RSShape class info.</returns>
+        	public override DslEditorDiagrams::RelationshipShapeInfo[] GetRelationshipShapeInfo()
+			{
+				return new DslEditorDiagrams::RelationshipShapeInfo[]
+				{
+<#+
+			foreach(RelationshipShapeClass shapeClass in rsShapeClassList)
+			{
+				List<DomainRelationship> relsDe = CodeGenerationUtilities.GetAllDerivedRSWithSelf(shapeClass.ReferenceRelationship);
+				foreach(DomainRelationship d in relsDe)
+				{
+#>
+					new DslEditorDiagrams::RelationshipShapeInfo(<#= dm.Namespace #>.<#= shapeClass.DiagramClass.Name #>.DomainClassId, <#= shapeClass.GetFullName(true) #>.DomainClassId, <#= d.GetFullName(true) #>.DomainClassId),
+<#+
+				}
+			}
+#>				
+				};
+			}
+			
+        	/// <summary>
+        	/// Gets the mapping rs shape class information.
+        	/// </summary>
+        	/// <returns>MappingRSShape class info.</returns>
+        	public override DslEditorDiagrams::MappingRelationshipShapeInfo[] GetMappingRelationshipShapeInfo()
+			{
+				return new DslEditorDiagrams::MappingRelationshipShapeInfo[]
+				{
+<#+
+			foreach(MappingRelationshipShapeClass shapeClass in mapRsShapeClassList)
+			{
+#>
+					new DslEditorDiagrams::MappingRelationshipShapeInfo(<#= dm.Namespace #>.<#= shapeClass.DiagramClass.Name #>.DomainClassId, <#= shapeClass.GetFullName(true) #>.DomainClassId, <#= shapeClass.DomainClass.GetFullName(true) #>.DomainClassId, <#= shapeClass.Source.GetFullName(true) #>.DomainClassId, <#= shapeClass.Target.GetFullName(true) #>.DomainClassId,
+						<#= shapeClass.Source.GetFullName(true) #>.<#= shapeClass.Source.Source.Name #>DomainRoleId, <#= shapeClass.Target.GetFullName(true) #>.<#= shapeClass.Target.Source.Name #>DomainRoleId)
+<#+
+			}
+#>					
+				};
+			}
+			
+        	/// <summary>
+        	/// Gets the shape class information.
+        	/// </summary>
+        	/// <returns>Shape class info.</returns>
+        	public override System.Guid[] GetClassesRelevantForSM()
+			{
+				return new System.Guid[]
+				{
+<#+
+			foreach(AttributedDomainElement element in modelElementsList)
+			{
+#>
+					<#= element.GetFullName(true) #>.DomainClassId,
+<#+
+			}
+#>					
+				};
+			}
+		}
+		
+		/// <summary>
+        /// Gets data extensions.
+        /// </summary>
+        /// <returns>List of data extensions or null.</returns>
+		public override DslEditorModeling::IDomainDataExtensionDirectory[] GetDataExtensions()
+        {
+            return new DslEditorModeling::IDomainDataExtensionDirectory[]
+			{
+				new <#= dm.Name #>DiagramDomainDataDirectory()
+			};
+        }
+		#endregion
+<#+
+		
+	// Generate code that is used to create the classes and relationships
+	// by reflective means.
+	if(classes.Count > 0)
+	{
+#>
+		#region Factory methods
+		private static global::System.Collections.Generic.Dictionary<global::System.Type, int> createElementMap;
+
+		/// <summary>
+		/// Creates an element of specified type.
+		/// </summary>
+		/// <param name="partition">Partition where element is to be created.</param>
+		/// <param name="elementType">Element type which belongs to this domain model.</param>
+		/// <param name="propertyAssignments">New element property assignments.</param>
+		/// <returns>Created element.</returns>
+		[global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
+		[global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling", Justification = "Generated code.")]	
+		public sealed override DslModeling::ModelElement CreateElement(DslModeling::Partition partition, global::System.Type elementType, DslModeling::PropertyAssignment[] propertyAssignments)
+		{
+			if (elementType == null) throw new global::System.ArgumentNullException("elementType");
+			
+			if (createElementMap == null)
+			{
+				createElementMap = new global::System.Collections.Generic.Dictionary<global::System.Type, int>(<#= classCount #>);
+<#+
+			int count = 0;
+			foreach(AttributedDomainElement c in classes)
+			{
+				if((!(c is DomainRelationship)) && c.InheritanceModifier != InheritanceModifier.Abstract)
+				{
+#>
+				createElementMap.Add(typeof(<#= c.GetRelativeName(dm.Namespace, true) #>), <#= count #>);
+<#+
+					count++;
+				}
+			}
+#>
+			}
+			int index;
+			if (!createElementMap.TryGetValue(elementType, out index))
+			{
+				// construct exception error message		
+				string exceptionError = string.Format(
+								global::System.Globalization.CultureInfo.CurrentCulture,
+								<#= this.MetaModel.GetFullName(true) #>DomainModel.SingletonResourceManager.GetString("UnrecognizedElementType"),
+								elementType.Name);
+				throw new global::System.ArgumentException(exceptionError, "elementType");
+			}
+			switch (index)
+			{
+<#+
+			count = 0;
+			foreach(AttributedDomainElement c in classes)
+			{
+				if((!(c is DomainRelationship)) && c.InheritanceModifier != InheritanceModifier.Abstract)
+				{
+					if(c.HasCustomConstructor)
+					{
+#>
+				// A constructor was not generated for <#= c.Name #> because it had HasCustomConstructor
+				// set to true. Please provide the constructor below.
+<#+
+					}
+#>
+				case <#= count #>: return new <#= c.GetRelativeName(dm.Namespace, true) #>(partition, propertyAssignments);
+<#+
+					count++;
+				}
+			}
+#>
+				default: return null;
+			}
+		}
+
+		private static global::System.Collections.Generic.Dictionary<global::System.Type, int> createElementLinkMap;
+
+		/// <summary>
+		/// Creates an element link of specified type.
+		/// </summary>
+		/// <param name="partition">Partition where element is to be created.</param>
+		/// <param name="elementLinkType">Element link type which belongs to this domain model.</param>
+		/// <param name="roleAssignments">List of relationship role assignments for the new link.</param>
+		/// <param name="propertyAssignments">New element property assignments.</param>
+		/// <returns>Created element link.</returns>
+		[global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
+		public sealed override DslModeling::ElementLink CreateElementLink(DslModeling::Partition partition, global::System.Type elementLinkType, DslModeling::RoleAssignment[] roleAssignments, DslModeling::PropertyAssignment[] propertyAssignments)
+		{
+			if (elementLinkType == null) throw new global::System.ArgumentNullException("elementLinkType");
+			if (roleAssignments == null) throw new global::System.ArgumentNullException("roleAssignments");
+			
+			if (createElementLinkMap == null)
+			{
+				createElementLinkMap = new global::System.Collections.Generic.Dictionary<global::System.Type, int>(<#= relationshipCount #>);
+<#+
+			count = 0;
+			foreach(AttributedDomainElement r in classes)
+			{
+				if(r is DomainRelationship && r.InheritanceModifier != InheritanceModifier.Abstract)
+				{
+#>
+				createElementLinkMap.Add(typeof(<#= r.GetRelativeName(dm.Namespace, true) #>), <#= count #>);
+<#+
+					count++;
+				}
+			}
+#>
+			}
+			int index;
+			if (!createElementLinkMap.TryGetValue(elementLinkType, out index))
+			{
+				// construct exception error message
+				string exceptionError = string.Format(
+								global::System.Globalization.CultureInfo.CurrentCulture,
+								<#= this.MetaModel.GetFullName(true) #>DomainModel.SingletonResourceManager.GetString("UnrecognizedElementLinkType"),
+								elementLinkType.Name);
+				throw new global::System.ArgumentException(exceptionError, "elementLinkType");
+		
+			}
+			switch (index)
+			{
+<#+
+			count = 0;
+			foreach(AttributedDomainElement r in classes)
+			{
+				if(r is DomainRelationship && r.InheritanceModifier != InheritanceModifier.Abstract)
+				{
+					if(r.HasCustomConstructor)
+					{
+#>
+				// A constructor was not generated for <#= r.Name #> because it had HasCustomConstructor
+				// set to true. Please provide the constructor below.
+<#+
+					}
+#>
+				case <#= count #>: return new <#= r.GetRelativeName(dm.Namespace, true) #>(partition, roleAssignments, propertyAssignments);
+<#+
+					count++;
+				}
+			}
+#>
+				default: return null;
+			}
+		}
+		#endregion	
+<#+
+	}
+	
+	if(!String.IsNullOrEmpty(dm.GeneratedResourceName))
+	{
+#>
+		#region Resource manager
+	
+		private static global::System.Resources.ResourceManager resourceManager;
+	
+		/// <summary>
+		/// The base name of this model's resources.
+		/// </summary>
+		public const string ResourceBaseName = "<#= GeneratedResourceName #>";
+	
+		/// <summary>
+		/// Gets the DomainModel's ResourceManager. If the ResourceManager does not already exist, then it is created.
+		/// </summary>
+		public override global::System.Resources.ResourceManager ResourceManager
+		{
+			[global::System.Diagnostics.DebuggerStepThrough]
+			get
+			{
+				return <#= dm.Name #>DomainModel.SingletonResourceManager;
+			}
+		}
+
+		/// <summary>
+		/// Gets the Singleton ResourceManager for this domain model.
+		/// </summary>
+		public static global::System.Resources.ResourceManager SingletonResourceManager
+		{
+			[global::System.Diagnostics.DebuggerStepThrough]
+			get
+			{
+				if (<#= dm.Name #>DomainModel.resourceManager == null)
+				{
+					<#= dm.Name #>DomainModel.resourceManager = new global::System.Resources.ResourceManager(
+                        ResourceBaseName, typeof(<#= dm.Name #>DomainModel).Assembly);
+				}
+				return <#= dm.Name #>DomainModel.resourceManager;
+			}
+		}
+		#endregion
+<#+
+	}
+#>
+		#region Copy/Remove closures
+<#+
+	PushIndent("\t");
+	PushIndent("\t");
+	// Generate properties to get the copy and delete closures for this
+	// domain model.
+	this.Write(ClosuresGenerator.Instance.GenerateClosureProperties(dm));
+	PopIndent();
+	PopIndent();
+#>
+		#endregion
+	}
+	
+	#region Copy/Remove closure classes
+<#+
+	// Generate the delete and copy closures for this domain model.
+	PushIndent("\t");
+	this.Write(ClosuresGenerator.Instance.GenerateDeleteClosure(dm));
+	this.Write(ClosuresGenerator.Instance.GenerateCopyClosure(dm));
+	PopIndent();
+#>
+	#endregion	
+}
+
+<#+
+	// Generate code for enumerations in this domain model
+	foreach(DomainType domainType in dm.DomainTypes)
+	{
+		if(domainType is DomainEnumeration)
+		{
+			this.Write(DomainEnumerationGenerator.Instance.GenerateDomainEnumeration(dm, (DomainEnumeration)domainType));
+		}
+	}	
+}
+#>

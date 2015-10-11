@@ -1,0 +1,324 @@
+﻿<#@ template language="C#" inherits="BaseTemplate"#> 
+<#@ import namespace="Tum.PDE.LanguageDSL"#>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Collections.ObjectModel" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+
+<#+ 
+public string GenerateCodeExampleForDiagram(MetaModel dm)
+{
+	this.GenerationEnvironment = null;
+	this.GenerateCodeExampleForDiagramInternal(dm);
+	return this.GenerationEnvironment.ToString();
+}
+
+private void GenerateCodeExampleForDiagramInternal(MetaModel dm)
+{	
+#>
+    /// <summary>
+    /// This diagram was generated to illustrate some concepts of PDE, especially when working with views.
+    /// </summary>
+    public class CodeExamplesDiagram : DslEditorViewDiagrams::DiagramSurfaceViewModel
+    {
+        /// <summary>
+        /// Constuctor.
+        /// </summary>
+        /// <param name="viewModelStore">View model store containing this view model.</param>
+		/// <param name="diagram">Diagram.</param>
+		/// <param name="modelContext">Model context.</param>
+        public CodeExamplesDiagram(VModellXTViewModelStore viewModelStore, DslEditorDiagrams::Diagram diagram, DslEditorModeling::ModelContext modelContext)
+            : base(viewModelStore, diagram, modelContext)
+        {
+			
+        }
+
+        #region 1. Messaging
+        /***************************
+           For the purpose of messaging PDE consists of an EventManager allowing the subscription or unsubscption to events.
+           Every event can either be published or be subscribed to (see example below). The concept of messaging in PDE follows the 
+           EventAggregator pattern (see PRISM for more details).
+         
+           The following events might be of interest when working with views:
+            * ActiveViewChangedEvent    (You can also override the 'IsActiveView' method)
+            * BringToFrontViewModelRequestEvent
+            * CloseViewModelRequestEvent
+            * OpenViewModelEvent
+            * ResetViewModelEvent   (You can also override the 'Reset' method)
+            * SelectionChangedEvent   (You can also override the 'ReactOnViewSelection' method)
+            * ShowViewModelRequestEvent
+            
+           PDE also has evets for model-based changes:
+            * ModelElementAddedEvent
+            * ModelElementCustomEvent
+            * ModelElementDeletedEvent
+            * ModelElementEvent
+            * ModelElementLinkAddedEvent
+            * ModelElementLinkDeletedEvent
+            * ModelElementPropertyChangedEvent
+            * ModelRolePlayerChangedEvent
+            * ModelRolePlayerMovedEvent
+           
+            (See Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel.Messaging.Events for more details.)
+         
+            Examle 1: Subscribe to model element creation and deletion events for a specific element.
+            Examle 2: Subscribe to relationship creation, deletion and role player changes for a specific relationship.
+          
+           HINT: Keep in mind that there you can have specific element view models generated for every element of your model.
+                 To do so, select an element in the LanguageDSL-Designer and set the property "Generate Specific View Model" to true.
+        ***************************/
+        protected override void Subscribe()
+        {
+            base.Subscribe();
+
+            // HINT: keep in mind that there are multiple overloads for the Subscribe/Unsubscribe methods
+
+            // Example 1: Vorgehensbaustein
+            this.EventManager.GetEvent<DslEditorEvents::ModelElementAddedEvent>().Subscribe(
+                this.Store.DomainDataDirectory.FindDomainClass(Tum.VModellXT.Statik.Vorgehensbaustein.DomainClassId), OnVorgehensbausteinAdded);
+            this.EventManager.GetEvent<DslEditorEvents::ModelElementDeletedEvent>().Subscribe(
+                this.Store.DomainDataDirectory.FindDomainClass(Tum.VModellXT.Statik.Vorgehensbaustein.DomainClassId), OnVorgehensbausteinDeleted);
+
+            /*
+             *  1. Every model element has a unique DomainClassID
+             *  2. The metamodel to the generated model is available through domain data reflection.
+             *     This is the DomainDataDirectory contained in the Store.
+             *  3. The method FindDomainClass returns a DomainClassInfo class, which basically is
+             *     equal to the Vorgehensbaustein-DomainClass in the LanguageDSL (see DomainMetaModel.lngdsl).
+             *     This DomainClassInfo allows to lookup certain properties of the metamodel class at runtime.
+            */
+
+
+            // Example 2: VorgehensbausteinBasiertAufVorgehensbaustein, assume we have a Vorgehensbaustein present.
+            this.EventManager.GetEvent<DslEditorEvents::ModelElementLinkAddedEvent>().Subscribe(this.Store.DomainDataDirectory.GetDomainRelationship(Tum.VModellXT.Statik.VorgehensbausteinBasiertAufVorgehensbaustein.DomainClassId),
+                true, vorgehensbaustein.Id, new System.Action<DslModeling::ElementAddedEventArgs>(OnReferenceAdded));
+
+            this.EventManager.GetEvent<DslEditorEvents::ModelElementLinkDeletedEvent>().Subscribe(this.Store.DomainDataDirectory.GetDomainRelationship(Tum.VModellXT.Statik.VorgehensbausteinBasiertAufVorgehensbaustein.DomainClassId),
+                true, vorgehensbaustein.Id, new System.Action<DslModeling::ElementDeletedEventArgs>(OnReferenceRemoved));
+
+            // Get a notification whenever the source Vorgehensbaustein changes for a referenced Vorgehensbaustein
+            this.EventManager.GetEvent<DslEditorEvents::ModelRolePlayerChangedEvent>().Subscribe(this.Store.DomainDataDirectory.GetDomainRole(Tum.VModellXT.Statik.VorgehensbausteinBasiertAufVorgehensbaustein.VorgehensbausteinSourceDomainRoleId),
+                new System.Action<DslModeling::RolePlayerChangedEventArgs>(OnReferenceChanged));
+
+            // Get a notification whenever the referenced Vorgehensbaustein of a Vorgehensbaustein changes
+            this.EventManager.GetEvent<DslEditorEvents::ModelRolePlayerChangedEvent>().Subscribe(this.Store.DomainDataDirectory.GetDomainRole(Tum.VModellXT.Statik.VorgehensbausteinBasiertAufVorgehensbaustein.VorgehensbausteinTargetDomainRoleId),
+                new System.Action<DslModeling::RolePlayerChangedEventArgs>(OnReferenceChanged));
+        }
+
+        protected override void Unsubscribe()
+        {
+            base.Unsubscribe();
+
+            // Example 1:
+            this.EventManager.GetEvent<DslEditorEvents::ModelElementAddedEvent>().Unsubscribe(
+                this.Store.DomainDataDirectory.FindDomainClass(Tum.VModellXT.Statik.Vorgehensbaustein.DomainClassId), OnVorgehensbausteinAdded);
+            this.EventManager.GetEvent<DslEditorEvents::ModelElementDeletedEvent>().Unsubscribe(
+                this.Store.DomainDataDirectory.FindDomainClass(Tum.VModellXT.Statik.Vorgehensbaustein.DomainClassId), OnVorgehensbausteinDeleted);
+
+            // Example 2: VorgehensbausteinBasiertAufVorgehensbaustein, assume we have a Vorgehensbaustein present.
+            this.EventManager.GetEvent<DslEditorEvents::ModelElementLinkAddedEvent>().Unsubscribe(this.Store.DomainDataDirectory.GetDomainRelationship(Tum.VModellXT.Statik.VorgehensbausteinBasiertAufVorgehensbaustein.DomainClassId),
+                true, vorgehensbaustein.Id, new System.Action<DslModeling::ElementAddedEventArgs>(OnReferenceAdded));
+            this.EventManager.GetEvent<DslEditorEvents::ModelElementLinkDeletedEvent>().Unsubscribe(this.Store.DomainDataDirectory.GetDomainRelationship(Tum.VModellXT.Statik.VorgehensbausteinBasiertAufVorgehensbaustein.DomainClassId),
+                true, vorgehensbaustein.Id, new System.Action<DslModeling::ElementDeletedEventArgs>(OnReferenceRemoved));
+            this.EventManager.GetEvent<DslEditorEvents::ModelRolePlayerChangedEvent>().Unsubscribe(this.Store.DomainDataDirectory.GetDomainRole(Tum.VModellXT.Statik.VorgehensbausteinBasiertAufVorgehensbaustein.VorgehensbausteinSourceDomainRoleId),
+                new System.Action<DslModeling::RolePlayerChangedEventArgs>(OnReferenceChanged));
+        }
+
+        // Example 1:
+        private void OnVorgehensbausteinAdded(DslModeling::ElementAddedEventArgs args)
+        {
+            Tum.VModellXT.Statik.Vorgehensbaustein element = args.ModelElement as Tum.VModellXT.Statik.Vorgehensbaustein;
+            this.VorgehensbausteinVM = new DslEditorViewModels::BaseModelElementViewModel(this.ViewModelStore, element, true);
+        }
+        private void OnVorgehensbausteinDeleted(DslModeling::ElementDeletedEventArgs args)
+        {
+            Tum.VModellXT.Statik.Vorgehensbaustein element = args.ModelElement as Tum.VModellXT.Statik.Vorgehensbaustein;
+			if( this.VorgehensbausteinVM != null )
+				if( this.VorgehensbausteinVM.Element == element )
+				{
+					this.VorgehensbausteinVM.Dispose();
+					this.VorgehensbausteinVM = null;
+				}
+        }
+		private DslEditorViewModels::BaseModelElementViewModel vorgehensbausteinVM = null;
+		private DslEditorViewModels::BaseModelElementViewModel VorgehensbausteinVM
+		{
+			get
+			{
+				return this.vorgehensbausteinVM;
+			}
+			private set
+			{
+				this.vorgehensbausteinVM = value;
+				OnPropertyChanged("VorgehensbausteinVM");
+			}
+		}
+
+        // Example 2:
+        private void AddReference(Tum.VModellXT.Statik.Vorgehensbaustein node)
+        {
+			// ..
+        }
+        private void RemoveReference(Tum.VModellXT.Statik.Vorgehensbaustein node)
+        {
+			// ..
+	    }
+
+        private void OnReferenceAdded(DslModeling::ElementAddedEventArgs args)
+        {
+            Tum.VModellXT.Statik.VorgehensbausteinBasiertAufVorgehensbaustein con
+                = args.ModelElement as Tum.VModellXT.Statik.VorgehensbausteinBasiertAufVorgehensbaustein;
+            if (con != null)
+            {
+                AddReference(con.VorgehensbausteinTarget);
+            }
+        }
+        private void OnReferenceRemoved(DslModeling::ElementDeletedEventArgs args)
+        {
+            Tum.VModellXT.Statik.VorgehensbausteinBasiertAufVorgehensbaustein con
+                = args.ModelElement as Tum.VModellXT.Statik.VorgehensbausteinBasiertAufVorgehensbaustein;
+            if (con != null)
+            {
+                RemoveReference(con.VorgehensbausteinTarget);
+            }
+
+        }
+        private void OnReferenceChanged(DslModeling::RolePlayerChangedEventArgs args)
+        {
+            Tum.VModellXT.Statik.VorgehensbausteinBasiertAufVorgehensbaustein con
+                = args.ElementLink as Tum.VModellXT.Statik.VorgehensbausteinBasiertAufVorgehensbaustein;
+            if (con != null)
+            {
+                if (args.DomainRole.Id == Tum.VModellXT.Statik.VorgehensbausteinBasiertAufVorgehensbaustein.VorgehensbausteinSourceDomainRoleId)
+                {
+                    if (args.OldRolePlayerId == vorgehensbaustein.Id)
+                        RemoveReference(con.VorgehensbausteinTarget);
+
+                    if (args.NewRolePlayerId == vorgehensbaustein.Id)
+                        AddReference(con.VorgehensbausteinTarget);
+                }
+                else if (args.DomainRole.Id == global::Tum.VModellXT.Statik.VorgehensbausteinBasiertAufVorgehensbaustein.VorgehensbausteinTargetDomainRoleId)
+                {
+                    if (args.OldRolePlayer != null)
+                        RemoveReference(args.OldRolePlayer as global::Tum.VModellXT.Statik.Vorgehensbaustein);
+
+                    if (args.NewRolePlayer != null)
+                        AddReference(args.NewRolePlayer as global::Tum.VModellXT.Statik.Vorgehensbaustein);
+                }
+            }
+        }  
+        #endregion
+    
+		#region 2. Xaml
+		// This Xaml represents a possible view definition for the code examples diagram
+		xmlns:vm="clr-namespace:Tum.VModellXT.ViewModel"
+		
+		// 1. RessourceDictionary (Resources.xaml)
+		<DataTemplate DataType="{x:Type vm:CodeExamplesDiagram}">
+        	<ctrl:CodeExamplesDiagram HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+    	</DataTemplate>
+		
+		// 2. CodeExamplesDiagram User-Control
+		<Grid>
+        	<Grid Margin="10">
+            	<Grid.RowDefinitions>
+                	<RowDefinition Height="24"></RowDefinition>
+                	<RowDefinition Height="34"></RowDefinition>
+                	<RowDefinition Height="3"></RowDefinition>
+            	</Grid.RowDefinitions>
+
+            	<TextBlock Text="Current element: " Grid.Row="0" VerticalAlignment="Center"/>
+            	<TextBlock Text="{Binding Path=VorgehensbausteinVM.DomainElementFullName, Mode=OneTime}" Grid.Row="1" VerticalAlignment="Center" FontSize="16"/>
+            	<Border Grid.Row="2" Height="1" BorderThickness="1" BorderBrush="DodgerBlue"/>
+        	</Grid>
+    	</Grid>
+		#endregion
+	
+		#region 3. Commanding
+		// 1. Code:		
+		private DslEditorCommands::DelegateCommand navigateToElementCommand;
+        public DslEditorCommands::DelegateCommand NavigateToElementCommand
+        {
+            get
+            {
+                return this.navigateToElementCommand;
+            }
+        }
+		
+		/// <summary>
+        /// Initialize.
+        /// </summary>
+        protected override void Initialize()
+        {
+            base.Initialize();
+
+            this.navigateToElementCommand = new DslEditorCommands::DelegateCommand(NavigateToElementCommandExecuted);
+        }
+		
+		private void NavigateToElementCommandExecuted()
+        {
+            BaseModelElementViewModel vm = some selected view model.
+            if (vm != null)
+            {
+                if (vm.Element != null)
+                {
+                    SelectedItemsCollection col = new SelectedItemsCollection();
+                    col.Add(vm.Element);
+					
+					// Publish event notifying that the selected element has changed.
+                    EventManager.GetEvent<SelectionChangedEvent>().Publish(new SelectionChangedEventArgs(this, col));
+                }
+            }
+		}
+		
+		// 2. Xaml (in the data template e.g.:):
+		<Button Command="{Binding Path=NavigateToElementCommand}">
+            ... content
+        </Button>
+		#endregion
+	
+		#region 4. Drag&Drop
+		// 1. Code:
+        public override void DragOver(DropInfo dropInfo)
+        {
+			// ..
+        }
+        public override void Drop(DropInfo dropInfo)
+		{
+			// ..
+        }
+		
+		// 2. Xaml:
+		xmlns:dd="clr-namespace:Tum.PDE.ToolFramework.Modeling.Visualization.Controls.Attached.DragDrop"
+		
+		<Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+			Background="Transparent" dd:DragDrop.IsDropTarget="True" dd:DragDrop.DropHandler="{Binding}"/>
+		#endregion
+		
+		#region 5. Transactions
+		// Use Transaction to create, modify or delete model elements/relationships.
+		using(Transaction t = this.Store.TransactionManager.BeginTransaction("Description") )
+		{
+			t.Commit();
+		}
+		
+		// HINT: Transaction can be nested as well.
+		#endregion
+		
+		#region 6. Domain Model Services
+		// Every PDE-based DSL has a set of domain model services:
+		// * ModelElementNameProvider
+		// * ModelElementTypeProvider
+		// * ModelElementParentProvider
+		// * ModelElementChildrenProvider
+		// * ModelElementParentProvider
+		// * ...
+		// 
+		// The domain model services can also be accessed from every model element (element.GetDomainModelServices()).
+		#endregion
+	}
+
+<#+
+}
+#>

@@ -1,0 +1,6 @@
+﻿<#@ template language="C#" inherits="BaseTemplate"#> 
+<#@ import namespace="Tum.PDE.LanguageDSL"#>
+<#@ output extension=".xml" #>
+<!--
+Not required yet...
+-->

@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<exampleModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="1c6c21eb-5237-4c9f-b62a-8fec9970aace" name="My model" xmlns="http://schemas.microsoft.com/dsltools/VSPluginDSL">
+  <exampleElements>
+    <exampleElement Id="e73e1578-1325-4f55-a8a0-ac75d4bccc61" Name="Element1" description="First Element" value="1" />
+    <exampleElement Id="8fc55820-2492-46d1-b5c9-66e8f08775d8" Name="Element2" description="Second element" value="2" />
+    <exampleElement Id="645c2306-e801-4ffd-b396-84a5111d22d3" Name="Element3" description="Third element" value="3" />
+    <exampleElement Id="3d87c764-df66-46c7-9b0d-9cc880589daa" Name="Element4" description="Fourth element" value="4" />
+    <exampleElement Id="05498143-ebc3-4857-a074-1e225791c0aa" Name="Element5" description="Fifth element" value="5" />
+    <exampleElement Id="0e6a773c-74a2-4268-ac65-26e66766aa29" Name="Element6" description="Sixth element" value="6" />
+  </exampleElements>
+</exampleModel>

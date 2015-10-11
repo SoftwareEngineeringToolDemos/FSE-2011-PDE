@@ -1,0 +1,71 @@
+<#@ template language="C#" inherits="BaseTemplate"#> 
+<#@ import namespace="Tum.PDE.LanguageDSL"#>
+using DslEditorViewModelData = global::Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel.Data;
+
+<#
+GenerateViewModel(this.MetaModel);
+#>
+<#+ 
+public void GenerateViewModel(MetaModel dm)
+{
+#>
+namespace <#= dm.Namespace #>.ViewModel
+{
+	/// <summary>
+	/// Class to allow easy service registration.
+	/// </summary>
+	public partial class <#= dm.Name #>ServiceRegistrar : <#= dm.Name #>ServiceRegistrarBase
+    {
+		#region Singleton Instance
+		private static <#= dm.Name #>ServiceRegistrar instance = null;
+		
+		/// <summary>
+		/// Private constructor.
+		/// </summary>
+		private <#= dm.Name #>ServiceRegistrar() : base()
+		{
+		}
+	
+		/// <summary>
+		/// Singleton Instance.
+		/// </summary>
+		public static <#= dm.Name #>ServiceRegistrar Instance
+		{
+			get
+			{
+				if( instance == null )
+					instance = new <#= dm.Name #>ServiceRegistrar();
+					
+				return instance;
+			}
+		}			
+		#endregion
+	}
+	
+	/// <summary>
+	/// Class to allow easy service registration.
+	///
+	/// This is the base abstract class.
+	/// </summary>
+	public partial class <#= dm.Name #>ServiceRegistrarBase : DslEditorViewModelData::ServiceRegistrar
+	{
+		/// <summary>
+		/// Constructor.
+		/// </summary>
+		protected <#= dm.Name #>ServiceRegistrarBase() : base()
+		{
+		}
+		
+        /// <summary>
+	   	/// Register services to the given store.
+    	/// </summary>
+    	/// <param name="store">ViewModelStore.</param>
+    	public override void RegisterServices(DslEditorViewModelData::ViewModelStore store)
+		{
+			
+		}
+	}
+}
+<#+
+}
+#>

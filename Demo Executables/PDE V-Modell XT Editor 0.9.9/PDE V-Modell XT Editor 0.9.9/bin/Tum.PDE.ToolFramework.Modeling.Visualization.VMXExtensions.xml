@@ -1,0 +1,2295 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions</name>
+    </assembly>
+    <members>
+        <member name="T:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Path.PathHelper">
+            <summary>
+            Helper class for the vmodell path editor.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Path.PathHelper.EvaluateRelativePath(System.String,System.String)">
+            <summary>
+            Calculates the path to the target file relative to the main directory path.
+            </summary>
+            <param name="mainDirPath">Main directory path.</param>
+            <param name="absoluteFilePath">Absolute path to the target file.</param>
+            <returns>Relative path to the target file.</returns>
+        </member>
+        <member name="T:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlInsertImageViewModel">
+            <summary>
+            View model to insert images.
+            </summary>
+        </member>
+        <member name="F:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlInsertImageViewModel.ImageDirectory">
+            <summary>
+            Directory to store images.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlInsertImageViewModel.#ctor(Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel.Data.ViewModelStore,System.String)">
+            <summary>
+            Constuctor.
+            </summary>
+            <param name="viewModelStore">The store this view model belongs to.</param>
+            <param name="referencePath">Reference path.</param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlInsertImageViewModel.BrowseCommand_Executed">
+            <summary>
+            Browse command executed.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlInsertImageViewModel.RaiseCloseRequest(System.Nullable{System.Boolean})">
+            <summary>
+            Windows closing.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlInsertImageViewModel.Title">
+            <summary>
+            Gets or sets the title of the view model.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlInsertImageViewModel.SourcePath">
+            <summary>
+            Gets or sets the source path of the image.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlInsertImageViewModel.RelativePath">
+            <summary>
+            Gets or sets the relative path of the image.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlInsertImageViewModel.AlternativeText">
+            <summary>
+            Gets or sets the alternative text of the image.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlInsertImageViewModel.ImageId">
+            <summary>
+            Gets or sets the id of the image.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlInsertImageViewModel.ExportWidth">
+            <summary>
+            Gets or sets the export width.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlInsertImageViewModel.ExportHeight">
+            <summary>
+            Gets or sets the export height.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlInsertImageViewModel.IsInsertionValid">
+            <summary>
+            Gets or sets whether the current insertion information valid or not.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlInsertImageViewModel.BrowseCommand">
+            <summary>
+            Browse command.
+            </summary>
+        </member>
+        <member name="T:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.XamlToHtmlConverter">
+            <summary>
+            This class is designed for the conversion of xaml flow documents to html data. The supported flow document elements are:
+            <list type="bullet">
+                <listheader>
+                    <element>element</element>
+                    <description>description</description>
+                </listheader>
+                <item>
+                    <element>Paragraph</element>
+                    <description>Converted to p. Applied attributes: align, style=margin***.</description>
+                </item>
+                <item>
+                    <element>Hyperlink</element>
+                    <description>Converted to a. Applied attributes: href.</description>
+                </item>
+                <item>
+                    <element>Bold, Underline, Italic elements. (which are specified via Run/Span and font***)</element>
+                    <description>Converted to b, u, or i.</description>
+                </item>
+                <item>
+                    <element>Image</element>
+                    <description>Converted to img. Applied attributes: align, src, alt, id.</description>
+                </item>
+                <item>
+                    <element>List (List, ListItem with marker style: Disc or Decimal)</element>
+                    <description>Converted to (ul, ol, li).</description>
+                </item>
+                <item>
+                    <element>Table (TableRowGroup, TableRow, TableColumn, TableCell) </element>
+                    <description>
+                    Converted to (table, tr, td). Applied attribute: "border" for table.
+                    </description>
+                </item>
+            </list>
+            </summary>
+            <remarks>
+            Based on XAML to HTML Conversion Demo: http://msdn.microsoft.com/en-us/library/aa972129.aspx
+            </remarks>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.XamlToHtmlConverter.ConvertXamlToHtml(System.Windows.Documents.FlowDocument,Tum.PDE.ToolFramework.Modeling.ValidationResult)">
+            <summary>
+            Converts an flow document to html string.
+            </summary>
+            <param name="flowDocument">Flow document.</param>
+            <param name="conversionResult">Conversion result to store error and warning messages. Can be null.</param>
+            <returns>
+            Well-formed xml string representing html equivalent for the input flow document.
+            </returns>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.XamlToHtmlConverter.AddBlock(System.Windows.Documents.Block,System.Xml.XmlTextWriter,Tum.PDE.ToolFramework.Modeling.ValidationResult)">
+            <summary>
+            Convert an flow document paragraph into its html representation.
+            </summary>
+            <param name="block">Flow document block.</param>
+            <param name="htmlWriter">XmlTextWriter producing resulting html.</param>
+            <param name="conversionResult">Conversion result to store error and warning messages. Can be null.</param>
+            <remarks>
+            List, Paragraph, Table are supported Block elements. Section is not supported.
+            </remarks>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.XamlToHtmlConverter.AddParagraph(System.Windows.Documents.Paragraph,System.Xml.XmlTextWriter,Tum.PDE.ToolFramework.Modeling.ValidationResult)">
+            <summary>
+            Convert an flow document block into its html representation.
+            </summary>
+            <param name="paragraph">Flow document paragraph.</param>
+            <param name="htmlWriter">XmlTextWriter producing resulting html.</param>
+            <param name="conversionResult">Conversion result to store error and warning messages. Can be null.</param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.XamlToHtmlConverter.AddList(System.Windows.Documents.List,System.Xml.XmlTextWriter,Tum.PDE.ToolFramework.Modeling.ValidationResult)">
+            <summary>
+            Convert an flow document list into its html representation.
+            </summary>
+            <param name="list">Flow document list.</param>
+            <param name="htmlWriter">XmlTextWriter producing resulting html.</param>
+            <param name="conversionResult">Conversion result to store error and warning messages. Can be null.</param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.XamlToHtmlConverter.AddTable(System.Windows.Documents.Table,System.Xml.XmlTextWriter,Tum.PDE.ToolFramework.Modeling.ValidationResult)">
+            <summary>
+            Convert an flow document table into its html representation.
+            </summary>
+            <param name="table">Flow document table.</param>
+            <param name="htmlWriter">XmlTextWriter producing resulting html.</param>
+            <param name="conversionResult">Conversion result to store error and warning messages. Can be null.</param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.XamlToHtmlConverter.AddInlines(System.Windows.Documents.InlineCollection,System.Xml.XmlTextWriter,Tum.PDE.ToolFramework.Modeling.ValidationResult)">
+            <summary>
+            Convert an flow document inlines into their (combined!) html representation.
+            </summary>
+            <param name="inlines">Flow document inlines collection.</param>
+            <param name="htmlWriter">XmlTextWriter producing resulting html.</param>
+            <param name="conversionResult">Conversion result to store error and warning messages. Can be null.</param>
+            <remarks>
+            Supported: Hyperlink, Bold, Underline, Italic as well as Run and InlineUIContainer for Image.
+            </remarks>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.XamlToHtmlConverter.AddInlines(System.Windows.Documents.InlineCollection,System.Xml.XmlTextWriter,Tum.PDE.ToolFramework.Modeling.ValidationResult,System.Collections.Generic.List{Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.XamlToHtmlConverter.InlineStyles})">
+            <summary>
+            Convert an flow document inlines into their (combined!) html representation.
+            </summary>
+            <param name="inlines">Flow document inlines collection.</param>
+            <param name="htmlWriter">XmlTextWriter producing resulting html.</param>
+            <param name="conversionResult">Conversion result to store error and warning messages. Can be null.</param>
+            <param name="inheritedStyle">Inherited inline styles.</param>
+            <remarks>
+            Supported: Hyperlink, Bold, Underline, Italic as well as Run and InlineUIContainer for Image.
+            </remarks>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.XamlToHtmlConverter.AddHyperlink(Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.HtmlHyperlink,System.Xml.XmlTextWriter,Tum.PDE.ToolFramework.Modeling.ValidationResult,System.Collections.Generic.List{Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.XamlToHtmlConverter.InlineStyles})">
+            <summary>
+            Convert an flow document hyperlink into its html representation.
+            </summary>
+            <param name="hyperlink">Flow document hyperlink.</param>
+            <param name="htmlWriter">XmlTextWriter producing resulting html.</param>
+            <param name="conversionResult">Conversion result to store error and warning messages. Can be null.</param>
+            <param name="inheritedStyle">Inherited inline styles.</param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.XamlToHtmlConverter.AddImage(Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.HtmlImage,System.Xml.XmlTextWriter,Tum.PDE.ToolFramework.Modeling.ValidationResult)">
+            <summary>
+            Convert an image into its html representation.
+            </summary>
+            <param name="image">Image.</param>
+            <param name="htmlWriter">XmlTextWriter producing resulting html.</param>
+            <param name="conversionResult">Conversion result to store error and warning messages. Can be null.</param>
+        </member>
+        <member name="T:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlSelectWebHyperlinkViewModel">
+            <summary>
+            Selects a web hyperlink.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlSelectWebHyperlinkViewModel.#ctor(Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel.Data.ViewModelStore)">
+            <summary>
+            Constuctor.
+            </summary>
+            <param name="viewModelStore">The store this view model belongs to.</param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlSelectWebHyperlinkViewModel.ActivatedCommand_Executed">
+            <summary>
+            Search command executed.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlSelectWebHyperlinkViewModel.SetSelectedElement(System.Object)">
+            <summary>
+            Tries to set the selection to the given element.
+            </summary>
+            <param name="element">Element to select.</param>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlSelectWebHyperlinkViewModel.ActivatedCommand">
+            <summary>
+            Activated command.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlSelectWebHyperlinkViewModel.IsActive">
+            <summary>
+            Gets or sets whether this view is active or not.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlSelectWebHyperlinkViewModel.SelectedElement">
+            <summary>
+            Gets the selected hyperlink element.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlSelectWebHyperlinkViewModel.HyperlinkText">
+            <summary>
+            Gets or sets the hyperlink as string.
+            </summary>
+        </member>
+        <member name="T:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.HtmlFlowDocument">
+            <summary>
+            This class extends the default flow document.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.HtmlFlowDocument.#ctor">
+            <summary>
+            Constructor.
+            </summary>
+        </member>
+        <member name="T:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="T:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.InsertImagePopup">
+            <summary>
+            Interaction logic for InsertImagePopup.xaml
+            </summary>
+            <summary>
+            InsertImagePopup
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.InsertImagePopup.#ctor">
+            <summary>
+            Constructor.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.InsertImagePopup.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.HtmlImage">
+            <summary>
+            This class is used to extend the default image class to store properties required for conversion from wpf to html and vice versa.
+            </summary>
+        </member>
+        <member name="F:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.HtmlImage.ImageWidth">
+            <summary>
+            Default image width.
+            </summary>
+        </member>
+        <member name="F:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.HtmlImage.ImageHeight">
+            <summary>
+            Default image height.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.HtmlImage.#ctor">
+            <summary>
+            Constructor.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.HtmlImage.OnMouseLeftButtonDown(System.Windows.Input.MouseButtonEventArgs)">
+            <summary>
+            Navigation logic.
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.HtmlImage.Id">
+            <summary>
+            Gets or sets the id of the image.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.HtmlImage.RelativeSource">
+            <summary>
+            Gets or sets the relative source of the image.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.HtmlImage.AlternativeText">
+            <summary>
+            Gets or sets the alternative text of the image.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.HtmlImage.ExportWidth">
+            <summary>
+            Gets or sets the export width of the image.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.HtmlImage.ExportHeight">
+            <summary>
+            Gets or sets the export height of the image.
+            </summary>
+        </member>
+        <member name="T:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.IHtmlRichTextEditor">
+            <summary>
+            This interface defines what methods and properties an html rich text editor (flow document editor) 
+            needs to provide.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.IHtmlRichTextEditor.ToggleBold">
+            <summary>
+            Toggle bold.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.IHtmlRichTextEditor.ToggleUnderline">
+            <summary>
+            Toggle underline.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.IHtmlRichTextEditor.ToggleItalic">
+            <summary>
+            Toggle italic.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.IHtmlRichTextEditor.IncreaseIndentation">
+            <summary>
+            Increases the indentation for the current paragraph by one tab stop.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.IHtmlRichTextEditor.DecreaseIndentation">
+            <summary>
+            Decreases the indentation for the current paragraph by one tab stop.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.IHtmlRichTextEditor.AlignLeft">
+            <summary>
+            Aligns the selection of content left.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.IHtmlRichTextEditor.AlignCenter">
+            <summary>
+            Aligns the selection of content to be centered.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.IHtmlRichTextEditor.AlignRight">
+            <summary>
+            Aligns the selection of content right.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.IHtmlRichTextEditor.AlignJustify">
+            <summary>
+            Aligns the selection of content to be justified.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.IHtmlRichTextEditor.InsertNumberList">
+            <summary>
+            Adds a numbered (ordered) list to the editor.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.IHtmlRichTextEditor.InsertBulletList">
+            <summary>
+            Adds a bulleted list to the editor.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.IHtmlRichTextEditor.Undo">
+            <summary>
+            Undo the last operation.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.IHtmlRichTextEditor.Redo">
+            <summary>
+            Redo last undone operation.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.IHtmlRichTextEditor.InsertHyperlink(System.String,System.String)">
+            <summary>
+            Inserts a new hyperlink.
+            </summary>
+            <param name="text">Text to display.</param>
+            <param name="link">Target of the hyperlink. Can either be an www-link or the v-modell id of a model element.</param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.IHtmlRichTextEditor.InsertTable(System.Int32,System.Int32,System.Double)">
+            <summary>
+            Inserts a new table by first displaying a form to specify table properties and then adding it to the flow document.
+            </summary>
+            <param name="tableRows">Number of rows.</param>
+            <param name="tableColumns">Number of columns.</param>
+            <param name="tableBorder">Border width.</param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.IHtmlRichTextEditor.InsertImage(Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.HtmlImage)">
+            <summary>
+            Inserts an image.
+            </summary>
+            <param name="image">Image to insert.</param>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.IHtmlRichTextEditor.CanUndo">
+            <summary>
+            True if the last operation can be undone.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.IHtmlRichTextEditor.CanRedo">
+            <summary>
+            True if the last undone operation can be redone.
+            </summary>
+        </member>
+        <member name="T:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlSelectHyperlinkViewModel">
+            <summary>
+            Html hyperlink selection view model. An html hyperlink can either be a true
+            hyperlink (web page) or a link to an existing model element.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlSelectHyperlinkViewModel.#ctor(Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel.Data.ViewModelStore)">
+            <summary>
+            Constuctor.
+            </summary>
+            <param name="viewModelStore">The store this view model belongs to.</param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlSelectHyperlinkViewModel.SetSelectedElement(System.Object)">
+            <summary>
+            Tries to set the selected elements to the given object. Not all sub viewmodels might be
+            capable of setting a selection.
+            </summary>
+            <param name="element">Element to select.</param>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlSelectHyperlinkViewModel.SelectWebHyperlinkViewModel">
+            <summary>
+            Gets the select web hyperlink view model.
+            </summary>
+        </member>
+        <member name="T:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.ExtendedHtmlUtility">
+            <summary>
+            SOURCE: http://conceptdevelopment.net/Localization/HtmlEncode/code3.html 
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.ExtendedHtmlUtility.HtmlEntityEncode(System.String)">
+             <summary>
+             Based on the 'reflected' code (from the Framework System.Web.HttpServerUtility)
+             listed on this page
+             UrlEncode vs. HtmlEncode
+             http://www.aspnetresources.com/blog/encoding_forms.aspx
+            
+             PDF of unicode characters in the 0-127 (dec) range
+             http://www.unicode.org/charts/PDF/U0000.pdf
+             </summary>
+             <param name="unicodeText">Unicode text</param>
+             <returns>
+             &amp; becomes &amp;amp;  (encoded for XML Comments - don't be confused)
+             0-9a-zA-Z and some punctuation (ASCII, basically) remain unchanged
+             </returns>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.ExtendedHtmlUtility.HtmlEntityEncode(System.String,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="unicodeText"></param>
+            <param name="encodeTagsToo"></param>
+            <returns>
+            0-9a-zA-Z and some punctuation (ASCII, basically) remain unchanged,
+            everything else encoded
+            </returns>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.ExtendedHtmlUtility.HtmlEntityDecode(System.String)">
+            <summary>
+            Converts Html Entities back to their 'underlying' Unicode characters
+            </summary>
+            <param name="encodedText">Text containing Html Entities eg. &amp;#1234; or &amp;eacute;</param>
+            <returns>
+            &amp;amp; becomes &amp;  (encoded for XML Comments - don't be confused)
+            1-9a-zA-Z and some punctuation (ASCII, basically) remain unchanged
+            </returns>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.ExtendedHtmlUtility.HtmlEntityDecode(System.String,System.Boolean)">
+            <summary>
+            Converts Html Entities back to their 'underlying' Unicode characters
+            </summary>
+            <param name="encodedText">Text containing Html Entities eg. &amp;#1234; or &amp;eacute;</param>
+            <param name="encodeTagsToo">Include angles and ampersand &lt; &gt; &amp;</param>
+            <returns>
+            &amp;amp; becomes &amp;  (encoded for XML Comments - don't be confused)
+            1-9a-zA-Z and some punctuation (ASCII, basically) remain unchanged
+            </returns>
+        </member>
+        <member name="F:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.ExtendedHtmlUtility.entityResolver">
+            <summary>
+            Static Regular Expression to match Html Entities in encoded text
+            Looking for named-entity, decimal or hexadecimal formats
+            http://www.w3.org/TR/REC-html40/charset.html#h-5.3.1
+            http://www.i18nguy.com/markup/ncrs.html
+            http://www.vigay.com/inet/acorn/browse-html2.html#entities
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.ExtendedHtmlUtility.ResolveEntityNotAngleAmp(System.Text.RegularExpressions.Match)">
+            <summary>
+            Regex Match processing delegate to replace the Entities with their
+            underlying Unicode character.
+            </summary>
+            <param name="matchToProcess">Regular Expression Match </param>
+            <returns>
+            &amp;amp; becomes &amp;  (encoded for XML Comments - don't be confused)
+            and &amp;eacute; becomes é
+            BUT we dont modify the angles or ampersand
+            </returns>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.ExtendedHtmlUtility.ResolveEntityAngleAmp(System.Text.RegularExpressions.Match)">
+            <summary>
+            Regex Match processing delegate to replace the Entities with their
+            underlying Unicode character.
+            </summary>
+            <param name="matchToProcess">Regular Expression Match</param>
+            <returns>
+            &amp;amp; becomes &amp;  (encoded for XML Comments - don't be confused)
+            and &amp;eacute; becomes é
+            </returns>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.ExtendedHtmlUtility.HexToInt(System.String)">
+            <summary>
+            For the 'hexadecimal' format &amp;#x233; we need to be able 
+            to convert hex into decimal...
+            Thanks for this method to
+            http://www.c-sharpcorner.com/Code/2002/Sept/HexColors.asp
+            </summary>
+            <remarks>
+            This method converts a hexvalues string as 80FF into a integer.
+            Note that you may NOT put a '#' at the beginning of string! There
+            is not much error checking in this method. If the string does not
+            represent a valid hexadecimal value it returns 0.
+            </remarks>
+            <param name="hexstr">eg 00, 1A, ff, etc</param>
+            <returns>eg. 0, 26, 255 (zero if the inputstring is NOT a valid hexadecimal)</returns>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.ExtendedHtmlUtility.EntityLookup(System.String)">
+            <summary>
+            Thanks to this site for the Entity Reference
+            http://www.vigay.com/inet/acorn/browse-html2.html#entities
+            </summary>
+        </member>
+        <member name="T:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlInsertTableViewModel">
+            <summary>
+            View model to insert html tables.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlInsertTableViewModel.#ctor(Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel.Data.ViewModelStore)">
+            <summary>
+            Constuctor.
+            </summary>
+            <param name="viewModelStore">The store this view model belongs to.</param>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlInsertTableViewModel.Title">
+            <summary>
+            Gets or sets the title of the view model.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlInsertTableViewModel.TableRows">
+            <summary>
+            Gets or sets the number of table rows.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlInsertTableViewModel.TableColumns">
+            <summary>
+            Gets or sets the number of table columns.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlInsertTableViewModel.TableBorder">
+            <summary>
+            Gets or sets the width of the table border.
+            </summary>
+        </member>
+        <member name="T:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.SerializationHelper">
+            <summary>
+            Serialization helper.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.SerializationHelper.ConvertIdFrom(Microsoft.VisualStudio.Modeling.SerializationContext,System.String)">
+            <summary>
+            This method is called during deserialization to convert a given id as string to the id of type Guid as used by the domain model.
+            </summary>
+            <param name="serializationContext">The current serialization context instance.</param>
+            <param name="id">Id as string.</param>
+            <returns>Converted value, Id as Guid.</returns>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.SerializationHelper.ConvertIdTo(Microsoft.VisualStudio.Modeling.SerializationContext,System.Guid)">
+            <summary>
+            This method is called during serialization to convert a given id to its specific string representation.
+            </summary>
+            <param name="serializationContext">The current serialization context instance.</param>
+            <param name="id">Id.</param>
+            <returns>Converted value.</returns>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.SerializationHelper.ConvertTypedObjectHtmlFrom(Microsoft.VisualStudio.Modeling.SerializationContext,Microsoft.VisualStudio.Modeling.ModelElement,System.String,System.Object,System.Type,System.Nullable{System.Boolean})">
+            <summary>
+            This method is called during deserialization to convert a given value to a specific typed value (Html).
+            </summary>
+            <param name="serializationContext">The current serialization context instance.</param>
+            <param name="modelELement">ModdelElement, to which the property belongs to.</param>
+            <param name="propertyName">The Property name, which value is to be converted.</param>
+            <param name="value">Value to convert.</param>
+            <param name="targetType">Type, the object is to be converted to.</param>
+            <param name="isRequired">True if this property is marked as required in the domain model. Can be null.</param>
+            <returns>Converted value.</returns>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.SerializationHelper.ConvertTypedObjectHtmlTo(Microsoft.VisualStudio.Modeling.SerializationContext,Microsoft.VisualStudio.Modeling.ModelElement,System.String,System.Object,System.Type,System.Nullable{System.Boolean})">
+            <summary>
+            This method is called during serialization to convert a given typed value (Html) to a specific value (string).
+            </summary>
+            <param name="serializationContext">The current serialization context instance.</param>
+            <param name="modelELement">ModdelElement, to which the property belongs to.</param>
+            <param name="propertyName">The Property name, which value is to be converted.</param>
+            <param name="value">Typed value to convert.</param>
+            <param name="sourceType">Type of the value.</param>
+            <param name="isRequired">True if this property is marked as required in the domain model. Can be null.</param>
+            <returns>Converted value.</returns>		
+        </member>
+        <member name="T:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlEditorViewModel">
+             <summary>
+             HtmlEditorViewModel.
+            
+             Double derived to allow easier customization.
+             </summary>
+            <summary>
+            This is the view model for editing html in the property grid.
+            </summary>
+        </member>
+        <member name="T:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlEditorViewModelBase">
+             <summary>
+             HtmlEditorViewModel.
+            
+             This is the base abstract class.
+             </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlEditorViewModelBase.#ctor(Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel.Data.ViewModelStore)">
+            <summary>
+            Constuctor.
+            </summary>
+            <param name="viewModelStore">The store this view model belongs to.</param>
+        </member>
+        <member name="T:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlEditorViewModelBase.HtmlEditorViewModelContextMenuBarCreater">
+            <summary>
+            Context menu bar creater for the html editor.
+            </summary>
+        </member>
+        <member name="F:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlEditorViewModelBase.HtmlEditorViewModelContextMenuBarCreater.instance">
+            <summary>
+            Singleton instance.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlEditorViewModelBase.HtmlEditorViewModelContextMenuBarCreater.#ctor">
+            <summary>
+            Constructor.
+            </summary>			
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlEditorViewModelBase.HtmlEditorViewModelContextMenuBarCreater.CreateRibbonMenuBar(Fluent.Ribbon)">
+            <summary>
+            Creates the ribbon menu bar for the html editor.
+            </summary>
+            <param name="ribbonMenu">Main ribbon menu.</param>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlEditorViewModelBase.HtmlEditorViewModelContextMenuBarCreater.Instance">
+            <summary>
+            Singleton instance.
+            </summary>
+        </member>
+        <member name="T:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.IHtmlEditorViewModel">
+            <summary>
+            This interface ensures what an html editor view model has to expose to the view.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.IHtmlEditorViewModel.NavigateToHtmlHyperlink(Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.HtmlHyperlink)">
+            <summary>
+            Execute the Html navigation command.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.IHtmlEditorViewModel.ModifyHtmlHyperlink(Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.HtmlHyperlink)">
+            <summary>
+            Modify the given hyperlink.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.IHtmlEditorViewModel.ModifyHtmlImage(Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.HtmlImage)">
+            <summary>
+            Modifies the given html image (parameterwise).
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.IHtmlEditorViewModel.CanDragDrop(System.Windows.IDataObject)">
+            <summary>
+            Verifies if a data object can be dropped.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.IHtmlEditorViewModel.DoDragDrop(System.Windows.IDataObject)">
+            <summary>
+            Do drag drop.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.IHtmlEditorViewModel.HtmlRichTextEditor">
+            <summary>
+            Actual html flow document editor view.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.IHtmlEditorViewModel.IsSelectionTextBold">
+            <summary>
+            Gets or sets whether the the current selection has its font set to bold.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.IHtmlEditorViewModel.IsSelectionTextUnderlined">
+            <summary>
+            Gets whether the the current selection has its font decoration set to underline.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.IHtmlEditorViewModel.IsSelectionTextItalic">
+            <summary>
+            Gets whether the the current selection has its font style set to italic.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.IHtmlEditorViewModel.IsSelectionAlignedLeft">
+            <summary>
+            Gets whether the the current selection has its alignment set to left.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.IHtmlEditorViewModel.IsSelectionAlignedCenter">
+            <summary>
+            Gets whether the the current selection has its alignment set to center.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.IHtmlEditorViewModel.IsSelectionAlignedRight">
+            <summary>
+            Gets whether the the current selection has its alignment set to right.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.IHtmlEditorViewModel.IsSelectionAlignedJustified">
+            <summary>
+            Gets whether the the current selection has its alignment set to justify.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlEditorViewModel.#ctor(Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel.Data.ViewModelStore)">
+            <summary>
+            Constuctor.
+            </summary>
+            <param name="viewModelStore">The store this view model belongs to.</param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlEditorViewModel.Initialize">
+            <summary>
+            Initialization.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlEditorViewModel.GetPropertyValue">
+            <summary>
+            Converts the property value (in respect to multiple source elements) and returns the converted value.
+            </summary>
+            <returns>Converted property value.</returns>
+            <remarks>
+            Converter: All equal --> use value. One differs --> empty value.
+            </remarks>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlEditorViewModel.SetPropertyValue(System.Object)">
+            <summary>
+            Assigns the property value to the property of every source element.
+            </summary>
+            <param name="value">Property value to be assigned.</param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlEditorViewModel.NavigateToHtmlHyperlink(Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.HtmlHyperlink)">
+            <summary>
+            Execute the Html navigation command.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlEditorViewModel.ModifyHtmlHyperlink(Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.HtmlHyperlink)">
+            <summary>
+            Modify the given hyperlink.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlEditorViewModel.ModifyHtmlImage(Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.HtmlImage)">
+            <summary>
+            Modifies the given html image (parameterwise).
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlEditorViewModel.CanDragDrop(System.Windows.IDataObject)">
+            <summary>
+            Verifies if a data object can be dropped.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlEditorViewModel.DoDragDrop(System.Windows.IDataObject)">
+            <summary>
+            Do drag drop.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlEditorViewModel.HtmlToggleBoldCommand_Executed">
+            <summary>
+            Toggle bold command executed.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlEditorViewModel.HtmlToggleUnderlineCommand_Executed">
+            <summary>
+            Toggle underline command executed.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlEditorViewModel.HtmlToggleItalicCommand_Executed">
+            <summary>
+            Toggle italic command executed.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlEditorViewModel.UndoCommand_Executed">
+            <summary>
+            Undo command executed.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlEditorViewModel.UndoCommand_CanExecute">
+            <summary>
+            Undo command can execute.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlEditorViewModel.RedoCommand_Executed">
+            <summary>
+            Undo command executed.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlEditorViewModel.RedoCommand_CanExecute">
+            <summary>
+            Undo command can execute.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlEditorViewModel.HtmlIndentLessCommand_Executed">
+            <summary>
+            Indent less command executed.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlEditorViewModel.HtmlIndentMoreCommand_Executed">
+            <summary>
+            Indent more command executed.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlEditorViewModel.HtmlAlignLeftCommand_Executed">
+            <summary>
+            Align left command executed.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlEditorViewModel.HtmlAlignCenterCommand_Executed">
+            <summary>
+            Align center command executed.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlEditorViewModel.HtmlAlignRightCommand_Executed">
+            <summary>
+            Align right command executed.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlEditorViewModel.HtmlAlignJustifyCommand_Executed">
+            <summary>
+            Align justify command executed.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlEditorViewModel.HtmlInsertBulletListCommand_Executed">
+            <summary>
+            Insert bullet list command executed.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlEditorViewModel.HtmlInsertNumberListCommand_Executed">
+            <summary>
+            Insert number list command executed.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlEditorViewModel.HtmlInsertHyperlinkCommand_Executed">
+            <summary>
+            Insert hyperlink command executed.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlEditorViewModel.HtmlInsertHyperlinkCommand_CanExecute">
+            <summary>
+            Insert hyperlink command can execute.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlEditorViewModel.HtmlInsertTableCommand_Executed">
+            <summary>
+            Insert table command executed.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlEditorViewModel.HtmlInsertImageCommand_Executed">
+            <summary>
+            Insert image command executed.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlEditorViewModel.OnDispose">
+            <summary>
+            Clean up.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlEditorViewModel.IsHtmlEditorViewModelVisible">
+            <summary>
+            Gets the visibility of the html editor menu.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlEditorViewModel.IsSelected">
+            <summary>
+            Gets or sets whether this property editor is the currently selected editor or not.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlEditorViewModel.HtmlRichTextEditor">
+            <summary>
+            Html rich text editor, that is used in the view.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlEditorViewModel.IsSelectionTextBold">
+            <summary>
+            Gets or sets whether the the current selection has its font set to bold.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlEditorViewModel.IsSelectionTextUnderlined">
+            <summary>
+            Gets whether the the current selection has its font decoration set to underline.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlEditorViewModel.IsSelectionTextItalic">
+            <summary>
+            Gets whether the the current selection has its font style set to italic.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlEditorViewModel.IsSelectionAlignedLeft">
+            <summary>
+            Gets whether the the current selection has its alignment set to left.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlEditorViewModel.IsSelectionAlignedCenter">
+            <summary>
+            Gets whether the the current selection has its alignment set to center.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlEditorViewModel.IsSelectionAlignedRight">
+            <summary>
+            Gets whether the the current selection has its alignment set to right.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlEditorViewModel.IsSelectionAlignedJustified">
+            <summary>
+            Gets whether the the current selection has its alignment set to justify.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlEditorViewModel.HtmlToggleBoldCommand">
+            <summary>
+            Toggle bold command.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlEditorViewModel.HtmlToggleUnderlineCommand">
+            <summary>
+            Toggle underline command.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlEditorViewModel.HtmlToggleItalicCommand">
+            <summary>
+            Toggle italic command.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlEditorViewModel.UndoCommand">
+            <summary>
+            Undo command.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlEditorViewModel.RedoCommand">
+            <summary>
+            Redo command.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlEditorViewModel.HtmlIndentLessCommand">
+            <summary>
+            Indent less command.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlEditorViewModel.HtmlIndentMoreCommand">
+            <summary>
+            Indent more command.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlEditorViewModel.HtmlAlignLeftCommand">
+            <summary>
+            Align left command.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlEditorViewModel.HtmlAlignCenterCommand">
+            <summary>
+            Align center command.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlEditorViewModel.HtmlAlignRightCommand">
+            <summary>
+            Align right command.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlEditorViewModel.HtmlAlignJustifyCommand">
+            <summary>
+            Align justify command.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlEditorViewModel.HtmlInsertBulletListCommand">
+            <summary>
+            Insert bullet list command.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlEditorViewModel.HtmlInsertNumberListCommand">
+            <summary>
+            Insert number list command.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlEditorViewModel.HtmlInsertHyperlinkCommand">
+            <summary>
+            Insert hyperlink command.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlEditorViewModel.HtmlInsertTableCommand">
+            <summary>
+            Insert table command.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.ViewModel.HtmlEditorViewModel.HtmlInsertImageCommand">
+            <summary>
+            Insert image command.
+            </summary>
+        </member>
+        <member name="T:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.ConversionMessage">
+            <summary>
+            Class used to represent an error or warning message, including message kind and message string.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.ConversionMessage.#ctor(Tum.PDE.ToolFramework.Modeling.ModelValidationViolationType,System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="type">Kind of the message.</param>
+            <param name="description">Message string.</param>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.ConversionMessage.Type">
+            <summary>
+            Kind of the message.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.ConversionMessage.Description">
+            <summary>
+            Message string.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.ConversionMessage.MessageId">
+            <summary>
+            Identification of the message.
+            </summary>
+        </member>
+        <member name="T:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.SelectHyperlinkPopup">
+            <summary>
+            Interaction logic for SelectHyperlinkPopup.xaml
+            </summary>
+            <summary>
+            SelectHyperlinkPopup
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.SelectHyperlinkPopup.#ctor">
+            <summary>
+            Constructor.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.SelectHyperlinkPopup.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Path.ReferencedModelRoleViewModel">
+            <summary>
+            Path editor view model base abstract class (To add, edit or delete referenced domain models).
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Path.ReferencedModelRoleViewModel.#ctor(Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel.Data.ViewModelStore)">
+            <summary>
+            Constuctor.
+            </summary>
+            <param name="viewModelStore">The store this view model belongs to.</param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Path.ReferencedModelRoleViewModel.EditPathCommand_Executed">
+            <summary>
+            EditPathCommand executed.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Path.ReferencedModelRoleViewModel.CreateNewReferencedModelCommand_Executed">
+            <summary>
+            CreateNewReferencedModelCommand executed.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Path.ReferencedModelRoleViewModel.DeleteReferencedModelCommand_Executed">
+            <summary>
+            DeleteReferencedModelCommand executed.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Path.ReferencedModelRoleViewModel.SetPropertyValue(System.Object)">
+            <summary>
+            Assigns the property value to the property of every source element.
+            </summary>
+            <param name="value">Property value to be assigned.</param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Path.ReferencedModelRoleViewModel.GetPropertyValue">
+            <summary>
+            Converts the property value and returns the converted value.
+            </summary>
+            <returns>Converted property value.</returns>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Path.ReferencedModelRoleViewModel.CreateNewReferencedModel">
+            <summary>
+            Creates a new referenced model.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Path.ReferencedModelRoleViewModel.DeleteReferencedModel">
+            <summary>
+            Deletes a referenced domain model.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Path.ReferencedModelRoleViewModel.EditReferencedModel">
+            <summary>
+            Edit a referenced model.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Path.ReferencedModelRoleViewModel.SetReferencedModel(System.String)">
+            <summary>
+            Loads the model from the given file path and sets it to its appropriate element.
+            </summary>
+            <param name="filePath">File path to load the model from. Can be null to indicate that there is no referenced domain model.</param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Path.ReferencedModelRoleViewModel.EnsureClosing">
+            <summary>
+            Ensures that the user truly wants to remove a reference to a domain model.
+            </summary>
+            <returns>True to remove; False otherwise.</returns>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Path.ReferencedModelRoleViewModel.EnsureOpening(System.String)">
+            <summary>
+            Ensures that the user can open the selected file and refence the domain model.
+            </summary>
+            <returns>True to reference; False otherwise.</returns>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Path.ReferencedModelRoleViewModel.EditPathCommand">
+            <summary>
+            Edit path command.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Path.ReferencedModelRoleViewModel.CreateNewReferencedModelCommand">
+            <summary>
+            CreateNewReferencedModel command.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Path.ReferencedModelRoleViewModel.DeleteReferencedModelCommand">
+            <summary>
+            DeleteReferencedModelCommand command.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Path.ReferencedModelRoleViewModel.CanHandleMultipleElements">
+            <summary>
+            Override: Can not handle multiple elements.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Path.ReferencedModelRoleViewModel.IsReferencedModelSet">
+            <summary>
+            Gets whether a model is referenced in this reference model or not.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Path.ReferencedModelRoleViewModel.FileDialogFilter">
+            <summary>
+            Gets the filter string for the open/save file dialog.
+            </summary>
+        </member>
+        <member name="T:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.KeyGenerator">
+            <summary>
+            This class provides unique keys for identifying V-Modell XT model-elements using
+            random numbers and GUIDs
+            
+            New: Tranformation of a V-Modell XT ID into a Guid and vice versa
+            </summary>
+        </member>
+        <member name="F:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.KeyGenerator.Instance">
+            <summary>
+            Singleton instance.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.KeyGenerator.GenerateKey">
+            <summary>
+            Create and returns a new unique Key, which is the value for V-Modell XT model-elemenst "id".
+            </summary>
+            <returns>A string representig a key/id.</returns>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.KeyGenerator.CanConvertVModellIDToGuid(System.String)">
+            <summary>
+            Verifies if a specified vmodell id can be converted to a guid.
+            </summary>
+            <param name="vID">Vmodell id</param>
+            <returns>True if a conversion is possible. False otherwise.</returns>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.KeyGenerator.ConvertVModellIDToGuid(System.String)">
+            <summary>
+            Converts a VModell XT ID (14, 15, 16 length) to a GUID by appending
+            a supplement, which can later be recognized and removed to gain
+            the VModell XT back
+            </summary>
+            <param name="vID">VModell XT ID</param>
+            <returns>GUID</returns>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.KeyGenerator.ConvertGuidToVModellID(System.Guid)">
+            <summary>
+            Converts a GUID previously generated through <b>ConvertVModellIDToGuid</b>
+            back to the V-Modell XT id by removing the supplement.
+            </summary>
+            <param name="guid">Guid</param>
+            <returns>VModell XT ID</returns>
+        </member>
+        <member name="T:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.KeyGenerator.IDToGuidMap">
+            <summary>
+            Structure used to define the supplement and the identification word 
+            for the mapping of a VModell XT id (14-16 length) to a GUID
+            </summary>
+        </member>
+        <member name="F:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.KeyGenerator.IDToGuidMap.IDWord">
+            <summary>
+            Identification word, usually the number of needed supplement chars in binary format
+            </summary>
+        </member>
+        <member name="F:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.KeyGenerator.IDToGuidMap.IDSupplement">
+            <summary>
+            The supplement 
+            </summary>
+        </member>
+        <member name="F:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.KeyGenerator.IDToGuidMap.VIDLength">
+            <summary>
+            Length of the VModell XT id to which the supplement is applicable
+            </summary>
+        </member>
+        <member name="T:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.HtmlSourceTextEditor">
+            <summary>
+            This class extends the default textbox so that we can bind our html data to text and update html data on changes.
+            
+            TODO: coloring, formating
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.HtmlSourceTextEditor.#ctor">
+            <summary>
+            Constructor.
+            </summary>
+        </member>
+        <member name="F:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.HtmlSourceTextEditor.IsHtmlDataDirty">
+            <summary>
+            Gets or sets whether the flow document has changed and html data needs to be rebuild based on the flow document before it can be accessed.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.HtmlSourceTextEditor.OnTextChanged(System.Windows.Controls.TextChangedEventArgs)">
+            <summary>
+            Mark html data as dirty, so that we can update html when we lose focus.
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.HtmlSourceTextEditor.OnLostFocus(System.Windows.RoutedEventArgs)">
+            <summary>
+            Update html when we lose focus if IsHtmlDataDirty=True
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="F:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.HtmlSourceTextEditor.HtmlProperty">
+            <summary>
+            Html dependency property.
+            </summary>
+        </member>
+        <member name="F:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.HtmlSourceTextEditor.UpdateCommandProperty">
+            <summary>
+            Html dependency property.
+            </summary>
+        </member>
+        <member name="F:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.HtmlSourceTextEditor.CancelCommandProperty">
+            <summary>
+            Html dependency property.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.HtmlSourceTextEditor.Html">
+            <summary>
+            Gets or sets the html document to display and/or edit in the rich text box and the html source text box.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.HtmlSourceTextEditor.UpdateCommand">
+            <summary>
+            Update the data source.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.HtmlSourceTextEditor.CancelCommand">
+            <summary>
+            Cancel update.
+            </summary>
+        </member>
+        <member name="T:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.ServicesHelper">
+            <summary>
+            Service registrar.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.ServicesHelper.RegisterServices(Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel.Data.ViewModelStore)">
+            <summary>
+            Register services to the given store.
+            </summary>
+            <param name="store">ViewModelStore.</param>
+        </member>
+        <member name="T:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Html">
+            <summary>
+            This class is used to represent html in the domain model. The html type consists of:
+            - HtmlData: this is the rough html.
+            - HtmlDocument: this is the parsed html document (HtmlAgilityPack).
+            - FlowDocumentData: this is the parsed flow document as string (corresponds to the HtmlData). 
+            - FlowDocument: this is the actual flow document. It is build using FlowDocumentData.
+            
+            Apart from that, an opportunity to track warnings and errors is also given through the
+            HtmlConversionResult property, which contains warnings, errors or just information messages
+            gathered while converting. (The result is reset each time a conversion takes place.)
+            
+            Conversions are available from html data to flow document and vice versa.
+            Warning: Only a partial subset of both html data and flow document elements are supported.
+            </summary>
+            <remarks>
+            This class is designed for the interpretation of a subset of html as needed by the VModell. 
+            (Refer to HtmlToXamlConverter and XamlToHtmlConverter for more information).
+            </remarks>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Html.#ctor(System.String,System.String)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="data">Html as string.</param>
+            <param name="vModellDirectory">Directory of the VModell instance containing the element that has a html property.</param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Html.#ctor(System.Windows.Documents.FlowDocument,System.String)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="data">Flowdocument which is to be converted to html.</param>
+            <param name="vModellDirectory">Directory of the VModell instance containing the element that has a html property.</param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Html.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="info">The SerializationInfo to get the data from.</param>
+            <param name="context">The destination (see System.Runtime.Serialization.StreamingContext) for this serialization.</param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Html.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Populates a System.Runtime.Serialization.SerializationInfo with the data
+            needed to serialize the target object.
+            </summary>
+            <param name="info">The SerializationInfo to populate with data.</param>
+            <param name="context">The destination (see System.Runtime.Serialization.StreamingContext) for this serialization.</param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Html.op_Explicit(Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Html)~System.String">
+            <summary>
+            Converts html to string.
+            </summary>
+            <param name="data">Html object.</param>
+            <returns>Html as string.</returns>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Html.Equals(System.Object)">
+            <summary>
+            Determines whether the specified System.Object is equal to the current Html instance.
+            </summary>
+            <param name="obj">The System.Object to compare with the current Html instance.</param>
+            <returns>true if the specified System.Object is equal to the current Html instance; otherwise, false.</returns>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Html.op_Equality(Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Html,Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Html)">
+            <summary>
+            == operator.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Html.op_Inequality(Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Html,Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Html)">
+            <summary>
+            != operator.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Html.ToString">
+            <summary>
+             Returns a System.String that represents the html data.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Html.GetHashCode">
+            <summary>
+            Serves as a hash function for a particular type.
+            </summary>
+            <returns>A hash code for the current Html instance.</returns>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Html.ParseHtml">
+            <summary>
+            Parses the current html data by creating the corresponding HtmlDocument as well as its FlowDocument representation.
+            </summary>
+            <remarks>The created FlowDument is stored as a string for later use.</remarks>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Html.ParseHtml(Tum.PDE.ToolFramework.Modeling.ValidationResult)">
+            <summary>
+            Parses the current html data by creating the corresponding HtmlDocument as well as its FlowDocument representation.
+            </summary>
+            <param name="conversionResult">Conversion result to store error and warning messages.</param>
+            <remarks>The created FlowDument is stored as a string for later use.</remarks>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Html.ParseFlowDocument(System.Windows.Documents.FlowDocument,Tum.PDE.ToolFramework.Modeling.ValidationResult)">
+            <summary>
+            Parses the given flow document by creating the corresponding html data as well as the html document.
+            </summary>
+            <param name="document">Flow document to parse</param>
+            <param name="conversionResult">Conversion result to store error and warning messages.</param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Html.ConvertToFlowDocument(HtmlAgilityPack.HtmlDocument,Tum.PDE.ToolFramework.Modeling.ValidationResult,System.String)">
+            <summary>
+            Converts the given html document to its flow document representation.
+            </summary>
+            <param name="htmlDocument">Html document to convert.</param>
+            <param name="conversionResult">Conversion result to store error and warning messages.</param>
+            <param name="vModellDirectory">Directory of the v-modell.</param>
+            <returns>Flow document representing the given html document.</returns>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Html.ConvertToHtmlDocument(System.String)">
+            <summary>
+            Converts the given html data to the corresponding html document.
+            </summary>
+            <param name="htmlData">Html data as string.</param>
+            <returns>Html document representing the given html data.</returns>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Html.Validate">
+            <summary>
+            Method to start validation.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Html.VModellDirectory">
+            <summary>
+            Gets the directory of the VModell instance containing the element that has this html property.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Html.HtmlData">
+            <summary>
+            Gets or sets html data.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Html.FlowDocumentData">
+            <summary>
+            Gets the flow document data string representing the actual html data.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Html.FlowDocument">
+            <summary>
+            Gets the converted flow document correspoding to html data.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Html.HtmlDocument">
+            <summary>
+            Gets the parsed html representaton.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Html.ValidationResult">
+            <summary>
+            Error/Warning messages added during conversion of html to xaml.
+            </summary>
+        </member>
+        <member name="T:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.HtmlToXamlConverter">
+            <summary>
+            This class is designed for the conversion of a subset of html to Wpf (as needed by VModell).
+            Thus, only the following elements are supported:
+            <list type="bullet">
+                <listheader>
+                    <element>element</element>
+                    <description>description</description>
+                </listheader>
+                <item>
+                    <element>p</element>
+                    <description>Converted to FlowDocument Paragraph. Accepted attributes: align, style=margin***.</description>
+                </item>
+                <item>
+                    <element>a</element>
+                    <description>Converted to FlowDocument Hyperlink. Accepted attributes: href.</description>
+                </item>
+                <item>
+                    <element>b, u, i</element>
+                    <description>Converted to FlowDocument Span/Run with corresponding style properties (FontWeight, FontStyle, TextDecorations).</description>
+                </item>
+                <item>
+                    <element>img</element>
+                    <description>Converted to Image. Accepted attributes: align, src, alt, id.</description>
+                </item>
+                <item>
+                    <element>List (ul, ol, li)</element>
+                    <description>Converted to FlowDocument List.</description>
+                </item>
+                <item>
+                    <element>Table (table, tr, td)</element>
+                    <description>
+                    Converted to FlowDocument Table. Accepted attribute: "border" for table.
+                    
+                    Warning: colspan, rowspan are not supported.
+                    </description>
+                </item>
+            </list>
+            </summary>
+            <remarks>
+            Based on XAML to HTML Conversion Demo: http://msdn.microsoft.com/en-us/library/aa972129.aspx
+            Uses HtmlAgilityPack: http://www.codeplex.com/htmlagilitypack
+            </remarks>
+        </member>
+        <member name="F:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.HtmlToXamlConverter.Xaml_FlowDocument">
+            <summary>
+            FlowDocument name.
+            </summary>
+        </member>
+        <member name="F:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.HtmlToXamlConverter.Xaml_Namespace">
+            <summary>
+            Xaml namespace.
+            </summary>
+        </member>
+        <member name="F:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.HtmlToXamlConverter.Xaml_Paragraph">
+            <summary>
+            FlowDocument paragraph.
+            </summary>
+        </member>
+        <member name="F:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.HtmlToXamlConverter.Xaml_Run">
+            <summary>
+            FlowDocument run.
+            </summary>
+        </member>
+        <member name="F:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.HtmlToXamlConverter.Xaml_Span">
+            <summary>
+            FlowDocument span.
+            </summary>
+        </member>
+        <member name="F:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.HtmlToXamlConverter.Xaml_BorderThickness">
+            <summary>
+            FlowDocument border thickness.
+            </summary>
+        </member>
+        <member name="F:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.HtmlToXamlConverter.Xaml_BorderBrush">
+            <summary>
+            FlowDocument border brush.
+            </summary>
+        </member>
+        <member name="F:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.HtmlToXamlConverter.Xaml_TextAlignment">
+            <summary>
+            FlowDocument text alignment.
+            </summary>
+        </member>
+        <member name="F:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.HtmlToXamlConverter.Xaml_TextDecorations">
+            <summary>
+            FlowDocument text decorations.
+            </summary>
+        </member>
+        <member name="F:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.HtmlToXamlConverter.Xaml_TextDecorations_Underline">
+            <summary>
+            FlowDocument text decorations underline.
+            </summary>
+        </member>
+        <member name="F:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.HtmlToXamlConverter.Xaml_FontWeight">
+            <summary>
+            FlowDocument font weight.
+            </summary>
+        </member>
+        <member name="F:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.HtmlToXamlConverter.Xaml_FontWeight_Bold">
+            <summary>
+            FlowDocument font weight bold.
+            </summary>
+        </member>
+        <member name="F:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.HtmlToXamlConverter.Xaml_FontStyle">
+            <summary>
+            FlowDocument font style.
+            </summary>
+        </member>
+        <member name="F:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.HtmlToXamlConverter.Xaml_FontStyle_Italic">
+            <summary>
+            FlowDocument font style italic.
+            </summary>
+        </member>
+        <member name="F:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.HtmlToXamlConverter.Xaml_Hyperlink">
+            <summary>
+            FlowDocument hyperlink.
+            </summary>
+        </member>
+        <member name="F:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.HtmlToXamlConverter.Xaml_Hyperlink_Click">
+            <summary>
+            FlowDocument hyperlink click.
+            </summary>
+        </member>
+        <member name="F:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.HtmlToXamlConverter.Xaml_Hyperlink_Click_Value">
+            <summary>
+            FlowDocument hyperlink click value.
+            </summary>
+        </member>
+        <member name="F:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.HtmlToXamlConverter.Xaml_Hyperlink_NavigateUri">
+            <summary>
+            FlowDocument hyperlink navigation uri.
+            </summary>
+        </member>
+        <member name="F:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.HtmlToXamlConverter.Xaml_Hyperlink_TargetName">
+            <summary>
+            FlowDocument hyperlink target name.
+            </summary>
+        </member>
+        <member name="F:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.HtmlToXamlConverter.Xaml_Image">
+            <summary>
+            FlowDocument image.
+            </summary>
+        </member>
+        <member name="F:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.HtmlToXamlConverter.Xaml_Image_Source">
+            <summary>
+            FlowDocument image source.
+            </summary>
+        </member>
+        <member name="F:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.HtmlToXamlConverter.Xaml_Image_BitmapImage">
+            <summary>
+            FlowDocument image bitmapimage.
+            </summary>
+        </member>
+        <member name="F:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.HtmlToXamlConverter.Xaml_UriSource">
+            <summary>
+            FlowDocument uri source.
+            </summary>
+        </member>
+        <member name="F:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.HtmlToXamlConverter.Xaml_HorizontalAlignment">
+            <summary>
+            FlowDocument horizontal alignment.
+            </summary>
+        </member>
+        <member name="F:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.HtmlToXamlConverter.Xaml_Margin">
+            <summary>
+            FlowDocument margin.
+            </summary>
+        </member>
+        <member name="F:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.HtmlToXamlConverter.Xaml_List">
+            <summary>
+            FlowDocument list.
+            </summary>
+        </member>
+        <member name="F:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.HtmlToXamlConverter.Xaml_ListItem">
+            <summary>
+            FlowDocument list item.
+            </summary>
+        </member>
+        <member name="F:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.HtmlToXamlConverter.Xaml_List_MarkerStyle">
+            <summary>
+            FlowDocument list marker style.
+            </summary>
+        </member>
+        <member name="F:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.HtmlToXamlConverter.Xaml_List_MarkerStyle_Decimal">
+            <summary>
+            FlowDocument list marker style decimal.
+            </summary>
+        </member>
+        <member name="F:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.HtmlToXamlConverter.Xaml_List_MarkerStyle_Disc">
+            <summary>
+            FlowDocument list marker style disc.
+            </summary>
+        </member>
+        <member name="F:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.HtmlToXamlConverter.Xaml_Table">
+            <summary>
+            FlowDocument table.
+            </summary>
+        </member>
+        <member name="F:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.HtmlToXamlConverter.Xaml_TableColumn">
+            <summary>
+            FlowDocument table column.
+            </summary>
+        </member>
+        <member name="F:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.HtmlToXamlConverter.Xaml_TableRowGroup">
+            <summary>
+            FlowDocument table row group.
+            </summary>
+        </member>
+        <member name="F:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.HtmlToXamlConverter.Xaml_TableRow">
+            <summary>
+            FlowDocument table row.
+            </summary>
+        </member>
+        <member name="F:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.HtmlToXamlConverter.Xaml_TableCell">
+            <summary>
+            FlowDocument table cell.
+            </summary>
+        </member>
+        <member name="F:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.HtmlToXamlConverter.Xaml_Bold">
+            <summary>
+            FlowDocument bold.
+            </summary>
+        </member>
+        <member name="F:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.HtmlToXamlConverter.Xaml_Underline">
+            <summary>
+            FlowDocument underline.
+            </summary>
+        </member>
+        <member name="F:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.HtmlToXamlConverter.Xaml_Italic">
+            <summary>
+            FlowDocument italic.
+            </summary>
+        </member>
+        <member name="F:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.HtmlToXamlConverter.Xaml_Namespace_Tum_VMX_Types">
+            <summary>
+            Xaml namespace vmx types.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.HtmlToXamlConverter.ConvertHtmlToXaml(HtmlAgilityPack.HtmlDocument,Tum.PDE.ToolFramework.Modeling.ValidationResult,System.String)">
+            <summary>
+            Converts an html string into xaml string.
+            </summary>
+            <param name="htmlDocument">Html document.</param>
+            <param name="conversionResult">Conversion result to store error and warning messages. Can be null.</param>
+            <param name="vModellDirectory">Directory of the VModell instance containing the element that has a html property.</param>
+            <returns>
+            Well-formed xml string representing XAML equivalent for the input html.
+            </returns>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.HtmlToXamlConverter.AddBlock(System.Xml.XmlElement,HtmlAgilityPack.HtmlNode,System.Collections.Generic.List{HtmlAgilityPack.HtmlNode},Tum.PDE.ToolFramework.Modeling.ValidationResult,System.String)">
+            <summary>
+            Analyzes the given XmlElement htmlElement, recognizes it as some HTML element and adds it as a child to a xamlParentElement.
+            </summary>
+            <param name="xamlParentElement">Parent xaml element, to which new converted element will be added/// </param>
+            <param name="htmlNode"> Source html element subject to convert to xaml.</param>
+            <param name="sourceContext"></param>
+            <param name="conversionResult">Conversion result to store error and warning messages. Can be null.</param>
+            <param name="vModellDirectory">Directory of the VModell instance containing the element that has a html property.</param>
+            <returns>
+            Last processed html node. Normally it should be the same htmlElement as was passed as a paramater.
+            The caller must use this node to get to next sibling from it.
+            </returns>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.HtmlToXamlConverter.AddParagraph(System.Xml.XmlElement,HtmlAgilityPack.HtmlNode,System.Collections.Generic.List{HtmlAgilityPack.HtmlNode},Tum.PDE.ToolFramework.Modeling.ValidationResult,System.String)">
+            <summary>
+            Generates Paragraph element from P.
+            </summary>
+            <param name="xamlParentElement">XmlElement representing Xaml parent to which the converted element should be added</param>
+            <param name="htmlElement">XmlElement representing Html element to be converted</param>
+            <param name="conversionResult">Conversion result to store error and warning messages. Can be null.</param>
+            <param name="vModellDirectory">Directory of the VModell instance containing the element that has a html property.</param>
+            <param name="sourceContext"></param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.HtmlToXamlConverter.AddImplicitParagraph(System.Xml.XmlElement,HtmlAgilityPack.HtmlNode,System.Collections.Generic.List{HtmlAgilityPack.HtmlNode},Tum.PDE.ToolFramework.Modeling.ValidationResult,System.String)">
+            <summary>
+            Creates a Paragraph element and adds all nodes starting from htmlNode converted to appropriate Inlines.
+            </summary>
+            <param name="xamlParentElement">XmlElement representing Xaml parent to which the converted element should be added</param>
+            <param name="htmlNode">XmlNode starting a collection of implicitly wrapped inlines. </param>
+            <param name="sourceContext"></param>
+            <param name="conversionResult">Conversion result to store error and warning messages. Can be null.</param>
+            <param name="vModellDirectory">Directory of the VModell instance containing the element that has a html property.</param>
+            <returns>The last htmlNode added to the implicit paragraph</returns>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.HtmlToXamlConverter.AddTable(System.Xml.XmlElement,HtmlAgilityPack.HtmlNode,System.Collections.Generic.List{HtmlAgilityPack.HtmlNode},Tum.PDE.ToolFramework.Modeling.ValidationResult,System.String)">
+            <summary>
+            Converts htmlTableElement to a Xaml Table element. Adds tbody elements if they are missing so
+            that a resulting Xaml Table element is properly formed.
+            </summary>
+            <param name="xamlParentElement">Parent xaml element to which a converted table must be added.</param>
+            <param name="htmlTableElement">XmlElement reprsenting the Html table element to be converted</param>
+            <param name="sourceContext">Source context.</param>
+            <param name="conversionResult">Conversion result to store error and warning messages. Can be null.</param>
+            <param name="vModellDirectory">Directory of the VModell instance containing the element that has a html property.</param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.HtmlToXamlConverter.AddTableRows(System.Xml.XmlElement,HtmlAgilityPack.HtmlNode,System.Collections.Generic.List{HtmlAgilityPack.HtmlNode},Tum.PDE.ToolFramework.Modeling.ValidationResult,System.String,System.Collections.Hashtable)">
+            <summary>
+            Adds TableRow elements . The rows are converted from Html tr elements.
+            </summary>
+            <param name="xamlTableRowGroup">XmlElement representing Xaml TableRowGroup element to which the converted rows should be added.</param>
+            <param name="htmlTRStartNode">XmlElement representing the first tr child.</param>
+            <param name="sourceContext"></param>
+            <param name="conversionResult">Conversion result to store error and warning messages. Can be null.</param>
+            <param name="vModellDirectory">Directory of the VModell instance containing the element that has a html property.</param>
+            <param name="inheritedProperties">Inherited properties.</param>
+            <returns>
+            XmlNode representing the current position of the iterator among tr elements.
+            </returns>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.HtmlToXamlConverter.AddTableCellsToTableRow(System.Xml.XmlElement,HtmlAgilityPack.HtmlNode,System.Collections.Generic.List{HtmlAgilityPack.HtmlNode},Tum.PDE.ToolFramework.Modeling.ValidationResult,System.String,System.Collections.Hashtable)">
+            <summary>
+            Adds TableCell elements to xamlTableRowElement.
+            </summary>
+            <param name="xamlTableRowElement">XmlElement representing Xaml TableRow element to which the converted cells should be added.</param>
+            <param name="htmlTDStartNode">XmlElement representing the child of tr element from which we should start adding td elements. </param>
+            <param name="sourceContext"></param>
+            <param name="conversionResult">Conversion result to store error and warning messages. Can be null.</param>
+            <param name="vModellDirectory">Directory of the VModell instance containing the element that has a html property.</param>
+            <param name="inheritedProperties">Inherited properties.</param>
+            <returns>
+            XmlElement representing the current position of the iterator among the children of the parent Html tbody/tr element
+            </returns>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.HtmlToXamlConverter.AddDataToTableCell(System.Xml.XmlElement,HtmlAgilityPack.HtmlNode,System.Collections.Generic.List{HtmlAgilityPack.HtmlNode},Tum.PDE.ToolFramework.Modeling.ValidationResult,System.String)">
+            <summary>
+            Adds table cell data to xamlTableCellElement
+            </summary>
+            <param name="xamlTableCellElement">XmlElement representing Xaml TableCell element to which the converted data should be added.</param>
+            <param name="htmlDataStartNode">XmlElement representing the start element of data to be added to xamlTableCellElement.</param>
+            <param name="sourceContext"></param>
+            <param name="conversionResult">Conversion result to store error and warning messages. Can be null.</param>
+            <param name="vModellDirectory">Directory of the VModell instance containing the element that has a html property.</param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.HtmlToXamlConverter.AddList(System.Xml.XmlElement,HtmlAgilityPack.HtmlNode,System.Collections.Generic.List{HtmlAgilityPack.HtmlNode},Tum.PDE.ToolFramework.Modeling.ValidationResult,System.String)">
+            <summary>
+            Converts Html ul or ol element into Xaml list element. During conversion if the ul/ol element has any children 
+            that are not li elements, they are ignored and not added to the list element
+            </summary>
+            <param name="xamlParentElement">XmlElement representing Xaml parent to which the converted element should be added</param>
+            <param name="htmlListElement">XmlElement representing Html ul/ol element to be converted</param>
+            <param name="sourceContext"></param>
+            <param name="conversionResult">Conversion result to store error and warning messages. Can be null.</param>
+            <param name="vModellDirectory">Directory of the VModell instance containing the element that has a html property.</param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.HtmlToXamlConverter.AddListItem(System.Xml.XmlElement,HtmlAgilityPack.HtmlNode,System.Collections.Generic.List{HtmlAgilityPack.HtmlNode},Tum.PDE.ToolFramework.Modeling.ValidationResult,System.String)">
+            <summary>
+            Converts htmlLIElement into Xaml ListItem element, and appends it to the parent xamlListElement
+            </summary>
+            <param name="xamlListElement">XmlElement representing Xaml List element to which the converted td/th should be added</param>
+            <param name="htmlLIElement">XmlElement representing Html li element to be converted</param>
+            <param name="sourceContext">Source context.</param>
+            <param name="conversionResult">Conversion result to store error and warning messages. Can be null.</param>
+            <param name="vModellDirectory">Directory of the VModell instance containing the element that has a html property.</param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.HtmlToXamlConverter.AddInline(System.Xml.XmlElement,HtmlAgilityPack.HtmlNode,System.Collections.Generic.List{HtmlAgilityPack.HtmlNode},Tum.PDE.ToolFramework.Modeling.ValidationResult,System.String)">
+            <summary>
+            Adds inline elements.
+            </summary>
+            <param name="xamlParentElement">Parent xaml element, to which new converted element will be added </param>
+            <param name="htmlNode"> Source html element subject to convert to xaml.</param>
+            <param name="sourceContext"></param>
+            <param name="conversionResult">Conversion result to store error and warning messages. Can be null.</param>
+            <param name="vModellDirectory">Directory of the VModell instance containing the element that has a html property.</param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.HtmlToXamlConverter.AddSpanOrRun(System.Xml.XmlElement,HtmlAgilityPack.HtmlNode,System.Collections.Generic.List{HtmlAgilityPack.HtmlNode},Tum.PDE.ToolFramework.Modeling.ValidationResult,System.String)">
+            <summary>
+            Adds a span or a run element depending on whether the current element has child element or not.
+            </summary>
+            <param name="xamlParentElement">Parent xaml element, to which new converted element will be added </param>
+            <param name="htmlElement"> Source html element subject to convert to xaml.</param>
+            <param name="sourceContext"></param>
+            <param name="conversionResult">Conversion result to store error and warning messages. Can be null.</param>
+            <param name="vModellDirectory">Directory of the VModell instance containing the element that has a html property.</param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.HtmlToXamlConverter.AddTextRun(System.Xml.XmlElement,HtmlAgilityPack.HtmlNode,Tum.PDE.ToolFramework.Modeling.ValidationResult,System.String)">
+            <summary>
+            Adds a text run to a xaml tree.
+            </summary>
+            <param name="xamlElement">XamlElement to add the text run to.</param>
+            <param name="htmlElement">Text node.</param>
+            <param name="conversionResult">Conversion result to store error and warning messages. Can be null.</param>
+            <param name="vModellDirectory">Directory of the VModell instance containing the element that has a html property.</param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.HtmlToXamlConverter.AddCommentText(System.Xml.XmlElement,HtmlAgilityPack.HtmlNode,Tum.PDE.ToolFramework.Modeling.ValidationResult,System.String)">
+            <summary>
+            Adds a comment text run to a xaml tree.
+            </summary>
+            <param name="xamlElement">XamlElement to add the text run to.</param>
+            <param name="htmlNode">Comment node.</param>
+            <param name="conversionResult">Conversion result to store error and warning messages. Can be null.</param>
+            <param name="vModellDirectory">Directory of the VModell instance containing the element that has a html property.</param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.HtmlToXamlConverter.AddHyperlink(System.Xml.XmlElement,HtmlAgilityPack.HtmlNode,System.Collections.Generic.List{HtmlAgilityPack.HtmlNode},Tum.PDE.ToolFramework.Modeling.ValidationResult,System.String)">
+            <summary>
+            Adds a hyperlink.
+            </summary>
+            <param name="xamlParentElement">XmlElement representing Xaml parent to which the converted element should be added</param>
+            <param name="htmlElement">Source html element subject to convert to xaml.</param>
+            <param name="sourceContext"></param>
+            <param name="conversionResult">Conversion result to store error and warning messages. Can be null.</param>
+            <param name="vModellDirectory">Directory of the VModell instance containing the element that has a html property.</param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.HtmlToXamlConverter.AddImage(System.Xml.XmlElement,HtmlAgilityPack.HtmlNode,System.Collections.Generic.List{HtmlAgilityPack.HtmlNode},Tum.PDE.ToolFramework.Modeling.ValidationResult,System.String)">
+            <summary>
+            Adds an image.
+            </summary>
+            <param name="xamlParentElement">XmlElement representing Xaml parent to which the converted element should be added</param>
+            <param name="htmlElement">Source html element subject to convert to xaml.</param>
+            <param name="sourceContext"></param>
+            <param name="conversionResult">Conversion result to store error and warning messages. Can be null.</param>
+            <param name="vModellDirectory">Directory of the VModell instance containing the element that has a html property.</param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.HtmlToXamlConverter.GetAttribute(HtmlAgilityPack.HtmlNode,System.String)">
+            <summary>
+            Returns a value for an attribute by its name (ignoring casing)
+            </summary>
+            <param name="element">XmlElement in which we are trying to find the specified attribute.</param>
+            <param name="attributeName">String representing the attribute name to be searched for</param>
+            <returns></returns>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.HtmlToXamlConverter.GetCssAttribute(System.String,System.String)">
+            <summary>
+            Extracts a value of css attribute from css style definition.
+            </summary>
+            <param name="cssStyle">Source csll style definition</param>
+            <param name="attributeName">A name of css attribute to extract.</param>
+            <returns>
+            A string rrepresentation of an attribute value if found;
+            null if there is no such attribute in a given string.
+            </returns>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.HtmlToXamlConverter.GetCssAttributes(System.String)">
+            <summary>
+            Returns local css attributes.
+            </summary>
+            <returns>Hashtable with css attributes (name and value).</returns>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.HtmlToXamlConverter.UnQuote(System.String)">
+            <summary>
+            Returns string extracted from quotation marks
+            </summary>
+            <param name="value">
+            String representing value enclosed in quotation marks
+            </param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.HtmlToXamlConverter.ParseTextAlignment(System.String,Tum.PDE.ToolFramework.Modeling.ValidationResult)">
+            <summary>
+            Parses the html align attribute given as a string.
+            </summary>
+            <param name="alignment">Html align attribute value.</param>
+            <param name="conversionResult">Conversion result to store error and warning messages. Can be null.</param>
+            <returns>
+            Returns the corresponding xaml alignment value as a string. 
+            Should the given value not be recognized, the default value ('Left') is returned.</returns>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.HtmlToXamlConverter.ParseBorderThickness(System.String,Tum.PDE.ToolFramework.Modeling.ValidationResult)">
+            <summary>
+            Parses the html border attribute given as a string.
+            </summary>
+            <param name="border">Html border attribute value.</param>
+            <param name="conversionResult">Conversion result to store error and warning messages. Can be null.</param>
+            <returns>
+            Returns the corresponding xaml border thickness value as a string. 
+            Should the given value not be recognized, the default value ('0') is returned.</returns>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.HtmlToXamlConverter.ParseMargin(System.String,System.String,System.String,System.String,Tum.PDE.ToolFramework.Modeling.ValidationResult)">
+            <summary>
+            Parses the html margin attributes.
+            </summary>
+            <param name="marginLeft">Left margin.</param>
+            <param name="marginRight">Right margin.</param>
+            <param name="marginTop">Top margin.</param>
+            <param name="marginBottom">Bottom margin.</param>
+            <param name="conversionResult">Conversion result to store error and warning messages. Can be null.</param>
+            <returns>Returns the corresponding xaml margin value as a string.</returns>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.HtmlToXamlConverter.ParseMarginValue(System.String,Tum.PDE.ToolFramework.Modeling.ValidationResult)">
+            <summary>
+            Parses the html margin attribute given as a string.
+            </summary>
+            <param name="margin">Html margin attribute value.</param>
+            <param name="conversionResult">Conversion result to store error and warning messages. Can be null.</param>
+            <returns>
+            Returns the corresponding xaml margin value as a string. 
+            Should the given value not be recognized, the default value ('0') is returned.</returns>
+        </member>
+        <member name="T:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.HtmlToXamlConverter.HtmlSchema">
+            <summary>
+            HtmlSchema class maintains static information about HTML structure.
+            
+            So far it only contains information about block elements.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.HtmlToXamlConverter.HtmlSchema.InitializeBlockElements">
+            <summary>
+            Initializes the array of html block element names.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.Converter.HtmlToXamlConverter.HtmlSchema.IsBlockElement(System.String)">
+            <summary>
+            Returns true if xmlElementName represents a block formatting element.
+            </summary>
+            <param name="xmlElementName"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.HtmlHyperlink">
+            <summary>
+            This class extends the default hyperlink class by providing an NavigationCommand, that can
+            be used to provide custom navigation based on the hyperlink, which is passed as parameter.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.HtmlHyperlink.#ctor">
+            <summary>
+            Constructor.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.HtmlHyperlink.#ctor(System.Windows.Documents.TextPointer,System.Windows.Documents.TextPointer)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="start"></param>
+            <param name="end"></param>
+        </member>
+        <member name="T:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.InsertTablePopup">
+            <summary>
+            Interaction logic for InsertTablePopup.xaml
+            </summary>
+            <summary>
+            InsertTablePopup
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.InsertTablePopup.#ctor">
+            <summary>
+            Constructor.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.InsertTablePopup.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.HtmlRichTextEditor">
+            <summary>
+            This class extends the rich text box by providing properties and and commands needed for html processing.
+            </summary>
+            <remarks>
+            The only commands supported so far are summarizen in HtmlToXamlConverter-Class.
+            </remarks>
+        </member>
+        <member name="F:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.HtmlRichTextEditor.IsFlowDocumentDirty">
+            <summary>
+            Gets or sets whether the flow document has changed and html data needs to be rebuild based on the flow document before it can be accessed.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.HtmlRichTextEditor.#ctor">
+            <summary>
+            Constructor.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.HtmlRichTextEditor.OnPreviewMouseWheel(System.Windows.Input.MouseWheelEventArgs)">
+            <summary>
+            Preventing ScrollViewer from handling the mouse wheel
+            Idea: http://serialseb.blogspot.com/2007/09/wpf-tips-6-preventing-scrollviewer-from.html
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.HtmlRichTextEditor.OnSelectionChanged(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Process selection changes and update properties.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.HtmlRichTextEditor.ProcessSelectionChanged">
+            <summary>
+            Processes selection changed event.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.HtmlRichTextEditor.OnTextChanged(System.Windows.Controls.TextChangedEventArgs)">
+            <summary>
+            Mark flow document as dirty, so we update html when we lose focus.
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.HtmlRichTextEditor.OnLostFocus(System.Windows.RoutedEventArgs)">
+            <summary>
+            Update document when we lose focus if IsFlowDocumentDirty=True
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.HtmlRichTextEditor.OnPreviewMouseDown(System.Windows.Input.MouseButtonEventArgs)">
+            <summary>
+            Navigation to hyperlink, if Ctrl+Leftclick.
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.HtmlRichTextEditor.OnContextMenuOpening(System.Windows.Controls.ContextMenuEventArgs)">
+            <summary>
+            See if we need to add specific context menu items based on the location of the context menu (mouse click location):
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.HtmlRichTextEditor.OnContextMenuClosing(System.Windows.Controls.ContextMenuEventArgs)">
+            <summary>
+            Clear context menu.
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.HtmlRichTextEditor.CopyCommand_Executed">
+            <summary>
+            CopyCommand executed
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.HtmlRichTextEditor.CutCommand_Executed">
+            <summary>
+            CutCommand executed
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.HtmlRichTextEditor.PasteCommand_Executed">
+            <summary>
+            PasteCommand executed
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.HtmlRichTextEditor.CopyCommand_CanExecute">
+            <summary>
+            CopyCommand executed
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.HtmlRichTextEditor.CutCommand_CanExecute">
+            <summary>
+            CutCommand executed
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.HtmlRichTextEditor.PasteCommand_CanExecute">
+            <summary>
+            PasteCommand executed
+            </summary>
+        </member>
+        <member name="F:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.HtmlRichTextEditor.HtmlProperty">
+            <summary>
+            Html dependency property.
+            </summary>
+        </member>
+        <member name="F:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.HtmlRichTextEditor.UpdateCommandProperty">
+            <summary>
+            Html dependency property.
+            </summary>
+        </member>
+        <member name="F:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.HtmlRichTextEditor.CancelCommandProperty">
+            <summary>
+            Html dependency property.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.HtmlRichTextEditor.OnDragOver(System.Windows.DragEventArgs)">
+            <summary>
+            Drag over logic.
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.HtmlRichTextEditor.OnDragEnter(System.Windows.DragEventArgs)">
+            <summary>
+            Drag enter logic.
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.HtmlRichTextEditor.OnDrop(System.Windows.DragEventArgs)">
+            <summary>
+            DragDrop logic.
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="F:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.HtmlRichTextEditor.CopyCommandProperty">
+            <summary>
+            Copy command dependency property.
+            </summary>
+        </member>
+        <member name="F:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.HtmlRichTextEditor.CutCommandProperty">
+            <summary>
+            Cut command dependency property.
+            </summary>
+        </member>
+        <member name="F:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.HtmlRichTextEditor.PasteCommandProperty">
+            <summary>
+            Paste command dependency property.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.HtmlRichTextEditor.ToggleBold">
+            <summary>
+            Toggle bold.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.HtmlRichTextEditor.ToggleUnderline">
+            <summary>
+            Toggle underline.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.HtmlRichTextEditor.ToggleItalic">
+            <summary>
+            Toggle italic.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.HtmlRichTextEditor.IncreaseIndentation">
+            <summary>
+            Increases the indentation for the current paragraph by one tab stop.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.HtmlRichTextEditor.DecreaseIndentation">
+            <summary>
+            Decreases the indentation for the current paragraph by one tab stop.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.HtmlRichTextEditor.AlignLeft">
+            <summary>
+            Aligns the selection of content left.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.HtmlRichTextEditor.AlignCenter">
+            <summary>
+            Aligns the selection of content to be centered.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.HtmlRichTextEditor.AlignRight">
+            <summary>
+            Aligns the selection of content right.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.HtmlRichTextEditor.AlignJustify">
+            <summary>
+            Aligns the selection of content to be justified.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.HtmlRichTextEditor.InsertNumberList">
+            <summary>
+            Adds a numbered (ordered) list to the editor.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.HtmlRichTextEditor.InsertBulletList">
+            <summary>
+            Adds a bulleted list to the editor.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.HtmlRichTextEditor.InsertHyperlink(System.String,System.String)">
+            <summary>
+            Inserts a new hyperlink.
+            </summary>
+            <param name="text">Text to display. This text will only be set in case there is no selection in the editor.</param>
+            <param name="link">Target of the hyperlink. Can either be an www-link or the v-modell id of a model element.</param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.HtmlRichTextEditor.InsertImage(Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.HtmlImage)">
+            <summary>
+            Inserts an image.
+            </summary>
+            <param name="image">Image to insert.</param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.HtmlRichTextEditor.InsertTable(System.Int32,System.Int32,System.Double)">
+            <summary>
+            Inserts a new table by first displaying a form to specify table properties and then adding it to the flow document.
+            </summary>
+            <param name="tableRows">Number of rows.</param>
+            <param name="tableColumns">Number of columns.</param>
+            <param name="tableBorder">Border width.</param>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.HtmlRichTextEditor.Html">
+            <summary>
+            Gets or sets the html document to display and/or edit in the rich text box and the html source text box.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.HtmlRichTextEditor.UpdateCommand">
+            <summary>
+            Update the data source.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.HtmlRichTextEditor.CancelCommand">
+            <summary>
+            Cancel update.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.HtmlRichTextEditor.CopyCommand">
+            <summary>
+            Gets or sets the copy command.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.HtmlRichTextEditor.CutCommand">
+            <summary>
+            Gets or sets the cut command.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.HtmlRichTextEditor.PasteCommand">
+            <summary>
+            Gets or sets the paste command.
+            </summary>
+        </member>
+    </members>
+</doc>

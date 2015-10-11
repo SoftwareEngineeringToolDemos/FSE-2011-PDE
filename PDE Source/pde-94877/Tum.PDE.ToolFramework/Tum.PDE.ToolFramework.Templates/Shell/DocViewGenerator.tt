@@ -1,0 +1,131 @@
+﻿<#@ template language="C#" inherits="BaseTemplate"#> 
+<#@ import namespace="Tum.PDE.LanguageDSL"#>
+<#@ import namespace="Microsoft.VisualStudio.Modeling" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Collections.ObjectModel" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#
+	string dslName = this.MetaModel.Name;
+	string dslFullName = this.MetaModel.GetFullName(true);
+#>
+using DslModeling = global::Microsoft.VisualStudio.Modeling;
+using DslShell = global::Microsoft.VisualStudio.Modeling.Shell;
+
+using DslEditorShell = global::Tum.PDE.ToolFramework.Modeling.Shell;
+
+namespace <#= this.MetaModel.Namespace #>
+{
+	/// <summary>
+	/// Double-derived class to allow easier code customization.
+	/// </summary>
+	[global::System.ComponentModel.ToolboxItemFilterAttribute(<#= dslFullName #>ToolboxHelperBase.ToolboxFilterString, global::System.ComponentModel.ToolboxItemFilterType.Require)]
+	internal partial class <#= dslName #>DocView : <#= dslName #>DocViewBase
+	{
+		/// <summary>
+		/// Constructs a new <#= dslName #>DocView.
+		/// </summary>
+		public <#= dslName #>DocView(DslEditorShell::ModelShellData docData, global::System.IServiceProvider serviceProvider)
+			: base(docData, serviceProvider)
+		{
+		}
+	}
+
+	/// <summary>
+	/// Class that hosts the diagram surface in the Visual Studio document area.
+	/// </summary>
+	internal abstract class <#= dslName #>DocViewBase : DslEditorShell::ModelDocView
+	{
+		/// <summary>
+		/// Constructs a new <#= dslName #>DocView.
+		/// </summary>
+		protected <#= dslName #>DocViewBase(DslEditorShell::ModelShellData docData, global::System.IServiceProvider serviceProvider) 
+			: base(docData, serviceProvider)
+		{
+			
+		}
+		
+		/// <summary>
+		/// Gets or sets the main view model.
+		/// </summary>
+		public <#= this.MetaModel.Namespace #>.ViewModel.<#= dslName #>MainViewModel ViewModel
+		{
+			get;
+			set;
+		}
+		
+		/// <summary>
+		/// Gets or sets the main ui control.
+		/// </summary>
+		public global::System.Windows.FrameworkElement ViewControl
+		{
+			get;
+			set;
+		}
+		
+		#region Methods
+		/// <summary>
+		/// This methods creates the WPF control that will represent the model
+		/// </summary>
+		/// <returns></returns>
+		protected override global::System.Windows.FrameworkElement CreateControl()
+		{
+            this.ViewControl = new MainViewControl();
+            this.CreateViewModel();
+
+			// Delay initialization of the ui until other tool windows have also 
+			// had a chance to be initialized
+			this.ViewControl.Dispatcher.BeginInvoke((System.Action)delegate
+            {
+                // Populate the list view
+                this.SetViewModel();
+            });
+
+			// add to main shell vm
+            (this.Package as <#= dslName #>Package).PackageController.AddShellViewModel(this.ViewModel, this.DocData.FullFileName);
+			(this.Package as <#= dslName #>Package).PackageController.SetCurrentShellViewModel(this.ViewModel);
+
+            return this.ViewControl;
+		}
+		
+		/// <summary>
+		/// Creates the main view model.
+		/// </summary>
+		/// <returns></returns>
+		protected virtual void CreateViewModel()
+		{
+            <#= dslName #>DocData docData = this.DocData as <#= dslName #>DocData;
+			this.ViewModel = new <#= this.MetaModel.Namespace #>.ViewModel.<#= dslName #>MainViewModel(docData.ModelData, this.Package as <#= dslName #>Package);
+			this.ViewModel.FullFileName = this.DocData.FullFileName;
+		}			
+		
+		/// <summary>
+		/// Set the vm to the data context of the view.
+		/// </summary>
+		/// <returns></returns>
+		protected virtual void SetViewModel()
+		{
+			(this.ViewControl as MainViewControl).SetViewModel(this.ViewModel);
+		}		
+		
+        /// <summary>
+        /// Clean up.
+        /// </summary>
+        protected override void OnClose()
+        {
+			//(this.Package as <#= dslName #>Package).PackageController.RemoveShellViewModel(this.ViewModel);		
+		
+			this.DocData.CloseDocument();
+					
+            (this.ViewControl as MainViewControl).Dispose();
+			this.ViewModel.Dispose();
+            
+            this.ViewModel = null;
+            this.ViewControl = null;
+			
+            base.OnClose();			
+        }		
+		#endregion
+	}	
+}

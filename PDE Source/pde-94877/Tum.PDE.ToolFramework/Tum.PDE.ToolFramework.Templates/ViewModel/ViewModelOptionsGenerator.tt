@@ -1,0 +1,87 @@
+﻿<#@ template language="C#" inherits="BaseTemplate"#> 
+<#@ import namespace="Tum.PDE.LanguageDSL"#>
+
+<#
+GenerateViewModelOptions(this.MetaModel);
+#>
+<#+ 
+public void GenerateViewModelOptions(MetaModel dm)
+{
+	if( dm.LanguageType == LanguageType.WPFEditor || dm.LanguageType == LanguageType.VMXEditor)
+		{
+#>
+
+namespace <#= dm.Namespace #>.ViewModel
+{	
+	/// <summary>
+	/// This class is used to store common options.
+	/// </summary>
+	public partial class <#= dm.Name #>ViewModelOptions : global::Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModelOptions
+	{
+		/// <summary>
+		/// Constructor.
+		/// </summary>
+		public <#= dm.Name #>ViewModelOptions() : base()
+		{
+		
+		}
+		
+		/*
+		/// <summary>
+        /// Loads options.
+        /// </summary>
+        /// <param name="filePath">File name to load options from.</param>
+        /// <returns><#= dm.Name #>ViewModelOptions instance.</returns>
+        public static <#= dm.Name #>ViewModelOptions Deserialize(string filePath)
+        {
+			System.IO.TextReader r = null;
+			try 
+			{
+    	      	System.Xml.Serialization.XmlSerializer s = new System.Xml.Serialization.XmlSerializer(typeof(<#= dm.Name #>ViewModelOptions));
+    	       	r = new System.IO.StreamReader(filePath);
+    	       	<#= dm.Name #>ViewModelOptions serializableObject = (<#= dm.Name #>ViewModelOptions)s.Deserialize(r);
+
+    	       	return serializableObject;
+			}
+			catch
+			{
+				return new <#= dm.Name #>ViewModelOptions();
+			}
+			finally
+			{
+				if( r != null )
+					r.Close();
+			}
+        }
+		
+		/// <summary>
+        /// Save options.
+        /// </summary>
+        /// <param name="filePath">File name to save options to.</param>
+        /// <param name="serializableObject"><#= dm.Name #>ViewModelOptions instance.</param>
+        public static void Serialize(string filePath, <#= dm.Name #>ViewModelOptions serializableObject)
+        {
+			System.IO.TextWriter w = null;
+			try 
+			{
+            	System.Xml.Serialization.XmlSerializer s = new System.Xml.Serialization.XmlSerializer(typeof(<#= dm.Name #>ViewModelOptions));
+            	w = new System.IO.StreamWriter(filePath);
+            	s.Serialize(w, serializableObject);
+			}
+			catch
+			{
+				// ...
+			}
+			finally
+			{
+				if( w != null )
+					w.Close();
+			}
+        }		
+		*/
+	}
+}
+<#+
+		}
+}
+#>

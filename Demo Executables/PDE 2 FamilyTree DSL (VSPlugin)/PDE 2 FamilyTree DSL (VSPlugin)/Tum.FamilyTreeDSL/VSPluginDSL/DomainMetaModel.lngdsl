@@ -1,0 +1,629 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<MetaModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="71e634b6-f895-45d5-bdbe-95853262c1a8" name="FamilyTreeDSL" companyName="TUM" namespace="Tum.FamilyTreeDSL" productName="FamilyTreeDSL" displayName="FamilyTreeDSL" applicationName="FamilyTreeDSL" layoutEmbeddedPath="GeneratedCode.ViewModel.WPFApplication.LayoutManagerLayout.xml" layoutDVEmbeddedPath="GeneratedCode.ViewModel.WPFApplication.LayoutManagerDV.txt" packageGuid="6f31046d-5aa5-4b80-99c5-27733698eb6d" customExtensionGuid="f3170641-9467-4bb0-97ca-15a64ee91028" customExtension="myfamilytree" xmlns="http://schemas.microsoft.com/dsltools/LanguageDSL"  languageType="VSPlugin">
+  <domainTypes>
+    <externalType namespace="System" serializationStyle="Normal" name="String" displayName="String" isDisplayNameTracking="True" requiresSerializationConversion="false">
+      <propertyGridEditor>
+        <propertyGridEditorMoniker name="StringEditorViewModel" />
+      </propertyGridEditor>
+    </externalType>
+    <externalType namespace="System" serializationStyle="Normal" name="Boolean?" displayName="Boolean" isDisplayNameTracking="True" requiresSerializationConversion="false">
+      <propertyGridEditor>
+        <propertyGridEditorMoniker name="BooleanEditorViewModel" />
+      </propertyGridEditor>
+    </externalType>
+    <externalType namespace="System" serializationStyle="Normal" name="Guid?" displayName="Guid" isDisplayNameTracking="True" requiresSerializationConversion="false" />
+    <externalType namespace="System" serializationStyle="Normal" name="Int32?" displayName="Integer" isDisplayNameTracking="True" requiresSerializationConversion="true">
+      <propertyGridEditor>
+        <propertyGridEditorMoniker name="IntegerEditorViewModel" />
+      </propertyGridEditor>
+    </externalType>
+    <externalType namespace="System" serializationStyle="Normal" name="Double?" displayName="Double" isDisplayNameTracking="True" requiresSerializationConversion="true">
+      <propertyGridEditor>
+        <propertyGridEditorMoniker name="DoubleEditorViewModel" />
+      </propertyGridEditor>
+    </externalType>
+    <domainEnumeration namespace="Tum.FamilyTreeDSL" serializationStyle="Normal" name="Gender" displayName="Gender" isDisplayNameTracking="True" requiresSerializationConversion="false" accessModifier="Public" isFlags="false">
+      <propertyGridEditor>
+        <propertyGridEditorMoniker name="EnumerationEditorViewModel" />
+      </propertyGridEditor>
+      <literals>
+        <domainEnumerationHasLiterals Id="451ed2bc-d29d-4752-bea8-0df6cfbf22f9">
+          <enumerationLiteral Id="3d22976c-a621-4d64-8324-36ef0a9f472c" name="Male" displayName="Male" isDisplayNameTracking="True" serializationName="Male" isSerializationNameTracking="True" />
+        </domainEnumerationHasLiterals>
+        <domainEnumerationHasLiterals Id="07343466-3393-470f-b829-e7b81f72f92a">
+          <enumerationLiteral Id="76218b5e-ba84-44af-8cdd-7dca52a59142" name="Female" displayName="Female" isDisplayNameTracking="True" serializationName="Female" isSerializationNameTracking="True" />
+        </domainEnumerationHasLiterals>
+      </literals>
+    </domainEnumeration>
+  </domainTypes>
+  <validation>
+    <metaModelHasValidation Id="c23ee8fd-4ed7-4206-accd-c30a1bc965da">
+      <validation Id="57e14fdf-5848-4fd5-b5cc-6191b1cfa366" useLoad="true" useMenu="true" useOpen="true" useSave="true" useAutoValidation="true" />
+    </metaModelHasValidation>
+  </validation>
+  <modelContexts>
+    <metaModelHasModelContexts Id="6f71bdcf-da52-4d91-85b5-c2d9e32d2090">
+      <modelContext Id="5e6d9c39-db9d-4fcb-81ef-751b0cf9494a" displayName="Default Context" isDisplayNameTracking="True" name="DefaultContext" isDefault="true">
+        <classes>
+          <libraryModelContextHasClasses Id="14f327ea-fed9-4426-a9b5-75a6d321f1a1">
+            <domainClass Id="67a0ab85-b72a-444d-ad42-062d4c6fd96e" displayName="Family Tree Model" isDisplayNameTracking="True" name="FamilyTreeModel" generatesDoubleDerived="false" hasCustomConstructor="false" accessModifier="Public" inheritanceModifier="None" namespace="Tum.FamilyTreeDSL" serializationName="FamilyTreeModel" isSerializationNameTracking="True" isDomainModel="true" canCopy="true" canMove="true" canPaste="true" generateSpecificViewModel="false" />
+          </libraryModelContextHasClasses>
+          <libraryModelContextHasClasses Id="9b3c79a8-1fbd-499b-872e-0a7e226db27f">
+            <domainClass Id="21332a00-f8e1-4b7d-98e0-faac3cf93b00" displayName="Person" isDisplayNameTracking="True" name="Person" generatesDoubleDerived="false" hasCustomConstructor="false" accessModifier="Public" inheritanceModifier="None" namespace="Tum.FamilyTreeDSL" serializationName="Person" isSerializationNameTracking="True" isDomainModel="false" canCopy="true" canMove="true" canPaste="true" generateSpecificViewModel="false">
+              <properties>
+                <attributedDomainElementHasProperties Id="e122e053-9435-443e-b3c0-5d1f4208ce40">
+                  <domainProperty Id="33a1895e-e63d-4eff-b2cf-e838c3e8a461" name="Name" isElementName="true" isRequired="true" displayName="Name" isBrowsable="true" getterAccessModifier="Public" setterAccessModifier="Public" isDisplayNameTracking="True" serializationName="Name" isSerializationNameTracking="True" serializationRepresentationType="Attribute" isUIReadOnly="false" propertyKind="Normal" isCustomCreated="false">
+                    <type>
+                      <externalTypeMoniker name="/FamilyTreeDSL/System/String" />
+                    </type>
+                  </domainProperty>
+                </attributedDomainElementHasProperties>
+                <attributedDomainElementHasProperties Id="10dcfc5f-b894-4e01-bd5e-de26c3bc45b3">
+                  <domainProperty Id="66e06c32-8163-447f-a7f3-9fef67dd3787" name="Gender" isElementName="false" isRequired="true" displayName="Gender" defaultValue="Male" isBrowsable="true" getterAccessModifier="Public" setterAccessModifier="Public" isDisplayNameTracking="True" serializationName="Gender" isSerializationNameTracking="True" serializationRepresentationType="Attribute" isUIReadOnly="false" propertyKind="Normal" isCustomCreated="false">
+                    <type>
+                      <domainEnumerationMoniker name="/FamilyTreeDSL/Tum.FamilyTreeDSL/Gender" />
+                    </type>
+                  </domainProperty>
+                </attributedDomainElementHasProperties>
+                <attributedDomainElementHasProperties Id="70cf32eb-47a4-40bc-b034-0e0ac9b41626">
+                  <domainProperty Id="bbdd8c7d-6da7-4336-878a-19ed0ba6caf6" name="Hobbies" isElementName="false" isRequired="false" displayName="Hobbies" isBrowsable="true" getterAccessModifier="Public" setterAccessModifier="Public" isDisplayNameTracking="True" serializationName="Hobbies" isSerializationNameTracking="True" serializationRepresentationType="Attribute" isUIReadOnly="false" propertyKind="Normal" isCustomCreated="false">
+                    <type>
+                      <externalTypeMoniker name="/FamilyTreeDSL/System/String" />
+                    </type>
+                  </domainProperty>
+                </attributedDomainElementHasProperties>
+              </properties>
+            </domainClass>
+          </libraryModelContextHasClasses>
+          <libraryModelContextHasClasses Id="e1b2cf90-8d08-419c-8df8-30affc48f781">
+            <domainClass Id="a6ef3e71-b373-4753-a220-2005f011f361" displayName="Family Tree Person" isDisplayNameTracking="True" name="FamilyTreePerson" generatesDoubleDerived="false" hasCustomConstructor="false" accessModifier="Public" inheritanceModifier="None" namespace="Tum.FamilyTreeDSL" serializationName="FamilyTreePerson" isSerializationNameTracking="True" isDomainModel="false" canCopy="true" canMove="true" canPaste="true" generateSpecificViewModel="false">
+              <baseClass>
+                <domainClassReferencesBaseClass Id="b115c06f-cb17-42e6-8dfa-ab43a14fb3ef" inhNodeId="11f19767-1a1a-4a3f-8279-57619c62da53">
+                  <domainClassMoniker Id="21332a00-f8e1-4b7d-98e0-faac3cf93b00" />
+                </domainClassReferencesBaseClass>
+              </baseClass>
+            </domainClass>
+          </libraryModelContextHasClasses>
+          <libraryModelContextHasClasses Id="ccb89150-b67d-4317-a3ae-e5d53c572fe0">
+            <domainClass Id="b1a37134-0462-49dd-8d11-28935de0f5c6" displayName="Pet" isDisplayNameTracking="True" name="Pet" generatesDoubleDerived="false" hasCustomConstructor="false" accessModifier="Public" inheritanceModifier="None" namespace="Tum.FamilyTreeDSL" serializationName="Pet" isSerializationNameTracking="True" isDomainModel="false" canCopy="true" canMove="true" canPaste="true" generateSpecificViewModel="false">
+              <properties>
+                <attributedDomainElementHasProperties Id="7cb0cd98-2375-48fa-93ad-3c279cdc8f74">
+                  <domainProperty Id="e4cbf5ed-1dc7-45e6-bda0-3e455672df20" name="Name" isElementName="true" isRequired="true" displayName="Name" isBrowsable="true" getterAccessModifier="Public" setterAccessModifier="Public" isDisplayNameTracking="True" serializationName="Name" isSerializationNameTracking="True" serializationRepresentationType="Attribute" isUIReadOnly="false" propertyKind="Normal" isCustomCreated="false">
+                    <type>
+                      <externalTypeMoniker name="/FamilyTreeDSL/System/String" />
+                    </type>
+                  </domainProperty>
+                </attributedDomainElementHasProperties>
+              </properties>
+            </domainClass>
+          </libraryModelContextHasClasses>
+        </classes>
+        <diagramClasses>
+          <libraryModelContextHasDiagramClasses Id="b3fcb16c-9490-4ff9-9a5a-a6d4a5038ea0">
+            <designerDiagramClass Id="dd212215-f39e-4b5f-8a70-b75549507756" name="DesignerDiagram" title="Designer" isCustom="false" visualizationBehavior="Normal">
+              <presentationElements>
+                <diagramClassHasPresentationElements Id="89e2e979-6c87-4e4b-8d49-845073d82c35">
+                  <shapeClass Id="2eb28189-2c8f-49e8-b792-19ed380853b0" displayName="Person Shape" isDisplayNameTracking="True" name="PersonShape" generatesDoubleDerived="false" hasCustomConstructor="false" accessModifier="Public" inheritanceModifier="None" namespace="Tum.FamilyTreeDSL" serializationName="PersonShape" isSerializationNameTracking="True" defaultWidth="100" defaultHeight="100" isFixedWidth="false" isFixedHeight="true" isRelativeChild="false" relativeChildBehaviour="PositionRelativeToParent" isAutoGenerated="true" borderThickness="1" backgroundBrush="White" borderBrush="Black" borderOuterBrush="White" borderOuterSize="3" borderCornerRadius="1" borderIsHitTestVisible="true" borderFocusable="true" useInDependencyView="false">
+                    <domainClass>
+                      <shapeClassReferencesDomainClass Id="5b24021c-1219-4df8-b962-c57835dd6edf">
+                        <domainClassMoniker Id="a6ef3e71-b373-4753-a220-2005f011f361" />
+                      </shapeClassReferencesDomainClass>
+                    </domainClass>
+                  </shapeClass>
+                </diagramClassHasPresentationElements>
+                <diagramClassHasPresentationElements Id="8d5a13f0-3fa0-4434-9ea2-0f67bdf70bce">
+                  <relationshipShapeClass Id="3433aec0-4665-4942-9870-6fdecaa18e39" displayName="Parent Of Shape" isDisplayNameTracking="True" name="ParentOfShape" generatesDoubleDerived="false" hasCustomConstructor="false" accessModifier="Public" inheritanceModifier="None" namespace="Tum.FamilyTreeDSL" serializationName="ParentOfShape" isSerializationNameTracking="True" isAutoGenerated="true" startAnchorStyle="None" endAnchorStyle="None" strokeThickness="1" stroke="Gray">
+                    <referenceRelationship>
+                      <relationshipShapeClassReferencesReferenceRelationship Id="22992183-4344-4eee-a468-71c2be87082b">
+                        <referenceRelationshipMoniker Id="a66e20aa-2060-4bbf-bff7-e86a0b71b1a5" />
+                      </relationshipShapeClassReferencesReferenceRelationship>
+                    </referenceRelationship>
+                  </relationshipShapeClass>
+                </diagramClassHasPresentationElements>
+                <diagramClassHasPresentationElements Id="72b2e9de-7d14-44ea-8cff-5c130c0cb515">
+                  <relationshipShapeClass Id="1ebc5904-97d0-43ac-a106-fdedaf4ed94d" displayName="Married To Shape" isDisplayNameTracking="True" name="MarriedToShape" generatesDoubleDerived="false" hasCustomConstructor="false" accessModifier="Public" inheritanceModifier="None" namespace="Tum.FamilyTreeDSL" serializationName="MarriedToShape" isSerializationNameTracking="True" isAutoGenerated="true" startAnchorStyle="None" endAnchorStyle="None" strokeThickness="1" stroke="Gray">
+                    <referenceRelationship>
+                      <relationshipShapeClassReferencesReferenceRelationship Id="ce26a5cb-ddf7-4760-bd5d-37876e83e8c4">
+                        <referenceRelationshipMoniker Id="adb58fcc-7f8c-4364-b57c-a760fc08651a" />
+                      </relationshipShapeClassReferencesReferenceRelationship>
+                    </referenceRelationship>
+                  </relationshipShapeClass>
+                </diagramClassHasPresentationElements>
+              </presentationElements>
+            </designerDiagramClass>
+          </libraryModelContextHasDiagramClasses>
+        </diagramClasses>
+        <relationships>
+          <libraryModelContextHasRelationships Id="149cfe3a-1c3f-4bc2-bb7f-8f8ff450e580">
+            <embeddingRelationship Id="7bdb12d9-1a35-4e87-bd6f-e3036f3bc0c6" displayName="Family Tree Model Has Family Tree Person" isDisplayNameTracking="True" name="FamilyTreeModelHasFamilyTreePerson" generatesDoubleDerived="false" hasCustomConstructor="false" accessModifier="Public" inheritanceModifier="None" namespace="Tum.FamilyTreeDSL" serializationName="FamilyTreeModelHasFamilyTreePerson" isSerializationNameTracking="True" isNameTracking="True" allowsDuplicates="false" propagatesCopyToChild="true">
+              <roles>
+                <domainRelationshipHasRoles Id="9a0a6ef7-540d-4feb-8469-ef9b8a649931">
+                  <domainRole Id="6eeff026-391b-4a93-96e9-860b61c561d0" displayName="Family Tree Model" isDisplayNameTracking="True" name="FamilyTreeModel" multiplicity="ZeroMany" propertyName="FamilyTreePerson" propertyDisplayName="Family Tree Person" isPropertyNameTracking="True" isPropertyDisplayNameTracking="True" propertyGetterAccessModifier="Public" propertySetterAccessModifier="Public" isPropertyBrowsable="true" isPropertyGenerator="true" propagatesDelete="false" isNameTracking="True" isPropertyUIReadOnly="false">
+                    <opposite>
+                      <domainRoleReferencesOpposite Id="3ab7cacc-4361-4cb2-974c-05ca382b8173">
+                        <domainRoleMoniker Id="de125b06-03b4-4fa1-98c5-649acca53db2" />
+                      </domainRoleReferencesOpposite>
+                    </opposite>
+                    <rolePlayer>
+                      <domainRoleReferencesRolePlayer Id="bb4ba1ab-ae0c-4653-be28-e56b6eb01aac">
+                        <domainClassMoniker Id="67a0ab85-b72a-444d-ad42-062d4c6fd96e" />
+                      </domainRoleReferencesRolePlayer>
+                    </rolePlayer>
+                  </domainRole>
+                </domainRelationshipHasRoles>
+                <domainRelationshipHasRoles Id="c6bbcbc6-a2a8-4db1-bd18-5dc2a13b8810">
+                  <domainRole Id="de125b06-03b4-4fa1-98c5-649acca53db2" displayName="Family Tree Person" isDisplayNameTracking="True" name="FamilyTreePerson" multiplicity="One" propertyName="FamilyTreeModel" propertyDisplayName="Family Tree Model" isPropertyNameTracking="True" isPropertyDisplayNameTracking="True" propertyGetterAccessModifier="Public" propertySetterAccessModifier="Public" isPropertyBrowsable="true" isPropertyGenerator="true" propagatesDelete="true" isNameTracking="True" isPropertyUIReadOnly="false">
+                    <opposite>
+                      <domainRoleReferencesOpposite Id="0e304ed1-770b-413b-836d-176a748784af">
+                        <domainRoleMoniker Id="6eeff026-391b-4a93-96e9-860b61c561d0" />
+                      </domainRoleReferencesOpposite>
+                    </opposite>
+                    <rolePlayer>
+                      <domainRoleReferencesRolePlayer Id="2cbc4327-005e-4325-9008-413afe569503">
+                        <domainClassMoniker Id="a6ef3e71-b373-4753-a220-2005f011f361" />
+                      </domainRoleReferencesRolePlayer>
+                    </rolePlayer>
+                  </domainRole>
+                </domainRelationshipHasRoles>
+              </roles>
+              <source>
+                <domainRelationshipReferencesSource Id="b0297354-af81-432b-9987-9844872c63d4">
+                  <domainRoleMoniker Id="6eeff026-391b-4a93-96e9-860b61c561d0" />
+                </domainRelationshipReferencesSource>
+              </source>
+              <target>
+                <domainRelationshipReferencesTarget Id="25b36f8d-67e8-43a8-a75a-8fa94c336858">
+                  <domainRoleMoniker Id="de125b06-03b4-4fa1-98c5-649acca53db2" />
+                </domainRelationshipReferencesTarget>
+              </target>
+            </embeddingRelationship>
+          </libraryModelContextHasRelationships>
+          <libraryModelContextHasRelationships Id="ab0efdca-0d90-4927-9f70-99f76bbe4e1a">
+            <embeddingRelationship Id="514239ef-2f74-4a7b-a3d2-da93960ff53c" displayName="Family Tree Person Has Pet" isDisplayNameTracking="True" name="FamilyTreePersonHasPet" generatesDoubleDerived="false" hasCustomConstructor="false" accessModifier="Public" inheritanceModifier="None" namespace="Tum.FamilyTreeDSL" serializationName="FamilyTreePersonHasPet" isSerializationNameTracking="True" isNameTracking="True" allowsDuplicates="false" propagatesCopyToChild="true">
+              <roles>
+                <domainRelationshipHasRoles Id="9ca5b289-0f48-430f-81c3-1d8357c7a9a2">
+                  <domainRole Id="75225fac-6eda-4ff5-b7c3-4c472bd960b4" displayName="Family Tree Person" isDisplayNameTracking="True" name="FamilyTreePerson" multiplicity="ZeroMany" propertyName="Pet" propertyDisplayName="Pet" isPropertyNameTracking="True" isPropertyDisplayNameTracking="True" propertyGetterAccessModifier="Public" propertySetterAccessModifier="Public" isPropertyBrowsable="true" isPropertyGenerator="true" propagatesDelete="false" isNameTracking="True" isPropertyUIReadOnly="false">
+                    <opposite>
+                      <domainRoleReferencesOpposite Id="fcf25f19-0ad8-4404-9509-cd3a8e06ed7d">
+                        <domainRoleMoniker Id="4aafc271-a696-46cf-9281-193bc9d55b36" />
+                      </domainRoleReferencesOpposite>
+                    </opposite>
+                    <rolePlayer>
+                      <domainRoleReferencesRolePlayer Id="66919ff8-f6a9-41f9-a490-a5af63abd469">
+                        <domainClassMoniker Id="a6ef3e71-b373-4753-a220-2005f011f361" />
+                      </domainRoleReferencesRolePlayer>
+                    </rolePlayer>
+                  </domainRole>
+                </domainRelationshipHasRoles>
+                <domainRelationshipHasRoles Id="e21314d3-60ae-496a-97a5-c24c06b02b3c">
+                  <domainRole Id="4aafc271-a696-46cf-9281-193bc9d55b36" displayName="Pet" isDisplayNameTracking="True" name="Pet" multiplicity="One" propertyName="FamilyTreePerson" propertyDisplayName="Family Tree Person" isPropertyNameTracking="True" isPropertyDisplayNameTracking="True" propertyGetterAccessModifier="Public" propertySetterAccessModifier="Public" isPropertyBrowsable="true" isPropertyGenerator="true" propagatesDelete="true" isNameTracking="True" isPropertyUIReadOnly="false">
+                    <opposite>
+                      <domainRoleReferencesOpposite Id="c1991ae6-3c9a-4547-b79a-053775bc4a2c">
+                        <domainRoleMoniker Id="75225fac-6eda-4ff5-b7c3-4c472bd960b4" />
+                      </domainRoleReferencesOpposite>
+                    </opposite>
+                    <rolePlayer>
+                      <domainRoleReferencesRolePlayer Id="24b00493-4938-4bf5-b63e-bb0ad2a903d2">
+                        <domainClassMoniker Id="b1a37134-0462-49dd-8d11-28935de0f5c6" />
+                      </domainRoleReferencesRolePlayer>
+                    </rolePlayer>
+                  </domainRole>
+                </domainRelationshipHasRoles>
+              </roles>
+              <source>
+                <domainRelationshipReferencesSource Id="10544773-20a3-4ea7-be39-e0c9b02e3bb9">
+                  <domainRoleMoniker Id="75225fac-6eda-4ff5-b7c3-4c472bd960b4" />
+                </domainRelationshipReferencesSource>
+              </source>
+              <target>
+                <domainRelationshipReferencesTarget Id="409383d4-0d87-4e76-8372-555a65ad8e62">
+                  <domainRoleMoniker Id="4aafc271-a696-46cf-9281-193bc9d55b36" />
+                </domainRelationshipReferencesTarget>
+              </target>
+            </embeddingRelationship>
+          </libraryModelContextHasRelationships>
+          <libraryModelContextHasRelationships Id="822d2384-0532-4c94-b794-78911d506d43">
+            <referenceRelationship Id="a66e20aa-2060-4bbf-bff7-e86a0b71b1a5" displayName="Parent Of" isDisplayNameTracking="True" name="ParentOf" generatesDoubleDerived="false" hasCustomConstructor="false" accessModifier="Public" inheritanceModifier="None" namespace="Tum.FamilyTreeDSL" serializationName="ParentOf" isSerializationNameTracking="True" isNameTracking="False" allowsDuplicates="false" serializationAttributeName="link" serializationTargetName="ChildRef" serializationSourceName="ParentRef" propagatesCopyToTarget="true" propagatesCopyToSource="false" propagatesCopyOnDeniedElementCopy="true" isSerializationTargetNameTracking="True" isSerializationSourceNameTracking="True">
+              <roles>
+                <domainRelationshipHasRoles Id="44cbecd6-cd0c-4ea4-9328-cdd32ed42c71">
+                  <domainRole Id="d235b88a-1c78-4891-9cf9-66a291491a64" displayName="Parent" isDisplayNameTracking="True" name="Parent" multiplicity="ZeroMany" propertyName="Children" propertyDisplayName="Children" isPropertyNameTracking="False" isPropertyDisplayNameTracking="True" propertyGetterAccessModifier="Public" propertySetterAccessModifier="Public" isPropertyBrowsable="false" isPropertyGenerator="true" propagatesDelete="false" isNameTracking="False" isPropertyUIReadOnly="true">
+                    <opposite>
+                      <domainRoleReferencesOpposite Id="c1e3f1d3-8b55-41f7-b697-f3ceacfb19b6">
+                        <domainRoleMoniker Id="155c695d-b225-4b0f-8f0a-5799fc5beebc" />
+                      </domainRoleReferencesOpposite>
+                    </opposite>
+                    <rolePlayer>
+                      <domainRoleReferencesRolePlayer Id="1d51d67b-2fdd-4452-bf6f-13c2b15d0b94">
+                        <domainClassMoniker Id="a6ef3e71-b373-4753-a220-2005f011f361" />
+                      </domainRoleReferencesRolePlayer>
+                    </rolePlayer>
+                  </domainRole>
+                </domainRelationshipHasRoles>
+                <domainRelationshipHasRoles Id="11f56539-8c27-4a08-b886-9a375350878a">
+                  <domainRole Id="155c695d-b225-4b0f-8f0a-5799fc5beebc" displayName="Child" isDisplayNameTracking="True" name="Child" multiplicity="ZeroMany" propertyName="Parents" propertyDisplayName="Parents" isPropertyNameTracking="False" isPropertyDisplayNameTracking="True" propertyGetterAccessModifier="Public" propertySetterAccessModifier="Public" isPropertyBrowsable="false" isPropertyGenerator="true" propagatesDelete="false" isNameTracking="False" isPropertyUIReadOnly="true">
+                    <opposite>
+                      <domainRoleReferencesOpposite Id="4705cd63-d49b-4763-8f5f-cb613ededbfc">
+                        <domainRoleMoniker Id="d235b88a-1c78-4891-9cf9-66a291491a64" />
+                      </domainRoleReferencesOpposite>
+                    </opposite>
+                    <rolePlayer>
+                      <domainRoleReferencesRolePlayer Id="668d990c-491e-4622-8aa2-b0b18915d442">
+                        <domainClassMoniker Id="a6ef3e71-b373-4753-a220-2005f011f361" />
+                      </domainRoleReferencesRolePlayer>
+                    </rolePlayer>
+                  </domainRole>
+                </domainRelationshipHasRoles>
+              </roles>
+              <source>
+                <domainRelationshipReferencesSource Id="f62b9e6d-ada5-461e-958f-01dc7be2acbb">
+                  <domainRoleMoniker Id="d235b88a-1c78-4891-9cf9-66a291491a64" />
+                </domainRelationshipReferencesSource>
+              </source>
+              <target>
+                <domainRelationshipReferencesTarget Id="c200c006-c36a-4b81-a8fa-7fe42e5638f3">
+                  <domainRoleMoniker Id="155c695d-b225-4b0f-8f0a-5799fc5beebc" />
+                </domainRelationshipReferencesTarget>
+              </target>
+            </referenceRelationship>
+          </libraryModelContextHasRelationships>
+          <libraryModelContextHasRelationships Id="8f4e864f-7d08-4873-a08a-bb47a83baabf">
+            <referenceRelationship Id="adb58fcc-7f8c-4364-b57c-a760fc08651a" displayName="Married To" isDisplayNameTracking="True" name="MarriedTo" generatesDoubleDerived="false" hasCustomConstructor="false" accessModifier="Public" inheritanceModifier="None" namespace="Tum.FamilyTreeDSL" serializationName="MarriedTo" isSerializationNameTracking="True" isNameTracking="False" allowsDuplicates="false" serializationAttributeName="link" serializationTargetName="WifeRef" serializationSourceName="HusbandRef" propagatesCopyToTarget="true" propagatesCopyToSource="false" propagatesCopyOnDeniedElementCopy="true" isSerializationTargetNameTracking="True" isSerializationSourceNameTracking="True">
+              <roles>
+                <domainRelationshipHasRoles Id="6d45b5fb-0b0e-43a9-ad54-5e6ba30c7631">
+                  <domainRole Id="c889a44a-6854-4049-acec-275c642ba048" displayName="Husband" isDisplayNameTracking="True" name="Husband" multiplicity="ZeroOne" propertyName="Wife" propertyDisplayName="Wife" isPropertyNameTracking="True" isPropertyDisplayNameTracking="True" propertyGetterAccessModifier="Public" propertySetterAccessModifier="Public" isPropertyBrowsable="false" isPropertyGenerator="true" propagatesDelete="false" isNameTracking="False" isPropertyUIReadOnly="true">
+                    <opposite>
+                      <domainRoleReferencesOpposite Id="bcb0dda1-225d-49f4-8573-9441cf7072ab">
+                        <domainRoleMoniker Id="fbf8ecb1-354a-488b-b5cc-686e63fa29f3" />
+                      </domainRoleReferencesOpposite>
+                    </opposite>
+                    <rolePlayer>
+                      <domainRoleReferencesRolePlayer Id="b54eccf5-ab30-478c-98d7-d1d744f98e63">
+                        <domainClassMoniker Id="a6ef3e71-b373-4753-a220-2005f011f361" />
+                      </domainRoleReferencesRolePlayer>
+                    </rolePlayer>
+                  </domainRole>
+                </domainRelationshipHasRoles>
+                <domainRelationshipHasRoles Id="4130302f-0246-40ab-9029-f76f75b0b218">
+                  <domainRole Id="fbf8ecb1-354a-488b-b5cc-686e63fa29f3" displayName="Wife" isDisplayNameTracking="True" name="Wife" multiplicity="ZeroOne" propertyName="Husband" propertyDisplayName="Husband" isPropertyNameTracking="True" isPropertyDisplayNameTracking="True" propertyGetterAccessModifier="Public" propertySetterAccessModifier="Public" isPropertyBrowsable="false" isPropertyGenerator="true" propagatesDelete="false" isNameTracking="False" isPropertyUIReadOnly="true">
+                    <opposite>
+                      <domainRoleReferencesOpposite Id="96757f5c-e13d-4251-8104-c06c37625236">
+                        <domainRoleMoniker Id="c889a44a-6854-4049-acec-275c642ba048" />
+                      </domainRoleReferencesOpposite>
+                    </opposite>
+                    <rolePlayer>
+                      <domainRoleReferencesRolePlayer Id="a87b9af1-d42e-40ef-8125-3df862909b3a">
+                        <domainClassMoniker Id="a6ef3e71-b373-4753-a220-2005f011f361" />
+                      </domainRoleReferencesRolePlayer>
+                    </rolePlayer>
+                  </domainRole>
+                </domainRelationshipHasRoles>
+              </roles>
+              <source>
+                <domainRelationshipReferencesSource Id="4a9aa86b-8c14-4457-b3a9-8f40992c1b7a">
+                  <domainRoleMoniker Id="c889a44a-6854-4049-acec-275c642ba048" />
+                </domainRelationshipReferencesSource>
+              </source>
+              <target>
+                <domainRelationshipReferencesTarget Id="b0afd43a-b958-474c-adcb-3fcacd50c52e">
+                  <domainRoleMoniker Id="fbf8ecb1-354a-488b-b5cc-686e63fa29f3" />
+                </domainRelationshipReferencesTarget>
+              </target>
+            </referenceRelationship>
+          </libraryModelContextHasRelationships>
+        </relationships>
+        <serializationModel>
+          <libraryModelContextHasSerializationModel Id="660e35d4-3646-4cb5-b3a9-d62b687353bb">
+            <serializationModel Id="7f6f1cbf-9345-4af4-8cb6-4d7f47d81c49" serializedIdAttributeName="Id">
+              <serializedDomainModel>
+                <serializationModelHasSerializedDomainModel Id="514e1dfe-6373-44c4-92c5-6bcedcdac50b">
+                  <serializedDomainModel Id="8814bf7e-cfae-4ee6-b223-ddceabac82e6" isSerializationNameTracking="True" serializationName="FamilyTreeModel" serializedIdAttributeName="Id">
+                    <children>
+                      <serializationClassReferencesChildren Id="a88f0629-e311-4157-82c1-ce6f9cee1580">
+                        <serializedEmbeddingRelationshipMoniker Id="cfa8ddce-a02a-49f0-8f87-392c613ab7c0" />
+                      </serializationClassReferencesChildren>
+                    </children>
+                    <attributes>
+                      <serializationClassReferencesAttributes Id="6f91766f-18aa-4c3d-b35e-51dd74ae4e4f">
+                        <serializedIdPropertyMoniker Id="a507962a-6f55-46fa-b082-1237e6df0eb6" />
+                      </serializationClassReferencesAttributes>
+                    </attributes>
+                    <idProperty>
+                      <serializationClassHasIdProperty Id="12e64092-804c-4cce-b733-a77224b8246f">
+                        <serializedIdProperty Id="a507962a-6f55-46fa-b082-1237e6df0eb6" name="Id" serializationName="Id" omitIdProperty="false" />
+                      </serializationClassHasIdProperty>
+                    </idProperty>
+                    <domainClass>
+                      <serializedDomainClassReferencesDomainClass Id="392649d0-c605-4544-997c-437f34262ad1">
+                        <domainClassMoniker Id="67a0ab85-b72a-444d-ad42-062d4c6fd96e" />
+                      </serializedDomainClassReferencesDomainClass>
+                    </domainClass>
+                  </serializedDomainModel>
+                </serializationModelHasSerializedDomainModel>
+              </serializedDomainModel>
+              <children>
+                <serializationModelHasChildren Id="3fb84c50-ad29-417f-b7fc-a02131e40cc0">
+                  <serializedDomainClass Id="1e249db6-00c0-4796-84c4-097485894a01" isSerializationNameTracking="True" serializationName="Person">
+                    <attributes>
+                      <serializationClassReferencesAttributes Id="9ed42538-f9ad-485d-b3f8-9b0e60523aa8">
+                        <serializedIdPropertyMoniker Id="bc29abc6-acbe-4e98-981f-e055df67f78f" />
+                      </serializationClassReferencesAttributes>
+                      <serializationClassReferencesAttributes Id="f2dd0247-41d8-4402-8dc7-d024ce4abd21">
+                        <serializedDomainPropertyMoniker Id="7aa9f392-b14d-45ac-a8d7-4bd455bae8b9" />
+                      </serializationClassReferencesAttributes>
+                      <serializationClassReferencesAttributes Id="ed74da43-6dbe-4904-941a-16ae96b4fde1">
+                        <serializedDomainPropertyMoniker Id="660b4bd5-cab4-4b0a-a287-a9eb2afb073f" />
+                      </serializationClassReferencesAttributes>
+                      <serializationClassReferencesAttributes Id="88ae0ae0-d2ca-4678-866e-f232fe53b3c7">
+                        <serializedDomainPropertyMoniker Id="bf542b41-e6a8-4cd3-b018-0d946bd37340" />
+                      </serializationClassReferencesAttributes>
+                    </attributes>
+                    <idProperty>
+                      <serializationClassHasIdProperty Id="c29e1160-8e12-4988-bab2-59a9d0fd73ac">
+                        <serializedIdProperty Id="bc29abc6-acbe-4e98-981f-e055df67f78f" name="Id" serializationName="Id" omitIdProperty="false" />
+                      </serializationClassHasIdProperty>
+                    </idProperty>
+                    <properties>
+                      <serializationClassHasProperties Id="392e5454-b7e3-4b63-9b41-0a8bbc76a321">
+                        <serializedDomainProperty Id="7aa9f392-b14d-45ac-a8d7-4bd455bae8b9" serializationName="Name" serializationRepresentationType="Attribute" isSerializationNameTracking="True" omitProperty="false">
+                          <domainProperty>
+                            <serializedDomainPropertyReferencesDomainProperty Id="320c91cb-5402-491a-b255-4afbb5b20088">
+                              <domainPropertyMoniker Id="33a1895e-e63d-4eff-b2cf-e838c3e8a461" />
+                            </serializedDomainPropertyReferencesDomainProperty>
+                          </domainProperty>
+                        </serializedDomainProperty>
+                      </serializationClassHasProperties>
+                      <serializationClassHasProperties Id="d4f8dedb-00a5-4324-8b47-3dd231b713a5">
+                        <serializedDomainProperty Id="660b4bd5-cab4-4b0a-a287-a9eb2afb073f" serializationName="Gender" serializationRepresentationType="Attribute" isSerializationNameTracking="True" omitProperty="false">
+                          <domainProperty>
+                            <serializedDomainPropertyReferencesDomainProperty Id="808bbf0f-525d-49b8-ae12-5b8295c62dc6">
+                              <domainPropertyMoniker Id="66e06c32-8163-447f-a7f3-9fef67dd3787" />
+                            </serializedDomainPropertyReferencesDomainProperty>
+                          </domainProperty>
+                        </serializedDomainProperty>
+                      </serializationClassHasProperties>
+                      <serializationClassHasProperties Id="4a645945-1d34-404c-a48a-b1c5279d3769">
+                        <serializedDomainProperty Id="bf542b41-e6a8-4cd3-b018-0d946bd37340" serializationName="Hobbies" serializationRepresentationType="Attribute" isSerializationNameTracking="True" omitProperty="false">
+                          <domainProperty>
+                            <serializedDomainPropertyReferencesDomainProperty Id="4c4c228f-357f-4e8a-a8fa-0ad5c86220af">
+                              <domainPropertyMoniker Id="bbdd8c7d-6da7-4336-878a-19ed0ba6caf6" />
+                            </serializedDomainPropertyReferencesDomainProperty>
+                          </domainProperty>
+                        </serializedDomainProperty>
+                      </serializationClassHasProperties>
+                    </properties>
+                    <domainClass>
+                      <serializedDomainClassReferencesDomainClass Id="06ae8a70-a088-40ba-bf15-887b0750a8ae">
+                        <domainClassMoniker Id="21332a00-f8e1-4b7d-98e0-faac3cf93b00" />
+                      </serializedDomainClassReferencesDomainClass>
+                    </domainClass>
+                  </serializedDomainClass>
+                </serializationModelHasChildren>
+                <serializationModelHasChildren Id="9a0aa8b5-2eb4-4704-aca0-ec64d6fcd810">
+                  <serializedDomainClass Id="a7a8504d-959a-47f9-93e0-d90d97e01f96" isSerializationNameTracking="True" serializationName="FamilyTreePerson">
+                    <children>
+                      <serializationClassReferencesChildren Id="201709a0-f7ef-4a9f-bdd9-f77037170bd8">
+                        <serializedEmbeddingRelationshipMoniker Id="1bfd0f33-fea0-4791-9302-964758a655e7" />
+                      </serializationClassReferencesChildren>
+                      <serializationClassReferencesChildren Id="bb970656-a11d-49da-95bc-8aade4cf3d25">
+                        <serializedReferenceRelationshipMoniker Id="cf8984ae-e906-4716-b92c-31c1425c3722" />
+                      </serializationClassReferencesChildren>
+                      <serializationClassReferencesChildren Id="1967d848-3074-49ea-a2a1-7a94efe7ee55">
+                        <serializedReferenceRelationshipMoniker Id="6ad8ef93-edb1-462a-a551-3f086b355c44" />
+                      </serializationClassReferencesChildren>
+                    </children>
+                    <attributes>
+                      <serializationClassReferencesAttributes Id="1f5043a4-d7dd-4306-8ebb-e88613de2ac0">
+                        <serializedIdPropertyMoniker Id="93013bb0-651e-4c75-b94b-81887116bbcc" />
+                      </serializationClassReferencesAttributes>
+                      <serializationClassReferencesAttributes Id="b7588b4b-e874-4618-868b-69d5e9c468e2">
+                        <serializedDomainPropertyMoniker Id="7aa9f392-b14d-45ac-a8d7-4bd455bae8b9" />
+                      </serializationClassReferencesAttributes>
+                      <serializationClassReferencesAttributes Id="f79b0495-90d5-4a05-b901-c789ae5fc2dc">
+                        <serializedDomainPropertyMoniker Id="660b4bd5-cab4-4b0a-a287-a9eb2afb073f" />
+                      </serializationClassReferencesAttributes>
+                      <serializationClassReferencesAttributes Id="14365853-5c62-4f00-ba7d-1b972ec962ac">
+                        <serializedDomainPropertyMoniker Id="bf542b41-e6a8-4cd3-b018-0d946bd37340" />
+                      </serializationClassReferencesAttributes>
+                    </attributes>
+                    <idProperty>
+                      <serializationClassHasIdProperty Id="29d0d64c-1ccf-4d0d-9a43-d6d1db07f332">
+                        <serializedIdProperty Id="93013bb0-651e-4c75-b94b-81887116bbcc" name="Id" serializationName="Id" omitIdProperty="false" />
+                      </serializationClassHasIdProperty>
+                    </idProperty>
+                    <domainClass>
+                      <serializedDomainClassReferencesDomainClass Id="ec5884c9-5287-4de6-86a5-5d7165f1af0d">
+                        <domainClassMoniker Id="a6ef3e71-b373-4753-a220-2005f011f361" />
+                      </serializedDomainClassReferencesDomainClass>
+                    </domainClass>
+                  </serializedDomainClass>
+                </serializationModelHasChildren>
+                <serializationModelHasChildren Id="371904fa-44b0-4d53-934b-cc148d7676da">
+                  <serializedEmbeddingRelationship Id="cfa8ddce-a02a-49f0-8f87-392c613ab7c0" isSerializationNameTracking="True" serializationName="FamilyTreeModelHasFamilyTreePerson" isInFullSerialization="false" omitRelationship="false" isTargetIncludedSubmodel="false">
+                    <children>
+                      <serializationClassReferencesChildren Id="5202d7d3-94f8-4871-949f-08c471a3d74d">
+                        <serializedDomainClassMoniker Id="a7a8504d-959a-47f9-93e0-d90d97e01f96" />
+                      </serializationClassReferencesChildren>
+                    </children>
+                    <attributes>
+                      <serializationClassReferencesAttributes Id="953e93c7-8436-43ba-b34c-ee03e7fd712b">
+                        <serializedIdPropertyMoniker Id="b6403240-5622-4e52-a6b0-cca4c6436c28" />
+                      </serializationClassReferencesAttributes>
+                    </attributes>
+                    <idProperty>
+                      <serializationClassHasIdProperty Id="96d72c28-fcfc-43d3-85c4-a8d0bf688c39">
+                        <serializedIdProperty Id="b6403240-5622-4e52-a6b0-cca4c6436c28" name="Id" serializationName="Id" omitIdProperty="false" />
+                      </serializationClassHasIdProperty>
+                    </idProperty>
+                    <embeddingRelationship>
+                      <serializedEmbeddingRelationshipReferencesEmbeddingRelationship Id="06a5c553-9c4b-46d3-8b38-8721eb720ee8">
+                        <embeddingRelationshipMoniker Id="7bdb12d9-1a35-4e87-bd6f-e3036f3bc0c6" />
+                      </serializedEmbeddingRelationshipReferencesEmbeddingRelationship>
+                    </embeddingRelationship>
+                  </serializedEmbeddingRelationship>
+                </serializationModelHasChildren>
+                <serializationModelHasChildren Id="315fd703-a927-4b02-8685-cd0dbe2112d6">
+                  <serializedDomainClass Id="aa8de84c-e2aa-4bc0-b549-38476450561e" isSerializationNameTracking="True" serializationName="Pet">
+                    <attributes>
+                      <serializationClassReferencesAttributes Id="77c425a4-01bb-4ed0-b971-8b56b5a38081">
+                        <serializedIdPropertyMoniker Id="8a026525-61a7-45d2-86d8-21008e81525e" />
+                      </serializationClassReferencesAttributes>
+                      <serializationClassReferencesAttributes Id="8c94b4f4-3d9a-46cf-9787-6d217ab80d33">
+                        <serializedDomainPropertyMoniker Id="0b5edea7-e49a-492e-8cf6-ac209132383f" />
+                      </serializationClassReferencesAttributes>
+                    </attributes>
+                    <idProperty>
+                      <serializationClassHasIdProperty Id="bcfbd8b7-c794-46d7-a96f-a085ccd5a0ec">
+                        <serializedIdProperty Id="8a026525-61a7-45d2-86d8-21008e81525e" name="Id" serializationName="Id" omitIdProperty="false" />
+                      </serializationClassHasIdProperty>
+                    </idProperty>
+                    <properties>
+                      <serializationClassHasProperties Id="a2f64349-2180-402a-907e-c7035b5c1177">
+                        <serializedDomainProperty Id="0b5edea7-e49a-492e-8cf6-ac209132383f" serializationName="Name" serializationRepresentationType="Attribute" isSerializationNameTracking="True" omitProperty="false">
+                          <domainProperty>
+                            <serializedDomainPropertyReferencesDomainProperty Id="205ad849-f477-446b-8690-7e0a32d8477c">
+                              <domainPropertyMoniker Id="e4cbf5ed-1dc7-45e6-bda0-3e455672df20" />
+                            </serializedDomainPropertyReferencesDomainProperty>
+                          </domainProperty>
+                        </serializedDomainProperty>
+                      </serializationClassHasProperties>
+                    </properties>
+                    <domainClass>
+                      <serializedDomainClassReferencesDomainClass Id="4795a9bd-fcba-4c89-bae9-f29629520853">
+                        <domainClassMoniker Id="b1a37134-0462-49dd-8d11-28935de0f5c6" />
+                      </serializedDomainClassReferencesDomainClass>
+                    </domainClass>
+                  </serializedDomainClass>
+                </serializationModelHasChildren>
+                <serializationModelHasChildren Id="de9d36c9-a554-4163-937b-8062ad1a22af">
+                  <serializedEmbeddingRelationship Id="1bfd0f33-fea0-4791-9302-964758a655e7" isSerializationNameTracking="True" serializationName="FamilyTreePersonHasPet" isInFullSerialization="false" omitRelationship="false" isTargetIncludedSubmodel="false">
+                    <children>
+                      <serializationClassReferencesChildren Id="77a5c4a5-8ccf-4e39-9b46-05e4fb9331a5">
+                        <serializedDomainClassMoniker Id="aa8de84c-e2aa-4bc0-b549-38476450561e" />
+                      </serializationClassReferencesChildren>
+                    </children>
+                    <attributes>
+                      <serializationClassReferencesAttributes Id="37c2f4fd-b86a-43e7-9e83-bdd9c5ab4359">
+                        <serializedIdPropertyMoniker Id="f4166c7d-015a-4eea-bf22-7e207fc6c183" />
+                      </serializationClassReferencesAttributes>
+                    </attributes>
+                    <idProperty>
+                      <serializationClassHasIdProperty Id="498fdf1b-7e7b-49dc-ae78-c87dfcc09a0a">
+                        <serializedIdProperty Id="f4166c7d-015a-4eea-bf22-7e207fc6c183" name="Id" serializationName="Id" omitIdProperty="false" />
+                      </serializationClassHasIdProperty>
+                    </idProperty>
+                    <embeddingRelationship>
+                      <serializedEmbeddingRelationshipReferencesEmbeddingRelationship Id="444db963-6624-4a8b-aace-1fe445f9f3d8">
+                        <embeddingRelationshipMoniker Id="514239ef-2f74-4a7b-a3d2-da93960ff53c" />
+                      </serializedEmbeddingRelationshipReferencesEmbeddingRelationship>
+                    </embeddingRelationship>
+                  </serializedEmbeddingRelationship>
+                </serializationModelHasChildren>
+                <serializationModelHasChildren Id="7fea596e-50f4-4fad-b64f-953f615fccc2">
+                  <serializedReferenceRelationship Id="cf8984ae-e906-4716-b92c-31c1425c3722" isSerializationNameTracking="False" serializationName="ParentOf" isInFullSerialization="false" omitRelationship="false">
+                    <children>
+                      <serializationClassReferencesChildren Id="aa53a35a-83d4-4efb-b30c-b1fb36860ce2">
+                        <serializedDomainRoleMoniker Id="f59c1954-6c16-41bf-b251-b93e91925da6" />
+                      </serializationClassReferencesChildren>
+                      <serializationClassReferencesChildren Id="e92f3b23-c7cf-4ec9-8532-3e60d21a129c">
+                        <serializedDomainRoleMoniker Id="3d9a94a9-ded5-432c-aa79-9ab9f0cb659d" />
+                      </serializationClassReferencesChildren>
+                    </children>
+                    <attributes>
+                      <serializationClassReferencesAttributes Id="44bd37ee-d385-47ca-96ba-ebcd04d9d1db">
+                        <serializedIdPropertyMoniker Id="44f74379-28c7-424b-b3ec-d08edf208727" />
+                      </serializationClassReferencesAttributes>
+                    </attributes>
+                    <idProperty>
+                      <serializationClassHasIdProperty Id="5d72dcde-12ef-46aa-9231-d33cbe261ff2">
+                        <serializedIdProperty Id="44f74379-28c7-424b-b3ec-d08edf208727" name="Id" serializationName="Id" omitIdProperty="false" />
+                      </serializationClassHasIdProperty>
+                    </idProperty>
+                    <serializedDomainRoles>
+                      <serializedRelationshipHasSerializedDomainRoles Id="592cf94b-03ad-428b-9b92-eda875f0e216">
+                        <serializedDomainRole Id="f59c1954-6c16-41bf-b251-b93e91925da6" serializationName="ParentRef" serializationAttributeName="link">
+                          <domainRole>
+                            <serializedDomainRoleReferencesDomainRole Id="353b3a0a-ca7c-41b2-947d-6d64a794d1ca">
+                              <domainRoleMoniker Id="d235b88a-1c78-4891-9cf9-66a291491a64" />
+                            </serializedDomainRoleReferencesDomainRole>
+                          </domainRole>
+                        </serializedDomainRole>
+                      </serializedRelationshipHasSerializedDomainRoles>
+                      <serializedRelationshipHasSerializedDomainRoles Id="8ec3244b-9db5-4045-a278-1bb0e8e21ca3">
+                        <serializedDomainRole Id="3d9a94a9-ded5-432c-aa79-9ab9f0cb659d" serializationName="ChildRef" serializationAttributeName="link">
+                          <domainRole>
+                            <serializedDomainRoleReferencesDomainRole Id="c4c6ea87-6729-4a0c-a5b2-b6a09656f444">
+                              <domainRoleMoniker Id="155c695d-b225-4b0f-8f0a-5799fc5beebc" />
+                            </serializedDomainRoleReferencesDomainRole>
+                          </domainRole>
+                        </serializedDomainRole>
+                      </serializedRelationshipHasSerializedDomainRoles>
+                    </serializedDomainRoles>
+                    <referenceRelationship>
+                      <serializedReferenceRelationshipReferencesReferenceRelationship Id="534ac5f5-8ff8-4768-b769-eb197ffe80ef">
+                        <referenceRelationshipMoniker Id="a66e20aa-2060-4bbf-bff7-e86a0b71b1a5" />
+                      </serializedReferenceRelationshipReferencesReferenceRelationship>
+                    </referenceRelationship>
+                  </serializedReferenceRelationship>
+                </serializationModelHasChildren>
+                <serializationModelHasChildren Id="18aa778f-8725-40e7-8ed3-149c2975f3d8">
+                  <serializedReferenceRelationship Id="6ad8ef93-edb1-462a-a551-3f086b355c44" isSerializationNameTracking="False" serializationName="MarriedTo" isInFullSerialization="false" omitRelationship="false">
+                    <children>
+                      <serializationClassReferencesChildren Id="e79979d1-c6ce-4078-8f94-feb455163322">
+                        <serializedDomainRoleMoniker Id="f1957064-b113-4334-9b24-749b2d2a431c" />
+                      </serializationClassReferencesChildren>
+                      <serializationClassReferencesChildren Id="68a61b8a-32d7-4a1a-8e6d-4ec352329591">
+                        <serializedDomainRoleMoniker Id="9f38cf10-ac14-4244-b848-76b9d4f56141" />
+                      </serializationClassReferencesChildren>
+                    </children>
+                    <attributes>
+                      <serializationClassReferencesAttributes Id="84395bca-6918-4c5e-9df7-d71c3450bbfa">
+                        <serializedIdPropertyMoniker Id="74951aad-b0b8-430f-9ab8-536d815af2f7" />
+                      </serializationClassReferencesAttributes>
+                    </attributes>
+                    <idProperty>
+                      <serializationClassHasIdProperty Id="c97c30f0-3548-43f9-93e6-b28c4fe47335">
+                        <serializedIdProperty Id="74951aad-b0b8-430f-9ab8-536d815af2f7" name="Id" serializationName="Id" omitIdProperty="false" />
+                      </serializationClassHasIdProperty>
+                    </idProperty>
+                    <serializedDomainRoles>
+                      <serializedRelationshipHasSerializedDomainRoles Id="57c4ccd6-7999-4ebe-93c6-7d0dc873938a">
+                        <serializedDomainRole Id="f1957064-b113-4334-9b24-749b2d2a431c" serializationName="HusbandRef" serializationAttributeName="link">
+                          <domainRole>
+                            <serializedDomainRoleReferencesDomainRole Id="cb526e4f-5feb-458f-b2cd-74a6800e26d6">
+                              <domainRoleMoniker Id="c889a44a-6854-4049-acec-275c642ba048" />
+                            </serializedDomainRoleReferencesDomainRole>
+                          </domainRole>
+                        </serializedDomainRole>
+                      </serializedRelationshipHasSerializedDomainRoles>
+                      <serializedRelationshipHasSerializedDomainRoles Id="1a8c9502-44b1-4479-ba6d-77a00e5bd9fb">
+                        <serializedDomainRole Id="9f38cf10-ac14-4244-b848-76b9d4f56141" serializationName="WifeRef" serializationAttributeName="link">
+                          <domainRole>
+                            <serializedDomainRoleReferencesDomainRole Id="6e8138aa-9171-4bd6-a2bd-ba3484437a6d">
+                              <domainRoleMoniker Id="fbf8ecb1-354a-488b-b5cc-686e63fa29f3" />
+                            </serializedDomainRoleReferencesDomainRole>
+                          </domainRole>
+                        </serializedDomainRole>
+                      </serializedRelationshipHasSerializedDomainRoles>
+                    </serializedDomainRoles>
+                    <referenceRelationship>
+                      <serializedReferenceRelationshipReferencesReferenceRelationship Id="26ed5f0f-1bca-4d47-9c9b-df93f9f45dd2">
+                        <referenceRelationshipMoniker Id="adb58fcc-7f8c-4364-b57c-a760fc08651a" />
+                      </serializedReferenceRelationshipReferencesReferenceRelationship>
+                    </referenceRelationship>
+                  </serializedReferenceRelationship>
+                </serializationModelHasChildren>
+              </children>
+            </serializationModel>
+          </libraryModelContextHasSerializationModel>
+        </serializationModel>
+      </modelContext>
+    </metaModelHasModelContexts>
+  </modelContexts>
+  <propertyGridEditors>
+    <propertyGridEditor name="StringEditorViewModel" namespace="Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel.PropertyGrid" shouldBeGenerated="false" editorBaseType="PropertyEditorViewModel" requiresContextMenuBar="false" />
+    <propertyGridEditor name="BooleanEditorViewModel" namespace="Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel.PropertyGrid" shouldBeGenerated="false" editorBaseType="PropertyEditorViewModel" requiresContextMenuBar="false" />
+    <propertyGridEditor name="EnumerationEditorViewModel" namespace="Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel.PropertyGrid" shouldBeGenerated="false" editorBaseType="PropertyEditorViewModel" requiresContextMenuBar="false" />
+    <propertyGridEditor name="IntegerEditorViewModel" namespace="Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel.PropertyGrid" shouldBeGenerated="false" editorBaseType="StringEditorViewModel" requiresContextMenuBar="false" />
+    <propertyGridEditor name="DoubleEditorViewModel" namespace="Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel.PropertyGrid" shouldBeGenerated="false" editorBaseType="StringEditorViewModel" requiresContextMenuBar="false" />
+  </propertyGridEditors>
+</MetaModel>

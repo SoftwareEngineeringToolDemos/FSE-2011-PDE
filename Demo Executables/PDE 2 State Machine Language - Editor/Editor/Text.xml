@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<StateMachineDomainModel Id="c03ad76c-8cb6-4c37-aeb1-01aabcb24201">
+  <State Id="e1e320e5-9b40-4ea0-bb76-814cbf2cffeb" Name="State0">
+    <Transition Id="0f94b0b4-5a08-498e-bdfe-37d67dbf7d45" Condition="333">
+      <StateBaseSourceRef link="e1e320e5-9b40-4ea0-bb76-814cbf2cffeb" />
+      <StateBaseTargetRef link="72a1f6ec-ef58-40ef-a336-e1ba25bd34e4" />
+    </Transition>
+  </State>
+  <State Id="72a1f6ec-ef58-40ef-a336-e1ba25bd34e4" Name="State1" />
+  <State Id="bf7c07c5-54b7-4a69-83d6-98ac0a7ecd39" Name="State2">
+    <Transition Id="bd53c128-390f-46f0-b031-3df949524df0" Condition="12">
+      <StateBaseSourceRef link="bf7c07c5-54b7-4a69-83d6-98ac0a7ecd39" />
+      <StateBaseTargetRef link="6875cb57-f09b-4437-abb4-835bc01c0246" />
+    </Transition>
+    <Transition Id="10ccd883-3049-4ae8-a7c1-f0ea08f96627" Condition="v">
+      <StateBaseSourceRef link="bf7c07c5-54b7-4a69-83d6-98ac0a7ecd39" />
+      <StateBaseTargetRef link="72a1f6ec-ef58-40ef-a336-e1ba25bd34e4" />
+    </Transition>
+    <Transition Id="55e6de27-0e5b-4e33-a8d8-348ab44c1a2a">
+      <StateBaseSourceRef link="bf7c07c5-54b7-4a69-83d6-98ac0a7ecd39" />
+      <StateBaseTargetRef link="dd2528e3-0fe1-4489-bb17-15d06a26cb0c" />
+    </Transition>
+  </State>
+  <State Id="b30689a5-327c-4172-9065-c6c9af6160bb" Name="State4">
+    <Transition Id="63fdba31-1bc5-4ec7-bfdf-e491617dd518" Condition="123">
+      <StateBaseSourceRef link="b30689a5-327c-4172-9065-c6c9af6160bb" />
+      <StateBaseTargetRef link="bf7c07c5-54b7-4a69-83d6-98ac0a7ecd39" />
+    </Transition>
+  </State>
+  <State Id="dd2528e3-0fe1-4489-bb17-15d06a26cb0c" Name="State3" />
+  <StartState Id="78cba143-8589-4e74-a132-3bf54752daf5">
+    <Transition Id="306f588f-f861-4181-b046-2fb8142c46dc" Condition="33">
+      <StateBaseSourceRef link="78cba143-8589-4e74-a132-3bf54752daf5" />
+      <StateBaseTargetRef link="72a1f6ec-ef58-40ef-a336-e1ba25bd34e4" />
+    </Transition>
+    <Transition Id="bfb5501a-9fba-45b7-9949-bb71ff8c90cf" Condition="123">
+      <StateBaseSourceRef link="78cba143-8589-4e74-a132-3bf54752daf5" />
+      <StateBaseTargetRef link="e1e320e5-9b40-4ea0-bb76-814cbf2cffeb" />
+    </Transition>
+  </StartState>
+  <EndState Id="6875cb57-f09b-4437-abb4-835bc01c0246" />
+</StateMachineDomainModel>

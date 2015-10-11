@@ -1,0 +1,82 @@
+﻿<#@ template language="C#" inherits="BaseTemplate"#> 
+<#@ import namespace="Tum.PDE.LanguageDSL"#>
+<#@ import namespace="Microsoft.VisualStudio.Modeling" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Collections.ObjectModel" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#
+	string dslName = this.MetaModel.Name;
+#>
+using VSShellInterop = global::Microsoft.VisualStudio.Shell.Interop;
+using DslShell = global::Microsoft.VisualStudio.Modeling.Shell;
+
+using DslEditorShell = global::Tum.PDE.ToolFramework.Modeling.Shell;
+
+namespace <#= this.MetaModel.Namespace #>
+{
+	/// <summary>
+	/// Double-derived class to allow easier code customization.
+	/// </summary>
+	[global::System.Runtime.InteropServices.Guid(Constants.<#= dslName #>EditorFactoryId)]
+	internal partial class <#= dslName #>EditorFactory : <#= dslName #>EditorFactoryBase
+	{
+		/// <summary>
+		/// Constructs a new <#= dslName #>EditorFactory.
+		/// </summary>
+		public <#= dslName #>EditorFactory(global::System.IServiceProvider serviceProvider)
+			: base(serviceProvider)
+		{
+		}
+	}
+
+	/// <summary>
+	/// Factory for creating our editors
+	/// </summary>
+	internal abstract class <#= dslName #>EditorFactoryBase : DslEditorShell::ModelEditorFactory
+	{
+		/// <summary>
+		/// Constructor.
+		/// </summary>
+		/// <param name="serviceProvider">Service provider used to access VS services.</param>
+		protected <#= dslName #>EditorFactoryBase(global::System.IServiceProvider serviceProvider) : base(serviceProvider)
+		{
+		}
+
+        /// <summary>
+        /// Called by the shell to ask the editor to create a new document object.
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <param name="hierarchy"></param>
+        /// <param name="itemId"></param>
+		public override DslShell::ModelingDocData CreateDocData(string fileName, VSShellInterop::IVsHierarchy hierarchy, uint itemId)
+		{
+			// Create the document type supported by this editor.
+			
+			// Create model data
+			<#= this.MetaModel.GetFullName(true) #>DocumentData modelData = new <#= this.MetaModel.GetFullName(true) #>DocumentData();
+			
+			// Create shell model data
+			<#= dslName #>DocData shellModelData = new <#= dslName #>DocData(modelData, this.ServiceProvider, typeof(<#= dslName #>EditorFactory).GUID);
+			this.ModelData = shellModelData;
+			
+			// Set file name properties
+			System.IO.FileInfo info = new System.IO.FileInfo(fileName);
+			shellModelData.FullFileName = fileName;
+			shellModelData.FileName = info.Name;
+			
+			return shellModelData;
+		}
+
+		/// <summary>
+		/// Called by the shell to ask the editor to create a new view object.
+		/// </summary>
+		protected override DslShell::ModelingDocView CreateDocView(DslShell::ModelingDocData docData, string physicalView, out string editorCaption)
+		{
+			// Create the view type supported by this editor.
+			editorCaption = string.Empty;
+			return new <#= dslName #>DocView(docData as DslEditorShell::ModelShellData, this.ServiceProvider);
+		}
+	}
+}

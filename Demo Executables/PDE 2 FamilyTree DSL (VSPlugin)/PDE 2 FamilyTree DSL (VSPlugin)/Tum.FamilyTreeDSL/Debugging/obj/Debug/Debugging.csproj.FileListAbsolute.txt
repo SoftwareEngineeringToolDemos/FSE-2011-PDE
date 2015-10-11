@@ -1,0 +1,10 @@
+J:\Uni\CC Processes\Werkzeuge\PDE 2 FamilyTree DSL (VSPlugin)\Tum.FamilyTreeDSL\Debugging\bin\Debug\Debugging.dll
+J:\Uni\CC Processes\Werkzeuge\PDE 2 FamilyTree DSL (VSPlugin)\Tum.FamilyTreeDSL\Debugging\bin\Debug\Debugging.pdb
+J:\Uni\CC Processes\Werkzeuge\PDE 2 FamilyTree DSL (VSPlugin)\Tum.FamilyTreeDSL\Debugging\obj\Debug\ResolveAssemblyReference.cache
+J:\Uni\CC Processes\Werkzeuge\PDE 2 FamilyTree DSL (VSPlugin)\Tum.FamilyTreeDSL\Debugging\obj\Debug\Debugging.dll
+J:\Uni\CC Processes\Werkzeuge\PDE 2 FamilyTree DSL (VSPlugin)\Tum.FamilyTreeDSL\Debugging\obj\Debug\Debugging.pdb
+J:\Uni\CC Processes\Werkzeuge\PDE 2 Examples\PDE 2 FamilyTree DSL (VSPlugin)\Tum.FamilyTreeDSL\Debugging\bin\Debug\Debugging.dll
+J:\Uni\CC Processes\Werkzeuge\PDE 2 Examples\PDE 2 FamilyTree DSL (VSPlugin)\Tum.FamilyTreeDSL\Debugging\bin\Debug\Debugging.pdb
+J:\Uni\CC Processes\Werkzeuge\PDE 2 Examples\PDE 2 FamilyTree DSL (VSPlugin)\Tum.FamilyTreeDSL\Debugging\obj\Debug\ResolveAssemblyReference.cache
+J:\Uni\CC Processes\Werkzeuge\PDE 2 Examples\PDE 2 FamilyTree DSL (VSPlugin)\Tum.FamilyTreeDSL\Debugging\obj\Debug\Debugging.dll
+J:\Uni\CC Processes\Werkzeuge\PDE 2 Examples\PDE 2 FamilyTree DSL (VSPlugin)\Tum.FamilyTreeDSL\Debugging\obj\Debug\Debugging.pdb

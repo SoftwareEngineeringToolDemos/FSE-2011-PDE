@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VSTemplate Version="3.0.0" Type="ProjectGroup" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005">
+  <TemplateData>
+    <Name>A new PDE-based DSL (Visual Studio Plugin)</Name>
+    <Description>Dsl as a plugin for Visual Studio. This template requires the Visual Studio SDK as well as the Visualization and Modeling SDK.</Description>
+    <Icon>Tum.PDE.LanguageDSL.Templates.VSPlugin.ico</Icon>
+    <ProjectType>CSharp</ProjectType>
+    <RequiredFrameworkVersion>4.0</RequiredFrameworkVersion>
+    <SortOrder>1000</SortOrder>
+    <TemplateID>D250AF9D-33A9-47FE-B884-ED8D610AC142</TemplateID>
+    <ProjectSubType>Eisk</ProjectSubType>
+    <DefaultName>PDEVSPlugin</DefaultName>
+    <ProvideDefaultName>true</ProvideDefaultName>
+  </TemplateData>
+  <TemplateContent>
+    <ProjectCollection>
+      <ProjectTemplateLink ProjectName="VSPluginDSL">
+        DslTemplate\VSPluginDSL.vstemplate
+      </ProjectTemplateLink>
+      <ProjectTemplateLink ProjectName="Debugging">
+        DebuggingTemplate\Debugging.vstemplate
+      </ProjectTemplateLink>      
+    </ProjectCollection>
+  </TemplateContent>
+  <WizardExtension>
+    <Assembly>Tum.PDE.LanguageDSL.Setup.VSPluginDesignerWizard, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5bfc276fccda04f8</Assembly>
+    <FullClassName>Tum.PDE.LanguageDSL.Setup.VSPluginDesignerWizard.LanguageDSLWizard</FullClassName>
+  </WizardExtension>
+</VSTemplate>

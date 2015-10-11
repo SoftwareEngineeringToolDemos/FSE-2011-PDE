@@ -1,0 +1,19 @@
+﻿<app:DslEditorApplication x:Class="StateMachineDSL.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:app="clr-namespace:Tum.StateMachineDSL.View">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!-- Default Fluent Control's Theme needs to be first !!!-->
+                <ResourceDictionary Source="pack://application:,,,/Fluent;Component/Themes/Office2010/Blue.xaml" />
+
+                <!-- Workaround a bug in tab control styling introduced by fluent -->
+                <ResourceDictionary Source="/Tum.PDE.ToolFramework.Modeling.Visualization;component/Themes/Default/TabControlStyle.xaml"/>
+
+                <!-- Include styles specific to this dsl -->
+                <ResourceDictionary Source="/Tum.PDE.ToolFramework.Modeling.Visualization.Base;component/Themes/Generic.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+ </app:DslEditorApplication>

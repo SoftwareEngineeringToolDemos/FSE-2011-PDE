@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DataTemplates>
+  <DataTemplate>
+    <DisplayName>Diagram Template</DisplayName>
+    <Description>This is a xaml template you can use to customize the visualization of this diagram class. You can copy and paste this template into the Resources.xaml resources dictionary and extend it.</Description>
+    <ImageURI>/Tum.PDE.LanguageDSL.Visualization;component/Resources/Images/Templates/gdocuments.icon.48.png</ImageURI>
+    <SyntaxHighlighting>XML</SyntaxHighlighting>
+    <Template>
+      <![CDATA[
+<DataTemplate DataType="{x:Type c:$CustomString0$$CustomString1$SurfaceViewModel}">
+
+</DataTemplate>
+
+xmlns:c="clr-namespace:$CustomString2$.ViewModel"
+]]>
+    </Template>
+  </DataTemplate>
+  <DataTemplate>
+    <DisplayName>Diagram Class</DisplayName>
+    <Description>This is a partial class that is generated for this diagram class. You can add a new class in your solution, copy and paste this template and modify properties or methods by overriding them.</Description>
+    <ImageURI>/Tum.PDE.LanguageDSL.Visualization;component/Resources/Images/Templates/Class_32-Add.png</ImageURI>
+    <SyntaxHighlighting>C#</SyntaxHighlighting>
+    <Template>
+      <![CDATA[
+namespace $CustomString2$.ViewModel
+{
+  public partial class $CustomString0$$CustomString1$SurfaceViewModel
+  {
+  }
+}
+]]>
+    </Template>
+  </DataTemplate>
+</DataTemplates>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<diagramsModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="a44bbca0-092b-41e5-9d20-eb40fd61fe9c" xmlns="http://schemas.microsoft.com/dsltools/DiagramsDSL">
+  <diagrams>
+    <VSPluginDSLdesignerDiagram Id="3d65f4a1-c476-4ef1-8246-616e2f7bbd3c" internalElementId="00000000-0000-0000-0000-000000000000" name="DesignerDiagram">
+      <children>
+        <VSPluginDSLdomainClass2Shape Id="5fdcbb48-04d8-495f-b3c4-f07f434d2577" internalElementId="4e60b09b-c1a8-48ea-904d-60b8283c4d9c" location="30, 30" size="150, 50" absoluteLocation="30, 30" placementSide="Left" />
+        <VSPluginDSLdomainClass2Shape Id="6941949e-5071-42c7-9dff-efd088c076a8" internalElementId="ba690b13-d0bd-4591-ac7e-9af6c6a316ce" location="30, 110" size="150, 50" absoluteLocation="30, 110" placementSide="Left" />
+        <VSPluginDSLdomainClass2Shape Id="e97d5892-b2ee-4e66-94ee-7ba4ccdadae2" internalElementId="01c9b924-c8f9-488d-9d56-495db032e1a6" location="30, 190" size="150, 50" absoluteLocation="30, 190" placementSide="Left" />
+      </children>
+    </VSPluginDSLdesignerDiagram>
+    <VSPluginDSLspecificElementsDiagramTemplate Id="45fb876f-6370-47e7-8dac-12da13de1b23" internalElementId="00000000-0000-0000-0000-000000000000" name="SpecificElementsDiagramTemplate" />
+  </diagrams>
+</diagramsModel>

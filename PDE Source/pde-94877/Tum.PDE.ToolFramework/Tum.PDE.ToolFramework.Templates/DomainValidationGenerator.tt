@@ -1,0 +1,346 @@
+﻿<#@ template language="C#" inherits="BaseTemplate"#> 
+<#@ import namespace="Tum.PDE.LanguageDSL"#>
+<#@ import namespace="Microsoft.VisualStudio.Modeling" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Collections.ObjectModel" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+using DslModeling = global::Microsoft.VisualStudio.Modeling;
+using DslEditorModeling = global::Tum.PDE.ToolFramework.Modeling;
+
+<#
+GenerateDomainValidation(this.MetaModel);
+#>
+<#+ 
+public void GenerateDomainValidation(MetaModel dm)
+{
+List<AttributedDomainElement> elements = new List<AttributedDomainElement>();
+	elements.AddRange(dm.AllClasses);
+	elements.AddRange(dm.AllRelationships);
+		
+	string messageIdsClass = dm.Namespace + "." + dm.Name + "ValidationMessageIds";
+#>
+namespace <#= dm.Namespace #>
+{
+	/// <summary>
+    /// Groups logic for model validation.
+    /// </summary>
+	public partial class <#= dm.Name #>ValidationController : DslEditorModeling::ModelValidationController
+	{
+		#region Singleton Instance
+		private static <#= dm.Name #>ValidationController validationController = null;
+        private static object domainModelValidationLock = new object();
+		
+        /// <summary>
+        /// Singleton instance.
+        /// </summary>
+        [global::System.Diagnostics.DebuggerBrowsable(global::System.Diagnostics.DebuggerBrowsableState.Never)] // Will trigger creation otherwise.
+        public static <#= dm.Name #>ValidationController Instance
+        {
+            [global::System.Diagnostics.DebuggerStepThrough]
+            get
+            {
+				lock(domainModelValidationLock)
+				{
+					if( validationController == null )
+					{
+						validationController = new <#= dm.Name #>ValidationController();
+						
+						// initialize
+						<#= dm.Name #>ValidationController.Initialize(validationController, new System.Collections.Generic.List<string>());
+					}
+				}
+				
+				return validationController;
+            }
+        }
+
+        /// <summary>
+        /// Constructor.
+        /// </summary>		
+		private <#= dm.Name #>ValidationController() : base()
+		{	
+		}
+        #endregion
+	
+		#region Initialization		
+        /// <summary>
+        /// Initializes the static Validation map as well as the Validation is enabled fields in the actual instance of this class.
+        /// </summary>
+        /// <param name="controller">Controller to initalize</param>
+        /// <param name="discardController">Validation controllers to discard.</param>
+        public static void Initialize(DslEditorModeling::ModelValidationController controller, System.Collections.Generic.List<string> discardController)
+		{
+<#+
+	foreach(AttributedDomainElement domainElement in elements)
+	{
+		if( domainElement.GeneratesDoubleDerived )
+		{
+#>
+			InitializeType(controller, typeof(global::<#= domainElement.Namespace #>.<#= domainElement.Name #>Base));
+<#+
+		}
+#>
+			InitializeType(controller, typeof(<#= domainElement.GetFullName(true) #>));
+<#+
+	}
+#>
+
+			// extern controller
+			discardController.Add("<#= dm.GetFullName(true) #>");
+
+<#+
+		foreach(MetaModelLibrary lib in dm.MetaModelLibraries)
+			if( lib.ImportedLibrary != null )
+			{
+				MetaModel m = lib.ImportedLibrary as MetaModel;
+#>
+			if( !discardController.Contains("<#= m.GetFullName(true) #>") )
+				<#= m.GetFullName(true) #>ValidationController.Initialize(controller, discardController);
+			
+<#+
+			}
+#>
+		}
+		#endregion
+	}
+}
+
+namespace <#= dm.Namespace #>
+{
+	/// <summary>
+    /// Ids identifying model validation messages.
+    /// </summary>
+	public partial class <#= dm.Name #>ValidationMessageIds : DslEditorModeling::ModelValidationMessageIds
+	{
+		#region Property Ids
+<#+
+		foreach(AttributedDomainElement domainElement in elements )
+		{
+			if( domainElement is EmbeddingRelationship )
+				continue;
+			
+			foreach(DomainProperty p in domainElement.Properties)
+			{
+				if( p.IsRequired )
+				{
+#>
+		/// <summary>
+    	/// <#= domainElement.Name #>_<#= p.Name #> error ID
+    	/// </summary>
+		public const string <#= domainElement.Name #>_<#= p.Name #> = "<#= domainElement.Name #>.<#= p.Name #>";
+<#+
+				}
+			}
+		}		
+#>
+		#endregion
+		
+		#region Relationship Ids
+<#+
+	foreach(AttributedDomainElement domainElement in elements )
+	{
+		foreach(DomainRole role in domainElement.RolesPlayed )
+		{
+			if( role.Relationship is EmbeddingRelationship )
+				if( role.Relationship.Source != role)
+					continue;
+
+			if( role.Multiplicity == Tum.PDE.LanguageDSL.Multiplicity.ZeroMany)
+				continue;
+				
+			if( role.Relationship is ReferenceRelationship )
+				if( role != role.Relationship.Source && !(role.Relationship.Target.RolePlayer is DomainClass) )
+					continue;
+				
+#>
+		/// <summary>
+    	/// <#= role.Relationship.Name #>_<#= role.Relationship.Target.Name #> error ID
+    	/// </summary>
+		public const string <#= role.Relationship.Name #>_<#= role.Opposite.Name #> = "<#= role.Relationship.Name #>.<#= role.Opposite.Name #>";
+<#+
+		}
+	}
+#>
+		#endregion		
+	}
+}
+
+<#+	
+	foreach(AttributedDomainElement c in elements )
+	{
+		if( c is EmbeddingRelationship )
+			continue;
+		
+		bool bSkip = true;
+		if( c.Properties.Count > 0 )
+			foreach(DomainProperty p in c.Properties)
+			{
+				if( p.IsRequired )
+				{
+					bSkip = false;
+					break;
+				}
+			}
+			
+		if( bSkip )
+		{
+			foreach(DomainRole role in c.RolesPlayed )
+			{
+				if( role.Relationship.Source == role)
+				{
+					if( role.Relationship.Source.Multiplicity != Tum.PDE.LanguageDSL.Multiplicity.ZeroMany)
+					{
+						bSkip = false;
+						break;
+					}
+				}
+			}
+		}
+		
+		if( bSkip )
+			continue;
+#>
+namespace <#= c.Namespace #>
+{
+	/// <summary>
+    /// Partial class used to validate <#= c.Name #>.
+    /// </summary>
+	[DslEditorModeling::ModelValidationState(DslEditorModeling::ModelValidationState.Enabled)]
+	<#= CodeGenerationUtilities.GetAccessModifier(c.AccessModifier) #><#= CodeGenerationUtilities.GetGenerationInheritanceModifier(c) #> partial class <#= CodeGenerationUtilities.GetGenerationClassName(c) #>
+	{
+		#region Validate
+		/// <summary>
+   		/// Automatically validates <#= c.Name #>.
+    	/// </summary>
+		[DslEditorModeling::ModelValidationMethod(DslEditorModeling::ModelValidationCategories.Open | DslEditorModeling::ModelValidationCategories.Save | DslEditorModeling::ModelValidationCategories.Menu)]		
+<#+
+		GenerateValidationFunction(c, messageIdsClass);
+#>
+		#endregion
+	}
+}
+<#+
+	}
+}
+#>
+
+<#+ 
+	public void GenerateValidationFunction(AttributedDomainElement domainElement, string messageIdsClass)
+	{
+#>
+		public virtual void Validate<#= domainElement.Name #>(DslEditorModeling::ModelValidationContext context)
+		{
+<#+
+		foreach(DomainProperty p in domainElement.Properties)
+		{
+			if( p.IsRequired )
+			{
+				if( p.Type == null )
+					continue;
+				
+				if( p.Type.Name.ToLower() == "string" )
+				{
+#>
+			// validate required attribute <#= p.Name #>
+			if( System.String.IsNullOrEmpty(this.<#= p.Name #>) )
+			{
+				context.AddMessage(new DslEditorModeling::ModelValidationMessage(<#= messageIdsClass #>.<#= domainElement.Name #>_<#= p.Name #>, DslEditorModeling::ModelValidationViolationType.Error, "Property '<#= p.Name #>' has no value although it is required", this));
+			}
+<#+					
+				}
+				else
+				{
+#>
+			// validate required attribute <#= p.Name #>
+			if( this.<#= p.Name #> == null )
+			{
+				context.AddMessage(new DslEditorModeling::ModelValidationMessage(<#= messageIdsClass #>.<#= domainElement.Name #>_<#= p.Name #>, DslEditorModeling::ModelValidationViolationType.Error, "Property '<#= p.Name #>' has no value although it is required", this));
+			}
+<#+
+				}
+			}
+		}
+		int counter = 0;
+		foreach(DomainRole role in domainElement.RolesPlayed )
+		{		
+			// validate reference relationships --> cardinality constraints
+			//if( role.Relationship.Source == role && role.Relationship is ReferenceRelationship )
+			if( role.Relationship is ReferenceRelationship )
+			{
+				ReferenceRelationship con = role.Relationship as ReferenceRelationship;
+				if( role != role.Relationship.Source && !(con.Target.RolePlayer is DomainClass) )
+					continue;
+				
+				if( role.Multiplicity == Tum.PDE.LanguageDSL.Multiplicity.ZeroMany)
+					continue;
+#>
+
+			// validate reference relationship from <#= con.Source.Name #> to <#= con.Target.Name #> (Side: <#= role.Name #>)
+			System.Collections.ObjectModel.ReadOnlyCollection<<#= con.GetFullName(true) #>> allM<#= con.Name #>Instances<#= counter #> =  DslModeling::DomainRoleInfo.GetElementLinks<<#= con.GetFullName(true) #>>(this, <#= con.GetFullName(true) #>.<#= role.Name #>DomainRoleId);
+<#+
+				if( role.Multiplicity == Tum.PDE.LanguageDSL.Multiplicity.One || role.Multiplicity == Tum.PDE.LanguageDSL.Multiplicity.OneMany )
+				{
+#>
+			// validate reference relationships --> see if cardinality constraints are met
+			if( allM<#= con.Name #>Instances<#= counter #>.Count == 0 )
+			{
+				context.AddMessage(new DslEditorModeling::ModelValidationMessage(<#= messageIdsClass #>.<#= con.Name #>_<#= role.Opposite.Name #>, DslEditorModeling::ModelValidationViolationType.Error, "Reference to element of type <#= role.Opposite.RolePlayer.DisplayName #> is missing, although it is required. Role name: + <#= role.PropertyName #>", this));
+			}
+<#+
+				}
+				else if( role.Multiplicity == Tum.PDE.LanguageDSL.Multiplicity.ZeroOne )
+				{
+#>
+			// validate reference relationships --> see if cardinality constraints are met
+			if( allM<#= con.Name #>Instances<#= counter #>.Count > 1 )
+			{
+				context.AddMessage(new DslEditorModeling::ModelValidationMessage(<#= messageIdsClass #>.<#= con.Name #>_<#= role.Opposite.Name #>, DslEditorModeling::ModelValidationViolationType.Error, "There are multiple references to elements of type <#= role.Opposite.RolePlayer.DisplayName #>, although only one is allowed. Role name: + <#= role.PropertyName #>", this));
+			}
+<#+
+				
+				}
+				counter++;
+			}			
+			
+			if( role.Relationship.Source == role && role.Relationship is EmbeddingRelationship)
+			{
+				EmbeddingRelationship con = role.Relationship as EmbeddingRelationship;
+				if( con.Source.Multiplicity == Tum.PDE.LanguageDSL.Multiplicity.ZeroMany )
+					continue;
+#>
+
+			// validate embedding relationship from <#= con.Source.Name #> to <#= con.Target.Name #>
+			System.Collections.ObjectModel.ReadOnlyCollection<<#= con.GetFullName(true) #>> allM<#= con.Name #>Instances<#= counter #> =  DslModeling::DomainRoleInfo.GetElementLinks<<#= con.GetFullName(true) #>>(this, <#= con.GetFullName(true) #>.<#= con.Source.Name #>DomainRoleId);
+<#+
+			if( con.Source.Multiplicity == Tum.PDE.LanguageDSL.Multiplicity.One || con.Source.Multiplicity == Tum.PDE.LanguageDSL.Multiplicity.OneMany )
+			{
+#>
+			// validate embedding relationships --> see if cardinality constraints are met
+			if( allM<#= con.Name #>Instances<#= counter #>.Count == 0 )
+			{
+				context.AddMessage(new DslEditorModeling::ModelValidationMessage(<#= messageIdsClass #>.<#= con.Name #>_<#= con.Target.Name #>, DslEditorModeling::ModelValidationViolationType.Error, "Embedded element of type <#= con.Target.Name #> is missing, although it is required.", this));
+			}
+<#+
+			}
+			else if( con.Source.Multiplicity == Tum.PDE.LanguageDSL.Multiplicity.ZeroOne )
+			{
+#>
+			// validate embedding relationships --> see if cardinality constraints are met
+			if( allM<#= con.Name #>Instances<#= counter #>.Count > 1 )
+			{
+				context.AddMessage(new DslEditorModeling::ModelValidationMessage(<#= messageIdsClass #>.<#= con.Name #>_<#= con.Target.Name #>, DslEditorModeling::ModelValidationViolationType.Error, "Multiple Embedded elements of type <#= con.Target.Name #> found, although only one is allowed.", this));
+			}
+<#+
+				
+			}
+			
+				counter++;
+			}
+		}
+#>
+		}
+<#+
+}
+#>

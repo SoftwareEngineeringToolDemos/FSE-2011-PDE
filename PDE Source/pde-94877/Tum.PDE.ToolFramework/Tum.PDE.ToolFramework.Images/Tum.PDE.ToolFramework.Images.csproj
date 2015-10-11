@@ -1,0 +1,191 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9163E59C-331C-4188-BC0B-99F86C49F661}</ProjectGuid>
+    <OutputType>library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Tum.PDE.ToolFramework.Images</RootNamespace>
+    <AssemblyName>Tum.PDE.ToolFramework.Images</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>Tum.PDE.ToolFramework.Images.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+    <None Include="Tum.PDE.ToolFramework.Images.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\Add2-16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Ribbon\Back-32.png" />
+    <Resource Include="Ribbon\Forward-32.png" />
+    <Resource Include="Ribbon\Add-16.png" />
+    <Resource Include="Ribbon\Theme\BlackTheme.png" />
+    <Resource Include="Ribbon\Theme\BlueTheme.png" />
+    <Resource Include="Ribbon\CopyAsImage-32.png" />
+    <Resource Include="Ribbon\Copy-16.png" />
+    <Resource Include="Ribbon\Cut-16.png" />
+    <Resource Include="Ribbon\Delete-16.png" />
+    <Resource Include="Ribbon\Delete-32.png" />
+    <Resource Include="Ribbon\CloseDocument-32.png" />
+    <Resource Include="Ribbon\ModelTree-32.png" />
+    <Resource Include="Ribbon\SaveAs-32.png" />
+    <Resource Include="Ribbon\DiagramSurface-16.png" />
+    <Resource Include="Ribbon\Exit-16.png" />
+    <Resource Include="Ribbon\Exit-32.png" />
+    <Resource Include="Ribbon\New-16.png" />
+    <Resource Include="Ribbon\New-32.png" />
+    <Resource Include="Ribbon\ErrorList-32.png" />
+    <Resource Include="Ribbon\Open-16.png" />
+    <Resource Include="Ribbon\Open-32.png" />
+    <Resource Include="Ribbon\ValidateAll-32.png" />
+    <Resource Include="Ribbon\Paste-16.png" />
+    <Resource Include="Ribbon\PropertyGrid-32.png" />
+    <Resource Include="Ribbon\Redo-32.png" />
+    <Resource Include="Ribbon\Refresh-16.png" />
+    <Resource Include="Ribbon\Refresh-32.png" />
+    <Resource Include="Ribbon\FindAndReplace-32.png" />
+    <Resource Include="Ribbon\Save-32.png" />
+    <Resource Include="Ribbon\Save-16.png" />
+    <Resource Include="Ribbon\Search-32.png" />
+    <Resource Include="Ribbon\Validate-32.png" />
+    <Resource Include="Ribbon\SearchAdvanced-32.png" />
+    <Resource Include="Ribbon\Theme\SilverTheme.png" />
+    <Resource Include="Ribbon\RecentItem-32.png" />
+    <Resource Include="Ribbon\Undo-32.png" />
+    <Resource Include="Ribbon\Up-16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\Add-16.png" />
+    <Resource Include="Views\Copy-16.png" />
+    <Resource Include="Views\Delete-16.png" />
+    <Resource Include="Views\Delete2-16.png" />
+    <Resource Include="Views\Down-16.png" />
+    <Resource Include="Views\Edit-16.png" />
+    <Resource Include="Views\EmbRotated-16.png" />
+    <Resource Include="Views\Emb-16.png" />
+    <Resource Include="Views\FolderClosed-16.png" />
+    <Resource Include="Views\FolderOpen-16.png" />
+    <Resource Include="Views\FolderSelected-16.png" />
+    <Resource Include="Views\Navigate-16.png" />
+    <Resource Include="Views\GoPrevious-16.png" />
+    <Resource Include="Views\Information-32.png" />
+    <Resource Include="Views\SortCategorized-16.png" />
+    <Resource Include="Views\Next-16.png" />
+    <Resource Include="Views\RefLeft-16.png" />
+    <Resource Include="Views\RefRight-16.png" />
+    <Resource Include="Views\Ref-16.png" />
+    <Resource Include="Views\Right-16.png" />
+    <Resource Include="Views\Search-16.png" />
+    <Resource Include="Views\SortAlphabetical-16.png" />
+    <Resource Include="Views\Up-16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\Info.ico" />
+    <Resource Include="Views\Filter.ico" />
+    <Resource Include="Views\Remove.ico" />
+    <Resource Include="Views\Warning.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Ribbon\Information-32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\ConnectorOrtho.png" />
+    <Resource Include="Views\ConnectorStraight.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Ribbon\Cancel-16.png" />
+    <Resource Include="Ribbon\Check-16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Common\PinMenuLeft.png" />
+    <Resource Include="Common\PinMenuRight.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Ribbon\ErrorList-16.png" />
+    <Resource Include="Ribbon\ModelTree-16.png" />
+    <Resource Include="Ribbon\PropertyGrid-16.png" />
+    <Resource Include="Ribbon\Search-16.png" />
+    <Resource Include="Ribbon\SearchAdvanced-16.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,41 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:c="clr-namespace:Tum.FamilyTreeDSL.ViewModel"
+                    xmlns:diagrams="clr-namespace:Tum.PDE.ToolFramework.Modeling.Visualization.Controls.DiagramSurface;assembly=Tum.PDE.ToolFramework.Modeling.Visualization">
+    <ResourceDictionary.MergedDictionaries>
+        <!-- Shell -->
+        <ResourceDictionary Source="pack://application:,,,/Tum.PDE.ToolFramework.Modeling.Visualization.Shell;component/Themes/Generic.xaml"/>
+
+        <!-- Domain DSL styles -->
+        <ResourceDictionary Source="pack://application:,,,/Tum.FamilyTreeDSL;component/GeneratedCode/ViewModel/WPFApplication/UIResourceDictionary.xaml"/>
+
+    </ResourceDictionary.MergedDictionaries>
+
+
+    <!-- PersonShape template -->
+    <DataTemplate DataType="{x:Type c:PersonShapeDiagramItemViewModel}">
+        <StackPanel Orientation="Vertical" IsHitTestVisible="False">
+            <Image x:Name="GenderImage" Source="pack://application:,,,/Tum.FamilyTreeDSL;component/Resources/Images/MaleAvatar.png" HorizontalAlignment="Center" Width="77" Height="77"/>
+            <TextBlock Margin="3" Grid.Row="0" HorizontalAlignment="Center" Text="{Binding Path=DomainElementName}" TextTrimming="CharacterEllipsis"/>
+        </StackPanel>
+        <DataTemplate.Triggers>
+            <DataTrigger Binding="{Binding Path=Element_Gender, Mode=OneWay}" Value="Female">
+                <Setter TargetName="GenderImage" Property="Source" Value="pack://application:,,,/Tum.FamilyTreeDSL;component/Resources/Images/FemaleAvatar.png"/>
+            </DataTrigger>
+        </DataTemplate.Triggers>
+    </DataTemplate>
+
+    <!-- MarriedToShape template -->
+    <Style x:Key="MarriedToShapeConnectionPathStyle" TargetType="Path">
+        <Setter Property="StrokeThickness" Value="1"/>
+        <Setter Property="Stroke" Value="Silver"/>
+    </Style>
+    <DataTemplate DataType="{x:Type c:MarriedToShapeDiagramItemLinkViewModel}">
+        <diagrams:DiagramDesignerItemLink StartAnchorStyle="Diamond" EndAnchorStyle="Diamond" PathStyle="{StaticResource MarriedToShapeConnectionPathStyle}"/>
+    </DataTemplate>
+
+    <!-- ParentOfShape template -->
+    <DataTemplate DataType="{x:Type c:ParentOfShapeDiagramItemLinkViewModel}">
+        <diagrams:DiagramDesignerItemLink EndAnchorStyle="Arrow" />
+    </DataTemplate>
+</ResourceDictionary>

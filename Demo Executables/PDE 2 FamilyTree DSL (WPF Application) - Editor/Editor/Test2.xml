@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<FamilyTreeModel Id="d7ca0ff1-2394-4dce-9d59-b9010f30f6a2">
+  <FamilyTreePerson Id="0b5c2dfe-c917-4097-8f12-0f23ab4fb1e0" Gender="Male">
+    <Name>H</Name>
+    <ChildRef link="eb08726b-a409-4143-b289-46b51c0ad0c0" />
+    <ChildRef link="94f0fd95-2ce2-454b-9b66-b08b164f91c5" />
+    <WifeRef link="ffe44eec-2ee1-4629-a43f-64fed41771e9" />
+  </FamilyTreePerson>
+  <FamilyTreePerson Id="ffe44eec-2ee1-4629-a43f-64fed41771e9" Gender="Female">
+    <Name>E</Name>
+    <ChildRef link="eb08726b-a409-4143-b289-46b51c0ad0c0" />
+    <ChildRef link="94f0fd95-2ce2-454b-9b66-b08b164f91c5" />
+  </FamilyTreePerson>
+  <FamilyTreePerson Id="eb08726b-a409-4143-b289-46b51c0ad0c0" Gender="Male">
+    <Name>A</Name>
+    <WifeRef link="4f42d390-3ef9-4549-95a8-41d1db82a351" />
+  </FamilyTreePerson>
+  <FamilyTreePerson Id="4f42d390-3ef9-4549-95a8-41d1db82a351" Gender="Female">
+    <Name>B</Name>
+  </FamilyTreePerson>
+  <FamilyTreePerson Id="94f0fd95-2ce2-454b-9b66-b08b164f91c5" Gender="Male">
+    <Name>C</Name>
+    <WifeRef link="53c0cdcc-b25c-433e-b34c-ae3590147045" />
+  </FamilyTreePerson>
+  <FamilyTreePerson Id="53c0cdcc-b25c-433e-b34c-ae3590147045" Gender="Female">
+    <Name>D</Name>
+    <ChildRef link="ec66ecfc-47f9-4089-857b-9ead89287da2" />
+  </FamilyTreePerson>
+  <FamilyTreePerson Id="ec66ecfc-47f9-4089-857b-9ead89287da2" Gender="Male">
+    <Name>E</Name>
+  </FamilyTreePerson>
+  <FamilyTreePerson Id="84407ea2-a4f9-4c52-878f-d2f805e0985b" Gender="Female">
+    <Name>F</Name>
+    <WifeRef link="ec66ecfc-47f9-4089-857b-9ead89287da2" />
+  </FamilyTreePerson>
+</FamilyTreeModel>

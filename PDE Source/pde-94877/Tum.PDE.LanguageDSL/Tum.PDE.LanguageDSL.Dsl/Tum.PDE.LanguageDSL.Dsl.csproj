@@ -1,0 +1,437 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.20820</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{CA8FB0DA-0E9C-48BE-AD37-0F9E0E38AE1F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Tum.PDE.LanguageDSL</RootNamespace>
+    <AssemblyName>Tum.PDE.LanguageDSL.Dsl</AssemblyName>
+    <AssemblyOriginatorKeyFile>..\Key.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyMode>File</AssemblyOriginatorKeyMode>
+    <SignAssembly>true</SignAssembly>
+    <GacTargetOutput>false</GacTargetOutput>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <StartupObject>
+    </StartupObject>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug_VSPlugin|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug_VSPlugin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Debug\Tum.PDE.LanguageDSL.Dsl.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\DSLTools\v10.0\Microsoft.DSLTools.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualStudio.Modeling.Sdk$(DslToolsVersionSuffix), Version=$(DslToolsAsmVersion), Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualStudio.Modeling.Sdk.Diagrams$(DslToolsVersionSuffix), Version=$(DslToolsAsmVersion), Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualStudio.Modeling.Sdk.Diagrams.GraphObject$(DslToolsVersionSuffix), Version=$(DslToolsAsmVersion), Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=x86" />
+    <Reference Include="Microsoft.VisualStudio.TextTemplating$(T4VersionSuffix), Version=$(T4AsmVersion), Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualStudio.TextTemplating.Interfaces$(T4VersionSuffix), Version=$(T4AsmVersion), Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="PresentationCore">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.XML" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="WindowsBase">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CustomCode\CopyPaste\Classes\DiagramClass.cs" />
+    <Compile Include="CustomCode\CopyPaste\Classes\DomainClass.cs" />
+    <Compile Include="CustomCode\CopyPaste\Classes\DomainRelationship.cs" />
+    <Compile Include="CustomCode\CopyPaste\Classes\LibraryModelContext.cs" />
+    <Compile Include="CustomCode\CopyPaste\Classes\MappingRelationshipShapeClass.cs" />
+    <Compile Include="CustomCode\CopyPaste\Classes\ShapeClass.cs" />
+    <Compile Include="CustomCode\CopyPaste\CopyAndPasteOperations.cs" />
+    <Compile Include="CustomCode\CopyPaste\DomainClassesCP.cs">
+      <DependentUpon>DomainClassesCP.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="CustomCode\CopyPaste\IModelMergeCustomArguments.cs" />
+    <Compile Include="CustomCode\CopyPaste\IModelMergeElements.cs" />
+    <Compile Include="CustomCode\CopyPaste\IValidationMessage.cs" />
+    <Compile Include="CustomCode\CopyPaste\IValidationResult.cs" />
+    <Compile Include="CustomCode\CopyPaste\ModelElementOperations.cs" />
+    <Compile Include="CustomCode\CopyPaste\ModelProtoElement.cs" />
+    <Compile Include="CustomCode\CopyPaste\ModelProtoGroup.cs" />
+    <Compile Include="CustomCode\CopyPaste\ModelProtoGroupMerger.cs" />
+    <Compile Include="CustomCode\CopyPaste\ModelProtoGroupOperation.cs" />
+    <Compile Include="CustomCode\CopyPaste\ModelProtoLink.cs" />
+    <Compile Include="CustomCode\CopyPaste\ModelProtoPropertyValue.cs" />
+    <Compile Include="CustomCode\CopyPaste\ModelProtoRolePlayer.cs" />
+    <Compile Include="CustomCode\CopyPaste\ModelValidationViolationType.cs" />
+    <Compile Include="CustomCode\CopyPaste\ValidationMessage.cs" />
+    <Compile Include="CustomCode\CopyPaste\ValidationResult.cs" />
+    <Compile Include="CustomCode\Dependency\Dependencies.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Dependencies.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CustomCode\Dependency\DependenciesData.cs" />
+    <Compile Include="CustomCode\Dependency\DependencyItemCategory.cs" />
+    <Compile Include="CustomCode\Dependency\Services.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Services.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CustomCode\Design\BaseModelContextTypeDescriptor.cs" />
+    <Compile Include="CustomCode\Design\DomainEnumPropertyDescriptor.cs" />
+    <Compile Include="CustomCode\Design\DomainPropertyTypeDescriptor.cs" />
+    <Compile Include="CustomCode\Design\DomainTypeBaseTypeDescriptor.cs" />
+    <Compile Include="CustomCode\Design\MappingRelationshipShapeClassTypeDescriptor.cs" />
+    <Compile Include="CustomCode\Design\MetaModelLibraryImportEditor.cs" />
+    <Compile Include="CustomCode\Design\PropertyGridEditorBaseTypeDescriptor.cs" />
+    <Compile Include="CustomCode\Design\RelationshipShapeClassTypeDescriptor.cs" />
+    <Compile Include="CustomCode\Design\ShapeClassTypeDescriptor.cs" />
+    <Compile Include="CustomCode\Extensions\CustomElementOperations.cs" />
+    <Compile Include="CustomCode\Extensions\DirectiveProcessor.cs" />
+    <Compile Include="CustomCode\Extensions\DomainProperty.cs" />
+    <Compile Include="CustomCode\Extensions\PropertyGridEditor.cs" />
+    <Compile Include="CustomCode\Helper\ModelTreeHelper.cs" />
+    <Compile Include="CustomCode\Helper\NameHelper.cs" />
+    <Compile Include="CustomCode\Dependency\DependencyItem.cs" />
+    <Compile Include="CustomCode\Rules\Diagrams\DiagramClassViewReferencesDCDeleteRule.cs" />
+    <Compile Include="CustomCode\Rules\Diagrams\DiagramTreeNodeReferencesPECDeleteRule.cs" />
+    <Compile Include="CustomCode\Rules\Diagrams\RelationshipShapeClassReferencesRRChangeRule.cs" />
+    <Compile Include="CustomCode\Rules\Diagrams\RelationshipShapeClassReferencesRRDeleteRule.cs" />
+    <Compile Include="CustomCode\Rules\Diagrams\ShapeClassDeleteRule.cs" />
+    <Compile Include="CustomCode\Rules\Diagrams\ShapeClassReferencesDomainClassChangeRule.cs" />
+    <Compile Include="CustomCode\Rules\Diagrams\ShapeClassReferencesDomainClassDeleteRule.cs" />
+    <Compile Include="CustomCode\Rules\DomainRelationshipChangedRule.cs" />
+    <Compile Include="CustomCode\Rules\LibraryModelContextAddRule.cs" />
+    <Compile Include="CustomCode\Rules\LibraryModelContextDeleteRule.cs" />
+    <Compile Include="CustomCode\Rules\Properties\AttributedDomainElementAddRule.cs" />
+    <Compile Include="CustomCode\Rules\Properties\DomainClassPropertyChangedRule.cs" />
+    <Compile Include="CustomCode\Rules\Properties\DomainEnumerationAddRule.cs" />
+    <Compile Include="CustomCode\Rules\Properties\DomainRoleReferencesCPGEAddRule.cs" />
+    <Compile Include="CustomCode\Rules\Properties\DomainRoleReferencesCPGEChangeRule.cs" />
+    <Compile Include="CustomCode\Rules\Properties\DomainTypeAddRule.cs" />
+    <Compile Include="CustomCode\Rules\Properties\DomainPropertyAddRule.cs" />
+    <Compile Include="CustomCode\Rules\Properties\DomainPropertyChangedRule.cs" />
+    <Compile Include="CustomCode\Rules\Properties\DomainRelationshipPropertyChangedRule.cs" />
+    <Compile Include="CustomCode\Rules\Properties\DomainRolePropertyChangedRule.cs" />
+    <Compile Include="CustomCode\Rules\Properties\DomainTypePropertyChangeRule.cs" />
+    <Compile Include="CustomCode\Rules\Properties\EmbeddingRelationshipPropertyChangedRule.cs" />
+    <Compile Include="CustomCode\Rules\Properties\EnumerationLiteralAddRule.cs" />
+    <Compile Include="CustomCode\Rules\Properties\EnumerationLiteralPropertyChangedRule.cs" />
+    <Compile Include="CustomCode\Rules\Properties\GeneratedDomainElementAddRule.cs" />
+    <Compile Include="CustomCode\Rules\ModelContextAddRule.cs" />
+    <Compile Include="CustomCode\Rules\Properties\NamedDomainElementPropertyChangedRule.cs" />
+    <Compile Include="CustomCode\Rules\Properties\PropertyGridEditorElementAddRule.cs" />
+    <Compile Include="CustomCode\Rules\Properties\ReferenceRelationshipPropertyChangedRule.cs" />
+    <Compile Include="CustomCode\Rules\Properties\StringHelper.cs" />
+    <Compile Include="CustomCode\Rules\Serialization\SerializationDomainPropertyAddRule.cs" />
+    <Compile Include="CustomCode\Rules\Serialization\SerializationDomainPropertyDeleteRule.cs" />
+    <Compile Include="CustomCode\Rules\Serialization\SerializationDomainRelationshipChangedRule.cs" />
+    <Compile Include="CustomCode\Rules\Serialization\SerializationDomainRelationshipAddRule.cs" />
+    <Compile Include="CustomCode\Rules\Serialization\SerializationDomainRelationshipDeleteRule.cs" />
+    <Compile Include="CustomCode\Rules\Serialization\SerializationDomainClassDeleteRule.cs" />
+    <Compile Include="CustomCode\Rules\Serialization\SerializationDomainClassAddRule.cs" />
+    <Compile Include="CustomCode\Helper\SerializationHelper.cs" />
+    <Compile Include="CustomCode\Rules\Serialization\SerializedDomainModelChangedRule.cs" />
+    <Compile Include="CustomCode\Rules\Serialization\SerializedDomainPropertyChangedRule.cs" />
+    <Compile Include="CustomCode\Rules\Serialization\SerializedDomainRoleChangedRule.cs" />
+    <Compile Include="CustomCode\Rules\View\ReferenceRSNodeReferencesSRNodesDeleteRule.cs" />
+    <Compile Include="CustomCode\Rules\View\ShapeClassNodeDeleteRule.cs" />
+    <Compile Include="CustomCode\Rules\View\ShapeRelationshipNodeDeleteRule.cs" />
+    <Compile Include="CustomCode\Rules\View\TreeNodeReferencesInheritanceNodesDeleteRule.cs" />
+    <Compile Include="CustomCode\Rules\View\TreeNodeReferencesReferenceRSNodesDeleteRule.cs" />
+    <Compile Include="CustomCode\Rules\Diagrams\ShapeClassReferencesDomainClassAddRule.cs" />
+    <Compile Include="CustomCode\Rules\Diagrams\RelationshipShapeClassReferencesRRAddRule.cs" />
+    <Compile Include="CustomCode\Rules\Serialization\SerializedDomainClassChangedRule.cs" />
+    <Compile Include="CustomCode\Rules\Serialization\SerializedEmbeddingRelationshipChangedRule.cs" />
+    <Compile Include="CustomCode\Rules\Serialization\SerializedReferenceRelationshipChangedRule.cs" />
+    <Compile Include="CustomCode\Rules\Serialization\SerializationModelPropertyChangeRule.cs" />
+    <Compile Include="CustomCode\Serialization\SerializationPostProcessor.cs" />
+    <Compile Include="CustomCode\Validation\DependencyDiagram.cs" />
+    <Compile Include="CustomCode\Validation\DomainRole.cs" />
+    <Compile Include="CustomCode\Validation\MappingRelationshipShapeClass.cs" />
+    <Compile Include="CustomCode\Validation\ModelTree.cs" />
+    <Compile Include="CustomCode\Validation\PropertyGridEditor.cs" />
+    <Compile Include="CustomCode\CopyPaste\Classes\RelationshipShapeClass.cs" />
+    <None Include="CustomCode\CopyPaste\DomainClassesCP.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DomainClassesCP.cs</LastGenOutput>
+    </None>
+    <None Include="CustomCode\Dependency\Dependencies.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Dependencies.cs</LastGenOutput>
+    </None>
+    <None Include="CustomCode\Dependency\Services.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Services.cs</LastGenOutput>
+    </None>
+    <None Include="DslDefinition.dsl">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DslDefinition.dsl.diagram">
+      <DependentUpon>DslDefinition.dsl</DependentUpon>
+    </None>
+    <None Include="GeneratedCode\SerializationHelper.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SerializationHelper.cs</LastGenOutput>
+    </None>
+    <Compile Include="CustomCode\Design\AccessModifierConverter.cs" />
+    <Compile Include="CustomCode\Design\CustomEnumConverter.cs" />
+    <Compile Include="CustomCode\Design\DomainClassTypeDescriptor.cs" />
+    <Compile Include="CustomCode\Design\DomainRelationshipTypeDescriptor.cs" />
+    <Compile Include="CustomCode\Design\InheritanceModifierConverter.cs" />
+    <Compile Include="CustomCode\Design\MultiplicityConverter.cs" />
+    <Compile Include="CustomCode\DomainOverrides.cs" />
+    <Compile Include="CustomCode\Extensions\AttributedDomainElement.cs" />
+    <Compile Include="CustomCode\Extensions\DomainClass.cs" />
+    <Compile Include="CustomCode\Extensions\DomainRelationship.cs" />
+    <Compile Include="CustomCode\Extensions\DomainType.cs" />
+    <Compile Include="CustomCode\Extensions\EmbeddingRelationship.cs" />
+    <Compile Include="CustomCode\Extensions\MappingRelationshipShapeClass.cs" />
+    <Compile Include="CustomCode\Extensions\MetaModel.cs" />
+    <Compile Include="CustomCode\Extensions\PresentationDomainClassElement.cs" />
+    <Compile Include="CustomCode\Extensions\ReferenceRelationship.cs" />
+    <Compile Include="CustomCode\Extensions\ShapeClass.cs" />
+    <Compile Include="CustomCode\Rules\DomainClassAddRule.cs" />
+    <Compile Include="CustomCode\Rules\DomainClassDeleteRule.cs" />
+    <Compile Include="CustomCode\Rules\DomainRelationshipAddRule.cs" />
+    <Compile Include="CustomCode\Rules\DomainRelationshipDeleteRule.cs" />
+    <Compile Include="CustomCode\Rules\Properties\AttributeDomainElementPropertyChangedRule.cs" />
+    <Compile Include="CustomCode\Rules\View\TreeNodeReferencesEmbeddingRSNodesDeleteRule.cs" />
+    <Compile Include="CustomCode\Serialization\DomainEnumerationSerializer.cs" />
+    <Compile Include="CustomCode\Serialization\DomainTypeSerializer.cs" />
+    <Compile Include="CustomCode\Serialization\ExternalTypeSerializer.cs" />
+    <Compile Include="CustomCode\Serialization\MetaModelSerializer.cs" />
+    <Compile Include="CustomCode\Serialization\MonikerResolver.cs" />
+    <Compile Include="CustomCode\Serialization\PropertyGridEditorSerializer.cs" />
+    <Compile Include="CustomCode\Serialization\SerializationHelper.cs" />
+    <Compile Include="CustomCode\Utils\CodeGenerationUtilities.cs" />
+    <Compile Include="CustomCode\Validation\AttributedDomainElement.cs" />
+    <Compile Include="CustomCode\Validation\DomainClass.cs" />
+    <Compile Include="CustomCode\Validation\DomainProperty.cs" />
+    <Compile Include="CustomCode\Validation\DomainRelationship.cs" />
+    <Compile Include="CustomCode\Validation\MetaModel.cs" />
+    <Compile Include="CustomCode\Validation\SerializationClass.cs" />
+    <Compile Include="CustomCode\Validation\SerializedEmbeddingRelationship.cs" />
+    <Compile Include="CustomCode\Validation\SpecificDependencyDiagram.cs" />
+    <Compile Include="DomainElementTypeDescriptor.cs" />
+    <Compile Include="GeneratedCode\ConnectionBuilders.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ConnectionBuilders.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GeneratedCode\Connectors.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Connectors.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GeneratedCode\Diagram.cs">
+      <DependentUpon>Diagram.tt</DependentUpon>
+      <SubType>Code</SubType>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="GeneratedCode\DirectiveProcessor.cs">
+      <DependentUpon>DirectiveProcessor.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="GeneratedCode\DomainClasses.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DomainClasses.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GeneratedCode\DomainRelationships1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DomainRelationships.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GeneratedCode\HelpKeywordHelper.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HelpKeywordHelper.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GeneratedCode\PropertiesGrid.cs">
+      <DependentUpon>PropertiesGrid.tt</DependentUpon>
+      <SubType>Code</SubType>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="GeneratedCode\SerializationHelper.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SerializationHelper.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GeneratedCode\Shapes.cs">
+      <DependentUpon>Shapes.tt</DependentUpon>
+      <SubType>Code</SubType>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="GeneratedCode\ToolboxHelper.cs">
+      <DependentUpon>ToolboxHelper.tt</DependentUpon>
+      <SubType>Code</SubType>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="CustomCode\Extensions\MetaModelLibrary.cs" />
+    <Compile Include="CustomCode\Serialization\MetaModelLibrarySerializer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="GeneratedCode\DomainModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DomainModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GeneratedCode\Serializer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Serializer.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="GeneratedCode\ConnectionBuilders.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ConnectionBuilders.cs</LastGenOutput>
+    </None>
+    <None Include="GeneratedCode\Diagram.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Diagram.cs</LastGenOutput>
+    </None>
+    <None Include="GeneratedCode\DirectiveProcessor.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DirectiveProcessor.cs</LastGenOutput>
+    </None>
+    <None Include="GeneratedCode\DomainRelationships.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DomainRelationships1.cs</LastGenOutput>
+    </None>
+    <None Include="GeneratedCode\Connectors.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Connectors.cs</LastGenOutput>
+    </None>
+    <None Include="GeneratedCode\DomainClasses.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DomainClasses.cs</LastGenOutput>
+    </None>
+    <None Include="GeneratedCode\DomainModelResx.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DomainModelResx.resx</LastGenOutput>
+    </None>
+    <None Include="GeneratedCode\HelpKeywordHelper.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>HelpKeywordHelper.cs</LastGenOutput>
+    </None>
+    <None Include="GeneratedCode\PropertiesGrid.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PropertiesGrid.cs</LastGenOutput>
+    </None>
+    <None Include="GeneratedCode\LanguageDSLSchema.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>LanguageDSLSchema.xsd</LastGenOutput>
+    </None>
+    <None Include="GeneratedCode\DomainModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DomainModel.cs</LastGenOutput>
+    </None>
+    <Content Include="CustomCode\Validation\!Important.txt" />
+    <Content Include="GeneratedCode\LanguageDSLSchema.xsd">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LanguageDSLSchema.tt</DependentUpon>
+      <SubType>
+      </SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="GeneratedCode\Serializer.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Serializer.cs</LastGenOutput>
+    </None>
+    <None Include="GeneratedCode\Shapes.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Shapes.cs</LastGenOutput>
+    </None>
+    <None Include="GeneratedCode\ToolboxHelper.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ToolboxHelper.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4df5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="GeneratedCode\DomainModelResx.resx">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DomainModelResx.tt</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <PropertyGroup>
+    <StartProgram>$(DevEnvDir)\devenv.exe</StartProgram>
+    <StartAction>Program</StartAction>
+    <StartArguments>/rootsuffix Exp "..\..\..\Debugging\Debugging.sln"</StartArguments>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <ItemGroup>
+    <CodeAnalysisDictionary Include="..\CodeAnalysisDictionary.xml">
+      <Link>CodeAnalysisDictionary.xml</Link>
+    </CodeAnalysisDictionary>
+  </ItemGroup>
+  <ItemGroup />
+</Project>

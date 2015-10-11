@@ -1,0 +1,507 @@
+﻿<#@ template language="C#" inherits="BaseTemplate"#> 
+<#@ import namespace="Tum.PDE.LanguageDSL"#>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Collections.ObjectModel" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+
+<#+ 
+public void SubscribeToPropertyChangeEvents(AttributedDomainElement pElement)
+{
+#>
+	if( this.Element != null )
+	{
+		this.EventManager.GetEvent<DslEditorEvents::ModelElementPropertyChangedEvent>().Subscribe(this.Element.Id, new System.Action<DslModeling::ElementPropertyChangedEventArgs>(OnElementPropertyChanged));
+	}
+<#+
+}
+
+public void SubscribeToPropertyChangeEvents(PresentationElementClass shape, AttributedDomainElement pElement)
+{
+#>
+	if( this.Element != null )
+	{
+		this.EventManager.GetEvent<DslEditorEvents::ModelElementPropertyChangedEvent>().Subscribe(this.Element.Id, new System.Action<DslModeling::ElementPropertyChangedEventArgs>(OnElementPropertyChanged));
+	}
+	
+	if( this.ShapeElement != null )
+	{
+		this.EventManager.GetEvent<DslEditorEvents::ModelElementPropertyChangedEvent>().Subscribe(this.ShapeElement.Id, new System.Action<DslModeling::ElementPropertyChangedEventArgs>(OnElementPropertyChanged));
+	}
+<#+
+}
+
+public void UnsubscribeToPropertyChangeEvents(AttributedDomainElement pElement)
+{
+#>
+	if( this.Element != null )
+	{
+		this.EventManager.GetEvent<DslEditorEvents::ModelElementPropertyChangedEvent>().Unsubscribe(this.Element.Id, new System.Action<DslModeling::ElementPropertyChangedEventArgs>(OnElementPropertyChanged));
+	}
+<#+	
+}
+
+public void UnsubscribeToPropertyChangeEvents(PresentationElementClass shape, AttributedDomainElement pElement)
+{
+#>
+	if( this.Element != null )
+	{
+		this.EventManager.GetEvent<DslEditorEvents::ModelElementPropertyChangedEvent>().Unsubscribe(this.Element.Id, new System.Action<DslModeling::ElementPropertyChangedEventArgs>(OnElementPropertyChanged));
+	}
+	
+	if( this.ShapeElement != null )
+	{
+		this.EventManager.GetEvent<DslEditorEvents::ModelElementPropertyChangedEvent>().Unsubscribe(this.ShapeElement.Id, new System.Action<DslModeling::ElementPropertyChangedEventArgs>(OnElementPropertyChanged));
+	}	
+<#+	
+}
+
+public string CreatePropertyHandlers(PresentationElementClass shape, AttributedDomainElement domainElement, bool hasBaseClass)
+{
+	this.GenerationEnvironment = null;
+	this.CreatePropertyHandlersInternal(shape, domainElement, hasBaseClass);
+	return this.GenerationEnvironment.ToString();
+}
+
+private void CreatePropertyHandlersInternal(PresentationElementClass shape, AttributedDomainElement domainElement, bool hasBaseClass)
+{
+	if( shape.GeneratePropertiesVM )
+		CreatePropertyAccessorsInternal(domainElement, hasBaseClass);
+	if( shape.GenerateShapePropertiesVM)
+		CreatePropertyAccessorsForShapeInternal(shape, hasBaseClass);
+	
+	string modifier = "virtual";
+	if( hasBaseClass )
+		modifier = "override";
+	
+#>
+
+#region Subscription and Unsubscription
+/// <summary>
+/// Called whenever properties change.
+/// </summary>
+/// <param name="args"></param>
+protected <#= modifier #> void OnElementPropertyChanged(DslModeling::ElementPropertyChangedEventArgs args)
+{
+<#+
+	HandlePropertyChangeEvents(shape, domainElement);
+#>
+}
+
+/// <summary>
+/// Subscribes to model element property change events.
+/// </summary>
+protected override void Subscribe()
+{
+	base.Subscribe();
+	
+<#+
+	SubscribeToPropertyChangeEvents(shape, domainElement);
+#>
+}
+
+/// <summary>
+/// Unsubscribes from model element property change events.
+/// </summary>
+protected override void Unsubscribe()
+{
+	base.Unsubscribe();
+	
+<#+
+	UnsubscribeToPropertyChangeEvents(shape, domainElement);
+#>
+}
+#endregion
+<#+
+}
+
+public string CreatePropertyHandlers(AttributedDomainElement domainElement, bool hasBaseClass)
+{
+	this.GenerationEnvironment = null;
+	this.CreatePropertyHandlersInternal(domainElement, hasBaseClass);
+	return this.GenerationEnvironment.ToString();
+}
+
+private void CreatePropertyHandlersInternal(AttributedDomainElement domainElement, bool hasBaseClass)
+{
+	CreatePropertyAccessorsInternal(domainElement, hasBaseClass);
+	
+	string modifier = "virtual";
+	if( hasBaseClass )
+		modifier = "override";
+	
+#>
+
+#region Subscription and Unsubscription
+/// <summary>
+/// Called whenever properties change.
+/// </summary>
+/// <param name="args"></param>
+protected <#= modifier #> void OnElementPropertyChanged(DslModeling::ElementPropertyChangedEventArgs args)
+{
+<#+
+	HandlePropertyChangeEvents(domainElement);
+#>
+}
+
+/// <summary>
+/// Subscribes to model element property change events.
+/// </summary>
+protected override void Subscribe()
+{
+	base.Subscribe();
+	
+<#+
+	SubscribeToPropertyChangeEvents(domainElement);
+#>
+}
+
+/// <summary>
+/// Unsubscribes from model element property change events.
+/// </summary>
+protected override void Unsubscribe()
+{
+	base.Unsubscribe();
+	
+<#+
+	UnsubscribeToPropertyChangeEvents(domainElement);
+#>
+}
+#endregion
+<#+
+}
+
+public string CreatePropertyAccessors(AttributedDomainElement domainElement, bool hasBaseClass)
+{
+	this.GenerationEnvironment = null;
+	this.CreatePropertyAccessorsInternal(domainElement, hasBaseClass);
+	return this.GenerationEnvironment.ToString();	
+}
+
+private void CreatePropertyAccessorsInternal(AttributedDomainElement domainElement, bool hasBaseClass)
+{
+#>
+#region Element Properties
+<#+
+	AttributedDomainElement temp = domainElement;
+	System.Collections.Generic.List<string> handledProperty = new System.Collections.Generic.List<string>();
+	while(temp != null )
+	{
+		foreach(DomainProperty property in temp.Properties)
+		{
+			if( handledProperty.Contains(property.Name) )
+				continue;
+			
+			handledProperty.Add(property.Name);
+			
+			AccessModifier setterAccessModifier = property.SetterAccessModifier;
+			AccessModifier getterAccessModifier = property.GetterAccessModifier;
+			AccessModifier overallAccessModifier;
+			
+			if(setterAccessModifier==AccessModifier.Public || getterAccessModifier==AccessModifier.Public)
+			{
+				overallAccessModifier = AccessModifier.Public;
+			}
+			else if(setterAccessModifier==AccessModifier.FamilyOrAssembly || getterAccessModifier==AccessModifier.FamilyOrAssembly)
+			{
+				overallAccessModifier = AccessModifier.FamilyOrAssembly;	
+			}
+			else if(setterAccessModifier==AccessModifier.Family || getterAccessModifier==AccessModifier.Family)
+			{
+				overallAccessModifier = AccessModifier.Family;
+			}
+			else if(setterAccessModifier==AccessModifier.Assembly || getterAccessModifier==AccessModifier.Assembly)
+			{
+				overallAccessModifier = AccessModifier.Assembly;
+			}
+			else 
+			{
+				overallAccessModifier = AccessModifier.Private;
+			}			
+			
+			string modifier = "";
+			if( hasBaseClass )
+				modifier = " new";
+			
+			//if( p.IsElementName )
+#>
+/// <summary>
+/// Gets or sets the value of <#= property.Name #> domain property.
+/// </summary>
+<#= CodeGenerationUtilities.GetAccessModifier(overallAccessModifier) #><#= modifier #> <#= CodeGenerationUtilities.GetDomainTypeFullName(property) #> Element_<#= property.Name #>
+{
+<#+
+	if(getterAccessModifier!=overallAccessModifier)
+	{
+#>
+	<#= CodeGenerationUtilities.GetAccessModifier(getterAccessModifier) #> get
+<#+
+	}
+	else
+	{
+#>
+	get
+<#+
+	}
+#>
+	{
+<#+
+	if( property.IsElementName )
+	{
+#>
+		return this.DomainElementName;
+<#+
+	}
+	else
+	{
+#>
+		return (this.Element as <#= domainElement.GetFullName(true) #>).<#= property.Name #>;
+<#+
+	}
+#>
+	}
+<#+
+		if(setterAccessModifier != overallAccessModifier)
+		{
+#>
+	<#= CodeGenerationUtilities.GetAccessModifier(setterAccessModifier) #> set
+<#+
+		}
+		else
+		{
+#>
+	set
+<#+
+		}
+#>
+	{
+<#+
+
+	if( property.IsElementName )
+	{
+#>
+		if( this.DomainElementName != value )
+			this.DomainElementName = value;
+<#+
+	}
+	else
+	{
+#>
+		if( (this.Element as <#= domainElement.GetFullName(true) #>).<#= property.Name #> != value )
+		{
+			using( DslModeling::Transaction transaction = this.Store.TransactionManager.BeginTransaction("Update value of <#= property.Name #>") )
+			{
+				(this.Element as <#= domainElement.GetFullName(true) #>).<#= property.Name #> = value;
+				
+				transaction.Commit();
+			}
+		}
+<#+
+	}
+#>
+	}
+}
+
+<#+
+		}
+		
+		temp = temp.BaseElement;
+	}
+#>
+#endregion
+<#+		
+}
+
+private void CreatePropertyAccessorsForShapeInternal(PresentationElementClass domainElement, bool hasBaseClass)
+{
+#>
+#region Shape Properties
+<#+
+	AttributedDomainElement temp = domainElement;
+	System.Collections.Generic.List<string> handledProperty = new System.Collections.Generic.List<string>();
+	while(temp != null )
+	{
+		foreach(DomainProperty property in temp.Properties)
+		{
+			if( handledProperty.Contains(property.Name) )
+				continue;
+			
+			handledProperty.Add(property.Name);
+			
+			AccessModifier setterAccessModifier = property.SetterAccessModifier;
+			AccessModifier getterAccessModifier = property.GetterAccessModifier;
+			AccessModifier overallAccessModifier;
+			
+			if(setterAccessModifier==AccessModifier.Public || getterAccessModifier==AccessModifier.Public)
+			{
+				overallAccessModifier = AccessModifier.Public;
+			}
+			else if(setterAccessModifier==AccessModifier.FamilyOrAssembly || getterAccessModifier==AccessModifier.FamilyOrAssembly)
+			{
+				overallAccessModifier = AccessModifier.FamilyOrAssembly;	
+			}
+			else if(setterAccessModifier==AccessModifier.Family || getterAccessModifier==AccessModifier.Family)
+			{
+				overallAccessModifier = AccessModifier.Family;
+			}
+			else if(setterAccessModifier==AccessModifier.Assembly || getterAccessModifier==AccessModifier.Assembly)
+			{
+				overallAccessModifier = AccessModifier.Assembly;
+			}
+			else 
+			{
+				overallAccessModifier = AccessModifier.Private;
+			}			
+			
+			string modifier = "";
+			//if( hasBaseClass )
+			//	modifier = " new";
+			
+			//if( p.IsElementName )
+#>
+/// <summary>
+/// Gets or sets the value of <#= property.Name #> domain property.
+/// </summary>
+<#= CodeGenerationUtilities.GetAccessModifier(overallAccessModifier) #><#= modifier #> <#= CodeGenerationUtilities.GetDomainTypeFullName(property) #> Shape_<#= property.Name #>
+{
+<#+
+	if(getterAccessModifier!=overallAccessModifier)
+	{
+#>
+	<#= CodeGenerationUtilities.GetAccessModifier(getterAccessModifier) #> get
+<#+
+	}
+	else
+	{
+#>
+	get
+<#+
+	}
+#>
+	{
+<#+
+	if( property.IsElementName )
+	{
+#>
+		return this.DomainElementName;
+<#+
+	}
+	else
+	{
+#>
+		return (this.ShapeElement as <#= domainElement.GetFullName(true) #>).<#= property.Name #>;
+<#+
+	}
+#>
+	}
+<#+
+		if(setterAccessModifier != overallAccessModifier)
+		{
+#>
+	<#= CodeGenerationUtilities.GetAccessModifier(setterAccessModifier) #> set
+<#+
+		}
+		else
+		{
+#>
+	set
+<#+
+		}
+#>
+	{
+<#+
+
+	if( property.IsElementName )
+	{
+#>
+		if( this.DomainElementName != value )
+			this.DomainElementName = value;
+<#+
+	}
+	else
+	{
+#>
+		if( (this.Element as <#= domainElement.GetFullName(true) #>).<#= property.Name #> != value )
+		{
+			using( DslModeling::Transaction transaction = this.Store.TransactionManager.BeginTransaction("Update value of <#= property.Name #>") )
+			{
+				(this.Element as <#= domainElement.GetFullName(true) #>).<#= property.Name #> = value;
+				
+				transaction.Commit();
+			}
+		}
+<#+
+	}
+#>
+	}
+}
+
+<#+
+		}
+		
+		temp = temp.BaseElement;
+	}
+#>
+#endregion
+<#+		
+}
+
+public void HandlePropertyChangeEvents(AttributedDomainElement domainElement)
+{
+#>
+	if( this.IsDisposed )
+		return;
+
+<#+
+	AttributedDomainElement temp = domainElement;
+	while(temp != null )
+	{
+		foreach(DomainProperty property in temp.Properties)
+		{
+#>
+	if( args.DomainProperty.Id == <#= temp.GetFullName(true) #>.<#= property.Name #>DomainPropertyId )
+		OnPropertyChanged("Element_<#= property.Name #>");
+<#+
+		}
+		
+		temp = temp.BaseElement;
+	}
+}
+
+public void HandlePropertyChangeEvents(PresentationElementClass shape, AttributedDomainElement domainElement)
+{
+#>
+	if( this.IsDisposed )
+		return;
+
+<#+
+	AttributedDomainElement temp = domainElement;
+	while(temp != null )
+	{
+		foreach(DomainProperty property in temp.Properties)
+		{
+#>
+	if( args.DomainProperty.Id == <#= temp.GetFullName(true) #>.<#= property.Name #>DomainPropertyId )
+		OnPropertyChanged("Element_<#= property.Name #>");
+<#+
+		}
+		
+		temp = temp.BaseElement;
+	}
+
+	temp = shape;
+	while(temp != null )
+	{
+		foreach(DomainProperty property in temp.Properties)
+		{
+#>
+	if( args.DomainProperty.Id == <#= temp.GetFullName(true) #>.<#= property.Name #>DomainPropertyId )
+		OnPropertyChanged("Shape_<#= property.Name #>");
+<#+
+		}
+		
+		temp = temp.BaseElement;
+	}
+}
+#>

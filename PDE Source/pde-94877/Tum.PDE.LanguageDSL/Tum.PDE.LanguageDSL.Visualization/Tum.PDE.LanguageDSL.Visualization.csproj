@@ -1,0 +1,622 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{AA20FE3F-D83D-49C9-8D23-23A6B9D14A62}</ProjectGuid>
+    <OutputType>library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Tum.PDE.LanguageDSL.Visualization</RootNamespace>
+    <AssemblyName>Tum.PDE.LanguageDSL.Visualization</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>Tum.PDE.LanguageDSL.Visualization.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug_VSPlugin|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug_VSPlugin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Debug\Tum.PDE.LanguageDSL.Visualization.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ICSharpCode.AvalonEdit">
+      <HintPath>..\..\Libraries\AvalonEdit\ICSharpCode.AvalonEdit.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Modeling.Sdk.10.0, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Attached\ButtonHelper.cs" />
+    <Compile Include="Attached\ListBoxHelper.cs" />
+    <Compile Include="Attached\ListViewSortHelper.cs" />
+    <Compile Include="Commands\CommandReference.cs" />
+    <Compile Include="Commands\DelegateCommand.cs" />
+    <Compile Include="Commands\WeakEventHandlerManager.cs" />
+    <Compile Include="Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Converters\IntToBoolOppositeConverter.cs" />
+    <Compile Include="Converters\IsFirstInItemsControlConverter.cs" />
+    <Compile Include="Converters\MenuIconUrlConverter.cs" />
+    <Compile Include="Converters\MultiplicityConverter.cs" />
+    <Compile Include="Converters\RelationshipMultiplicityConverter.cs" />
+    <Compile Include="Converters\ToCollectionConverter.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Selectors\ContextMenuStyleSelector.cs" />
+    <Compile Include="Selectors\DiagramClassTemplateSelector.cs" />
+    <Compile Include="Selectors\DiagramItemTemplateSelector.cs" />
+    <Compile Include="Selectors\SerializationModelTemplateSelector.cs" />
+    <Compile Include="Selectors\SerializationModelTemplateSelectorAdvanced.cs" />
+    <Compile Include="ViewModel\BaseAttributeElementViewModel.cs" />
+    <Compile Include="ViewModel\BaseDockingViewModel.cs" />
+    <Compile Include="ViewModel\BaseHostingViewModel.cs" />
+    <Compile Include="ViewModel\BaseModelElementViewModel.cs" />
+    <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\BaseWindowViewModel.cs" />
+    <Compile Include="ViewModel\Data\ModelData.cs" />
+    <Compile Include="ViewModel\Data\SelectedItemsCollection.cs" />
+    <Compile Include="ViewModel\Data\ViewModelStore.cs" />
+    <Compile Include="ViewModel\Dependencies\DependenciesSortOrder.cs" />
+    <Compile Include="ViewModel\Dependencies\DependenciesViewModel.cs" />
+    <Compile Include="ViewModel\Dependencies\DependencyItemViewModel.cs" />
+    <Compile Include="ViewModel\Diagram\DataTemplates.cs" />
+    <Compile Include="ViewModel\Diagram\DataTemplateViewModel.cs" />
+    <Compile Include="ViewModel\Diagram\DateTemplateSelectorViewModel.cs" />
+    <Compile Include="ViewModel\Diagram\DependencyDiagramViewModel.cs" />
+    <Compile Include="ViewModel\Diagram\DiagramClassTemplateIds.cs" />
+    <Compile Include="ViewModel\Diagram\DiagramClassTemplateSelectorViewModel.cs" />
+    <Compile Include="ViewModel\Diagram\DiagramClassTemplateViewModel.cs" />
+    <Compile Include="ViewModel\Diagram\DiagramClassViewModel.cs" />
+    <Compile Include="ViewModel\Diagram\ModalDiagramViewModel.cs" />
+    <Compile Include="ViewModel\Diagram\DiagramTreeNodeViewModel.cs" />
+    <Compile Include="ViewModel\Diagram\DiagramTreeOperations.cs" />
+    <Compile Include="ViewModel\Diagram\DiagramViewModel.cs" />
+    <Compile Include="ViewModel\Diagram\EmbeddingDiagramNodeViewModel.cs" />
+    <Compile Include="ViewModel\Diagram\ImportedDiagramClassViewModel.cs" />
+    <Compile Include="ViewModel\Diagram\IncludedDiagramClassViewModel.cs" />
+    <Compile Include="ViewModel\Diagram\RootDiagramNodeViewModel.cs" />
+    <Compile Include="ViewModel\Diagram\SpecificDependencyDiagramViewModel.cs" />
+    <Compile Include="ViewModel\Diagram\SpecificElementsDiagramViewModel.cs" />
+    <Compile Include="ViewModel\IBaseViewModel.cs" />
+    <Compile Include="ViewModel\IDockableViewModel.cs" />
+    <Compile Include="ViewModel\MainSurfaceViewModel.cs" />
+    <Compile Include="ViewModel\Menu\MenuItemViewModel.cs" />
+    <Compile Include="ViewModel\Menu\SeparatorMenuItemViewModel.cs" />
+    <Compile Include="ViewModel\Messaging\Events\ActiveViewChangedEvent.cs" />
+    <Compile Include="ViewModel\Messaging\Events\ActiveViewChangedEventArgs.cs" />
+    <Compile Include="ViewModel\Messaging\Events\ModelElementAddedEvent.cs" />
+    <Compile Include="ViewModel\Messaging\Events\ModelElementCustomEvent.cs" />
+    <Compile Include="ViewModel\Messaging\Events\ModelElementCustomEventNames.cs" />
+    <Compile Include="ViewModel\Messaging\Events\ModelElementDeletedEvent.cs" />
+    <Compile Include="ViewModel\Messaging\Events\ModelElementEvent.cs" />
+    <Compile Include="ViewModel\Messaging\Events\ModelElementLinkAddedEvent.cs" />
+    <Compile Include="ViewModel\Messaging\Events\ModelElementLinkDeletedEvent.cs" />
+    <Compile Include="ViewModel\Messaging\Events\ModelElementPropertyChangedEvent.cs" />
+    <Compile Include="ViewModel\Messaging\Events\ModelRolePlayerChangedEvent.cs" />
+    <Compile Include="ViewModel\Messaging\Events\ModelRolePlayerMovedEvent.cs" />
+    <Compile Include="ViewModel\Messaging\Events\ResetViewModelEvent.cs" />
+    <Compile Include="ViewModel\Messaging\Events\SelectionChangedEvent.cs" />
+    <Compile Include="ViewModel\Messaging\Events\SelectionChangedEventArgs.cs" />
+    <Compile Include="ViewModel\Messaging\Prism\BackgroundEventSubscription.cs" />
+    <Compile Include="ViewModel\Messaging\Prism\DataEventArgs.cs" />
+    <Compile Include="ViewModel\Messaging\Prism\DelegateReference.cs" />
+    <Compile Include="ViewModel\Messaging\Prism\EventAggregator.cs" />
+    <Compile Include="ViewModel\Messaging\Prism\EventBase.cs" />
+    <Compile Include="ViewModel\Messaging\Prism\EventSubscription.cs" />
+    <Compile Include="ViewModel\Messaging\Prism\IDelegateReference.cs" />
+    <Compile Include="ViewModel\Messaging\Prism\IEventAggregator.cs" />
+    <Compile Include="ViewModel\Messaging\Prism\IEventSubscription.cs" />
+    <Compile Include="ViewModel\Messaging\Prism\Presentation\CompositePresentationEvent.cs" />
+    <Compile Include="ViewModel\Messaging\Prism\Presentation\DefaultDispatcher.cs" />
+    <Compile Include="ViewModel\Messaging\Prism\Presentation\DispatcherEventSubscription.cs" />
+    <Compile Include="ViewModel\Messaging\Prism\Presentation\IDispatcherFacade.cs" />
+    <Compile Include="ViewModel\Messaging\Prism\Presentation\ThreadOption.cs" />
+    <Compile Include="ViewModel\Messaging\Prism\SubscriptionToken.cs" />
+    <Compile Include="ViewModel\Messaging\ViewModelEvent.cs" />
+    <Compile Include="ViewModel\Messaging\ViewModelEventArgs.cs" />
+    <Compile Include="ViewModel\Messaging\ViewModelEventManager.cs" />
+    <Compile Include="ViewModel\ModelContextViewModel.cs" />
+    <Compile Include="ViewModel\ModelTree\ModelTreeDataTemplates.cs" />
+    <Compile Include="ViewModel\ModelTree\DomainPropertyViewModel.cs" />
+    <Compile Include="ViewModel\ModelTree\DomainRelationshipViewModel.cs" />
+    <Compile Include="ViewModel\ModelTree\DomainRoleViewModel.cs" />
+    <Compile Include="ViewModel\ModelTree\EmbeddingNodeViewModel.cs" />
+    <Compile Include="ViewModel\ModelTree\EmbeddingRSNodeViewModel.cs" />
+    <Compile Include="ViewModel\ModelTree\InheritanceNodeViewModel.cs" />
+    <Compile Include="ViewModel\ModelTree\ModelContextItem.cs" />
+    <Compile Include="ViewModel\ModelTree\ModelContextTab.cs" />
+    <Compile Include="ViewModel\ModelTree\ModelTreeOperations.cs" />
+    <Compile Include="ViewModel\ModelTree\ModelTreeViewModel.cs" />
+    <Compile Include="ViewModel\ModelTree\ReferenceNodeViewModel.cs" />
+    <Compile Include="ViewModel\ModelTree\ReferenceRSNodeViewModel.cs" />
+    <Compile Include="ViewModel\ModelTree\RootNodeViewModel.cs" />
+    <Compile Include="ViewModel\ModelTree\ShapeClassNodeViewModel.cs" />
+    <Compile Include="ViewModel\ModelTree\ShapeRelationshipNodeViewModel.cs" />
+    <Compile Include="ViewModel\ModelTree\TreeNodeViewModel.cs" />
+    <Compile Include="ViewModel\Optimization\OptimizationMainViewModel.cs" />
+    <Compile Include="ViewModel\Optimization\OptimizationModelTreeViewModel.cs" />
+    <Compile Include="ViewModel\Optimization\OptimizationViewModel.cs" />
+    <Compile Include="ViewModel\Selection\CategorizedAdvSelectableViewModel.cs" />
+    <Compile Include="ViewModel\Selection\CategorizedSelectableViewModel.cs" />
+    <Compile Include="ViewModel\Selection\DiagramClassSelectableViewModel.cs" />
+    <Compile Include="ViewModel\Selection\CategorizedSelectionViewModel.cs" />
+    <Compile Include="ViewModel\Selection\MappingRelationshipShapeClassViewModel.cs" />
+    <Compile Include="ViewModel\Selection\RelationshipShapeClassSelectableViewModel.cs" />
+    <Compile Include="ViewModel\Selection\SelectableViewModel.cs" />
+    <Compile Include="ViewModel\Selection\SelectionHelper.cs" />
+    <Compile Include="ViewModel\Selection\SelectionViewModel.cs" />
+    <Compile Include="ViewModel\Selection\ShapeClassSelectableViewModel.cs" />
+    <Compile Include="ViewModel\Serialization\SerializationAttributeElementViewModel.cs" />
+    <Compile Include="ViewModel\Serialization\SerializationClassViewModel.cs" />
+    <Compile Include="ViewModel\Serialization\SerializationElementViewModel.cs" />
+    <Compile Include="ViewModel\Serialization\SerializationViewModel.cs" />
+    <Compile Include="ViewModel\Serialization\SerializedDomainClassViewModel.cs" />
+    <Compile Include="ViewModel\Serialization\SerializedDomainModelViewModel.cs" />
+    <Compile Include="ViewModel\Serialization\SerializedDomainPropertyViewModel.cs" />
+    <Compile Include="ViewModel\Serialization\SerializedDomainRoleViewModel.cs" />
+    <Compile Include="ViewModel\Serialization\SerializedEmbeddingRelationshipViewModel.cs" />
+    <Compile Include="ViewModel\Serialization\SerializedIdPropertyViewModel.cs" />
+    <Compile Include="ViewModel\Serialization\SerializedReferenceRelationshipViewModel.cs" />
+    <Compile Include="ViewModel\Serialization\SerializedRelationshipViewModel.cs" />
+    <Compile Include="ViewModel\Services\CloseRequestEventArgs.cs" />
+    <Compile Include="ViewModel\Services\IMessageBoxService.cs" />
+    <Compile Include="ViewModel\Services\IOpenFileService.cs" />
+    <Compile Include="ViewModel\Services\ISaveFileService.cs" />
+    <Compile Include="ViewModel\Services\IUIVisualizerService.cs" />
+    <Compile Include="ViewModel\Services\MessageBoxService.cs" />
+    <Compile Include="ViewModel\Services\OpenFileService.cs" />
+    <Compile Include="ViewModel\Services\SaveFileService.cs" />
+    <Compile Include="ViewModel\Services\ServiceProvider.cs" />
+    <Compile Include="ViewModel\Services\UICompletedEventArgs.cs" />
+    <Compile Include="ViewModel\Services\UIVisualizerService.cs" />
+    <Compile Include="ViewModel\UI\WaitCursor.cs" />
+    <Compile Include="View\Controls\DecoratorLeftPositionConverter.cs" />
+    <Compile Include="View\Controls\DecoratorWidthConverter.cs" />
+    <Compile Include="View\Controls\DesignerHelper.cs" />
+    <Compile Include="View\Controls\DesignerItem.cs" />
+    <Compile Include="View\Controls\DesignerCanvas.cs" />
+    <Compile Include="View\Controls\DiagramConnector.cs" />
+    <Compile Include="View\Controls\DiagramConnectorAdorner.cs" />
+    <Compile Include="View\Controls\DiagramHelper.cs" />
+    <Compile Include="View\Controls\EditableTextBlock.cs" />
+    <Compile Include="View\Controls\EditableTextBlockAdorner.cs" />
+    <Compile Include="View\Controls\ISelectable.cs" />
+    <Compile Include="View\Controls\SelectionService.cs" />
+    <Compile Include="View\Controls\SerializationExpander.cs" />
+    <Compile Include="View\Controls\SymbolCanvas.cs" />
+    <Compile Include="View\Forms\CategorizedSelectionPopup.xaml.cs">
+      <DependentUpon>CategorizedSelectionPopup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Forms\DataTemplatePresetsPopup.xaml.cs">
+      <DependentUpon>DataTemplatePresetsPopup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Forms\DeleteElementsPopup.xaml.cs">
+      <DependentUpon>DeleteElementsPopup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Forms\DependenciesViewControl.xaml.cs">
+      <DependentUpon>DependenciesViewControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Forms\DiagramClassTemplateSelector.xaml.cs">
+      <DependentUpon>DiagramClassTemplateSelector.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Forms\PDETextEditor.cs" />
+    <Compile Include="View\Forms\RelationshipTypeSelector.xaml.cs">
+      <DependentUpon>RelationshipTypeSelector.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Forms\TargetSelectorForm.xaml.cs">
+      <DependentUpon>TargetSelectorForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Optimization\ConversionModelControl.xaml.cs">
+      <DependentUpon>ConversionModelControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Optimization\OptimizationControl.xaml.cs">
+      <DependentUpon>OptimizationControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ViewContextControl.xaml.cs">
+      <DependentUpon>ViewContextControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ViewControl.xaml.cs">
+      <DependentUpon>ViewControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ViewExternLibraryControl.xaml.cs">
+      <DependentUpon>ViewExternLibraryControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ViewLibraryControl.xaml.cs">
+      <DependentUpon>ViewLibraryControl.xaml</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+    <None Include="Tum.PDE.LanguageDSL.Visualization.snk" />
+    <None Include="ViewModel\Diagram\Templates\DataTemplate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ViewModel\ModelTree\Templates\DataTemplate.xsd">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Resources\Styles\Button.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Styles\Compartment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Styles\DiagramAdditionalStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Styles\DiagramItemStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Styles\DiagramModelElements.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Styles\DiagramModelTreeStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Styles\DomainModelConnections.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Styles\DomainModelElements.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Styles\DomainModelTreeStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Styles\Expander.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Styles\MenuItemStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Styles\ModelDiagramStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Styles\SerializationExpander.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Styles\SerializationModelTreeViewStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Styles\SpecificElementsDiagramTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Styles\TabItemStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Forms\CategorizedSelectionPopup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Forms\DataTemplatePresetsPopup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Forms\DeleteElementsPopup.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Forms\DependenciesViewControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Forms\DiagramClassTemplateSelector.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Forms\RelationshipTypeSelector.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Forms\TargetSelectorForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Optimization\ConversionModelControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Optimization\OptimizationControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ViewContextControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ViewControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ViewExternLibraryControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ViewLibraryControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\database.icon.32.png" />
+    <Resource Include="Resources\Images\database.icon.48.png" />
+    <Resource Include="Resources\Images\database.icon.64.png" />
+    <Resource Include="Resources\Images\file.icon.32.png" />
+    <Resource Include="Resources\Images\file.icon.48.png" />
+    <Resource Include="Resources\Images\file.icon.64.png" />
+    <Resource Include="Resources\Images\odf.icon.32.png" />
+    <Resource Include="Resources\Images\odf.icon.48.png" />
+    <Resource Include="Resources\Images\odf.icon.64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Add-16.png" />
+    <Resource Include="Resources\Images\AddTableHS.png" />
+    <Resource Include="Resources\Images\AtImage.png" />
+    <Resource Include="Resources\Images\blog-post-icon.png" />
+    <Resource Include="Resources\Images\Class_16.png" />
+    <Resource Include="Resources\Images\Class_32-Add.png" />
+    <Resource Include="Resources\Images\Class_32.png" />
+    <Resource Include="Resources\Images\CollapseSubTree.bmp" />
+    <Resource Include="Resources\Images\Copy.png" />
+    <Resource Include="Resources\Images\Cut.png" />
+    <Resource Include="Resources\Images\Delete-16.png" />
+    <Resource Include="Resources\Images\Delete-32.png" />
+    <Resource Include="Resources\Images\DeleteHS.png" />
+    <Resource Include="Resources\Images\DomainModelElementImage.png" />
+    <Resource Include="Resources\Images\Down-16.png" />
+    <Resource Include="Resources\Images\Down-32.png" />
+    <Resource Include="Resources\Images\ElementImage.png" />
+    <Resource Include="Resources\Images\Emb_16.png" />
+    <Resource Include="Resources\Images\Emb_32-Add.png" />
+    <Resource Include="Resources\Images\Emb_32.png" />
+    <Resource Include="Resources\Images\ExpandSubTree.bmp" />
+    <Resource Include="Resources\Images\Paste.png" />
+    <Resource Include="Resources\Images\Properties-16x16.png" />
+    <Resource Include="Resources\Images\Properties-32x32-Add.png" />
+    <Resource Include="Resources\Images\Properties.png" />
+    <Resource Include="Resources\Images\Redo.png" />
+    <Resource Include="Resources\Images\Ref_16.png" />
+    <Resource Include="Resources\Images\Ref_24-Add.png" />
+    <Resource Include="Resources\Images\Ref_24.png" />
+    <Resource Include="Resources\Images\SimpleElementImage.png" />
+    <Resource Include="Resources\Images\Undo.png" />
+    <Resource Include="Resources\Images\Up-16.png" />
+    <Resource Include="Resources\Images\Up-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Diagram\link-16.png" />
+    <Resource Include="Resources\Images\Diagram\link-32.png" />
+    <Resource Include="Resources\Images\Diagram\shape-16.png" />
+    <Resource Include="Resources\Images\Diagram\shape-32.png" />
+    <Resource Include="Resources\Images\Diagram\shape_group - 32.png" />
+    <Resource Include="Resources\Images\Diagram\shape_group-16.png" />
+    <Resource Include="Resources\Images\Diagram\shape_map-16.png" />
+    <Resource Include="Resources\Images\Diagram\shape_map-32.png" />
+    <Resource Include="Resources\Images\Diagram\shape_mapmulti-16.png" />
+    <Resource Include="Resources\Images\Diagram\shape_mapmulti-32.png" />
+    <Resource Include="Resources\Images\Diagram\shape_rs-link-16.png" />
+    <Resource Include="Resources\Images\Diagram\shape_rs-link-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\odf.icon.22.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Emb_16 - Rotated.png" />
+    <Resource Include="Resources\Images\Ref_16 - Left.png" />
+    <Resource Include="Resources\Images\Ref_16 - Right.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\database.icon.16.png" />
+    <Resource Include="Resources\Images\database.icon.22.png" />
+    <Resource Include="Resources\Images\file.icon.16.png" />
+    <Resource Include="Resources\Images\file.icon.22.png" />
+    <Resource Include="Resources\Images\odf.icon.16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\gdocuments.icon.128.png" />
+    <Resource Include="Resources\Images\gdocuments.icon.16.png" />
+    <Resource Include="Resources\Images\gdocuments.icon.22.png" />
+    <Resource Include="Resources\Images\gdocuments.icon.32.png" />
+    <Resource Include="Resources\Images\gdocuments.icon.48.png" />
+    <Resource Include="Resources\Images\gdocuments.icon.64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\spreadsheet.icon.128.png" />
+    <Resource Include="Resources\Images\spreadsheet.icon.16.png" />
+    <Resource Include="Resources\Images\spreadsheet.icon.22.png" />
+    <Resource Include="Resources\Images\spreadsheet.icon.32.png" />
+    <Resource Include="Resources\Images\spreadsheet.icon.48.png" />
+    <Resource Include="Resources\Images\spreadsheet.icon.64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\config.icon.128.png" />
+    <Resource Include="Resources\Images\config.icon.16.png" />
+    <Resource Include="Resources\Images\config.icon.22.png" />
+    <Resource Include="Resources\Images\config.icon.32.png" />
+    <Resource Include="Resources\Images\config.icon.48.png" />
+    <Resource Include="Resources\Images\config.icon.64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\database.icon.128.png" />
+    <Resource Include="Resources\Images\file.icon.128.png" />
+    <Resource Include="Resources\Images\odf.icon.128.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Tum.PDE.LanguageDSL.Dsl\Tum.PDE.LanguageDSL.Dsl.csproj">
+      <Project>{CA8FB0DA-0E9C-48BE-AD37-0F9E0E38AE1F}</Project>
+      <Name>Tum.PDE.LanguageDSL.Dsl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Tum.PDE.LanguageDSL.Optimization\Tum.PDE.LanguageDSL.Optimization.csproj">
+      <Project>{0CE01CB8-CE54-4717-B3DF-6042EBC55EFA}</Project>
+      <Name>Tum.PDE.LanguageDSL.Optimization</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\info-16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Templates\GrDependencies.png" />
+    <Resource Include="Resources\Images\Templates\SpecificGrDependencies.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Templates\Class_32-Add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Templates\shape_handles-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Templates\gdocuments.icon.48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Templates\Picture-32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Templates\shape_handles-link-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Templates\shape_move_backwards-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Properties-32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ViewModel\Diagram\Templates\DependencyDiagramTemplate.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ViewModel\Diagram\Templates\SpecificDependencyDiagramTemplate.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ViewModel\Diagram\Templates\DiagramTemplate.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ViewModel\Diagram\Templates\ShapeClassTemplate.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ViewModel\Diagram\Templates\RelationshipShapeClassTemplate.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ViewModel\Diagram\Templates\MappingRelationshipShapeClassTemplate.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ViewModel\ModelTree\Templates\DomainClassValidationTemplate.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Templates\Validate-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ViewModel\ModelTree\Templates\DomainClassPropertyGridTemplate.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Templates\ModalView.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Templates\Preview-32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Templates\Presentation-32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Templates\SpecificElementsView.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Back-32.png" />
+    <Resource Include="Resources\Images\Forward-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Cancel-16.png" />
+    <Resource Include="Resources\Images\Check-16.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

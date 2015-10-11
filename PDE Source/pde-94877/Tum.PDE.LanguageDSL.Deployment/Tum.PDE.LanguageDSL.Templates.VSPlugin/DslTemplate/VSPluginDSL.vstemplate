@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VSTemplate Version="3.0.0" Type="Project" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005">
+  <TemplateData>
+    <Name>A new PDE-based DSL (Visual Studio Plugin)</Name>
+    <Description>Dsl as a plugin for Visual Studio. This template requires the Visual Studio SDK as well as the Visualization and Modeling SDK.</Description>
+    <Icon>VSPluginDSL.ico</Icon>
+    <ProjectType>CSharp</ProjectType>
+    <RequiredFrameworkVersion>4.0</RequiredFrameworkVersion>
+    <SortOrder>1000</SortOrder>
+    <TemplateID>951d6dab-8bed-4f1e-9725-23346338c2e8</TemplateID>
+  </TemplateData>
+  <TemplateContent>
+    <Project TargetFileName="ProjectTemplate.csproj" File="ProjectTemplate.csproj" ReplaceParameters="true">
+        <ProjectItem ReplaceParameters="true" TargetFileName="Commands.vsct">Commands.vsct</ProjectItem>
+        <Folder Name="CustomCode" TargetFolderName="CustomCode">
+          <ProjectItem ReplaceParameters="true" TargetFileName="SerializationHelper.cs">SerializationHelper.cs</ProjectItem>
+        </Folder>
+        <ProjectItem ReplaceParameters="false" TargetFileName="DomainMetaModel.diagram">DomainMetaModel.diagram</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="DomainMetaModel.lngdsl">DomainMetaModel.lngdsl</ProjectItem>
+      <Folder Name="GeneratedCode" TargetFolderName="GeneratedCode">
+        <ProjectItem ReplaceParameters="false" TargetFileName="Resources.tt">Resources.tt</ProjectItem>
+        <ProjectItem ReplaceParameters="false" TargetFileName="Resources.cs">Resources.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="false" TargetFileName="DomainModelResx.resx">DomainModelResx.resx</ProjectItem>
+        <Folder Name="Model" TargetFolderName="Model">
+          <ProjectItem ReplaceParameters="false" TargetFileName="Model.tt">Model.tt</ProjectItem>
+          <ProjectItem ReplaceParameters="false" TargetFileName="Model.cs">Model.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="false" TargetFileName="Diagrams.cs">Diagrams.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="false" TargetFileName="DiagramsLinkRules.cs">DiagramsLinkRules.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="false" TargetFileName="DiagramsRules.cs">DiagramsRules.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="false" TargetFileName="DiagramsSerializer.cs">DiagramsSerializer.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="false" TargetFileName="DiagramsSerializerHelper.cs">DiagramsSerializerHelper.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="false" TargetFileName="DocumentData.cs">DocumentData.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="false" TargetFileName="DomainClasses.cs">DomainClasses.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="false" TargetFileName="DomainModel.cs">DomainModel.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="false" TargetFileName="DomainModelDependencies.cs">DomainModelDependencies.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="false" TargetFileName="DomainModelIdProvider.cs">DomainModelIdProvider.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="false" TargetFileName="DomainModelServices.cs">DomainModelServices.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="false" TargetFileName="DomainRelationships.cs">DomainRelationships.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="false" TargetFileName="DomainValidation.cs">DomainValidation.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="false" TargetFileName="ModelContexts.cs">ModelContexts.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="false" TargetFileName="SearchProcessor.cs">SearchProcessor.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="false" TargetFileName="SerializationHelper.cs">SerializationHelper.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="false" TargetFileName="Serializer.cs">Serializer.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="false" TargetFileName="Shapes.cs">Shapes.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="false" TargetFileName="DirectiveProcessor.cs">DirectiveProcessor.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="false" TargetFileName="HelpKeywordHelper.cs">HelpKeywordHelper.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="false" TargetFileName="SerializationHelperShell.cs">SerializationHelperShell.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="false" TargetFileName="ToolboxHelper.cs">ToolboxHelper.cs</ProjectItem>
+        </Folder>
+        <Folder Name="Shell" TargetFolderName="Shell">
+          <ProjectItem ReplaceParameters="false" TargetFileName="Shell.tt">Shell.tt</ProjectItem>
+          <ProjectItem ReplaceParameters="false" TargetFileName="Shell.cs">Shell.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="false" TargetFileName="Constants.cs">Constants.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="false" TargetFileName="DocData.cs">DocData.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="false" TargetFileName="DocView.cs">DocView.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="false" TargetFileName="EditorFactory.cs">EditorFactory.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="false" TargetFileName="Package.cs">Package.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="false" TargetFileName="PackageController.cs">PackageController.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="false" TargetFileName="ToolWindow.cs">ToolWindow.cs</ProjectItem>
+        </Folder>
+        <Folder Name="ViewModel" TargetFolderName="ViewModel">
+          <ProjectItem ReplaceParameters="false" TargetFileName="ViewModel.tt">ViewModel.tt</ProjectItem>
+          <ProjectItem ReplaceParameters="false" TargetFileName="ViewModel.cs">ViewModel.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="false" TargetFileName="DiagramItemViewModel.cs">DiagramItemViewModel.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="false" TargetFileName="DiagramLinkViewModel.cs">DiagramLinkViewModel.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="false" TargetFileName="DiagramViewModel.cs">DiagramViewModel.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="false" TargetFileName="PropertyGridEditorViewModel.cs">PropertyGridEditorViewModel.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="false" TargetFileName="PropertyGridViewModel.cs">PropertyGridViewModel.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="false" TargetFileName="Services.cs">Services.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="false" TargetFileName="SpecificViewModel.cs">SpecificViewModel.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="false" TargetFileName="TreeViewModel.cs">TreeViewModel.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="false" TargetFileName="ViewModels.cs">ViewModels.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="false" TargetFileName="ViewModelData.cs">ViewModelData.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="false" TargetFileName="ViewModelOptions.cs">ViewModelOptions.cs</ProjectItem>
+          <Folder Name="WPFApplication" TargetFolderName="WPFApplication">
+            <ProjectItem ReplaceParameters="false" TargetFileName="App.tt">App.tt</ProjectItem>
+            <ProjectItem ReplaceParameters="false" TargetFileName="App.cs">App.cs</ProjectItem>
+            <ProjectItem ReplaceParameters="false" TargetFileName="LayoutManagerDV.txt">LayoutManagerDV.txt</ProjectItem>
+            <ProjectItem ReplaceParameters="false" TargetFileName="LayoutManagerLayout.xml">LayoutManagerLayout.xml</ProjectItem>
+            <ProjectItem ReplaceParameters="false" TargetFileName="Ui.cs">Ui.cs</ProjectItem>
+            <ProjectItem ReplaceParameters="false" TargetFileName="UIResourceDictionary.xaml">UIResourceDictionary.xaml</ProjectItem>
+          </Folder>
+        </Folder>
+      </Folder>
+        <ProjectItem ReplaceParameters="true" TargetFileName="MainViewControl.xaml">MainViewControl.xaml</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="MainViewControl.xaml.cs">MainViewControl.xaml.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="Properties\AssemblyInfo.cs">AssemblyInfo.cs</ProjectItem>
+        <Folder Name="Resources" TargetFolderName="Resources">
+          <ProjectItem ReplaceParameters="false" TargetFileName="DiagramSurface-16.png">DiagramSurface-16.png</ProjectItem>
+          <ProjectItem ReplaceParameters="false" TargetFileName="ErrorList-16.png">ErrorList-16.png</ProjectItem>
+          <ProjectItem ReplaceParameters="false" TargetFileName="File.ico">File.ico</ProjectItem>
+          <ProjectItem ReplaceParameters="false" TargetFileName="ModelTree-16.png">ModelTree-16.png</ProjectItem>
+          <Folder Name="ProjectItemTemplates" TargetFolderName="ProjectItemTemplates">
+            <ProjectItem ReplaceParameters="false" TargetFileName="CSharp.tt">CSharp.tt</ProjectItem>
+            <ProjectItem ReplaceParameters="false" TargetFileName="CSharp.vstemplate">CSharp.vstemplate</ProjectItem>
+            <ProjectItem ReplaceParameters="false" TargetFileName="$LanguageExtension$.$LanguageExtension$">Sample.mydsl</ProjectItem>
+          </Folder>
+          <ProjectItem ReplaceParameters="false" TargetFileName="PropertyGrid-16.png">PropertyGrid-16.png</ProjectItem>
+          <ProjectItem ReplaceParameters="false" TargetFileName="Refresh-16.png">Refresh-16.png</ProjectItem>
+          <ProjectItem ReplaceParameters="false" TargetFileName="Search-16.png">Search-16.png</ProjectItem>
+          <ProjectItem ReplaceParameters="false" TargetFileName="SearchAdvanced-16.png">SearchAdvanced-16.png</ProjectItem>
+        </Folder>
+        <ProjectItem ReplaceParameters="true" TargetFileName="Resources.xaml">Resources.xaml</ProjectItem>
+        <ProjectItem ReplaceParameters="false" TargetFileName="source.extension.tt">source.extension.tt</ProjectItem>
+        <ProjectItem ReplaceParameters="false" TargetFileName="source.extension.vsixmanifest">source.extension.vsixmanifest</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="VSPackage.resx">VSPackage.resx</ProjectItem>
+    </Project>
+  </TemplateContent>
+  <WizardExtension>
+    <Assembly>Tum.PDE.LanguageDSL.Setup.VSPluginDesignerWizard, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5bfc276fccda04f8</Assembly>
+    <FullClassName>Tum.PDE.LanguageDSL.Setup.VSPluginDesignerWizard.LanguageDSLSubWizard</FullClassName>
+  </WizardExtension>
+</VSTemplate>

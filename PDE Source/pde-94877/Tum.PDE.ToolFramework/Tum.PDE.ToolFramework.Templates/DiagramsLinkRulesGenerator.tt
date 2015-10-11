@@ -1,0 +1,370 @@
+﻿<#@ template language="C#" inherits="BaseTemplate"#> 
+<#@ import namespace="Tum.PDE.LanguageDSL"#>
+<#@ import namespace="Microsoft.VisualStudio.Modeling" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Collections.ObjectModel" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+using DslModeling = global::Microsoft.VisualStudio.Modeling;
+using DslEditorDiagrams = global::Tum.PDE.ToolFramework.Modeling.Diagrams;
+
+<#
+	List<AttributedDomainElement> ruleOnElementsAdd = new List<AttributedDomainElement>();
+	List<AttributedDomainElement> ruleOnLinksChange = new List<AttributedDomainElement>();
+	List<AttributedDomainElement> ruleOnElementsDelete = new List<AttributedDomainElement>();
+	
+	List<AttributedDomainElement> ruleMappingOnElementsAdd = new List<AttributedDomainElement>();
+	List<AttributedDomainElement> ruleMappingOnLinksChange = new List<AttributedDomainElement>();
+	List<AttributedDomainElement> ruleMappingOnElementsDelete = new List<AttributedDomainElement>();
+	foreach(DiagramClass diagram in this.MetaModel.AllDiagramClasses)
+	{
+		foreach (PresentationElementClass element in diagram.PresentationElements)
+		{
+			if (element is RelationshipShapeClass)
+    	    {
+				RelationshipShapeClass shape = element as RelationshipShapeClass;
+				DomainRelationship con = shape.ReferenceRelationship;
+			
+				if( con == null )
+					continue;
+				
+				ruleOnElementsAdd.Add(con);
+				ruleOnLinksChange.Add(con);
+				ruleOnElementsDelete.Add(con);
+			}
+			else if( element is MappingRelationshipShapeClass)
+			{
+				MappingRelationshipShapeClass shape = element as MappingRelationshipShapeClass;
+				DomainClass domainClass = shape.DomainClass;
+				
+				ReferenceRelationship source = shape.Source;
+				ReferenceRelationship target = shape.Target;
+				
+				if( domainClass != null && source != null && target != null )
+				{
+					if( source.Target.RolePlayer is DomainClass && 
+						target.Target.RolePlayer is DomainClass )
+					{	
+						ruleMappingOnElementsAdd.Add(domainClass);
+						ruleMappingOnElementsAdd.Add(source);
+						ruleMappingOnElementsAdd.Add(target);
+						
+						ruleMappingOnLinksChange.Add(source);
+						ruleMappingOnLinksChange.Add(target);
+						
+						ruleMappingOnElementsDelete.Add(domainClass);
+						ruleMappingOnElementsDelete.Add(source);
+						ruleMappingOnElementsDelete.Add(target);
+					}
+				}
+			}
+		}
+	}
+	
+	MetaModel dm = this.MetaModel;
+#>
+namespace <#= dm.Namespace #>
+{
+<#
+	if( CodeGenerationUtilities.NeedsLinkRules(dm) )
+	{
+#>
+	/// <summary>
+    /// This AddRule is for monitoring link creation that we need to reflect
+	/// onto the diagram surface by creating its specified rs shape class.
+    /// </summary>
+<#
+	foreach(AttributedDomainElement domainElement in ruleOnElementsAdd )
+	{
+#>
+	[DslModeling::RuleOn(typeof(<#= domainElement.GetFullName(true) #>), FireTime = DslModeling::TimeToFire.LocalCommit)]
+<#
+	}
+#>
+    public partial class <#= dm.Name #>LinkForShapesAdded : DslEditorDiagrams::ModelLinkAddRuleForRSShapes
+    {
+		/// <summary>
+        /// Constructor.
+        /// </summary>
+		public <#= dm.Name #>LinkForShapesAdded() 
+			: base(<#= dm.Name #>ElementForShapesFactoryHelper.Instance)
+		{
+		}
+		
+		/// <summary>
+        /// Helper class for model element creation.
+        /// </summary>
+        public partial class <#= dm.Name #>ElementForShapesFactoryHelper : DslEditorDiagrams::ModelLinkAddRuleForRSShapes.RSShapesFactoryHelper
+        {
+			private static <#= dm.Name #>ElementForShapesFactoryHelper instanceHolder = null;
+
+    	    /// <summary>
+    	    /// Gets a singleton instance.
+    	    /// </summary>
+    	    public static <#= dm.Name #>ElementForShapesFactoryHelper Instance
+    	    {
+    	        get
+    	        {
+    	            if (instanceHolder == null)
+    	                instanceHolder = new <#= dm.Name #>ElementForShapesFactoryHelper();
+
+    	            return instanceHolder;
+    	        }
+    	    }			
+		}
+	}
+
+    /// <summary>
+	/// This ChangeRule is for monitoring link role player changes that we need to reflect
+	/// onto the diagram surface.
+    /// </summary>	
+<#
+	foreach(AttributedDomainElement domainElement in ruleOnLinksChange )
+	{
+#>
+	[DslModeling::RuleOn(typeof(<#= domainElement.GetFullName(true) #>), FireTime = DslModeling::TimeToFire.LocalCommit)]
+<#
+	}
+#>
+    public partial class <#= dm.Name #>LinkForShapesChanged : DslEditorDiagrams::ModelLinkRolePlayerChangeRuleForRSShapes
+    {
+		/// <summary>
+        /// Constructor.
+        /// </summary>
+		public <#= dm.Name #>LinkForShapesChanged() 
+			: base(<#= dm.Name #>RolePlayerChangeHelper.Instance)
+		{
+		}	
+		
+		/// <summary>
+        /// Helper class for model element creation.
+        /// </summary>
+        public partial class <#= dm.Name #>RolePlayerChangeHelper : DslEditorDiagrams::ModelLinkRolePlayerChangeRuleForRSShapes.RolePlayerChangeHelper
+        {
+			private static <#= dm.Name #>RolePlayerChangeHelper instanceHolder = null;
+
+    	    /// <summary>
+    	    /// Gets a singleton instance.
+    	    /// </summary>
+    	    public static <#= dm.Name #>RolePlayerChangeHelper Instance
+    	    {
+    	        get
+    	        {
+    	            if (instanceHolder == null)
+    	                instanceHolder = new <#= dm.Name #>RolePlayerChangeHelper();
+
+    	            return instanceHolder;
+    	        }
+    	    }		
+		
+			/// <summary>
+        	/// Constructor.
+        	/// </summary>
+			public <#= dm.Name #>RolePlayerChangeHelper() 
+				: base(<#= dm.Name #>LinkForShapesAdded.<#= dm.Name #>ElementForShapesFactoryHelper.Instance,
+					   <#= dm.Name #>LinkForShapesDeleted.<#= dm.Name #>ShapeDeletionHelper.Instance)		
+			{
+			}
+		}		
+	}	
+
+	/// <summary>
+    /// This DeleteRule is for monitoring link deletion that we need to reflect
+	/// onto the diagram surface by deleting its specified rs shape clas
+    /// </summary>
+<#
+	foreach(AttributedDomainElement domainElement in ruleOnElementsDelete )
+	{
+#>
+	[DslModeling::RuleOn(typeof(<#= domainElement.GetFullName(true) #>), FireTime = DslModeling::TimeToFire.LocalCommit)]
+<#
+	}
+#>
+    public partial class <#= dm.Name #>LinkForShapesDeleted : DslEditorDiagrams::ModelElementDeletingRuleForRSShapes
+    {
+		/// <summary>
+        /// Constructor.
+        /// </summary>
+		public <#= dm.Name #>LinkForShapesDeleted() 
+			: base(<#= dm.Name #>ShapeDeletionHelper.Instance)
+		{
+		}
+		
+		/// <summary>
+        /// Helper class for model element creation.
+        /// </summary>
+        public partial class <#= dm.Name #>ShapeDeletionHelper : DslEditorDiagrams::ModelElementDeletingRuleForRSShapes.ShapeDeletionHelper
+        {
+			private static <#= dm.Name #>ShapeDeletionHelper instanceHolder = null;
+
+    	    /// <summary>
+    	    /// Gets a singleton instance.
+    	    /// </summary>
+    	    public static <#= dm.Name #>ShapeDeletionHelper Instance
+    	    {
+    	        get
+    	        {
+    	            if (instanceHolder == null)
+    	                instanceHolder = new <#= dm.Name #>ShapeDeletionHelper();
+
+    	            return instanceHolder;
+    	        }
+    	    }
+		}
+	}
+	
+<#
+	}
+	if( CodeGenerationUtilities.NeedsMappingLinkRules(dm) )
+	{
+#>	
+	/// <summary>
+    /// This AddRule is for monitoring link creation that we need to reflect
+	/// onto the diagram surface by creating its specified rs shape class.
+    /// </summary>
+<#
+	foreach(AttributedDomainElement domainElement in ruleMappingOnElementsAdd )
+	{
+#>
+	[DslModeling::RuleOn(typeof(<#= domainElement.GetFullName(true) #>), FireTime = DslModeling::TimeToFire.LocalCommit)]
+<#
+	}
+#>
+    public partial class <#= dm.Name #>MappingLinkForShapesAdded : DslEditorDiagrams::ModelLinkAddRuleForMappingRSShapes
+    {
+		/// <summary>
+        /// Constructor.
+        /// </summary>
+		public <#= dm.Name #>MappingLinkForShapesAdded() 
+			: base(<#= dm.Name #>ElementForShapesFactoryHelper.Instance)
+		{
+		}
+		
+		/// <summary>
+        /// Helper class for model element creation.
+        /// </summary>
+        public partial class <#= dm.Name #>ElementForShapesFactoryHelper : DslEditorDiagrams::ModelLinkAddRuleForMappingRSShapes.RSShapesFactoryHelper
+        {
+			private static <#= dm.Name #>ElementForShapesFactoryHelper instanceHolder = null;
+
+    	    /// <summary>
+    	    /// Gets a singleton instance.
+    	    /// </summary>
+    	    public static <#= dm.Name #>ElementForShapesFactoryHelper Instance
+    	    {
+    	        get
+    	        {
+    	            if (instanceHolder == null)
+    	                instanceHolder = new <#= dm.Name #>ElementForShapesFactoryHelper();
+
+    	            return instanceHolder;
+    	        }
+    	    }
+		}
+	}
+
+    /// <summary>
+	/// This ChangeRule is for monitoring link role player changes that we need to reflect
+	/// onto the diagram surface.
+    /// </summary>	
+<#
+	foreach(AttributedDomainElement domainElement in ruleMappingOnLinksChange )
+	{
+#>
+	[DslModeling::RuleOn(typeof(<#= domainElement.GetFullName(true) #>), FireTime = DslModeling::TimeToFire.LocalCommit)]
+<#
+	}
+#>
+    public partial class <#= dm.Name #>MappingLinkForShapesChanged : DslEditorDiagrams::ModelLinkRolePlayerChangeRuleForMappingRSShapes
+    {
+		/// <summary>
+        /// Constructor.
+        /// </summary>
+		public <#= dm.Name #>MappingLinkForShapesChanged() 
+			: base(<#= dm.Name #>RolePlayerChangeHelper.Instance)
+		{
+		}	
+		
+		/// <summary>
+        /// Helper class for model element creation.
+        /// </summary>
+        public partial class <#= dm.Name #>RolePlayerChangeHelper : DslEditorDiagrams::ModelLinkRolePlayerChangeRuleForMappingRSShapes.RolePlayerChangeHelper
+        {
+			private static <#= dm.Name #>RolePlayerChangeHelper instanceHolder = null;
+
+    	    /// <summary>
+    	    /// Gets a singleton instance.
+    	    /// </summary>
+    	    public static <#= dm.Name #>RolePlayerChangeHelper Instance
+    	    {
+    	        get
+    	        {
+    	            if (instanceHolder == null)
+    	                instanceHolder = new <#= dm.Name #>RolePlayerChangeHelper();
+
+    	            return instanceHolder;
+    	        }
+    	    }
+		
+			/// <summary>
+        	/// Constructor.
+        	/// </summary>
+			public <#= dm.Name #>RolePlayerChangeHelper() 
+				: base(<#= dm.Name #>MappingLinkForShapesAdded.<#= dm.Name #>ElementForShapesFactoryHelper.Instance,
+					   <#= dm.Name #>MappingLinkForShapesDeleted.<#= dm.Name #>ShapeDeletionHelper.Instance)		
+			{
+			}
+		}		
+	}	
+
+	/// <summary>
+    /// This DeleteRule is for monitoring link deletion that we need to reflect
+	/// onto the diagram surface by deleting its specified rs shape clas
+    /// </summary>
+<#
+	foreach(AttributedDomainElement domainElement in ruleMappingOnElementsDelete )
+	{
+#>
+	[DslModeling::RuleOn(typeof(<#= domainElement.GetFullName(true) #>), FireTime = DslModeling::TimeToFire.LocalCommit)]
+<#
+	}
+#>
+    public partial class <#= dm.Name #>MappingLinkForShapesDeleted : DslEditorDiagrams::ModelElementDeletingRuleForMappingRSShapes
+    {
+		/// <summary>
+        /// Constructor.
+        /// </summary>
+		public <#= dm.Name #>MappingLinkForShapesDeleted() 
+			: base(<#= dm.Name #>ShapeDeletionHelper.Instance)
+		{
+		}
+		
+		/// <summary>
+        /// Helper class for model element creation.
+        /// </summary>
+        public partial class <#= dm.Name #>ShapeDeletionHelper : DslEditorDiagrams::ModelElementDeletingRuleForMappingRSShapes.ShapeDeletionHelper
+        {
+			private static <#= dm.Name #>ShapeDeletionHelper instanceHolder = null;
+
+    	    /// <summary>
+    	    /// Gets a singleton instance.
+    	    /// </summary>
+    	    public static <#= dm.Name #>ShapeDeletionHelper Instance
+    	    {
+    	        get
+    	        {
+    	            if (instanceHolder == null)
+    	                instanceHolder = new <#= dm.Name #>ShapeDeletionHelper();
+
+    	            return instanceHolder;
+    	        }
+    	    }
+		}
+	}
+<#
+	}
+	
+#>
+}
+

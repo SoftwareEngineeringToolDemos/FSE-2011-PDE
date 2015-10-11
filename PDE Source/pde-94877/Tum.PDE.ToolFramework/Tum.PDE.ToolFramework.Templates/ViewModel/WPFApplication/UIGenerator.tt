@@ -1,0 +1,493 @@
+﻿<#@ template language="C#" inherits="BaseTemplate"#> 
+<#@ import namespace="Tum.PDE.LanguageDSL"#>
+<#@ import namespace="Microsoft.VisualStudio.Modeling" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Collections.ObjectModel" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<# 
+	GenerateUI(this.MetaModel);
+#>
+<#+ 
+public void GenerateUI(MetaModel dm)
+{
+#>
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+
+using <#= dm.Namespace #>.ViewModel;
+
+using System.ComponentModel.Composition;
+using System.ComponentModel.Composition.Hosting;
+
+using DslEditorModeling = global::Tum.PDE.ToolFramework.Modeling;
+using DslEditorContracts = Tum.PDE.ToolFramework.Modeling.Visualization.Contracts;
+using DslEditorControls =  Tum.PDE.ToolFramework.Modeling.Visualization.Controls;
+using DslEditorPopups   = Tum.PDE.ToolFramework.Modeling.Visualization.Controls.Popups;
+using DslEditorServices = Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel.Services;
+using DslEditorCommands = Tum.PDE.ToolFramework.Modeling.Visualization.Commands;
+using DslEditorDiagramSurface = Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel.DiagramSurface;
+
+using DslEditorContractsBase = Tum.PDE.ToolFramework.Modeling.Visualization.Base.Contracts;
+
+<#+
+	if( dm.LanguageType == LanguageType.WPFEditor || dm.LanguageType == LanguageType.VMXEditor)
+	{
+#>
+
+namespace <#= dm.Namespace #>.View
+{
+	/// <summary>
+    /// This class is used as a base class for the main window of the editor.
+    /// </summary>
+	public abstract class DslEditorMainWindow : Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.PDEMainWindow
+	{
+	    // Loading Process:
+        // 1. DoLoadInBackground = true
+        //    a. Create main welcome vm
+        //    b. DoShowWelcomeScreen = true --> GetWelcomeWindow() as main content
+        //    c. once ribbon has been created --> start loading data in background
+        // 2. DoLoadInBackground = false
+        //    a. Invoke loading on background ui thread
+        //    b. load data, main vm --> load model (will invoke loading ui)
+
+        // on first activated --> create ribbon control
+        // once ribbon control is loaded --> check if main ui has loaded or subscribe 
+        // to requests to open a model from WelcomeVM
+        // --> if either of this is the case --> load main ui
+	
+		#region Field and Properties
+        /// <summary>
+        /// Imported plugins which suffice to the IPlugin interface.
+        /// </summary>
+		[System.ComponentModel.Composition.ImportMany(typeof(DslEditorContracts::IPlugin))]
+        public System.Collections.Generic.List<DslEditorContracts::IPlugin> SimplePlugins { get; set; }
+
+		/// <summary>
+        /// Imported plugins which suffice to the IPlugin interface.
+        /// </summary>
+		[System.ComponentModel.Composition.ImportMany(typeof(DslEditorContracts::IModelPlugin))]
+        public System.Collections.Generic.List<DslEditorContracts::IModelPlugin> SimpleModelPlugins { get; set; }
+	
+		/// <summary>
+        /// Imported plugins which suffice to the IViewModelPlugin interface.
+        /// </summary>
+        [System.ComponentModel.Composition.ImportMany(typeof(DslEditorContracts::IViewModelPlugin))]
+        public System.Collections.Generic.List<DslEditorContracts::IViewModelPlugin> ViewModelPlugins { get; set; }
+		
+        /// <summary>
+        /// Plugins directory.
+        /// </summary>
+        public const string PluginsDirectory = "plugins";
+        
+		
+		/// <summary>
+        /// Gets the name of the current editor.
+        /// </summary>
+        public override string AppName
+        {
+            get
+            {
+                return "<#= dm.ApplicationName #>";
+            }
+        }
+		
+		/// <summary>
+        /// Gets the name of the company providing this editor.
+        /// </summary>
+        public override string Company
+		{
+	        get
+    	    {
+        	    return "<#= dm.CompanyName #>";
+        	}	
+		}
+		
+		/// <summary>
+        /// Gets the version of the editor.
+        /// </summary>
+        public override string Version
+        {
+            get
+            {
+<#+
+			string version = "";
+			if( !String.IsNullOrEmpty(dm.MajorVersion) && !String.IsNullOrWhiteSpace(dm.MajorVersion))
+			{
+				version = dm.MajorVersion;
+				if( !String.IsNullOrEmpty(dm.MinorVersion) && !String.IsNullOrWhiteSpace(dm.MinorVersion))
+				{
+					version += "." + dm.MinorVersion;
+					if( !String.IsNullOrEmpty(dm.Build) && !String.IsNullOrWhiteSpace(dm.Build))
+					{
+						version += "." + dm.Build;
+						if( !String.IsNullOrEmpty(dm.Revision) && !String.IsNullOrWhiteSpace(dm.Revision))
+						{
+							version += "." + dm.Revision;
+						}
+					}					
+				}				
+			}
+#>			
+                return "<#= version #>";
+            }
+        }
+		
+		
+        /// <summary>
+        /// VModellXT Main view model.
+        /// </summary>
+        public new <#= dm.Name #>MainViewModel MainViewModel
+        {
+            get
+            {
+                return (<#= dm.Name #>MainViewModel)base.MainViewModel;
+            }
+            set
+            {
+                base.MainViewModel = value;
+            }
+        }
+
+        /// <summary>
+        /// Welcome view model.
+        /// </summary>
+        public new <#= dm.Name #>WelcomeViewModel WelcomeViewModel
+        {
+            get
+			{
+				return (<#= dm.Name #>WelcomeViewModel)base.WelcomeViewModel;
+			}
+            set
+			{
+				base.WelcomeViewModel = value;
+			}
+        }
+		
+        /// <summary>
+        /// Doc data.
+        /// </summary>
+        public new <#= dm.Name #>DocumentData DocData
+        {
+            get
+			{
+				return (<#= dm.Name #>DocumentData)base.DocData;
+			}
+            set
+			{
+				base.DocData = value;
+			}
+        }
+		#endregion
+		
+		/// <summary>
+        /// Constructor.
+        /// </summary>
+		public DslEditorMainWindow()
+		{        
+        }
+		
+		/// <summary>
+        /// Creates the welcome vm.
+        /// </summary>
+        /// <returns></returns>
+        protected override DslEditorContractsBase::IMainWelcomeViewModel CreateWelcomeViewModel()
+		{
+			return new <#= dm.Name #>WelcomeViewModel(AppDataDirectory + System.IO.Path.DirectorySeparatorChar + <#= dm.Name #>ViewModelOptions.OptionsFileName);
+		}
+		
+		/// <summary>
+        /// Initialize services
+        /// </summary>
+        protected override void InitializeServices()
+		{
+            // Initialize base services on the main thread.
+            Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel.BaseViewModel.SetupServices(); 
+		}
+
+        /// <summary>
+        /// Register windows..
+        /// </summary>
+        protected override void RegisterWindows()
+        {
+			// Register known windows
+			DslEditorServices::IUIVisualizerService popupVisualizer = MainViewModel.GlobalServiceProvider.Resolve<DslEditorServices::IUIVisualizerService>();				
+			popupVisualizer.TryRegister("SelectElementPopup", typeof(DslEditorPopups::SelectElementPopup));
+			popupVisualizer.TryRegister("DeleteElementsPopup", typeof(DslEditorPopups::DeleteElementsPopup));				
+			popupVisualizer.TryRegister("SelectElementWithRSTypePopup", typeof(DslEditorPopups::SelectElementWithRSTypePopup));
+			popupVisualizer.TryRegister("SelectRSTypePopup", typeof(DslEditorPopups::SelectRSTypePopup));
+        }
+
+        /// <summary>
+        /// Switch model context for the main VM if required.
+        /// </summary>
+        protected override void SwitchModelContextIfRequired()
+		{
+			// change model context if required
+            if (this.WelcomeViewModel != null && this.DoLoadInBackground)
+                if (this.WelcomeViewModel.SelectedModelContextViewModel != null)
+                    for (int i = 0; i < this.MainViewModel.AvailableModelModelContextViewModels.Count; i++)
+                        if (this.MainViewModel.AvailableModelModelContextViewModels[i].ModelContext != null)
+                            if (this.MainViewModel.AvailableModelModelContextViewModels[i].ModelContext.Name == this.WelcomeViewModel.SelectedModelContextViewModel.Name)
+                            {
+                                this.MainViewModel.SelectedModelContextViewModel = this.MainViewModel.AvailableModelModelContextViewModels[i];
+                                break;
+                            }
+		}
+				
+	 	/// <summary>
+        /// Gets the main UI control.
+        /// </summary>
+        /// <returns></returns>
+        protected override System.Windows.FrameworkElement GetMainUIControl()
+		{
+			return this.MainViewModel.LayoutManager.MainDockingManager;
+		}
+				
+        /// <summary>
+        /// Creates and assings doc data.
+        /// </summary>
+        protected override void CreateAndAssignDocData()
+		{
+			DocData = new <#= dm.Name #>DocumentData();
+		}
+		        
+		/// <summary>
+        /// Creates and assings the main view model.
+        /// </summary>
+        protected override void CreateAndAssignMainViewModel()
+		{				
+			<#= dm.Name #>ViewModelStore vStore;
+			if( this.WelcomeViewModel != null )
+				vStore = new <#= dm.Name #>ViewModelStore((<#= dm.Name #>DocumentData)DocData, WelcomeViewModel.Options);
+			else
+				vStore = new <#= dm.Name #>ViewModelStore((<#= dm.Name #>DocumentData)DocData);
+			
+	        MainViewModel = new <#= dm.Name #>MainViewModel(vStore);
+		}
+		
+        /// <summary>
+        /// Register imported resources.
+        /// </summary>
+        protected override void RegisterImportedResources()
+		{
+			<#= dm.Name #>MainViewModelBase.RegisterImportedLibrariesRessources(new System.Collections.Generic.List<string>());
+		}
+		
+        /// <summary>
+        /// Post process main vm init.
+        /// </summary>
+        /// <remarks>
+        /// Before SetViewModel was called, layout manager was already initialized (possible, since in
+        /// some cases, this is called on the ui thread in the background --> queued for execution)
+        /// </remarks>
+        protected override void PostProcessLMIfRequired()
+		{
+            if (this.MainViewModel.LayoutManager != null)
+                this.ViewModel_LayoutManagerInitialized(null, null);			
+		}
+		
+		#region Plugins
+		/// <summary>
+        /// Load plugins in background.
+        /// </summary>
+        public override void LoadPlugins()
+        {
+            // load plugins
+            System.ComponentModel.BackgroundWorker w = new System.ComponentModel.BackgroundWorker();
+            w.DoWork += new System.ComponentModel.DoWorkEventHandler(loadPlugins_DoWork);
+            w.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(loadPlugins_RunWorkerCompleted);
+            w.RunWorkerAsync();
+        }	
+		
+		/// <summary>
+        /// Add plugins data in background.
+        /// </summary>
+        public void LoadPluginsPostProcess()
+		{
+            if (Tum.PDE.ToolFramework.Modeling.Base.ModelState.IsInDebugState)
+                Tum.PDE.ToolFramework.Modeling.Base.LogHelper.LogEvent("Load plugins progess: start processing");
+
+			if( SimplePlugins != null )
+            if (SimplePlugins.Count > 0)
+            {
+                try
+                {
+                    foreach (DslEditorContracts::IPlugin plugin in SimplePlugins)
+                        foreach (Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel.ModelContextViewModel mcVM in MainViewModel.AvailableModelModelContextViewModels)
+                        {
+                            if (plugin.ModelContext == mcVM.ModelContext.Name || plugin.ModelContext == null)
+                                mcVM.AddPlugin(plugin);
+                        }
+                }
+                catch (System.Exception ex)
+                {
+                    Tum.PDE.ToolFramework.Modeling.Base.LogHelper.LogError("Load plugins progess: simple plugins (1) processed error: " + ex.Message);
+                }
+				
+				
+				if( this.tabPlugins != null )
+				{
+					if (this.tabPluginsGrpFP != null)
+                	{
+                    	tabPluginsGrpFP.Visibility = System.Windows.Visibility.Visible;
+                	}
+					else if( this.MainViewModel.LayoutManager != null )
+					{
+						CreateRibbonFPGroup();
+					}
+				}
+            }
+
+            if (Tum.PDE.ToolFramework.Modeling.Base.ModelState.IsInDebugState)
+                Tum.PDE.ToolFramework.Modeling.Base.LogHelper.LogEvent("Load plugins progess: simple plugins processed");
+			
+			if( SimpleModelPlugins != null )
+            if (SimpleModelPlugins.Count > 0)
+            {
+                try
+                {
+                    foreach (DslEditorContracts::IModelPlugin plugin in SimpleModelPlugins)
+                        foreach (Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel.ModelContextViewModel mcVM in MainViewModel.AvailableModelModelContextViewModels)
+                        {
+                            if (plugin.ModelContext == mcVM.ModelContext.Name || plugin.ModelContext == null)
+                                mcVM.AddPlugin(plugin);
+
+                            plugin.SetViewModelStore(MainViewModel.ViewModelStore);
+                        }
+                }
+                catch (System.Exception ex)
+                {
+                    Tum.PDE.ToolFramework.Modeling.Base.LogHelper.LogError("Load plugins progess: simple plugins (2) processed error: " + ex.Message);
+                }
+                
+				if( this.tabPlugins != null )
+				{
+					if (this.tabPluginsGrpFP != null)
+                	{
+                    	tabPluginsGrpFP.Visibility = System.Windows.Visibility.Visible;
+                	}
+					else if( this.MainViewModel.LayoutManager != null )
+					{
+						CreateRibbonFPGroup();
+					}
+				}
+            }
+
+            if (Tum.PDE.ToolFramework.Modeling.Base.ModelState.IsInDebugState)
+                Tum.PDE.ToolFramework.Modeling.Base.LogHelper.LogEvent("Load plugins progess: simple model plugins processed");
+			
+			if( ViewModelPlugins != null )
+            if (ViewModelPlugins.Count > 0)
+            {
+                foreach (DslEditorContracts::IViewModelPlugin plugin in ViewModelPlugins)
+                {
+                    try
+                    {
+                        DslEditorDiagramSurface::BaseDiagramSurfaceViewModel vm = plugin.GetViewModel(MainViewModel.ViewModelStore);
+                        if (vm != null)
+                        {
+                            vm.VMPlugin = plugin;
+
+                            foreach (Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel.ModelContextViewModel mcVM in MainViewModel.AvailableModelModelContextViewModels)
+                                if (plugin.ModelContext == null)
+                                    mcVM.AddPluginViewModel(vm);
+                                else if (plugin.ModelContext == mcVM.ModelContext.Name)
+                                    mcVM.AddPluginViewModel(vm);
+                        }
+                    }
+                    catch (System.Exception ex)
+                    {
+                        Tum.PDE.ToolFramework.Modeling.Base.LogHelper.LogError("Load plugins progess: vm plugins processed error: " + ex.Message);
+                    }
+
+
+					if( this.tabPlugins != null )
+					{
+                		if (this.tabPluginsGrpVP != null)
+                		{
+	                    	tabPluginsGrpVP.Visibility = System.Windows.Visibility.Visible;
+                		}
+						else if( this.MainViewModel.LayoutManager != null )
+						{
+							CreateRibbonVPGroup();
+						}
+					}
+                }
+            }
+
+            if (Tum.PDE.ToolFramework.Modeling.Base.ModelState.IsInDebugState)
+                Tum.PDE.ToolFramework.Modeling.Base.LogHelper.LogEvent("Load plugins progess: view model plugins processed");
+		}
+		        
+		void loadPlugins_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+            System.Windows.Application.Current.Dispatcher.Invoke(
+                System.Windows.Threading.DispatcherPriority.Background, new System.Action(LoadPluginsPostProcess));
+        }
+
+        void loadPlugins_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            try
+            {
+				// Load plugins
+				if (!System.IO.Directory.Exists(PluginsDirectory))
+                	System.IO.Directory.CreateDirectory(PluginsDirectory);
+					
+				DirectoryCatalog directoryCatalog = new DirectoryCatalog(PluginsDirectory);
+				CompositionContainer container = new CompositionContainer(directoryCatalog);
+				
+				if( Tum.PDE.ToolFramework.Modeling.Base.ModelState.IsInDebugState )
+					Tum.PDE.ToolFramework.Modeling.Base.LogHelper.LogEvent("Load plugins progess: compose parts");
+			
+				container.ComposeParts(this);
+
+                if (Tum.PDE.ToolFramework.Modeling.Base.ModelState.IsInDebugState)
+                    Tum.PDE.ToolFramework.Modeling.Base.LogHelper.LogEvent("Load plugins progess: compose parts done");
+
+            }
+            catch (System.Exception ex)
+            {
+				Tum.PDE.ToolFramework.Modeling.Base.LogHelper.LogError("Load plugins progess error: " + ex.Message);
+            }
+			
+			// wait for main VM
+			if( this.MainViewModel != null )
+			{
+			}
+        }
+		#endregion
+		
+		#region Ribbon
+<#+		
+		this.PushIndent("\t\t");
+		this.Write(RibbonGeneratorHelper.Instance.GenerateRibbon(this.MetaModel));
+		this.PopIndent();		
+#>		
+		#endregion
+	}
+}
+<#+
+	}
+	else
+	{
+#>
+
+// Not generated since it is not required...
+
+<#+
+	}
+}
+#>

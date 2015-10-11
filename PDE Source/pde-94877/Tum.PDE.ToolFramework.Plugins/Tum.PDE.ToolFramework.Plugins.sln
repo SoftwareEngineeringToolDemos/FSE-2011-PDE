@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tum.PDE.ToolFramework.Plugins.BreadcrumbNavigation", "Tum.PDE.ToolFramework.Plugins.BreadcrumbNavigation\Tum.PDE.ToolFramework.Plugins.BreadcrumbNavigation.csproj", "{A5B7995F-A752-4B7C-8AC3-E584C5E4C55E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A5B7995F-A752-4B7C-8AC3-E584C5E4C55E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5B7995F-A752-4B7C-8AC3-E584C5E4C55E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5B7995F-A752-4B7C-8AC3-E584C5E4C55E}.Release|Any CPU.ActiveCfg = Release|x86
+		{A5B7995F-A752-4B7C-8AC3-E584C5E4C55E}.Release|Any CPU.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,277 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{949DD9D4-533E-4699-8A6F-38A451522605}</ProjectGuid>
+    <OutputType>library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Tum.PDE.ToolFramework.Modeling.Diagrams</RootNamespace>
+    <AssemblyName>Tum.PDE.ToolFramework.Modeling.Diagrams</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>Tum.PDE.ToolFramework.Modeling.Diagrams.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.GLEE">
+      <HintPath>..\..\Libraries\GLEE\Microsoft.GLEE.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Modeling.Sdk.10.0, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition">
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CustomCode\Anchor.cs" />
+    <Compile Include="CustomCode\Converter\SizeDConverter.cs" />
+    <Compile Include="CustomCode\Converter\PointDConverter.cs" />
+    <Compile Include="CustomCode\Converter\RectangleDConverter.cs" />
+    <Compile Include="CustomCode\CopyPaste\Diagram.cs" />
+    <Compile Include="CustomCode\CopyPaste\DiagramModelMergeOptions.cs" />
+    <Compile Include="CustomCode\CopyPaste\NodeShape.cs" />
+    <Compile Include="CustomCode\CopyPaste\SerializationHelper.cs" />
+    <Compile Include="CustomCode\Data\DiagramClassInfo.cs" />
+    <Compile Include="CustomCode\Data\DiagramDomainDataDirectory.cs" />
+    <Compile Include="CustomCode\Data\DiagramsShapeStore.cs" />
+    <Compile Include="CustomCode\Data\DiagramVisualizationBehavior.cs" />
+    <Compile Include="CustomCode\Data\GraphicalDependencyShapeStore.cs" />
+    <Compile Include="CustomCode\Data\MappingRelationshipShapeInfo.cs" />
+    <Compile Include="CustomCode\Data\RelationshipShapeInfo.cs" />
+    <Compile Include="CustomCode\Data\ShapeClassInfo.cs" />
+    <Compile Include="CustomCode\Data\ShapeElementInfo.cs" />
+    <Compile Include="CustomCode\Diagram.cs" />
+    <Compile Include="CustomCode\DiagramHelper.cs" />
+    <Compile Include="CustomCode\DiagramsDomainModel.cs" />
+    <Compile Include="CustomCode\DiagramsModel.cs" />
+    <Compile Include="CustomCode\DomainModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DomainModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CustomCode\EdgePoint.cs" />
+    <Compile Include="CustomCode\EdgePointCollection.cs" />
+    <Compile Include="CustomCode\Converter\EdgePointCollectionConverter.cs" />
+    <Compile Include="CustomCode\Converter\EdgePointConverter.cs" />
+    <Compile Include="CustomCode\EdgePointType.cs" />
+    <Compile Include="CustomCode\GraphicalDependenciesDiagram.cs" />
+    <Compile Include="CustomCode\GraphicalDependencyLinkShape.cs" />
+    <Compile Include="CustomCode\GraphicalDependencyShape.cs" />
+    <Compile Include="CustomCode\Layout\GleeLayouter.cs" />
+    <Compile Include="CustomCode\Layout\LayoutHelper.cs" />
+    <Compile Include="CustomCode\Layout\NodePlacementHelper.cs" />
+    <Compile Include="CustomCode\Layout\OrthogonalEdgeRouter.cs" />
+    <Compile Include="CustomCode\LinkShape.cs" />
+    <Compile Include="CustomCode\NodeShape.cs" />
+    <Compile Include="CustomCode\NodeShapeBase.cs" />
+    <Compile Include="CustomCode\PointD.cs" />
+    <Compile Include="CustomCode\RectangleD.cs" />
+    <Compile Include="CustomCode\Rules\AnchorAbsoluteLocationChanged.cs" />
+    <Compile Include="CustomCode\Rules\DiagramHasChildrenAddRule.cs" />
+    <Compile Include="CustomCode\Rules\DiagramHasChildrenDeleteRule.cs" />
+    <Compile Include="CustomCode\Rules\DiagramHasLinkShapesAddRule.cs" />
+    <Compile Include="CustomCode\Rules\DiagramHasLinkShapesDeleteRule.cs" />
+    <Compile Include="CustomCode\Rules\LinkShapeEdgePointsChanged.cs" />
+    <Compile Include="CustomCode\Rules\LinkShapeRoutingModeChanged.cs" />
+    <Compile Include="CustomCode\Rules\ModelElementDeletingRuleForGRShapes.cs" />
+    <Compile Include="CustomCode\Rules\ModelElementDeletingRuleForMappingRSShapes.cs" />
+    <Compile Include="CustomCode\Rules\ModelElementDeletingRuleForRSShapes.cs" />
+    <Compile Include="CustomCode\Rules\ModelElementDeletingRuleForShapes.cs" />
+    <Compile Include="CustomCode\Rules\ModelLinkAddRuleForMappingRSShapes.cs" />
+    <Compile Include="CustomCode\Rules\ModelLinkAddRuleForRSShapes.cs" />
+    <Compile Include="CustomCode\Rules\ModelLinkAddRuleForShapes.cs" />
+    <Compile Include="CustomCode\Rules\ModelLinkRolePlayerChangeRuleForMappingRSShapes.cs" />
+    <Compile Include="CustomCode\Rules\ModelLinkRolePlayerChangeRuleForRSShapes.cs" />
+    <Compile Include="CustomCode\Rules\ModelLinkRolePlayerChangeRuleForShapes.cs" />
+    <Compile Include="CustomCode\Rules\NodeShapeAddedRule.cs" />
+    <Compile Include="CustomCode\Rules\NodeShapeBoundsChangedRule.cs" />
+    <Compile Include="CustomCode\Rules\NodeShapeDeleteRule.cs" />
+    <Compile Include="CustomCode\Rules\NodeShapeReferencesNestedChildrenAddRule.cs" />
+    <Compile Include="CustomCode\Rules\NodeShapeReferencesRelativeChildrenAddRule.cs" />
+    <Compile Include="CustomCode\Rules\ShapeElementContainsChildShapesAddRule.cs" />
+    <Compile Include="CustomCode\Rules\ShapeElementContainsChildShapesChangeRule.cs" />
+    <Compile Include="CustomCode\Rules\ShapeElementContainsChildShapesDeleteRule.cs" />
+    <Compile Include="CustomCode\Serialization\DiagramsDSLSerializationHelper.cs" />
+    <Compile Include="CustomCode\Serialization\DiagramSerializer.cs" />
+    <Compile Include="CustomCode\Serialization\LinkShapeSerializer.cs" />
+    <Compile Include="CustomCode\Serialization\NodeShapeSerializer.cs" />
+    <Compile Include="CustomCode\Serialization\SerializationBehaviorMonikerResolver.cs" />
+    <Compile Include="CustomCode\ShapeElement.cs" />
+    <Compile Include="CustomCode\SizeD.cs" />
+    <Compile Include="GeneratedCode\DomainClasses.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DomainClasses.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GeneratedCode\DomainModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DomainModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GeneratedCode\DomainRelationships.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DomainRelationships.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GeneratedCode\HelpKeywordHelper.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HelpKeywordHelper.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GeneratedCode\SerializationHelper.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SerializationHelper.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GeneratedCode\Serializer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Serializer.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="GeneratedCode\DomainModelResx.resx">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DomainModelResx.tt</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="CustomCode\DomainModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DomainModel.cs</LastGenOutput>
+    </None>
+    <None Include="DslDefinition.dsl" />
+    <None Include="DslDefinition.dsl.diagram">
+      <DependentUpon>DslDefinition.dsl</DependentUpon>
+    </None>
+    <None Include="GeneratedCode\DiagramsDSLSchema.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DiagramsDSLSchema.xsd</LastGenOutput>
+    </None>
+    <None Include="GeneratedCode\DiagramsDSLSchema.xsd">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DiagramsDSLSchema.tt</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="GeneratedCode\DomainClasses.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DomainClasses.cs</LastGenOutput>
+    </None>
+    <None Include="GeneratedCode\DomainModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DomainModel.cs</LastGenOutput>
+    </None>
+    <None Include="GeneratedCode\DomainModelResx.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DomainModelResx.resx</LastGenOutput>
+    </None>
+    <None Include="GeneratedCode\DomainRelationships.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DomainRelationships.cs</LastGenOutput>
+    </None>
+    <None Include="GeneratedCode\HelpKeywordHelper.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>HelpKeywordHelper.cs</LastGenOutput>
+    </None>
+    <None Include="GeneratedCode\SerializationHelper.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SerializationHelper.cs</LastGenOutput>
+    </None>
+    <None Include="GeneratedCode\Serializer.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Serializer.cs</LastGenOutput>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+    <None Include="Tum.PDE.ToolFramework.Modeling.Diagrams.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Tum.PDE.ToolFramework.Modeling.Base\Tum.PDE.ToolFramework.Modeling.Base.csproj">
+      <Project>{C4C95AA3-1066-4739-8B3D-11F80FEBFF52}</Project>
+      <Name>Tum.PDE.ToolFramework.Modeling.Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Tum.PDE.ToolFramework.Modeling\Tum.PDE.ToolFramework.Modeling.csproj">
+      <Project>{AAC9B8A3-1E6C-4439-831C-CF8880075B08}</Project>
+      <Name>Tum.PDE.ToolFramework.Modeling</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

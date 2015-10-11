@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<diagramsModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="b4d4e809-62e5-41db-b637-a1d21dafc9f4" xmlns="http://schemas.microsoft.com/dsltools/DiagramsDSL">
+  <diagrams>
+    <VSPluginDSLdesignerDiagram Id="48a88809-3a7d-49fb-b229-bb2cc5fa6605" internalElementId="00000000-0000-0000-0000-000000000000" name="DesignerDiagram" />
+    <VSPluginDSLspecificElementsDiagramTemplate Id="494696d7-452e-4ec6-87f3-229b623f9180" internalElementId="00000000-0000-0000-0000-000000000000" name="SpecificElementsDiagramTemplate" />
+  </diagrams>
+</diagramsModel>

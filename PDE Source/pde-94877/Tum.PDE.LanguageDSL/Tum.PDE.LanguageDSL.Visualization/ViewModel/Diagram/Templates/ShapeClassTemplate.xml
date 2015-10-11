@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DataTemplates>
+  <DataTemplate>
+    <DisplayName>Shape Template</DisplayName>
+    <Description>This is a xaml template you can use to customize the visualization of this shape class. You can copy and paste this template into the Resources.xaml resources dictionary and extend it.</Description>
+    <ImageURI>/Tum.PDE.LanguageDSL.Visualization;component/Resources/Images/Templates/shape_handles-32.png</ImageURI>
+    <SyntaxHighlighting>XML</SyntaxHighlighting>
+    <Template>
+      <![CDATA[
+<DataTemplate DataType="{x:Type c:$CustomString0$DiagramItemViewModel}">
+
+</DataTemplate>
+
+xmlns:c="clr-namespace:$CustomString1$.ViewModel"
+]]>
+    </Template>
+  </DataTemplate>
+  <DataTemplate>
+    <DisplayName>Shape Class</DisplayName>
+    <Description>This is a partial class that is generated for this shape class. You can add a new class in your solution, copy and paste this template and modify properties or methods by overriding them.</Description>
+    <ImageURI>/Tum.PDE.LanguageDSL.Visualization;component/Resources/Images/Templates/Class_32-Add.png</ImageURI>
+    <SyntaxHighlighting>C#</SyntaxHighlighting>
+    <Template>
+      <![CDATA[
+namespace $CustomString1$.ViewModel
+{
+  public partial class $CustomString0$DiagramItemViewModel
+  {
+  }
+}
+]]>
+    </Template>
+  </DataTemplate>
+  <DataTemplate>
+    <DisplayName>Image Shape Template</DisplayName>
+    <Description>This is a xaml template for this shape class which is composed of an image as well as a text field for the elements name. You can copy and paste this template into the Resources.xaml resources dictionary and extend it.</Description>
+    <ImageURI>/Tum.PDE.LanguageDSL.Visualization;component/Resources/Images/Templates/Picture-32x32.png</ImageURI>
+    <SyntaxHighlighting>XML</SyntaxHighlighting>
+    <Template>
+      <![CDATA[
+<DataTemplate DataType="{x:Type c:$CustomString0$DiagramItemViewModel}">
+  <Grid>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="Auto"/>
+      <ColumnDefinition Width="*"/>
+    </Grid.ColumnDefinitions>
+    <Image Source="/Tum.VModellXT;component/Resources/ ***name*** " Margin="5"
+      HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Uniform" Grid.Column="0"/>
+    <TextBlock TextTrimming="CharacterEllipsis" 
+      Text="{Binding Path=DomainElementName, Mode=OneWay}"
+      ToolTip="{Binding Path=DomainElementFullName, Mode=OneWay}"
+      VerticalAlignment="Center" Grid.Column="1"/>
+  </Grid>
+</DataTemplate>
+
+xmlns:c="clr-namespace:$CustomString1$.ViewModel"
+]]>
+    </Template>
+  </DataTemplate>
+</DataTemplates>

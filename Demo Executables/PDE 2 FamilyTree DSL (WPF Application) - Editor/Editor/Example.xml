@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<FamilyTreeModel Id="f0e6c177-4fbf-42c5-83bf-2f51f09d8758">
+  <FamilyTreePerson Id="9c55e39f-49c5-4200-bf0f-ee680480e4e0" Gender="Male">
+    <Name>Eugen</Name>
+    <ChildRef link="5091adc7-bb67-42d9-9128-6360d2324505" />
+    <ChildRef link="a5d5d298-c4fb-4573-a739-ebc164f5d084" />
+    <WifeRef link="9dfadbee-b3b1-42cb-a84c-991b30b07fad" />
+  </FamilyTreePerson>
+  <FamilyTreePerson Id="9dfadbee-b3b1-42cb-a84c-991b30b07fad" Gender="Female">
+    <Name>Tatjana</Name>
+    <ChildRef link="5091adc7-bb67-42d9-9128-6360d2324505" />
+    <ChildRef link="a5d5d298-c4fb-4573-a739-ebc164f5d084" />
+  </FamilyTreePerson>
+  <FamilyTreePerson Id="a5d5d298-c4fb-4573-a739-ebc164f5d084" Gender="Male">
+    <Name>Eugen</Name>
+  </FamilyTreePerson>
+  <FamilyTreePerson Id="5091adc7-bb67-42d9-9128-6360d2324505" Gender="Male">
+    <Name>Alex</Name>
+  </FamilyTreePerson>
+  <FamilyTreePerson Id="78d4486c-1cd8-4721-afae-f7d0b3553eac" Gender="Female">
+    <Name>Maria</Name>
+    <ChildRef link="9dfadbee-b3b1-42cb-a84c-991b30b07fad" />
+    <WifeRef link="635b518d-f5b1-4500-bd9f-632543bf9f90" />
+  </FamilyTreePerson>
+  <FamilyTreePerson Id="635b518d-f5b1-4500-bd9f-632543bf9f90" Gender="Male">
+    <Name>Anatololij</Name>
+    <ChildRef link="9dfadbee-b3b1-42cb-a84c-991b30b07fad" />
+  </FamilyTreePerson>
+  <FamilyTreePerson Id="92ec434d-e232-44b9-8c47-e771c75cdf1f" Gender="Male">
+    <Name>Ivan</Name>
+    <ChildRef link="9c55e39f-49c5-4200-bf0f-ee680480e4e0" />
+    <ChildRef link="6ac0c1b1-cd6c-4813-af88-b85f0903aecb" />
+    <ChildRef link="557ff9ba-5885-477b-8f9e-de658f039fe7" />
+    <WifeRef link="39ab18fc-809e-4bd6-834d-3db1aaa8085f" />
+  </FamilyTreePerson>
+  <FamilyTreePerson Id="6ac0c1b1-cd6c-4813-af88-b85f0903aecb" Gender="Male">
+    <Name>Test</Name>
+  </FamilyTreePerson>
+  <FamilyTreePerson Id="39ab18fc-809e-4bd6-834d-3db1aaa8085f" Gender="Female">
+    <Name>Test3</Name>
+    <ChildRef link="6ac0c1b1-cd6c-4813-af88-b85f0903aecb" />
+    <ChildRef link="557ff9ba-5885-477b-8f9e-de658f039fe7" />
+  </FamilyTreePerson>
+  <FamilyTreePerson Id="5b4cc736-a648-41ea-bd5b-bbd4decb6ad5" Gender="Female">
+    <Name>M</Name>
+    <ChildRef link="9c55e39f-49c5-4200-bf0f-ee680480e4e0" />
+  </FamilyTreePerson>
+  <FamilyTreePerson Id="557ff9ba-5885-477b-8f9e-de658f039fe7" Gender="Female">
+    <Name>Test2</Name>
+    <ChildRef link="637c27f5-681a-482a-8329-255e7d8fd32c" />
+    <ChildRef link="e9704483-3c8c-4174-b830-49e4ae128cdf" />
+    <WifeRef link="795766c7-eb2a-4f30-a4a2-f7ad62085ed7" />
+  </FamilyTreePerson>
+  <FamilyTreePerson Id="795766c7-eb2a-4f30-a4a2-f7ad62085ed7" Gender="Male">
+    <Name>Serg</Name>
+    <ChildRef link="637c27f5-681a-482a-8329-255e7d8fd32c" />
+    <ChildRef link="e9704483-3c8c-4174-b830-49e4ae128cdf" />
+  </FamilyTreePerson>
+  <FamilyTreePerson Id="637c27f5-681a-482a-8329-255e7d8fd32c" Gender="Female">
+    <Name>Test4</Name>
+  </FamilyTreePerson>
+  <FamilyTreePerson Id="e9704483-3c8c-4174-b830-49e4ae128cdf" Gender="Male">
+    <Name>Test5</Name>
+    <WifeRef link="e02be64c-3b81-4161-a791-64a9de61d4c7" />
+  </FamilyTreePerson>
+  <FamilyTreePerson Id="e02be64c-3b81-4161-a791-64a9de61d4c7" Gender="Female">
+    <Name>Test6</Name>
+  </FamilyTreePerson>
+</FamilyTreeModel>

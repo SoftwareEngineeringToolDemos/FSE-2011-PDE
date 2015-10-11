@@ -1,0 +1,20 @@
+<#
+/***************************************************************************
+         Copyright (c) Microsoft Corporation, All rights reserved.             
+    This code sample is provided "AS IS" without warranty of any kind, 
+    it is not recommended for use in a production environment.
+***************************************************************************/
+#>
+<#@ Dsl processor="DslDirectiveProcessor" requires="fileName='..\..\Tum.PDE.LanguageDSL.Dsl\DslDefinition.dsl'" #>
+<#@ include file="DslPackage\Constants.tt" #>
+//
+// Constants not generated from values in DesignerDefinition.dsl are defined below
+//
+namespace <#= CodeGenerationUtilities.GetPackageNamespace(this.Dsl) #>
+{
+	internal static partial class Constants
+	{
+		// Menu identifier
+		public const string <#= dslName #>CommandSetId = "61fae200-c141-4ff2-8cbe-535feb97831d";
+	}
+}

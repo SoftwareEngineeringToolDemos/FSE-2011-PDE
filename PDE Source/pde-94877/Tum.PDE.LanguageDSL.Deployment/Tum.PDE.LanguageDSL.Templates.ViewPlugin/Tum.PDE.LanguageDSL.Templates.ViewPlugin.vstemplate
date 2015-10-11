@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VSTemplate Version="3.0.0" Type="Project" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005">
+  <TemplateData>
+    <Name>A new PDE-based Plugin (View Model Extension)</Name>
+    <Description>Plugin extending the functionality of a PDE-based DSL by providing additional views</Description>
+    <Icon>Tum.PDE.LanguageDSL.Templates.ViewPlugin.ico</Icon>
+    <ProjectType>CSharp</ProjectType>
+    <RequiredFrameworkVersion>2.0</RequiredFrameworkVersion>
+    <SortOrder>1000</SortOrder>
+    <TemplateID>215bba5e-9455-4614-ba06-981bc0b3ec78</TemplateID>
+    <CreateNewFolder>true</CreateNewFolder>
+    <DefaultName>PDEViewPlugin</DefaultName>
+    <ProvideDefaultName>true</ProvideDefaultName>
+  </TemplateData>
+  <TemplateContent>
+    <Project File="ProjectTemplate.csproj" ReplaceParameters="true">
+      <ProjectItem ReplaceParameters="true" TargetFileName="Properties\AssemblyInfo.cs">AssemblyInfo.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" OpenInEditor="true">IViewModelPlugin.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" OpenInEditor="true">ExampleViewModelPlugin.xaml</ProjectItem>
+      <ProjectItem ReplaceParameters="true" OpenInEditor="true">ExamplePluginDiagramSurfaceViewModel.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" OpenInEditor="true">ExampleElementViewModel.cs</ProjectItem>
+      <ProjectItem>Images/csv_32x32.png</ProjectItem>
+      <ProjectItem>Images/html_32x32.png</ProjectItem>
+      <ProjectItem>Images/pdf_32x32.png</ProjectItem>
+      <ProjectItem>Images/prepare_32.png</ProjectItem>
+      <ProjectItem>Images/table-32.png</ProjectItem>
+      <ProjectItem>Images/tree-32.png</ProjectItem>
+    </Project>
+  </TemplateContent>
+</VSTemplate>

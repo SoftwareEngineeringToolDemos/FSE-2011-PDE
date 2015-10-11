@@ -1,0 +1,59 @@
+﻿<#@ template language="C#" inherits="BaseTemplate"#> 
+<#@ import namespace="Tum.PDE.LanguageDSL"#>
+<#@ import namespace="Microsoft.VisualStudio.Modeling" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Collections.ObjectModel" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#
+	string dslName = this.MetaModel.Name;
+#>
+
+using DslShell = global::Microsoft.VisualStudio.Modeling.Shell;
+using DslModeling = global::Microsoft.VisualStudio.Modeling;
+using DslValidation = global::Microsoft.VisualStudio.Modeling.Validation;
+using DslDiagrams = global::Microsoft.VisualStudio.Modeling.Diagrams;
+using VSShellInterop = global::Microsoft.VisualStudio.Shell.Interop;
+
+using DslEditorModeling = global::Tum.PDE.ToolFramework.Modeling;
+using DslEditorShell = global::Tum.PDE.ToolFramework.Modeling.Shell;
+
+using global::System.Linq;
+
+namespace <#= this.MetaModel.Namespace #>
+{
+	/// <summary>
+	/// Double-derived class to allow easier code customization.
+	/// </summary>
+	internal partial class <#= dslName #>DocData : <#= dslName #>DocDataBase
+	{
+		/// <summary>
+		/// Constructs a new <#= dslName #>DocData.
+		/// </summary>
+        /// <param name="modelData">Model data.</param>
+        /// <param name="serviceProvider">Service Provider</param>
+        /// <param name="editorFactoryId">EditorFactory id.</param>
+		public <#= dslName #>DocData(DslEditorModeling::ModelData modelData, global::System.IServiceProvider serviceProvider, global::System.Guid editorFactoryId) 
+			: base(modelData, serviceProvider, editorFactoryId)
+		{
+		}
+	}
+
+	/// <summary>
+	/// Class which represents a <#= dslName #> document in memory.
+	/// </summary>
+	internal abstract partial class <#= dslName #>DocDataBase : DslEditorShell::ModelShellData
+	{
+		/// <summary>
+		/// Constructs a new <#= dslName #>DocDataBase.
+		/// </summary>
+		/// <param name="modelData">Model data.</param>
+        /// <param name="serviceProvider">Service Provider</param>
+        /// <param name="editorFactoryId">EditorFactory id.</param>
+		protected <#= dslName #>DocDataBase(DslEditorModeling::ModelData modelData, global::System.IServiceProvider serviceProvider, global::System.Guid editorFactoryId)
+			: base(modelData, serviceProvider, editorFactoryId)
+		{
+		}
+	}
+}

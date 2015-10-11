@@ -1,0 +1,54 @@
+﻿<Window x:Class="Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Html.View.InsertTablePopup"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="{Binding Path=Title}" Height="200" Width="300" WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow"
+        Icon="/Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions;component/Resources/Images/HtmlEditor/table.ico"
+        xmlns:attached="clr-namespace:Tum.PDE.ToolFramework.Modeling.Visualization.Controls.Attached;assembly=Tum.PDE.ToolFramework.Modeling.Visualization">
+    <Grid Margin="3,3,3,3">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <GroupBox Header="Table size" Grid.Row="0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="130"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Column="0" Grid.Row="0" Text="Number of columns" VerticalAlignment="Center"/>
+                <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Path=TableColumns}" Margin="0,3,0,3"/>
+
+                <TextBlock Grid.Column="0" Grid.Row="1" Text="Number of rows" VerticalAlignment="Center" />
+                <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=TableRows}" Margin="0,3,0,3"/>
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Table style" Grid.Row="1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="130"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Column="0" Grid.Row="0" Text="Border width" VerticalAlignment="Center"/>
+                <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Path=TableBorder}" x:Name="TextBoxWidthOfBorder" Margin="0,3,0,3"/>
+            </Grid>
+        </GroupBox>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="2" Margin="3,8,3,0">
+            <Button x:Name="ButtonOK" Content="Ok" Width="70" Margin="0, 0, 3, 0" IsDefault="True" attached:ButtonHelper.DialogResult="True"/>
+            <Button x:Name="ButtonCancel" Content="Cancel" Width="70" IsCancel="True"/>
+        </StackPanel>
+    </Grid>
+
+</Window>

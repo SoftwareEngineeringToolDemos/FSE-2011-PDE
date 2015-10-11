@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<FamilyTreeModel Id="d7ca0ff1-2394-4dce-9d59-b9010f30f6a2">
+  <FamilyTreePerson Id="0b5c2dfe-c917-4097-8f12-0f23ab4fb1e0" Gender="Male">
+    <Name>H</Name>
+    <ChildRef link="eb08726b-a409-4143-b289-46b51c0ad0c0" />
+    <ChildRef link="94f0fd95-2ce2-454b-9b66-b08b164f91c5" />
+    <WifeRef link="ffe44eec-2ee1-4629-a43f-64fed41771e9" />
+  </FamilyTreePerson>
+  <FamilyTreePerson Id="ffe44eec-2ee1-4629-a43f-64fed41771e9" Gender="Female">
+    <Name>E</Name>
+    <ChildRef link="eb08726b-a409-4143-b289-46b51c0ad0c0" />
+    <ChildRef link="94f0fd95-2ce2-454b-9b66-b08b164f91c5" />
+  </FamilyTreePerson>
+  <FamilyTreePerson Id="eb08726b-a409-4143-b289-46b51c0ad0c0" Gender="Male">
+    <Name>A</Name>
+    <WifeRef link="4f42d390-3ef9-4549-95a8-41d1db82a351" />
+  </FamilyTreePerson>
+  <FamilyTreePerson Id="4f42d390-3ef9-4549-95a8-41d1db82a351" Gender="Female">
+    <Name>B</Name>
+  </FamilyTreePerson>
+  <FamilyTreePerson Id="94f0fd95-2ce2-454b-9b66-b08b164f91c5" Gender="Male">
+    <Name>C</Name>
+    <ChildRef link="84407ea2-a4f9-4c52-878f-d2f805e0985b" />
+    <WifeRef link="53c0cdcc-b25c-433e-b34c-ae3590147045" />
+  </FamilyTreePerson>
+  <FamilyTreePerson Id="53c0cdcc-b25c-433e-b34c-ae3590147045" Gender="Female">
+    <Name>D</Name>
+    <ChildRef link="84407ea2-a4f9-4c52-878f-d2f805e0985b" />
+  </FamilyTreePerson>
+  <FamilyTreePerson Id="ec66ecfc-47f9-4089-857b-9ead89287da2" Gender="Male">
+    <Name>E</Name>
+    <ChildRef link="c60ee563-4946-477c-bcc0-b2a5c8b986f2" />
+  </FamilyTreePerson>
+  <FamilyTreePerson Id="84407ea2-a4f9-4c52-878f-d2f805e0985b" Gender="Female">
+    <Name>F</Name>
+    <WifeRef link="ec66ecfc-47f9-4089-857b-9ead89287da2" />
+  </FamilyTreePerson>
+  <FamilyTreePerson Id="c60ee563-4946-477c-bcc0-b2a5c8b986f2" Gender="Male">
+    <Name>G</Name>
+  </FamilyTreePerson>
+  <FamilyTreePerson Id="9ed4a3b5-969f-43b0-bd03-a65d7cf9f943" Gender="Male">
+    <Name>H</Name>
+    <WifeRef link="b2a72a23-c187-4d80-bf47-69e9e5f1bf30" />
+  </FamilyTreePerson>
+  <FamilyTreePerson Id="b2a72a23-c187-4d80-bf47-69e9e5f1bf30" Gender="Female">
+    <Name>K</Name>
+  </FamilyTreePerson>
+</FamilyTreeModel>

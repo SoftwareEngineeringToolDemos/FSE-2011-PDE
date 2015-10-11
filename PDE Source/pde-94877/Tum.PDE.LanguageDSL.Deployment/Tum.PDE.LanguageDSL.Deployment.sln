@@ -1,0 +1,90 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Tum.PDE.LanguageDSL.Setup", "Tum.PDE.LanguageDSL.Setup\Tum.PDE.LanguageDSL.Setup.vdproj", "{E3648A06-A2AC-40F4-A6FE-59CE1B3899D3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tum.PDE.LanguageDSL.Setup.DesignerWizard", "Tum.PDE.LanguageDSL.Setup.DesignerWizard\Tum.PDE.LanguageDSL.Setup.DesignerWizard.csproj", "{597D066A-6323-4990-90CF-26CECED1AC80}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tum.PDE.LanguageDSL.Setup.Installer", "Tum.PDE.LanguageDSL.Setup.Installer\Tum.PDE.LanguageDSL.Setup.Installer.csproj", "{F53CB102-3A9B-49EE-A457-6237C187259D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tum.PDE.LanguageDSL.Templates.WPFApplication", "Tum.PDE.LanguageDSL.Templates.WPFApplication\Tum.PDE.LanguageDSL.Templates.WPFApplication.csproj", "{546878B8-0F96-4499-8655-D3D2139B712A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tum.PDE.LanguageDSL.Templates.WPFLibrary", "Tum.PDE.LanguageDSL.Templates.WPFLibrary\Tum.PDE.LanguageDSL.Templates.WPFLibrary.csproj", "{F6D83900-FA00-4F92-8EE0-77E511FB290F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tum.PDE.LanguageDSL.Templates.VMXEditorApplication", "Tum.PDE.LanguageDSL.Templates.VMXEditorApplication\Tum.PDE.LanguageDSL.Templates.VMXEditorApplication.csproj", "{AEE2D00A-58D3-4BE6-A301-5C0821B950A7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tum.PDE.LanguageDSL.Templates.VMXEditorLibrary", "Tum.PDE.LanguageDSL.Templates.VMXEditorLibrary\Tum.PDE.LanguageDSL.Templates.VMXEditorLibrary.csproj", "{BB8E180D-3C27-43C9-A243-DEFB54BCE94B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tum.PDE.LanguageDSL.Templates.FunctionalityPlugin", "Tum.PDE.LanguageDSL.Templates.FunctionalityPlugin\Tum.PDE.LanguageDSL.Templates.FunctionalityPlugin.csproj", "{3E47AF58-0AC3-4D3A-B042-473E458252C5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tum.PDE.LanguageDSL.Templates.ViewPlugin", "Tum.PDE.LanguageDSL.Templates.ViewPlugin\Tum.PDE.LanguageDSL.Templates.ViewPlugin.csproj", "{A753463F-5F82-4BF9-8EFF-6778A25229CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tum.PDE.LanguageDSL.Templates.VSPlugin", "Tum.PDE.LanguageDSL.Templates.VSPlugin\Tum.PDE.LanguageDSL.Templates.VSPlugin.csproj", "{F4728D9A-D616-4115-B07F-B07486EF4FD2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tum.PDE.LanguageDSL.Setup.VSPluginDesignerWizard", "Tum.PDE.LanguageDSL.Setup.VSPluginDesignerWizard\Tum.PDE.LanguageDSL.Setup.VSPluginDesignerWizard.csproj", "{63EBD208-0A34-492B-BEDE-DC8E1F1C2406}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E3648A06-A2AC-40F4-A6FE-59CE1B3899D3}.Release|Any CPU.ActiveCfg = Release
+		{E3648A06-A2AC-40F4-A6FE-59CE1B3899D3}.Release|Mixed Platforms.ActiveCfg = Release
+		{E3648A06-A2AC-40F4-A6FE-59CE1B3899D3}.Release|x86.ActiveCfg = Release
+		{597D066A-6323-4990-90CF-26CECED1AC80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{597D066A-6323-4990-90CF-26CECED1AC80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{597D066A-6323-4990-90CF-26CECED1AC80}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{597D066A-6323-4990-90CF-26CECED1AC80}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{597D066A-6323-4990-90CF-26CECED1AC80}.Release|x86.ActiveCfg = Release|Any CPU
+		{F53CB102-3A9B-49EE-A457-6237C187259D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F53CB102-3A9B-49EE-A457-6237C187259D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F53CB102-3A9B-49EE-A457-6237C187259D}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{F53CB102-3A9B-49EE-A457-6237C187259D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{F53CB102-3A9B-49EE-A457-6237C187259D}.Release|x86.ActiveCfg = Release|Any CPU
+		{546878B8-0F96-4499-8655-D3D2139B712A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{546878B8-0F96-4499-8655-D3D2139B712A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{546878B8-0F96-4499-8655-D3D2139B712A}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{546878B8-0F96-4499-8655-D3D2139B712A}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{546878B8-0F96-4499-8655-D3D2139B712A}.Release|x86.ActiveCfg = Release|Any CPU
+		{F6D83900-FA00-4F92-8EE0-77E511FB290F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6D83900-FA00-4F92-8EE0-77E511FB290F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6D83900-FA00-4F92-8EE0-77E511FB290F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{F6D83900-FA00-4F92-8EE0-77E511FB290F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{F6D83900-FA00-4F92-8EE0-77E511FB290F}.Release|x86.ActiveCfg = Release|Any CPU
+		{AEE2D00A-58D3-4BE6-A301-5C0821B950A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEE2D00A-58D3-4BE6-A301-5C0821B950A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AEE2D00A-58D3-4BE6-A301-5C0821B950A7}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{AEE2D00A-58D3-4BE6-A301-5C0821B950A7}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{AEE2D00A-58D3-4BE6-A301-5C0821B950A7}.Release|x86.ActiveCfg = Release|Any CPU
+		{BB8E180D-3C27-43C9-A243-DEFB54BCE94B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB8E180D-3C27-43C9-A243-DEFB54BCE94B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB8E180D-3C27-43C9-A243-DEFB54BCE94B}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{BB8E180D-3C27-43C9-A243-DEFB54BCE94B}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{BB8E180D-3C27-43C9-A243-DEFB54BCE94B}.Release|x86.ActiveCfg = Release|Any CPU
+		{3E47AF58-0AC3-4D3A-B042-473E458252C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E47AF58-0AC3-4D3A-B042-473E458252C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E47AF58-0AC3-4D3A-B042-473E458252C5}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{3E47AF58-0AC3-4D3A-B042-473E458252C5}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{3E47AF58-0AC3-4D3A-B042-473E458252C5}.Release|x86.ActiveCfg = Release|Any CPU
+		{A753463F-5F82-4BF9-8EFF-6778A25229CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A753463F-5F82-4BF9-8EFF-6778A25229CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A753463F-5F82-4BF9-8EFF-6778A25229CF}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{A753463F-5F82-4BF9-8EFF-6778A25229CF}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{A753463F-5F82-4BF9-8EFF-6778A25229CF}.Release|x86.ActiveCfg = Release|Any CPU
+		{F4728D9A-D616-4115-B07F-B07486EF4FD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4728D9A-D616-4115-B07F-B07486EF4FD2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4728D9A-D616-4115-B07F-B07486EF4FD2}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{F4728D9A-D616-4115-B07F-B07486EF4FD2}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{F4728D9A-D616-4115-B07F-B07486EF4FD2}.Release|x86.ActiveCfg = Release|Any CPU
+		{63EBD208-0A34-492B-BEDE-DC8E1F1C2406}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63EBD208-0A34-492B-BEDE-DC8E1F1C2406}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63EBD208-0A34-492B-BEDE-DC8E1F1C2406}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{63EBD208-0A34-492B-BEDE-DC8E1F1C2406}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{63EBD208-0A34-492B-BEDE-DC8E1F1C2406}.Release|x86.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

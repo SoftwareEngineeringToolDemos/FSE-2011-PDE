@@ -1,0 +1,791 @@
+﻿<#@ template language="C#" inherits="BaseTemplate"#> 
+<#@ import namespace="Tum.PDE.LanguageDSL"#>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Collections.ObjectModel" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+using DslModeling = Microsoft.VisualStudio.Modeling;
+using DslEditorViewModel = global::Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel;
+using DslEditorViewModelData = global::Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel.Data;
+using DslEditorViewModelEvents = global::Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel.Messaging.Events;
+
+<#
+GenerateSpecificViewModel(this.MetaModel);
+#>
+<#+ 
+public void GenerateSpecificViewModel(MetaModel dm)
+{
+// Generate code for all the classes in this domain model
+foreach(DomainClass domainClass in dm.AllClasses)
+{
+	bool bGenerate = ShouldGenerateSpecificVM(domainClass);
+	if( !bGenerate )
+		continue;
+
+	string baseClass = "DslEditorViewModel::BaseSpecificModelElementViewModel";
+	string abstractModifierClass = "";
+	string abstractModifierConst = "public";
+	string virtualModifier = "virtual";
+	
+	if( domainClass.BaseClass != null )
+	{
+		//baseClass = domainClass.BaseClass.Name + "SpecificViewModel";
+		baseClass = domainClass.BaseClass.GetMetaModel().Namespace + ".ViewModel." + domainClass.BaseClass.Name + "SpecificViewModel";
+		virtualModifier = "override";
+	}
+	if( domainClass.InheritanceModifier == InheritanceModifier.Abstract )
+	{
+		//abstractModifierClass = " abstract";
+		//abstractModifierConst = "protected";
+	}	
+#>
+namespace <#= dm.Namespace #>.ViewModel
+{
+	/// <summary>
+    /// Specific view model class for <#= domainClass.Name #>.
+    /// 
+    /// Double derived to allow easier custimization. This is the derived class.
+    /// </summary>
+	public<#= abstractModifierClass #> partial class <#= domainClass.Name #>SpecificViewModel : <#= domainClass.Name #>SpecificViewModelBase
+	{
+		#region Constructor
+		/// <summary>
+        /// Constuctor.
+        /// </summary>
+        /// <param name="viewModelStore">The store this view model belongs to.</param>
+        /// <param name="element">Element to be hosted by this view model.</param>
+        <#= abstractModifierConst #> <#= domainClass.Name #>SpecificViewModel(DslEditorViewModelData::ViewModelStore viewModelStore, <#= domainClass.GetFullName(true) #> element)
+            : this(viewModelStore, element, null)
+        {
+		}
+		
+		/// <summary>
+        /// Constuctor.
+        /// </summary>
+        /// <param name="viewModelStore">The store this view model belongs to.</param>
+        /// <param name="element">Element to be hosted by this view model.</param>
+		/// <param name="parentVM">Parent view model. Can be null.</param>
+        <#= abstractModifierConst #> <#= domainClass.Name #>SpecificViewModel(DslEditorViewModelData::ViewModelStore viewModelStore, <#= domainClass.GetFullName(true) #> element, DslEditorViewModel::BaseModelElementViewModel parentVM)
+            : this(viewModelStore, element, parentVM, true)
+        {
+		}
+		
+		/// <summary>
+        /// Constuctor.
+        /// </summary>
+        /// <param name="viewModelStore">The store this view model belongs to.</param>
+        /// <param name="element">Element to be hosted by this view model.</param>
+		/// <param name="parentVM">Parent view model. Can be null.</param>
+		/// <param name="bCallInitialize"></param>
+        <#= abstractModifierConst #> <#= domainClass.Name #>SpecificViewModel(DslEditorViewModelData::ViewModelStore viewModelStore, <#= domainClass.GetFullName(true) #> element, DslEditorViewModel::BaseModelElementViewModel parentVM, bool bCallInitialize)
+            : base(viewModelStore, element, parentVM, bCallInitialize)
+        {
+		}		
+		
+		/// <summary>
+        /// Gets an instance of this vm.
+        /// </summary>
+		public override DslEditorViewModel::BaseSpecificModelElementViewModel GetInstance()
+		{
+			return this;
+		}
+		#endregion
+		
+		
+	}
+
+	/// <summary>
+    /// Specific view model class for <#= domainClass.Name #>.
+    /// 
+    /// Double derived to allow easier custimization. This is the base class.
+    /// </summary>
+	public abstract class <#= domainClass.Name #>SpecificViewModelBase : <#= baseClass #>
+	{
+		#region Constructor
+		/// <summary>
+        /// Constuctor.
+        /// </summary>
+        /// <param name="viewModelStore">The store this view model belongs to.</param>
+        /// <param name="element">Element to be hosted by this view model.</param>
+		/// <param name="parentVM">Parent view model. Can be null.</param>
+		/// <param name="bCallInitialize"></param>
+        protected <#= domainClass.Name #>SpecificViewModelBase(DslEditorViewModelData::ViewModelStore viewModelStore, <#= domainClass.GetFullName(true) #> element, DslEditorViewModel::BaseModelElementViewModel parentVM, bool bCallInitialize)
+            : base(viewModelStore, element, parentVM, false)
+        {
+			if( bCallInitialize )
+			{
+				this.Initialize();
+				
+				this.InitializeRelationships();
+				this.InitializeSubscription();				
+			}
+		}
+		#endregion
+		
+		#region Properties
+		/// <summary>
+        /// Gets an instance of this vm.
+        /// </summary>
+		public override DslEditorViewModel::BaseSpecificModelElementViewModel GetInstance()
+		{
+			return this;
+		}
+		
+        /// <summary>
+        /// Gets the <#= domainClass.Name #>, which is represented by this view model.
+        /// </summary>
+        public new <#= domainClass.GetFullName(true) #> Element
+        {
+            get { return base.Element as <#= domainClass.GetFullName(true) #>; }
+        }
+<#+
+		if( domainClass.GenerateSpecificViewModelProperties )
+		foreach(DomainProperty p in domainClass.Properties)
+		{
+			if( p.IsElementName )
+				continue;
+			
+			if( p.Type == null )
+				continue;
+#>
+
+		/// <summary>
+        /// Gets or sets the <#= p.Name #> property.
+        /// </summary>
+		public <#= CodeGenerationUtilities.GetDomainTypeFullName(p) #> <#= p.Name #>
+		{
+			get
+			{
+				return this.Element.<#= p.Name #>;
+			}
+			set
+			{
+				if( this.Element.<#= p.Name #> != value )
+				{
+					using(DslModeling::Transaction transaction = this.Store.TransactionManager.BeginTransaction("Set the <#= p.Name #> property."))
+					{
+						this.Element.<#= p.Name #> = value;
+						transaction.Commit();	
+					}
+				}
+			}
+		}
+<#+
+		}
+#>
+		#endregion
+		
+		#region Initialization
+        /// <summary>
+        /// Initialize.
+        /// </summary>
+        protected override void Initialize()
+        {
+     	    base.Initialize();
+			
+						
+		}		
+		
+		/// <summary>
+        /// Initialize Relationship children.
+        /// </summary>
+		protected override void InitializeRelationships()
+		{			
+            base.InitializeRelationships();
+		
+			if( this.Element != null )
+			{
+
+<#+
+	foreach(DomainRole role in domainClass.RolesPlayed )
+	{
+		if( !CodeGenerationUtilities.GenerateSpecificVMHandlerForRole(domainClass, role) )
+			continue;
+		
+		if( role.IsPropertyGenerator)
+		{
+			if (role.Multiplicity == Tum.PDE.LanguageDSL.Multiplicity.ZeroMany || role.Multiplicity == Tum.PDE.LanguageDSL.Multiplicity.OneMany )
+			{
+#>
+				foreach(<#=role.Opposite.RolePlayer.GetFullName(true)#> m in this.Element.<#= role.PropertyName #>)
+					Add<#= role.PropertyName #>(m);
+<#+
+			}
+			else
+			{
+#>
+				Add<#= role.PropertyName #>(this.Element.<#= role.PropertyName #>);
+<#+
+			}
+		}
+		else
+		{
+#>
+				foreach(<#= role.Relationship.GetFullName(true) #> con in DslModeling::DomainRoleInfo.GetElementLinks<<#= role.Relationship.GetFullName(true) #>>(this.Element, <#= role.Relationship.GetFullName(true) #>.<#= role.Name #>DomainRoleId))
+					Add<#= role.PropertyName #>(con.<#= role.Opposite.Name #>);
+<#+
+		}
+	}
+#>		
+			}
+		
+		}
+		
+		/// <summary>
+        /// Sets up subscription.
+        /// </summary>
+		protected override void InitializeSubscription()
+		{
+			base.InitializeSubscription();
+			
+			if( this.Element != null )
+			{
+<#+
+	if( domainClass.BaseClass == null )
+	{
+#>
+				// properties
+                this.EventManager.GetEvent<DslEditorViewModelEvents::ModelElementPropertyChangedEvent>().Subscribe(this.Element.Id, new System.Action<DslModeling::ElementPropertyChangedEventArgs>(OnElementPropertyChanged));
+				
+<#+
+	}
+	
+	foreach(DomainRole role in domainClass.RolesPlayed )
+	{
+		if( !CodeGenerationUtilities.GenerateSpecificVMHandlerForRole(domainClass, role) )
+			continue;		
+		
+		bool bIsSource = true;
+		if( role.Relationship.Source != role )
+			bIsSource = false;
+/*		
+		if( role.Relationship.InheritanceModifier == InheritanceModifier.Abstract ||
+			role.Relationship.Source != role)
+			continue;
+	
+		if( role.Relationship is EmbeddingRelationship && !domainClass.GenerateSpecificViewModelEmbeddings )
+			continue;
+		
+		if( role.Relationship is ReferenceRelationship && !domainClass.GenerateSpecificViewModelReferences )
+			continue;		
+		
+		if( !role.IsPropertyGenerator )
+			continue;*/
+#>
+            	this.EventManager.GetEvent<DslEditorViewModelEvents::ModelElementLinkAddedEvent>().Subscribe(this.Store.DomainDataDirectory.GetDomainRelationship(<#= role.Relationship.GetFullName(true) #>.DomainClassId),
+                	<#= bIsSource.ToString().ToLower() #>, this.Element.Id, new System.Action<DslModeling::ElementAddedEventArgs>(On<#= role.PropertyName #>Added));
+            	this.EventManager.GetEvent<DslEditorViewModelEvents::ModelElementLinkDeletedEvent>().Subscribe(this.Store.DomainDataDirectory.GetDomainRelationship(<#= role.Relationship.GetFullName(true) #>.DomainClassId),
+                	<#= bIsSource.ToString().ToLower() #>, this.Element.Id, new System.Action<DslModeling::ElementDeletedEventArgs>(On<#= role.PropertyName #>Removed));
+				this.EventManager.GetEvent<DslEditorViewModelEvents::ModelRolePlayerChangedEvent>().Subscribe(this.Store.DomainDataDirectory.GetDomainRole(<#= role.Relationship.GetFullName(true) #>.<#= role.Name #>DomainRoleId),
+                	new System.Action<DslModeling::RolePlayerChangedEventArgs>(On<#= role.PropertyName #>Changed));					
+				this.EventManager.GetEvent<DslEditorViewModelEvents::ModelRolePlayerChangedEvent>().Subscribe(this.Store.DomainDataDirectory.GetDomainRole(<#= role.Relationship.GetFullName(true) #>.<#= role.Opposite.Name #>DomainRoleId),
+                	new System.Action<DslModeling::RolePlayerChangedEventArgs>(On<#= role.PropertyName #>Changed));
+<#+
+		if (role.Multiplicity == Tum.PDE.LanguageDSL.Multiplicity.ZeroMany || role.Multiplicity == Tum.PDE.LanguageDSL.Multiplicity.OneMany )
+		{
+#>
+				this.EventManager.GetEvent<DslEditorViewModelEvents::ModelRolePlayerMovedEvent>().Subscribe(this.Store.DomainDataDirectory.GetDomainRelationship(<#= role.Relationship.GetFullName(true) #>.DomainClassId),
+                	this.Element.Id, new System.Action<DslModeling::RolePlayerOrderChangedEventArgs>(On<#= role.PropertyName #>Moved));
+<#+
+		}
+#>
+					
+<#+
+	}
+#>
+			}
+		}
+		#endregion
+		
+		#region Subscription and Unsubscription
+		/// <summary>
+        /// Called whenever properties change.
+        /// </summary>
+        /// <param name="args"></param>
+        protected <#= virtualModifier #> void OnElementPropertyChanged(DslModeling::ElementPropertyChangedEventArgs args)
+        {
+<#+
+	if( domainClass.BaseClass != null )
+	{
+#>
+			base.OnElementPropertyChanged(args);
+			
+<#+
+	}
+	
+	if( domainClass.GenerateSpecificViewModelProperties )
+	foreach(DomainProperty p in domainClass.Properties)
+	{
+		if( p.IsElementName )
+			continue;
+		
+		if( p.Type == null )
+			continue;
+#>
+			if (args.DomainProperty.Id == <#= domainClass.GetFullName(true) #>.<#= p.Name #>DomainPropertyId)
+                OnPropertyChanged("<#= p.Name #>");
+<#+
+	}
+#>
+        }
+
+<#+
+	foreach(DomainRole role in domainClass.RolesPlayed )
+	{
+		if( !CodeGenerationUtilities.GenerateSpecificVMHandlerForRole(domainClass, role) )
+			continue;
+		
+		/*
+		if( role.Relationship.InheritanceModifier == InheritanceModifier.Abstract )
+			continue;
+		
+		if( role.Relationship.Source != role)
+		{
+			if( !domainClass.GenerateSpecificViewModelOppositeReferences )
+				continue;
+			
+			if( !(role.Relationship is ReferenceRelationship) )
+				continue;
+		}
+		
+		//if( !role.IsPropertyGenerator )
+		//	continue;
+		
+		if( role.Relationship is EmbeddingRelationship && !domainClass.GenerateSpecificViewModelEmbeddings )
+			continue;
+		
+		if( role.Relationship is ReferenceRelationship && !domainClass.GenerateSpecificViewModelReferences )
+			if( role.Relationship.Source == role)
+				continue;
+			*/
+#>
+		#region <#= role.Relationship.Name #>.<#= role.PropertyName #>
+<#+
+		string viewModelName = "DslEditorViewModel::BaseSpecificModelElementViewModel";
+		if( role.Opposite.RolePlayer is DomainClass )
+			if( ShouldGenerateSpecificVM(role.Opposite.RolePlayer as DomainClass))
+				viewModelName = role.Opposite.RolePlayer.GetMetaModel().Namespace + ".ViewModel." + role.Opposite.RolePlayer.Name + "SpecificViewModel";
+		if (role.Multiplicity == Tum.PDE.LanguageDSL.Multiplicity.ZeroMany || role.Multiplicity == Tum.PDE.LanguageDSL.Multiplicity.OneMany )
+		{
+#>
+		/// <summary>
+        /// <#= role.PropertyName #> view models host.
+        /// </summary>
+		protected System.Collections.ObjectModel.ObservableCollection<<#= viewModelName #>> <#= role.PropertyName #>VMsHost = new System.Collections.ObjectModel.ObservableCollection<<#= viewModelName #>>();
+		
+		/// <summary>
+        /// Gets the <#= role.PropertyName #> view model collection.
+        /// </summary>
+		public System.Collections.ObjectModel.ObservableCollection<<#= viewModelName #>> <#= role.PropertyName #>VMs
+		{
+			get
+			{
+				return this.<#= role.PropertyName #>VMsHost;
+			}
+		}
+<#+
+		}
+		else
+		{
+#>
+		/// <summary>
+        /// <#= role.PropertyName #> view model host.
+        /// </summary>
+		protected <#= viewModelName #> <#= role.PropertyName #>VMHost = null;
+		
+		/// <summary>
+        /// Gets the <#= role.PropertyName #> view model.
+        /// </summary>
+		public <#= viewModelName #> <#= role.PropertyName #>VM
+		{
+			get
+			{
+				return this.<#= role.PropertyName #>VMHost;
+			}
+		}
+<#+
+		}
+#>
+		
+		/// <summary>
+        /// Adds a new <#= role.Opposite.RolePlayer.Name #> view model for the given <#= role.Opposite.RolePlayer.Name #>.
+        /// </summary>
+		/// <param name="element"><#= role.Opposite.RolePlayer.Name #>.</param>
+        public virtual void Add<#= role.PropertyName #>(<#= role.Opposite.RolePlayer.GetFullName(true) #> element)
+        {
+			if( element == null && !ShouldCreateVMForNullElements("<#= role.Opposite.RolePlayer.GetFullName(false) #>"))
+				return;
+<#+
+		if (role.Multiplicity == Tum.PDE.LanguageDSL.Multiplicity.ZeroMany || role.Multiplicity == Tum.PDE.LanguageDSL.Multiplicity.OneMany )
+		{
+#>
+            // verify that element has not been added yet
+            foreach (<#= viewModelName #> viewModel in this.<#= role.PropertyName #>VMs)
+                if (viewModel.Element.Id == element.Id)
+                    return;
+            
+			<#= viewModelName #> vm = null;
+			if( element != null )
+				vm= this.ViewModelStore.SpecificViewModelStore.TryGetVM("<#= viewModelName #>", element.Id) as <#= viewModelName #>;
+			if( vm == null )
+				vm = new <#= viewModelName #>(this.ViewModelStore, element, this);
+			else if( vm != null )
+				this.ViewModelStore.SpecificViewModelStore.AddVM(vm, this.Id);
+<#+
+			/*if( role.Opposite.RolePlayer == domainClass )
+			{
+#>
+            if( element.Id == this.Element.Id )
+                vm = (<#= viewModelName #>)this.GetInstance();
+            else
+                vm = new <#= viewModelName #>(this.ViewModelStore, element, this);
+<#+
+			}
+			else
+			{
+#>
+			vm = new <#= viewModelName #>(this.ViewModelStore, element, this);
+<#+
+			}*/
+#>				
+			
+            this.<#= role.PropertyName #>VMs.Add(vm);
+
+            OnPropertyChanged("<#= role.PropertyName #>VMs");
+<#+
+		}
+		else
+		{
+#>
+			if( this.<#= role.PropertyName #>VM != null )
+				if( this.<#= role.PropertyName #>VM.Element == element )
+					return;
+			
+			<#= viewModelName #> vm = null;
+			if( element != null )
+				vm= this.ViewModelStore.SpecificViewModelStore.TryGetVM("<#= viewModelName #>", element.Id) as <#= viewModelName #>;
+			if( vm == null )
+				vm = new <#= viewModelName #>(this.ViewModelStore, element, this);
+			//this.ViewModelStore.SpecificViewModelStore.AddVM(vm, this.Id);
+			
+			this.<#= role.PropertyName #>VMHost = vm;
+<#+
+			/*if( role.Opposite.RolePlayer == domainClass )
+			{
+#>					
+            if( element.Id == this.Element.Id )
+                this.<#= role.PropertyName #>VMHost = (<#= viewModelName #>)this.GetInstance();
+            else
+                this.<#= role.PropertyName #>VMHost = new <#= viewModelName #>(this.ViewModelStore, element, this);
+<#+
+			}
+			else
+			{
+#>
+			this.<#= role.PropertyName #>VMHost = new <#= viewModelName #>(this.ViewModelStore, element, this);
+<#+
+			}*/
+#>					
+				
+			OnPropertyChanged("<#= role.PropertyName #>VM");				
+<#+
+		}
+#>
+        }
+
+        /// <summary>
+        /// Deletes the <#= role.RolePlayer.Name #> view model that is hosting the given <#= role.RolePlayer.Name #>.
+        /// </summary>
+        /// <param name="element"><#= role.RolePlayer.Name #>.</param>
+        public virtual void Delete<#= role.PropertyName #>(<#= role.Opposite.RolePlayer.GetFullName(true) #> element)
+        {
+			if( element == null )
+				return;
+				
+<#+
+		if (role.Multiplicity == Tum.PDE.LanguageDSL.Multiplicity.ZeroMany || role.Multiplicity == Tum.PDE.LanguageDSL.Multiplicity.OneMany )
+		{
+#>
+            for (int i = this.<#= role.PropertyName #>VMs.Count - 1; i >= 0; i--)
+			{
+				if( this.<#= role.PropertyName #>VMs[i].Element == null )
+					continue;
+				
+                if (this.<#= role.PropertyName #>VMs[i].Element.Id == element.Id)
+                {
+					this.ViewModelStore.SpecificViewModelStore.RemoveVM(this.<#= role.PropertyName #>VMs[i], this.Id);
+					<#= viewModelName #> vmTemp = this.<#= role.PropertyName #>VMs[i];
+					this.<#= role.PropertyName #>VMs.RemoveAt(i);
+					if( !this.ViewModelStore.SpecificViewModelStore.IsVMInUse(vmTemp) )
+						vmTemp.Dispose();
+                    
+<#+
+			/*if( role.Opposite.RolePlayer == domainClass )
+			{
+#>
+					if (this.<#= role.PropertyName #>VMs[i] == (<#= viewModelName #>)this.GetInstance())
+                        this.<#= role.PropertyName #>VMs.RemoveAt(i);
+					else
+					{
+                    	this.<#= role.PropertyName #>VMs[i].Dispose();
+                    	this.<#= role.PropertyName #>VMs.RemoveAt(i);
+					}						
+<#+
+			}
+			else
+			{
+#>
+					this.<#= role.PropertyName #>VMs[i].Dispose();
+                    this.<#= role.PropertyName #>VMs.RemoveAt(i);
+<#+
+			}*/
+#>
+				}
+			}
+
+            OnPropertyChanged("<#= role.PropertyName #>VMs");
+<#+
+		}
+		else
+		{
+#>
+			if( this.<#= role.PropertyName #>VM != null )
+				if( this.<#= role.PropertyName #>VM.Element == element )
+				{
+					this.ViewModelStore.SpecificViewModelStore.RemoveVM(this.<#= role.PropertyName #>VM, this.Id);
+					if( !this.ViewModelStore.SpecificViewModelStore.IsVMInUse(this.<#= role.PropertyName #>VM) )
+						this.<#= role.PropertyName #>VM.Dispose();
+                    this.<#= role.PropertyName #>VMHost = null;
+<#+
+			/*if( role.Opposite.RolePlayer == domainClass )
+			{		
+#>
+					if( this.<#= role.PropertyName #>VM == (<#= viewModelName #>)this.GetInstance() )
+					{
+						this.<#= role.PropertyName #>VMHost = null;
+					}
+					else
+					{
+						this.<#= role.PropertyName #>VM.Dispose();
+						this.<#= role.PropertyName #>VMHost = null;
+					}
+<#+
+			}
+			else
+			{
+#>
+					this.<#= role.PropertyName #>VM.Dispose();
+					this.<#= role.PropertyName #>VMHost = null;
+<#+
+			}*/
+#>
+				}
+				
+			OnPropertyChanged("<#= role.PropertyName #>VM");				
+<#+
+		}
+#>
+        }		
+		
+		/// <summary>
+        /// Called whenever a relationship of type <#= role.Relationship.Name #> is added and
+        /// the element hosted by this model is the source.
+        /// </summary>
+        /// <param name="args">Arguments.</param>
+		protected virtual void On<#= role.PropertyName #>Added(DslModeling::ElementAddedEventArgs args)
+		{
+			<#= role.Relationship.GetFullName(true) #> con = args.ModelElement as <#= role.Relationship.GetFullName(true) #>;
+            if (con != null)
+            {
+                Add<#= role.PropertyName #>(con.<#= role.Opposite.Name #>);
+            }
+		}
+
+		/// <summary>
+        /// Called whenever a relationship of type <#= role.Relationship.Name #> is deleted and
+        /// the element hosted by this model is the source.
+        /// </summary>
+        /// <param name="args">Arguments.</param>
+		protected virtual void On<#= role.PropertyName #>Removed(DslModeling::ElementDeletedEventArgs args)
+		{
+			<#= role.Relationship.GetFullName(true) #> con = args.ModelElement as <#= role.Relationship.GetFullName(true) #>;
+            if (con != null)
+            {
+                Delete<#= role.PropertyName #>(con.<#= role.Opposite.Name #>);
+            }
+		}
+		
+<#+
+		if (role.Multiplicity == Tum.PDE.LanguageDSL.Multiplicity.ZeroMany || role.Multiplicity == Tum.PDE.LanguageDSL.Multiplicity.OneMany )
+		{
+#>		
+		/// <summary>
+        /// Called on a role player beeing moved.
+        /// </summary>
+        /// <param name="args">Arguments.</param>
+		protected virtual void On<#= role.PropertyName #>Moved(DslModeling::RolePlayerOrderChangedEventArgs args)
+		{
+			this.HandleRolePlayerMoved<<#= viewModelName #>>(args, this.<#= role.PropertyName #>VMs);
+				/*
+			if (args.SourceElement == this.Element)
+                this.<#= role.PropertyName #>VMs.Move(args.OldOrdinal, args.NewOrdinal);
+				*/
+		}
+
+<#+
+		}
+#>
+		/// <summary>
+        /// Called on a role player changing.
+        /// </summary>
+        /// <param name="args">Arguments.</param>
+		protected virtual void On<#= role.PropertyName #>Changed(DslModeling::RolePlayerChangedEventArgs args)
+		{
+			<#= role.Relationship.GetFullName(true) #> con = args.ElementLink as <#= role.Relationship.GetFullName(true) #>;
+            if (con != null)
+            {
+                if (args.DomainRole.Id == <#= role.Relationship.GetFullName(true) #>.<#= role.Name #>DomainRoleId)
+                {
+                    if (args.OldRolePlayerId == this.Element.Id)
+                       Delete<#= role.PropertyName #>(con.<#= role.Opposite.Name #>);
+
+                    if (args.NewRolePlayerId == this.Element.Id)
+                        Add<#= role.PropertyName #>(con.<#= role.Opposite.Name #>);
+                }
+				else if (args.DomainRole.Id == <#= role.Relationship.GetFullName(true) #>.<#= role.Opposite.Name #>DomainRoleId)
+				{
+					if( args.OldRolePlayer != null )
+                        Delete<#= role.PropertyName #>(args.OldRolePlayer as <#= role.Opposite.RolePlayer.GetFullName(true) #>);
+
+                    if( args.NewRolePlayer != null )
+                        Add<#= role.PropertyName #>(args.NewRolePlayer as <#= role.Opposite.RolePlayer.GetFullName(true) #>);
+				}
+            }
+		}
+		#endregion			
+<#+
+	}	
+#>
+
+		/// <summary>
+        /// Clean up.
+        /// </summary>
+        protected override void OnDispose()
+        {
+			if( this.Element != null )
+			{
+<#+
+	if( domainClass.BaseClass == null )
+	{
+#>
+				// properties
+                this.EventManager.GetEvent<DslEditorViewModelEvents::ModelElementPropertyChangedEvent>().Unsubscribe(this.Element.Id, new System.Action<DslModeling::ElementPropertyChangedEventArgs>(OnElementPropertyChanged));
+				
+<#+
+	}
+	
+		foreach(DomainRole role in domainClass.RolesPlayed )
+	{
+		if( !CodeGenerationUtilities.GenerateSpecificVMHandlerForRole(domainClass, role) )
+			continue;
+		
+		bool bIsSource = true;
+		if( role.Relationship.Source != role )
+			bIsSource = false;
+		/*
+		if( role.Relationship.InheritanceModifier == InheritanceModifier.Abstract ||
+			role.Relationship.Source != role)
+			continue;
+		
+		if( !role.IsPropertyGenerator )
+			continue;
+		
+		if( role.Relationship is EmbeddingRelationship && !domainClass.GenerateSpecificViewModelEmbeddings )
+			continue;
+		
+		if( role.Relationship is ReferenceRelationship && !domainClass.GenerateSpecificViewModelReferences )
+			continue;		
+		*/
+#>
+            	this.EventManager.GetEvent<DslEditorViewModelEvents::ModelElementLinkAddedEvent>().Unsubscribe(this.Store.DomainDataDirectory.GetDomainRelationship(<#= role.Relationship.GetFullName(true) #>.DomainClassId),
+                	<#= bIsSource.ToString().ToLower() #>, this.Element.Id, new System.Action<DslModeling::ElementAddedEventArgs>(On<#= role.PropertyName #>Added));
+            	this.EventManager.GetEvent<DslEditorViewModelEvents::ModelElementLinkDeletedEvent>().Unsubscribe(this.Store.DomainDataDirectory.GetDomainRelationship(<#= role.Relationship.GetFullName(true) #>.DomainClassId),
+                	<#= bIsSource.ToString().ToLower() #>, this.Element.Id, new System.Action<DslModeling::ElementDeletedEventArgs>(On<#= role.PropertyName #>Removed));
+				this.EventManager.GetEvent<DslEditorViewModelEvents::ModelRolePlayerChangedEvent>().Unsubscribe(this.Store.DomainDataDirectory.GetDomainRole(<#= role.Relationship.GetFullName(true) #>.<#= role.Name #>DomainRoleId),
+                	new System.Action<DslModeling::RolePlayerChangedEventArgs>(On<#= role.PropertyName #>Changed));
+				this.EventManager.GetEvent<DslEditorViewModelEvents::ModelRolePlayerChangedEvent>().Unsubscribe(this.Store.DomainDataDirectory.GetDomainRole(<#= role.Relationship.GetFullName(true) #>.<#= role.Opposite.Name #>DomainRoleId),
+                	new System.Action<DslModeling::RolePlayerChangedEventArgs>(On<#= role.PropertyName #>Changed));
+			
+<#+
+		// remove existing
+		if (role.Multiplicity == Tum.PDE.LanguageDSL.Multiplicity.ZeroMany || role.Multiplicity == Tum.PDE.LanguageDSL.Multiplicity.OneMany )
+		{
+#>
+ 				for( int i = this.<#= role.PropertyName #>VMs.Count-1; i>=0; i--)
+                {
+					this.ViewModelStore.SpecificViewModelStore.RemoveVM(this.<#= role.PropertyName #>VMs[i], this.Id);
+					if( !this.ViewModelStore.SpecificViewModelStore.IsVMInUse(this.<#= role.PropertyName #>VMs[i]) )
+						if( !this.<#= role.PropertyName #>VMs[i].IsDisposed && !this.<#= role.PropertyName #>VMs[i].IsDisposing )
+							this.<#= role.PropertyName #>VMs[i].Dispose();
+                    this.<#= role.PropertyName #>VMs.RemoveAt(i);
+				}
+				
+<#+
+		}
+		else
+		{
+#>
+				if( this.<#= role.PropertyName #>VM != null )
+				{
+					this.ViewModelStore.SpecificViewModelStore.RemoveVM(this.<#= role.PropertyName #>VM, this.Id);
+					if( !this.ViewModelStore.SpecificViewModelStore.IsVMInUse(this.<#= role.PropertyName #>VM) )
+						if( !this.<#= role.PropertyName #>VM.IsDisposed && !this.<#= role.PropertyName #>VM.IsDisposing )
+							this.<#= role.PropertyName #>VM.Dispose();
+                	this.<#= role.PropertyName #>VMHost = null;
+				}
+				
+<#+
+		}		
+		
+		if (role.Multiplicity == Tum.PDE.LanguageDSL.Multiplicity.ZeroMany || role.Multiplicity == Tum.PDE.LanguageDSL.Multiplicity.OneMany )
+		{
+#>
+				this.EventManager.GetEvent<DslEditorViewModelEvents::ModelRolePlayerMovedEvent>().Unsubscribe(this.Store.DomainDataDirectory.GetDomainRelationship(<#= role.Relationship.GetFullName(true) #>.DomainClassId),
+                	this.Element.Id, new System.Action<DslModeling::RolePlayerOrderChangedEventArgs>(On<#= role.PropertyName #>Moved));
+<#+
+		}
+#>
+					
+<#+
+	}
+#>
+			}
+		
+            base.OnDispose();
+        }
+		#endregion
+	}
+}
+<#+
+}
+}
+#>
+
+<#+
+private bool ShouldGenerateSpecificVM(DomainClass domainClass)
+{
+	bool bGenerate = false;
+	if( domainClass.GenerateSpecificViewModel )
+		bGenerate = true;
+	
+	if( !bGenerate )
+	{
+		foreach(DomainClass d in domainClass.DerivedClasses)
+			if( ShouldGenerateSpecificVM(d) )
+				return true;
+	}
+	
+	return bGenerate;
+}
+#>

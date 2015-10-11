@@ -1,0 +1,101 @@
+﻿<UserControl x:Class="Tum.PDE.LanguageDSL.Visualization.View.ViewContextControl"
+            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="558" 
+             TextOptions.TextFormattingMode="Display"
+             
+             xmlns:ctrl="clr-namespace:Tum.PDE.LanguageDSL.Visualization.View.Controls"
+             xmlns:commands="clr-namespace:Tum.PDE.LanguageDSL.Visualization.Commands">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Resources/Styles/TabItemStyle.xaml"/>
+                
+                <!-- Domain model style -->
+                <ResourceDictionary Source="../Resources/Styles/DomainModelTreeStyle.xaml"/>
+
+                <!-- Diagram model style -->
+                <ResourceDictionary Source="../Resources/Styles/DiagramModelTreeStyle.xaml"/>
+
+                <!-- Serialization model style + templates -->
+                <ResourceDictionary Source="../Resources/Styles/SerializationModelTreeViewStyle.xaml"/>
+
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <TabControl  Background="White" TabStripPlacement="Left" ItemContainerStyle="{StaticResource TabItemStyleNoGrayBackground}"
+                    SelectedIndex="{Binding Path=SelectedIndex, Mode=TwoWay}" >
+            <TabItem>
+                <TabItem.Resources>
+                    <commands:CommandReference x:Key="DeleteCommandRef" Command="{Binding Path=ModelTreeViewModel.DeleteCommand}"/>
+                </TabItem.Resources>
+                <TabItem.InputBindings>
+                    <KeyBinding Command="{StaticResource DeleteCommandRef}" Key="Delete"/>
+                </TabItem.InputBindings>
+                <TabItem.Header>
+                    <Grid ToolTip="{Binding Path=ModelTreeViewModel.DockingPaneTitle, Mode=OneTime}">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Width="16" Height="16" RenderOptions.BitmapScalingMode="HighQuality" Source="/Tum.PDE.LanguageDSL.Visualization;component/Resources/Images/spreadsheet.icon.128.png" Margin="3"/>
+                            <TextBlock Text="Model" VerticalAlignment="Center" Margin="5,0,5,0"/>
+                        </StackPanel>
+                    </Grid>
+                </TabItem.Header>
+                <ItemsControl Margin="0, 0, 0, 0"
+                          ItemsSource="{Binding Path=RootNodes, Mode=OneWay}"  DataContext="{Binding Path=ModelTreeViewModel, Mode=OneTime}"
+                          ItemTemplate="{StaticResource RootElementsTemplate}"
+                          Style="{StaticResource RootItemsControl}">
+                </ItemsControl>
+            </TabItem>
+
+            <TabItem DataContext="{Binding Path=DiagramViewModel, Mode=OneTime}">
+                <TabItem.Resources>
+                    <commands:CommandReference x:Key="DeleteCommandRefDiagrams" Command="{Binding Path=DeleteCommand}"/>
+                </TabItem.Resources>
+                <TabItem.InputBindings>
+                    <KeyBinding Command="{StaticResource DeleteCommandRefDiagrams}" Key="Delete"/>
+                </TabItem.InputBindings>
+                <TabItem.Header>
+                    <Grid ToolTip="{Binding Path=DockingPaneTitle, Mode=OneTime}">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Width="16" Height="16" RenderOptions.BitmapScalingMode="HighQuality" Source="/Tum.PDE.LanguageDSL.Visualization;component/Resources/Images/gdocuments.icon.128.png" Margin="3"/>
+                            <TextBlock Text="Diagrams" VerticalAlignment="Center" Margin="5,0,5,0"/>
+                        </StackPanel>                            
+                    </Grid>
+                </TabItem.Header>
+                <ItemsControl Margin="0, 0, 0, 0"
+                          ItemsSource="{Binding Path=RootDiagramNodes, Mode=OneWay}"
+                          ItemTemplateSelector="{StaticResource DiagramClassTemplateSelector}"
+                          Style="{StaticResource DiagramItemsControl}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+            </TabItem>
+
+            <TabItem>
+                <TabItem.Header>
+                    <Grid ToolTip="{Binding Path=SerializationViewModel.DockingPaneTitle, Mode=OneTime}">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Width="16" Height="16" RenderOptions.BitmapScalingMode="HighQuality" Source="/Tum.PDE.LanguageDSL.Visualization;component/Resources/Images/config.icon.128.png" Margin="3"/>
+                            <TextBlock Text="Serialization" VerticalAlignment="Center" Margin="5,0,5,0"/>
+                        </StackPanel>                            
+                    </Grid>
+                </TabItem.Header>
+                <ItemsControl Margin="0, 0, 0, 0" DataContext="{Binding Path=SerializationViewModel, Mode=OneTime}" 
+                          ItemsSource="{Binding RootNodes, Mode=OneWay}"
+                          ItemTemplateSelector="{StaticResource SerializationModelTemplateSelector}"
+                          Style="{StaticResource SerializationModelTreeViewStyle}">
+                </ItemsControl>
+            </TabItem>
+            
+        </TabControl>
+    </Grid>
+</UserControl>

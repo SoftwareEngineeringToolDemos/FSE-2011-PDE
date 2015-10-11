@@ -1,0 +1,95 @@
+﻿1. DockableContent
+
+    /// <summary>
+    /// Docking context change kind specifying when a docking content is to be activated.
+    /// </summary>
+    public enum ContextChangeKind
+    {
+        /// <summary>
+        /// Activate content whenever a mouse down event occurs.
+        /// </summary>
+        PreviewMouseDown,
+
+        /// <summary>
+        /// Activate content whenever a mouse up event occurs.
+        /// </summary>
+        PreviewMouseUp
+    }
+
+    public class DockableContent : ManagedContent
+    {
+        /// <summary>
+        /// Gets or sets the context change kind.
+        /// </summary>
+        public ContextChangeKind ContextChangeKind { get; set; }
+
+		...
+	}
+
+
+2. DockablePane and DocumentPane
+
+        protected override void OnPreviewMouseDown(MouseButtonEventArgs e)
+        {
+            base.OnPreviewMouseDown(e);
+
+            if (this.SelectedItem is DockableContent)
+            {
+                DockableContent content = this.SelectedItem as DockableContent;
+                if( content.ContextChangeKind == ContextChangeKind.PreviewMouseDown ||
+                    (content.ContextChangeKind == ContextChangeKind.PreviewMouseUp && e.ButtonState == MouseButtonState.Released ))
+                {
+                    if (!content.IsActiveContent)
+                        content.Activate();
+                }
+            }
+        }
+
+		protected override void OnPreviewMouseUp(MouseButtonEventArgs e)
+        {
+            base.OnPreviewMouseUp(e);
+
+            if (this.SelectedItem is DockableContent)
+            {
+                DockableContent content = this.SelectedItem as DockableContent;
+                if( content.ContextChangeKind == ContextChangeKind.PreviewMouseUp )
+                    if (!content.IsActiveContent)
+                        content.Activate();
+            }
+        }
+
+
+3.		DockingManager
+
+
+        public void Anchor(DockablePane paneToAnchor, AnchorStyle anchor)
+        {
+            //ensure that content property is not empty
+            EnsureContentNotEmpty();
+
+            if (Content == null)
+                return;
+
+            if (anchor == AnchorStyle.Bottom || anchor == AnchorStyle.Top)
+                paneToAnchor.MinHeight = 20;
+            else
+                paneToAnchor.MinWidth = 20;
+
+			....
+		}
+
+		internal void Show(DockableContent content, DockableContentState desideredState, AnchorStyle desideredAnchor)
+        {
+
+		....
+
+						var floatingWindow = new DockableFloatingWindow(this);
+                        floatingWindow.Content = newHostpane;
+						floatingWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                        floatingWindow.Width = content.FloatingWindowSize.Width;
+                        floatingWindow.Height = content.FloatingWindowSize.Height;
+
+		....
+
+		}
+

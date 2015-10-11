@@ -1,0 +1,1413 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Tum.PDE.ToolFramework.Modeling.Visualization.Base</name>
+    </assembly>
+    <members>
+        <member name="T:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.LinkItemsViewModel">
+            <summary>
+            Base abstract view model class for displaying link items.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.LinkItemsViewModel.#ctor">
+            <summary>
+            Constuctor.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.LinkItemsViewModel.AddLinkItem(Tum.PDE.ToolFramework.Modeling.Base.LinkItem)">
+            <summary>
+            Adds a new link item.
+            </summary>
+            <param name="linkItem">Link item to add.</param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.LinkItemsViewModel.OnPropertyChanged(System.String)">
+            <summary>
+            Called whenever a specific property changes.
+            </summary>
+            <param name="name">Name of the property, which value changed.</param>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.LinkItemsViewModel.LinkItemVMsWithoutCategory">
+            <summary>
+            Gets the link items vms, which don't find a specific category.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.LinkItemsViewModel.LinkItemVmsCategorized">
+            <summary>
+            Gets the link item categories sorted by categories.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.LinkItemsViewModel.HasLinkItems">
+            <summary>
+            Gets whether this view model has any items.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.LinkItemsViewModel.HasLinkItemVMsWithoutCategory">
+            <summary>
+            Gets whether there are link items without a category present.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.LinkItemsViewModel.HasLinkItemVmsCategorized">
+            <summary>
+            Gets whether there are link items with a category present.
+            </summary>
+        </member>
+        <member name="E:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.LinkItemsViewModel.PropertyChanged">
+            <summary>
+            Property changed event.
+            </summary>
+        </member>
+        <member name="T:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.LinkItemCategoryViewModel">
+            <summary>
+            Link item category vm.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.LinkItemCategoryViewModel.#ctor(System.String)">
+            <summary>
+            Constuctor.
+            </summary>
+            <param name="category">Category.</param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.LinkItemCategoryViewModel.OnPropertyChanged(System.String)">
+            <summary>
+            Called whenever a specific property changes.
+            </summary>
+            <param name="name">Name of the property, which value changed.</param>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.LinkItemCategoryViewModel.Category">
+            <summary>
+            Gets the category.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.LinkItemCategoryViewModel.LinkItemVMs">
+            <summary>
+            Gets or sets the link items vms.
+            </summary>
+        </member>
+        <member name="E:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.LinkItemCategoryViewModel.PropertyChanged">
+            <summary>
+            Property changed event.
+            </summary>
+        </member>
+        <member name="T:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.PDEMainWindow">
+            <summary>
+            Main window for a PDE WPF application.
+            </summary>
+        </member>
+        <member name="F:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.PDEMainWindow.DocData">
+            <summary>
+            VModellXT Modeling document data.
+            </summary>
+        </member>
+        <member name="F:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.PDEMainWindow.DoLoadInBackground">
+            <summary>
+            True if the application should be initialized in background.
+            </summary>
+        </member>
+        <member name="F:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.PDEMainWindow.DoShowWelcomeScreen">
+            <summary>
+            True if the the welcome screen should be displayed at startup. (DoLoadInBackground needs to be true for this).
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.PDEMainWindow.GetWelcomeWindow">
+            <summary>
+            Gets the welcome window control.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.PDEMainWindow.CreateWelcomeViewModel">
+            <summary>
+            Creates the welcome vm.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.PDEMainWindow.SetWelcomeViewModel">
+            <summary>
+            Sets the welcome window.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.PDEMainWindow.Initialize">
+            <summary>
+            Initialize
+            </summary>		
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.PDEMainWindow.OnActivated(System.EventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.PDEMainWindow.OnActivated">
+            <summary>
+            Called once the application has been activated for the first time.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.PDEMainWindow.InitializeMainUIDirectly">
+            <summary>
+            Directly loads main UI on startup.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.PDEMainWindow.ViewModel_LayoutManagerInitialized(System.Object,System.EventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.PDEMainWindow.InitializeServices">
+            <summary>
+            Initialize services
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.PDEMainWindow.RegisterWindows">
+            <summary>
+            Register windows..
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.PDEMainWindow.SwitchModelContextIfRequired">
+            <summary>
+            Switch model context for the main VM if required.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.PDEMainWindow.GetMainUIControl">
+            <summary>
+            Gets the main UI control.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.PDEMainWindow.CreateAndAssignDocData">
+            <summary>
+            Creates and assings doc data.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.PDEMainWindow.CreateAndAssignMainViewModel">
+            <summary>
+            Creates and assings the main view model.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.PDEMainWindow.RegisterImportedResources">
+            <summary>
+            Register imported resources.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.PDEMainWindow.PostProcessLMIfRequired">
+            <summary>
+            Post process main vm init.
+            </summary>
+            <remarks>
+            Before SetViewModel was called, layout manager was already initialized (possible, since in
+            some cases, this is called on the ui thread in the background --> queued for execution)
+            </remarks>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.PDEMainWindow.LoadInBackground">
+            <summary>
+            Load data and plugins in background.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.PDEMainWindow.LoadPlugins">
+            <summary>
+            Load plugins in background.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.PDEMainWindow.LoadData">
+            <summary>
+            Load data.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.PDEMainWindow.CreateRibbon">
+            <summary>
+            Create the ribbon control.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.PDEMainWindow.SetupRibbonOnMainSolutionLoad">
+            <summary>
+            Setups the main ribbon solution on load.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.PDEMainWindow.OnClosing(System.ComponentModel.CancelEventArgs)">
+            <summary>
+            Called whenever the application is about to exit.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.PDEMainWindow.ExitButton_Click(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Exit application.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.PDEMainWindow.Dispose">
+            <summary>
+            Invoked when this object is being removed from the application
+            and will be subject to garbage collection.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.PDEMainWindow.Dispose(System.Boolean)">
+            <summary>
+            Dispose method.
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.PDEMainWindow.MainViewModel">
+            <summary>
+            VModellXT Main view model.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.PDEMainWindow.WelcomeViewModel">
+            <summary>
+            Welcome view model.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.PDEMainWindow.DockingHostControl">
+            <summary>
+            Main content host.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.PDEMainWindow.RibbonHostControl">
+            <summary>
+            Main content host.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.PDEMainWindow.Ribbon">
+            <summary>
+            Ribbon.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.PDEMainWindow.AppName">
+            <summary>
+            Gets the name of the current editor.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.PDEMainWindow.Company">
+            <summary>
+            Gets the name of the company providing this editor.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.PDEMainWindow.Version">
+            <summary>
+            Gets the version of the editor.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.PDEMainWindow.AppDataDirectory">
+            <summary>
+            Gets the application data directory for the current editor.
+            </summary>
+        </member>
+        <member name="T:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Commands.CommandReference">
+            <summary>
+            This class facilitates associating a key binding in XAML markup to a command
+            defined in a View Model by exposing a Command dependency property.
+            The class derives from Freezable to work around a limitation in WPF when data-binding from XAML.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Commands.CommandReference.#ctor">
+            <summary>
+            Constructor.
+            </summary>
+        </member>
+        <member name="F:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Commands.CommandReference.CommandProperty">
+            <summary>
+            Command property.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Commands.CommandReference.CanExecute(System.Object)">
+            <summary>
+            Command can execute.
+            </summary>
+            <param name="parameter">Command parameter.</param>
+            <returns>True if the command can be executed; False otherwise.</returns>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Commands.CommandReference.Execute(System.Object)">
+            <summary>
+            Execute the command.
+            </summary>
+            <param name="parameter">Command parameter.</param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Commands.CommandReference.CreateInstanceCore">
+            <summary>
+            Not required.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Commands.CommandReference.Command">
+            <summary>
+            Gets or sets the command.
+            </summary>
+        </member>
+        <member name="E:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Commands.CommandReference.CanExecuteChanged">
+            <summary>
+            Can execute changed event handler.
+            </summary>
+        </member>
+        <member name="T:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Attached.CommandBehavior">
+            <summary>
+            Defines the attached properties to create a CommandBehaviorBinding
+            </summary>
+            <remarks>
+            Source: http://marlongrech.wordpress.com/2008/12/13/attachedcommandbehavior-v2-aka-acb/
+            </remarks>
+        </member>
+        <member name="F:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Attached.CommandBehavior.BehaviorProperty">
+            <summary>
+            Behavior Attached Dependency Property
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Attached.CommandBehavior.GetBehavior(System.Windows.DependencyObject)">
+            <summary>
+            Gets the Behavior property. 
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Attached.CommandBehavior.SetBehavior(System.Windows.DependencyObject,Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Attached.CommandBehaviorBinding)">
+            <summary>
+            Sets the Behavior property.  
+            </summary>
+        </member>
+        <member name="F:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Attached.CommandBehavior.CommandProperty">
+            <summary>
+            Command Attached Dependency Property
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Attached.CommandBehavior.GetCommand(System.Windows.DependencyObject)">
+            <summary>
+            Gets the Command property.  
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Attached.CommandBehavior.SetCommand(System.Windows.DependencyObject,System.Windows.Input.ICommand)">
+            <summary>
+            Sets the Command property. 
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Attached.CommandBehavior.OnCommandChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Handles changes to the Command property.
+            </summary>
+        </member>
+        <member name="F:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Attached.CommandBehavior.CommandParameterProperty">
+            <summary>
+            CommandParameter Attached Dependency Property
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Attached.CommandBehavior.GetCommandParameter(System.Windows.DependencyObject)">
+            <summary>
+            Gets the CommandParameter property.  
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Attached.CommandBehavior.SetCommandParameter(System.Windows.DependencyObject,System.Object)">
+            <summary>
+            Sets the CommandParameter property. 
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Attached.CommandBehavior.OnCommandParameterChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Handles changes to the CommandParameter property.
+            </summary>
+        </member>
+        <member name="F:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Attached.CommandBehavior.EventProperty">
+            <summary>
+            Event Attached Dependency Property
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Attached.CommandBehavior.GetEvent(System.Windows.DependencyObject)">
+            <summary>
+            Gets the Event property.  This dependency property 
+            indicates ....
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Attached.CommandBehavior.SetEvent(System.Windows.DependencyObject,System.String)">
+            <summary>
+            Sets the Event property.  This dependency property 
+            indicates ....
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Attached.CommandBehavior.OnEventChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary>
+            Handles changes to the Event property.
+            </summary>
+        </member>
+        <member name="T:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Commands.DelegateCommand`1">
+            <summary>
+            An <see cref="T:System.Windows.Input.ICommand"/> whose delegates can be attached for <see cref="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Commands.DelegateCommand`1.Execute(`0)"/> and <see cref="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Commands.DelegateCommand`1.CanExecute(`0)"/>.
+            It also implements the IActiveAware interface, which is
+            useful when registering this command in a CompositeCommand/&gt;
+            that monitors command's activity.
+            </summary>
+            <typeparam name="T">Parameter type.</typeparam>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Commands.DelegateCommand`1.#ctor(System.Action{`0})">
+            <summary>
+            Initializes a new instance of <see cref="T:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Commands.DelegateCommand`1"/>.
+            </summary>
+            <param name="executeMethod">Delegate to execute when Execute is called on the command.  This can be null to just hook up a CanExecute delegate.</param>
+            <remarks><seealso cref="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Commands.DelegateCommand`1.CanExecute(`0)"/> will always return true.</remarks>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Commands.DelegateCommand`1.#ctor(System.Action{`0},System.Func{`0,System.Boolean})">
+            <summary>
+            Initializes a new instance of <see cref="T:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Commands.DelegateCommand`1"/>.
+            </summary>
+            <param name="executeMethod">Delegate to execute when Execute is called on the command.  This can be null to just hook up a CanExecute delegate.</param>
+            <param name="canExecuteMethod">Delegate to execute when CanExecute is called on the command.  This can be null.</param>
+            <exception cref="T:System.ArgumentNullException">When both <paramref name="executeMethod"/> and <paramref name="canExecuteMethod"/> ar <see langword="null"/>.</exception>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Commands.DelegateCommand`1.CanExecute(`0)">
+            <summary>
+            Defines the method that determines whether the command can execute in its current state.
+            </summary>
+            <param name="parameter">Data used by the command. If the command does not require data to be passed, this object can be set to <see langword="null" />.</param>
+            <returns>
+            <see langword="true" /> if this command can be executed; otherwise, <see langword="false" />.
+            </returns>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Commands.DelegateCommand`1.Execute(`0)">
+            <summary>
+            Defines the method to be called when the command is invoked.
+            </summary>
+            <param name="parameter">Data used by the command. If the command does not require data to be passed, this object can be set to <see langword="null" />.</param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Commands.DelegateCommand`1.System#Windows#Input#ICommand#CanExecute(System.Object)">
+            <summary>
+            Defines the method that determines whether the command can execute in its current state.
+            </summary>
+            <param name="parameter">Data used by the command.  If the command does not require data to be passed, this object can be set to null.</param>
+            <returns>
+            true if this command can be executed; otherwise, false.
+            </returns>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Commands.DelegateCommand`1.System#Windows#Input#ICommand#Execute(System.Object)">
+            <summary>
+            Defines the method to be called when the command is invoked.
+            </summary>
+            <param name="parameter">Data used by the command.  If the command does not require data to be passed, this object can be set to null.</param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Commands.DelegateCommand`1.OnCanExecuteChanged">
+            <summary>
+            Raises <see cref="E:System.Windows.Input.ICommand.CanExecuteChanged"/> on the UI thread so every 
+            command invoker can requery <see cref="M:System.Windows.Input.ICommand.CanExecute(System.Object)"/> to check if the CompositeCommand can execute.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Commands.DelegateCommand`1.RaiseCanExecuteChanged">
+            <summary>
+            Raises <see cref="E:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Commands.DelegateCommand`1.CanExecuteChanged"/> on the UI thread so every command invoker
+            can requery to check if the command can execute.
+            <remarks>Note that this will trigger the execution of <see cref="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Commands.DelegateCommand`1.CanExecute(`0)"/> once for each invoker.</remarks>
+            </summary>
+        </member>
+        <member name="E:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Commands.DelegateCommand`1.CanExecuteChanged">
+            <summary>
+            Occurs when changes occur that affect whether or not the command should execute.
+            </summary>        
+        </member>
+        <member name="T:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Commands.DelegateCommand">
+            <summary>
+            An <see cref="T:System.Windows.Input.ICommand"/> whose delegates can be attached for <see cref="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Commands.DelegateCommand.Execute"/> and <see cref="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Commands.DelegateCommand.CanExecute"/>.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Commands.DelegateCommand.#ctor(System.Action)">
+            <summary>
+            Initializes a new instance of <see cref="T:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Commands.DelegateCommand`1"/>.
+            </summary>
+            <param name="executeMethod">Delegate to execute when Execute is called on the command.  This can be null to just hook up a CanExecute delegate.</param>
+            <remarks><seealso cref="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Commands.DelegateCommand.CanExecute"/> will always return true.</remarks>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Commands.DelegateCommand.#ctor(System.Action,System.Func{System.Boolean})">
+            <summary>
+            Initializes a new instance of <see cref="T:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Commands.DelegateCommand`1"/>.
+            </summary>
+            <param name="executeMethod">Delegate to execute when Execute is called on the command.  This can be null to just hook up a CanExecute delegate.</param>
+            <param name="canExecuteMethod">Delegate to execute when CanExecute is called on the command.  This can be null.</param>
+            <exception cref="T:System.ArgumentNullException">When both <paramref name="executeMethod"/> and <paramref name="canExecuteMethod"/> ar <see langword="null"/>.</exception>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Commands.DelegateCommand.#ctor(System.Action,System.Func{System.Boolean},System.Boolean)">
+            <summary>
+            Initializes a new instance of <see cref="T:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Commands.DelegateCommand`1"/>.
+            </summary>
+            <param name="executeMethod">Delegate to execute when Execute is called on the command.  This can be null to just hook up a CanExecute delegate.</param>
+            <param name="canExecuteMethod">Delegate to execute when CanExecute is called on the command.  This can be null.</param>
+            <exception cref="T:System.ArgumentNullException">When both <paramref name="executeMethod"/> and <paramref name="canExecuteMethod"/> ar <see langword="null"/>.</exception>
+            <param name="autoCanExecuteUpdating">Use this flag only if you can not invoke RaiseCanExecuteChanged</param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Commands.DelegateCommand.CanExecute">
+            <summary>
+            Defines the method that determines whether the command can execute in its current state.
+            </summary>
+            <returns>
+            <see langword="true" /> if this command can be executed; otherwise, <see langword="false" />.
+            </returns>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Commands.DelegateCommand.Execute">
+            <summary>
+            Defines the method to be called when the command is invoked.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Commands.DelegateCommand.System#Windows#Input#ICommand#CanExecute(System.Object)">
+            <summary>
+            Defines the method that determines whether the command can execute in its current state.
+            </summary>
+            <param name="parameter">Data used by the command.  If the command does not require data to be passed, this object can be set to null.</param>
+            <returns>
+            true if this command can be executed; otherwise, false.
+            </returns>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Commands.DelegateCommand.System#Windows#Input#ICommand#Execute(System.Object)">
+            <summary>
+            Defines the method to be called when the command is invoked.
+            </summary>
+            <param name="parameter">Data used by the command.  If the command does not require data to be passed, this object can be set to null.</param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Commands.DelegateCommand.OnCanExecuteChanged">
+            <summary>
+            Raises <see cref="E:System.Windows.Input.ICommand.CanExecuteChanged"/> on the UI thread so every 
+            command invoker can requery <see cref="M:System.Windows.Input.ICommand.CanExecute(System.Object)"/> to check if the CompositeCommand can execute.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Commands.DelegateCommand.RaiseCanExecuteChanged">
+            <summary>
+            Raises <see cref="E:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Commands.DelegateCommand.CanExecuteChanged"/> on the UI thread so every command invoker
+            can requery to check if the command can execute.
+            <remarks>Note that this will trigger the execution of <see cref="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Commands.DelegateCommand.CanExecute"/> once for each invoker.</remarks>
+            </summary>
+        </member>
+        <member name="E:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Commands.DelegateCommand.CanExecuteChanged">
+            <summary>
+            Occurs when changes occur that affect whether or not the command should execute.
+            </summary>        
+        </member>
+        <member name="T:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.FurtherReadingViewModel">
+            <summary>
+            This class provides further reading items.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.FurtherReadingViewModel.#ctor">
+            <summary>
+            Constuctor.
+            </summary>
+        </member>
+        <member name="T:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.LinkItemViewModel">
+            <summary>
+            This viewmodel is used to display LinkItems.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.LinkItemViewModel.#ctor(Tum.PDE.ToolFramework.Modeling.Base.LinkItem)">
+            <summary>
+            Constuctor.
+            </summary>
+            <param name="linkItem">Link item to be hosted by this view model.</param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.LinkItemViewModel.NavigateCommand_Executed">
+            <summary>
+            NavigateCommand executed.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.LinkItemViewModel.Titel">
+            <summary>
+            Gets the titel of the link item.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.LinkItemViewModel.Description">
+            <summary>
+            Gets the description of the link item. Can be null or empty.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.LinkItemViewModel.Link">
+            <summary>
+            Gets the link of the link item. Can be null or empty.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.LinkItemViewModel.Category">
+            <summary>
+            Gets the category of the link item. Can be null or empty.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.LinkItemViewModel.NavigateCommand">
+            <summary>
+            Gets the navigate command.
+            </summary>
+        </member>
+        <member name="T:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.BaseModelContextViewModel">
+            <summary>
+            Model context vm used at app startup in the welcome screen.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.BaseModelContextViewModel.#ctor(Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.MainWelcomeViewModel,System.String,System.String)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="mainVM"></param>
+            <param name="contextName"></param>
+            <param name="contextTitle"></param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.BaseModelContextViewModel.OnPropertyChanged(System.String)">
+            <summary>
+            Called whenever a specific property changes.
+            </summary>
+            <param name="name">Name of the property, which value changed.</param>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.BaseModelContextViewModel.SelectModelContextCommand">
+            <summary>
+            Gets the selectModelContextCommand.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.BaseModelContextViewModel.Name">
+            <summary>
+            Gets the hosted contexts titel.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.BaseModelContextViewModel.Titel">
+            <summary>
+            Gets the hosted contexts titel.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.BaseModelContextViewModel.IsSelected">
+            <summary>
+            Gets or sets whether this model context vm is the currently active model context vm.
+            </summary>
+        </member>
+        <member name="E:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.BaseModelContextViewModel.PropertyChanged">
+            <summary>
+            Property changed event.
+            </summary>
+        </member>
+        <member name="T:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Attached.EventHandlerGenerator">
+            <summary>
+            Generates delegates according to the specified signature on runtime
+            </summary>
+            <remarks>
+            Source: http://marlongrech.wordpress.com/2008/12/13/attachedcommandbehavior-v2-aka-acb/
+            </remarks>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Attached.EventHandlerGenerator.CreateDelegate(System.Type,System.Reflection.MethodInfo,System.Object)">
+            <summary>
+            Generates a delegate with a matching signature of the supplied eventHandlerType
+            This method only supports Events that have a delegate of type void
+            </summary>
+            <param name="eventHandlerType">The delegate type to wrap. Note that this must always be a void delegate</param>
+            <param name="methodToInvoke">The method to invoke</param>
+            <param name="methodInvoker">The object where the method resides</param>
+            <returns>Returns a delegate with the same signature as eventHandlerType that calls the methodToInvoke inside</returns>
+        </member>
+        <member name="T:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Converters.BoolToVisibilityConverter">
+            <summary>
+            This class converts boolean to visibility and vice versa. Should the incoming values be null,
+            'Visibility.Collapsed' or 'false' are returned.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Converters.BoolToVisibilityConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Converts a value to its target type.
+            </summary>
+            <param name="value">Value to convert.</param>
+            <param name="targetType">Target type.</param>
+            <param name="parameter">Optional parameter to use during conversion.</param>
+            <param name="culture">CultureInfo to use during conversion.</param>
+            <returns>Converted value</returns>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Converters.BoolToVisibilityConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Converts a value to its target type.
+            </summary>
+            <param name="value">Value to convert.</param>
+            <param name="targetType">Target type.</param>
+            <param name="parameter">Optional parameter to use during conversion.</param>
+            <param name="culture">CultureInfo to use during conversion.</param>
+            <returns>Converted value</returns>
+        </member>
+        <member name="T:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Ribbon.RibbonInGalleryItem">
+            <summary>
+            Gallery item for the ribbon InGallery control.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Ribbon.RibbonInGalleryItem.#cctor">
+            <summary>
+            Static constructor to set style.
+            </summary>
+        </member>
+        <member name="F:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Ribbon.RibbonInGalleryItem.IsSelectedItemProperty">
+            <summary>
+            Is selected dependency property.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Ribbon.RibbonInGalleryItem.IsSelectedItem">
+            <summary>
+            Property to notify the control that it is selected.
+            </summary>
+        </member>
+        <member name="T:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Attached.CommandBehaviorBinding">
+            <summary>
+            Defines the command behavior binding
+            </summary>
+            <remarks>
+            Source: http://marlongrech.wordpress.com/2008/12/13/attachedcommandbehavior-v2-aka-acb/
+            </remarks>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Attached.CommandBehaviorBinding.BindEvent(System.Windows.DependencyObject,System.String)">
+            <summary>
+            Creates an EventHandler on runtime and registers that handler to the Event specified.
+            </summary>
+            <param name="owner"></param>
+            <param name="eventName"></param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Attached.CommandBehaviorBinding.ExecuteCommand">
+            <summary>
+            Executes the command
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Attached.CommandBehaviorBinding.Dispose">
+            <summary>
+            Invoked when this object is being removed from the application
+            and will be subject to garbage collection.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Attached.CommandBehaviorBinding.Dispose(System.Boolean)">
+            <summary>
+            Unregisters the EventHandler from the Event
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Attached.CommandBehaviorBinding.Owner">
+            <summary>
+            Get the owner of the CommandBinding ex: a Button
+            This property can only be set from the BindEvent Method
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Attached.CommandBehaviorBinding.Command">
+            <summary>
+            The command to execute when the specified event is raised
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Attached.CommandBehaviorBinding.CommandParameter">
+            <summary>
+            Gets or sets a CommandParameter
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Attached.CommandBehaviorBinding.EventName">
+            <summary>
+            The event name to hook up to
+            This property can only be set from the BindEvent Method
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Attached.CommandBehaviorBinding.Event">
+            <summary>
+            The event info of the event
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Attached.CommandBehaviorBinding.EventHandler">
+            <summary>
+            Gets the EventHandler for the binding with the event
+            </summary>
+        </member>
+        <member name="T:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Contracts.IMainViewModel">
+            <summary>
+            Interface identifying a main vm.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Contracts.IMainViewModel.InitializeVM">
+            <summary>
+            Initialize.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Contracts.IMainViewModel.CanExit">
+            <summary>
+            True if the app can exit. False otherwise.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Contracts.IMainViewModel.OnExit">
+            <summary>
+            Logic to handle on app exit.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Contracts.IMainViewModel.Dispose">
+            <summary>
+            Dispose.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Contracts.IMainViewModel.OpenModel(System.String)">
+            <summary>
+            Open the model at the specified file location.
+            </summary>
+            <param name="fileName"></param>
+        </member>
+        <member name="E:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Contracts.IMainViewModel.LayoutManagerInitialized">
+            <summary>
+            Event handler, called after the layout manager has been initialized.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Contracts.IMainViewModel.Ribbon">
+            <summary>
+            Ribbon control.
+            </summary>
+        </member>
+        <member name="T:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.MRUFileEntryViewModel">
+            <summary>
+            This view model is used to represent a most recently used file entry.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.MRUFileEntryViewModel.#ctor(Tum.PDE.ToolFramework.Modeling.Base.MRUFileEntry)">
+            <summary>
+            Constuctor.
+            </summary>
+            <param name="mruEntry">MRU entry.</param>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.MRUFileEntryViewModel.FileName">
+            <summary>
+            Gets the file name.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.MRUFileEntryViewModel.ShortName">
+            <summary>
+            Gets the short name of the file.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.MRUFileEntryViewModel.MRUFileEntry">
+            <summary>
+            Gets the mru file entry.
+            </summary>
+        </member>
+        <member name="T:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="T:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModelOptions">
+            <summary>
+            View model options helper class.
+            </summary>
+        </member>
+        <member name="F:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModelOptions.OptionsFileName">
+            <summary>
+            Filename.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModelOptions.#ctor">
+            <summary>
+            Constructor.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModelOptions.Deserialize(System.String)">
+            <summary>
+            Load options.
+            </summary>
+            <param name="filePath">File name to load options from.</param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModelOptions.DoDeserialize(System.String)">
+            <summary>
+            Load options.
+            </summary>
+            <param name="filePath">File name to load options from.</param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModelOptions.DeserializeElement(System.Xml.XmlTextReader,System.String)">
+            <summary>
+            Deserialize element.
+            </summary>
+            <param name="reader">Xml text reader.</param>
+            <param name="elementName">Element name.</param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModelOptions.Serialize(System.String)">
+            <summary>
+            Save options.
+            </summary>
+            <param name="filePath">File name to save options to.</param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModelOptions.SerializeElements(System.Xml.XmlTextWriter)">
+            <summary>
+            Serialize.
+            </summary>
+            <param name="writer">Xml text writer.</param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModelOptions.OnOptionsDeserialized(System.EventArgs)">
+            <summary>
+            Called after options have been deserialized.
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModelOptions.IsDeserialized">
+            <summary>
+            Gets whether the options have already been deserialized.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModelOptions.ErrorCategoryVisible">
+            <summary>
+            Gets or sets whether the error category is toggled on the error list or not.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModelOptions.WarningCategoryVisible">
+            <summary>
+            Gets or sets whether the warning category is toggled on the error list or not.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModelOptions.InfoCategoryVisible">
+            <summary>
+            Gets or sets whether the info category is toggled on the error list or not.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModelOptions.FilteredCategoryVisible">
+            <summary>
+            Gets or sets whether the filtered category is toggled on the error list or not.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModelOptions.MRUFileEntries">
+            <summary>
+            MRU items.
+            </summary>
+        </member>
+        <member name="E:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModelOptions.OptionsDeserialized">
+            <summary>
+            Fires after options have been deserialized.
+            </summary>
+        </member>
+        <member name="T:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.CreditsViewModel">
+            <summary>
+            This class provides credits.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.CreditsViewModel.#ctor">
+            <summary>
+            Constuctor.
+            </summary>
+        </member>
+        <member name="T:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.WaitCursor">
+            <summary>
+            This class implements a disposable WaitCursor to 
+            show an hourglass while some long-running event occurs.
+            </summary>
+            <example>
+            <![CDATA[
+            
+            using (new WaitCursor())
+            {
+               .. Do work here ..
+            }
+            
+            ]]>
+            </example>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.WaitCursor.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.WaitCursor.Dispose">
+            <summary>
+            Invoked when this object is being removed from the application
+            and will be subject to garbage collection.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.WaitCursor.Dispose(System.Boolean)">
+            <summary>
+            Returns the cursor to the default state.
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="T:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.MRUFilesViewModel">
+            <summary>
+            View model for handling mru file entries.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.MRUFilesViewModel.#ctor(System.String,Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModelOptions,Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.MainWelcomeViewModel)">
+            <summary>
+            Constuctor.
+            </summary>
+            <param name="modelContextName">Name of the model context.</param>
+            <param name="options">View model options.</param>
+            <param name="mainViewModel">The main view model, this MRU view model belongs to.</param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.MRUFilesViewModel.InitializeMRUEntries(System.String)">
+            <summary>
+            Initializes mru entries based on the given context name.
+            </summary>
+            <param name="modelContextName">Model context name.</param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.MRUFilesViewModel.AddCommandExecuted(Tum.PDE.ToolFramework.Modeling.Base.MRUFileEntry)">
+            <summary>
+            AddCommand executed.
+            </summary>
+            <param name="entry">MRU file entry.</param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.MRUFilesViewModel.RemoveCommandExecuted(Tum.PDE.ToolFramework.Modeling.Base.MRUFileEntry)">
+            <summary>
+            Remove command executed.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.MRUFilesViewModel.MoveToTopCommandExecuted(Tum.PDE.ToolFramework.Modeling.Base.MRUFileEntry)">
+            <summary>
+            Move to top command executed.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.MRUFilesViewModel.OpenCommandExecuted(Tum.PDE.ToolFramework.Modeling.Base.MRUFileEntry)">
+            <summary>
+            Open command executed.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.MRUFilesViewModel.AddMRUEntry(Tum.PDE.ToolFramework.Modeling.Base.MRUFileEntry)">
+            <summary>
+            Adds a new mru entry to the collection.
+            </summary>
+            <param name="entry">MRU entry to add</param>
+            <remarks>
+            If the given mru entry already exists in the collection --> we move it to the top of the list, making it the most recent entry.
+            </remarks>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.MRUFilesViewModel.AddMRUEntry(System.String)">
+            <summary>
+            Adds a new mru entry to the collection.
+            </summary>
+            <param name="fileName">File name.</param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.MRUFilesViewModel.Contains(System.String,System.String)">
+            <summary>
+            Verifies if there is a mru entry pointing at the given file name and providing the same version as given.
+            </summary>
+            <param name="fileName">File name.</param>
+            <param name="modelContextName">Model context name.</param>
+            <returns>True if a mru entry is found; False otherwise.</returns>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.MRUFilesViewModel.Contains(Tum.PDE.ToolFramework.Modeling.Base.MRUFileEntry)">
+            <summary>
+            Verifies if there is a specific mru entry.
+            </summary>
+            <param name="mruEntry">Mru entry.</param>
+            <returns>True if a mru entry is found; False otherwise.</returns>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.MRUFilesViewModel.MoveToTop(Tum.PDE.ToolFramework.Modeling.Base.MRUFileEntry)">
+            <summary>
+            Moves an mru entry to the top of the list.
+            </summary>
+            <param name="entry">MRU entry.</param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.MRUFilesViewModel.MoveToTop(System.String,System.String)">
+            <summary>
+            Moves an mru entry to the top of the list.
+            </summary>
+            <param name="fileName">MRU file name.</param>
+            <param name="modelContextName">Model context name.</param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.MRUFilesViewModel.RemoveMRUEntry(Tum.PDE.ToolFramework.Modeling.Base.MRUFileEntry)">
+            <summary>
+            Removes an mru entry from the list.
+            </summary>
+            <param name="entry">MRU entry.</param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.MRUFilesViewModel.RemoveMRUEntry(System.String,System.String)">
+            <summary>
+            Removes an mru entry from the list.
+            </summary>
+            <param name="fileName">File name pointing to an mru entry.</param>
+            <param name="modelContextName">Model context name.</param>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.MRUFilesViewModel.MRUFileEntries">
+            <summary>
+            Gets the mru fil entries.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.MRUFilesViewModel.SelectedMRUFileEntry">
+            <summary>
+            Gets or sets the selected mru file entry.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.MRUFilesViewModel.AddCommand">
+            <summary>
+            Gets the add command.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.MRUFilesViewModel.RemoveCommand">
+            <summary>
+            Gets the remove command.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.MRUFilesViewModel.MoveToTopCommand">
+            <summary>
+            Gets the move to top command.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.MRUFilesViewModel.OpenCommand">
+            <summary>
+            Gets the open command.
+            </summary>
+        </member>
+        <member name="T:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.MainWelcomeViewModel">
+            <summary>
+            Welcome view model that is displayed on application start.
+            </summary>
+        </member>
+        <member name="T:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Contracts.IMainWelcomeViewModel">
+            <summary>
+            Interface identifying a main welcome vm.
+            </summary>
+        </member>
+        <member name="E:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Contracts.IMainWelcomeViewModel.OpenModelRequested">
+            <summary>
+            Event handler, called once a model open request has been initiated.
+            </summary>
+        </member>
+        <member name="F:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.MainWelcomeViewModel.Options">
+            <summary>
+            Gets the options.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.MainWelcomeViewModel.#ctor(System.String)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="optionsPath">Options path.</param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.MainWelcomeViewModel.NewModelCommandExecuted">
+            <summary>
+            New command executed.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.MainWelcomeViewModel.OpenModelCommandExecuted">
+            <summary>
+            Open command executed.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.MainWelcomeViewModel.Load(System.String)">
+            <summary>
+            Load options for a specific model context.
+            </summary>
+            <param name="modelContextName"></param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.MainWelcomeViewModel.ChangeModelContext(System.String)">
+            <summary>
+            Model context change.
+            </summary>
+            <param name="modelContextName"></param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.MainWelcomeViewModel.OpenModel(System.String)">
+            <summary>
+            Open model.
+            </summary>
+            <param name="fileName"></param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.MainWelcomeViewModel.OnOpenModelRequested(Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.MainWelcomeViewModel.OpenModelEventArgs)">
+            <summary>
+            Called after the layout manager has been initialized.
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.MainWelcomeViewModel.NewModelCommand">
+            <summary>
+            New command, used to create a new document.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.MainWelcomeViewModel.OpenModelCommand">
+            <summary>
+            New command, used to open an existing document.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.MainWelcomeViewModel.MRUFilesViewModel">
+            <summary>
+            Gets or sets the mru files view model.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.MainWelcomeViewModel.FurtherReadingViewModel">
+            <summary>
+            Gets the further reading vm.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.MainWelcomeViewModel.SelectedModelContextViewModel">
+            <summary>
+            Gets or sets the selected model context vm.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.MainWelcomeViewModel.AvailableModelModelContextViewModels">
+            <summary>
+            Gets the list of available model context vms.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.MainWelcomeViewModel.WindowTitle">
+            <summary>
+            Gets or sets the window title.
+            </summary>
+        </member>
+        <member name="E:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.MainWelcomeViewModel.OpenModelRequested">
+            <summary>
+            Fires after the layout manager has been initialized.
+            </summary>
+        </member>
+        <member name="T:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.MainWelcomeViewModel.OpenModelEventArgs">
+            <summary>
+            Open model event arguments.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.MainWelcomeViewModel.OpenModelEventArgs.#ctor(System.String)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="fileName">Filename to open.</param>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Visualization.Base.ViewModel.MainWelcomeViewModel.OpenModelEventArgs.FileName">
+            <summary>
+            Gets the filename to open.
+            </summary>
+        </member>
+        <member name="T:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.WelcomeWindowControl">
+            <summary>
+            Interaction logic for WelcomeWindowControl.xaml
+            </summary>
+            <summary>
+            WelcomeWindowControl
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.WelcomeWindowControl.#ctor">
+            <summary>
+            Constructor.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.WelcomeWindowControl.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Ribbon.RibbonCreationHelper">
+            <summary>
+            Helper class for creating the ribbon menu.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Ribbon.RibbonCreationHelper.CreateButton(System.String)">
+            <summary>
+            Creates a ribbon button.
+            </summary>
+            <param name="text">Text.</param>
+            <returns>Ribbon button.</returns>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Ribbon.RibbonCreationHelper.CreateButton(System.String,System.String)">
+            <summary>
+            Creates a ribbon button.
+            </summary>
+            <param name="text">Text.</param>
+            <param name="imageUri">Image uri. Can be null.</param>
+            <returns>Ribbon button.</returns>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Ribbon.RibbonCreationHelper.CreateButton(System.String,System.String,System.String,System.String)">
+            <summary>
+            Creates a ribbon button.
+            </summary>
+            <param name="text">Text.</param>
+            <param name="imageUri">Image uri. Can be null.</param>
+            <param name="size">Large, Medium, .. Can be null.</param>
+            <param name="commandBinding">Binding path for the Command-Property. Can be null.</param>
+            <returns>Ribbon button.</returns>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Ribbon.RibbonCreationHelper.CreateButton(System.String,System.String,System.String,System.String,System.Windows.Data.BindingMode)">
+            <summary>
+            Creates a ribbon button.
+            </summary>
+            <param name="text">Text.</param>
+            <param name="imageUri">Image uri. Can be null.</param>
+            <param name="size">Large, Medium, .. Can be null.</param>
+            <param name="commandBinding">Binding path for the Command-Property. Can be null.</param>
+            <param name="commandBindingMode">Binding mode for the Command-Property.</param>
+            <returns>Ribbon button.</returns>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Ribbon.RibbonCreationHelper.CreateButton(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Creates a ribbon button.
+            </summary>
+            <param name="text">Text.</param>
+            <param name="imageUri">Image uri. Can be null.</param>
+            <param name="size">Large, Medium, .. Can be null.</param>
+            <param name="commandBinding">Binding path for the Command-Property. Can be null.</param>
+            <param name="commandParameterBinding">>Binding path for the CommandParameter-Property. Can be null.</param>
+            <returns>Ribbon button.</returns>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Ribbon.RibbonCreationHelper.CreateButton(System.String,System.String,System.String,System.String,System.Windows.Data.BindingMode,System.String,System.Windows.Data.BindingMode)">
+            <summary>
+            Creates a ribbon button.
+            </summary>
+            <param name="text">Text.</param>
+            <param name="imageUri">Image uri. Can be null.</param>
+            <param name="size">Large, Medium, .. Can be null.</param>
+            <param name="commandBinding">Binding path for the Command-Property. Can be null.</param>
+            <param name="commandBindingMode">Binding mode for the Command-Property. Default is OneWay.</param>
+            <param name="commandParameterBinding">>Binding path for the CommandParameter-Property. Can be null.</param>
+            <param name="commandParameterBindingMode">Binding mode for the CommandParameter-Property.</param>
+            <returns>Ribbon button.</returns>
+        </member>
+        <member name="T:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Ribbon.RibbonTabItemLateInit">
+            <summary>
+            Ribbon tab item providing late initialization.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Ribbon.RibbonTabItemLateInit.#ctor">
+            <summary>
+            Constructor.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Ribbon.RibbonTabItemLateInit.OnLateInitializationTriggered(System.EventArgs)">
+            <summary>
+            Called when initialization should processed.
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="E:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Ribbon.RibbonTabItemLateInit.LateInitializationTriggered">
+            <summary>
+            Fires when the tab item needs to initialize itself.
+            </summary>
+        </member>
+        <member name="T:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.PDEApplication">
+            <summary>
+            This is a base class for a PDE application
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.PDEApplication.HandleException(System.Exception)">
+            <summary>
+            Handle the given unhandled exception.
+            </summary>
+            <param name="ex">Exception.</param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.PDEApplication.SaveException(System.Exception)">
+            <summary>
+            Save unhandled exception.
+            </summary>
+            <param name="ex">Exception ex.</param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.PDEApplication.OnExit(System.Windows.ExitEventArgs)">
+            <summary>
+            Exit..
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="T:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Commands.WeakEventHandlerManager">
+            <summary>
+            Handles management and dispatching of EventHandlers in a weak way.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Commands.WeakEventHandlerManager.CallWeakReferenceHandlers(System.Object,System.Collections.Generic.List{System.WeakReference})">
+            <summary>
+             Invokes the handlers 
+            </summary>
+            <param name="sender"></param>
+            <param name="handlers"></param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Commands.WeakEventHandlerManager.AddWeakReferenceHandler(System.Collections.Generic.List{System.WeakReference}@,System.EventHandler,System.Int32)">
+            <summary>
+             Adds a handler to the supplied list in a weak way.
+            </summary>
+            <param name="handlers">Existing handler list.  It will be created if null.</param>
+            <param name="handler">Handler to add.</param>
+            <param name="defaultListSize">Default list size.</param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Commands.WeakEventHandlerManager.RemoveWeakReferenceHandler(System.Collections.Generic.List{System.WeakReference},System.EventHandler)">
+            <summary>
+             Removes an event handler from the reference list.
+            </summary>
+            <param name="handlers">Handler list to remove reference from.</param>
+            <param name="handler">Handler to remove.</param>
+        </member>
+        <member name="T:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Commands.WeakEventHandlerManager.DispatcherProxy">
+            <summary>
+            Hides the dispatcher mis-match between Silverlight and .Net, largely so code reads a bit easier
+            </summary>
+        </member>
+    </members>
+</doc>

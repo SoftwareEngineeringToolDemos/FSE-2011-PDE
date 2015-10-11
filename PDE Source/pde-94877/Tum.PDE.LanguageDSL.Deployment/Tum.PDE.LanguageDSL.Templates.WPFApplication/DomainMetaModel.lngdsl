@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<MetaModel Id="$LanguageID$" name="$LanguageName$" companyName="$LanguageCompanyName$" namespace="$LanguageNamespace$" productName="$LanguageProductName$" displayName="$LanguageProductName$" applicationName="$LanguageProductName$" description="$LanguageDescription$" languageType="WPFEditor">
+  <domainTypes>
+    <externalType namespace="System" serializationStyle="Normal" name="String" displayName="String" isDisplayNameTracking="True" requiresSerializationConversion="false">
+      <propertyGridEditor>
+        <propertyGridEditorMoniker name="StringEditorViewModel" />
+      </propertyGridEditor>
+    </externalType>
+    <externalType namespace="System" serializationStyle="Normal" name="Boolean?" displayName="Boolean" isDisplayNameTracking="True" requiresSerializationConversion="false">
+      <propertyGridEditor>
+        <propertyGridEditorMoniker name="BooleanEditorViewModel" />
+      </propertyGridEditor>
+    </externalType>
+    <externalType namespace="System" serializationStyle="Normal" name="Guid?" displayName="Guid" isDisplayNameTracking="True" requiresSerializationConversion="false" />
+    <externalType namespace="System" serializationStyle="Normal" name="Int32?" displayName="Integer" isDisplayNameTracking="True" requiresSerializationConversion="true">
+      <propertyGridEditor>
+        <propertyGridEditorMoniker name="IntegerEditorViewModel" />
+      </propertyGridEditor>
+    </externalType>
+    <externalType namespace="System" serializationStyle="Normal" name="Double?" displayName="Double" isDisplayNameTracking="True" requiresSerializationConversion="true">
+      <propertyGridEditor>
+        <propertyGridEditorMoniker name="DoubleEditorViewModel" />
+      </propertyGridEditor>
+    </externalType>
+  </domainTypes>
+  <validation>
+    <metaModelHasValidation Id="$Guid1$">
+      <validation Id="$Guid2$" useLoad="true" useMenu="true" useOpen="true" useSave="true" useAutoValidation="true" />
+    </metaModelHasValidation>
+  </validation>
+  <modelContexts>
+    <metaModelHasModelContexts Id="$Guid3$">
+      <modelContext Id="$Guid4$" isDisplayNameTracking="True" name="DefaultContext" isDefault="true" displayName="Default Context">
+        <classes>
+          <libraryModelContextHasClasses Id="$Guid5$">
+            <domainClass Id="$Guid6$" displayName="DomainModel" isDisplayNameTracking="True" name="DomainModel" generatesDoubleDerived="false" hasCustomConstructor="false" accessModifier="Public" inheritanceModifier="None" namespace="$LanguageNamespace$" serializationName="DomainModel" isSerializationNameTracking="True" isDomainModel="true" canCopy="true" canMove="true" canPaste="true" generateSpecificViewModel="false" />
+          </libraryModelContextHasClasses>
+        </classes>
+        <diagramClasses>
+          <libraryModelContextHasDiagramClasses Id="$Guid7$">
+            <designerDiagramClass Id="$Guid8$" name="DesignerDiagram" title="Designer" isCustom="false" />
+          </libraryModelContextHasDiagramClasses>
+        </diagramClasses>
+        <serializationModel>
+          <libraryModelContextHasSerializationModel Id="$Guid9$">
+            <serializationModel Id="$Guid10$" serializedIdAttributeName="Id">
+              <serializedDomainModel>
+                <serializationModelHasSerializedDomainModel Id="$Guid11$">
+                  <serializedDomainModel Id="$Guid12$" isSerializationNameTracking="True" serializationName="DomainModel" serializedIdAttributeName="Id">
+                    <attributes>
+                      <serializationClassReferencesAttributes Id="$Guid13$">
+                        <serializedIdPropertyMoniker Id="$Guid14$" />
+                      </serializationClassReferencesAttributes>
+                    </attributes>
+                    <idProperty>
+                      <serializationClassHasIdProperty Id="$Guid15$">
+                        <serializedIdProperty Id="$Guid14$" name="Id" serializationName="Id" omitIdProperty="false" />
+                      </serializationClassHasIdProperty>
+                    </idProperty>
+                    <domainClass>
+                      <serializedDomainClassReferencesDomainClass Id="$Guid16$">
+                        <domainClassMoniker Id="$Guid6$" />
+                      </serializedDomainClassReferencesDomainClass>
+                    </domainClass>
+                  </serializedDomainModel>
+                </serializationModelHasSerializedDomainModel>
+              </serializedDomainModel>
+            </serializationModel>
+          </libraryModelContextHasSerializationModel>
+        </serializationModel>
+      </modelContext>
+    </metaModelHasModelContexts>
+  </modelContexts>
+  <propertyGridEditors>
+    <propertyGridEditor name="StringEditorViewModel" namespace="Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel.PropertyGrid" shouldBeGenerated="false" editorBaseType="PropertyEditorViewModel" requiresContextMenuBar="false" />
+    <propertyGridEditor name="BooleanEditorViewModel" namespace="Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel.PropertyGrid" shouldBeGenerated="false" editorBaseType="PropertyEditorViewModel" requiresContextMenuBar="false" />
+    <propertyGridEditor name="EnumerationEditorViewModel" namespace="Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel.PropertyGrid" shouldBeGenerated="false" editorBaseType="PropertyEditorViewModel" requiresContextMenuBar="false" />
+    <propertyGridEditor name="IntegerEditorViewModel" namespace="Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel.PropertyGrid" shouldBeGenerated="false" editorBaseType="StringEditorViewModel" requiresContextMenuBar="false" />
+    <propertyGridEditor name="DoubleEditorViewModel" namespace="Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel.PropertyGrid" shouldBeGenerated="false" editorBaseType="StringEditorViewModel" requiresContextMenuBar="false" />
+  </propertyGridEditors>
+</MetaModel>

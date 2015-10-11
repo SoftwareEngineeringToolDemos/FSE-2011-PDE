@@ -1,0 +1,422 @@
+﻿<#@ template language="C#" inherits="BaseTemplate"#> 
+<#@ import namespace="Tum.PDE.LanguageDSL"#>
+<#@ import namespace="Microsoft.VisualStudio.Modeling" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Collections.ObjectModel" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+using DslModeling = global::Microsoft.VisualStudio.Modeling;
+using DslEditorModeling = global::Tum.PDE.ToolFramework.Modeling;
+using DslEditorDiagrams = global::Tum.PDE.ToolFramework.Modeling.Diagrams;
+using DslDesign = global::Microsoft.VisualStudio.Modeling.Design;
+
+<#
+foreach(BaseModelContext context in this.MetaModel.ModelContexts)
+{
+	if( context is LibraryModelContext )
+		GenerateShapes(context as LibraryModelContext);
+}
+#>
+<#+ 
+public void GenerateShapes(LibraryModelContext modelContext)
+{
+	foreach(DiagramClass diagram in modelContext.DiagramClasses)
+	{
+	Dictionary<ShapeClass, List<ShapeClass>> childParentMapping = new Dictionary<ShapeClass, List<ShapeClass>>();
+	Dictionary<DomainClass, List<EmbeddingRelationship>> embeddingChildParentMapping = new Dictionary<DomainClass, List<EmbeddingRelationship>>();
+
+	foreach(PresentationElementClass presentationElement in diagram.PresentationElements)
+	{
+		if( presentationElement is ShapeClass)
+		{
+			ShapeClass shapeClass = presentationElement as ShapeClass;
+			DomainClass domainClass = shapeClass.DomainClass;
+
+			if( domainClass == null )
+				continue;
+			
+			if( shapeClass.Parent != null )
+			{
+				if( shapeClass.Parent.DomainClass == null )
+					continue;
+				
+				if( !childParentMapping.ContainsKey(shapeClass.Parent) )
+					childParentMapping.Add(shapeClass.Parent, new List<ShapeClass>());
+				
+				childParentMapping[shapeClass.Parent].Add(shapeClass);
+			}
+			
+			if( !embeddingChildParentMapping.ContainsKey(domainClass) )
+				embeddingChildParentMapping.Add(domainClass, new List<EmbeddingRelationship>());
+			foreach(DomainRole rolesPlayed in domainClass.RolesPlayed)
+			{
+				if( rolesPlayed.Relationship.Target == rolesPlayed && 
+					rolesPlayed.Relationship is EmbeddingRelationship && 
+					rolesPlayed.Relationship.InheritanceModifier != InheritanceModifier.Abstract)
+						if( !embeddingChildParentMapping[domainClass].Contains(rolesPlayed.Relationship as EmbeddingRelationship) )
+							embeddingChildParentMapping[domainClass].Add(rolesPlayed.Relationship as EmbeddingRelationship);
+			}
+			if( embeddingChildParentMapping[domainClass].Count > 0 )
+			{
+				IEnumerable<AttributedDomainElement> sortedByInheritanceRS = CodeGenerationUtilities.SortDomainClassesByInheritance(embeddingChildParentMapping[domainClass]);					
+				embeddingChildParentMapping[domainClass].Clear();
+				foreach(EmbeddingRelationship r in sortedByInheritanceRS)
+					embeddingChildParentMapping[domainClass].Add(r);
+			}
+		}
+	}
+	foreach(PresentationElementClass presentationElement in diagram.PresentationElements)
+	{
+		string baseClass = "DslEditorDiagrams::NodeShape";
+		string className = presentationElement.Name;
+		bool hasBaseClass = false;
+		InheritanceModifier modifier = presentationElement.InheritanceModifier;
+		
+		if( !(presentationElement is ShapeClass) )
+		{
+			baseClass = "DslEditorDiagrams::LinkShape";
+		}
+		else if(presentationElement is ShapeClass)
+		{
+			if( (presentationElement as ShapeClass).BaseShape != null )
+			{
+				ShapeClass s = (presentationElement as ShapeClass).BaseShape;
+				baseClass = s.Namespace + "." + s.Name;
+				hasBaseClass = true;
+			}
+		}
+		
+		if( presentationElement.GeneratesDoubleDerived )
+		{
+			className += "Base";
+			modifier = InheritanceModifier.Abstract;
+		}
+	
+#>
+namespace <#= presentationElement.Namespace #>
+{
+	/// <summary>
+    /// <#= className #> class representing a Shape.
+    /// </summary>
+	[DslModeling::DomainObjectId("<#= presentationElement.Id.ToString("D") #>")]
+	<#= CodeGenerationUtilities.GetAccessModifier(presentationElement.AccessModifier) #><#= CodeGenerationUtilities.GetInheritanceModifier(modifier) #> partial class <#= className #> : <#= baseClass #>
+	{
+		#region Constructors, domain class Id
+
+		/// <summary>
+		/// <#= presentationElement.Name #> domain class Id.
+		/// </summary>
+		public static readonly new global::System.Guid DomainClassId = new System.Guid("<#= presentationElement.Id.ToString("D") #>");
+<#+
+		PushIndent("\t\t");
+		GenerateDomainClassConstructors(presentationElement, true);
+		PopIndent();
+#>
+		#endregion
+<#+
+		PushIndent("\t\t");
+		foreach(DomainProperty property in presentationElement.Properties)
+		{
+			this.Write(DomainPropertyGenerator.Instance.GenerateDomainProperty(property));
+		}
+		PopIndent();
+		
+		if( presentationElement is ShapeClass )
+		{
+			ShapeClass shapeClass = presentationElement as ShapeClass;
+			bool bTopMost = false;
+			if( shapeClass.Parent == null )
+				bTopMost = true;
+#>
+		#region Shape Properties/Methods
+		        /// <summary>
+        /// Gets if this shape is a top most item.
+        /// </summary>
+        public override bool IsTopMostItem 
+		{ 
+			get
+			{
+				return <#= bTopMost.ToString().ToLower() #>;
+			}
+		}
+		
+		        /// <summary>
+        /// Gets the default size of the shape.
+        /// </summary>
+        public override DslEditorDiagrams::SizeD DefaultSize
+        {
+            get
+            {
+                return new DslEditorDiagrams::SizeD(<#= shapeClass.DefaultWidth #>, <#= shapeClass.DefaultHeight #>);
+            }
+        }
+		
+		 /// <summary>
+        /// Gets the used defined resizing behaviour value.
+        /// </summary>
+        /// <returns>Resizing behaviour value.</returns>
+        public override DslEditorDiagrams::ShapeResizingBehaviour GetResizingBehaviourValue()
+		{
+<#+
+			if( shapeClass.IsFixedWidth && shapeClass.IsFixedHeight )
+			{
+#>
+			return DslEditorDiagrams::ShapeResizingBehaviour.Fixed;
+<#+
+			}
+			else if( shapeClass.IsFixedWidth )
+			{
+#>
+			return DslEditorDiagrams::ShapeResizingBehaviour.FixedWidth;
+<#+
+			}
+			else if( shapeClass.IsFixedHeight )
+			{
+#>
+			return DslEditorDiagrams::ShapeResizingBehaviour.FixedHeight;
+<#+
+			}
+			else
+			{
+#>
+			return DslEditorDiagrams::ShapeResizingBehaviour.Normal;
+<#+
+			}
+#>
+		}
+
+        /// <summary>
+        /// Gets the used defined movement behaviour value.
+        /// </summary>
+        /// <returns>Movement behaviour value.</returns>
+        public override DslEditorDiagrams::ShapeMovementBehaviour GetMovementBehaviourValue()
+		{
+<#+
+			if( shapeClass.IsRelativeChild )
+			{
+				if( shapeClass.RelativeChildBehaviour == RelativeChildBehaviour.PositionRelativeToParent )
+				{
+#>
+			return DslEditorDiagrams::ShapeMovementBehaviour.PositionRelativeToParent;
+<#+
+				}
+				else if( shapeClass.RelativeChildBehaviour == RelativeChildBehaviour.PositionOnEdgeOfParent )
+				{
+#>
+			return DslEditorDiagrams::ShapeMovementBehaviour.PositionOnEdgeOfParent;
+<#+
+				}
+			}
+			else
+			{
+#>
+			return DslEditorDiagrams::ShapeMovementBehaviour.Normal;
+<#+
+			}
+#>
+		}
+
+        /// <summary>
+        /// Gets whether this shape is a relative child shape or not.
+        /// </summary>
+        /// <returns>True if this shape is a relative child shape. False otherwise</returns>
+        public override bool GetIsRelativeChildShapeValue()
+		{
+			return <#= shapeClass.IsRelativeChild.ToString().ToLower() #>;
+		}
+		
+        /// <summary>
+        /// Gets whether this shape takes part in any relationship or not.
+        /// </summary>
+        /// <returns>True if this shape takes part in any relationship. False otherwise</returns>
+        public override bool GetTakesPartInRelationshipValue()
+		{
+<#+
+			if( hasBaseClass )
+			{
+#>
+			if( base.GetTakesPartInRelationshipValue() )
+				return true;
+				
+<#+
+			}
+			
+			bool takesPart = false;
+			foreach(PresentationElementClass pLink in diagram.PresentationElements)
+			{
+				if( pLink is RelationshipShapeClass)
+				{
+					RelationshipShapeClass rsShape = pLink as RelationshipShapeClass;
+					DomainRelationship con = rsShape.ReferenceRelationship;
+					if( con != null )
+						if( CodeGenerationUtilities.ShapeTakesPart(shapeClass, con) )
+							takesPart = true;
+				}
+				else if( !takesPart && pLink is MappingRelationshipShapeClass )
+				{
+					MappingRelationshipShapeClass rsShape = pLink as MappingRelationshipShapeClass;
+					ReferenceRelationship con = rsShape.Source;
+					if( con != null )
+						if( CodeGenerationUtilities.ShapeTakesPart(shapeClass, con.Target.RolePlayer as DomainClass) )
+							takesPart = true;
+						
+					con = rsShape.Target;
+					if( con != null && !takesPart )
+						if( CodeGenerationUtilities.ShapeTakesPart(shapeClass, con.Target.RolePlayer as DomainClass) )
+							takesPart = true;
+				}
+			}
+#>
+			return <#= takesPart.ToString().ToLower() #>;
+		}
+		#endregion
+<#+
+		}
+#>
+	}
+<#+
+		// If this class is double-derived, generate the skeleton derived class (with just the
+		// constructors)
+		if ( presentationElement.GeneratesDoubleDerived )
+		{
+#>			
+	/// <summary>
+    /// <#= presentationElement.Name #> class representing a Shape.
+    /// </summary>
+	<#= CodeGenerationUtilities.GetAccessModifier(presentationElement.AccessModifier) #><#= CodeGenerationUtilities.GetInheritanceModifier(presentationElement.InheritanceModifier) #> partial class <#= presentationElement.Name #> : <#= presentationElement.Name #>Base
+	{
+		#region Constructors
+<#+
+			PushIndent("\t\t");
+			GenerateDomainClassConstructors(presentationElement, false);
+			PopIndent();
+#>
+		#endregion
+	}
+<#+
+		}
+#>
+}
+<#+
+	}
+#>
+<#+
+}
+#>
+<#+
+}
+#>
+
+<#+
+/// <summary>
+/// Generate the constructors for a DomainClass
+/// </summary>
+/// <param name="domainClass">the domain class to generate constructors for</param>
+/// <param name="generatedClass">Whether this is the class carrying the generated code or the derived class in a double-derived pair</param>
+private void GenerateDomainClassConstructors(PresentationElementClass presentationClass, bool generatedClass)
+{
+	if(presentationClass.HasCustomConstructor && !(generatedClass && presentationClass.GeneratesDoubleDerived))
+	{
+#>
+// Constructors were not generated for this class because it had HasCustomConstructor
+// set to true. Please provide the constructors below in a partial class.
+<#+
+		// We comment out the constructors if HasCustomConstructor is set to true
+		PushIndent("//");
+	}
+	string ctorName;
+	if ( generatedClass )
+	{
+		if( presentationClass.GeneratesDoubleDerived)
+			ctorName = presentationClass.Name + "Base";
+		else
+			ctorName = presentationClass.Name;
+	}
+	else
+	{
+		ctorName = presentationClass.Name;
+	}
+	if(presentationClass.InheritanceModifier == InheritanceModifier.Abstract || (generatedClass && presentationClass.GeneratesDoubleDerived ))
+	{
+#>
+/// <summary>
+/// Constructor.
+/// </summary>
+/// <param name="partition">Partition where new element is to be created.</param>
+/// <param name="propertyAssignments">List of domain property id/value pairs to set once the element is created.</param>
+protected <#= ctorName #>(DslModeling::Partition partition, DslModeling::PropertyAssignment[] propertyAssignments)
+	: base(partition, propertyAssignments)
+{
+<#+
+	//SetupInitialValues(presentationClass);
+#>
+}
+<#+
+	}
+	else
+	{
+#>
+/// <summary>
+/// Constructor
+/// </summary>
+/// <param name="store">Store where new element is to be created.</param>
+/// <param name="propertyAssignments">List of domain property id/value pairs to set once the element is created.</param>
+public <#= ctorName #>(DslModeling::Store store, params DslModeling::PropertyAssignment[] propertyAssignments)
+	: this(store != null ? store.DefaultPartitionForClass(DomainClassId) : null, propertyAssignments)
+{
+<#+
+	//SetupInitialValues(presentationClass);
+#>
+}
+
+/// <summary>
+/// Constructor
+/// </summary>
+/// <param name="partition">Partition where new element is to be created.</param>
+/// <param name="propertyAssignments">List of domain property id/value pairs to set once the element is created.</param>
+public <#= ctorName #>(DslModeling::Partition partition, params DslModeling::PropertyAssignment[] propertyAssignments)
+	: base(partition, propertyAssignments)
+{
+}
+<#+
+	}
+	if(presentationClass.HasCustomConstructor && !(generatedClass && presentationClass.GeneratesDoubleDerived))
+	{
+		PopIndent();
+	}
+}
+#>
+
+<#+
+private void SetupInitialValues(PresentationElementClass presentationClass)
+{
+	if( presentationClass is ShapeClass )
+	{
+		ShapeClass shapeClass = presentationClass as ShapeClass;
+#>
+	bool bHandledSize = false;
+	bool bHandledLocation = false;
+	bool bHandledAbsoluteLocation = false;
+	
+	if( propertyAssignments != null )
+		foreach(DslModeling::PropertyAssignment propertyAssignment in propertyAssignments )
+		{
+			if( propertyAssignment.PropertyId == DslEditorDiagrams::NodeShape.SizeDomainPropertyId)
+				bHandledSize = true;
+			else if( propertyAssignment.PropertyId == DslEditorDiagrams::NodeShape.LocationDomainPropertyId)
+				bHandledLocation = true;
+			else if( propertyAssignment.PropertyId == DslEditorDiagrams::NodeShape.AbsoluteLocationDomainPropertyId)
+				bHandledAbsoluteLocation = true;
+		}
+	
+	if( !bHandledSize )
+		this.Size = new DslEditorDiagrams::SizeD(<#= shapeClass.DefaultWidth #>, <#= shapeClass.DefaultHeight #>);
+	if( !bHandledLocation )
+		this.Location = DslEditorDiagrams::PointD.Empty;
+	if( !bHandledAbsoluteLocation )
+		this.AbsoluteLocation = DslEditorDiagrams::PointD.Empty;
+<#+
+	}
+}
+#>

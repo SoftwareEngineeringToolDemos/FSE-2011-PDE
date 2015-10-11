@@ -1,0 +1,388 @@
+﻿<#@ template language="C#" inherits="BaseTemplate"#> 
+<#@ import namespace="Tum.PDE.LanguageDSL"#>
+<#@ output extension=".txt" #>
+<#+ 
+
+
+public string GenerateRibbon(MetaModel dm)
+{
+	this.GenerationEnvironment = null;
+	this.GenerateRibbonInternal(dm);
+	return this.GenerationEnvironment.ToString();
+}
+
+private void GenerateRibbonInternal(MetaModel dm)
+{
+#>
+
+protected Fluent.BackstageTabItem tabItemRecent;
+protected Fluent.BackstageTabItem tabItemFI;
+protected Fluent.BackstageTabItem tabItemCredits;
+
+protected Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Ribbon.RibbonTabItemLateInit tabHome;
+protected Fluent.RibbonGroupBox tabHomeGrpCommon;
+protected Fluent.RibbonGroupBox tabHomeGrpCommands;
+protected Fluent.RibbonGroupBox tabHomeGrpNavigation;
+protected Fluent.RibbonGroupBox tabHomeGrpView;
+protected Fluent.RibbonGroupBox tabHomeGrpValidation;
+
+protected Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Ribbon.RibbonTabItemLateInit tabEdit;
+protected Fluent.RibbonGroupBox tabEditGrpFindAdv;
+protected Fluent.RibbonGroupBox tabEditGrpFind;
+
+protected Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Ribbon.RibbonTabItemLateInit tabView;
+protected Fluent.RibbonGroupBox tabViewgrpMC;
+protected Fluent.RibbonGroupBox tabViewGrpAV;
+
+protected Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Ribbon.RibbonTabItemLateInit tabPlugins;
+protected Fluent.RibbonGroupBox tabPluginsGrpInformation;
+protected Fluent.RibbonGroupBox tabPluginsGrpFP;
+protected Fluent.RibbonGroupBox tabPluginsGrpVP;
+
+protected Fluent.Button backstageSaveModelButton;
+protected Fluent.Button backstageSaveAsModelButton;
+protected Fluent.Button backstageCloseModelButton;
+
+protected override void CreateRibbon()
+{
+	base.CreateRibbon();
+
+    CreateRibbonBackstage(Ribbon);
+
+	Fluent.RibbonTabItem t = CreateRibbonHomeTab(Ribbon);
+	if( t != null )
+    	Ribbon.Tabs.Add(t);
+	
+	Fluent.RibbonTabItem t2 = CreateRibbonEditTab(Ribbon);
+	if( t2 != null )
+    	Ribbon.Tabs.Add(t2);
+	
+	Fluent.RibbonTabItem t3 = CreateRibbonViewTab(Ribbon);
+	if( t3 != null )
+    	Ribbon.Tabs.Add(t3);
+	
+	Fluent.RibbonTabItem t4 = CreateRibbonPluginsTab(Ribbon);
+	if( t4 != null )
+    	Ribbon.Tabs.Add(t4);
+	
+	if( this.tabEdit != null )
+		this.tabEdit.IsEnabled = false;
+	
+	if( this.tabPlugins != null )
+		this.tabPlugins.IsEnabled = false;
+}
+
+protected override void SetupRibbonOnMainSolutionLoad()
+{
+	if( this.tabEdit != null )
+		this.tabEdit.IsEnabled = true;
+	
+	if( this.tabPlugins != null )
+		this.tabPlugins.IsEnabled = true;
+	
+	if( this.tabHomeGrpCommon != null )
+		this.tabHomeGrpCommon.IsEnabled = true;
+	
+	if( this.tabHomeGrpCommands != null )
+		this.tabHomeGrpCommands.IsEnabled = true;
+	
+	if( this.tabHomeGrpNavigation != null )	
+		this.tabHomeGrpNavigation.IsEnabled = true;
+	
+	if( this.tabHomeGrpView != null )
+		this.tabHomeGrpView.IsEnabled = true;
+	
+	if( this.tabHomeGrpValidation != null )
+		this.tabHomeGrpValidation.IsEnabled = true;	
+	
+	if( this.tabView != null )
+		if( this.tabViewGrpAV == null )
+			this.CreateRibbonViewTabAVGroup();
+	
+	if( this.tabPlugins != null )
+		if (this.tabPluginsGrpFP == null)
+			CreateRibbonFPGroup();
+		
+	if( this.tabPlugins != null )
+		if (this.tabPluginsGrpVP == null)
+			CreateRibbonVPGroup();
+	
+	backstageSaveModelButton.IsEnabled = true;
+	backstageSaveAsModelButton.IsEnabled = true;
+	backstageCloseModelButton.IsEnabled = true;
+}	
+
+protected virtual Fluent.RibbonTabItem CreateRibbonHomeTab(Fluent.Ribbon ribbon)
+{
+    tabHome = new Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Ribbon.RibbonTabItemLateInit();
+    tabHome.Header = "Home";
+    tabHome.LateInitializationTriggered += new EventHandler(TabHome_LateInitializationTriggered);
+
+    return tabHome;
+}
+protected virtual void TabHome_LateInitializationTriggered(object sender, EventArgs e)
+{
+    Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Ribbon.RibbonTabItemLateInit tabHome = (Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Ribbon.RibbonTabItemLateInit)sender;
+    tabHome.LateInitializationTriggered -= new EventHandler(TabHome_LateInitializationTriggered);
+
+    Fluent.RibbonGroupBox grpCommon = new Fluent.RibbonGroupBox();
+    grpCommon.Header = "Common";
+    grpCommon.Items.Add(Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Ribbon.RibbonCreationHelper.CreateButton(
+        "Delete", "pack://application:,,,/Tum.PDE.ToolFramework.Images;component/Ribbon/Delete-32.png", "Large", "ActiveViewModel.DeleteCommand"));
+    grpCommon.Items.Add(Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Ribbon.RibbonCreationHelper.CreateButton(
+        "Cut", "pack://application:,,,/Tum.PDE.ToolFramework.Images;component/Ribbon/Cut-16.png", "Middle", "ActiveViewModel.CutCommand"));
+    grpCommon.Items.Add(Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Ribbon.RibbonCreationHelper.CreateButton(
+        "Copy", "pack://application:,,,/Tum.PDE.ToolFramework.Images;component/Ribbon/Copy-16.png", "Middle", "ActiveViewModel.CopyCommand"));
+    grpCommon.Items.Add(Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Ribbon.RibbonCreationHelper.CreateButton(
+        "Paste", "pack://application:,,,/Tum.PDE.ToolFramework.Images;component/Ribbon/Paste-16.png", "Middle", "ActiveViewModel.PasteCommand"));
+    tabHome.Groups.Add(grpCommon);
+    tabHomeGrpCommon = grpCommon;
+
+    Fluent.RibbonGroupBox grpCommands = new Fluent.RibbonGroupBox();
+    grpCommands.Header = "Commands";
+    grpCommands.Items.Add(Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Ribbon.RibbonCreationHelper.CreateButton(
+        "Undo", "pack://application:,,,/Tum.PDE.ToolFramework.Images;component/Ribbon/Undo-32.png", "Large", "ActiveViewModel.UndoCommand"));
+    grpCommands.Items.Add(Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Ribbon.RibbonCreationHelper.CreateButton(
+        "Redo", "pack://application:,,,/Tum.PDE.ToolFramework.Images;component/Ribbon/Redo-32.png", "Large", "ActiveViewModel.RedoCommand"));
+    tabHome.Groups.Add(grpCommands);
+    tabHomeGrpCommands = grpCommands;
+
+    Fluent.RibbonGroupBox grpNavigation = new Fluent.RibbonGroupBox();
+    grpNavigation.Header = "Navigation";
+    grpNavigation.Items.Add(Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Ribbon.RibbonCreationHelper.CreateButton(
+        "Back", "pack://application:,,,/Tum.PDE.ToolFramework.Images;component/Ribbon/Back-32.png", "Large", "NavigateBackwardCommand"));
+    grpNavigation.Items.Add(Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Ribbon.RibbonCreationHelper.CreateButton(
+        "Forward", "pack://application:,,,/Tum.PDE.ToolFramework.Images;component/Ribbon/Forward-32.png", "Large", "NavigateForwardCommand"));
+    tabHome.Groups.Add(grpNavigation);
+    tabHomeGrpNavigation = grpNavigation;
+
+    // check which buttons are required
+    Fluent.RibbonGroupBox grpView = new Fluent.RibbonGroupBox();
+    grpView.Header = "View";
+    grpView.Items.Add(Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Ribbon.RibbonCreationHelper.CreateButton(
+        "Model Tree", "pack://application:,,,/Tum.PDE.ToolFramework.Images;component/Ribbon/ModelTree-32.png", "Large", "ShowModelTreeCommand"));
+    grpView.Items.Add(Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Ribbon.RibbonCreationHelper.CreateButton(
+        "Property Window", "pack://application:,,,/Tum.PDE.ToolFramework.Images;component/Ribbon/PropertyGrid-32.png", "Large", "ShowPropertiesCommand"));
+    grpView.Items.Add(Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Ribbon.RibbonCreationHelper.CreateButton(
+        "Error List", "pack://application:,,,/Tum.PDE.ToolFramework.Images;component/Ribbon/ErrorList-32.png", "Large", "ShowErrorListCommand"));
+    grpView.Items.Add(Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Ribbon.RibbonCreationHelper.CreateButton(
+        "Dependencies   ", "pack://application:,,,/Tum.PDE.ToolFramework.Images;component/Ribbon/Refresh-16.png", "Middle", "ShowDependenciesCommand"));
+    grpView.Items.Add(Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Ribbon.RibbonCreationHelper.CreateButton(
+        "Diagram Surface", "pack://application:,,,/Tum.PDE.ToolFramework.Images;component/Ribbon/DiagramSurface-16.png", "Middle", "ShowDiagramSurfaceCommand"));
+    tabHome.Groups.Add(grpView);
+    tabHomeGrpView = grpView;
+
+    // check if required
+    Fluent.RibbonGroupBox grpValidation = new Fluent.RibbonGroupBox();
+    grpValidation.Header = "Commands";
+    grpValidation.Items.Add(Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Ribbon.RibbonCreationHelper.CreateButton(
+        "Validate", "pack://application:,,,/Tum.PDE.ToolFramework.Images;component/Ribbon/Validate-32.png", "Large", "ActiveViewModel.ValidateCommand"));
+    grpValidation.Items.Add(Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Ribbon.RibbonCreationHelper.CreateButton(
+        "Validate All", "pack://application:,,,/Tum.PDE.ToolFramework.Images;component/Ribbon/ValidateAll-32.png", "Large", "ValidateAllCommand"));
+    tabHomeGrpValidation = grpValidation;
+    tabHome.Groups.Add(grpValidation);
+	
+	this.tabHomeGrpCommon.IsEnabled = false;
+	this.tabHomeGrpCommands.IsEnabled = false;
+	this.tabHomeGrpNavigation.IsEnabled = false;
+	this.tabHomeGrpView.IsEnabled = false;
+	this.tabHomeGrpValidation.IsEnabled = false;
+}
+
+protected virtual Fluent.RibbonTabItem CreateRibbonEditTab(Fluent.Ribbon ribbon)
+{
+    tabEdit = new Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Ribbon.RibbonTabItemLateInit();
+    tabEdit.Header = "Edit";
+    tabEdit.LateInitializationTriggered += new EventHandler(TabEdit_LateInitializationTriggered);
+    return tabEdit;
+}
+protected virtual void TabEdit_LateInitializationTriggered(object sender, EventArgs e)
+{
+    Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Ribbon.RibbonTabItemLateInit tabEdit = (Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Ribbon.RibbonTabItemLateInit)sender;
+    tabEdit.LateInitializationTriggered -= new EventHandler(TabEdit_LateInitializationTriggered);
+	
+    Fluent.RibbonGroupBox grpFindAdv = new Fluent.RibbonGroupBox();
+    grpFindAdv.Header = "Find Advanced";
+    grpFindAdv.Items.Add(Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Ribbon.RibbonCreationHelper.CreateButton(
+        "Find Advanced", "pack://application:,,,/Tum.PDE.ToolFramework.Images;component/Ribbon/SearchAdvanced-32.png", "Large", "SearchModel.SearchAdvancedCommand"));
+    tabEdit.Groups.Add(grpFindAdv);
+    tabEditGrpFindAdv = grpFindAdv;
+
+    Fluent.RibbonGroupBox grpFind = new Fluent.RibbonGroupBox();
+    grpFind.Header = "Quick Find";
+    System.Windows.Controls.TextBox txt = new System.Windows.Controls.TextBox();
+    txt.Width = 250;
+    txt.Margin = new Thickness(0, 0, 0, 1);
+    tabEditGrpFind = grpFind;
+
+    Binding txtBinding = new Binding("SearchModel.SearchText");
+    txtBinding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
+    txtBinding.Mode = BindingMode.TwoWay;
+    txt.SetBinding(System.Windows.Controls.TextBox.TextProperty, txtBinding);
+    grpFind.Items.Add(txt);
+
+    Fluent.ComboBox cmb = new Fluent.ComboBox();
+    cmb.IsReadOnly = true;
+    cmb.DisplayMemberPath = "DisplayName";
+    cmb.Text = "Find where";
+    cmb.Height = 23;
+    cmb.Width = 250;
+    grpFind.Items.Add(cmb);
+    Binding itemsSourceB = new Binding("SearchModel.SearchSource");
+    itemsSourceB.Mode = BindingMode.OneWay;
+    cmb.SetBinding(Fluent.ComboBox.ItemsSourceProperty, itemsSourceB);
+    Binding selectedItemB = new Binding("SearchModel.SelectedSearchSource");
+    selectedItemB.Mode = BindingMode.TwoWay;
+    cmb.SetBinding(Fluent.ComboBox.SelectedItemProperty, selectedItemB);
+
+    Fluent.ComboBox cmb2 = new Fluent.ComboBox();
+    cmb2.IsReadOnly = true;
+    cmb2.DisplayMemberPath = "DisplayName";
+    cmb2.Text = "Find criteria";
+    cmb2.Height = 23;
+    cmb2.Width = 250;
+    Binding itemsSourceB2 = new Binding("SearchModel.SearchCriteria");
+    itemsSourceB2.Mode = BindingMode.OneWay;
+    cmb2.SetBinding(Fluent.ComboBox.ItemsSourceProperty, itemsSourceB2);
+    Binding selectedItemB2 = new Binding("SearchModel.SelectedSearchCriteria");
+    selectedItemB2.Mode = BindingMode.TwoWay;
+    cmb2.SetBinding(Fluent.ComboBox.SelectedItemProperty, selectedItemB2);
+    grpFind.Items.Add(cmb2);
+
+    grpFind.Items.Add(Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Ribbon.RibbonCreationHelper.CreateButton(
+         "Find", "pack://application:,,,/Tum.PDE.ToolFramework.Images;component/Ribbon/Search-32.png", "Large", "SearchModel.SearchCommand"));
+
+    tabEdit.Groups.Add(grpFind);
+}
+
+protected virtual Fluent.RibbonTabItem CreateRibbonViewTab(Fluent.Ribbon ribbon)
+{
+    tabView = new Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Ribbon.RibbonTabItemLateInit();
+    tabView.Header = "View";
+    
+	// see if required
+    Fluent.RibbonGroupBox grpMC = new Fluent.RibbonGroupBox();
+    grpMC.Header = "Model Contexts";
+
+    ContentControl c = new ContentControl();
+    c.Template = (ControlTemplate)FindResource("RibbonViewTabMCTemplate");
+    grpMC.Items.Add(c);
+    tabView.Groups.Add(grpMC);
+    tabViewgrpMC = grpMC;
+	
+    return tabView;
+}
+protected virtual Fluent.RibbonGroupBox CreateRibbonViewTabAVGroup()
+{
+    // see if required
+    Fluent.RibbonGroupBox grpAV = new Fluent.RibbonGroupBox();
+    grpAV.Header = "Additional Views";
+
+    ContentControl c2 = new ContentControl();
+    c2.Template = (ControlTemplate)FindResource("RibbonViewTabAVTemplate");
+    grpAV.Items.Add(c2);
+    tabView.Groups.Add(grpAV);
+    tabViewGrpAV = grpAV;
+    return grpAV;
+}
+
+protected virtual Fluent.RibbonTabItem CreateRibbonPluginsTab(Fluent.Ribbon ribbon)
+{
+    tabPlugins = new Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Ribbon.RibbonTabItemLateInit();
+    tabPlugins.Header = "Plugins";
+    tabPlugins.LateInitializationTriggered += new EventHandler(TabPlugins_LateInitializationTriggered);
+
+    return tabPlugins;
+}
+protected virtual Fluent.RibbonGroupBox CreateRibbonFPGroup()
+{
+    Fluent.RibbonGroupBox grpFP = new Fluent.RibbonGroupBox();
+    grpFP.Header = "Functionality Plugins";
+    ContentControl c = new ContentControl();
+    c.Template = (ControlTemplate)FindResource("RibbonPluginsTabFPTemplate");
+    grpFP.Items.Add(c);
+    tabPlugins.Groups.Add(grpFP);
+    tabPluginsGrpFP = grpFP;
+	
+	return grpFP;
+}
+protected virtual Fluent.RibbonGroupBox CreateRibbonVPGroup()
+{
+   Fluent.RibbonGroupBox grpVP = new Fluent.RibbonGroupBox();
+    grpVP.Header = "View Plugins";
+    ContentControl c2 = new ContentControl();
+    c2.Template = (ControlTemplate)FindResource("RibbonPluginsTabVPTemplate");
+    grpVP.Items.Add(c2);
+    tabPlugins.Groups.Add(grpVP);
+    tabPluginsGrpVP = grpVP;
+	return grpVP;
+}
+protected virtual void TabPlugins_LateInitializationTriggered(object sender, EventArgs e)
+{
+    Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Ribbon.RibbonTabItemLateInit tabPlugins = (Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Ribbon.RibbonTabItemLateInit)sender;
+    tabPlugins.LateInitializationTriggered -= new EventHandler(TabPlugins_LateInitializationTriggered);
+
+    Fluent.RibbonGroupBox grpInformation = new Fluent.RibbonGroupBox();
+    grpInformation.Header = "Information";
+    grpInformation.Items.Add(Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Ribbon.RibbonCreationHelper.CreateButton(
+        "Info", "pack://application:,,,/Tum.PDE.ToolFramework.Images;component/Ribbon/Information-32x32.png", "Large", "PluginInformationCommand"));
+    tabPlugins.Groups.Add(grpInformation);
+    tabPluginsGrpInformation = grpInformation;
+}
+
+protected virtual void CreateRibbonBackstage(Fluent.Ribbon ribbon)
+{
+    ribbon.BackstageItems.Add(Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Ribbon.RibbonCreationHelper.CreateButton(
+        "New", "pack://application:,,,/Tum.PDE.ToolFramework.Images;component/Ribbon/New-16.png", "Medium", "NewModelCommand"));
+    ribbon.BackstageItems.Add(Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Ribbon.RibbonCreationHelper.CreateButton(
+        "Open...", "pack://application:,,,/Tum.PDE.ToolFramework.Images;component/Ribbon/Open-16.png", "Medium", "OpenModelCommand"));
+    
+	backstageSaveModelButton = Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Ribbon.RibbonCreationHelper.CreateButton(
+        "Save", "pack://application:,,,/Tum.PDE.ToolFramework.Images;component/Ribbon/Save-16.png", "Medium", "SaveModelCommand");
+	ribbon.BackstageItems.Add(backstageSaveModelButton);
+	backstageSaveModelButton.IsEnabled = false;
+		
+	backstageSaveAsModelButton = Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Ribbon.RibbonCreationHelper.CreateButton(
+        "Save As...", "pack://application:,,,/Tum.PDE.ToolFramework.Images;component/Ribbon/SaveAs-32.png", "Medium", "SaveAsModelCommand");
+    ribbon.BackstageItems.Add(backstageSaveAsModelButton);
+	backstageSaveAsModelButton.IsEnabled = false;
+
+    Fluent.BackstageTabItem tabItemRecent = new Fluent.BackstageTabItem();
+    tabItemRecent.Header = "Recent";
+    ContentControl c = new ContentControl();
+    c.Template = (ControlTemplate)FindResource("RibbonBackstageRecentItemsTemplate");
+    tabItemRecent.Content = c;
+    ribbon.BackstageItems.Add(tabItemRecent);
+
+    // see if needed
+    tabItemFI = new Fluent.BackstageTabItem();
+    tabItemFI.Header = "Further Information";
+    ContentControl c2 = new ContentControl();
+    c2.Template = (ControlTemplate)FindResource("RibbonBackstageFurtherInformationTemplate");
+    tabItemFI.Content = c2;
+    ribbon.BackstageItems.Add(tabItemFI);
+
+    // see if needed
+    tabItemCredits = new Fluent.BackstageTabItem();
+    tabItemCredits.Header = "Credits";
+    ContentControl c3 = new ContentControl();
+    c3.Template = (ControlTemplate)FindResource("RibbonBackstageCreditsTemplate");
+    tabItemCredits.Content = c3;
+    ribbon.BackstageItems.Add(tabItemCredits);
+
+	backstageCloseModelButton = Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Ribbon.RibbonCreationHelper.CreateButton(
+        "Close", "pack://application:,,,/Tum.PDE.ToolFramework.Images;component/Ribbon/CloseDocument-32.png", "Medium", "CloseModelCommand");
+    ribbon.BackstageItems.Add(backstageCloseModelButton);
+	backstageCloseModelButton.IsEnabled = false;
+
+    Fluent.Button b = new Fluent.Button();
+    b.Text = "Exit";
+    b.Click += new RoutedEventHandler(ExitButton_Click);
+    b.Icon = new System.Windows.Media.Imaging.BitmapImage(new Uri("pack://application:,,,/Tum.PDE.ToolFramework.Images;component/Ribbon/Exit-16.png", UriKind.Absolute));
+
+    ribbon.BackstageItems.Add(b);
+}
+<#+
+}
+	
+#>

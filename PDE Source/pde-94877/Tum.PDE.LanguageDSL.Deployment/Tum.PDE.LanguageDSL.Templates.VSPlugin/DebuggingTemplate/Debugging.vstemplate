@@ -1,0 +1,21 @@
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
+  <TemplateData>
+    <Name>Debugging</Name>
+    <Description>&lt;No description available&gt;</Description>
+    <ProjectType>CSharp</ProjectType>
+    <SortOrder>1000</SortOrder>
+    <TemplateID>99E14F24-2978-425A-BABA-DFCD00079AED</TemplateID>
+    <Icon>Debugging.ico</Icon>
+  </TemplateData>
+  <TemplateContent>
+    <Project TargetFileName="Debugging.csproj" File="Debugging.csproj" ReplaceParameters="true">
+      <ProjectItem ReplaceParameters="true" TargetFileName="Properties\AssemblyInfo.cs">AssemblyInfo.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Sample.$LanguageExtension$">Sample.mydsl</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Test.$LanguageExtension$">Test.mydsl</ProjectItem>
+    </Project>
+  </TemplateContent>
+  <WizardExtension>
+    <Assembly>Tum.PDE.LanguageDSL.Setup.VSPluginDesignerWizard, Version=1.0.0.0, Culture=neutral, PublicKeyToken=5bfc276fccda04f8</Assembly>
+    <FullClassName>Tum.PDE.LanguageDSL.Setup.VSPluginDesignerWizard.LanguageDSLDebuggingSubWizard</FullClassName>
+  </WizardExtension>
+</VSTemplate>

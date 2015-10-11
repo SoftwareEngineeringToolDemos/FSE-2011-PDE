@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<diagramsModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="d42255b1-497f-45fe-8e76-4e3460721a2e" xmlns="http://schemas.microsoft.com/dsltools/DiagramsDSL">
+  <diagrams>
+    <FamilyTreeDSLdesignerDiagram Id="7d318754-492b-45b8-bb6d-21361c87134d" internalElementId="00000000-0000-0000-0000-000000000000" name="DesignerDiagram">
+      <children>
+        <FamilyTreeDSLpersonShape Id="8dd7801d-99b6-4b54-8e27-246f7b5137a4" internalElementId="1c8e1951-be85-4c0d-818b-53f1cccb6fc9" location="15, 15" size="100, 100" absoluteLocation="15, 15" placementSide="Left" />
+      </children>
+    </FamilyTreeDSLdesignerDiagram>
+  </diagrams>
+</diagramsModel>

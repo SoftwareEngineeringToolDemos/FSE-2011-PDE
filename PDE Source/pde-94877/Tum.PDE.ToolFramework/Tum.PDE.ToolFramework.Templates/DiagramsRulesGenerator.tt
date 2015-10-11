@@ -1,0 +1,231 @@
+<#@ template language="C#" inherits="BaseTemplate"#> 
+<#@ import namespace="Tum.PDE.LanguageDSL"#>
+<#@ import namespace="Microsoft.VisualStudio.Modeling" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Collections.ObjectModel" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+using DslModeling = global::Microsoft.VisualStudio.Modeling;
+using DslEditorDiagrams = global::Tum.PDE.ToolFramework.Modeling.Diagrams;
+
+<#
+	List<DomainClass> ruleOnElementsAdd = new List<DomainClass>();
+	List<DomainRelationship> ruleOnLinksChange = new List<DomainRelationship>();
+	List<DomainClass> ruleOnElementsDelete = new List<DomainClass>();
+	
+	foreach(DiagramClass diagram in this.MetaModel.AllDiagramClasses)
+	{
+		foreach (PresentationElementClass element in diagram.PresentationElements)
+		{
+        	if (element is ShapeClass)
+        	{
+				ShapeClass shapeClass = element as ShapeClass;
+				DomainClass domainClass = shapeClass.DomainClass;
+
+				if( domainClass == null )
+					continue;
+				
+				if( !diagram.IsCustom )
+				{
+					if( !ruleOnElementsAdd.Contains(domainClass) )
+						ruleOnElementsAdd.Add(domainClass);
+					/*
+					if (diagram.VisualizationBehavior != DiagramVisualizationBehavior.Extended)
+					{
+						if( !ruleOnElementsAdd.Contains(domainClass) )
+							ruleOnElementsAdd.Add(domainClass);
+					}
+					else if( shapeClass.Parent != null )
+					{
+						if( !ruleOnElementsAdd.Contains(domainClass) )
+							ruleOnElementsAdd.Add(domainClass);
+					}
+					*/
+				}
+				
+				if( !ruleOnElementsDelete.Contains(domainClass) )
+					ruleOnElementsDelete.Add(domainClass);
+			}
+		}
+	}
+	
+	foreach(DomainClass d in ruleOnElementsAdd)
+	{
+		foreach(DomainRole rolesPlayed in d.RolesPlayed)
+		{
+			if( rolesPlayed.Relationship.Target == rolesPlayed && 
+				rolesPlayed.Relationship is EmbeddingRelationship && 
+				rolesPlayed.Relationship.InheritanceModifier != InheritanceModifier.Abstract)
+			{
+				if( !ruleOnLinksChange.Contains(rolesPlayed.Relationship))
+					ruleOnLinksChange.Add(rolesPlayed.Relationship);
+			}
+		}
+	}
+	MetaModel dm = this.MetaModel;
+#>
+namespace <#= dm.Namespace #>
+{
+<#
+	if( CodeGenerationUtilities.NeedsShapeAddRule(dm) )
+	{
+#>
+	/// <summary>
+    /// This AddRule is for monitoring element creation that we need to reflect
+	/// onto the diagram surface by creating its specified shape class.
+    /// </summary>
+<#
+	foreach(AttributedDomainElement domainElement in ruleOnElementsAdd )
+	{
+#>
+	[DslModeling::RuleOn(typeof(<#= domainElement.GetFullName(true) #>), FireTime = DslModeling::TimeToFire.LocalCommit)]
+<#
+	}
+#>
+    public partial class <#= dm.Name #>ElementForShapesAdded : DslEditorDiagrams::ModelLinkAddRuleForShapes
+    {
+		/// <summary>
+        /// Constructor.
+        /// </summary>
+		public <#= dm.Name #>ElementForShapesAdded() 
+			: base(<#= dm.Name #>ElementForShapesFactoryHelper.Instance)
+		{
+		}
+		
+		/// <summary>
+        /// Helper class for model element creation.
+        /// </summary>
+        public partial class <#= dm.Name #>ElementForShapesFactoryHelper : DslEditorDiagrams::ModelLinkAddRuleForShapes.ShapesFactoryHelper
+        {
+			private static <#= dm.Name #>ElementForShapesFactoryHelper instanceHolder = null;
+
+    	    /// <summary>
+    	    /// Gets a singleton instance.
+    	    /// </summary>
+    	    public static <#= dm.Name #>ElementForShapesFactoryHelper Instance
+    	    {
+    	        get
+    	        {
+    	            if (instanceHolder == null)
+    	                instanceHolder = new <#= dm.Name #>ElementForShapesFactoryHelper();
+
+    	            return instanceHolder;
+    	        }
+    	    }
+		}
+	}
+
+    /// <summary>
+    /// This RolePlayerChangeRule is for monitoring embedding relationship changes that we need to reflect
+	/// onto the diagram surface by removing and recreating its specified shape class if necessary.
+    /// </summary>	
+<#
+	}
+	if( CodeGenerationUtilities.NeedsShapeChangeRule(dm) )
+	{
+		
+	foreach(AttributedDomainElement domainElement in ruleOnLinksChange )
+	{
+#>
+	[DslModeling::RuleOn(typeof(<#= domainElement.GetFullName(true) #>), FireTime = DslModeling::TimeToFire.LocalCommit)]
+<#
+	}
+#>
+    public partial class <#= dm.Name #>ElementForShapesChanged : DslEditorDiagrams::ModelLinkRolePlayerChangeRuleForShapes
+    {
+		/// <summary>
+        /// Constructor.
+        /// </summary>
+		public <#= dm.Name #>ElementForShapesChanged() 
+			: base(<#= dm.Name #>RolePlayerChangeHelper.Instance)
+		{
+		}	
+		
+		/// <summary>
+        /// Helper class for model element creation.
+        /// </summary>
+        public partial class <#= dm.Name #>RolePlayerChangeHelper : DslEditorDiagrams::ModelLinkRolePlayerChangeRuleForShapes.RolePlayerChangeHelper
+        {
+			private static <#= dm.Name #>RolePlayerChangeHelper instanceHolder = null;
+
+    	    /// <summary>
+    	    /// Gets a singleton instance.
+    	    /// </summary>
+    	    public static <#= dm.Name #>RolePlayerChangeHelper Instance
+    	    {
+    	        get
+    	        {
+    	            if (instanceHolder == null)
+    	                instanceHolder = new <#= dm.Name #>RolePlayerChangeHelper();
+
+    	            return instanceHolder;
+    	        }
+    	    }
+		
+			/// <summary>
+        	/// Constructor.
+        	/// </summary>
+			public <#= dm.Name #>RolePlayerChangeHelper() 
+				: base(<#= dm.Name #>ElementForShapesAdded.<#= dm.Name #>ElementForShapesFactoryHelper.Instance,
+					   <#= dm.Name #>ElementForShapesDeleted.<#= dm.Name #>ShapeDeletionHelper.Instance)		
+			{
+			}
+		}		
+	}	
+<#
+	}
+	
+	if( CodeGenerationUtilities.NeedsShapeDeleteRule(dm) )
+	{
+#>
+
+	/// <summary>
+    /// This DeleteRule is for monitoring element deletin that we need to reflect
+	/// onto the diagram surface by creating its specified shape class.
+    /// </summary>
+<#
+	foreach(AttributedDomainElement domainElement in ruleOnElementsDelete )
+	{
+#>
+	[DslModeling::RuleOn(typeof(<#= domainElement.GetFullName(true) #>), FireTime = DslModeling::TimeToFire.LocalCommit)]
+<#
+	}
+#>
+    public partial class <#= dm.Name #>ElementForShapesDeleted : DslEditorDiagrams::ModelElementDeletingRuleForShapes
+    {
+		/// <summary>
+        /// Constructor.
+        /// </summary>
+		public <#= dm.Name #>ElementForShapesDeleted() 
+			: base(<#= dm.Name #>ShapeDeletionHelper.Instance)
+		{
+		}
+		
+		/// <summary>
+        /// Helper class for model element creation.
+        /// </summary>
+        public partial class <#= dm.Name #>ShapeDeletionHelper : DslEditorDiagrams::ModelElementDeletingRuleForShapes.ShapeDeletionHelper
+        {
+			private static <#= dm.Name #>ShapeDeletionHelper instanceHolder = null;
+
+    	    /// <summary>
+    	    /// Gets a singleton instance.
+    	    /// </summary>
+    	    public static <#= dm.Name #>ShapeDeletionHelper Instance
+    	    {
+    	        get
+    	        {
+    	            if (instanceHolder == null)
+    	                instanceHolder = new <#= dm.Name #>ShapeDeletionHelper();
+
+    	            return instanceHolder;
+    	        }
+    	    }
+		}
+	}
+<#
+	}
+	
+#>
+}

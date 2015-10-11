@@ -1,0 +1,574 @@
+﻿<#@ template language="C#" inherits="BaseTemplate"#> 
+<#@ import namespace="Tum.PDE.LanguageDSL"#>
+<#@ import namespace="Microsoft.VisualStudio.Modeling" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Collections.ObjectModel" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+using DslModeling = global::Microsoft.VisualStudio.Modeling;
+using DslEditorModeling = global::Tum.PDE.ToolFramework.Modeling;
+using DslEditorDiagrams = global::Tum.PDE.ToolFramework.Modeling.Diagrams;
+
+<#
+	foreach(BaseModelContext m in this.MetaModel.ModelContexts)	
+		GenerateModelContext(this.MetaModel, m);
+#>
+<#+ 
+public void GenerateModelContext(MetaModel dm, BaseModelContext modelContext)
+{
+	DomainClass domainModel = null;
+	if( modelContext is ModelContext)
+		foreach(DomainClass domainClass in (modelContext as LibraryModelContext).Classes)
+		{
+			if( domainClass.IsDomainModel )
+			{
+				domainModel = domainClass;
+				break;
+			}
+		}
+		
+	string baseClass = "DslEditorModeling::BaseModelContext";
+	if( modelContext is ModelContext)
+		baseClass = "DslEditorModeling::ModelContext";
+	else if( modelContext is ExternModelContext)
+	{
+		ExternModelContext e = modelContext as ExternModelContext;
+		if( e.ModelContext != null )
+			baseClass = e.ModelContext.MetaModel.Namespace + "." + e.ModelContext.Name + "ModelContext";
+	}
+	
+	DesignerDiagramClass designerDC = null;
+	if( modelContext is ModelContext)
+		if( (modelContext as ModelContext).DiagramClasses.Count > 0 )
+			designerDC = (modelContext as ModelContext).DiagramClasses[0] as DesignerDiagramClass;
+
+#>
+namespace <#= dm.Namespace #>
+{
+	/// <summary>
+	/// Double-derived class to allow easier code customization.
+	/// </summary>
+	public partial class <#= modelContext.Name #>ModelContext : <#= modelContext.Name #>ModelContextBase
+	{
+		/// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="modelData"></param>
+        public <#= modelContext.Name #>ModelContext(DslEditorModeling::ModelData modelData) 
+			: base(modelData)
+        {
+        }	
+	}
+	
+	/// <summary>
+	/// Class which represents a model context.
+	/// </summary>
+	public abstract partial class <#= modelContext.Name #>ModelContextBase : <#= baseClass #>
+	{
+		private System.Text.Encoding encodingXml;
+		//private DslEditorModeling::ModelValidationController validationController;
+<#+
+	if( modelContext is ModelContext)
+	{
+#>
+		private DslEditorModeling::SerializationResult serializationResult;
+        private DslEditorDiagrams::DiagramsModel diagramsModel = null;		
+<#+
+	}
+#>
+
+		/// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="modelData"></param>
+        public <#= modelContext.Name #>ModelContextBase(DslEditorModeling::ModelData modelData) 
+			: base(modelData)
+        {
+			encodingXml = System.Text.Encoding.GetEncoding("ISO-8859-1");
+			
+			//validationController = <#= dm.Name #>ValidationController.Instance;
+			//validationController.Initialize();			
+<#+
+	if( modelContext is ModelContext)
+	{
+#>
+			serializationResult = new DslEditorModeling::SerializationResult();
+<#+
+	}
+#>
+        }
+		
+		/// <summary>
+        /// Domain Class ID.
+        /// </summary>
+		public static readonly System.Guid DomainClassId = new System.Guid("<#= modelContext.Id #>");
+		
+		/// <summary>
+        /// Gets the model context id.
+        /// </summary>
+        public override System.Guid ModelContextId
+        {
+            get
+			{
+				return DomainClassId;
+			}
+        }
+		
+		/// <summary>
+        /// Gets the name of this model context.
+        /// </summary>
+        public override string Name
+		{
+            get
+			{
+				return "<#= modelContext.Name #>";
+			}
+        }
+
+        /// <summary>
+        /// Gets the titel of the model context.
+        /// </summary>
+        public override string Titel
+        {
+            get
+			{
+				return "<#= modelContext.DisplayName #>";
+			}
+        }
+
+        /// <summary>
+        /// Gets whether this model context is the default context or not.
+        /// </summary>
+        public override bool IsDefault
+        {
+            get
+			{
+				return <#= modelContext.IsDefault.ToString().ToLower() #>;
+			}
+        }		
+		
+		/// <summary>
+        /// Gets the current validation controller.
+        /// </summary>
+        public override DslEditorModeling::ModelValidationController CurrentValidationController 
+		{ 
+			get{ return <#= dm.Name #>ValidationController.Instance; }
+		}		
+<#+
+	if( modelContext is ModelContext)
+	{
+#>
+
+		/// <summary>
+        /// Serialization result.
+        /// </summary>
+        public override DslEditorModeling::SerializationResult SerializationResult 
+		{ 
+			get{ return this.serializationResult; }
+		}
+		
+        /// <summary>
+        /// Gets or sets the encoding that this doc data is persisted in
+		/// </summary>	
+        public virtual System.Text.Encoding Encoding 
+		{ 
+			get
+			{
+				return encodingXml;
+			}
+			set
+			{
+				encodingXml = value;
+			}
+		}
+		
+		#region Serialization
+		/// <summary>
+        /// Loads the domain model from a specified file.
+        /// </summary>
+		/// <param name="fileName">Filename to load the domain model from.</param>
+		/// <param name="isReload"></param>
+        protected override void LoadDocument(string fileName, bool isReload)
+		{
+			this.rootModelElement = null;
+
+			serializationResult = new DslEditorModeling::SerializationResult();
+			DslModeling::SerializationResult result = new DslModeling.SerializationResult();
+			<#= domainModel.GetFullName(true) #> modelRoot = null;
+
+			// reset post process info
+			<#= dm.Name #>SerializationPostProcessor.Instance.Reset();
+
+			DslModeling::Transaction transaction = this.ModelData.Store.TransactionManager.BeginTransaction("Load model", true);
+			try
+			{
+				modelRoot = <#= dm.GetFullName(true) #>SerializationHelper.Instance.LoadModel<#= domainModel.Name #>(result, this.ModelData.GetModelPartition(), fileName, null, null, null);
+
+				// post process
+				if( modelRoot != null && !serializationResult.Failed)
+				{
+					<#= dm.Name #>SerializationPostProcessor.Instance.DoPostProcess(new System.Collections.Generic.List<string>(), result, modelRoot.Store);
+
+				}
+
+<#+
+	if( dm.Validation.UseLoad )
+	{
+#>
+
+				if( !serializationResult.Failed )
+					// start validation because UseLoad=true
+					ValidateAll();
+
+<#+
+	}
+#>
+				// load diagramsModel
+				string diagramsFileName = GetDiagramsFileName(fileName);
+				if(System.IO.File.Exists(diagramsFileName) )
+					diagramsModel = <#= dm.Name #>DiagramsDSLSerializationHelper.Instance.LoadModel(result, this.ModelData.GetModelPartition(), GetDiagramsFileName(fileName), null, null, null);
+				
+				if( diagramsModel == null )
+					diagramsModel = new DslEditorDiagrams::DiagramsModel(this.ModelData.Store);
+
+<#+
+	foreach(DiagramClass diagramClass in (modelContext as ModelContext).DiagramClasses)
+	{
+		if( diagramClass is TemplatedDiagramViewModelOnly )
+			continue;
+#>
+				if( !diagramsModel.ContainsDiagram("<#= diagramClass.Name #>") )
+				{
+					<#= diagramClass.Name #> diagram<#= diagramClass.Name #> = new <#= diagramClass.Name #>(this.ModelData.Store);
+					diagram<#= diagramClass.Name #>.Name = "<#= diagramClass.Name #>";
+				
+					diagramsModel.Diagrams.Add(diagram<#= diagramClass.Name #>);
+				}
+				diagramsModel.GetDiagram("<#= diagramClass.Name #>").Initialize();
+				OnPropertyChanged("<#= diagramClass.Name #>");
+<#+
+	}
+	if( designerDC != null )
+	{
+		foreach(DiagramClass diagramClass in designerDC.ImportedDiagramClasses)
+		{
+			if( diagramClass is TemplatedDiagramViewModelOnly )
+				continue;
+			
+			string namespaceStr = diagramClass.ModelContext.MetaModel.Namespace;
+#>
+
+				if( !diagramsModel.ContainsDiagram("<#= diagramClass.Name #>") )
+				{
+					<#= namespaceStr #>.<#= diagramClass.Name #> diagram<#= diagramClass.Name #> = new <#= namespaceStr #>.<#= diagramClass.Name #>(this.ModelData.Store);
+					diagram<#= diagramClass.Name #>.Name = "<#= diagramClass.Name #>";
+				
+					diagramsModel.Diagrams.Add(diagram<#= diagramClass.Name #>);
+				}
+				diagramsModel.GetDiagram("<#= diagramClass.Name #>").Initialize();
+				OnPropertyChanged("<#= diagramClass.Name #>");
+<#+			
+		}
+	}
+#>
+
+				if( result.Failed )
+					transaction.Rollback();	
+				else
+					transaction.Commit();
+			}
+			catch (System.Exception ex)
+			{
+                serializationResult.AddMessage(new DslEditorModeling::SerializationMessage(
+					<#= dm.Name #>ValidationMessageIds.SerializationLoadErrorId, DslEditorModeling::ModelValidationViolationType.Error,
+                    ex.Message, fileName, 0, 0));
+				transaction.Rollback();	
+			}
+			// copy messages
+			bool bHasMessages = false;
+			foreach (DslModeling::SerializationMessage m in result)
+        	{
+				bHasMessages = true;
+			
+        	    DslEditorModeling.ModelValidationViolationType kind = DslEditorModeling.ModelValidationViolationType.Error;
+        	    if( m.Kind == DslModeling.SerializationMessageKind.Info )
+        	        kind = DslEditorModeling.ModelValidationViolationType.Message;
+        	    else if( m.Kind == DslModeling.SerializationMessageKind.Warning )
+        	        kind = DslEditorModeling.ModelValidationViolationType.Warning;
+
+        	    DslEditorModeling::SerializationMessage message = new DslEditorModeling.SerializationMessage(
+        	        <#= dm.Name #>ValidationMessageIds.SerializationMessageId, kind, m.Message, m.Location, m.Line, m.Column);
+        	    serializationResult.AddMessage(message);
+        	}	
+			serializationResult.Failed = result.Failed;
+
+			if (serializationResult.Failed)
+			{	
+				// Load failed, can't open the file.
+        	    serializationResult.AddMessage(new DslEditorModeling::SerializationMessage(<#= dm.Name #>ValidationMessageIds.SerializationLoadErrorId, DslEditorModeling::ModelValidationViolationType.Error, 
+        	        <#= dm.Name #>DomainModel.SingletonResourceManager.GetString("CannotOpenDocument"), fileName, 0, 0));
+			}
+			else
+			{
+				this.rootModelElement = modelRoot;
+			}
+<#+
+	if( dm.Validation.UseOpen )
+	{
+#>
+			
+			if( !serializationResult.Failed && !bHasMessages )
+				// start validation because UseOpen=true
+				ValidateAll();
+<#+
+	}
+#>			
+		}
+
+        /// <summary>
+        /// Loads the domain model from a specified file.  This will not replace the currently loaded domain model.
+        /// </summary>
+        protected override DslModeling::ModelElement LoadDocumentInternal(string fileName)
+		{
+			serializationResult = new DslEditorModeling::SerializationResult();
+			DslModeling::SerializationResult result = new DslModeling.SerializationResult();
+			
+			// reset post process info
+			<#= dm.Name #>SerializationPostProcessor.Instance.Reset();
+
+			<#= domainModel.GetFullName(true) #> modelRoot = null;
+			modelRoot = <#= dm.GetFullName(true) #>SerializationHelper.Instance.LoadModel<#= domainModel.Name #>(result, this.ModelData.GetModelPartition(), fileName, null, null, null);
+
+			// post process
+			if( modelRoot != null && !serializationResult.Failed)
+			{
+				<#= dm.Name #>SerializationPostProcessor.Instance.DoPostProcess(new System.Collections.Generic.List<string>(), result, modelRoot.Store);
+			}
+
+			// copy messages
+			foreach (DslModeling::SerializationMessage m in result)
+            {
+                DslEditorModeling.ModelValidationViolationType kind = DslEditorModeling.ModelValidationViolationType.Error;
+                if( m.Kind == DslModeling.SerializationMessageKind.Info )
+                    kind = DslEditorModeling.ModelValidationViolationType.Message;
+                else if( m.Kind == DslModeling.SerializationMessageKind.Warning )
+                    kind = DslEditorModeling.ModelValidationViolationType.Warning;
+
+                DslEditorModeling::SerializationMessage message = new DslEditorModeling.SerializationMessage(
+                    <#= dm.Name #>ValidationMessageIds.SerializationMessageId, kind, m.Message, m.Location, m.Line, m.Column);
+                serializationResult.AddMessage(message);
+            }	
+			serializationResult.Failed = result.Failed;
+
+			if (serializationResult.Failed)
+			{	
+				// Load failed, can't open the file.
+                serializationResult.AddMessage(new DslEditorModeling::SerializationMessage(<#= dm.Name #>ValidationMessageIds.SerializationLoadErrorId, DslEditorModeling::ModelValidationViolationType.Error, 
+                    <#= dm.Name #>DomainModel.SingletonResourceManager.GetString("CannotOpenDocument"), fileName, 0, 0));
+					
+				return null;
+			}
+			else
+			{
+				return modelRoot;
+			}
+		}
+
+		/// <summary>
+        /// Saves the domain model to a specified filename.
+        /// </summary>
+        /// <param name="fileName">Filename to save the domain model to.</param>
+        protected override void SaveDocument(string fileName)
+		{
+			serializationResult = new DslEditorModeling::SerializationResult();
+			DslModeling::SerializationResult result = new DslModeling.SerializationResult();
+			
+			<#= domainModel.GetFullName(true) #> modelRoot = (<#= domainModel.GetFullName(true) #>)this.RootElement;
+			<#= dm.GetFullName(true) #>SerializationHelper.Instance.SaveModel<#= domainModel.Name #>(result, modelRoot, fileName, this.Encoding, false);
+
+			// Save Diagrams
+			if( this.diagramsModel != null )
+			{
+				string diagramsFileName = GetDiagramsFileName(fileName);
+				if( this.diagramsModel.Diagrams.Count > 0 )
+				{
+					<#= dm.Name #>DiagramsDSLSerializationHelper.Instance.SaveModel(result, this.diagramsModel, diagramsFileName, this.Encoding, false);
+				}
+				else if(System.IO.File.Exists(diagramsFileName) )
+					System.IO.File.Delete(diagramsFileName);
+			}
+
+			// copy messages
+			foreach (DslModeling::SerializationMessage m in result)
+            {
+                DslEditorModeling.ModelValidationViolationType kind = DslEditorModeling.ModelValidationViolationType.Error;
+                if( m.Kind == DslModeling.SerializationMessageKind.Info )
+                    kind = DslEditorModeling.ModelValidationViolationType.Message;
+                else if( m.Kind == DslModeling.SerializationMessageKind.Warning )
+                    kind = DslEditorModeling.ModelValidationViolationType.Warning;
+
+                DslEditorModeling::SerializationMessage message = new DslEditorModeling.SerializationMessage(
+                   <#= dm.Name #>ValidationMessageIds.SerializationMessageId, kind, m.Message, m.Location, m.Line, m.Column);
+                serializationResult.AddMessage(message);
+            }	
+			serializationResult.Failed = result.Failed;
+
+			if (serializationResult.Failed)
+			{	
+				// Save failed.
+				 serializationResult.AddMessage(new DslEditorModeling::SerializationMessage(<#= dm.Name #>ValidationMessageIds.SerializationSaveErrorId, DslEditorModeling::ModelValidationViolationType.Error, 
+                    <#= dm.Name #>DomainModel.SingletonResourceManager.GetString("CannotSaveDocument"), fileName, 0, 0));
+			}
+		}
+		
+		/// <summary>
+        /// Return the model in XML format (SerializationMode.InternalToString).
+        /// </summary>
+		public override string SerializedModel
+		{
+			get
+			{
+				<#= domainModel.GetFullName(true) #> modelRoot = this.RootElement as <#= domainModel.GetFullName(true) #>;
+				string modelFile = string.Empty;
+				if (modelRoot != null)
+				{
+					modelFile = <#= dm.GetFullName(true) #>SerializationHelper.Instance.GetSerializedModelString<#= domainModel.Name #>(modelRoot, this.Encoding, DslEditorModeling::SerializationMode.InternalToString);
+				}
+				return modelFile;
+			}
+		}
+		
+		/// <summary>
+        /// Return the model in XML format (SerializationMode.InternalFullToString).
+        /// </summary>
+		public override string SerializedFullModel
+		{
+			get
+			{
+				<#= domainModel.GetFullName(true) #> modelRoot = this.RootElement as <#= domainModel.GetFullName(true) #>;
+				string modelFile = string.Empty;
+				if (modelRoot != null)
+				{
+					modelFile = <#= dm.GetFullName(true) #>SerializationHelper.Instance.GetSerializedModelString<#= domainModel.Name #>(modelRoot, this.Encoding, DslEditorModeling::SerializationMode.InternalFullToString);
+				}
+				return modelFile;
+			}
+		}		
+		
+        /// <summary>
+        /// Saves the domain model to a specified filename. This serialization is treated as temporarly and as such does
+        /// not change the default saving location of the current domain model.
+        /// </summary>
+        /// <param name="fileName">Filename to save the domain model to.</param>
+        protected override void SaveDocumentTemporarly(string fileName)
+        {
+            DslModeling::SerializationResult result = new DslModeling.SerializationResult();
+            <#= domainModel.GetFullName(true) #> modelRoot = (<#= domainModel.GetFullName(true) #>)this.RootElement;
+            <#= dm.Name #>SerializationHelper.Instance.TemporarlySaveModel<#= domainModel.Name #>(result, modelRoot, fileName, this.Encoding, false);
+        }		
+		
+		/// <summary>
+        /// Computes the fileName to save the diagrams model to from the model file name.
+        /// </summary>
+        /// <param name="modelFileName">Model file name.</param>
+		protected virtual string GetDiagramsFileName(string modelFileName)
+		{
+			System.IO.FileInfo info = new System.IO.FileInfo(modelFileName);
+            return info.FullName.Substring(0, info.FullName.Length - info.Extension.Length) + ".diagrams"; ;
+		}		
+		#endregion
+		
+		/// <summary>
+        /// Reset.
+        /// </summary>
+        public override void Reset()
+		{
+			this.diagramsModel = null;
+			
+			base.Reset();
+		}
+<#+
+if( (modelContext as ModelContext).DiagramClasses.Count > 0 )
+{
+#>
+
+		#region Diagrams
+		/// <summary>
+        /// Gets a specific diagram.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public override Microsoft.VisualStudio.Modeling.ModelElement GetDiagram(string name)
+		{
+            if (diagramsModel == null)
+                return null;
+
+			return diagramsModel.GetDiagram(name);
+		}
+		
+<#+
+	foreach(DiagramClass diagramClass in (modelContext as ModelContext).DiagramClasses)
+	{
+		if( diagramClass is TemplatedDiagramViewModelOnly )
+			continue;
+#>
+	
+		/// <summary>
+        /// Gets the <#= diagramClass.Name #> Diagram.
+        /// </summary>
+		public <#= diagramClass.Name #> <#= diagramClass.Name #>
+		{
+			get
+			{
+            	if (diagramsModel == null)
+                	return null;
+
+				return diagramsModel.GetDiagram("<#= diagramClass.Name #>") as <#= diagramClass.Name #>;
+			}
+			/*set
+			{
+				this.<#= diagramClass.Name #>Storage = value;
+				OnPropertyChanged("<#= diagramClass.Name #>");
+			}*/
+		}		
+		
+<#+
+	}
+	if( designerDC != null )
+	{
+		foreach(DiagramClass diagramClass in designerDC.ImportedDiagramClasses)
+		{
+			if( diagramClass is TemplatedDiagramViewModelOnly )
+				continue;
+			
+			string namespaceStr = diagramClass.ModelContext.MetaModel.Namespace;
+#>
+
+		/// <summary>
+        /// Gets the <#= diagramClass.Name #> Diagram.
+        /// </summary>
+		public <#= namespaceStr #>.<#= diagramClass.Name #> <#= diagramClass.Name #>
+		{
+			get
+			{
+				return diagramsModel.GetDiagram("<#= diagramClass.Name #>") as <#= namespaceStr #>.<#= diagramClass.Name #>;
+			}
+		}
+
+<#+
+		}
+	}
+#>
+		#endregion
+<#+
+}
+#>
+<#+
+	}
+#>	
+	}
+}
+<#+
+}
+#>

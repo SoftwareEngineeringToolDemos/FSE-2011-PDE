@@ -1,0 +1,73 @@
+<#@ import namespace="Tum.PDE.LanguageDSL"#>
+<#@ import namespace="Microsoft.VisualStudio.Modeling" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Collections.ObjectModel" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#+ 
+
+public string GenerateModelMergeMembers(DomainClass domainClass)
+{
+	this.GenerationEnvironment = null;
+	this.GenerateModelMergeMembersInternal(domainClass);
+	return this.GenerationEnvironment.ToString();
+}
+
+private void GenerateModelMergeMembersInternal(DomainClass domainClass)
+{
+#>
+#region IModelMergeElements
+<#+
+	if( !domainClass.CanCopy )
+	{
+#>
+/// <summary>
+/// Decides whether the element can be copied or not.
+/// </summary>
+/// <returns>True if the element can be copied. False otherwise.</returns>
+public override bool ModelIsCopyAllowed()
+{
+	return false;
+}
+
+<#+
+	}
+	if( !domainClass.CanMove )
+	{
+#>
+/// <summary>
+/// Decides whether the element can be moved or not.
+/// </summary>
+/// <returns>True if the element can be moved. False otherwise.</returns>
+public override bool ModelIsMoveAllowed()
+{
+	return false;
+}
+
+<#+
+	}
+	if( !domainClass.CanPaste )
+	{
+#>
+/// <summary>
+/// Decides whether the element can be pasted or not based on the operation.
+/// </summary>
+/// <param name="protoGroupOperation">Proto group operation.</param>
+/// <returns>True if the element can be pasted. False otherwise.</returns>
+public override bool ModelIsPasteAllowed(DslEditorModeling::ModelProtoGroupOperation protoGroupOperation)
+{
+	if( protoGroupOperation == DslEditorModeling.ModelProtoGroupOperation.Move )
+		return ModelIsMoveAllowed();
+		
+	return false;
+}
+
+<#+
+	}
+	
+#>
+#endregion
+<#+
+}
+#>
