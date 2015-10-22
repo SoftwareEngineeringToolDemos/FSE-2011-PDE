@@ -6,7 +6,7 @@ This repository contains information related to the tool PDE presented at the Fo
 
 
 
-This repository is not the original repository for this tool. Here are some links to the original project:<br/>
+This repository *is not* the original repository for this tool. Here are some links to the original project:<br/>
 
 * [The Official Project Page, including source code](http://pde.codeplex.com/)
 
