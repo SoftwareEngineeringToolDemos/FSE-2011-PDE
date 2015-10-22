@@ -26,4 +26,4 @@ In this repository, for PDE you will find:
 
 
 
-This repository was constructed by [Craig Kimpel](https://github.com/cskimpel) under the supervision of [Emerson Murphy-Hill](https://github.com/CaptainEmerson).
+This repository was constructed by [Craig Kimpel](https://github.com/cskimpel) under the supervision of [Emerson Murphy-Hill](https://github.com/CaptainEmerson). Thanks to Daniela Costache, Georg Kalus, Marco Kuhrmann for their help in establishing this repository.
