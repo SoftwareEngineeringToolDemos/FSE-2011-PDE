@@ -2,7 +2,7 @@
 
 
 
-This repository contains information related to the tool PDE presented at the Foundations of Software Engineering, 2011. This tool was originally presented in [this paper](http://dl.acm.org/citation.cfm?doid=2025113.2025192).
+This repository contains information related to the tool PDE presented at the Foundations of Software Engineering, 2011. This tool was originally presented in this [paper](http://dl.acm.org/citation.cfm?doid=2025113.2025192).
 
 
 
