@@ -18,11 +18,11 @@ In this repository, for PDE you will find:
 
 
 
-:white_check_mark: Source Code for PDE, the version taht was used in the Video of the Tool (available)
+:white_check_mark: Source Code for PDE, the version that was used in the Video of the Tool (available)
 
-:white_check_mark: Examples of products written using the tool, that were presentedthe Video Demo (available)
+:white_check_mark: Examples of products written using the tool, that were presented in the Video Demo (available)
 
-:white_check_mark: Source Code of the explame products presented in the the Video of the Tool (available)
+:white_check_mark: Source Code of the explame products presented in the Video of the Tool (available)
 
 
 
