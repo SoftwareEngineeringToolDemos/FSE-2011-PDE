@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<FamilyTreeModel Id="498fb9e9-f784-412c-b9a1-593867fe51ec">
+  <FamilyTreePerson Id="58b25072-cb31-4b47-8a59-b9258d4b3eb1" Gender="Male">
+    <Name>Father</Name>
+    <ChildRef link="e4588077-78d9-4c52-93c8-71815bbc759a" />
+  </FamilyTreePerson>
+  <FamilyTreePerson Id="444c86c0-ae23-471d-b048-78cfa7178127" Gender="Female">
+    <Name>Mother</Name>
+    <ChildRef link="e4588077-78d9-4c52-93c8-71815bbc759a" />
+    <WifeRef link="58b25072-cb31-4b47-8a59-b9258d4b3eb1" />
+  </FamilyTreePerson>
+  <FamilyTreePerson Id="e4588077-78d9-4c52-93c8-71815bbc759a" Gender="Male">
+    <Name>Child</Name>
+    <ChildRef link="d7ce84cb-8ad3-4862-80fa-38e7a846ab2d" />
+  </FamilyTreePerson>
+  <FamilyTreePerson Id="d7ce84cb-8ad3-4862-80fa-38e7a846ab2d" Gender="Female">
+    <Name>Grand Child</Name>
+    <Pet Id="af0a216a-5f1b-4ed6-baec-7823e583d7dd" Name="Fluffy" />
+  </FamilyTreePerson>
+</FamilyTreeModel>

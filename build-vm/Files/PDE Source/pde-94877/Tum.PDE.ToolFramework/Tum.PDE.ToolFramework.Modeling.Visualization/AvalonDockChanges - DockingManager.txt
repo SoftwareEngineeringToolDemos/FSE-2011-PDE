@@ -1,0 +1,46 @@
+﻿1. 
+/*
+*  CHANGE:
+*/
+
+private bool bLayoutUseExcludedContents = false;
+private List<DockableContent> excludedContents = null;
+
+public void RemovePane(DockableContent content)
+{
+    if (this.DockableContents.Contains(content))
+        this.DockableContents.Remove(content);
+
+    
+}
+
+public void SaveLayoutAdvanced(string path, List<DockableContent> excludedContents)
+{
+    this.bLayoutUseExcludedContents = true;
+    this.excludedContents = excludedContents;
+
+    this.SaveLayout(path);
+
+    this.bLayoutUseExcludedContents = false;
+    this.excludedContents = null;
+}
+
+/*
+ *  CHANGE END:
+*/
+
+		
+2.		
+void SaveLayout(XmlWriter xmlWriter, DockableContent content)
+{
+    /*
+        * CHANGE
+       */
+
+    if (this.bLayoutUseExcludedContents)
+        if (this.excludedContents != null)
+            if (this.excludedContents.Contains(content))
+                return;
+    /*
+     * END CHANGE
+            */

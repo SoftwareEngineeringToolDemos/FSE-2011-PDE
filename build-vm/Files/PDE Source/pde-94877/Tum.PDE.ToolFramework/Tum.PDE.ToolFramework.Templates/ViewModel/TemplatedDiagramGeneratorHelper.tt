@@ -1,0 +1,395 @@
+﻿<#@ template language="C#" inherits="BaseTemplate"#> 
+<#@ import namespace="Tum.PDE.LanguageDSL"#>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Collections.ObjectModel" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+
+<#+ 
+public string GenerateDiagramViewModel(MetaModel dm, DiagramClass diagramClass)
+{
+	this.GenerationEnvironment = null;
+	this.GenerateDiagramViewModelInternal(dm, diagramClass);
+	return this.GenerationEnvironment.ToString();
+}
+
+private void GenerateDiagramViewModelInternal(MetaModel dm, DiagramClass diagramClass)
+{
+	string baseClass = "DslEditorViewDiagrams::BaseDiagramSurfaceViewModel";	
+	if( diagramClass is SpecificElementsDiagram)
+	{
+		if( (diagramClass as SpecificElementsDiagram).DomainClasses.Count == 0 )
+			return;
+		
+		baseClass = "DslEditorViewDiagrams.Templates.SpecificElementsDesignerSurfaceViewModel";
+	}
+	else if( diagramClass is DesignerSurfaceDiagram)
+	{
+		baseClass = "DslEditorViewDiagrams.Templates.DesignerSurfaceViewModel";
+	}
+	else if( diagramClass is ModalDiagram)
+	{
+		if( (diagramClass as ModalDiagram).DomainClass == null )
+			return;
+		
+		baseClass = "DslEditorViewDiagrams.Templates.ModalDesignerSurfaceViewModel";
+	}
+#>
+
+namespace <#= dm.Namespace #>.ViewModel
+{
+	/// <summary>
+	/// This class represents the default diagram surface view model of the <#= dm.ApplicationName #>.
+	/// 
+	/// Double-derived class to allow easier code customization.
+	/// </summary>
+	public partial class <#= dm.Name #><#= diagramClass.Name #>SurfaceViewModel : <#= dm.Name #><#= diagramClass.Name #>SurfaceViewModelBase
+	{
+		#region Constructor
+<#+
+		this.PushIndent("\t\t");
+		CreateConstructor(dm, diagramClass, false);
+		this.PopIndent();
+#>	
+		#endregion
+	}
+	
+	/// <summary>
+	/// This class represents the default diagram surface view model of the <#= dm.ApplicationName #>.
+	/// 
+	/// This is the abstract base class.
+	/// </summary>
+	public abstract partial class <#= dm.Name #><#= diagramClass.Name #>SurfaceViewModelBase : <#= baseClass #>
+	{
+		#region Constructor
+<#+
+		this.PushIndent("\t\t");
+		CreateConstructor(dm, diagramClass, true);
+		this.PopIndent();
+#>	
+		#endregion		
+<#+	
+		if( diagramClass is ModalDiagram)
+		{
+			ModalDiagram diagram = diagramClass as ModalDiagram;
+#>
+		#region ModalDiagram
+		/// <summary>
+        /// Unique name of the property grid docking window.
+        /// </summary>
+        public override string DockingPaneName
+        {
+            get { return "<#= diagramClass.Name #>SurfaceDockWindowPane" + this.NameExtension; }
+        }
+
+        /// <summary>
+        /// Title of the docking windo.
+        /// </summary>
+        public override string DockingPaneTitle
+        {
+            get { return "<#= diagramClass.Title #>" + this.TitleExtension; }
+        }		
+		
+        /// <summary>
+        /// Initialization routine.
+        /// </summary>
+        protected override void Initialize()
+        {
+            base.Initialize();
+
+<#+
+				if(diagram.DomainClass.GenerateSpecificViewModel )
+				{
+					string dClass = diagram.DomainClass.GetMetaModel().Namespace + ".ViewModel." + diagram.DomainClass.Name + "SpecificViewModel";
+#>
+			this.HostedElementVM = new <#= dClass #>(this.ViewModelStore, (this.HostedElement as <#=  diagram.DomainClass.GetFullName(true) #>));
+<#+
+				}
+				else
+				{
+#>
+			this.HostedElementVM = new DslEditorViewModels::BaseModelElementViewModel(this.ViewModelStore, this.HostedElement, true);
+<#+					
+				}
+#>
+        }		
+		#endregion
+<#+
+		}
+		else if( diagramClass is SpecificElementsDiagram)
+		{
+			SpecificElementsDiagram diagram = diagramClass as SpecificElementsDiagram;
+#>
+
+		#region SpecificElementsDiagram		
+		private SelectedElementEnum selectedElementEnum = SelectedElementEnum.___None___;
+		
+		/// <summary>
+		/// Enumeration identifying the currently selected element type.
+		/// </summary>
+		public enum SelectedElementEnum
+		{
+			___None___,
+<#+
+			foreach(DomainClass d in diagram.DomainClasses)
+			{
+#>
+			<#= d.Name #>,
+<#+
+			}
+#>
+		}
+		
+		/// <summary>
+		/// Gets the selected element type.
+		/// </summary>
+		public SelectedElementEnum SelectedElementType
+		{
+			get
+			{
+				return this.selectedElementEnum;
+			}
+			private set
+			{
+				if( this.selectedElementEnum != value )
+				{
+					this.selectedElementEnum = value;
+					OnPropertyChanged("SelectedElementType");
+				}
+			}
+		}
+		
+		/// <summary>
+        /// Called if the hosted element was deleted.
+        /// </summary>
+        /// <param name="args">Data</param>
+        protected override void OnHostedElementDeleted(DslModeling::ElementDeletedEventArgs args)
+        {
+            base.OnHostedElementDeleted(args);
+			
+			this.SelectedElementType = SelectedElementEnum.___None___;
+        }
+		
+        /// <summary>
+        /// Callback from SelectionChangedEvent.
+        /// </summary>
+        /// <param name="eventArgs">SelectionChangedEventArgs.</param>
+        protected override void ReactOnViewSelection(DslEditorEvents::SelectionChangedEventArgs eventArgs)
+        {
+			base.ReactOnViewSelection(eventArgs);
+
+			// update selection
+            if (this.IsInitialized && this.IsDockingPaneVisible)
+				DslEditorViewModels.Threading.DispatcherExtensions.InvokeAsynchronouslyInBackground(
+                   System.Windows.Threading.Dispatcher.CurrentDispatcher, new System.Action(UpdateView));
+        }
+				
+        /// <summary>
+        /// Initialize.
+        /// </summary>
+        protected override void Initialize()
+        {
+            base.Initialize();
+
+            if (this.SelectedItemsCollection != null)
+				DslEditorViewModels.Threading.DispatcherExtensions.InvokeAsynchronouslyInBackground(
+                   System.Windows.Threading.Dispatcher.CurrentDispatcher, new System.Action(UpdateView));
+        }
+		
+		/// <summary>
+        /// Updates the view based on the current selection.
+        /// </summary>
+		protected virtual void UpdateView()
+		{
+			if( this.SelectedItemsCollection.Count != 1 )
+				return;
+				
+			DslEditorModeling::DomainModelElement element = this.SelectedItemsCollection[0] as DslEditorModeling::DomainModelElement;
+			if( element != null )
+			{
+<#+
+			foreach(DomainClass d in diagram.DomainClasses)
+			{
+#>
+				if( element is <#= d.GetFullName(true) #> )
+				{
+					this.SelectedElementType = SelectedElementEnum.<#= d.Name #>;
+<#+
+				if(d.GenerateSpecificViewModel )
+				{
+					string dClass = d.GetMetaModel().Namespace + ".ViewModel." + d.Name + "SpecificViewModel";
+#>
+					if( HostedElement != null )
+						if( HostedElement.Element.Id == element.Id )
+							return;
+							
+					HostedElement = new <#= dClass #>(this.ViewModelStore, (element as <#= d.GetFullName(true) #>));
+<#+
+				}
+				else
+				{
+#>
+					HostedElement = new DslEditorViewModels::BaseModelElementViewModel(this.ViewModelStore, element, true);
+<#+					
+				}
+#>
+				
+					return;
+				}
+<#+
+			}
+#>
+			}
+		}
+		
+		/// <summary>
+        /// Reset.
+        /// </summary>
+        protected override void Reset()
+        {
+			this.SelectedElementType = SelectedElementEnum.___None___;
+			
+			base.Reset();
+		}
+		
+		 /// <summary>
+        /// Visibility changed.
+        /// </summary>
+        /// <param name="bVisible"></param>
+        protected override void OnVisibilityChanged(bool bVisible)
+        {
+            base.OnVisibilityChanged(bVisible);
+
+            if (this.IsDockingPaneVisible && this.IsInitialized)
+				if (this.SelectedItemsCollection != null)
+					DslEditorViewModels.Threading.DispatcherExtensions.InvokeAsynchronouslyInBackground(
+                   		System.Windows.Threading.Dispatcher.CurrentDispatcher, new System.Action(UpdateView));
+        }
+		#endregion
+		
+<#+
+		}
+		else if( diagramClass is DesignerSurfaceDiagram)
+		{
+#>
+		#region DesignerSurfaceDiagram
+		
+		#endregion
+<#+
+		}
+#>
+		#region IDockableViewModel
+<#+
+		if( !(diagramClass is ModalDiagram))
+		{
+#>
+      	/// <summary>
+        /// Unique name of the property grid docking window.
+        /// </summary>
+        public override string DockingPaneName
+        {
+            get { return "<#= diagramClass.Name #>SurfaceDockWindowPane"; }
+        }
+
+        /// <summary>
+        /// Title of the docking windo.
+        /// </summary>
+        public override string DockingPaneTitle
+        {
+            get { return "<#= diagramClass.Title #>"; }
+        }
+<#+
+		}
+#> 
+        		
+		/// <summary>
+		/// Gets the docking pane style. 
+		/// </summary>
+		public override global::Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel.DockingPaneStyle DockingPaneStyle
+        {
+            get
+            {
+                return global::Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel.DockingPaneStyle.DockedInDocumentPane;
+            }
+        }
+        #endregion		
+	}
+}
+
+<#+
+}
+
+private void CreateConstructor(MetaModel dm, DiagramClass diagramClass, bool isBaseAbstractClass)
+{
+	string accessor = "public";
+	string name = dm.Name + diagramClass.Name + "SurfaceViewModel";
+	if( isBaseAbstractClass )
+	{
+		accessor = "protected";
+		name += "Base";
+	}
+	
+	
+	if( diagramClass is ModalDiagram)
+	{
+#>
+/// <summary>
+/// Constuctor.
+/// </summary>
+/// <param name="viewModelStore">The store this view model belongs to.</param>
+/// <param name="element">Element.</param>
+<#= accessor #> <#= name #>(DslEditorViewModels.Data.ViewModelStore viewModelStore, DslEditorModeling::DomainModelElement element)
+    : base(viewModelStore, element)
+{
+
+}
+<#+
+	}
+	else if( diagramClass is SpecificElementsDiagram)
+	{
+#>
+/// <summary>
+/// Constuctor.
+/// </summary>
+/// <param name="viewModelStore">The store this view model belongs to.</param>
+/// <param name="modelContext">Model context.</param>
+<#= accessor #> <#= name #>(DslEditorViewModels.Data.ViewModelStore viewModelStore, DslEditorModeling::ModelContext modelContext)
+    : base(viewModelStore, modelContext)
+{
+}
+
+/// <summary>
+/// Constuctor.
+/// </summary>
+/// <param name="viewModelStore">The store this view model belongs to.</param>
+/// <param name="modelContextName">Model context name.</param>
+<#= accessor #> <#= name #>(DslEditorViewModels.Data.ViewModelStore viewModelStore, string modelContextName)
+    : base(viewModelStore, modelContextName)
+{
+}
+<#+
+	}
+	else if( diagramClass is DesignerSurfaceDiagram)
+	{
+#>
+
+<#+
+	}
+
+	if( diagramClass is RestorableChildlessDiagram || diagramClass is RestorableTemplatedDiagramVMOnly)
+	{
+#>
+/// <summary>
+/// Constuctor.
+/// </summary>
+/// <param name="viewModelStore">The store this view model belongs to.</param>
+<#= accessor #> <#= name #>(DslEditorViewModels.Data.ViewModelStore viewModelStore)
+    : base(viewModelStore)
+{
+
+}
+<#+
+	}
+}
+#>

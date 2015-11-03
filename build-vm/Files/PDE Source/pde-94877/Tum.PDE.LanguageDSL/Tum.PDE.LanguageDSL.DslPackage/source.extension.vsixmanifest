@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Vsix xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2010">
+  <Identifier Id="121cb910-4e04-45ac-93bc-2ae09819a245">
+    <Name>Process Development Environment Language</Name>
+    <Author>Tum</Author>
+    <Version>1.0.0.0</Version>
+    <Description xml:space="preserve">The Process Development Environment Language is the base language to define DSLs that are either edited within a WPF application or as a Visual Studio Plugin.</Description>
+    <Locale>1033</Locale>
+    <InstalledByMsi>true</InstalledByMsi>
+    <SupportedProducts>
+      <VisualStudio Version="10.0">
+        <Edition>Pro</Edition>
+        <Edition>VSTS</Edition>
+        <Edition>VSTD</Edition>
+      </VisualStudio>
+    </SupportedProducts>
+    <SupportedFrameworkRuntimeEdition MinVersion="4.0" MaxVersion="4.0" />
+  </Identifier>
+  <References />
+  <Content>
+    <VsPackage>|%CurrentProject%;PkgdefProjectOutputGroup|</VsPackage>
+    <MefComponent>|Tum.PDE.LanguageDSL.Dsl|</MefComponent>
+    <MefComponent>|%CurrentProject%|</MefComponent>
+    <CustomExtension Type="dll">|Tum.PDE.LanguageDSL.Visualization|</CustomExtension>
+    <CustomExtension Type="dll">|Tum.PDE.LanguageDSL.Optimization|</CustomExtension>    
+    <Assembly AssemblyName="ICSharpCode.AvalonEdit.dll"></Assembly>
+  </Content>
+</Vsix>

@@ -1,0 +1,70 @@
+﻿<#@ template language="C#" inherits="BaseTemplate"#> 
+<#@ import namespace="Tum.PDE.LanguageDSL"#>
+<#@ output extension=".xml" #>
+<# 
+	GenerateLayoutManagerLayout(this.MetaModel);
+#>
+<#+
+public void GenerateLayoutManagerLayout(MetaModel dm)
+{
+#>
+<DefaultLayouts>
+<#+
+	foreach(BaseModelContext modelContext in this.MetaModel.ModelContexts)	
+		if( modelContext is ModelContext)
+		{
+			string diagramDesignerClassName = "DesignerDiagramSurfaceDockWindowPane";
+			foreach( DiagramClass diagramClass in (modelContext as ModelContext).DiagramClasses)
+				if( diagramClass is DesignerDiagramClass )
+					diagramDesignerClassName = diagramClass.Name + "SurfaceDockWindowPane";
+#>
+	<DefaultLayout name="<#= modelContext.Name #>">
+<#+
+	this.PushIndent("\t\t");		
+#>
+<DockingManager version="1.3.0">
+    <ResizingPanel ResizeWidth="*" ResizeHeight="*" EffectiveSize="0,0" Orientation="Horizontal">
+        <DockablePane ResizeWidth="282" ResizeHeight="*" EffectiveSize="282,1000" ID="2911486e-0e55-40fd-9f2c-366fd5d06549" Anchor="Left" IsAutoHidden="false">
+            <DockableContent Name="ModelTreeViewDockWindow" FloatingWindowSize="250,400" ChildIndex="0" Width="250" Height="594" Anchor="Left" State="Docked" ContainerPaneID="5681c1d1-6d75-4334-8ac6-220a51501503" />
+        </DockablePane>
+        <ResizingPanel ResizeWidth="*" ResizeHeight="*" EffectiveSize="1632,1000" Orientation="Vertical">
+            <ResizingPanel ResizeWidth="*" ResizeHeight="*" EffectiveSize="1632,594" Orientation="Horizontal">
+                <DocumentPane IsMain="true" SelectedIndex="0">
+                    <DockableContent Name="<#= diagramDesignerClassName #>" FloatingWindowSize="250,400" ChildIndex="0" Width="1046" Height="594" Anchor="None" State="Document" />
+<#+
+					/*for(int i = 1; i < this.MetaModel.AllDiagramClasses.Count; i++)
+					{
+						DiagramClass diagramClass = this.MetaModel.AllDiagramClasses[i];
+#>
+                    <DockableContent Name="<#= diagramClass.Name #>DiagramSurfaceDockWindowPane" FloatingWindowSize="250,400" Width="1046" Height="594" Anchor="None" State="Document" ChildIndex="0" />						
+<#+
+					}*/
+#>
+                </DocumentPane>
+                <DockablePane ResizeWidth="327" ResizeHeight="*" EffectiveSize="327,594" ID="5681c1d1-6d75-4334-8ac6-220a51501503" Anchor="Right" IsAutoHidden="false">
+                    <DockableContent Name="PropertiesDockWindowPane" FloatingWindowSize="250,400" />
+                </DockablePane>
+            </ResizingPanel>
+            <DockablePane ResizeWidth="*" ResizeHeight="400" EffectiveSize="1632,400" ID="13b34325-ea7b-44a1-b3a2-67a4fad20bf5" Anchor="Bottom" SelectedIndex="0" IsAutoHidden="false">
+                <DockableContent Name="ErrorListDockWindow" FloatingWindowSize="250,400" ChildIndex="0" Width="200" Height="1000" Anchor="Bottom" State="Docked" ContainerPaneID="f88d48ad-60b4-4b51-93f8-04e63b2f4ead" />
+                <DockableContent Name="DependenciesDockWindowPane" FloatingWindowSize="250,400" ChildIndex="0" Width="200" Height="594" Anchor="Bottom" State="Docked" ContainerPaneID="cd31227d-6e26-4b35-9e3e-586f2dc4c053" />
+            </DockablePane>
+        </ResizingPanel>
+    </ResizingPanel>
+    <Hidden>
+        <DockableContent Name="SearchResultViewModel" FloatingWindowSize="400,500" ChildIndex="2" Width="1632" Height="400" Anchor="Bottom" State="Docked" ContainerPaneID="13b34325-ea7b-44a1-b3a2-67a4fad20bf5" />
+        <DockableContent Name="SearchViewModel" FloatingWindowSize="200,500" ChildIndex="0" Width="100" Height="100" Anchor="None" State="DockableWindow" ContainerPaneID="0187e39b-2379-4e8b-bf3f-db6ce7ca72fa" />
+    </Hidden>
+    <Windows />
+</DockingManager>
+<#+
+	this.PopIndent();
+#>
+	</DefaultLayout>
+<#+
+		}
+#>
+</DefaultLayouts>
+<#+
+}
+#>

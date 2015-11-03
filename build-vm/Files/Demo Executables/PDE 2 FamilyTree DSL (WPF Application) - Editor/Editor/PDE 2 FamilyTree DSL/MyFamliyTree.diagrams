@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<diagramsModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="0cc29997-3f88-4eae-812b-5c1478a1e342" xmlns="http://schemas.microsoft.com/dsltools/DiagramsDSL">
+  <diagrams>
+    <FamilyTreeDSLdesignerDiagram Id="10c186bb-bcd6-458e-b6e8-febb36af2c1f" internalElementId="00000000-0000-0000-0000-000000000000" name="DesignerDiagram">
+      <children>
+        <FamilyTreeDSLpersonShape Id="f088323c-940a-4b8a-8a90-7c7b7e4c00e0" internalElementId="58b25072-cb31-4b47-8a59-b9258d4b3eb1" location="170, 15" size="100, 100" absoluteLocation="170, 15" placementSide="Left" />
+        <FamilyTreeDSLpersonShape Id="cf3ef1d6-7765-4736-b744-10fae78b0328" internalElementId="444c86c0-ae23-471d-b048-78cfa7178127" location="15, 15" size="100, 100" absoluteLocation="15, 15" placementSide="Left" />
+        <FamilyTreeDSLpersonShape Id="5390b381-9da0-47e9-927d-0697195f9f12" internalElementId="e4588077-78d9-4c52-93c8-71815bbc759a" location="15, 170" size="100, 100" absoluteLocation="15, 170" placementSide="Left" />
+        <FamilyTreeDSLpersonShape Id="0a21099f-84fd-4778-8e07-3d60787bde9b" internalElementId="d7ce84cb-8ad3-4862-80fa-38e7a846ab2d" location="15, 325" size="100, 100" absoluteLocation="15, 325" placementSide="Left" />
+      </children>
+      <linkShapes>
+        <FamilyTreeDSLmarriedToShape Id="976e085c-346a-4ede-b306-9f187609a9aa" internalElementId="b1739e7f-c091-4d9d-96b9-0ba4ca92e2ea" sourceShapeId="cf3ef1d6-7765-4736-b744-10fae78b0328" targetShapeId="f088323c-940a-4b8a-8a90-7c7b7e4c00e0">
+          <edgePoints>[(122 : 65 : Normal); (132 : 65 : Normal); (153 : 65 : Normal); (163 : 65 : Normal)]</edgePoints>
+          <sourceAnchor>
+            <linkShapeHasSourceAnchor>
+              <sourceAnchor Id="2c1a100e-c6b0-4560-9d5b-595b8a6317d2" absoluteLocation="122, 65">
+                <fromShape>
+                  <sourceAnchorReferencesFromShape>
+                    <FamilyTreeDSLpersonShapeMoniker Id="cf3ef1d6-7765-4736-b744-10fae78b0328" />
+                  </sourceAnchorReferencesFromShape>
+                </fromShape>
+              </sourceAnchor>
+            </linkShapeHasSourceAnchor>
+          </sourceAnchor>
+          <targetAnchor>
+            <linkShapeHasTargetAnchor>
+              <targetAnchor Id="caefa27a-b8de-466d-9003-3eb616adf007" absoluteLocation="163, 65">
+                <toShape>
+                  <targetAnchorReferencesToShape>
+                    <FamilyTreeDSLpersonShapeMoniker Id="f088323c-940a-4b8a-8a90-7c7b7e4c00e0" />
+                  </targetAnchorReferencesToShape>
+                </toShape>
+              </targetAnchor>
+            </linkShapeHasTargetAnchor>
+          </targetAnchor>
+        </FamilyTreeDSLmarriedToShape>
+        <FamilyTreeDSLparentOfShape Id="9dccf88c-a69e-46ec-aa6a-21bfa14158ee" internalElementId="11ee6c0d-f0c7-486c-9132-405d7e957829" sourceShapeId="f088323c-940a-4b8a-8a90-7c7b7e4c00e0" targetShapeId="5390b381-9da0-47e9-927d-0697195f9f12">
+          <edgePoints>[(220 : 122 : Normal); (220 : 132 : Normal); (220 : 142.5 : Normal); (65 : 142.5 : Normal); (65 : 153 : Normal); (65 : 163 : Normal)]</edgePoints>
+          <sourceAnchor>
+            <linkShapeHasSourceAnchor>
+              <sourceAnchor Id="929a0aa9-9171-4a7c-83cc-7d4ddca1a746" absoluteLocation="220, 122">
+                <fromShape>
+                  <sourceAnchorReferencesFromShape>
+                    <FamilyTreeDSLpersonShapeMoniker Id="f088323c-940a-4b8a-8a90-7c7b7e4c00e0" />
+                  </sourceAnchorReferencesFromShape>
+                </fromShape>
+              </sourceAnchor>
+            </linkShapeHasSourceAnchor>
+          </sourceAnchor>
+          <targetAnchor>
+            <linkShapeHasTargetAnchor>
+              <targetAnchor Id="2a265227-79cd-4b60-8dd5-3a276b0e5f21" absoluteLocation="65, 163">
+                <toShape>
+                  <targetAnchorReferencesToShape>
+                    <FamilyTreeDSLpersonShapeMoniker Id="5390b381-9da0-47e9-927d-0697195f9f12" />
+                  </targetAnchorReferencesToShape>
+                </toShape>
+              </targetAnchor>
+            </linkShapeHasTargetAnchor>
+          </targetAnchor>
+        </FamilyTreeDSLparentOfShape>
+        <FamilyTreeDSLparentOfShape Id="0f355a18-f3b4-4543-b669-809c13bcff36" internalElementId="f2246d87-081a-4dbe-a0a4-a06132f8c96a" sourceShapeId="cf3ef1d6-7765-4736-b744-10fae78b0328" targetShapeId="5390b381-9da0-47e9-927d-0697195f9f12">
+          <edgePoints>[(65 : 122 : Normal); (65 : 132 : Normal); (65 : 153 : Normal); (65 : 163 : Normal)]</edgePoints>
+          <sourceAnchor>
+            <linkShapeHasSourceAnchor>
+              <sourceAnchor Id="4c2feed7-016e-4cd3-ac28-de828968d8f8" absoluteLocation="65, 122">
+                <fromShape>
+                  <sourceAnchorReferencesFromShape>
+                    <FamilyTreeDSLpersonShapeMoniker Id="cf3ef1d6-7765-4736-b744-10fae78b0328" />
+                  </sourceAnchorReferencesFromShape>
+                </fromShape>
+              </sourceAnchor>
+            </linkShapeHasSourceAnchor>
+          </sourceAnchor>
+          <targetAnchor>
+            <linkShapeHasTargetAnchor>
+              <targetAnchor Id="11f35c34-5676-43bd-a3ef-94bd00d3a90f" absoluteLocation="65, 163">
+                <toShape>
+                  <targetAnchorReferencesToShape>
+                    <FamilyTreeDSLpersonShapeMoniker Id="5390b381-9da0-47e9-927d-0697195f9f12" />
+                  </targetAnchorReferencesToShape>
+                </toShape>
+              </targetAnchor>
+            </linkShapeHasTargetAnchor>
+          </targetAnchor>
+        </FamilyTreeDSLparentOfShape>
+        <FamilyTreeDSLparentOfShape Id="c3a97ced-afbd-4db7-bc7e-43002423f4ef" internalElementId="88a16205-bd5e-4512-8ece-04c73d8c7ef4" sourceShapeId="5390b381-9da0-47e9-927d-0697195f9f12" targetShapeId="0a21099f-84fd-4778-8e07-3d60787bde9b">
+          <edgePoints>[(65 : 277 : Normal); (65 : 287 : Normal); (65 : 308 : Normal); (65 : 318 : Normal)]</edgePoints>
+          <sourceAnchor>
+            <linkShapeHasSourceAnchor>
+              <sourceAnchor Id="becd95ba-efd3-49e6-911c-93fd7c40fd41" absoluteLocation="65, 277">
+                <fromShape>
+                  <sourceAnchorReferencesFromShape>
+                    <FamilyTreeDSLpersonShapeMoniker Id="5390b381-9da0-47e9-927d-0697195f9f12" />
+                  </sourceAnchorReferencesFromShape>
+                </fromShape>
+              </sourceAnchor>
+            </linkShapeHasSourceAnchor>
+          </sourceAnchor>
+          <targetAnchor>
+            <linkShapeHasTargetAnchor>
+              <targetAnchor Id="88533ec7-7ca9-48d9-9601-6458b49a573d" absoluteLocation="65, 318">
+                <toShape>
+                  <targetAnchorReferencesToShape>
+                    <FamilyTreeDSLpersonShapeMoniker Id="0a21099f-84fd-4778-8e07-3d60787bde9b" />
+                  </targetAnchorReferencesToShape>
+                </toShape>
+              </targetAnchor>
+            </linkShapeHasTargetAnchor>
+          </targetAnchor>
+        </FamilyTreeDSLparentOfShape>
+      </linkShapes>
+    </FamilyTreeDSLdesignerDiagram>
+  </diagrams>
+</diagramsModel>

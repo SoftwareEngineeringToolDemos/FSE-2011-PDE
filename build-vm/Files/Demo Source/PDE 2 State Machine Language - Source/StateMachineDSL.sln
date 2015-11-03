@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StateMachineDSL", "StateMachineDSL\StateMachineDSL.csproj", "{14F4EFD3-52AD-4FA9-A8B2-A6716E534275}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{14F4EFD3-52AD-4FA9-A8B2-A6716E534275}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{14F4EFD3-52AD-4FA9-A8B2-A6716E534275}.Debug|Any CPU.Build.0 = Debug|x86
+		{14F4EFD3-52AD-4FA9-A8B2-A6716E534275}.Release|Any CPU.ActiveCfg = Release|x86
+		{14F4EFD3-52AD-4FA9-A8B2-A6716E534275}.Release|Any CPU.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

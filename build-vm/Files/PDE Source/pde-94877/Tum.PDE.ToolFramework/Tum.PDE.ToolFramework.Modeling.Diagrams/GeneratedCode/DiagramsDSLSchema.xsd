@@ -1,0 +1,1609 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema id="DiagramsDSLSchema" targetNamespace="http://schemas.microsoft.com/dsltools/DiagramsDSL" elementFormDefault="qualified" xmlns="http://schemas.microsoft.com/dsltools/DiagramsDSL" xmlns:core="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:import id="CoreSchema" namespace="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" />
+  <!-- DiagramsModel -->
+  <xsd:element name="diagramsModel" type="DiagramsModel" substitutionGroup="core:modelElement" />
+  <xsd:complexType name="DiagramsModel">
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElement">
+        <xsd:sequence minOccurs="0" maxOccurs="1">
+          <!-- Relationship: DiagramsModelHasDiagrams -->
+          <xsd:element name="diagrams" minOccurs="0" maxOccurs="1">
+            <xsd:annotation>
+              <xsd:documentation>Instances of DiagramsModelHasDiagrams</xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:choice minOccurs="0" maxOccurs="unbounded" >
+                  <xsd:element ref="diagramsModelHasDiagrams">
+                    <xsd:annotation>
+                      <xsd:documentation>[Relationship deriving from DiagramsModelHasDiagrams needs to be serialized in full-form]</xsd:documentation>
+                    </xsd:annotation>
+                  </xsd:element>
+                  <xsd:element ref="diagram" >
+                    <xsd:annotation>
+                      <xsd:documentation>[Target role-player]</xsd:documentation>
+                    </xsd:annotation>
+                  </xsd:element>
+                </xsd:choice>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+          <!-- Relationship: DiagramsModelHasLayoutInfos -->
+          <xsd:element name="layoutInfos" minOccurs="0" maxOccurs="1">
+            <xsd:annotation>
+              <xsd:documentation>Instances of DiagramsModelHasLayoutInfos</xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element ref="diagramsModelHasLayoutInfos" minOccurs="0" maxOccurs="unbounded">
+                  <xsd:annotation>
+                    <xsd:documentation>[Instance of DiagramsModelHasLayoutInfos needs to be serialized in full-form]</xsd:documentation>
+                  </xsd:annotation>
+                </xsd:element>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:sequence>
+        <!-- Id -->
+        <xsd:attribute name="Id" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Instance Guid of this element, needed because SerializeId is set to true.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <!-- dslVersion -->
+        <xsd:attribute name="dslVersion" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Version of the model serialized in this file.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- DiagramsModel Moniker -->
+  <xsd:element name="diagramsModelMoniker" type="DiagramsModelMoniker" substitutionGroup="core:modelElementMoniker" />
+  <xsd:complexType name="DiagramsModelMoniker">
+    <xsd:annotation>
+      <xsd:documentation>Moniker for DiagramsModel instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElementMoniker">
+        <xsd:attribute name="Id" type="xsd:string" >
+          <xsd:annotation>
+            <xsd:documentation>Attribute to store the moniker string.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- NodeShape -->
+  <xsd:element name="nodeShape" type="NodeShape" substitutionGroup="shapeElement" />
+  <xsd:complexType name="NodeShape">
+    <xsd:complexContent>
+      <xsd:extension base="ShapeElement">
+        <xsd:sequence minOccurs="0" maxOccurs="1">
+          <!-- Relationship: ShapeElementContainsChildShapes -->
+          <xsd:element name="internalChildren" minOccurs="0" maxOccurs="1">
+            <xsd:annotation>
+              <xsd:documentation>Instances of ShapeElementContainsChildShapes</xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:choice minOccurs="0" maxOccurs="unbounded" >
+                  <xsd:element ref="shapeElementContainsChildShapes">
+                    <xsd:annotation>
+                      <xsd:documentation>[Relationship deriving from ShapeElementContainsChildShapes needs to be serialized in full-form]</xsd:documentation>
+                    </xsd:annotation>
+                  </xsd:element>
+                  <xsd:element ref="nodeShape" >
+                    <xsd:annotation>
+                      <xsd:documentation>[Target role-player]</xsd:documentation>
+                    </xsd:annotation>
+                  </xsd:element>
+                </xsd:choice>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+          <!-- Relationship: NodeShapeReferencesNestedChildren -->
+          <xsd:element name="nestedChildren" minOccurs="0" maxOccurs="1">
+            <xsd:annotation>
+              <xsd:documentation>Instances of NodeShapeReferencesNestedChildren</xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:choice minOccurs="0" maxOccurs="unbounded" >
+                  <xsd:element ref="nodeShapeReferencesNestedChildren">
+                    <xsd:annotation>
+                      <xsd:documentation>[Relationship deriving from NodeShapeReferencesNestedChildren needs to be serialized in full-form]</xsd:documentation>
+                    </xsd:annotation>
+                  </xsd:element>
+                  <xsd:element ref="nodeShapeMoniker" >
+                    <xsd:annotation>
+                      <xsd:documentation>[Target role-player]</xsd:documentation>
+                    </xsd:annotation>
+                  </xsd:element>
+                </xsd:choice>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+          <!-- Relationship: NodeShapeReferencesRelativeChildren -->
+          <xsd:element name="relativeChildren" minOccurs="0" maxOccurs="1">
+            <xsd:annotation>
+              <xsd:documentation>Instances of NodeShapeReferencesRelativeChildren</xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:choice minOccurs="0" maxOccurs="unbounded" >
+                  <xsd:element ref="nodeShapeReferencesRelativeChildren">
+                    <xsd:annotation>
+                      <xsd:documentation>[Relationship deriving from NodeShapeReferencesRelativeChildren needs to be serialized in full-form]</xsd:documentation>
+                    </xsd:annotation>
+                  </xsd:element>
+                  <xsd:element ref="nodeShapeMoniker" >
+                    <xsd:annotation>
+                      <xsd:documentation>[Target role-player]</xsd:documentation>
+                    </xsd:annotation>
+                  </xsd:element>
+                </xsd:choice>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:sequence>
+        <!-- Id -->
+        <xsd:attribute name="Id" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Instance Guid of this element, needed because SerializeId is set to true.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <!-- Property: Location -->
+        <xsd:attribute name="location" type="xsd:string" />
+        <!-- Property: Size -->
+        <xsd:attribute name="size" type="xsd:string" />
+        <!-- Property: AbsoluteLocation -->
+        <xsd:attribute name="absoluteLocation" type="xsd:string" />
+        <!-- Property: PlacementSide -->
+        <xsd:attribute name="placementSide" type="PortPlacement" />
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- NodeShape Moniker -->
+  <xsd:element name="nodeShapeMoniker" type="NodeShapeMoniker" substitutionGroup="shapeElementMoniker" />
+  <xsd:complexType name="NodeShapeMoniker">
+    <xsd:annotation>
+      <xsd:documentation>Moniker for NodeShape instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="ShapeElementMoniker">
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- Diagram -->
+  <xsd:element name="diagram" type="Diagram" substitutionGroup="shapeElement" />
+  <xsd:complexType name="Diagram">
+    <xsd:complexContent>
+      <xsd:extension base="ShapeElement">
+        <xsd:sequence minOccurs="0" maxOccurs="1">
+          <!-- Relationship: DiagramHasChildren -->
+          <xsd:element name="children" minOccurs="0" maxOccurs="1">
+            <xsd:annotation>
+              <xsd:documentation>Instances of DiagramHasChildren</xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:choice minOccurs="0" maxOccurs="unbounded" >
+                  <xsd:element ref="diagramHasChildren">
+                    <xsd:annotation>
+                      <xsd:documentation>[Relationship deriving from DiagramHasChildren needs to be serialized in full-form]</xsd:documentation>
+                    </xsd:annotation>
+                  </xsd:element>
+                  <xsd:element ref="nodeShape" >
+                    <xsd:annotation>
+                      <xsd:documentation>[Target role-player]</xsd:documentation>
+                    </xsd:annotation>
+                  </xsd:element>
+                </xsd:choice>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+          <!-- Relationship: DiagramHasLinkShapes -->
+          <xsd:element name="linkShapes" minOccurs="0" maxOccurs="1">
+            <xsd:annotation>
+              <xsd:documentation>Instances of DiagramHasLinkShapes</xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:choice minOccurs="0" maxOccurs="unbounded" >
+                  <xsd:element ref="diagramHasLinkShapes">
+                    <xsd:annotation>
+                      <xsd:documentation>[Relationship deriving from DiagramHasLinkShapes needs to be serialized in full-form]</xsd:documentation>
+                    </xsd:annotation>
+                  </xsd:element>
+                  <xsd:element ref="linkShape" >
+                    <xsd:annotation>
+                      <xsd:documentation>[Target role-player]</xsd:documentation>
+                    </xsd:annotation>
+                  </xsd:element>
+                </xsd:choice>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+          <!-- Relationship: DiagramHasIncludedDiagrams -->
+          <xsd:element name="includedDiagrams" minOccurs="0" maxOccurs="1">
+            <xsd:annotation>
+              <xsd:documentation>Instances of DiagramHasIncludedDiagrams</xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element ref="diagramHasIncludedDiagrams" minOccurs="0" maxOccurs="unbounded">
+                  <xsd:annotation>
+                    <xsd:documentation>[Instance of DiagramHasIncludedDiagrams needs to be serialized in full-form]</xsd:documentation>
+                  </xsd:annotation>
+                </xsd:element>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:sequence>
+        <!-- Id -->
+        <xsd:attribute name="Id" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Instance Guid of this element, needed because SerializeId is set to true.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <!-- Property: Name -->
+        <xsd:attribute name="name" type="xsd:string" />
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- Diagram Moniker -->
+  <xsd:element name="diagramMoniker" type="DiagramMoniker" substitutionGroup="shapeElementMoniker" />
+  <xsd:complexType name="DiagramMoniker">
+    <xsd:annotation>
+      <xsd:documentation>Moniker for Diagram instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="ShapeElementMoniker">
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- LinkShape -->
+  <xsd:element name="linkShape" type="LinkShape" substitutionGroup="shapeElement" />
+  <xsd:complexType name="LinkShape">
+    <xsd:complexContent>
+      <xsd:extension base="ShapeElement">
+        <xsd:sequence minOccurs="0" maxOccurs="1">
+          <!-- Property: EdgePoints -->
+          <xsd:element name="edgePoints" type="xsd:string" minOccurs="0" maxOccurs="1" />
+          <!-- Relationship: LinkShapeHasSourceAnchor -->
+          <xsd:element name="sourceAnchor" minOccurs="1" maxOccurs="1">
+            <xsd:annotation>
+              <xsd:documentation>Instance of LinkShapeHasSourceAnchor</xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element ref="linkShapeHasSourceAnchor" minOccurs="1" maxOccurs="1">
+                  <xsd:annotation>
+                    <xsd:documentation>[Instance of LinkShapeHasSourceAnchor needs to be serialized in full-form]</xsd:documentation>
+                  </xsd:annotation>
+                </xsd:element>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+          <!-- Relationship: LinkShapeHasTargetAnchor -->
+          <xsd:element name="targetAnchor" minOccurs="1" maxOccurs="1">
+            <xsd:annotation>
+              <xsd:documentation>Instance of LinkShapeHasTargetAnchor</xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element ref="linkShapeHasTargetAnchor" minOccurs="1" maxOccurs="1">
+                  <xsd:annotation>
+                    <xsd:documentation>[Instance of LinkShapeHasTargetAnchor needs to be serialized in full-form]</xsd:documentation>
+                  </xsd:annotation>
+                </xsd:element>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:sequence>
+        <!-- Id -->
+        <xsd:attribute name="Id" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Instance Guid of this element, needed because SerializeId is set to true.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <!-- Property: DummyProperty -->
+        <xsd:attribute name="dummyProperty" type="xsd:string" />
+        <!-- Property: RoutingMode -->
+        <xsd:attribute name="routingMode" type="RoutingMode" />
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- LinkShape Moniker -->
+  <xsd:element name="linkShapeMoniker" type="LinkShapeMoniker" substitutionGroup="shapeElementMoniker" />
+  <xsd:complexType name="LinkShapeMoniker">
+    <xsd:annotation>
+      <xsd:documentation>Moniker for LinkShape instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="ShapeElementMoniker">
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- ShapeElement -->
+  <xsd:element name="shapeElement" abstract="true" type="ShapeElement" substitutionGroup="core:modelElement" />
+  <xsd:complexType name="ShapeElement" abstract="true" >
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElement">
+        <!-- Id -->
+        <xsd:attribute name="Id" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Instance Guid of this element, needed because SerializeId is set to true.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <!-- Property: InternalElementId -->
+        <xsd:attribute name="internalElementId" type="xsd:string" />
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- ShapeElement Moniker -->
+  <xsd:element name="shapeElementMoniker" abstract="true" type="ShapeElementMoniker" substitutionGroup="core:modelElementMoniker" />
+  <xsd:complexType name="ShapeElementMoniker">
+    <xsd:annotation>
+      <xsd:documentation>Moniker for ShapeElement instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElementMoniker">
+        <xsd:attribute name="Id" type="xsd:string" >
+          <xsd:annotation>
+            <xsd:documentation>Attribute to store the moniker string.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- LayoutInfo -->
+  <xsd:element name="layoutInfo" type="LayoutInfo" substitutionGroup="core:modelElement" />
+  <xsd:complexType name="LayoutInfo">
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElement">
+        <xsd:sequence minOccurs="0" maxOccurs="1">
+          <!-- Relationship: LayoutInfoHasChildrenInfos -->
+          <xsd:element name="childrenInfos" minOccurs="0" maxOccurs="1">
+            <xsd:annotation>
+              <xsd:documentation>Instances of LayoutInfoHasChildrenInfos</xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element ref="layoutInfoHasChildrenInfos" minOccurs="0" maxOccurs="unbounded">
+                  <xsd:annotation>
+                    <xsd:documentation>[Instance of LayoutInfoHasChildrenInfos needs to be serialized in full-form]</xsd:documentation>
+                  </xsd:annotation>
+                </xsd:element>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+          <!-- Relationship: LayoutInfoHasLinkShapeInfos -->
+          <xsd:element name="linkShapeInfos" minOccurs="0" maxOccurs="1">
+            <xsd:annotation>
+              <xsd:documentation>Instances of LayoutInfoHasLinkShapeInfos</xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element ref="layoutInfoHasLinkShapeInfos" minOccurs="0" maxOccurs="unbounded">
+                  <xsd:annotation>
+                    <xsd:documentation>[Instance of LayoutInfoHasLinkShapeInfos needs to be serialized in full-form]</xsd:documentation>
+                  </xsd:annotation>
+                </xsd:element>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:sequence>
+        <!-- Id -->
+        <xsd:attribute name="Id" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Instance Guid of this element, needed because SerializeId is set to true.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <!-- Property: HostElementId -->
+        <xsd:attribute name="hostElementId" type="xsd:string" />
+        <!-- Property: Size -->
+        <xsd:attribute name="size" type="xsd:string" />
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- LayoutInfo Moniker -->
+  <xsd:element name="layoutInfoMoniker" type="LayoutInfoMoniker" substitutionGroup="core:modelElementMoniker" />
+  <xsd:complexType name="LayoutInfoMoniker">
+    <xsd:annotation>
+      <xsd:documentation>Moniker for LayoutInfo instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElementMoniker">
+        <xsd:attribute name="Id" type="xsd:string" >
+          <xsd:annotation>
+            <xsd:documentation>Attribute to store the moniker string.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- SourceAnchor -->
+  <xsd:element name="sourceAnchor" type="SourceAnchor" substitutionGroup="anchor" />
+  <xsd:complexType name="SourceAnchor">
+    <xsd:complexContent>
+      <xsd:extension base="Anchor">
+        <xsd:sequence minOccurs="0" maxOccurs="1">
+          <!-- Relationship: SourceAnchorReferencesFromShape -->
+          <xsd:element name="fromShape" minOccurs="1" maxOccurs="1">
+            <xsd:annotation>
+              <xsd:documentation>Instance of SourceAnchorReferencesFromShape</xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element ref="sourceAnchorReferencesFromShape" minOccurs="1" maxOccurs="1">
+                  <xsd:annotation>
+                    <xsd:documentation>[Instance of SourceAnchorReferencesFromShape needs to be serialized in full-form]</xsd:documentation>
+                  </xsd:annotation>
+                </xsd:element>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:sequence>
+        <!-- Id -->
+        <xsd:attribute name="Id" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Instance Guid of this element, needed because SerializeId is set to true.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- SourceAnchor Moniker -->
+  <xsd:element name="sourceAnchorMoniker" type="SourceAnchorMoniker" substitutionGroup="anchorMoniker" />
+  <xsd:complexType name="SourceAnchorMoniker">
+    <xsd:annotation>
+      <xsd:documentation>Moniker for SourceAnchor instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="AnchorMoniker">
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- TargetAnchor -->
+  <xsd:element name="targetAnchor" type="TargetAnchor" substitutionGroup="anchor" />
+  <xsd:complexType name="TargetAnchor">
+    <xsd:complexContent>
+      <xsd:extension base="Anchor">
+        <xsd:sequence minOccurs="0" maxOccurs="1">
+          <!-- Relationship: TargetAnchorReferencesToShape -->
+          <xsd:element name="toShape" minOccurs="1" maxOccurs="1">
+            <xsd:annotation>
+              <xsd:documentation>Instance of TargetAnchorReferencesToShape</xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element ref="targetAnchorReferencesToShape" minOccurs="1" maxOccurs="1">
+                  <xsd:annotation>
+                    <xsd:documentation>[Instance of TargetAnchorReferencesToShape needs to be serialized in full-form]</xsd:documentation>
+                  </xsd:annotation>
+                </xsd:element>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:sequence>
+        <!-- Id -->
+        <xsd:attribute name="Id" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Instance Guid of this element, needed because SerializeId is set to true.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- TargetAnchor Moniker -->
+  <xsd:element name="targetAnchorMoniker" type="TargetAnchorMoniker" substitutionGroup="anchorMoniker" />
+  <xsd:complexType name="TargetAnchorMoniker">
+    <xsd:annotation>
+      <xsd:documentation>Moniker for TargetAnchor instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="AnchorMoniker">
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- Anchor -->
+  <xsd:element name="anchor" type="Anchor" substitutionGroup="core:modelElement" />
+  <xsd:complexType name="Anchor">
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElement">
+        <!-- Id -->
+        <xsd:attribute name="Id" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Instance Guid of this element, needed because SerializeId is set to true.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <!-- Property: AbsoluteLocation -->
+        <xsd:attribute name="absoluteLocation" type="xsd:string" />
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- Anchor Moniker -->
+  <xsd:element name="anchorMoniker" type="AnchorMoniker" substitutionGroup="core:modelElementMoniker" />
+  <xsd:complexType name="AnchorMoniker">
+    <xsd:annotation>
+      <xsd:documentation>Moniker for Anchor instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElementMoniker">
+        <xsd:attribute name="Id" type="xsd:string" >
+          <xsd:annotation>
+            <xsd:documentation>Attribute to store the moniker string.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- NodeShapeInfo -->
+  <xsd:element name="nodeShapeInfo" type="NodeShapeInfo" substitutionGroup="core:modelElement" />
+  <xsd:complexType name="NodeShapeInfo">
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElement">
+        <xsd:sequence minOccurs="0" maxOccurs="1">
+          <!-- Relationship: NodeShapeInfoHasChildrenInfos -->
+          <xsd:element name="childrenInfos" minOccurs="0" maxOccurs="1">
+            <xsd:annotation>
+              <xsd:documentation>Instances of NodeShapeInfoHasChildrenInfos</xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element ref="nodeShapeInfoHasChildrenInfos" minOccurs="0" maxOccurs="unbounded">
+                  <xsd:annotation>
+                    <xsd:documentation>[Instance of NodeShapeInfoHasChildrenInfos needs to be serialized in full-form]</xsd:documentation>
+                  </xsd:annotation>
+                </xsd:element>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:sequence>
+        <!-- Id -->
+        <xsd:attribute name="Id" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Instance Guid of this element, needed because SerializeId is set to true.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <!-- Property: Size -->
+        <xsd:attribute name="size" type="xsd:string" />
+        <!-- Property: RelativeLocation -->
+        <xsd:attribute name="relativeLocation" type="xsd:string" />
+        <!-- Property: ElementId -->
+        <xsd:attribute name="elementId" type="xsd:string" />
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- NodeShapeInfo Moniker -->
+  <xsd:element name="nodeShapeInfoMoniker" type="NodeShapeInfoMoniker" substitutionGroup="core:modelElementMoniker" />
+  <xsd:complexType name="NodeShapeInfoMoniker">
+    <xsd:annotation>
+      <xsd:documentation>Moniker for NodeShapeInfo instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElementMoniker">
+        <xsd:attribute name="Id" type="xsd:string" >
+          <xsd:annotation>
+            <xsd:documentation>Attribute to store the moniker string.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- LinkShapeInfo -->
+  <xsd:element name="linkShapeInfo" type="LinkShapeInfo" substitutionGroup="core:modelElement" />
+  <xsd:complexType name="LinkShapeInfo">
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElement">
+        <xsd:sequence minOccurs="0" maxOccurs="1">
+          <!-- Property: EdgePoints -->
+          <xsd:element name="edgePoints" type="xsd:string" minOccurs="0" maxOccurs="1" />
+        </xsd:sequence>
+        <!-- Id -->
+        <xsd:attribute name="Id" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Instance Guid of this element, needed because SerializeId is set to true.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <!-- Property: SourceLocation -->
+        <xsd:attribute name="sourceLocation" type="xsd:string" />
+        <!-- Property: TargetLocation -->
+        <xsd:attribute name="targetLocation" type="xsd:string" />
+        <!-- Property: ElementId -->
+        <xsd:attribute name="elementId" type="xsd:string" />
+        <!-- Property: SourceElementId -->
+        <xsd:attribute name="sourceElementId" type="xsd:string" />
+        <!-- Property: TargetElementId -->
+        <xsd:attribute name="targetElementId" type="xsd:string" />
+        <!-- Property: LinkDomainClassId -->
+        <xsd:attribute name="linkDomainClassId" type="xsd:string" />
+        <!-- Property: RoutingMode -->
+        <xsd:attribute name="routingMode" type="RoutingMode" />
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- LinkShapeInfo Moniker -->
+  <xsd:element name="linkShapeInfoMoniker" type="LinkShapeInfoMoniker" substitutionGroup="core:modelElementMoniker" />
+  <xsd:complexType name="LinkShapeInfoMoniker">
+    <xsd:annotation>
+      <xsd:documentation>Moniker for LinkShapeInfo instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElementMoniker">
+        <xsd:attribute name="Id" type="xsd:string" >
+          <xsd:annotation>
+            <xsd:documentation>Attribute to store the moniker string.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- GraphicalDependenciesDiagram -->
+  <xsd:element name="graphicalDependenciesDiagram" type="GraphicalDependenciesDiagram" substitutionGroup="diagram" />
+  <xsd:complexType name="GraphicalDependenciesDiagram">
+    <xsd:complexContent>
+      <xsd:extension base="Diagram">
+        <xsd:sequence minOccurs="0" maxOccurs="1">
+          <!-- Relationship: GraphicalDependenciesDiagramReferencesSourceDependencyShapes -->
+          <xsd:element name="sourceDependencyShapes" minOccurs="0" maxOccurs="1">
+            <xsd:annotation>
+              <xsd:documentation>Instances of GraphicalDependenciesDiagramReferencesSourceDependencyShapes</xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element ref="graphicalDependenciesDiagramReferencesSourceDependencyShapes" minOccurs="0" maxOccurs="unbounded">
+                  <xsd:annotation>
+                    <xsd:documentation>[Instance of GraphicalDependenciesDiagramReferencesSourceDependencyShapes needs to be serialized in full-form]</xsd:documentation>
+                  </xsd:annotation>
+                </xsd:element>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+          <!-- Relationship: GraphicalDependenciesDiagramReferencesTargetDependencyShapes -->
+          <xsd:element name="targetDependencyShapes" minOccurs="0" maxOccurs="1">
+            <xsd:annotation>
+              <xsd:documentation>Instances of GraphicalDependenciesDiagramReferencesTargetDependencyShapes</xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element ref="graphicalDependenciesDiagramReferencesTargetDependencyShapes" minOccurs="0" maxOccurs="unbounded">
+                  <xsd:annotation>
+                    <xsd:documentation>[Instance of GraphicalDependenciesDiagramReferencesTargetDependencyShapes needs to be serialized in full-form]</xsd:documentation>
+                  </xsd:annotation>
+                </xsd:element>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+          <!-- Relationship: GraphicalDependenciesDiagramReferencesMainElementShape -->
+          <xsd:element name="mainElementShape" minOccurs="0" maxOccurs="1">
+            <xsd:annotation>
+              <xsd:documentation>Instance of GraphicalDependenciesDiagramReferencesMainElementShape</xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element ref="graphicalDependenciesDiagramReferencesMainElementShape" minOccurs="0" maxOccurs="1">
+                  <xsd:annotation>
+                    <xsd:documentation>[Instance of GraphicalDependenciesDiagramReferencesMainElementShape needs to be serialized in full-form]</xsd:documentation>
+                  </xsd:annotation>
+                </xsd:element>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:sequence>
+        <!-- Id -->
+        <xsd:attribute name="Id" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Instance Guid of this element, needed because SerializeId is set to true.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- GraphicalDependenciesDiagram Moniker -->
+  <xsd:element name="graphicalDependenciesDiagramMoniker" type="GraphicalDependenciesDiagramMoniker" substitutionGroup="diagramMoniker" />
+  <xsd:complexType name="GraphicalDependenciesDiagramMoniker">
+    <xsd:annotation>
+      <xsd:documentation>Moniker for GraphicalDependenciesDiagram instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="DiagramMoniker">
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- GraphicalDependencyLinkShape -->
+  <xsd:element name="graphicalDependencyLinkShape" type="GraphicalDependencyLinkShape" substitutionGroup="linkShape" />
+  <xsd:complexType name="GraphicalDependencyLinkShape">
+    <xsd:complexContent>
+      <xsd:extension base="LinkShape">
+        <xsd:sequence minOccurs="0" maxOccurs="1">
+          <!-- Relationship: GraphicalDependencyLinkShapeReferencesMainShape -->
+          <xsd:element name="mainShape" minOccurs="1" maxOccurs="1">
+            <xsd:annotation>
+              <xsd:documentation>Instance of GraphicalDependencyLinkShapeReferencesMainShape</xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element ref="graphicalDependencyLinkShapeReferencesMainShape" minOccurs="1" maxOccurs="1">
+                  <xsd:annotation>
+                    <xsd:documentation>[Instance of GraphicalDependencyLinkShapeReferencesMainShape needs to be serialized in full-form]</xsd:documentation>
+                  </xsd:annotation>
+                </xsd:element>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+          <!-- Relationship: GraphicalDependencyLinkShapeReferencesDependencyShape -->
+          <xsd:element name="dependencyShape" minOccurs="1" maxOccurs="1">
+            <xsd:annotation>
+              <xsd:documentation>Instance of GraphicalDependencyLinkShapeReferencesDependencyShape</xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element ref="graphicalDependencyLinkShapeReferencesDependencyShape" minOccurs="1" maxOccurs="1">
+                  <xsd:annotation>
+                    <xsd:documentation>[Instance of GraphicalDependencyLinkShapeReferencesDependencyShape needs to be serialized in full-form]</xsd:documentation>
+                  </xsd:annotation>
+                </xsd:element>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:sequence>
+        <!-- Id -->
+        <xsd:attribute name="Id" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Instance Guid of this element, needed because SerializeId is set to true.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- GraphicalDependencyLinkShape Moniker -->
+  <xsd:element name="graphicalDependencyLinkShapeMoniker" type="GraphicalDependencyLinkShapeMoniker" substitutionGroup="linkShapeMoniker" />
+  <xsd:complexType name="GraphicalDependencyLinkShapeMoniker">
+    <xsd:annotation>
+      <xsd:documentation>Moniker for GraphicalDependencyLinkShape instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="LinkShapeMoniker">
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- GraphicalDependencyMainShape -->
+  <xsd:element name="graphicalDependencyMainShape" type="GraphicalDependencyMainShape" substitutionGroup="nodeShape" />
+  <xsd:complexType name="GraphicalDependencyMainShape">
+    <xsd:complexContent>
+      <xsd:extension base="NodeShape">
+        <!-- Id -->
+        <xsd:attribute name="Id" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Instance Guid of this element, needed because SerializeId is set to true.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- GraphicalDependencyMainShape Moniker -->
+  <xsd:element name="graphicalDependencyMainShapeMoniker" type="GraphicalDependencyMainShapeMoniker" substitutionGroup="nodeShapeMoniker" />
+  <xsd:complexType name="GraphicalDependencyMainShapeMoniker">
+    <xsd:annotation>
+      <xsd:documentation>Moniker for GraphicalDependencyMainShape instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="NodeShapeMoniker">
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- GraphicalDependencyShape -->
+  <xsd:element name="graphicalDependencyShape" type="GraphicalDependencyShape" substitutionGroup="nodeShape" />
+  <xsd:complexType name="GraphicalDependencyShape">
+    <xsd:complexContent>
+      <xsd:extension base="NodeShape">
+        <!-- Id -->
+        <xsd:attribute name="Id" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Instance Guid of this element, needed because SerializeId is set to true.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+        <!-- Property: RelationshipName -->
+        <xsd:attribute name="relationshipName" type="xsd:string" />
+        <!-- Property: RelationshipTypeId -->
+        <xsd:attribute name="relationshipTypeId" type="xsd:string" />
+        <!-- Property: CustomInfo -->
+        <xsd:attribute name="customInfo" type="xsd:string" />
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- GraphicalDependencyShape Moniker -->
+  <xsd:element name="graphicalDependencyShapeMoniker" type="GraphicalDependencyShapeMoniker" substitutionGroup="nodeShapeMoniker" />
+  <xsd:complexType name="GraphicalDependencyShapeMoniker">
+    <xsd:annotation>
+      <xsd:documentation>Moniker for GraphicalDependencyShape instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="NodeShapeMoniker">
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- ShapeElementContainsChildShapes -->
+  <xsd:element name="shapeElementContainsChildShapes" abstract="true" type="ShapeElementContainsChildShapes" substitutionGroup="core:modelElement" />
+  <xsd:complexType name="ShapeElementContainsChildShapes" abstract="true" >
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElement">
+        <xsd:sequence minOccurs="0" maxOccurs="1">
+          <!-- Target end NodeShape -->
+          <xsd:element ref="nodeShape" minOccurs="1" maxOccurs="1">
+            <xsd:annotation>
+              <xsd:documentation>[Target role-player]</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- ShapeElementContainsChildShapes Moniker -->
+  <xsd:element name="shapeElementContainsChildShapesMoniker" abstract="true" type="ShapeElementContainsChildShapesMoniker" substitutionGroup="core:modelElementMoniker" />
+  <xsd:complexType name="ShapeElementContainsChildShapesMoniker">
+    <xsd:annotation>
+      <xsd:documentation>Moniker for ShapeElementContainsChildShapes instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElementMoniker">
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- DiagramsModelHasDiagrams -->
+  <xsd:element name="diagramsModelHasDiagrams" abstract="true" type="DiagramsModelHasDiagrams" substitutionGroup="core:modelElement" />
+  <xsd:complexType name="DiagramsModelHasDiagrams" abstract="true" >
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElement">
+        <xsd:sequence minOccurs="0" maxOccurs="1">
+          <!-- Target end Diagram -->
+          <xsd:element ref="diagram" minOccurs="1" maxOccurs="1">
+            <xsd:annotation>
+              <xsd:documentation>[Target role-player]</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- DiagramsModelHasDiagrams Moniker -->
+  <xsd:element name="diagramsModelHasDiagramsMoniker" abstract="true" type="DiagramsModelHasDiagramsMoniker" substitutionGroup="core:modelElementMoniker" />
+  <xsd:complexType name="DiagramsModelHasDiagramsMoniker">
+    <xsd:annotation>
+      <xsd:documentation>Moniker for DiagramsModelHasDiagrams instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElementMoniker">
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- DiagramHasChildren -->
+  <xsd:element name="diagramHasChildren" abstract="true" type="DiagramHasChildren" substitutionGroup="core:modelElement" />
+  <xsd:complexType name="DiagramHasChildren" abstract="true" >
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElement">
+        <xsd:sequence minOccurs="0" maxOccurs="1">
+          <!-- Target end NodeShape -->
+          <xsd:element ref="nodeShape" minOccurs="1" maxOccurs="1">
+            <xsd:annotation>
+              <xsd:documentation>[Target role-player]</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- DiagramHasChildren Moniker -->
+  <xsd:element name="diagramHasChildrenMoniker" abstract="true" type="DiagramHasChildrenMoniker" substitutionGroup="core:modelElementMoniker" />
+  <xsd:complexType name="DiagramHasChildrenMoniker">
+    <xsd:annotation>
+      <xsd:documentation>Moniker for DiagramHasChildren instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElementMoniker">
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- DiagramHasLinkShapes -->
+  <xsd:element name="diagramHasLinkShapes" abstract="true" type="DiagramHasLinkShapes" substitutionGroup="core:modelElement" />
+  <xsd:complexType name="DiagramHasLinkShapes" abstract="true" >
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElement">
+        <xsd:sequence minOccurs="0" maxOccurs="1">
+          <!-- Target end LinkShape -->
+          <xsd:element ref="linkShape" minOccurs="1" maxOccurs="1">
+            <xsd:annotation>
+              <xsd:documentation>[Target role-player]</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- DiagramHasLinkShapes Moniker -->
+  <xsd:element name="diagramHasLinkShapesMoniker" abstract="true" type="DiagramHasLinkShapesMoniker" substitutionGroup="core:modelElementMoniker" />
+  <xsd:complexType name="DiagramHasLinkShapesMoniker">
+    <xsd:annotation>
+      <xsd:documentation>Moniker for DiagramHasLinkShapes instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElementMoniker">
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- NodeShapeReferencesNestedChildren -->
+  <xsd:element name="nodeShapeReferencesNestedChildren" abstract="true" type="NodeShapeReferencesNestedChildren" substitutionGroup="core:modelElement" />
+  <xsd:complexType name="NodeShapeReferencesNestedChildren" abstract="true" >
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElement">
+        <xsd:sequence minOccurs="0" maxOccurs="1">
+          <!-- Target end NodeShape -->
+          <xsd:element ref="nodeShapeMoniker" minOccurs="1" maxOccurs="1">
+            <xsd:annotation>
+              <xsd:documentation>[Target role-player]</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- NodeShapeReferencesNestedChildren Moniker -->
+  <xsd:element name="nodeShapeReferencesNestedChildrenMoniker" abstract="true" type="NodeShapeReferencesNestedChildrenMoniker" substitutionGroup="core:modelElementMoniker" />
+  <xsd:complexType name="NodeShapeReferencesNestedChildrenMoniker">
+    <xsd:annotation>
+      <xsd:documentation>Moniker for NodeShapeReferencesNestedChildren instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElementMoniker">
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- NodeShapeReferencesRelativeChildren -->
+  <xsd:element name="nodeShapeReferencesRelativeChildren" abstract="true" type="NodeShapeReferencesRelativeChildren" substitutionGroup="core:modelElement" />
+  <xsd:complexType name="NodeShapeReferencesRelativeChildren" abstract="true" >
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElement">
+        <xsd:sequence minOccurs="0" maxOccurs="1">
+          <!-- Target end NodeShape -->
+          <xsd:element ref="nodeShapeMoniker" minOccurs="1" maxOccurs="1">
+            <xsd:annotation>
+              <xsd:documentation>[Target role-player]</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- NodeShapeReferencesRelativeChildren Moniker -->
+  <xsd:element name="nodeShapeReferencesRelativeChildrenMoniker" abstract="true" type="NodeShapeReferencesRelativeChildrenMoniker" substitutionGroup="core:modelElementMoniker" />
+  <xsd:complexType name="NodeShapeReferencesRelativeChildrenMoniker">
+    <xsd:annotation>
+      <xsd:documentation>Moniker for NodeShapeReferencesRelativeChildren instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElementMoniker">
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- LinkShapeHasSourceAnchor -->
+  <xsd:element name="linkShapeHasSourceAnchor" type="LinkShapeHasSourceAnchor" substitutionGroup="core:modelElement" />
+  <xsd:complexType name="LinkShapeHasSourceAnchor">
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElement">
+        <xsd:sequence minOccurs="0" maxOccurs="1">
+          <!-- Target end SourceAnchor -->
+          <xsd:element ref="sourceAnchor" minOccurs="1" maxOccurs="1">
+            <xsd:annotation>
+              <xsd:documentation>[Target role-player]</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- LinkShapeHasSourceAnchor Moniker -->
+  <xsd:element name="linkShapeHasSourceAnchorMoniker" abstract="true" type="LinkShapeHasSourceAnchorMoniker" substitutionGroup="core:modelElementMoniker" />
+  <xsd:complexType name="LinkShapeHasSourceAnchorMoniker">
+    <xsd:annotation>
+      <xsd:documentation>Moniker for LinkShapeHasSourceAnchor instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElementMoniker">
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- LinkShapeHasTargetAnchor -->
+  <xsd:element name="linkShapeHasTargetAnchor" type="LinkShapeHasTargetAnchor" substitutionGroup="core:modelElement" />
+  <xsd:complexType name="LinkShapeHasTargetAnchor">
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElement">
+        <xsd:sequence minOccurs="0" maxOccurs="1">
+          <!-- Target end TargetAnchor -->
+          <xsd:element ref="targetAnchor" minOccurs="1" maxOccurs="1">
+            <xsd:annotation>
+              <xsd:documentation>[Target role-player]</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- LinkShapeHasTargetAnchor Moniker -->
+  <xsd:element name="linkShapeHasTargetAnchorMoniker" abstract="true" type="LinkShapeHasTargetAnchorMoniker" substitutionGroup="core:modelElementMoniker" />
+  <xsd:complexType name="LinkShapeHasTargetAnchorMoniker">
+    <xsd:annotation>
+      <xsd:documentation>Moniker for LinkShapeHasTargetAnchor instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElementMoniker">
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- SourceAnchorReferencesFromShape -->
+  <xsd:element name="sourceAnchorReferencesFromShape" type="SourceAnchorReferencesFromShape" substitutionGroup="core:modelElement" />
+  <xsd:complexType name="SourceAnchorReferencesFromShape">
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElement">
+        <xsd:sequence minOccurs="0" maxOccurs="1">
+          <!-- Target end NodeShape -->
+          <xsd:element ref="nodeShapeMoniker" minOccurs="1" maxOccurs="1">
+            <xsd:annotation>
+              <xsd:documentation>[Target role-player]</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- SourceAnchorReferencesFromShape Moniker -->
+  <xsd:element name="sourceAnchorReferencesFromShapeMoniker" abstract="true" type="SourceAnchorReferencesFromShapeMoniker" substitutionGroup="core:modelElementMoniker" />
+  <xsd:complexType name="SourceAnchorReferencesFromShapeMoniker">
+    <xsd:annotation>
+      <xsd:documentation>Moniker for SourceAnchorReferencesFromShape instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElementMoniker">
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- TargetAnchorReferencesToShape -->
+  <xsd:element name="targetAnchorReferencesToShape" type="TargetAnchorReferencesToShape" substitutionGroup="core:modelElement" />
+  <xsd:complexType name="TargetAnchorReferencesToShape">
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElement">
+        <xsd:sequence minOccurs="0" maxOccurs="1">
+          <!-- Target end NodeShape -->
+          <xsd:element ref="nodeShapeMoniker" minOccurs="1" maxOccurs="1">
+            <xsd:annotation>
+              <xsd:documentation>[Target role-player]</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- TargetAnchorReferencesToShape Moniker -->
+  <xsd:element name="targetAnchorReferencesToShapeMoniker" abstract="true" type="TargetAnchorReferencesToShapeMoniker" substitutionGroup="core:modelElementMoniker" />
+  <xsd:complexType name="TargetAnchorReferencesToShapeMoniker">
+    <xsd:annotation>
+      <xsd:documentation>Moniker for TargetAnchorReferencesToShape instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElementMoniker">
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- DiagramHasIncludedDiagrams -->
+  <xsd:element name="diagramHasIncludedDiagrams" type="DiagramHasIncludedDiagrams" substitutionGroup="core:modelElement" />
+  <xsd:complexType name="DiagramHasIncludedDiagrams">
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElement">
+        <xsd:sequence minOccurs="0" maxOccurs="1">
+          <!-- Target end Diagram -->
+          <xsd:element ref="diagram" minOccurs="1" maxOccurs="1">
+            <xsd:annotation>
+              <xsd:documentation>[Target role-player]</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+        <!-- Id -->
+        <xsd:attribute name="Id" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Instance Guid of this element, needed because SerializeId is set to true.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- DiagramHasIncludedDiagrams Moniker -->
+  <xsd:element name="diagramHasIncludedDiagramsMoniker" type="DiagramHasIncludedDiagramsMoniker" substitutionGroup="core:modelElementMoniker" />
+  <xsd:complexType name="DiagramHasIncludedDiagramsMoniker">
+    <xsd:annotation>
+      <xsd:documentation>Moniker for DiagramHasIncludedDiagrams instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElementMoniker">
+        <xsd:attribute name="Id" type="xsd:string" >
+          <xsd:annotation>
+            <xsd:documentation>Attribute to store the moniker string.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- LayoutInfoHasChildrenInfos -->
+  <xsd:element name="layoutInfoHasChildrenInfos" type="LayoutInfoHasChildrenInfos" substitutionGroup="core:modelElement" />
+  <xsd:complexType name="LayoutInfoHasChildrenInfos">
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElement">
+        <xsd:sequence minOccurs="0" maxOccurs="1">
+          <!-- Target end NodeShapeInfo -->
+          <xsd:element ref="nodeShapeInfo" minOccurs="1" maxOccurs="1">
+            <xsd:annotation>
+              <xsd:documentation>[Target role-player]</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+        <!-- Id -->
+        <xsd:attribute name="Id" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Instance Guid of this element, needed because SerializeId is set to true.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- LayoutInfoHasChildrenInfos Moniker -->
+  <xsd:element name="layoutInfoHasChildrenInfosMoniker" type="LayoutInfoHasChildrenInfosMoniker" substitutionGroup="core:modelElementMoniker" />
+  <xsd:complexType name="LayoutInfoHasChildrenInfosMoniker">
+    <xsd:annotation>
+      <xsd:documentation>Moniker for LayoutInfoHasChildrenInfos instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElementMoniker">
+        <xsd:attribute name="Id" type="xsd:string" >
+          <xsd:annotation>
+            <xsd:documentation>Attribute to store the moniker string.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- LayoutInfoHasLinkShapeInfos -->
+  <xsd:element name="layoutInfoHasLinkShapeInfos" type="LayoutInfoHasLinkShapeInfos" substitutionGroup="core:modelElement" />
+  <xsd:complexType name="LayoutInfoHasLinkShapeInfos">
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElement">
+        <xsd:sequence minOccurs="0" maxOccurs="1">
+          <!-- Target end LinkShapeInfo -->
+          <xsd:element ref="linkShapeInfo" minOccurs="1" maxOccurs="1">
+            <xsd:annotation>
+              <xsd:documentation>[Target role-player]</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+        <!-- Id -->
+        <xsd:attribute name="Id" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Instance Guid of this element, needed because SerializeId is set to true.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- LayoutInfoHasLinkShapeInfos Moniker -->
+  <xsd:element name="layoutInfoHasLinkShapeInfosMoniker" type="LayoutInfoHasLinkShapeInfosMoniker" substitutionGroup="core:modelElementMoniker" />
+  <xsd:complexType name="LayoutInfoHasLinkShapeInfosMoniker">
+    <xsd:annotation>
+      <xsd:documentation>Moniker for LayoutInfoHasLinkShapeInfos instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElementMoniker">
+        <xsd:attribute name="Id" type="xsd:string" >
+          <xsd:annotation>
+            <xsd:documentation>Attribute to store the moniker string.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- DiagramsModelHasLayoutInfos -->
+  <xsd:element name="diagramsModelHasLayoutInfos" type="DiagramsModelHasLayoutInfos" substitutionGroup="core:modelElement" />
+  <xsd:complexType name="DiagramsModelHasLayoutInfos">
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElement">
+        <xsd:sequence minOccurs="0" maxOccurs="1">
+          <!-- Target end LayoutInfo -->
+          <xsd:element ref="layoutInfo" minOccurs="1" maxOccurs="1">
+            <xsd:annotation>
+              <xsd:documentation>[Target role-player]</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+        <!-- Id -->
+        <xsd:attribute name="Id" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Instance Guid of this element, needed because SerializeId is set to true.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- DiagramsModelHasLayoutInfos Moniker -->
+  <xsd:element name="diagramsModelHasLayoutInfosMoniker" type="DiagramsModelHasLayoutInfosMoniker" substitutionGroup="core:modelElementMoniker" />
+  <xsd:complexType name="DiagramsModelHasLayoutInfosMoniker">
+    <xsd:annotation>
+      <xsd:documentation>Moniker for DiagramsModelHasLayoutInfos instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElementMoniker">
+        <xsd:attribute name="Id" type="xsd:string" >
+          <xsd:annotation>
+            <xsd:documentation>Attribute to store the moniker string.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- NodeShapeInfoHasChildrenInfos -->
+  <xsd:element name="nodeShapeInfoHasChildrenInfos" type="NodeShapeInfoHasChildrenInfos" substitutionGroup="core:modelElement" />
+  <xsd:complexType name="NodeShapeInfoHasChildrenInfos">
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElement">
+        <xsd:sequence minOccurs="0" maxOccurs="1">
+          <!-- Target end NodeShapeInfo -->
+          <xsd:element ref="nodeShapeInfo" minOccurs="1" maxOccurs="1">
+            <xsd:annotation>
+              <xsd:documentation>[Target role-player]</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+        <!-- Id -->
+        <xsd:attribute name="Id" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Instance Guid of this element, needed because SerializeId is set to true.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- NodeShapeInfoHasChildrenInfos Moniker -->
+  <xsd:element name="nodeShapeInfoHasChildrenInfosMoniker" type="NodeShapeInfoHasChildrenInfosMoniker" substitutionGroup="core:modelElementMoniker" />
+  <xsd:complexType name="NodeShapeInfoHasChildrenInfosMoniker">
+    <xsd:annotation>
+      <xsd:documentation>Moniker for NodeShapeInfoHasChildrenInfos instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElementMoniker">
+        <xsd:attribute name="Id" type="xsd:string" >
+          <xsd:annotation>
+            <xsd:documentation>Attribute to store the moniker string.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- GraphicalDependenciesDiagramReferencesSourceDependencyShapes -->
+  <xsd:element name="graphicalDependenciesDiagramReferencesSourceDependencyShapes" type="GraphicalDependenciesDiagramReferencesSourceDependencyShapes" substitutionGroup="core:modelElement" />
+  <xsd:complexType name="GraphicalDependenciesDiagramReferencesSourceDependencyShapes">
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElement">
+        <xsd:sequence minOccurs="0" maxOccurs="1">
+          <!-- Target end GraphicalDependencyShape -->
+          <xsd:element ref="graphicalDependencyShapeMoniker" minOccurs="1" maxOccurs="1">
+            <xsd:annotation>
+              <xsd:documentation>[Target role-player]</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+        <!-- Id -->
+        <xsd:attribute name="Id" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Instance Guid of this element, needed because SerializeId is set to true.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- GraphicalDependenciesDiagramReferencesSourceDependencyShapes Moniker -->
+  <xsd:element name="graphicalDependenciesDiagramReferencesSourceDependencyShapesMoniker" type="GraphicalDependenciesDiagramReferencesSourceDependencyShapesMoniker" substitutionGroup="core:modelElementMoniker" />
+  <xsd:complexType name="GraphicalDependenciesDiagramReferencesSourceDependencyShapesMoniker">
+    <xsd:annotation>
+      <xsd:documentation>Moniker for GraphicalDependenciesDiagramReferencesSourceDependencyShapes instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElementMoniker">
+        <xsd:attribute name="Id" type="xsd:string" >
+          <xsd:annotation>
+            <xsd:documentation>Attribute to store the moniker string.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- GraphicalDependenciesDiagramReferencesTargetDependencyShapes -->
+  <xsd:element name="graphicalDependenciesDiagramReferencesTargetDependencyShapes" type="GraphicalDependenciesDiagramReferencesTargetDependencyShapes" substitutionGroup="core:modelElement" />
+  <xsd:complexType name="GraphicalDependenciesDiagramReferencesTargetDependencyShapes">
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElement">
+        <xsd:sequence minOccurs="0" maxOccurs="1">
+          <!-- Target end GraphicalDependencyShape -->
+          <xsd:element ref="graphicalDependencyShapeMoniker" minOccurs="1" maxOccurs="1">
+            <xsd:annotation>
+              <xsd:documentation>[Target role-player]</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+        <!-- Id -->
+        <xsd:attribute name="Id" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Instance Guid of this element, needed because SerializeId is set to true.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- GraphicalDependenciesDiagramReferencesTargetDependencyShapes Moniker -->
+  <xsd:element name="graphicalDependenciesDiagramReferencesTargetDependencyShapesMoniker" type="GraphicalDependenciesDiagramReferencesTargetDependencyShapesMoniker" substitutionGroup="core:modelElementMoniker" />
+  <xsd:complexType name="GraphicalDependenciesDiagramReferencesTargetDependencyShapesMoniker">
+    <xsd:annotation>
+      <xsd:documentation>Moniker for GraphicalDependenciesDiagramReferencesTargetDependencyShapes instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElementMoniker">
+        <xsd:attribute name="Id" type="xsd:string" >
+          <xsd:annotation>
+            <xsd:documentation>Attribute to store the moniker string.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- GraphicalDependencyLinkShapeReferencesMainShape -->
+  <xsd:element name="graphicalDependencyLinkShapeReferencesMainShape" type="GraphicalDependencyLinkShapeReferencesMainShape" substitutionGroup="core:modelElement" />
+  <xsd:complexType name="GraphicalDependencyLinkShapeReferencesMainShape">
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElement">
+        <xsd:sequence minOccurs="0" maxOccurs="1">
+          <!-- Target end NodeShape -->
+          <xsd:element ref="nodeShapeMoniker" minOccurs="1" maxOccurs="1">
+            <xsd:annotation>
+              <xsd:documentation>[Target role-player]</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+        <!-- Id -->
+        <xsd:attribute name="Id" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Instance Guid of this element, needed because SerializeId is set to true.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- GraphicalDependencyLinkShapeReferencesMainShape Moniker -->
+  <xsd:element name="graphicalDependencyLinkShapeReferencesMainShapeMoniker" type="GraphicalDependencyLinkShapeReferencesMainShapeMoniker" substitutionGroup="core:modelElementMoniker" />
+  <xsd:complexType name="GraphicalDependencyLinkShapeReferencesMainShapeMoniker">
+    <xsd:annotation>
+      <xsd:documentation>Moniker for GraphicalDependencyLinkShapeReferencesMainShape instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElementMoniker">
+        <xsd:attribute name="Id" type="xsd:string" >
+          <xsd:annotation>
+            <xsd:documentation>Attribute to store the moniker string.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- GraphicalDependenciesDiagramReferencesMainElementShape -->
+  <xsd:element name="graphicalDependenciesDiagramReferencesMainElementShape" type="GraphicalDependenciesDiagramReferencesMainElementShape" substitutionGroup="core:modelElement" />
+  <xsd:complexType name="GraphicalDependenciesDiagramReferencesMainElementShape">
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElement">
+        <xsd:sequence minOccurs="0" maxOccurs="1">
+          <!-- Target end NodeShape -->
+          <xsd:element ref="nodeShapeMoniker" minOccurs="1" maxOccurs="1">
+            <xsd:annotation>
+              <xsd:documentation>[Target role-player]</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+        <!-- Id -->
+        <xsd:attribute name="Id" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Instance Guid of this element, needed because SerializeId is set to true.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- GraphicalDependenciesDiagramReferencesMainElementShape Moniker -->
+  <xsd:element name="graphicalDependenciesDiagramReferencesMainElementShapeMoniker" type="GraphicalDependenciesDiagramReferencesMainElementShapeMoniker" substitutionGroup="core:modelElementMoniker" />
+  <xsd:complexType name="GraphicalDependenciesDiagramReferencesMainElementShapeMoniker">
+    <xsd:annotation>
+      <xsd:documentation>Moniker for GraphicalDependenciesDiagramReferencesMainElementShape instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElementMoniker">
+        <xsd:attribute name="Id" type="xsd:string" >
+          <xsd:annotation>
+            <xsd:documentation>Attribute to store the moniker string.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- GraphicalDependencyLinkShapeReferencesDependencyShape -->
+  <xsd:element name="graphicalDependencyLinkShapeReferencesDependencyShape" type="GraphicalDependencyLinkShapeReferencesDependencyShape" substitutionGroup="core:modelElement" />
+  <xsd:complexType name="GraphicalDependencyLinkShapeReferencesDependencyShape">
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElement">
+        <xsd:sequence minOccurs="0" maxOccurs="1">
+          <!-- Target end GraphicalDependencyShape -->
+          <xsd:element ref="graphicalDependencyShapeMoniker" minOccurs="1" maxOccurs="1">
+            <xsd:annotation>
+              <xsd:documentation>[Target role-player]</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+        <!-- Id -->
+        <xsd:attribute name="Id" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation>Instance Guid of this element, needed because SerializeId is set to true.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- GraphicalDependencyLinkShapeReferencesDependencyShape Moniker -->
+  <xsd:element name="graphicalDependencyLinkShapeReferencesDependencyShapeMoniker" type="GraphicalDependencyLinkShapeReferencesDependencyShapeMoniker" substitutionGroup="core:modelElementMoniker" />
+  <xsd:complexType name="GraphicalDependencyLinkShapeReferencesDependencyShapeMoniker">
+    <xsd:annotation>
+      <xsd:documentation>Moniker for GraphicalDependencyLinkShapeReferencesDependencyShape instance.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="core:ModelElementMoniker">
+        <xsd:attribute name="Id" type="xsd:string" >
+          <xsd:annotation>
+            <xsd:documentation>Attribute to store the moniker string.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  
+  <!-- Enum ShapeMovementBehaviour -->
+  <xsd:simpleType name="ShapeMovementBehaviour">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Normal"/>
+      <xsd:enumeration value="PositionRelativeToParent"/>
+      <xsd:enumeration value="PositionOnEdgeOfParent"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  
+  <!-- Enum ShapeResizingBehaviour -->
+  <xsd:simpleType name="ShapeResizingBehaviour">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="FixedHeight"/>
+      <xsd:enumeration value="FixedWidth"/>
+      <xsd:enumeration value="Fixed"/>
+      <xsd:enumeration value="Normal"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  
+  <!-- Enum PortPlacement -->
+  <xsd:simpleType name="PortPlacement">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Left"/>
+      <xsd:enumeration value="Right"/>
+      <xsd:enumeration value="Top"/>
+      <xsd:enumeration value="Bottom"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  
+  <!-- Enum LinkPlacement -->
+  <xsd:simpleType name="LinkPlacement">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Left"/>
+      <xsd:enumeration value="Top"/>
+      <xsd:enumeration value="Right"/>
+      <xsd:enumeration value="Bottom"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  
+  <!-- Enum FixedGeometryPoints -->
+  <xsd:simpleType name="FixedGeometryPoints">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Source"/>
+      <xsd:enumeration value="Target"/>
+      <xsd:enumeration value="SourceAndTarget"/>
+      <xsd:enumeration value="None"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  
+  <!-- Enum RoutingMode -->
+  <xsd:simpleType name="RoutingMode">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Orthogonal"/>
+      <xsd:enumeration value="Straight"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  
+</xsd:schema>
+

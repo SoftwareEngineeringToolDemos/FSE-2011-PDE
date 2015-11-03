@@ -1,0 +1,177 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:c="clr-namespace:Tum.PDE.ToolFramework.Modeling.Visualization.Controls.PropertyGrid">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Tum.PDE.ToolFramework.Modeling.Visualization;component/Themes/Default/PropertyGridButtonStyle.xaml"/>
+        <ResourceDictionary Source="/Tum.PDE.ToolFramework.Modeling.Visualization;component/Themes/Default/PropertyGridEditorsStyle.xaml"/>
+        <ResourceDictionary Source="/Tum.PDE.ToolFramework.Modeling.Visualization;component/Themes/Default/PropertyGridCategoryExpanderStyle.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <SolidColorBrush x:Key="BorderSeparatorColor" Color="#E9ECFF" />
+    <SolidColorBrush x:Key="BorderFocusedColor" Color="#5EAAFF" />
+    
+    <!-- Property grid item style -->
+    <Style TargetType="{x:Type c:PropertyGridItem}" x:Key="PropertyGridItemStyle">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type c:PropertyGridItem}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="1"/>
+                        </Grid.RowDefinitions>
+                        <Border x:Name="SelectionBorder" Grid.Row="0" Margin="2.0" Background="Transparent">
+                            <ContentPresenter Margin="0.5"/>
+                        </Border>
+                        <Border Grid.Row="1" Height="1.0" BorderBrush="{StaticResource BorderSeparatorColor}" BorderThickness="0,0,0,1.0"  Background="Transparent"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <DataTrigger Binding="{Binding Path=IsSelected}" Value="True">
+                            <Setter TargetName="SelectionBorder" Property="BorderThickness" Value="1.5"/>
+                            <Setter TargetName="SelectionBorder" Property="BorderBrush" Value="{StaticResource BorderFocusedColor}"/>
+                            <Setter TargetName="SelectionBorder" Property="Margin" Value="0.5"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=IsPropertyReadOnly}" Value="True">
+                            <Setter Property="Foreground" Value="Gray"/>
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <!-- Property grid alphabetical style -->
+    <Style x:Key="PropertyGridAlphabeticalStyle" TargetType="{x:Type ContentControl}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ContentControl}">
+                    <Grid Margin="0,0,0,-2">
+                        <c:PropertyGridEditors x:Name="PropertyGridEditors" Padding="0"
+                               ItemContainerStyle="{StaticResource PropertyGridItemStyle}"
+                               ItemsSource="{Binding Path=CurrentEditorViewModelsAlphabetic, Mode=OneWay}"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Property grid category item style -->
+    <DataTemplate x:Key="PropertyGridCategoryItemTemplate">
+        <Grid>
+            <Expander Header="{Binding CategoryName}" IsExpanded="True" Style="{StaticResource PropertyGridCategoryExpanderStyle}" Margin="0,0,0,-2">
+                <c:PropertyGridEditors x:Name="PropertyGridEditors" 
+                                ItemContainerStyle="{StaticResource PropertyGridItemStyle}"
+                                ItemsSource="{Binding Path=CategoryChildren, Mode=OneWay}"/>
+            </Expander>
+        </Grid>
+    </DataTemplate>
+
+    <!-- Property grid categorized style -->
+    <Style x:Key="PropertyGridCategorizedStyle" TargetType="{x:Type ContentControl}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ContentControl}">
+                    <Grid>
+                        <ItemsControl x:Name="PropertyGridEditors" 
+                                ItemTemplate="{StaticResource PropertyGridCategoryItemTemplate}"
+                                ItemsSource="{Binding Path=CurrentEditorViewModelsCategorized, Mode=OneWay}"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Main Property grid style -->
+    <Style TargetType="{x:Type c:PropertyGrid}">
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type c:PropertyGrid}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="3"/>
+                            <RowDefinition Height="70"/>
+                        </Grid.RowDefinitions>
+
+                        <!-- Menu bar + search -->
+                        <Grid Grid.Row="0" Background="AliceBlue">
+                            <Grid Margin="3">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="22"/>
+                                    <ColumnDefinition Width="22"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="0"/>
+                                </Grid.ColumnDefinitions>
+                                <Canvas Grid.Column="0" Margin="0.5,0,0,0">
+                                    <ToggleButton x:Name="ButtonSortCategorised" Style="{DynamicResource PropertyGridButtonStyle}" Margin="0,0,0,0" Command="{Binding Path=ToggleCategorizedSortOrderCommand, Mode=OneTime}">
+                                        <Image Width="16" Height="16" Source="/Tum.PDE.ToolFramework.Images;component/Views/SortCategorized-16.png" />
+                                    </ToggleButton>
+                                </Canvas>
+                                <Canvas Grid.Column="1" Margin="0.5,0,0,0">
+                                    <ToggleButton x:Name="ButtonSortAlphabetical" Style="{DynamicResource PropertyGridButtonStyle}" Margin="0,0,0,0" Command="{Binding Path=ToggleAlphabeticalSortOrderCommand, Mode=OneTime}">
+                                        <Image Width="16" Height="16"  Source="/Tum.PDE.ToolFramework.Images;component/Views/SortAlphabetical-16.png" />
+                                    </ToggleButton>
+                                </Canvas>
+
+                                <TextBox Text="{Binding Path=SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" Margin="3,0,0,1" >
+                                    <TextBox.InputBindings>
+                                        <KeyBinding Key="Enter" Command="{Binding Path=SearchCommand}"/>
+                                    </TextBox.InputBindings>
+                                </TextBox>
+                                <Canvas Grid.Column="3">
+                                    <Image Width="16" Height="16" Margin="-22, 3, 0, 0" Source="/Tum.PDE.ToolFramework.Images;component/Viewss/Search-16.png">
+                                        <Image.InputBindings>
+                                            <MouseBinding MouseAction="LeftClick" Command="{Binding Path=SearchCommand}"/>
+                                        </Image.InputBindings>
+                                    </Image>
+                                </Canvas>
+                            </Grid>
+                        </Grid>
+
+                        <!-- Property Grid Styles: Alphabetical or Categorized-->
+                        <ScrollViewer Grid.Row="1" Margin="0" Padding="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" 
+                                      HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Background="White">
+                            <!--<ContentControl Style="{Binding Path=SortOrder, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource SortOrderToStyleConverter}, Mode=OneWay}" />-->
+                            <ContentControl x:Name="PropertyGridContentControl"/>
+                        </ScrollViewer>
+
+                        <!-- Grid splitter-->
+                        <GridSplitter Background="LightGray" Grid.Row="2" Height="Auto" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+
+                        <!-- Selected item/editor description-->
+                        <Grid Grid.Row="3" Background="AliceBlue">
+                            <Grid Margin="3,3,0,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="20" />
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                    <TextBlock x:Name="PropertyDisplayName" Text="{Binding Path=PropertyGridDescriptionFullName, Mode=OneWay}"  FontWeight="SemiBold" HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="NoWrap"/>
+                                    <TextBlock Margin="2,0,0,0" Text="{Binding Path=PropertyGridDescriptionType, Mode=OneWay}" HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="NoWrap"/>
+                                </StackPanel>
+                                <TextBlock x:Name="PropertyDescription" Text="{Binding Path=PropertyGridDescriptionText, Mode=OneWay}" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" TextWrapping="WrapWithOverflow"/>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <DataTrigger Binding="{Binding Path=SortOrder}" Value="Categorized">
+                            <Setter TargetName="ButtonSortCategorised" Property="IsChecked" Value="True"/>
+                            <Setter TargetName="ButtonSortAlphabetical" Property="IsChecked" Value="False"/>
+                            <Setter TargetName="PropertyGridContentControl" Property="Style" Value="{StaticResource PropertyGridCategorizedStyle}"/>
+                        </DataTrigger>
+
+                        <DataTrigger Binding="{Binding Path=SortOrder}" Value="Alphabetical">
+                            <Setter TargetName="ButtonSortCategorised" Property="IsChecked" Value="False"/>
+                            <Setter TargetName="ButtonSortAlphabetical" Property="IsChecked" Value="True"/>
+                            <Setter TargetName="PropertyGridContentControl" Property="Style" Value="{StaticResource PropertyGridAlphabeticalStyle}"/>
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

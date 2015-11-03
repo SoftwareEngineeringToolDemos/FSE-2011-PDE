@@ -1,0 +1,32 @@
+﻿<Window x:Class="Tum.PDE.LanguageDSL.Visualization.View.Forms.RelationshipTypeSelector"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Select the type of Relationship you want to create..." Height="180" Width="500"
+        
+        WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow">
+    <Grid>
+        <ListBox Margin="1" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
+            <ListBoxItem Width="500" HorizontalAlignment="Left" MouseDoubleClick="ListBoxItemEmb_MouseDoubleClick">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Tum.PDE.LanguageDSL.Visualization;component/Resources/Images/Emb_32.png" Width="32" Height="32" Margin="1"/>
+                        <TextBlock Text="Embedding Relationship" Margin="3,0,0,0" FontWeight="Bold" FontSize="14" VerticalAlignment="Center"/>
+                    </StackPanel>
+
+                    <TextBlock Text="If you press Shift before releasing the mouse, you will automatically create an Embedding Relationship!" TextWrapping="Wrap" FontStyle="Italic"/>
+                </StackPanel>
+            </ListBoxItem>
+
+            <ListBoxItem Margin="0,2,0,0" Width="500" HorizontalAlignment="Left" MouseDoubleClick="ListBoxItemRef_MouseDoubleClick">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Tum.PDE.LanguageDSL.Visualization;component/Resources/Images/Ref_24.png" Width="32" Height="32" Margin="1"/>
+                        <TextBlock Text="Reference Relationship" Margin="3,0,0,0" FontWeight="Bold" FontSize="14" VerticalAlignment="Center"/>
+                    </StackPanel>
+
+                    <TextBlock Text="If you press Ctrl before releasing the mouse, you will automatically create an Reference Relationship!" TextWrapping="Wrap" FontStyle="Italic" />
+                </StackPanel>
+            </ListBoxItem>
+        </ListBox>
+    </Grid>
+</Window>

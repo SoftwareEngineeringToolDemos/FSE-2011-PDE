@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="Tum.PDE.ToolFramework.Modeling.Visualization.Controls.SearchWindowControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" TextOptions.TextFormattingMode="Display" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             MinHeight="300" MinWidth="300"
+             xmlns:conv="clr-namespace:Tum.PDE.ToolFramework.Modeling.Visualization.Controls.Search"
+             xmlns:res="clr-namespace:Tum.PDE.ToolFramework.Modeling.Visualization.Localization"
+             xmlns:resFile="clr-namespace:Tum.PDE.ToolFramework.Modeling.Visualization.Localization.LocalResources">
+    <Grid Margin="3">
+        <StackPanel Orientation="Vertical">
+            <TextBlock x:Name="txtFindWhat" Margin="0,2,0,0" Text="{res:Res Static=resFile:SearchWindowControl.txtFindWhat_Text, Default=_FindWhat!}"/>
+            <TextBox Text="{Binding Path=SearchText, Mode=TwoWay}">
+                <TextBox.InputBindings>
+                    <KeyBinding Key="Enter" Command="{Binding Path=SearchCommand}"/>
+                </TextBox.InputBindings>
+            </TextBox>
+            <TextBlock x:Name="txtFindWhere" Text="{res:Res Static=resFile:SearchWindowControl.txtFindWhere_Text, Default=_FindWhere!}" Margin="0,2,0,0"/>
+            <ComboBox ItemsSource="{Binding Path=SearchSource, Mode=OneWay}" Height="23" HorizontalAlignment="Stretch"
+                                      SelectedItem="{Binding Path=SelectedSearchSource, Mode=TwoWay}" IsReadOnly="True" DisplayMemberPath="DisplayName"/>
+
+            <TextBlock x:Name="txtFindCriteria" Text="{res:Res Static=resFile:SearchWindowControl.txtFindCriteria_Text, Default=_FindCriteria!}" Margin="0,2,0,0"/>
+            <ComboBox ItemsSource="{Binding Path=SearchCriteria, Mode=OneWay}" Height="23" HorizontalAlignment="Stretch"
+                                      SelectedItem="{Binding Path=SelectedSearchCriteria, Mode=TwoWay}" IsReadOnly="True" DisplayMemberPath="DisplayName"/>
+
+            <GroupBox x:Name="grpFindInResult" Margin="0,2,0,0" Header="{res:Res Static=resFile:SearchWindowControl.grpFindInResult_Header, Default=_FindInResult!}">
+                <StackPanel Orientation="Vertical">
+                    <CheckBox x:Name="chkDoFindInResult" Content="{res:Res Static=resFile:SearchWindowControl.chkDoFindInResult_Content, Default=_DoFindInResult!}" IsChecked="{Binding Path=DoFindInResult, Mode=TwoWay}"/>
+
+                    <TextBlock Text="{res:Res Static=resFile:SearchWindowControl.txtFindWhat_Text, Default=_FindWhat!}" Margin="0,2,0,0"/>
+                    <TextBox Text="{Binding Path=SearchTextInResult, Mode=TwoWay}"/>
+
+
+                    <TextBlock Text="{res:Res Static=resFile:SearchWindowControl.txtFindCriteria_Text, Default=_FindCriteria!}" Margin="0,2,0,0"/>
+                    <ComboBox ItemsSource="{Binding Path=SearchCriteria, Mode=OneWay}" Height="23" HorizontalAlignment="Stretch"
+                                      SelectedItem="{Binding Path=SelectedSearchCriteriaInResult, Mode=TwoWay}" IsReadOnly="True" DisplayMemberPath="DisplayName"/>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox x:Name="grpFindOptions" Margin="0,2,0,0" Header="{res:Res Static=resFile:SearchWindowControl.grpFindOptions_Header, Default=_FindOptions!}">
+                <StackPanel Orientation="Vertical">
+                    <CheckBox Margin="0,2,0,0" x:Name="chkMatchCase" Content="{res:Res Static=resFile:SearchWindowControl.chkMatchCase_Content, Default=_MatchCase!}" IsChecked="{Binding Path=DoMatchCase, Mode=TwoWay}"/>
+                    <CheckBox Margin="0,2,0,0" x:Name="chkMatchWholeWord" Content="{res:Res Static=resFile:SearchWindowControl.chkMatchWholeWord_Content, Default=_MatchWholeWord!}" IsChecked="{Binding Path=DoMatchWholeWord, Mode=TwoWay}"/>
+                </StackPanel>
+            </GroupBox>
+
+            <Button Width="80" Margin="0,5,0,0" HorizontalAlignment="Right" Command="{Binding Path=SearchCommand}">
+                <StackPanel Orientation="Horizontal" >
+                    <Image Width="16" Height="16" Source="/Tum.PDE.ToolFramework.Images;component/Views/Search-16.png" />
+                    <TextBlock x:Name="txtFindAll" Margin="5,0,0,0" Text="{res:Res Static=resFile:SearchWindowControl.txtFindAll_Text, Default=_FindAll!}"></TextBlock>
+                </StackPanel>
+            </Button>
+        </StackPanel>
+    </Grid>
+</UserControl>

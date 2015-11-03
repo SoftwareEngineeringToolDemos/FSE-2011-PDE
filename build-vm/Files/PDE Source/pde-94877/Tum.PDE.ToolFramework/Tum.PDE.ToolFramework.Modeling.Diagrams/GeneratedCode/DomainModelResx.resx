@@ -1,0 +1,1446 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.DiagramsDSLDomainModel.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.DiagramsDSL</value>
+    <comment>Description for DslLibrary &apos;DiagramsDSL&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.DiagramsDSLDomainModel.DisplayName" xml:space="preserve">
+    <value>DiagramsDSL</value>
+    <comment>DisplayName for DslLibrary &apos;DiagramsDSL&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.DiagramsModel.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.DiagramsModel</value>
+    <comment>Description for DomainClass &apos;DiagramsModel&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.DiagramsModel.DisplayName" xml:space="preserve">
+    <value>Diagrams Model</value>
+    <comment>DisplayName for DomainClass &apos;DiagramsModel&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShape.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShape</value>
+    <comment>Description for DomainClass &apos;NodeShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShape.DisplayName" xml:space="preserve">
+    <value>Node Shape</value>
+    <comment>DisplayName for DomainClass &apos;NodeShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShape/ResizingBehaviour.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShape.Resizing Behaviour</value>
+    <comment>Description for DomainProperty &apos;ResizingBehaviour&apos; on DomainClass &apos;NodeShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShape/ResizingBehaviour.DisplayName" xml:space="preserve">
+    <value>Resizing Behaviour</value>
+    <comment>DisplayName for DomainProperty &apos;ResizingBehaviour&apos; on DomainClass &apos;NodeShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShape/ResizingBehaviour.Category" xml:space="preserve">
+    <value>Behaviour</value>
+    <comment>Category for DomainProperty &apos;ResizingBehaviour&apos; on DomainClass &apos;NodeShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShape/MovementBehaviour.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShape.Movement Behaviour</value>
+    <comment>Description for DomainProperty &apos;MovementBehaviour&apos; on DomainClass &apos;NodeShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShape/MovementBehaviour.DisplayName" xml:space="preserve">
+    <value>Movement Behaviour</value>
+    <comment>DisplayName for DomainProperty &apos;MovementBehaviour&apos; on DomainClass &apos;NodeShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShape/MovementBehaviour.Category" xml:space="preserve">
+    <value>Behaviour</value>
+    <comment>Category for DomainProperty &apos;MovementBehaviour&apos; on DomainClass &apos;NodeShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShape/IsRelativeChildShape.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShape.Is Relative Child Shape</value>
+    <comment>Description for DomainProperty &apos;IsRelativeChildShape&apos; on DomainClass &apos;NodeShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShape/IsRelativeChildShape.DisplayName" xml:space="preserve">
+    <value>Is Relative Child Shape</value>
+    <comment>DisplayName for DomainProperty &apos;IsRelativeChildShape&apos; on DomainClass &apos;NodeShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShape/IsRelativeChildShape.Category" xml:space="preserve">
+    <value>Definition</value>
+    <comment>Category for DomainProperty &apos;IsRelativeChildShape&apos; on DomainClass &apos;NodeShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShape/TakesPartInRelationship.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShape.Takes Part In Relationship</value>
+    <comment>Description for DomainProperty &apos;TakesPartInRelationship&apos; on DomainClass &apos;NodeShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShape/TakesPartInRelationship.DisplayName" xml:space="preserve">
+    <value>Takes Part In Relationship</value>
+    <comment>DisplayName for DomainProperty &apos;TakesPartInRelationship&apos; on DomainClass &apos;NodeShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShape/TakesPartInRelationship.Category" xml:space="preserve">
+    <value>Definition</value>
+    <comment>Category for DomainProperty &apos;TakesPartInRelationship&apos; on DomainClass &apos;NodeShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShape/Location.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShape.Location</value>
+    <comment>Description for DomainProperty &apos;Location&apos; on DomainClass &apos;NodeShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShape/Location.DisplayName" xml:space="preserve">
+    <value>Location</value>
+    <comment>DisplayName for DomainProperty &apos;Location&apos; on DomainClass &apos;NodeShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShape/Size.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShape.Size</value>
+    <comment>Description for DomainProperty &apos;Size&apos; on DomainClass &apos;NodeShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShape/Size.DisplayName" xml:space="preserve">
+    <value>Size</value>
+    <comment>DisplayName for DomainProperty &apos;Size&apos; on DomainClass &apos;NodeShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShape/AbsoluteLocation.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShape.Absolute Location</value>
+    <comment>Description for DomainProperty &apos;AbsoluteLocation&apos; on DomainClass &apos;NodeShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShape/AbsoluteLocation.DisplayName" xml:space="preserve">
+    <value>Absolute Location</value>
+    <comment>DisplayName for DomainProperty &apos;AbsoluteLocation&apos; on DomainClass &apos;NodeShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShape/PlacementSide.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShape.Placement Side</value>
+    <comment>Description for DomainProperty &apos;PlacementSide&apos; on DomainClass &apos;NodeShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShape/PlacementSide.DisplayName" xml:space="preserve">
+    <value>Placement Side</value>
+    <comment>DisplayName for DomainProperty &apos;PlacementSide&apos; on DomainClass &apos;NodeShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.Diagram.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.Diagram</value>
+    <comment>Description for DomainClass &apos;Diagram&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.Diagram.DisplayName" xml:space="preserve">
+    <value>Diagram</value>
+    <comment>DisplayName for DomainClass &apos;Diagram&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.Diagram/Name.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.Diagram.Name</value>
+    <comment>Description for DomainProperty &apos;Name&apos; on DomainClass &apos;Diagram&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.Diagram/Name.DisplayName" xml:space="preserve">
+    <value>Name</value>
+    <comment>DisplayName for DomainProperty &apos;Name&apos; on DomainClass &apos;Diagram&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LinkShape.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.LinkShape</value>
+    <comment>Description for DomainClass &apos;LinkShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LinkShape.DisplayName" xml:space="preserve">
+    <value>Link Shape</value>
+    <comment>DisplayName for DomainClass &apos;LinkShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LinkShape/EdgePoints.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.LinkShape.Edge Points</value>
+    <comment>Description for DomainProperty &apos;EdgePoints&apos; on DomainClass &apos;LinkShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LinkShape/EdgePoints.DisplayName" xml:space="preserve">
+    <value>Edge Points</value>
+    <comment>DisplayName for DomainProperty &apos;EdgePoints&apos; on DomainClass &apos;LinkShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LinkShape/DummyProperty.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.LinkShape.Dummy Property</value>
+    <comment>Description for DomainProperty &apos;DummyProperty&apos; on DomainClass &apos;LinkShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LinkShape/DummyProperty.DisplayName" xml:space="preserve">
+    <value>Dummy Property</value>
+    <comment>DisplayName for DomainProperty &apos;DummyProperty&apos; on DomainClass &apos;LinkShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LinkShape/RoutingMode.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.LinkShape.Routing Mode</value>
+    <comment>Description for DomainProperty &apos;RoutingMode&apos; on DomainClass &apos;LinkShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LinkShape/RoutingMode.DisplayName" xml:space="preserve">
+    <value>Routing Mode</value>
+    <comment>DisplayName for DomainProperty &apos;RoutingMode&apos; on DomainClass &apos;LinkShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.ShapeElement.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.ShapeElement</value>
+    <comment>Description for DomainClass &apos;ShapeElement&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.ShapeElement.DisplayName" xml:space="preserve">
+    <value>Shape Element</value>
+    <comment>DisplayName for DomainClass &apos;ShapeElement&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.ShapeElement/InternalElementId.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.ShapeElement.Internal Element Id</value>
+    <comment>Description for DomainProperty &apos;InternalElementId&apos; on DomainClass &apos;ShapeElement&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.ShapeElement/InternalElementId.DisplayName" xml:space="preserve">
+    <value>Internal Element Id</value>
+    <comment>DisplayName for DomainProperty &apos;InternalElementId&apos; on DomainClass &apos;ShapeElement&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LayoutInfo.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.LayoutInfo</value>
+    <comment>Description for DomainClass &apos;LayoutInfo&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LayoutInfo.DisplayName" xml:space="preserve">
+    <value>Layout Info</value>
+    <comment>DisplayName for DomainClass &apos;LayoutInfo&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LayoutInfo/HostElementId.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.LayoutInfo.Host Element Id</value>
+    <comment>Description for DomainProperty &apos;HostElementId&apos; on DomainClass &apos;LayoutInfo&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LayoutInfo/HostElementId.DisplayName" xml:space="preserve">
+    <value>Host Element Id</value>
+    <comment>DisplayName for DomainProperty &apos;HostElementId&apos; on DomainClass &apos;LayoutInfo&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LayoutInfo/Size.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.LayoutInfo.Size</value>
+    <comment>Description for DomainProperty &apos;Size&apos; on DomainClass &apos;LayoutInfo&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LayoutInfo/Size.DisplayName" xml:space="preserve">
+    <value>Size</value>
+    <comment>DisplayName for DomainProperty &apos;Size&apos; on DomainClass &apos;LayoutInfo&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.SourceAnchor.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.SourceAnchor</value>
+    <comment>Description for DomainClass &apos;SourceAnchor&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.SourceAnchor.DisplayName" xml:space="preserve">
+    <value>Source Anchor</value>
+    <comment>DisplayName for DomainClass &apos;SourceAnchor&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.TargetAnchor.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.TargetAnchor</value>
+    <comment>Description for DomainClass &apos;TargetAnchor&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.TargetAnchor.DisplayName" xml:space="preserve">
+    <value>Target Anchor</value>
+    <comment>DisplayName for DomainClass &apos;TargetAnchor&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.Anchor.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.Anchor</value>
+    <comment>Description for DomainClass &apos;Anchor&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.Anchor.DisplayName" xml:space="preserve">
+    <value>Anchor</value>
+    <comment>DisplayName for DomainClass &apos;Anchor&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.Anchor/AbsoluteLocation.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.Anchor.Absolute Location</value>
+    <comment>Description for DomainProperty &apos;AbsoluteLocation&apos; on DomainClass &apos;Anchor&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.Anchor/AbsoluteLocation.DisplayName" xml:space="preserve">
+    <value>Absolute Location</value>
+    <comment>DisplayName for DomainProperty &apos;AbsoluteLocation&apos; on DomainClass &apos;Anchor&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShapeInfo.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShapeInfo</value>
+    <comment>Description for DomainClass &apos;NodeShapeInfo&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShapeInfo.DisplayName" xml:space="preserve">
+    <value>Node Shape Info</value>
+    <comment>DisplayName for DomainClass &apos;NodeShapeInfo&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShapeInfo/Size.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShapeInfo.Size</value>
+    <comment>Description for DomainProperty &apos;Size&apos; on DomainClass &apos;NodeShapeInfo&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShapeInfo/Size.DisplayName" xml:space="preserve">
+    <value>Size</value>
+    <comment>DisplayName for DomainProperty &apos;Size&apos; on DomainClass &apos;NodeShapeInfo&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShapeInfo/RelativeLocation.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShapeInfo.Relative Location</value>
+    <comment>Description for DomainProperty &apos;RelativeLocation&apos; on DomainClass &apos;NodeShapeInfo&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShapeInfo/RelativeLocation.DisplayName" xml:space="preserve">
+    <value>Relative Location</value>
+    <comment>DisplayName for DomainProperty &apos;RelativeLocation&apos; on DomainClass &apos;NodeShapeInfo&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShapeInfo/ElementId.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShapeInfo.Element Id</value>
+    <comment>Description for DomainProperty &apos;ElementId&apos; on DomainClass &apos;NodeShapeInfo&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShapeInfo/ElementId.DisplayName" xml:space="preserve">
+    <value>Element Id</value>
+    <comment>DisplayName for DomainProperty &apos;ElementId&apos; on DomainClass &apos;NodeShapeInfo&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LinkShapeInfo.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.LinkShapeInfo</value>
+    <comment>Description for DomainClass &apos;LinkShapeInfo&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LinkShapeInfo.DisplayName" xml:space="preserve">
+    <value>Link Shape Info</value>
+    <comment>DisplayName for DomainClass &apos;LinkShapeInfo&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LinkShapeInfo/SourceLocation.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.LinkShapeInfo.Source Location</value>
+    <comment>Description for DomainProperty &apos;SourceLocation&apos; on DomainClass &apos;LinkShapeInfo&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LinkShapeInfo/SourceLocation.DisplayName" xml:space="preserve">
+    <value>Source Location</value>
+    <comment>DisplayName for DomainProperty &apos;SourceLocation&apos; on DomainClass &apos;LinkShapeInfo&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LinkShapeInfo/TargetLocation.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.LinkShapeInfo.Target Location</value>
+    <comment>Description for DomainProperty &apos;TargetLocation&apos; on DomainClass &apos;LinkShapeInfo&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LinkShapeInfo/TargetLocation.DisplayName" xml:space="preserve">
+    <value>Target Location</value>
+    <comment>DisplayName for DomainProperty &apos;TargetLocation&apos; on DomainClass &apos;LinkShapeInfo&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LinkShapeInfo/ElementId.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.LinkShapeInfo.Element Id</value>
+    <comment>Description for DomainProperty &apos;ElementId&apos; on DomainClass &apos;LinkShapeInfo&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LinkShapeInfo/ElementId.DisplayName" xml:space="preserve">
+    <value>Element Id</value>
+    <comment>DisplayName for DomainProperty &apos;ElementId&apos; on DomainClass &apos;LinkShapeInfo&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LinkShapeInfo/SourceElementId.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.LinkShapeInfo.Source Element Id</value>
+    <comment>Description for DomainProperty &apos;SourceElementId&apos; on DomainClass &apos;LinkShapeInfo&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LinkShapeInfo/SourceElementId.DisplayName" xml:space="preserve">
+    <value>Source Element Id</value>
+    <comment>DisplayName for DomainProperty &apos;SourceElementId&apos; on DomainClass &apos;LinkShapeInfo&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LinkShapeInfo/TargetElementId.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.LinkShapeInfo.Target Element Id</value>
+    <comment>Description for DomainProperty &apos;TargetElementId&apos; on DomainClass &apos;LinkShapeInfo&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LinkShapeInfo/TargetElementId.DisplayName" xml:space="preserve">
+    <value>Target Element Id</value>
+    <comment>DisplayName for DomainProperty &apos;TargetElementId&apos; on DomainClass &apos;LinkShapeInfo&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LinkShapeInfo/LinkDomainClassId.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.LinkShapeInfo.Link Domain Class Id</value>
+    <comment>Description for DomainProperty &apos;LinkDomainClassId&apos; on DomainClass &apos;LinkShapeInfo&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LinkShapeInfo/LinkDomainClassId.DisplayName" xml:space="preserve">
+    <value>Link Domain Class Id</value>
+    <comment>DisplayName for DomainProperty &apos;LinkDomainClassId&apos; on DomainClass &apos;LinkShapeInfo&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LinkShapeInfo/RoutingMode.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.LinkShapeInfo.Routing Mode</value>
+    <comment>Description for DomainProperty &apos;RoutingMode&apos; on DomainClass &apos;LinkShapeInfo&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LinkShapeInfo/RoutingMode.DisplayName" xml:space="preserve">
+    <value>Routing Mode</value>
+    <comment>DisplayName for DomainProperty &apos;RoutingMode&apos; on DomainClass &apos;LinkShapeInfo&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LinkShapeInfo/EdgePoints.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.LinkShapeInfo.Edge Points</value>
+    <comment>Description for DomainProperty &apos;EdgePoints&apos; on DomainClass &apos;LinkShapeInfo&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LinkShapeInfo/EdgePoints.DisplayName" xml:space="preserve">
+    <value>Edge Points</value>
+    <comment>DisplayName for DomainProperty &apos;EdgePoints&apos; on DomainClass &apos;LinkShapeInfo&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependenciesDiagram.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependenciesDiagram</value>
+    <comment>Description for DomainClass &apos;GraphicalDependenciesDiagram&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependenciesDiagram.DisplayName" xml:space="preserve">
+    <value>Graphical Dependencies Diagram</value>
+    <comment>DisplayName for DomainClass &apos;GraphicalDependenciesDiagram&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependencyLinkShape.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependencyLinkShape</value>
+    <comment>Description for DomainClass &apos;GraphicalDependencyLinkShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependencyLinkShape.DisplayName" xml:space="preserve">
+    <value>Graphical Dependency Link Shape</value>
+    <comment>DisplayName for DomainClass &apos;GraphicalDependencyLinkShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependencyMainShape.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependencyMainShape</value>
+    <comment>Description for DomainClass &apos;GraphicalDependencyMainShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependencyMainShape.DisplayName" xml:space="preserve">
+    <value>Graphical Dependency Main Shape</value>
+    <comment>DisplayName for DomainClass &apos;GraphicalDependencyMainShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependencyShape.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependencyShape</value>
+    <comment>Description for DomainClass &apos;GraphicalDependencyShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependencyShape.DisplayName" xml:space="preserve">
+    <value>Graphical Dependency Shape</value>
+    <comment>DisplayName for DomainClass &apos;GraphicalDependencyShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependencyShape/RelationshipName.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependencyShape.Relationship Name</value>
+    <comment>Description for DomainProperty &apos;RelationshipName&apos; on DomainClass &apos;GraphicalDependencyShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependencyShape/RelationshipName.DisplayName" xml:space="preserve">
+    <value>Relationship Name</value>
+    <comment>DisplayName for DomainProperty &apos;RelationshipName&apos; on DomainClass &apos;GraphicalDependencyShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependencyShape/RelationshipTypeId.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependencyShape.Relationship Type Id</value>
+    <comment>Description for DomainProperty &apos;RelationshipTypeId&apos; on DomainClass &apos;GraphicalDependencyShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependencyShape/RelationshipTypeId.DisplayName" xml:space="preserve">
+    <value>Relationship Type Id</value>
+    <comment>DisplayName for DomainProperty &apos;RelationshipTypeId&apos; on DomainClass &apos;GraphicalDependencyShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependencyShape/CustomInfo.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependencyShape.Custom Info</value>
+    <comment>Description for DomainProperty &apos;CustomInfo&apos; on DomainClass &apos;GraphicalDependencyShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependencyShape/CustomInfo.DisplayName" xml:space="preserve">
+    <value>Custom Info</value>
+    <comment>DisplayName for DomainProperty &apos;CustomInfo&apos; on DomainClass &apos;GraphicalDependencyShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.ShapeElementContainsChildShapes.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.ShapeElementContainsChildShapes</value>
+    <comment>Description for DomainClass &apos;ShapeElementContainsChildShapes&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.ShapeElementContainsChildShapes.DisplayName" xml:space="preserve">
+    <value>Shape Element Contains Child Shapes</value>
+    <comment>DisplayName for DomainClass &apos;ShapeElementContainsChildShapes&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.ShapeElementContainsChildShapes/ParentShape.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.ShapeElementContainsChildShapes.ParentShape</value>
+    <comment>Description for DomainRole &apos;ParentShape&apos; on DomainRelationship &apos;ShapeElementContainsChildShapes&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.ShapeElementContainsChildShapes/ParentShape.DisplayName" xml:space="preserve">
+    <value>Parent Shape</value>
+    <comment>DisplayName for DomainRole &apos;ParentShape&apos; on DomainRelationship &apos;ShapeElementContainsChildShapes&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.ShapeElementContainsChildShapes/ParentShape.PropertyDisplayName" xml:space="preserve">
+    <value>Internal Children</value>
+    <comment>PropertyDisplayName for DomainRole &apos;ParentShape&apos; on DomainRelationship &apos;ShapeElementContainsChildShapes&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.ShapeElementContainsChildShapes/ChildShape.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.ShapeElementContainsChildShapes.ChildShape</value>
+    <comment>Description for DomainRole &apos;ChildShape&apos; on DomainRelationship &apos;ShapeElementContainsChildShapes&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.ShapeElementContainsChildShapes/ChildShape.DisplayName" xml:space="preserve">
+    <value>Child Shape</value>
+    <comment>DisplayName for DomainRole &apos;ChildShape&apos; on DomainRelationship &apos;ShapeElementContainsChildShapes&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.ShapeElementContainsChildShapes/ChildShape.PropertyDisplayName" xml:space="preserve">
+    <value>Parent</value>
+    <comment>PropertyDisplayName for DomainRole &apos;ChildShape&apos; on DomainRelationship &apos;ShapeElementContainsChildShapes&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.DiagramsModelHasDiagrams.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.DiagramsModelHasDiagrams</value>
+    <comment>Description for DomainClass &apos;DiagramsModelHasDiagrams&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.DiagramsModelHasDiagrams.DisplayName" xml:space="preserve">
+    <value>Diagrams Model Has Diagrams</value>
+    <comment>DisplayName for DomainClass &apos;DiagramsModelHasDiagrams&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.DiagramsModelHasDiagrams/DiagramsModel.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.DiagramsModelHasDiagrams.DiagramsModel</value>
+    <comment>Description for DomainRole &apos;DiagramsModel&apos; on DomainRelationship &apos;DiagramsModelHasDiagrams&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.DiagramsModelHasDiagrams/DiagramsModel.DisplayName" xml:space="preserve">
+    <value>Diagrams Model</value>
+    <comment>DisplayName for DomainRole &apos;DiagramsModel&apos; on DomainRelationship &apos;DiagramsModelHasDiagrams&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.DiagramsModelHasDiagrams/DiagramsModel.PropertyDisplayName" xml:space="preserve">
+    <value>Diagrams</value>
+    <comment>PropertyDisplayName for DomainRole &apos;DiagramsModel&apos; on DomainRelationship &apos;DiagramsModelHasDiagrams&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.DiagramsModelHasDiagrams/Diagram.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.DiagramsModelHasDiagrams.Diagram</value>
+    <comment>Description for DomainRole &apos;Diagram&apos; on DomainRelationship &apos;DiagramsModelHasDiagrams&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.DiagramsModelHasDiagrams/Diagram.DisplayName" xml:space="preserve">
+    <value>Diagram</value>
+    <comment>DisplayName for DomainRole &apos;Diagram&apos; on DomainRelationship &apos;DiagramsModelHasDiagrams&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.DiagramsModelHasDiagrams/Diagram.PropertyDisplayName" xml:space="preserve">
+    <value>Diagrams Model</value>
+    <comment>PropertyDisplayName for DomainRole &apos;Diagram&apos; on DomainRelationship &apos;DiagramsModelHasDiagrams&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.DiagramHasChildren.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.DiagramHasChildren</value>
+    <comment>Description for DomainClass &apos;DiagramHasChildren&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.DiagramHasChildren.DisplayName" xml:space="preserve">
+    <value>Diagram Has Children</value>
+    <comment>DisplayName for DomainClass &apos;DiagramHasChildren&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.DiagramHasChildren/Diagram.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.DiagramHasChildren.Diagram</value>
+    <comment>Description for DomainRole &apos;Diagram&apos; on DomainRelationship &apos;DiagramHasChildren&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.DiagramHasChildren/Diagram.DisplayName" xml:space="preserve">
+    <value>Diagram</value>
+    <comment>DisplayName for DomainRole &apos;Diagram&apos; on DomainRelationship &apos;DiagramHasChildren&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.DiagramHasChildren/Diagram.PropertyDisplayName" xml:space="preserve">
+    <value>Children</value>
+    <comment>PropertyDisplayName for DomainRole &apos;Diagram&apos; on DomainRelationship &apos;DiagramHasChildren&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.DiagramHasChildren/ChildShape.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.DiagramHasChildren.ChildShape</value>
+    <comment>Description for DomainRole &apos;ChildShape&apos; on DomainRelationship &apos;DiagramHasChildren&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.DiagramHasChildren/ChildShape.DisplayName" xml:space="preserve">
+    <value>Child Shape</value>
+    <comment>DisplayName for DomainRole &apos;ChildShape&apos; on DomainRelationship &apos;DiagramHasChildren&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.DiagramHasChildren/ChildShape.PropertyDisplayName" xml:space="preserve">
+    <value>Internal Diagram</value>
+    <comment>PropertyDisplayName for DomainRole &apos;ChildShape&apos; on DomainRelationship &apos;DiagramHasChildren&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.DiagramHasLinkShapes.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.DiagramHasLinkShapes</value>
+    <comment>Description for DomainClass &apos;DiagramHasLinkShapes&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.DiagramHasLinkShapes.DisplayName" xml:space="preserve">
+    <value>Diagram Has Link Shapes</value>
+    <comment>DisplayName for DomainClass &apos;DiagramHasLinkShapes&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.DiagramHasLinkShapes/Diagram.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.DiagramHasLinkShapes.Diagram</value>
+    <comment>Description for DomainRole &apos;Diagram&apos; on DomainRelationship &apos;DiagramHasLinkShapes&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.DiagramHasLinkShapes/Diagram.DisplayName" xml:space="preserve">
+    <value>Diagram</value>
+    <comment>DisplayName for DomainRole &apos;Diagram&apos; on DomainRelationship &apos;DiagramHasLinkShapes&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.DiagramHasLinkShapes/Diagram.PropertyDisplayName" xml:space="preserve">
+    <value>Link Shapes</value>
+    <comment>PropertyDisplayName for DomainRole &apos;Diagram&apos; on DomainRelationship &apos;DiagramHasLinkShapes&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.DiagramHasLinkShapes/LinkShape.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.DiagramHasLinkShapes.LinkShape</value>
+    <comment>Description for DomainRole &apos;LinkShape&apos; on DomainRelationship &apos;DiagramHasLinkShapes&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.DiagramHasLinkShapes/LinkShape.DisplayName" xml:space="preserve">
+    <value>Link Shape</value>
+    <comment>DisplayName for DomainRole &apos;LinkShape&apos; on DomainRelationship &apos;DiagramHasLinkShapes&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.DiagramHasLinkShapes/LinkShape.PropertyDisplayName" xml:space="preserve">
+    <value>Diagram</value>
+    <comment>PropertyDisplayName for DomainRole &apos;LinkShape&apos; on DomainRelationship &apos;DiagramHasLinkShapes&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShapeReferencesNestedChildren.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShapeReferencesNestedChildren</value>
+    <comment>Description for DomainClass &apos;NodeShapeReferencesNestedChildren&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShapeReferencesNestedChildren.DisplayName" xml:space="preserve">
+    <value>Node Shape References Nested Children</value>
+    <comment>DisplayName for DomainClass &apos;NodeShapeReferencesNestedChildren&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShapeReferencesNestedChildren/ParentShape.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShapeReferencesNestedChildren.ParentShape</value>
+    <comment>Description for DomainRole &apos;ParentShape&apos; on DomainRelationship &apos;NodeShapeReferencesNestedChildren&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShapeReferencesNestedChildren/ParentShape.DisplayName" xml:space="preserve">
+    <value>Parent Shape</value>
+    <comment>DisplayName for DomainRole &apos;ParentShape&apos; on DomainRelationship &apos;NodeShapeReferencesNestedChildren&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShapeReferencesNestedChildren/ParentShape.PropertyDisplayName" xml:space="preserve">
+    <value>Nested Children</value>
+    <comment>PropertyDisplayName for DomainRole &apos;ParentShape&apos; on DomainRelationship &apos;NodeShapeReferencesNestedChildren&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShapeReferencesNestedChildren/ChildShape.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShapeReferencesNestedChildren.ChildShape</value>
+    <comment>Description for DomainRole &apos;ChildShape&apos; on DomainRelationship &apos;NodeShapeReferencesNestedChildren&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShapeReferencesNestedChildren/ChildShape.DisplayName" xml:space="preserve">
+    <value>Child Shape</value>
+    <comment>DisplayName for DomainRole &apos;ChildShape&apos; on DomainRelationship &apos;NodeShapeReferencesNestedChildren&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShapeReferencesNestedChildren/ChildShape.PropertyDisplayName" xml:space="preserve">
+    <value>Parent Shape</value>
+    <comment>PropertyDisplayName for DomainRole &apos;ChildShape&apos; on DomainRelationship &apos;NodeShapeReferencesNestedChildren&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShapeReferencesRelativeChildren.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShapeReferencesRelativeChildren</value>
+    <comment>Description for DomainClass &apos;NodeShapeReferencesRelativeChildren&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShapeReferencesRelativeChildren.DisplayName" xml:space="preserve">
+    <value>Node Shape References Relative Children</value>
+    <comment>DisplayName for DomainClass &apos;NodeShapeReferencesRelativeChildren&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShapeReferencesRelativeChildren/ParentShape.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShapeReferencesRelativeChildren.ParentShape</value>
+    <comment>Description for DomainRole &apos;ParentShape&apos; on DomainRelationship &apos;NodeShapeReferencesRelativeChildren&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShapeReferencesRelativeChildren/ParentShape.DisplayName" xml:space="preserve">
+    <value>Parent Shape</value>
+    <comment>DisplayName for DomainRole &apos;ParentShape&apos; on DomainRelationship &apos;NodeShapeReferencesRelativeChildren&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShapeReferencesRelativeChildren/ParentShape.PropertyDisplayName" xml:space="preserve">
+    <value>Relative Children</value>
+    <comment>PropertyDisplayName for DomainRole &apos;ParentShape&apos; on DomainRelationship &apos;NodeShapeReferencesRelativeChildren&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShapeReferencesRelativeChildren/ChildShape.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShapeReferencesRelativeChildren.ChildShape</value>
+    <comment>Description for DomainRole &apos;ChildShape&apos; on DomainRelationship &apos;NodeShapeReferencesRelativeChildren&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShapeReferencesRelativeChildren/ChildShape.DisplayName" xml:space="preserve">
+    <value>Child Shape</value>
+    <comment>DisplayName for DomainRole &apos;ChildShape&apos; on DomainRelationship &apos;NodeShapeReferencesRelativeChildren&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShapeReferencesRelativeChildren/ChildShape.PropertyDisplayName" xml:space="preserve">
+    <value>Parent Shape</value>
+    <comment>PropertyDisplayName for DomainRole &apos;ChildShape&apos; on DomainRelationship &apos;NodeShapeReferencesRelativeChildren&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LinkShapeHasSourceAnchor.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.LinkShapeHasSourceAnchor</value>
+    <comment>Description for DomainClass &apos;LinkShapeHasSourceAnchor&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LinkShapeHasSourceAnchor.DisplayName" xml:space="preserve">
+    <value>Link Shape Has Source Anchor</value>
+    <comment>DisplayName for DomainClass &apos;LinkShapeHasSourceAnchor&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LinkShapeHasSourceAnchor/LinkShape.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.LinkShapeHasSourceAnchor.LinkShape</value>
+    <comment>Description for DomainRole &apos;LinkShape&apos; on DomainRelationship &apos;LinkShapeHasSourceAnchor&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LinkShapeHasSourceAnchor/LinkShape.DisplayName" xml:space="preserve">
+    <value>Link Shape</value>
+    <comment>DisplayName for DomainRole &apos;LinkShape&apos; on DomainRelationship &apos;LinkShapeHasSourceAnchor&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LinkShapeHasSourceAnchor/LinkShape.PropertyDisplayName" xml:space="preserve">
+    <value>Source Anchor</value>
+    <comment>PropertyDisplayName for DomainRole &apos;LinkShape&apos; on DomainRelationship &apos;LinkShapeHasSourceAnchor&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LinkShapeHasSourceAnchor/SourceAnchor.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.LinkShapeHasSourceAnchor.SourceAnchor</value>
+    <comment>Description for DomainRole &apos;SourceAnchor&apos; on DomainRelationship &apos;LinkShapeHasSourceAnchor&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LinkShapeHasSourceAnchor/SourceAnchor.DisplayName" xml:space="preserve">
+    <value>Source Anchor</value>
+    <comment>DisplayName for DomainRole &apos;SourceAnchor&apos; on DomainRelationship &apos;LinkShapeHasSourceAnchor&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LinkShapeHasSourceAnchor/SourceAnchor.PropertyDisplayName" xml:space="preserve">
+    <value>Link Shape</value>
+    <comment>PropertyDisplayName for DomainRole &apos;SourceAnchor&apos; on DomainRelationship &apos;LinkShapeHasSourceAnchor&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LinkShapeHasTargetAnchor.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.LinkShapeHasTargetAnchor</value>
+    <comment>Description for DomainClass &apos;LinkShapeHasTargetAnchor&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LinkShapeHasTargetAnchor.DisplayName" xml:space="preserve">
+    <value>Link Shape Has Target Anchor</value>
+    <comment>DisplayName for DomainClass &apos;LinkShapeHasTargetAnchor&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LinkShapeHasTargetAnchor/LinkShape.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.LinkShapeHasTargetAnchor.LinkShape</value>
+    <comment>Description for DomainRole &apos;LinkShape&apos; on DomainRelationship &apos;LinkShapeHasTargetAnchor&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LinkShapeHasTargetAnchor/LinkShape.DisplayName" xml:space="preserve">
+    <value>Link Shape</value>
+    <comment>DisplayName for DomainRole &apos;LinkShape&apos; on DomainRelationship &apos;LinkShapeHasTargetAnchor&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LinkShapeHasTargetAnchor/LinkShape.PropertyDisplayName" xml:space="preserve">
+    <value>Target Anchor</value>
+    <comment>PropertyDisplayName for DomainRole &apos;LinkShape&apos; on DomainRelationship &apos;LinkShapeHasTargetAnchor&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LinkShapeHasTargetAnchor/TargetAnchor.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.LinkShapeHasTargetAnchor.TargetAnchor</value>
+    <comment>Description for DomainRole &apos;TargetAnchor&apos; on DomainRelationship &apos;LinkShapeHasTargetAnchor&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LinkShapeHasTargetAnchor/TargetAnchor.DisplayName" xml:space="preserve">
+    <value>Target Anchor</value>
+    <comment>DisplayName for DomainRole &apos;TargetAnchor&apos; on DomainRelationship &apos;LinkShapeHasTargetAnchor&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LinkShapeHasTargetAnchor/TargetAnchor.PropertyDisplayName" xml:space="preserve">
+    <value>Link Shape</value>
+    <comment>PropertyDisplayName for DomainRole &apos;TargetAnchor&apos; on DomainRelationship &apos;LinkShapeHasTargetAnchor&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.SourceAnchorReferencesFromShape.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.SourceAnchorReferencesFromShape</value>
+    <comment>Description for DomainClass &apos;SourceAnchorReferencesFromShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.SourceAnchorReferencesFromShape.DisplayName" xml:space="preserve">
+    <value>Source Anchor References From Shape</value>
+    <comment>DisplayName for DomainClass &apos;SourceAnchorReferencesFromShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.SourceAnchorReferencesFromShape/SourceAnchor.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.SourceAnchorReferencesFromShape.SourceAnchor</value>
+    <comment>Description for DomainRole &apos;SourceAnchor&apos; on DomainRelationship &apos;SourceAnchorReferencesFromShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.SourceAnchorReferencesFromShape/SourceAnchor.DisplayName" xml:space="preserve">
+    <value>Source Anchor</value>
+    <comment>DisplayName for DomainRole &apos;SourceAnchor&apos; on DomainRelationship &apos;SourceAnchorReferencesFromShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.SourceAnchorReferencesFromShape/SourceAnchor.PropertyDisplayName" xml:space="preserve">
+    <value>From Shape</value>
+    <comment>PropertyDisplayName for DomainRole &apos;SourceAnchor&apos; on DomainRelationship &apos;SourceAnchorReferencesFromShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.SourceAnchorReferencesFromShape/NodeShape.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.SourceAnchorReferencesFromShape.NodeShape</value>
+    <comment>Description for DomainRole &apos;NodeShape&apos; on DomainRelationship &apos;SourceAnchorReferencesFromShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.SourceAnchorReferencesFromShape/NodeShape.DisplayName" xml:space="preserve">
+    <value>Node Shape</value>
+    <comment>DisplayName for DomainRole &apos;NodeShape&apos; on DomainRelationship &apos;SourceAnchorReferencesFromShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.SourceAnchorReferencesFromShape/NodeShape.PropertyDisplayName" xml:space="preserve">
+    <value>Source Anchors</value>
+    <comment>PropertyDisplayName for DomainRole &apos;NodeShape&apos; on DomainRelationship &apos;SourceAnchorReferencesFromShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.TargetAnchorReferencesToShape.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.TargetAnchorReferencesToShape</value>
+    <comment>Description for DomainClass &apos;TargetAnchorReferencesToShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.TargetAnchorReferencesToShape.DisplayName" xml:space="preserve">
+    <value>Target Anchor References To Shape</value>
+    <comment>DisplayName for DomainClass &apos;TargetAnchorReferencesToShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.TargetAnchorReferencesToShape/TargetAnchor.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.TargetAnchorReferencesToShape.TargetAnchor</value>
+    <comment>Description for DomainRole &apos;TargetAnchor&apos; on DomainRelationship &apos;TargetAnchorReferencesToShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.TargetAnchorReferencesToShape/TargetAnchor.DisplayName" xml:space="preserve">
+    <value>Target Anchor</value>
+    <comment>DisplayName for DomainRole &apos;TargetAnchor&apos; on DomainRelationship &apos;TargetAnchorReferencesToShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.TargetAnchorReferencesToShape/TargetAnchor.PropertyDisplayName" xml:space="preserve">
+    <value>To Shape</value>
+    <comment>PropertyDisplayName for DomainRole &apos;TargetAnchor&apos; on DomainRelationship &apos;TargetAnchorReferencesToShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.TargetAnchorReferencesToShape/NodeShape.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.TargetAnchorReferencesToShape.NodeShape</value>
+    <comment>Description for DomainRole &apos;NodeShape&apos; on DomainRelationship &apos;TargetAnchorReferencesToShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.TargetAnchorReferencesToShape/NodeShape.DisplayName" xml:space="preserve">
+    <value>Node Shape</value>
+    <comment>DisplayName for DomainRole &apos;NodeShape&apos; on DomainRelationship &apos;TargetAnchorReferencesToShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.TargetAnchorReferencesToShape/NodeShape.PropertyDisplayName" xml:space="preserve">
+    <value>Target Anchors</value>
+    <comment>PropertyDisplayName for DomainRole &apos;NodeShape&apos; on DomainRelationship &apos;TargetAnchorReferencesToShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.DiagramHasIncludedDiagrams.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.DiagramHasIncludedDiagrams</value>
+    <comment>Description for DomainClass &apos;DiagramHasIncludedDiagrams&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.DiagramHasIncludedDiagrams.DisplayName" xml:space="preserve">
+    <value>Diagram Has Included Diagrams</value>
+    <comment>DisplayName for DomainClass &apos;DiagramHasIncludedDiagrams&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.DiagramHasIncludedDiagrams/SourceDiagram.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.DiagramHasIncludedDiagrams.SourceDiagram</value>
+    <comment>Description for DomainRole &apos;SourceDiagram&apos; on DomainRelationship &apos;DiagramHasIncludedDiagrams&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.DiagramHasIncludedDiagrams/SourceDiagram.DisplayName" xml:space="preserve">
+    <value>Source Diagram</value>
+    <comment>DisplayName for DomainRole &apos;SourceDiagram&apos; on DomainRelationship &apos;DiagramHasIncludedDiagrams&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.DiagramHasIncludedDiagrams/SourceDiagram.PropertyDisplayName" xml:space="preserve">
+    <value>Included Diagrams</value>
+    <comment>PropertyDisplayName for DomainRole &apos;SourceDiagram&apos; on DomainRelationship &apos;DiagramHasIncludedDiagrams&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.DiagramHasIncludedDiagrams/TargetDiagram.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.DiagramHasIncludedDiagrams.TargetDiagram</value>
+    <comment>Description for DomainRole &apos;TargetDiagram&apos; on DomainRelationship &apos;DiagramHasIncludedDiagrams&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.DiagramHasIncludedDiagrams/TargetDiagram.DisplayName" xml:space="preserve">
+    <value>Target Diagram</value>
+    <comment>DisplayName for DomainRole &apos;TargetDiagram&apos; on DomainRelationship &apos;DiagramHasIncludedDiagrams&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.DiagramHasIncludedDiagrams/TargetDiagram.PropertyDisplayName" xml:space="preserve">
+    <value>Parent Diagram</value>
+    <comment>PropertyDisplayName for DomainRole &apos;TargetDiagram&apos; on DomainRelationship &apos;DiagramHasIncludedDiagrams&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LayoutInfoHasChildrenInfos.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.LayoutInfoHasChildrenInfos</value>
+    <comment>Description for DomainClass &apos;LayoutInfoHasChildrenInfos&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LayoutInfoHasChildrenInfos.DisplayName" xml:space="preserve">
+    <value>Layout Info Has Children Infos</value>
+    <comment>DisplayName for DomainClass &apos;LayoutInfoHasChildrenInfos&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LayoutInfoHasChildrenInfos/LayoutInfo.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.LayoutInfoHasChildrenInfos.LayoutInfo</value>
+    <comment>Description for DomainRole &apos;LayoutInfo&apos; on DomainRelationship &apos;LayoutInfoHasChildrenInfos&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LayoutInfoHasChildrenInfos/LayoutInfo.DisplayName" xml:space="preserve">
+    <value>Layout Info</value>
+    <comment>DisplayName for DomainRole &apos;LayoutInfo&apos; on DomainRelationship &apos;LayoutInfoHasChildrenInfos&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LayoutInfoHasChildrenInfos/LayoutInfo.PropertyDisplayName" xml:space="preserve">
+    <value>Children Infos</value>
+    <comment>PropertyDisplayName for DomainRole &apos;LayoutInfo&apos; on DomainRelationship &apos;LayoutInfoHasChildrenInfos&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LayoutInfoHasChildrenInfos/NodeShapeInfo.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.LayoutInfoHasChildrenInfos.NodeShapeInfo</value>
+    <comment>Description for DomainRole &apos;NodeShapeInfo&apos; on DomainRelationship &apos;LayoutInfoHasChildrenInfos&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LayoutInfoHasChildrenInfos/NodeShapeInfo.DisplayName" xml:space="preserve">
+    <value>Node Shape Info</value>
+    <comment>DisplayName for DomainRole &apos;NodeShapeInfo&apos; on DomainRelationship &apos;LayoutInfoHasChildrenInfos&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LayoutInfoHasChildrenInfos/NodeShapeInfo.PropertyDisplayName" xml:space="preserve">
+    <value>Layout Info</value>
+    <comment>PropertyDisplayName for DomainRole &apos;NodeShapeInfo&apos; on DomainRelationship &apos;LayoutInfoHasChildrenInfos&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LayoutInfoHasLinkShapeInfos.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.LayoutInfoHasLinkShapeInfos</value>
+    <comment>Description for DomainClass &apos;LayoutInfoHasLinkShapeInfos&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LayoutInfoHasLinkShapeInfos.DisplayName" xml:space="preserve">
+    <value>Layout Info Has Link Shape Infos</value>
+    <comment>DisplayName for DomainClass &apos;LayoutInfoHasLinkShapeInfos&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LayoutInfoHasLinkShapeInfos/LayoutInfo.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.LayoutInfoHasLinkShapeInfos.LayoutInfo</value>
+    <comment>Description for DomainRole &apos;LayoutInfo&apos; on DomainRelationship &apos;LayoutInfoHasLinkShapeInfos&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LayoutInfoHasLinkShapeInfos/LayoutInfo.DisplayName" xml:space="preserve">
+    <value>Layout Info</value>
+    <comment>DisplayName for DomainRole &apos;LayoutInfo&apos; on DomainRelationship &apos;LayoutInfoHasLinkShapeInfos&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LayoutInfoHasLinkShapeInfos/LayoutInfo.PropertyDisplayName" xml:space="preserve">
+    <value>Link Shape Infos</value>
+    <comment>PropertyDisplayName for DomainRole &apos;LayoutInfo&apos; on DomainRelationship &apos;LayoutInfoHasLinkShapeInfos&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LayoutInfoHasLinkShapeInfos/LinkShapeInfo.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.LayoutInfoHasLinkShapeInfos.LinkShapeInfo</value>
+    <comment>Description for DomainRole &apos;LinkShapeInfo&apos; on DomainRelationship &apos;LayoutInfoHasLinkShapeInfos&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LayoutInfoHasLinkShapeInfos/LinkShapeInfo.DisplayName" xml:space="preserve">
+    <value>Link Shape Info</value>
+    <comment>DisplayName for DomainRole &apos;LinkShapeInfo&apos; on DomainRelationship &apos;LayoutInfoHasLinkShapeInfos&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LayoutInfoHasLinkShapeInfos/LinkShapeInfo.PropertyDisplayName" xml:space="preserve">
+    <value>Layout Info</value>
+    <comment>PropertyDisplayName for DomainRole &apos;LinkShapeInfo&apos; on DomainRelationship &apos;LayoutInfoHasLinkShapeInfos&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.DiagramsModelHasLayoutInfos.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.DiagramsModelHasLayoutInfos</value>
+    <comment>Description for DomainClass &apos;DiagramsModelHasLayoutInfos&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.DiagramsModelHasLayoutInfos.DisplayName" xml:space="preserve">
+    <value>Diagrams Model Has Layout Infos</value>
+    <comment>DisplayName for DomainClass &apos;DiagramsModelHasLayoutInfos&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.DiagramsModelHasLayoutInfos/DiagramsModel.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.DiagramsModelHasLayoutInfos.DiagramsModel</value>
+    <comment>Description for DomainRole &apos;DiagramsModel&apos; on DomainRelationship &apos;DiagramsModelHasLayoutInfos&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.DiagramsModelHasLayoutInfos/DiagramsModel.DisplayName" xml:space="preserve">
+    <value>Diagrams Model</value>
+    <comment>DisplayName for DomainRole &apos;DiagramsModel&apos; on DomainRelationship &apos;DiagramsModelHasLayoutInfos&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.DiagramsModelHasLayoutInfos/DiagramsModel.PropertyDisplayName" xml:space="preserve">
+    <value>Layout Infos</value>
+    <comment>PropertyDisplayName for DomainRole &apos;DiagramsModel&apos; on DomainRelationship &apos;DiagramsModelHasLayoutInfos&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.DiagramsModelHasLayoutInfos/LayoutInfo.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.DiagramsModelHasLayoutInfos.LayoutInfo</value>
+    <comment>Description for DomainRole &apos;LayoutInfo&apos; on DomainRelationship &apos;DiagramsModelHasLayoutInfos&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.DiagramsModelHasLayoutInfos/LayoutInfo.DisplayName" xml:space="preserve">
+    <value>Layout Info</value>
+    <comment>DisplayName for DomainRole &apos;LayoutInfo&apos; on DomainRelationship &apos;DiagramsModelHasLayoutInfos&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.DiagramsModelHasLayoutInfos/LayoutInfo.PropertyDisplayName" xml:space="preserve">
+    <value>Diagrams Model</value>
+    <comment>PropertyDisplayName for DomainRole &apos;LayoutInfo&apos; on DomainRelationship &apos;DiagramsModelHasLayoutInfos&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShapeInfoHasChildrenInfos.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShapeInfoHasChildrenInfos</value>
+    <comment>Description for DomainClass &apos;NodeShapeInfoHasChildrenInfos&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShapeInfoHasChildrenInfos.DisplayName" xml:space="preserve">
+    <value>Node Shape Info Has Children Infos</value>
+    <comment>DisplayName for DomainClass &apos;NodeShapeInfoHasChildrenInfos&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShapeInfoHasChildrenInfos/SourceNodeShapeInfo.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShapeInfoHasChildrenInfos.SourceNodeShapeInfo</value>
+    <comment>Description for DomainRole &apos;SourceNodeShapeInfo&apos; on DomainRelationship &apos;NodeShapeInfoHasChildrenInfos&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShapeInfoHasChildrenInfos/SourceNodeShapeInfo.DisplayName" xml:space="preserve">
+    <value>Source Node Shape Info</value>
+    <comment>DisplayName for DomainRole &apos;SourceNodeShapeInfo&apos; on DomainRelationship &apos;NodeShapeInfoHasChildrenInfos&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShapeInfoHasChildrenInfos/SourceNodeShapeInfo.PropertyDisplayName" xml:space="preserve">
+    <value>Children Infos</value>
+    <comment>PropertyDisplayName for DomainRole &apos;SourceNodeShapeInfo&apos; on DomainRelationship &apos;NodeShapeInfoHasChildrenInfos&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShapeInfoHasChildrenInfos/TargetNodeShapeInfo.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShapeInfoHasChildrenInfos.TargetNodeShapeInfo</value>
+    <comment>Description for DomainRole &apos;TargetNodeShapeInfo&apos; on DomainRelationship &apos;NodeShapeInfoHasChildrenInfos&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShapeInfoHasChildrenInfos/TargetNodeShapeInfo.DisplayName" xml:space="preserve">
+    <value>Target Node Shape Info</value>
+    <comment>DisplayName for DomainRole &apos;TargetNodeShapeInfo&apos; on DomainRelationship &apos;NodeShapeInfoHasChildrenInfos&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.NodeShapeInfoHasChildrenInfos/TargetNodeShapeInfo.PropertyDisplayName" xml:space="preserve">
+    <value>Parent Info</value>
+    <comment>PropertyDisplayName for DomainRole &apos;TargetNodeShapeInfo&apos; on DomainRelationship &apos;NodeShapeInfoHasChildrenInfos&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependenciesDiagramReferencesSourceDependencyShapes.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependenciesDiagramReferencesSourceDependencyShapes</value>
+    <comment>Description for DomainClass &apos;GraphicalDependenciesDiagramReferencesSourceDependencyShapes&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependenciesDiagramReferencesSourceDependencyShapes.DisplayName" xml:space="preserve">
+    <value>Graphical Dependencies Diagram References Source Dependency Shapes</value>
+    <comment>DisplayName for DomainClass &apos;GraphicalDependenciesDiagramReferencesSourceDependencyShapes&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependenciesDiagramReferencesSourceDependencyShapes/GraphicalDependenciesDiagram.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependenciesDiagramReferencesSourceDependencyShapes.GraphicalDependenciesDiagram</value>
+    <comment>Description for DomainRole &apos;GraphicalDependenciesDiagram&apos; on DomainRelationship &apos;GraphicalDependenciesDiagramReferencesSourceDependencyShapes&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependenciesDiagramReferencesSourceDependencyShapes/GraphicalDependenciesDiagram.DisplayName" xml:space="preserve">
+    <value>Graphical Dependencies Diagram</value>
+    <comment>DisplayName for DomainRole &apos;GraphicalDependenciesDiagram&apos; on DomainRelationship &apos;GraphicalDependenciesDiagramReferencesSourceDependencyShapes&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependenciesDiagramReferencesSourceDependencyShapes/GraphicalDependenciesDiagram.PropertyDisplayName" xml:space="preserve">
+    <value>Source Dependency Shapes</value>
+    <comment>PropertyDisplayName for DomainRole &apos;GraphicalDependenciesDiagram&apos; on DomainRelationship &apos;GraphicalDependenciesDiagramReferencesSourceDependencyShapes&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependenciesDiagramReferencesSourceDependencyShapes/GraphicalDependencyShape.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependenciesDiagramReferencesSourceDependencyShapes.GraphicalDependencyShape</value>
+    <comment>Description for DomainRole &apos;GraphicalDependencyShape&apos; on DomainRelationship &apos;GraphicalDependenciesDiagramReferencesSourceDependencyShapes&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependenciesDiagramReferencesSourceDependencyShapes/GraphicalDependencyShape.DisplayName" xml:space="preserve">
+    <value>Graphical Dependency Shape</value>
+    <comment>DisplayName for DomainRole &apos;GraphicalDependencyShape&apos; on DomainRelationship &apos;GraphicalDependenciesDiagramReferencesSourceDependencyShapes&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependenciesDiagramReferencesSourceDependencyShapes/GraphicalDependencyShape.PropertyDisplayName" xml:space="preserve">
+    <value>Graphical Dependencies Diagram</value>
+    <comment>PropertyDisplayName for DomainRole &apos;GraphicalDependencyShape&apos; on DomainRelationship &apos;GraphicalDependenciesDiagramReferencesSourceDependencyShapes&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependenciesDiagramReferencesTargetDependencyShapes.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependenciesDiagramReferencesTargetDependencyShapes</value>
+    <comment>Description for DomainClass &apos;GraphicalDependenciesDiagramReferencesTargetDependencyShapes&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependenciesDiagramReferencesTargetDependencyShapes.DisplayName" xml:space="preserve">
+    <value>Graphical Dependencies Diagram References Target Dependency Shapes</value>
+    <comment>DisplayName for DomainClass &apos;GraphicalDependenciesDiagramReferencesTargetDependencyShapes&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependenciesDiagramReferencesTargetDependencyShapes/GraphicalDependenciesDiagram.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependenciesDiagramReferencesTargetDependencyShapes.GraphicalDependenciesDiagram</value>
+    <comment>Description for DomainRole &apos;GraphicalDependenciesDiagram&apos; on DomainRelationship &apos;GraphicalDependenciesDiagramReferencesTargetDependencyShapes&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependenciesDiagramReferencesTargetDependencyShapes/GraphicalDependenciesDiagram.DisplayName" xml:space="preserve">
+    <value>Graphical Dependencies Diagram</value>
+    <comment>DisplayName for DomainRole &apos;GraphicalDependenciesDiagram&apos; on DomainRelationship &apos;GraphicalDependenciesDiagramReferencesTargetDependencyShapes&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependenciesDiagramReferencesTargetDependencyShapes/GraphicalDependenciesDiagram.PropertyDisplayName" xml:space="preserve">
+    <value>Target Dependency Shapes</value>
+    <comment>PropertyDisplayName for DomainRole &apos;GraphicalDependenciesDiagram&apos; on DomainRelationship &apos;GraphicalDependenciesDiagramReferencesTargetDependencyShapes&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependenciesDiagramReferencesTargetDependencyShapes/GraphicalDependencyShape.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependenciesDiagramReferencesTargetDependencyShapes.GraphicalDependencyShape</value>
+    <comment>Description for DomainRole &apos;GraphicalDependencyShape&apos; on DomainRelationship &apos;GraphicalDependenciesDiagramReferencesTargetDependencyShapes&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependenciesDiagramReferencesTargetDependencyShapes/GraphicalDependencyShape.DisplayName" xml:space="preserve">
+    <value>Graphical Dependency Shape</value>
+    <comment>DisplayName for DomainRole &apos;GraphicalDependencyShape&apos; on DomainRelationship &apos;GraphicalDependenciesDiagramReferencesTargetDependencyShapes&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependenciesDiagramReferencesTargetDependencyShapes/GraphicalDependencyShape.PropertyDisplayName" xml:space="preserve">
+    <value>Graphical Dependencies Diagram</value>
+    <comment>PropertyDisplayName for DomainRole &apos;GraphicalDependencyShape&apos; on DomainRelationship &apos;GraphicalDependenciesDiagramReferencesTargetDependencyShapes&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependencyLinkShapeReferencesMainShape.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependencyLinkShapeReferencesMainShape</value>
+    <comment>Description for DomainClass &apos;GraphicalDependencyLinkShapeReferencesMainShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependencyLinkShapeReferencesMainShape.DisplayName" xml:space="preserve">
+    <value>Graphical Dependency Link Shape References Main Shape</value>
+    <comment>DisplayName for DomainClass &apos;GraphicalDependencyLinkShapeReferencesMainShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependencyLinkShapeReferencesMainShape/GraphicalDependencyLinkShape.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependencyLinkShapeReferencesMainShape.GraphicalDependencyLinkShape</value>
+    <comment>Description for DomainRole &apos;GraphicalDependencyLinkShape&apos; on DomainRelationship &apos;GraphicalDependencyLinkShapeReferencesMainShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependencyLinkShapeReferencesMainShape/GraphicalDependencyLinkShape.DisplayName" xml:space="preserve">
+    <value>Graphical Dependency Link Shape</value>
+    <comment>DisplayName for DomainRole &apos;GraphicalDependencyLinkShape&apos; on DomainRelationship &apos;GraphicalDependencyLinkShapeReferencesMainShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependencyLinkShapeReferencesMainShape/GraphicalDependencyLinkShape.PropertyDisplayName" xml:space="preserve">
+    <value>Main Shape</value>
+    <comment>PropertyDisplayName for DomainRole &apos;GraphicalDependencyLinkShape&apos; on DomainRelationship &apos;GraphicalDependencyLinkShapeReferencesMainShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependencyLinkShapeReferencesMainShape/NodeShape.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependencyLinkShapeReferencesMainShape.NodeShape</value>
+    <comment>Description for DomainRole &apos;NodeShape&apos; on DomainRelationship &apos;GraphicalDependencyLinkShapeReferencesMainShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependencyLinkShapeReferencesMainShape/NodeShape.DisplayName" xml:space="preserve">
+    <value>Node Shape</value>
+    <comment>DisplayName for DomainRole &apos;NodeShape&apos; on DomainRelationship &apos;GraphicalDependencyLinkShapeReferencesMainShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependencyLinkShapeReferencesMainShape/NodeShape.PropertyDisplayName" xml:space="preserve">
+    <value>Link Shape</value>
+    <comment>PropertyDisplayName for DomainRole &apos;NodeShape&apos; on DomainRelationship &apos;GraphicalDependencyLinkShapeReferencesMainShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependenciesDiagramReferencesMainElementShape.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependenciesDiagramReferencesMainElementShape</value>
+    <comment>Description for DomainClass &apos;GraphicalDependenciesDiagramReferencesMainElementShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependenciesDiagramReferencesMainElementShape.DisplayName" xml:space="preserve">
+    <value>Graphical Dependencies Diagram References Main Element Shape</value>
+    <comment>DisplayName for DomainClass &apos;GraphicalDependenciesDiagramReferencesMainElementShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependenciesDiagramReferencesMainElementShape/GraphicalDependenciesDiagram.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependenciesDiagramReferencesMainElementShape.GraphicalDependenciesDiagram</value>
+    <comment>Description for DomainRole &apos;GraphicalDependenciesDiagram&apos; on DomainRelationship &apos;GraphicalDependenciesDiagramReferencesMainElementShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependenciesDiagramReferencesMainElementShape/GraphicalDependenciesDiagram.DisplayName" xml:space="preserve">
+    <value>Graphical Dependencies Diagram</value>
+    <comment>DisplayName for DomainRole &apos;GraphicalDependenciesDiagram&apos; on DomainRelationship &apos;GraphicalDependenciesDiagramReferencesMainElementShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependenciesDiagramReferencesMainElementShape/GraphicalDependenciesDiagram.PropertyDisplayName" xml:space="preserve">
+    <value>Main Element Shape</value>
+    <comment>PropertyDisplayName for DomainRole &apos;GraphicalDependenciesDiagram&apos; on DomainRelationship &apos;GraphicalDependenciesDiagramReferencesMainElementShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependenciesDiagramReferencesMainElementShape/NodeShape.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependenciesDiagramReferencesMainElementShape.NodeShape</value>
+    <comment>Description for DomainRole &apos;NodeShape&apos; on DomainRelationship &apos;GraphicalDependenciesDiagramReferencesMainElementShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependenciesDiagramReferencesMainElementShape/NodeShape.DisplayName" xml:space="preserve">
+    <value>Node Shape</value>
+    <comment>DisplayName for DomainRole &apos;NodeShape&apos; on DomainRelationship &apos;GraphicalDependenciesDiagramReferencesMainElementShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependenciesDiagramReferencesMainElementShape/NodeShape.PropertyDisplayName" xml:space="preserve">
+    <value>Graphical Dependencies Diagram</value>
+    <comment>PropertyDisplayName for DomainRole &apos;NodeShape&apos; on DomainRelationship &apos;GraphicalDependenciesDiagramReferencesMainElementShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependencyLinkShapeReferencesDependencyShape.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependencyLinkShapeReferencesDependencyShape</value>
+    <comment>Description for DomainClass &apos;GraphicalDependencyLinkShapeReferencesDependencyShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependencyLinkShapeReferencesDependencyShape.DisplayName" xml:space="preserve">
+    <value>Graphical Dependency Link Shape References Dependency Shape</value>
+    <comment>DisplayName for DomainClass &apos;GraphicalDependencyLinkShapeReferencesDependencyShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependencyLinkShapeReferencesDependencyShape/GraphicalDependencyLinkShape.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependencyLinkShapeReferencesDependencyShape.GraphicalDependencyLinkShape</value>
+    <comment>Description for DomainRole &apos;GraphicalDependencyLinkShape&apos; on DomainRelationship &apos;GraphicalDependencyLinkShapeReferencesDependencyShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependencyLinkShapeReferencesDependencyShape/GraphicalDependencyLinkShape.DisplayName" xml:space="preserve">
+    <value>Graphical Dependency Link Shape</value>
+    <comment>DisplayName for DomainRole &apos;GraphicalDependencyLinkShape&apos; on DomainRelationship &apos;GraphicalDependencyLinkShapeReferencesDependencyShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependencyLinkShapeReferencesDependencyShape/GraphicalDependencyLinkShape.PropertyDisplayName" xml:space="preserve">
+    <value>Dependency Shape</value>
+    <comment>PropertyDisplayName for DomainRole &apos;GraphicalDependencyLinkShape&apos; on DomainRelationship &apos;GraphicalDependencyLinkShapeReferencesDependencyShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependencyLinkShapeReferencesDependencyShape/GraphicalDependencyShape.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependencyLinkShapeReferencesDependencyShape.GraphicalDependencyShape</value>
+    <comment>Description for DomainRole &apos;GraphicalDependencyShape&apos; on DomainRelationship &apos;GraphicalDependencyLinkShapeReferencesDependencyShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependencyLinkShapeReferencesDependencyShape/GraphicalDependencyShape.DisplayName" xml:space="preserve">
+    <value>Graphical Dependency Shape</value>
+    <comment>DisplayName for DomainRole &apos;GraphicalDependencyShape&apos; on DomainRelationship &apos;GraphicalDependencyLinkShapeReferencesDependencyShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.GraphicalDependencyLinkShapeReferencesDependencyShape/GraphicalDependencyShape.PropertyDisplayName" xml:space="preserve">
+    <value>Link Shape</value>
+    <comment>PropertyDisplayName for DomainRole &apos;GraphicalDependencyShape&apos; on DomainRelationship &apos;GraphicalDependencyLinkShapeReferencesDependencyShape&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.ShapeMovementBehaviour/Normal.DisplayName" xml:space="preserve">
+    <value>Normal</value>
+    <comment>Display name for EnumerationLiteral &apos;Normal&apos; on DomainEnumeration &apos;ShapeMovementBehaviour&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.ShapeMovementBehaviour/Normal.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.ShapeMovementBehaviour.Normal</value>
+    <comment>Description for EnumerationLiteral &apos;Normal&apos; on DomainEnumeration &apos;ShapeMovementBehaviour&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.ShapeMovementBehaviour/PositionRelativeToParent.DisplayName" xml:space="preserve">
+    <value>PositionRelativeToParent</value>
+    <comment>Display name for EnumerationLiteral &apos;PositionRelativeToParent&apos; on DomainEnumeration &apos;ShapeMovementBehaviour&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.ShapeMovementBehaviour/PositionRelativeToParent.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.ShapeMovementBehaviour.PositionRelativeToParent</value>
+    <comment>Description for EnumerationLiteral &apos;PositionRelativeToParent&apos; on DomainEnumeration &apos;ShapeMovementBehaviour&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.ShapeMovementBehaviour/PositionOnEdgeOfParent.DisplayName" xml:space="preserve">
+    <value>PositionOnEdgeOfParent</value>
+    <comment>Display name for EnumerationLiteral &apos;PositionOnEdgeOfParent&apos; on DomainEnumeration &apos;ShapeMovementBehaviour&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.ShapeMovementBehaviour/PositionOnEdgeOfParent.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.ShapeMovementBehaviour.PositionOnEdgeOfParent</value>
+    <comment>Description for EnumerationLiteral &apos;PositionOnEdgeOfParent&apos; on DomainEnumeration &apos;ShapeMovementBehaviour&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.ShapeResizingBehaviour/FixedHeight.DisplayName" xml:space="preserve">
+    <value>FixedHeight</value>
+    <comment>Display name for EnumerationLiteral &apos;FixedHeight&apos; on DomainEnumeration &apos;ShapeResizingBehaviour&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.ShapeResizingBehaviour/FixedHeight.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.ShapeResizingBehaviour.FixedHeight</value>
+    <comment>Description for EnumerationLiteral &apos;FixedHeight&apos; on DomainEnumeration &apos;ShapeResizingBehaviour&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.ShapeResizingBehaviour/FixedWidth.DisplayName" xml:space="preserve">
+    <value>FixedWidth</value>
+    <comment>Display name for EnumerationLiteral &apos;FixedWidth&apos; on DomainEnumeration &apos;ShapeResizingBehaviour&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.ShapeResizingBehaviour/FixedWidth.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.ShapeResizingBehaviour.FixedWidth</value>
+    <comment>Description for EnumerationLiteral &apos;FixedWidth&apos; on DomainEnumeration &apos;ShapeResizingBehaviour&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.ShapeResizingBehaviour/Fixed.DisplayName" xml:space="preserve">
+    <value>Fixed</value>
+    <comment>Display name for EnumerationLiteral &apos;Fixed&apos; on DomainEnumeration &apos;ShapeResizingBehaviour&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.ShapeResizingBehaviour/Fixed.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.ShapeResizingBehaviour.Fixed</value>
+    <comment>Description for EnumerationLiteral &apos;Fixed&apos; on DomainEnumeration &apos;ShapeResizingBehaviour&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.ShapeResizingBehaviour/Normal.DisplayName" xml:space="preserve">
+    <value>Normal</value>
+    <comment>Display name for EnumerationLiteral &apos;Normal&apos; on DomainEnumeration &apos;ShapeResizingBehaviour&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.ShapeResizingBehaviour/Normal.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.ShapeResizingBehaviour.Normal</value>
+    <comment>Description for EnumerationLiteral &apos;Normal&apos; on DomainEnumeration &apos;ShapeResizingBehaviour&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.PortPlacement/Left.DisplayName" xml:space="preserve">
+    <value>Left</value>
+    <comment>Display name for EnumerationLiteral &apos;Left&apos; on DomainEnumeration &apos;PortPlacement&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.PortPlacement/Left.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.PortPlacement.Left</value>
+    <comment>Description for EnumerationLiteral &apos;Left&apos; on DomainEnumeration &apos;PortPlacement&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.PortPlacement/Right.DisplayName" xml:space="preserve">
+    <value>Right</value>
+    <comment>Display name for EnumerationLiteral &apos;Right&apos; on DomainEnumeration &apos;PortPlacement&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.PortPlacement/Right.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.PortPlacement.Right</value>
+    <comment>Description for EnumerationLiteral &apos;Right&apos; on DomainEnumeration &apos;PortPlacement&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.PortPlacement/Top.DisplayName" xml:space="preserve">
+    <value>Top</value>
+    <comment>Display name for EnumerationLiteral &apos;Top&apos; on DomainEnumeration &apos;PortPlacement&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.PortPlacement/Top.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.PortPlacement.Top</value>
+    <comment>Description for EnumerationLiteral &apos;Top&apos; on DomainEnumeration &apos;PortPlacement&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.PortPlacement/Bottom.DisplayName" xml:space="preserve">
+    <value>Bottom</value>
+    <comment>Display name for EnumerationLiteral &apos;Bottom&apos; on DomainEnumeration &apos;PortPlacement&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.PortPlacement/Bottom.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.PortPlacement.Bottom</value>
+    <comment>Description for EnumerationLiteral &apos;Bottom&apos; on DomainEnumeration &apos;PortPlacement&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LinkPlacement/Left.DisplayName" xml:space="preserve">
+    <value>Left</value>
+    <comment>Display name for EnumerationLiteral &apos;Left&apos; on DomainEnumeration &apos;LinkPlacement&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LinkPlacement/Left.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.LinkPlacement.Left</value>
+    <comment>Description for EnumerationLiteral &apos;Left&apos; on DomainEnumeration &apos;LinkPlacement&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LinkPlacement/Top.DisplayName" xml:space="preserve">
+    <value>Top</value>
+    <comment>Display name for EnumerationLiteral &apos;Top&apos; on DomainEnumeration &apos;LinkPlacement&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LinkPlacement/Top.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.LinkPlacement.Top</value>
+    <comment>Description for EnumerationLiteral &apos;Top&apos; on DomainEnumeration &apos;LinkPlacement&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LinkPlacement/Right.DisplayName" xml:space="preserve">
+    <value>Right</value>
+    <comment>Display name for EnumerationLiteral &apos;Right&apos; on DomainEnumeration &apos;LinkPlacement&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LinkPlacement/Right.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.LinkPlacement.Right</value>
+    <comment>Description for EnumerationLiteral &apos;Right&apos; on DomainEnumeration &apos;LinkPlacement&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LinkPlacement/Bottom.DisplayName" xml:space="preserve">
+    <value>Bottom</value>
+    <comment>Display name for EnumerationLiteral &apos;Bottom&apos; on DomainEnumeration &apos;LinkPlacement&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.LinkPlacement/Bottom.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.LinkPlacement.Bottom</value>
+    <comment>Description for EnumerationLiteral &apos;Bottom&apos; on DomainEnumeration &apos;LinkPlacement&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.FixedGeometryPoints/Source.DisplayName" xml:space="preserve">
+    <value>Source</value>
+    <comment>Display name for EnumerationLiteral &apos;Source&apos; on DomainEnumeration &apos;FixedGeometryPoints&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.FixedGeometryPoints/Source.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.FixedGeometryPoints.Source</value>
+    <comment>Description for EnumerationLiteral &apos;Source&apos; on DomainEnumeration &apos;FixedGeometryPoints&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.FixedGeometryPoints/Target.DisplayName" xml:space="preserve">
+    <value>Target</value>
+    <comment>Display name for EnumerationLiteral &apos;Target&apos; on DomainEnumeration &apos;FixedGeometryPoints&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.FixedGeometryPoints/Target.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.FixedGeometryPoints.Target</value>
+    <comment>Description for EnumerationLiteral &apos;Target&apos; on DomainEnumeration &apos;FixedGeometryPoints&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.FixedGeometryPoints/SourceAndTarget.DisplayName" xml:space="preserve">
+    <value>SourceAndTarget</value>
+    <comment>Display name for EnumerationLiteral &apos;SourceAndTarget&apos; on DomainEnumeration &apos;FixedGeometryPoints&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.FixedGeometryPoints/SourceAndTarget.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.FixedGeometryPoints.SourceAndTarget</value>
+    <comment>Description for EnumerationLiteral &apos;SourceAndTarget&apos; on DomainEnumeration &apos;FixedGeometryPoints&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.FixedGeometryPoints/None.DisplayName" xml:space="preserve">
+    <value>None</value>
+    <comment>Display name for EnumerationLiteral &apos;None&apos; on DomainEnumeration &apos;FixedGeometryPoints&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.FixedGeometryPoints/None.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.FixedGeometryPoints.None</value>
+    <comment>Description for EnumerationLiteral &apos;None&apos; on DomainEnumeration &apos;FixedGeometryPoints&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.RoutingMode/Orthogonal.DisplayName" xml:space="preserve">
+    <value>Orthogonal</value>
+    <comment>Display name for EnumerationLiteral &apos;Orthogonal&apos; on DomainEnumeration &apos;RoutingMode&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.RoutingMode/Orthogonal.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.RoutingMode.Orthogonal</value>
+    <comment>Description for EnumerationLiteral &apos;Orthogonal&apos; on DomainEnumeration &apos;RoutingMode&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.RoutingMode/Straight.DisplayName" xml:space="preserve">
+    <value>Straight</value>
+    <comment>Display name for EnumerationLiteral &apos;Straight&apos; on DomainEnumeration &apos;RoutingMode&apos;</comment>
+  </data>
+  <data name="Tum.PDE.ToolFramework.Modeling.Diagrams.RoutingMode/Straight.Description" xml:space="preserve">
+    <value>Description for Tum.PDE.ToolFramework.Modeling.Diagrams.RoutingMode.Straight</value>
+    <comment>Description for EnumerationLiteral &apos;Straight&apos; on DomainEnumeration &apos;RoutingMode&apos;</comment>
+  </data>
+  <data name="FormatList" xml:space="preserve">
+    <value>DiagramsDSL (*.diagramsdsl)|*.diagramsdsl</value>
+    <comment>A list of file format specifiers for the Save dialog box</comment>
+  </data>
+  <data name="ModelExplorerTitle" xml:space="preserve">
+    <value>WpfDesigner Explorer</value>
+    <comment>Model Explorer Toolwindow title</comment>
+  </data>
+  <data name="UnresolvedToolboxItem" xml:space="preserve">
+    <value>ToolboxItem {0} was not found</value>
+    <comment>Invalid toolId</comment>
+  </data>
+  <data name="UnsupportedToolboxFormat" xml:space="preserve">
+    <value>Unsupported toolbox format: {0}</value>
+    <comment>Unsupported format Id</comment>
+  </data>
+  <data name="UnrecognizedElementType" xml:space="preserve">
+    <value>ElementType {0} is not recognized as a type of domain class which belongs to this domain model.</value>
+    <comment>Incorrect ElementType passed in to Model.CreateElement method</comment>
+  </data>
+  <data name="UnrecognizedElementLinkType" xml:space="preserve">
+    <value>ElementLinkType {0} is not recognized as a type of domain relationship which belongs to this domain model.</value>
+    <comment>Incorrect ElementLinkType passed in to Model.CreateElementLink method</comment>
+  </data>
+  <data name="AmbiguousSchema" xml:space="preserve">
+    <value>More than one schema found for target namespace &apos;{0}&apos;, use the first one at &apos;{1}&apos;.</value>
+    <comment>Serialization Warning: AmbiguousSchema</comment>
+  </data>
+  <data name="ExpectingFullFormRelationship" xml:space="preserve">
+    <value>Element &apos;{0}&apos; is treated as the target role-player of a relationship &apos;{1}&apos; instance, which should be serialized in full-form.</value>
+    <comment>Serialization Warning: ExpectingFullFormRelationship</comment>
+  </data>
+  <data name="ExpectingShortFormRelationship" xml:space="preserve">
+    <value>Instances of relationship &apos;{0}&apos; should be serialized in short-form.</value>
+    <comment>Serialization Warning: ExpectingShortFormRelationship</comment>
+  </data>
+  <data name="IgnoredPropertyValue" xml:space="preserve">
+    <value>Invalid property value &apos;{0}&apos; for property &apos;{1}&apos; with type &apos;{2}&apos;, ignored.</value>
+    <comment>Serialization Warning: IgnoredPropertyValue</comment>
+  </data>
+  <data name="MissingId" xml:space="preserve">
+    <value>Missing &apos;Id&apos; attribute, a new Guid &apos;{0}&apos; is auto-generated.</value>
+    <comment>Serialization Warning: MissingId</comment>
+  </data>
+  <data name="MonikerResolvedToDuplicateLink" xml:space="preserve">
+    <value>Resolving moniker &apos;{0}&apos; causes a duplicate link to be created, so the link and the moniker are ignored.</value>
+    <comment>Serialization Warning: MonikerResolvedToDuplicateLink</comment>
+  </data>
+  <data name="NoSchema" xml:space="preserve">
+    <value>Cannot find a schema that defines target namespace &apos;{0}&apos;, schema validation skipped.</value>
+    <comment>Serialization Warning: NoSchema</comment>
+  </data>
+  <data name="UnexpectedXmlElement" xml:space="preserve">
+    <value>Unexpected XML element &apos;{0}&apos;, ignored.</value>
+    <comment>Serialization Warning: UnexpectedXmlElement</comment>
+  </data>
+  <data name="AmbiguousMoniker" xml:space="preserve">
+    <value>Ambiguous moniker &apos;{0}&apos; encountered. It is used for both &apos;{1}&apos; and &apos;{2}&apos;.</value>
+    <comment>Serialization Error: AmbiguousMoniker</comment>
+  </data>
+  <data name="CannotMonikerizeElement" xml:space="preserve">
+    <value>Instances of DomainClass &apos;{0}&apos; cannot be serialized as a moniker.
+A DomainClass can be serialized as a moniker only if 
+1) it has a defined/inherited DomainProperty marked as IsMonikerKey=true, or 
+2) it is marked/inherited with SerializeId=true.</value>
+    <comment>Serialization Error: CannotMonikerizeElement</comment>
+  </data>
+  <data name="CannotOpenDocument" xml:space="preserve">
+    <value>Error encountered, check Error List window for details.</value>
+    <comment>Serialization Error: CannotOpenDocument</comment>
+  </data>
+  <data name="CannotSaveDocument" xml:space="preserve">
+    <value>Error encountered, check Error List window for details.</value>
+    <comment>Serialization Error: CannotSaveDocument</comment>
+  </data>
+  <data name="DanglingRelationship" xml:space="preserve">
+    <value>Relationship &apos;{0}&apos; instance is missing target role-player.</value>
+    <comment>Serialization Error: DanglingRelationship</comment>
+  </data>
+  <data name="InvalidPropertyValue" xml:space="preserve">
+    <value>Invalid property value &apos;{0}&apos; for property &apos;{1}&apos; with type &apos;{2}&apos;.</value>
+    <comment>Serialization Error: InvalidPropertyValue</comment>
+  </data>
+  <data name="MissingMoniker" xml:space="preserve">
+    <value>Missing moniker. A moniker is expected in attribute &apos;{0}&apos;.</value>
+    <comment>Serialization Error: MissingMoniker</comment>
+  </data>
+  <data name="MissingTransaction" xml:space="preserve">
+    <value>This must be called within the context of an active transaction.</value>
+    <comment>Serialization Error: MissingTransaction</comment>
+  </data>
+  <data name="UnresolvedMoniker" xml:space="preserve">
+    <value>Cannot resolve moniker &apos;{0}&apos;.</value>
+    <comment>Serialization Error: UnresolvedMoniker</comment>
+  </data>
+  <data name="VersionMismatch" xml:space="preserve">
+    <value>Unsupported version &apos;{0}&apos;, can only support &apos;{1}&apos;.</value>
+    <comment>Serialization Error: VersionMismatch</comment>
+  </data>
+  <data name="CannotCloseExistingDiagramDocument" xml:space="preserve">
+    <value>Diagram file &apos;{0}&apos; cannot be closed.</value>
+    <comment>User cancel closing diagram file. Hence, the DSL model file cannot be opened</comment>
+  </data>
+  <data name="BindingErrorOccurred" xml:space="preserve">
+    <value>Extensions for this designer may not be found as a MEF binding error has occurred. The error that occurred was:
+{0}</value>
+    <comment>MEF binding error occurred - exception message being logged in the error window so the user is aware.</comment>
+  </data>
+  <data name="InvalidSaveRootElementType" xml:space="preserve">
+    <value>&apos;{0}&apos; is not a valid root element type.</value>
+    <comment>Exception message used if an invalid root element type is passed to IDomainModelSerializer.SaveModel / SaveModelAndDiagram</comment>
+  </data>
+  <data name="InvalidSaveDiagramType" xml:space="preserve">
+    <value>&apos;{0}&apos; is not a valid diagram type.</value>
+    <comment>Exception message used if an invalid diagram type is passed to IDomainModelSerializer.SaveModelAndDiagram</comment>
+  </data>
+  <data name="MinimumMultiplicityMissingLink" xml:space="preserve">
+    <value>{0} {1} has no {2}.</value>
+    <comment>Multiplicity underflow validation.</comment>
+  </data>
+  <data name="SaveOperationCancelled" xml:space="preserve">
+    <value>Save operation cancelled.</value>
+    <comment>Message when save is cancelled on validation errors</comment>
+  </data>
+  <data name="SaveValidationFailed" xml:space="preserve">
+    <value>There were validation errors, continue save?</value>
+    <comment>Message when validation errors are found on save</comment>
+  </data>
+  <data name="UnloadableSaveValidationFailed" xml:space="preserve">
+    <value>There were validation errors. Continuing to save may cause the file to become unloadable, do you want to continue?</value>
+    <comment>Message when validation errors are found on save that will cause file to become unloadable</comment>
+  </data>
+</root>
+
+

@@ -1,0 +1,159 @@
+<#@ template language="C#" inherits="BaseTemplate"#> 
+<#@ import namespace="Tum.PDE.LanguageDSL"#>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Collections.ObjectModel" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+using DslModeling = global::Microsoft.VisualStudio.Modeling;
+using DslEditorModeling = global::Tum.PDE.ToolFramework.Modeling;
+
+<# 
+	GenerateDomainModelDependencies(this.MetaModel);
+#>
+<#+ 
+public void GenerateDomainModelDependencies(MetaModel dm)
+{
+	IEnumerable<AttributedDomainElement> sortedByInheritanceClasses = CodeGenerationUtilities.SortDomainClassesByInheritance(dm.AllClasses);
+	IEnumerable<AttributedDomainElement> sortedByInheritanceRS = CodeGenerationUtilities.SortDomainClassesByInheritance(dm.AllRelationships);
+	
+	List<AttributedDomainElement> elements = new List<AttributedDomainElement>();
+	elements.AddRange(sortedByInheritanceClasses);
+	elements.AddRange(sortedByInheritanceRS);	
+#>
+namespace <#= dm.Namespace #>
+{
+	/// <summary>
+	/// This class represents the dependencies retrieval options for the domain model.
+	/// 
+	/// Double-derived class to allow easier code customization.
+	/// </summary>
+	public partial class <#= dm.Name #>DependenciesRetrivalOptions : <#= dm.Name #>DependenciesRetrivalOptionsBase
+	{
+		#region Singleton Instance
+		private static <#= dm.Name #>DependenciesRetrivalOptions dependenciesProvider = null;
+		
+        /// <summary>
+        /// Singleton instance.
+        /// </summary>
+        [global::System.Diagnostics.DebuggerBrowsable(global::System.Diagnostics.DebuggerBrowsableState.Never)] // Will trigger creation otherwise.
+        public static <#= dm.Name #>DependenciesRetrivalOptions Instance
+        {
+            [global::System.Diagnostics.DebuggerStepThrough]
+            get
+            {
+                if( dependenciesProvider == null )
+				{
+					dependenciesProvider = new <#= dm.Name #>DependenciesRetrivalOptions();
+				}
+				
+				return dependenciesProvider;
+            }
+        }
+		
+		/// <summary>
+        /// Constructor.
+        /// </summary>
+		[global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+		private <#= dm.Name #>DependenciesRetrivalOptions() : base()
+		{
+			Initialize();
+		}
+        #endregion
+	}
+	
+	/// <summary>
+	/// This class represents the dependencies retrieval options for the domain model.
+	/// 
+	/// This is the abstract base class.
+	/// </summary>
+	public abstract class <#= dm.Name #>DependenciesRetrivalOptionsBase : DslEditorModeling::DependenciesRetrivalOptions
+	{
+		/// <summary>
+        /// Constructor.
+        /// </summary>
+		protected <#= dm.Name #>DependenciesRetrivalOptionsBase()
+		{			
+		}
+	
+        /// <summary>
+        /// Initialization.
+        /// </summary>
+        protected virtual void Initialize()
+        {
+        }
+	}
+
+	/// <summary>
+	/// This class represents the dependencies provider for the domain model.
+	/// 
+	/// Double-derived class to allow easier code customization.
+	/// </summary>
+	public partial class <#= dm.Name #>DependenciesItemsProvider : <#= dm.Name #>DependenciesItemsProviderBase
+	{
+		#region Singleton Instance
+		private static <#= dm.Name #>DependenciesItemsProvider dependenciesProvider = null;
+		
+        /// <summary>
+        /// Singleton instance.
+        /// </summary>
+        [global::System.Diagnostics.DebuggerBrowsable(global::System.Diagnostics.DebuggerBrowsableState.Never)] // Will trigger creation otherwise.
+        public static <#= dm.Name #>DependenciesItemsProvider Instance
+        {
+            [global::System.Diagnostics.DebuggerStepThrough]
+            get
+            {
+                if( dependenciesProvider == null )
+				{
+					dependenciesProvider = new <#= dm.Name #>DependenciesItemsProvider();
+				}
+				
+				return dependenciesProvider;
+            }
+        }
+		
+		/// <summary>
+        /// Constructor.
+        /// </summary>
+		protected <#= dm.Name #>DependenciesItemsProvider() : base()
+		{
+		}
+        #endregion
+	
+	}
+
+	/// <summary>
+	/// This class represents the dependencies provider for the domain model.
+	/// 
+	/// This is the abstract base class.
+	/// </summary>
+	public abstract class <#= dm.Name #>DependenciesItemsProviderBase : DslEditorModeling::DependenciesItemsProvider
+	{		
+		#region Constructor
+		/// <summary>
+        /// Constructor.
+        /// </summary>
+		protected <#= dm.Name #>DependenciesItemsProviderBase()
+		{
+	
+		}
+		#endregion
+		
+		/// <summary>
+        /// Gets the retrival options.
+        /// </summary>
+        public override DslEditorModeling::DependenciesRetrivalOptions RetrivalOptions
+        {
+            get
+			{
+				return <#= dm.Name #>DependenciesRetrivalOptions.Instance;
+			}
+        }
+	}
+}
+
+<#+
+	
+}
+#>
+

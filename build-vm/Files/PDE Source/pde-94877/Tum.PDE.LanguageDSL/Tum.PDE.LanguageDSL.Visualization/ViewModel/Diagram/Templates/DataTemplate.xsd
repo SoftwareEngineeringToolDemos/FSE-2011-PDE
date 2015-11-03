@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DataTemplate"
+    targetNamespace="http://tempuri.org/DataTemplate.xsd"
+    elementFormDefault="qualified"
+    xmlns="http://tempuri.org/DataTemplate.xsd"
+    xmlns:mstns="http://tempuri.org/DataTemplate.xsd"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="DataTemplates">
+    <xs:sequence>
+      <xs:element name="DataTemplate" type="DataTemplate"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DataTemplate">
+    <xs:sequence>
+      <xs:element name="DisplayName"/>
+      <xs:element name="Description" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="ImageURI"  minOccurs="0" maxOccurs="1"/>
+      <xs:element name="SyntaxHighlighting"  minOccurs="0" maxOccurs="1"/>
+      <xs:element name="Template"/> <!-- CDATA-->
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

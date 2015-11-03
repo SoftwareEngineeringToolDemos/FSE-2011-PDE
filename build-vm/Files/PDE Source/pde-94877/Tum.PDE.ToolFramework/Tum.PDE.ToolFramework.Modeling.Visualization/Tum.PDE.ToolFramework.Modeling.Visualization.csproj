@@ -1,0 +1,703 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E88CB333-AA56-476B-BEC5-2351457544EB}</ProjectGuid>
+    <OutputType>library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Tum.PDE.ToolFramework.Modeling.Visualization</RootNamespace>
+    <AssemblyName>Tum.PDE.ToolFramework.Modeling.Visualization</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\Tum.PDE.ToolFramework.Modeling.Visualization.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\Tum.PDE.ToolFramework.Modeling.Visualization.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>Tum.PDE.ToolFramework.Modeling.Visualization.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AvalonDock, Version=1.2.2691.0, Culture=neutral, PublicKeyToken=85a1e0ada7ec13e4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\AvalonDock\AvalonDock.dll</HintPath>
+    </Reference>
+    <Reference Include="Fluent">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\Fluent Ribbon Control Suite 1.3\Fluent.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Modeling.Sdk.10.0, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="PresentationFramework.Aero" />
+    <Reference Include="SStuff.FlowControls">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\SLFlow\SStuff.FlowControls.dll</HintPath>
+    </Reference>
+    <Reference Include="SStuff.LayoutAlgorithms">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\SLFlow\SStuff.LayoutAlgorithms.dll</HintPath>
+    </Reference>
+    <Reference Include="SStuff.WpfEffects, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\SLFlow\SStuff.WpfEffects.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\Blend\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Behaviors\FrameworkElementContextMenuBehavior.cs" />
+    <Compile Include="Behaviors\ListBoxSelectedItemBehavior.cs" />
+    <Compile Include="Behaviors\ListViewColumnWidthBehavior.cs" />
+    <Compile Include="Behaviors\ListViewContextMenuBehavior.cs" />
+    <Compile Include="Behaviors\Loaders\FrameworkElementLoadingBehavior.cs" />
+    <Compile Include="Behaviors\TextBoxEnterBehavior.cs" />
+    <Compile Include="Behaviors\TreeViewClickedAndSelectedItemBehavior.cs" />
+    <Compile Include="Behaviors\TreeViewSelectedItemBehavior.cs" />
+    <Compile Include="Commands\CommandReference.cs" />
+    <Compile Include="Commands\DelegateCommand.cs" />
+    <Compile Include="Commands\WeakEventHandlerManager.cs" />
+    <Compile Include="Contracts\IModelPlugin.cs" />
+    <Compile Include="Contracts\IPlugin.cs" />
+    <Compile Include="Contracts\IViewModelPlugin.cs" />
+    <Compile Include="Contracts\ViewModel\IBaseViewModel.cs" />
+    <Compile Include="Contracts\ViewModel\IContextableDockableViewModel.cs" />
+    <Compile Include="Contracts\ViewModel\IEdgePointViewModel.cs" />
+    <Compile Include="Contracts\ViewModel\IPluginHosterViewModel.cs" />
+    <Compile Include="Contracts\ViewModel\IRestorableDockableViewModel.cs" />
+    <Compile Include="Contracts\ViewModel\IRibbonDockableViewModel.cs" />
+    <Compile Include="Contracts\View\IDiagramDesigner.cs" />
+    <Compile Include="Contracts\View\IGraphicalDependenciesView.cs" />
+    <Compile Include="Controls\Attached\ButtonHelper.cs" />
+    <Compile Include="Controls\Attached\CommandBehavior.cs" />
+    <Compile Include="Controls\Attached\CommandBehaviorBinding.cs" />
+    <Compile Include="Controls\Attached\ContextMenuHelper.cs" />
+    <Compile Include="Controls\Attached\DragDrop\DefaultDragHandler.cs" />
+    <Compile Include="Controls\Attached\DragDrop\DefaultDropHandler.cs" />
+    <Compile Include="Controls\Attached\DragDrop\DragAdorner.cs" />
+    <Compile Include="Controls\Attached\DragDrop\DragDrop.cs" />
+    <Compile Include="Controls\Attached\DragDrop\DragInfo.cs" />
+    <Compile Include="Controls\Attached\DragDrop\DropInfo.cs" />
+    <Compile Include="Controls\Attached\DragDrop\DropTargetAdorner.cs" />
+    <Compile Include="Controls\Attached\DragDrop\DropTargetAdorners.cs" />
+    <Compile Include="Controls\Attached\DragDrop\DropTargetHighlightAdorner.cs" />
+    <Compile Include="Controls\Attached\DragDrop\DropTargetInsertionAdorner.cs" />
+    <Compile Include="Controls\Attached\DragDrop\IDragSource.cs" />
+    <Compile Include="Controls\Attached\DragDrop\IDropTarget.cs" />
+    <Compile Include="Controls\Attached\DragDrop\Utilities\ItemsControlExtensions.cs" />
+    <Compile Include="Controls\Attached\DragDrop\Utilities\TypeUtilities.cs" />
+    <Compile Include="Controls\Attached\DragDrop\Utilities\VisualTreeExtensions.cs" />
+    <Compile Include="Controls\Attached\EventHandlerGenerator.cs" />
+    <Compile Include="Controls\Attached\ExpanderHelper.cs" />
+    <Compile Include="Controls\Attached\ListBoxHelper.cs" />
+    <Compile Include="Controls\Attached\ListViewSortHelper.cs" />
+    <Compile Include="Controls\Attached\MultiSelectorBehaviours.cs" />
+    <Compile Include="Controls\Attached\TwoListSynchronizer.cs" />
+    <Compile Include="Controls\Common\ComboBoxWithDisplayText.cs" />
+    <Compile Include="Controls\Common\RadioButtonBindable.cs" />
+    <Compile Include="Controls\Common\ScrollableTabPanel.cs" />
+    <Compile Include="Controls\Common\TabControlAvalonDock.cs" />
+    <Compile Include="Controls\Common\TabItemAvalonDock.cs" />
+    <Compile Include="Controls\ContextMenu\ContextMenuStyleSelector.cs" />
+    <Compile Include="Controls\DependenciesControl.xaml.cs">
+      <DependentUpon>DependenciesControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DependenciesViewControl.xaml.cs">
+      <DependentUpon>DependenciesViewControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Dependencies\GraphDependenciesViewControl.xaml.cs">
+      <DependentUpon>GraphDependenciesViewControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Contracts\ViewModel\IGraphicalDependenciesViewModel.cs" />
+    <Compile Include="Controls\Dependencies\SpecificDependenciesViewControl.xaml.cs">
+      <DependentUpon>SpecificDependenciesViewControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DiagramSurface\Templates\ModalDiagram.xaml.cs">
+      <DependentUpon>ModalDiagram.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DiagramSurface\Templates\SpecificElementsDiagram.xaml.cs">
+      <DependentUpon>SpecificElementsDiagram.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Extensions\WindowExtensions.cs" />
+    <Compile Include="Controls\Loaders\DecoratorAdorner.cs" />
+    <Compile Include="Controls\Loaders\ImageLoaderControl.xaml.cs">
+      <DependentUpon>ImageLoaderControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Loaders\LoaderAnimation.xaml.cs">
+      <DependentUpon>LoaderAnimation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Loaders\PleaseWaitWindow.xaml.cs">
+      <DependentUpon>PleaseWaitWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Loaders\VisualTargetPresentationSource.cs" />
+    <Compile Include="Controls\Loaders\VisualWrapper.cs" />
+    <Compile Include="Controls\Ribbon\EmbeddedRibbon.cs" />
+    <Compile Include="Localization\LocalizationSettings.cs" />
+    <Compile Include="Localization\LocalResources\SearchResultControl.de.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SearchResultControl.de.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Localization\LocalResources\SearchResultControl.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SearchResultControl.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Localization\LocalResources\SearchWindowControl.de.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SearchWindowControl.de.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Localization\ResExtension.cs" />
+    <Compile Include="Localization\LocalResources\SearchWindowControl.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SearchWindowControl.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.de.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.de.resx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\BaseMainViewModel.cs" />
+    <Compile Include="ViewModel\Data\LanguagesViewModel.cs" />
+    <Compile Include="ViewModel\Data\LanguageViewModel.cs" />
+    <Compile Include="ViewModel\Data\SpecificViewModelStore.cs" />
+    <Compile Include="ViewModel\Dependencies\GraphicalDependenciesFilterItem.cs" />
+    <Compile Include="Controls\Dependencies\GraphicalDependenciesItem.cs" />
+    <Compile Include="Controls\Dependencies\GraphicalDependenciesItemsControl.cs" />
+    <Compile Include="Controls\Dependencies\GraphicalDepenedenciesCanvas.cs" />
+    <Compile Include="Controls\DiagramSurface\DiagramConnector.cs" />
+    <Compile Include="Controls\DiagramSurface\DiagramConnectorAdorner.cs" />
+    <Compile Include="Controls\DiagramSurface\DiagramDesigner.cs" />
+    <Compile Include="Controls\DiagramSurface\DiagramDesignerCanvas.cs" />
+    <Compile Include="Controls\DiagramSurface\DiagramDesignerItem.cs" />
+    <Compile Include="Controls\DiagramSurface\DiagramDesignerItemLink.cs" />
+    <Compile Include="Controls\DiagramSurface\DiagramDesignerItemResizeThumb.cs" />
+    <Compile Include="Controls\DiagramSurface\DiagramDesignerItems.cs" />
+    <Compile Include="Controls\DiagramSurface\DiagramDesignerItemDragThumb.cs" />
+    <Compile Include="Controls\DiagramSurface\DiagramDesignerItemsContainerStyleSelector.cs" />
+    <Compile Include="Controls\DiagramSurface\DiagramDesignerLinkDragThumb.cs" />
+    <Compile Include="Controls\DiagramSurface\DiagramDesignerRelativeCanvas.cs" />
+    <Compile Include="Controls\DiagramSurface\DiagramDesignerRelativeItems.cs" />
+    <Compile Include="Controls\DiagramSurface\DiagramDesignerRubberbandAdorner.cs" />
+    <Compile Include="Controls\DiagramSurface\DiagramDesignerSelectionService.cs" />
+    <Compile Include="Controls\DiagramSurface\DiagramHelper.cs" />
+    <Compile Include="Controls\DiagramSurface\DiagramLinkAnchorStyle.cs" />
+    <Compile Include="Controls\DiagramSurface\DiagramRubberbandSelector.cs" />
+    <Compile Include="Controls\DiagramSurface\DragAdorner.cs" />
+    <Compile Include="Contracts\View\IDiagramDesignerItem.cs" />
+    <Compile Include="Controls\ModelTree\LeftMarginMultiplierConverter.cs" />
+    <Compile Include="Controls\Popups\SelectElementWithRSTypePopup.xaml.cs">
+      <DependentUpon>SelectElementWithRSTypePopup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Popups\SelectRSTypePopup.xaml.cs">
+      <DependentUpon>SelectRSTypePopup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\PropertyGrid\PropertyGridEditors.cs" />
+    <Compile Include="Controls\PropertyGrid\PropertyGridItem.cs" />
+    <Compile Include="Controls\SearchResultControl.xaml.cs">
+      <DependentUpon>SearchResultControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SearchWindowControl.xaml.cs">
+      <DependentUpon>SearchWindowControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Search\SearchModusConverter.cs" />
+    <Compile Include="Converters\MissingSourceConverter.cs" />
+    <Compile Include="Converters\MissingSourceToVisibilityConverter.cs" />
+    <Compile Include="ViewModel\Attached\ViewModelAttachedCommands.cs" />
+    <Compile Include="ViewModel\BaseSpecificModelElementViewModel.cs" />
+    <Compile Include="ViewModel\Data\CreditsViewModel.cs" />
+    <Compile Include="ViewModel\Data\FurtherReadingViewModel.cs" />
+    <Compile Include="ViewModel\Data\LinkItemCategoryViewModel.cs" />
+    <Compile Include="ViewModel\Data\LinkItemsViewModel.cs" />
+    <Compile Include="ViewModel\Data\LinkItemViewModel.cs" />
+    <Compile Include="ViewModel\Data\MRUFileEntryViewModel.cs" />
+    <Compile Include="ViewModel\Data\MRUFilesViewModel.cs" />
+    <Compile Include="ViewModel\Data\ServiceRegistrar.cs" />
+    <Compile Include="ViewModel\Dependencies\GraphicalDependenciesViewModel.cs" />
+    <Compile Include="ViewModel\Dependencies\GraphicalDependencyHostViewModel.cs" />
+    <Compile Include="ViewModel\Dependencies\GraphicalDependencyItemViewModel.cs" />
+    <Compile Include="ViewModel\Dependencies\GraphicalDependencyLinkViewModel.cs" />
+    <Compile Include="ViewModel\Dependencies\GraphicalDependencyMainItemViewModel.cs" />
+    <Compile Include="ViewModel\Dependencies\SpecificDependenciesItemViewModel.cs" />
+    <Compile Include="ViewModel\Dependencies\SpecificDependenciesViewModel.cs" />
+    <Compile Include="ViewModel\DiagramSurface\BaseDiagramItemElementViewModel.cs" />
+    <Compile Include="ViewModel\DiagramSurface\BaseDiagramItemLinkViewModel.cs" />
+    <Compile Include="ViewModel\DiagramSurface\BaseDiagramSurfaceViewModel.cs" />
+    <Compile Include="ViewModel\DiagramSurface\Templates\DesignerSurfaceViewModel.cs" />
+    <Compile Include="ViewModel\DiagramSurface\DiagramItemsResizeDirection.cs" />
+    <Compile Include="ViewModel\DiagramSurface\DiagramItemsResizeInfo.cs" />
+    <Compile Include="ViewModel\DiagramSurface\DiagramItemsMovementInfo.cs" />
+    <Compile Include="Contracts\ViewModel\IDiagramItemViewModel.cs" />
+    <Compile Include="Controls\DiagramSurface\ISelectable.cs" />
+    <Compile Include="Controls\ErrorListControl.xaml.cs">
+      <DependentUpon>ErrorListControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ModelTreeControl.xaml.cs">
+      <DependentUpon>ModelTreeControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ModelTree\ModelTreeView.cs" />
+    <Compile Include="Controls\ModelTree\ModelTreeViewItem.cs" />
+    <Compile Include="Controls\ModelTree\ModelTreeViewScrollBar.cs" />
+    <Compile Include="Controls\ModelTree\ModelTreeViewScrollViewer.cs" />
+    <Compile Include="Controls\Popups\DeleteElementsPopup.xaml.cs">
+      <DependentUpon>DeleteElementsPopup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Popups\SelectElementPopup.xaml.cs">
+      <DependentUpon>SelectElementPopup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\PropertyGrid\PropertyGrid.cs" />
+    <Compile Include="Controls\PropertyWindowControl.xaml.cs">
+      <DependentUpon>PropertyWindowControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converters\BoolToDisabledVisibilityConverter.cs" />
+    <Compile Include="Converters\BoolToOppositeConverter.cs" />
+    <Compile Include="Converters\BoolToUnderlineConverter.cs" />
+    <Compile Include="Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Converters\DoubleToGridLengthConverter.cs" />
+    <Compile Include="Converters\ICollectionToNumberConverter.cs" />
+    <Compile Include="Converters\ICollectionToVisibilityConverter.cs" />
+    <Compile Include="Converters\MenuIconUrlConverter.cs" />
+    <Compile Include="Operations\CopyAndPasteOperations.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ViewModel\BaseDockingViewModel.cs" />
+    <Compile Include="ViewModel\BaseHostingViewModel.cs" />
+    <Compile Include="ViewModel\BaseModelElementViewModel.cs" />
+    <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\BaseWindowViewModel.cs" />
+    <Compile Include="ViewModel\Data\ViewModelFactory.cs" />
+    <Compile Include="ViewModel\Data\ViewModelStore.cs" />
+    <Compile Include="ViewModel\Deletion\DeletionViewModel.cs" />
+    <Compile Include="ViewModel\Dependencies\DependenciesSortOrder.cs" />
+    <Compile Include="ViewModel\Dependencies\DependenciesViewModel.cs" />
+    <Compile Include="ViewModel\Dependencies\DependencyItemViewModel.cs" />
+    <Compile Include="ViewModel\DiagramSurface\BaseDiagramItemViewModel.cs" />
+    <Compile Include="Contracts\ViewModel\IDiagramLinkViewModel.cs" />
+    <Compile Include="Contracts\ViewModel\IDiagramViewModel.cs" />
+    <Compile Include="ViewModel\DiagramSurface\DiagramItemElementViewModel.cs" />
+    <Compile Include="ViewModel\DiagramSurface\DiagramSurfaceViewModel.cs" />
+    <Compile Include="ViewModel\DiagramSurface\EdgePointViewModel.cs" />
+    <Compile Include="ViewModel\DiagramSurface\Templates\ModalDesignerSurfaceViewModel.cs" />
+    <Compile Include="ViewModel\DiagramSurface\Templates\SpecificElementsDesignerSurfaceViewModel.cs" />
+    <Compile Include="ViewModel\DiagramSurface\ViewModelRelationshipCreationInfo.cs" />
+    <Compile Include="ViewModel\DockingLayoutManager.cs" />
+    <Compile Include="ViewModel\ErrorList\BaseErrorListItemViewModel.cs" />
+    <Compile Include="ViewModel\ErrorList\ErrorListItemCategory.cs" />
+    <Compile Include="ViewModel\ErrorList\ErrorListSortOrder.cs" />
+    <Compile Include="ViewModel\ErrorList\FilterableErrorListItemViewModel.cs" />
+    <Compile Include="ViewModel\ErrorList\ModelErrorListItemViewModel.cs" />
+    <Compile Include="ViewModel\ErrorList\SerializationErrorListItemViewModel.cs" />
+    <Compile Include="ViewModel\ErrorList\StringErrorListItemViewModel.cs" />
+    <Compile Include="Contracts\ViewModel\IDockableViewModel.cs" />
+    <Compile Include="ViewModel\MainDependenciesViewModel.cs" />
+    <Compile Include="ViewModel\MainErrorListViewModel.cs" />
+    <Compile Include="ViewModel\MainModelTreeViewModel.cs" />
+    <Compile Include="ViewModel\MainPropertyGridViewModel.cs" />
+    <Compile Include="ViewModel\MainSearchViewModel.cs" />
+    <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\Menu\MenuItemViewModel.cs" />
+    <Compile Include="ViewModel\Menu\SeparatorMenuItemViewModel.cs" />
+    <Compile Include="ViewModel\Messaging\Events\ActiveViewChangedEvent.cs" />
+    <Compile Include="ViewModel\Messaging\Events\ActiveViewChangedEventArgs.cs" />
+    <Compile Include="ViewModel\Messaging\Events\BringToFrontViewModelRequestEvent.cs" />
+    <Compile Include="ViewModel\Messaging\Events\BringToFrontViewModelRequestEventArgs.cs" />
+    <Compile Include="ViewModel\Messaging\Events\CloseViewModelRequestEvent.cs" />
+    <Compile Include="ViewModel\Messaging\Events\CloseViewModelRequestEventArgs.cs" />
+    <Compile Include="ViewModel\Messaging\Events\CultureInfoChangedEvent.cs" />
+    <Compile Include="ViewModel\Messaging\Events\CultureInfoChangedEventArgs.cs" />
+    <Compile Include="ViewModel\Messaging\Events\DocumentClosedEvent.cs" />
+    <Compile Include="ViewModel\Messaging\Events\DocumentClosingEvent.cs" />
+    <Compile Include="ViewModel\Messaging\Events\DocumentEventArgs.cs" />
+    <Compile Include="ViewModel\Messaging\Events\DocumentOpenedEvent.cs" />
+    <Compile Include="ViewModel\Messaging\Events\DocumentOpeningEvent.cs" />
+    <Compile Include="ViewModel\Messaging\Events\DocumentSavedEvent.cs" />
+    <Compile Include="ViewModel\Messaging\Events\DocumentSavingEvent.cs" />
+    <Compile Include="ViewModel\Messaging\Events\GenericEvent.cs" />
+    <Compile Include="ViewModel\Messaging\Events\ResetDataEvent.cs" />
+    <Compile Include="ViewModel\Messaging\Events\ErrorListAddItem.cs" />
+    <Compile Include="ViewModel\Messaging\Events\ErrorListAddItems.cs" />
+    <Compile Include="ViewModel\Messaging\Events\ErrorListClearItems.cs" />
+    <Compile Include="ViewModel\Messaging\Events\ErrorListRemoveItem.cs" />
+    <Compile Include="ViewModel\Messaging\Events\ModelElementAddedEvent.cs" />
+    <Compile Include="ViewModel\Messaging\Events\ModelElementCustomEvent.cs" />
+    <Compile Include="ViewModel\Messaging\Events\ModelElementCustomEventNames.cs" />
+    <Compile Include="ViewModel\Messaging\Events\ModelElementDeletedEvent.cs" />
+    <Compile Include="ViewModel\Messaging\Events\ModelElementEvent.cs" />
+    <Compile Include="ViewModel\Messaging\Events\ModelElementLinkAddedEvent.cs" />
+    <Compile Include="ViewModel\Messaging\Events\ModelElementLinkDeletedEvent.cs" />
+    <Compile Include="ViewModel\Messaging\Events\ModelElementPropertyChangedEvent.cs" />
+    <Compile Include="ViewModel\Messaging\Events\ModelRolePlayerChangedEvent.cs" />
+    <Compile Include="ViewModel\Messaging\Events\ModelRolePlayerMovedEvent.cs" />
+    <Compile Include="ViewModel\Messaging\Events\ResetViewModelEvent.cs" />
+    <Compile Include="ViewModel\Messaging\Events\SearchEvent.cs" />
+    <Compile Include="ViewModel\Messaging\Events\SearchEventArgs.cs" />
+    <Compile Include="ViewModel\Messaging\Events\SelectionChangedEvent.cs" />
+    <Compile Include="ViewModel\Messaging\Events\SelectionChangedEventArgs.cs" />
+    <Compile Include="ViewModel\Messaging\Events\ShowViewModelRequestEvent.cs" />
+    <Compile Include="ViewModel\Messaging\Events\ShowViewModelRequestEventArgs.cs" />
+    <Compile Include="ViewModel\Messaging\Events\OpenViewModelEvent.cs" />
+    <Compile Include="ViewModel\Messaging\Events\OpenViewModelEventArgs.cs" />
+    <Compile Include="ViewModel\Messaging\Prism\BackgroundEventSubscription.cs" />
+    <Compile Include="ViewModel\Messaging\Prism\DataEventArgs.cs" />
+    <Compile Include="ViewModel\Messaging\Prism\DelegateReference.cs" />
+    <Compile Include="ViewModel\Messaging\Prism\EventAggregator.cs" />
+    <Compile Include="ViewModel\Messaging\Prism\EventBase.cs" />
+    <Compile Include="ViewModel\Messaging\Prism\EventSubscription.cs" />
+    <Compile Include="ViewModel\Messaging\Prism\IDelegateReference.cs" />
+    <Compile Include="ViewModel\Messaging\Prism\IEventAggregator.cs" />
+    <Compile Include="ViewModel\Messaging\Prism\IEventSubscription.cs" />
+    <Compile Include="ViewModel\Messaging\Prism\Presentation\CompositePresentationEvent.cs" />
+    <Compile Include="ViewModel\Messaging\Prism\Presentation\DefaultDispatcher.cs" />
+    <Compile Include="ViewModel\Messaging\Prism\Presentation\DispatcherEventSubscription.cs" />
+    <Compile Include="ViewModel\Messaging\Prism\Presentation\IDispatcherFacade.cs" />
+    <Compile Include="ViewModel\Messaging\Prism\Presentation\ThreadOption.cs" />
+    <Compile Include="ViewModel\Messaging\Prism\SubscriptionToken.cs" />
+    <Compile Include="ViewModel\Messaging\ViewModelEvent.cs" />
+    <Compile Include="ViewModel\Messaging\ViewModelEventArgs.cs" />
+    <Compile Include="ViewModel\Messaging\ViewModelEventManager.cs" />
+    <Compile Include="ViewModel\ModelContextViewModel.cs" />
+    <Compile Include="ViewModel\ModelTree\BaseModelElementTreeViewModel.cs" />
+    <Compile Include="Contracts\ViewModel\IModelTreeContextMenuProvider.cs" />
+    <Compile Include="Contracts\ViewModel\IModelTreeSortingProvider.cs" />
+    <Compile Include="ViewModel\ModelTree\ModelElementTreeViewModel.cs" />
+    <Compile Include="ViewModel\ModelTree\ModelTreeContextMenuItemType.cs" />
+    <Compile Include="ViewModel\ModelTree\ModelTreeContextMenuProvider.cs" />
+    <Compile Include="ViewModel\ModelTree\ModelTreeSortingProvider.cs" />
+    <Compile Include="ViewModel\NavigationManager.cs" />
+    <Compile Include="ViewModel\PropertyGrid\BooleanEditorViewModel.cs" />
+    <Compile Include="ViewModel\PropertyGrid\ContextMenuBarCreater.cs" />
+    <Compile Include="ViewModel\PropertyGrid\DoubleEditorViewModel.cs" />
+    <Compile Include="ViewModel\PropertyGrid\EnumerationEditorViewModel.cs" />
+    <Compile Include="Contracts\ViewModel\IPropertyGridEditorViewModel.cs" />
+    <Compile Include="ViewModel\PropertyGrid\IntegerEditorViewModel.cs" />
+    <Compile Include="ViewModel\PropertyGrid\LookupListEditorDefaultValuesProvider.cs" />
+    <Compile Include="ViewModel\PropertyGrid\LookupListEditorFilter.cs" />
+    <Compile Include="ViewModel\PropertyGrid\LookupListEditorViewModel.cs" />
+    <Compile Include="ViewModel\PropertyGrid\MultiplePropertyGridViewModel.cs" />
+    <Compile Include="ViewModel\PropertyGrid\MultipleRoleEditorViewModel.cs" />
+    <Compile Include="ViewModel\PropertyGrid\PropertyEditorViewModel.cs" />
+    <Compile Include="ViewModel\PropertyGrid\PropertyGridEditorCategoryViewModel.cs" />
+    <Compile Include="ViewModel\PropertyGrid\PropertyGridEditorViewModel.cs" />
+    <Compile Include="ViewModel\PropertyGrid\PropertyGridEditorViewModelAttribute.cs" />
+    <Compile Include="ViewModel\PropertyGrid\PropertyGridSortOrder.cs" />
+    <Compile Include="ViewModel\PropertyGrid\PropertyGridViewModel.cs" />
+    <Compile Include="ViewModel\PropertyGrid\PropertyGridViewModelConstructor.cs" />
+    <Compile Include="ViewModel\PropertyGrid\RoleEditorViewModel.cs" />
+    <Compile Include="ViewModel\PropertyGrid\StringEditorViewModel.cs" />
+    <Compile Include="ViewModel\PropertyGrid\UnaryRoleEditorViewModel.cs" />
+    <Compile Include="ViewModel\Search\SearchModus.cs" />
+    <Compile Include="ViewModel\Search\SearchResultItemViewModel.cs" />
+    <Compile Include="ViewModel\Search\SearchResultSortOrder.cs" />
+    <Compile Include="ViewModel\Search\SearchResultViewModel.cs" />
+    <Compile Include="ViewModel\Search\SearchCriteria.cs" />
+    <Compile Include="ViewModel\Search\SearchSource.cs" />
+    <Compile Include="ViewModel\Search\SearchViewModel.cs" />
+    <Compile Include="ViewModel\Selection\GenericSearchDelegate.cs" />
+    <Compile Include="ViewModel\Selection\GenericSortDelegate.cs" />
+    <Compile Include="Contracts\ViewModel\ISelectElementSubViewModel.cs" />
+    <Compile Include="Contracts\ViewModel\ISelectGenericSubViewModel.cs" />
+    <Compile Include="ViewModel\Selection\SearchElementWithRSType.cs" />
+    <Compile Include="ViewModel\Selection\SearchRSType.cs" />
+    <Compile Include="ViewModel\Selection\SelectElementSearchViewModel.cs" />
+    <Compile Include="ViewModel\Selection\SelectElementTreeViewModel.cs" />
+    <Compile Include="ViewModel\Selection\SelectElementViewModel.cs" />
+    <Compile Include="ViewModel\Selection\SelectGenericViewModel.cs" />
+    <Compile Include="ViewModel\Selection\SelectGenericSearchViewModel.cs" />
+    <Compile Include="ViewModel\Services\CloseRequestEventArgs.cs" />
+    <Compile Include="ViewModel\Services\IMessageBoxService.cs" />
+    <Compile Include="ViewModel\Services\IOpenFileService.cs" />
+    <Compile Include="ViewModel\Services\ISaveFileService.cs" />
+    <Compile Include="ViewModel\Services\IUIVisualizerService.cs" />
+    <Compile Include="ViewModel\Services\MessageBoxService.cs" />
+    <Compile Include="ViewModel\Services\OpenFileService.cs" />
+    <Compile Include="ViewModel\Services\SaveFileService.cs" />
+    <Compile Include="ViewModel\Services\ServiceProvider.cs" />
+    <Compile Include="ViewModel\Services\UICompletedEventArgs.cs" />
+    <Compile Include="ViewModel\Services\UIVisualizerService.cs" />
+    <Compile Include="ViewModel\Threading\DispatcherExtensions.cs" />
+    <Compile Include="ViewModel\UI\WaitCursor.cs" />
+    <EmbeddedResource Include="Localization\LocalResources\SearchResultControl.de.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SearchResultControl.de.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\LocalResources\SearchResultControl.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SearchResultControl.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\LocalResources\SearchWindowControl.de.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SearchWindowControl.de.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\LocalResources\SearchWindowControl.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SearchWindowControl.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.de.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.de.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+    <None Include="Tum.PDE.ToolFramework.Modeling.Visualization.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Controls\DependenciesControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\DependenciesViewControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Dependencies\GraphDependenciesViewControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Dependencies\SpecificDependenciesViewControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\DiagramSurface\Templates\ModalDiagram.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\DiagramSurface\Templates\SpecificElementsDiagram.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ErrorListControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Loaders\ImageLoader.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Loaders\ImageLoaderControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Loaders\LoaderAnimation.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Loaders\PleaseWaitWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ModelTreeControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Popups\DeleteElementsPopup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Popups\SelectElementPopup.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Popups\SelectElementWithRSTypePopup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Popups\SelectRSTypePopup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\PropertyWindowControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\SearchResultControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\SearchWindowControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Controls\ComboBoxWithDisplayText.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Controls\TabControlAvalonDock.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Controls\EmbeddedRibbon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Default\GraphicalDependenciesStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Default\DiagramLinkAnchorStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Default\DiagramSurfaceStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Default\ErrorListButtonStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Default\MenuItemStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Default\ModelTreeViewStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Default\MultipleRoleEditorExpanderStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Default\PropertyGridButtonStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Default\PropertyGridCategoryExpanderStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Default\PropertyGridEditorsStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Default\PropertyGridStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Default\SpecificDependenciesStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Default\TabControlStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Default\TemplatedDiagramSurfaceStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Tum.PDE.ToolFramework.Images\Tum.PDE.ToolFramework.Images.csproj">
+      <Project>{9163E59C-331C-4188-BC0B-99F86C49F661}</Project>
+      <Name>Tum.PDE.ToolFramework.Images</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Tum.PDE.ToolFramework.Modeling.Base\Tum.PDE.ToolFramework.Modeling.Base.csproj">
+      <Project>{C4C95AA3-1066-4739-8B3D-11F80FEBFF52}</Project>
+      <Name>Tum.PDE.ToolFramework.Modeling.Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Tum.PDE.ToolFramework.Modeling.Diagrams\Tum.PDE.ToolFramework.Modeling.Diagrams.csproj">
+      <Project>{949DD9D4-533E-4699-8A6F-38A451522605}</Project>
+      <Name>Tum.PDE.ToolFramework.Modeling.Diagrams</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Tum.PDE.ToolFramework.Modeling.Visualization.Base\Tum.PDE.ToolFramework.Modeling.Visualization.Base.csproj">
+      <Project>{88089010-D4CE-42D4-9F27-2C3ABA31F8B7}</Project>
+      <Name>Tum.PDE.ToolFramework.Modeling.Visualization.Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Tum.PDE.ToolFramework.Modeling\Tum.PDE.ToolFramework.Modeling.csproj">
+      <Project>{AAC9B8A3-1E6C-4439-831C-CF8880075B08}</Project>
+      <Name>Tum.PDE.ToolFramework.Modeling</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="FluentRibbonControlChanges.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="AvalonDockChanges.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controls\SplashScreen\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="AvalonDockChanges - DockingManager.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

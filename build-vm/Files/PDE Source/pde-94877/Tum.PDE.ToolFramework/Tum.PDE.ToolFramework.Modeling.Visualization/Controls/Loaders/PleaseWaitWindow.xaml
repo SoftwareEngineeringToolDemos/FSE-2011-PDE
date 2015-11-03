@@ -1,0 +1,33 @@
+﻿<Window x:Class="Tum.PDE.ToolFramework.Modeling.Visualization.Controls.Loaders.PleaseWaitWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Controls="clr-namespace:Tum.PDE.ToolFramework.Modeling.Visualization.Controls.Loaders"
+        Width="Auto" MaxWidth="600"  
+        ResizeMode="NoResize" SizeToContent="WidthAndHeight" WindowStyle="None" ShowInTaskbar="False" 
+        WindowStartupLocation="CenterOwner" Cursor="Wait" AllowsTransparency="True" Background="Transparent">
+
+    <!-- Content -->
+    <Grid Height="60" DataContext="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}">
+        <Border Width="Auto"
+                    BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}"
+                    BorderThickness="3"
+                    Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" 
+                    CornerRadius="5">
+            <StackPanel Orientation="Horizontal">
+                <Controls:VisualWrapper x:Name="visualWrapper" Width="32" Height="32" Margin="10"/>
+                
+                <Label Content="{Binding Text}" 
+                   Padding="0,0,10,0"
+                   Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}"
+                   FontSize="14"
+                   FontWeight="Bold"
+                   HorizontalContentAlignment="Center" 
+                   VerticalContentAlignment="Center"
+                   Width="Auto"/>
+                
+                <!-- Fill up some space -->
+                <Label Width="10" />
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>

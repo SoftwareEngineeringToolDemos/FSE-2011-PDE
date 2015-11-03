@@ -1,0 +1,1604 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Tum.VModellXT.VModellXTDomainModel.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DslLibrary &apos;VModellXT&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellXTDomainModel.DisplayName" xml:space="preserve">
+    <value>VModellXT</value>
+    <comment>DisplayName for DslLibrary &apos;VModellXT&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModell.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainClass &apos;VModell&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModell.DisplayName" xml:space="preserve">
+    <value>VModell</value>
+    <comment>DisplayName for DomainClass &apos;VModell&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModell/Master.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainProperty &apos;Master&apos; on DomainClass &apos;VModell&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModell/Master.DisplayName" xml:space="preserve">
+    <value>Master</value>
+    <comment>DisplayName for DomainProperty &apos;Master&apos; on DomainClass &apos;VModell&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvariante.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainClass &apos;VModellvariante&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvariante.DisplayName" xml:space="preserve">
+    <value>V-Modellvariante</value>
+    <comment>DisplayName for DomainClass &apos;VModellvariante&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvariante/Name.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainProperty &apos;Name&apos; on DomainClass &apos;VModellvariante&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvariante/Name.DisplayName" xml:space="preserve">
+    <value>Name</value>
+    <comment>DisplayName for DomainProperty &apos;Name&apos; on DomainClass &apos;VModellvariante&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvariante/Version.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainProperty &apos;Version&apos; on DomainClass &apos;VModellvariante&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvariante/Version.DisplayName" xml:space="preserve">
+    <value>Version</value>
+    <comment>DisplayName for DomainProperty &apos;Version&apos; on DomainClass &apos;VModellvariante&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvariante/VersionIntern.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainProperty &apos;VersionIntern&apos; on DomainClass &apos;VModellvariante&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvariante/VersionIntern.DisplayName" xml:space="preserve">
+    <value>Version Intern</value>
+    <comment>DisplayName for DomainProperty &apos;VersionIntern&apos; on DomainClass &apos;VModellvariante&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvariante/CopyrightKurz.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainProperty &apos;CopyrightKurz&apos; on DomainClass &apos;VModellvariante&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvariante/CopyrightKurz.DisplayName" xml:space="preserve">
+    <value>Copyright Kurz</value>
+    <comment>DisplayName for DomainProperty &apos;CopyrightKurz&apos; on DomainClass &apos;VModellvariante&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvariante/CopyrightLang.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainProperty &apos;CopyrightLang&apos; on DomainClass &apos;VModellvariante&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvariante/CopyrightLang.DisplayName" xml:space="preserve">
+    <value>Copyright Lang</value>
+    <comment>DisplayName for DomainProperty &apos;CopyrightLang&apos; on DomainClass &apos;VModellvariante&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.Referenzmodell.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainClass &apos;Referenzmodell&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.Referenzmodell.DisplayName" xml:space="preserve">
+    <value>Referenzmodell</value>
+    <comment>DisplayName for DomainClass &apos;Referenzmodell&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.Musterbibliothek.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainClass &apos;Musterbibliothek&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.Musterbibliothek.DisplayName" xml:space="preserve">
+    <value>Musterbibliothek</value>
+    <comment>DisplayName for DomainClass &apos;Musterbibliothek&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.Mustergruppe.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainClass &apos;Mustergruppe&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.Mustergruppe.DisplayName" xml:space="preserve">
+    <value>Mustergruppe</value>
+    <comment>DisplayName for DomainClass &apos;Mustergruppe&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.Mustergruppe/Name.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainProperty &apos;Name&apos; on DomainClass &apos;Mustergruppe&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.Mustergruppe/Name.DisplayName" xml:space="preserve">
+    <value>Name</value>
+    <comment>DisplayName for DomainProperty &apos;Name&apos; on DomainClass &apos;Mustergruppe&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.Themenmuster.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainClass &apos;Themenmuster&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.Themenmuster.DisplayName" xml:space="preserve">
+    <value>Themenmuster</value>
+    <comment>DisplayName for DomainClass &apos;Themenmuster&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.Themenmuster/Name.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainProperty &apos;Name&apos; on DomainClass &apos;Themenmuster&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.Themenmuster/Name.DisplayName" xml:space="preserve">
+    <value>Name</value>
+    <comment>DisplayName for DomainProperty &apos;Name&apos; on DomainClass &apos;Themenmuster&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.Mustertext.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainClass &apos;Mustertext&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.Mustertext.DisplayName" xml:space="preserve">
+    <value>Mustertext</value>
+    <comment>DisplayName for DomainClass &apos;Mustertext&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.Mustertext/Name.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainProperty &apos;Name&apos; on DomainClass &apos;Mustertext&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.Mustertext/Name.DisplayName" xml:space="preserve">
+    <value>Name</value>
+    <comment>DisplayName for DomainProperty &apos;Name&apos; on DomainClass &apos;Mustertext&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.Mustertext/Standardauswahl.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainProperty &apos;Standardauswahl&apos; on DomainClass &apos;Mustertext&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.Mustertext/Standardauswahl.DisplayName" xml:space="preserve">
+    <value>Standardauswahl</value>
+    <comment>DisplayName for DomainProperty &apos;Standardauswahl&apos; on DomainClass &apos;Mustertext&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.Mustertext/Text.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainProperty &apos;Text&apos; on DomainClass &apos;Mustertext&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.Mustertext/Text.DisplayName" xml:space="preserve">
+    <value>Text</value>
+    <comment>DisplayName for DomainProperty &apos;Text&apos; on DomainClass &apos;Mustertext&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.Zusatzthema.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainClass &apos;Zusatzthema&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.Zusatzthema.DisplayName" xml:space="preserve">
+    <value>Zusatzthema</value>
+    <comment>DisplayName for DomainClass &apos;Zusatzthema&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.Zusatzthema/Name.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainProperty &apos;Name&apos; on DomainClass &apos;Zusatzthema&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.Zusatzthema/Name.DisplayName" xml:space="preserve">
+    <value>Name</value>
+    <comment>DisplayName for DomainProperty &apos;Name&apos; on DomainClass &apos;Zusatzthema&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.Zusatzthema/Standardauswahl.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainProperty &apos;Standardauswahl&apos; on DomainClass &apos;Zusatzthema&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.Zusatzthema/Standardauswahl.DisplayName" xml:space="preserve">
+    <value>Standardauswahl</value>
+    <comment>DisplayName for DomainProperty &apos;Standardauswahl&apos; on DomainClass &apos;Zusatzthema&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.Varianten.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainClass &apos;Varianten&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.Varianten.DisplayName" xml:space="preserve">
+    <value>Varianten</value>
+    <comment>DisplayName for DomainClass &apos;Varianten&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.Variante.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainClass &apos;Variante&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.Variante.DisplayName" xml:space="preserve">
+    <value>Variante</value>
+    <comment>DisplayName for DomainClass &apos;Variante&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.Variante/Name.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainProperty &apos;Name&apos; on DomainClass &apos;Variante&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.Variante/Name.DisplayName" xml:space="preserve">
+    <value>Name</value>
+    <comment>DisplayName for DomainProperty &apos;Name&apos; on DomainClass &apos;Variante&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.Variante/Verzeichnis.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainProperty &apos;Verzeichnis&apos; on DomainClass &apos;Variante&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.Variante/Verzeichnis.DisplayName" xml:space="preserve">
+    <value>Verzeichnis</value>
+    <comment>DisplayName for DomainProperty &apos;Verzeichnis&apos; on DomainClass &apos;Variante&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.Variante/Dateiname.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainProperty &apos;Dateiname&apos; on DomainClass &apos;Variante&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.Variante/Dateiname.DisplayName" xml:space="preserve">
+    <value>Dateiname</value>
+    <comment>DisplayName for DomainProperty &apos;Dateiname&apos; on DomainClass &apos;Variante&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellHasVModellvariante.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainClass &apos;VModellHasVModellvariante&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellHasVModellvariante.DisplayName" xml:space="preserve">
+    <value>VModell Has VModellvariante</value>
+    <comment>DisplayName for DomainClass &apos;VModellHasVModellvariante&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellHasVModellvariante/VModell.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainRole &apos;VModell&apos; on DomainRelationship &apos;VModellHasVModellvariante&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellHasVModellvariante/VModell.DisplayName" xml:space="preserve">
+    <value>VModell</value>
+    <comment>DisplayName for DomainRole &apos;VModell&apos; on DomainRelationship &apos;VModellHasVModellvariante&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellHasVModellvariante/VModell.PropertyDisplayName" xml:space="preserve">
+    <value>VModellvariante</value>
+    <comment>PropertyDisplayName for DomainRole &apos;VModell&apos; on DomainRelationship &apos;VModellHasVModellvariante&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellHasVModellvariante/VModellvariante.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainRole &apos;VModellvariante&apos; on DomainRelationship &apos;VModellHasVModellvariante&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellHasVModellvariante/VModellvariante.DisplayName" xml:space="preserve">
+    <value>VModellvariante</value>
+    <comment>DisplayName for DomainRole &apos;VModellvariante&apos; on DomainRelationship &apos;VModellHasVModellvariante&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellHasVModellvariante/VModellvariante.PropertyDisplayName" xml:space="preserve">
+    <value>VModell</value>
+    <comment>PropertyDisplayName for DomainRole &apos;VModellvariante&apos; on DomainRelationship &apos;VModellHasVModellvariante&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasVModellStruktur.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainClass &apos;VModellvarianteHasVModellStruktur&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasVModellStruktur.DisplayName" xml:space="preserve">
+    <value>VModellvariante Has VModell Struktur</value>
+    <comment>DisplayName for DomainClass &apos;VModellvarianteHasVModellStruktur&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasVModellStruktur/VModellvariante.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainRole &apos;VModellvariante&apos; on DomainRelationship &apos;VModellvarianteHasVModellStruktur&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasVModellStruktur/VModellvariante.DisplayName" xml:space="preserve">
+    <value>VModellvariante</value>
+    <comment>DisplayName for DomainRole &apos;VModellvariante&apos; on DomainRelationship &apos;VModellvarianteHasVModellStruktur&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasVModellStruktur/VModellvariante.PropertyDisplayName" xml:space="preserve">
+    <value>VModell Struktur</value>
+    <comment>PropertyDisplayName for DomainRole &apos;VModellvariante&apos; on DomainRelationship &apos;VModellvarianteHasVModellStruktur&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasVModellStruktur/VModellStruktur.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainRole &apos;VModellStruktur&apos; on DomainRelationship &apos;VModellvarianteHasVModellStruktur&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasVModellStruktur/VModellStruktur.DisplayName" xml:space="preserve">
+    <value>VModell Struktur</value>
+    <comment>DisplayName for DomainRole &apos;VModellStruktur&apos; on DomainRelationship &apos;VModellvarianteHasVModellStruktur&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasVModellStruktur/VModellStruktur.PropertyDisplayName" xml:space="preserve">
+    <value>VModellvariante</value>
+    <comment>PropertyDisplayName for DomainRole &apos;VModellStruktur&apos; on DomainRelationship &apos;VModellvarianteHasVModellStruktur&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasTextbausteine.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainClass &apos;VModellvarianteHasTextbausteine&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasTextbausteine.DisplayName" xml:space="preserve">
+    <value>VModellvariante Has Textbausteine</value>
+    <comment>DisplayName for DomainClass &apos;VModellvarianteHasTextbausteine&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasTextbausteine/VModellvariante.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainRole &apos;VModellvariante&apos; on DomainRelationship &apos;VModellvarianteHasTextbausteine&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasTextbausteine/VModellvariante.DisplayName" xml:space="preserve">
+    <value>VModellvariante</value>
+    <comment>DisplayName for DomainRole &apos;VModellvariante&apos; on DomainRelationship &apos;VModellvarianteHasTextbausteine&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasTextbausteine/VModellvariante.PropertyDisplayName" xml:space="preserve">
+    <value>Textbausteine</value>
+    <comment>PropertyDisplayName for DomainRole &apos;VModellvariante&apos; on DomainRelationship &apos;VModellvarianteHasTextbausteine&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasTextbausteine/Textbausteine.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainRole &apos;Textbausteine&apos; on DomainRelationship &apos;VModellvarianteHasTextbausteine&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasTextbausteine/Textbausteine.DisplayName" xml:space="preserve">
+    <value>Textbausteine</value>
+    <comment>DisplayName for DomainRole &apos;Textbausteine&apos; on DomainRelationship &apos;VModellvarianteHasTextbausteine&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasTextbausteine/Textbausteine.PropertyDisplayName" xml:space="preserve">
+    <value>VModellvariante</value>
+    <comment>PropertyDisplayName for DomainRole &apos;Textbausteine&apos; on DomainRelationship &apos;VModellvarianteHasTextbausteine&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasVorgehensbausteine.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainClass &apos;VModellvarianteHasVorgehensbausteine&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasVorgehensbausteine.DisplayName" xml:space="preserve">
+    <value>VModellvariante Has Vorgehensbausteine</value>
+    <comment>DisplayName for DomainClass &apos;VModellvarianteHasVorgehensbausteine&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasVorgehensbausteine/VModellvariante.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainRole &apos;VModellvariante&apos; on DomainRelationship &apos;VModellvarianteHasVorgehensbausteine&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasVorgehensbausteine/VModellvariante.DisplayName" xml:space="preserve">
+    <value>VModellvariante</value>
+    <comment>DisplayName for DomainRole &apos;VModellvariante&apos; on DomainRelationship &apos;VModellvarianteHasVorgehensbausteine&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasVorgehensbausteine/VModellvariante.PropertyDisplayName" xml:space="preserve">
+    <value>Vorgehensbausteine</value>
+    <comment>PropertyDisplayName for DomainRole &apos;VModellvariante&apos; on DomainRelationship &apos;VModellvarianteHasVorgehensbausteine&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasVorgehensbausteine/Vorgehensbausteine.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainRole &apos;Vorgehensbausteine&apos; on DomainRelationship &apos;VModellvarianteHasVorgehensbausteine&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasVorgehensbausteine/Vorgehensbausteine.DisplayName" xml:space="preserve">
+    <value>Vorgehensbausteine</value>
+    <comment>DisplayName for DomainRole &apos;Vorgehensbausteine&apos; on DomainRelationship &apos;VModellvarianteHasVorgehensbausteine&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasVorgehensbausteine/Vorgehensbausteine.PropertyDisplayName" xml:space="preserve">
+    <value>VModellvariante</value>
+    <comment>PropertyDisplayName for DomainRole &apos;Vorgehensbausteine&apos; on DomainRelationship &apos;VModellvarianteHasVorgehensbausteine&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasRollen.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainClass &apos;VModellvarianteHasRollen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasRollen.DisplayName" xml:space="preserve">
+    <value>VModellvariante Has Rollen</value>
+    <comment>DisplayName for DomainClass &apos;VModellvarianteHasRollen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasRollen/VModellvariante.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainRole &apos;VModellvariante&apos; on DomainRelationship &apos;VModellvarianteHasRollen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasRollen/VModellvariante.DisplayName" xml:space="preserve">
+    <value>VModellvariante</value>
+    <comment>DisplayName for DomainRole &apos;VModellvariante&apos; on DomainRelationship &apos;VModellvarianteHasRollen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasRollen/VModellvariante.PropertyDisplayName" xml:space="preserve">
+    <value>Rollen</value>
+    <comment>PropertyDisplayName for DomainRole &apos;VModellvariante&apos; on DomainRelationship &apos;VModellvarianteHasRollen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasRollen/Rollen.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainRole &apos;Rollen&apos; on DomainRelationship &apos;VModellvarianteHasRollen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasRollen/Rollen.DisplayName" xml:space="preserve">
+    <value>Rollen</value>
+    <comment>DisplayName for DomainRole &apos;Rollen&apos; on DomainRelationship &apos;VModellvarianteHasRollen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasRollen/Rollen.PropertyDisplayName" xml:space="preserve">
+    <value>VModellvariante</value>
+    <comment>PropertyDisplayName for DomainRole &apos;Rollen&apos; on DomainRelationship &apos;VModellvarianteHasRollen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasPDSSpezifikationen.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainClass &apos;VModellvarianteHasPDSSpezifikationen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasPDSSpezifikationen.DisplayName" xml:space="preserve">
+    <value>VModellvariante Has PDSSpezifikationen</value>
+    <comment>DisplayName for DomainClass &apos;VModellvarianteHasPDSSpezifikationen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasPDSSpezifikationen/VModellvariante.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainRole &apos;VModellvariante&apos; on DomainRelationship &apos;VModellvarianteHasPDSSpezifikationen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasPDSSpezifikationen/VModellvariante.DisplayName" xml:space="preserve">
+    <value>VModellvariante</value>
+    <comment>DisplayName for DomainRole &apos;VModellvariante&apos; on DomainRelationship &apos;VModellvarianteHasPDSSpezifikationen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasPDSSpezifikationen/VModellvariante.PropertyDisplayName" xml:space="preserve">
+    <value>PDSSpezifikationen</value>
+    <comment>PropertyDisplayName for DomainRole &apos;VModellvariante&apos; on DomainRelationship &apos;VModellvarianteHasPDSSpezifikationen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasPDSSpezifikationen/PDSSpezifikationen.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainRole &apos;PDSSpezifikationen&apos; on DomainRelationship &apos;VModellvarianteHasPDSSpezifikationen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasPDSSpezifikationen/PDSSpezifikationen.DisplayName" xml:space="preserve">
+    <value>PDSSpezifikationen</value>
+    <comment>DisplayName for DomainRole &apos;PDSSpezifikationen&apos; on DomainRelationship &apos;VModellvarianteHasPDSSpezifikationen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasPDSSpezifikationen/PDSSpezifikationen.PropertyDisplayName" xml:space="preserve">
+    <value>VModellvariante</value>
+    <comment>PropertyDisplayName for DomainRole &apos;PDSSpezifikationen&apos; on DomainRelationship &apos;VModellvarianteHasPDSSpezifikationen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasAblaufbausteine.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainClass &apos;VModellvarianteHasAblaufbausteine&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasAblaufbausteine.DisplayName" xml:space="preserve">
+    <value>VModellvariante Has Ablaufbausteine</value>
+    <comment>DisplayName for DomainClass &apos;VModellvarianteHasAblaufbausteine&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasAblaufbausteine/VModellvariante.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainRole &apos;VModellvariante&apos; on DomainRelationship &apos;VModellvarianteHasAblaufbausteine&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasAblaufbausteine/VModellvariante.DisplayName" xml:space="preserve">
+    <value>VModellvariante</value>
+    <comment>DisplayName for DomainRole &apos;VModellvariante&apos; on DomainRelationship &apos;VModellvarianteHasAblaufbausteine&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasAblaufbausteine/VModellvariante.PropertyDisplayName" xml:space="preserve">
+    <value>Ablaufbausteine</value>
+    <comment>PropertyDisplayName for DomainRole &apos;VModellvariante&apos; on DomainRelationship &apos;VModellvarianteHasAblaufbausteine&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasAblaufbausteine/Ablaufbausteine.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainRole &apos;Ablaufbausteine&apos; on DomainRelationship &apos;VModellvarianteHasAblaufbausteine&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasAblaufbausteine/Ablaufbausteine.DisplayName" xml:space="preserve">
+    <value>Ablaufbausteine</value>
+    <comment>DisplayName for DomainRole &apos;Ablaufbausteine&apos; on DomainRelationship &apos;VModellvarianteHasAblaufbausteine&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasAblaufbausteine/Ablaufbausteine.PropertyDisplayName" xml:space="preserve">
+    <value>VModellvariante</value>
+    <comment>PropertyDisplayName for DomainRole &apos;Ablaufbausteine&apos; on DomainRelationship &apos;VModellvarianteHasAblaufbausteine&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasAblaufbausteinspezifikationen.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainClass &apos;VModellvarianteHasAblaufbausteinspezifikationen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasAblaufbausteinspezifikationen.DisplayName" xml:space="preserve">
+    <value>VModellvariante Has Ablaufbausteinspezifikationen</value>
+    <comment>DisplayName for DomainClass &apos;VModellvarianteHasAblaufbausteinspezifikationen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasAblaufbausteinspezifikationen/VModellvariante.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainRole &apos;VModellvariante&apos; on DomainRelationship &apos;VModellvarianteHasAblaufbausteinspezifikationen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasAblaufbausteinspezifikationen/VModellvariante.DisplayName" xml:space="preserve">
+    <value>VModellvariante</value>
+    <comment>DisplayName for DomainRole &apos;VModellvariante&apos; on DomainRelationship &apos;VModellvarianteHasAblaufbausteinspezifikationen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasAblaufbausteinspezifikationen/VModellvariante.PropertyDisplayName" xml:space="preserve">
+    <value>Ablaufbausteinspezifikationen</value>
+    <comment>PropertyDisplayName for DomainRole &apos;VModellvariante&apos; on DomainRelationship &apos;VModellvarianteHasAblaufbausteinspezifikationen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasAblaufbausteinspezifikationen/Ablaufbausteinspezifikationen.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainRole &apos;Ablaufbausteinspezifikationen&apos; on DomainRelationship &apos;VModellvarianteHasAblaufbausteinspezifikationen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasAblaufbausteinspezifikationen/Ablaufbausteinspezifikationen.DisplayName" xml:space="preserve">
+    <value>Ablaufbausteinspezifikationen</value>
+    <comment>DisplayName for DomainRole &apos;Ablaufbausteinspezifikationen&apos; on DomainRelationship &apos;VModellvarianteHasAblaufbausteinspezifikationen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasAblaufbausteinspezifikationen/Ablaufbausteinspezifikationen.PropertyDisplayName" xml:space="preserve">
+    <value>VModellvariante</value>
+    <comment>PropertyDisplayName for DomainRole &apos;Ablaufbausteinspezifikationen&apos; on DomainRelationship &apos;VModellvarianteHasAblaufbausteinspezifikationen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasProjekttypen.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainClass &apos;VModellvarianteHasProjekttypen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasProjekttypen.DisplayName" xml:space="preserve">
+    <value>VModellvariante Has Projekttypen</value>
+    <comment>DisplayName for DomainClass &apos;VModellvarianteHasProjekttypen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasProjekttypen/VModellvariante.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainRole &apos;VModellvariante&apos; on DomainRelationship &apos;VModellvarianteHasProjekttypen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasProjekttypen/VModellvariante.DisplayName" xml:space="preserve">
+    <value>VModellvariante</value>
+    <comment>DisplayName for DomainRole &apos;VModellvariante&apos; on DomainRelationship &apos;VModellvarianteHasProjekttypen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasProjekttypen/VModellvariante.PropertyDisplayName" xml:space="preserve">
+    <value>Projekttypen</value>
+    <comment>PropertyDisplayName for DomainRole &apos;VModellvariante&apos; on DomainRelationship &apos;VModellvarianteHasProjekttypen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasProjekttypen/Projekttypen.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainRole &apos;Projekttypen&apos; on DomainRelationship &apos;VModellvarianteHasProjekttypen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasProjekttypen/Projekttypen.DisplayName" xml:space="preserve">
+    <value>Projekttypen</value>
+    <comment>DisplayName for DomainRole &apos;Projekttypen&apos; on DomainRelationship &apos;VModellvarianteHasProjekttypen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasProjekttypen/Projekttypen.PropertyDisplayName" xml:space="preserve">
+    <value>VModellvariante</value>
+    <comment>PropertyDisplayName for DomainRole &apos;Projekttypen&apos; on DomainRelationship &apos;VModellvarianteHasProjekttypen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasProjekttypvarianten.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainClass &apos;VModellvarianteHasProjekttypvarianten&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasProjekttypvarianten.DisplayName" xml:space="preserve">
+    <value>VModellvariante Has Projekttypvarianten</value>
+    <comment>DisplayName for DomainClass &apos;VModellvarianteHasProjekttypvarianten&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasProjekttypvarianten/VModellvariante.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainRole &apos;VModellvariante&apos; on DomainRelationship &apos;VModellvarianteHasProjekttypvarianten&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasProjekttypvarianten/VModellvariante.DisplayName" xml:space="preserve">
+    <value>VModellvariante</value>
+    <comment>DisplayName for DomainRole &apos;VModellvariante&apos; on DomainRelationship &apos;VModellvarianteHasProjekttypvarianten&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasProjekttypvarianten/VModellvariante.PropertyDisplayName" xml:space="preserve">
+    <value>Projekttypvarianten</value>
+    <comment>PropertyDisplayName for DomainRole &apos;VModellvariante&apos; on DomainRelationship &apos;VModellvarianteHasProjekttypvarianten&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasProjekttypvarianten/Projekttypvarianten.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainRole &apos;Projekttypvarianten&apos; on DomainRelationship &apos;VModellvarianteHasProjekttypvarianten&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasProjekttypvarianten/Projekttypvarianten.DisplayName" xml:space="preserve">
+    <value>Projekttypvarianten</value>
+    <comment>DisplayName for DomainRole &apos;Projekttypvarianten&apos; on DomainRelationship &apos;VModellvarianteHasProjekttypvarianten&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasProjekttypvarianten/Projekttypvarianten.PropertyDisplayName" xml:space="preserve">
+    <value>VModellvariante</value>
+    <comment>PropertyDisplayName for DomainRole &apos;Projekttypvarianten&apos; on DomainRelationship &apos;VModellvarianteHasProjekttypvarianten&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasVortailoring.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainClass &apos;VModellvarianteHasVortailoring&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasVortailoring.DisplayName" xml:space="preserve">
+    <value>VModellvariante Has Vortailoring</value>
+    <comment>DisplayName for DomainClass &apos;VModellvarianteHasVortailoring&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasVortailoring/VModellvariante.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainRole &apos;VModellvariante&apos; on DomainRelationship &apos;VModellvarianteHasVortailoring&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasVortailoring/VModellvariante.DisplayName" xml:space="preserve">
+    <value>VModellvariante</value>
+    <comment>DisplayName for DomainRole &apos;VModellvariante&apos; on DomainRelationship &apos;VModellvarianteHasVortailoring&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasVortailoring/VModellvariante.PropertyDisplayName" xml:space="preserve">
+    <value>Vortailoring</value>
+    <comment>PropertyDisplayName for DomainRole &apos;VModellvariante&apos; on DomainRelationship &apos;VModellvarianteHasVortailoring&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasVortailoring/Vortailoring.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainRole &apos;Vortailoring&apos; on DomainRelationship &apos;VModellvarianteHasVortailoring&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasVortailoring/Vortailoring.DisplayName" xml:space="preserve">
+    <value>Vortailoring</value>
+    <comment>DisplayName for DomainRole &apos;Vortailoring&apos; on DomainRelationship &apos;VModellvarianteHasVortailoring&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasVortailoring/Vortailoring.PropertyDisplayName" xml:space="preserve">
+    <value>VModellvariante</value>
+    <comment>PropertyDisplayName for DomainRole &apos;Vortailoring&apos; on DomainRelationship &apos;VModellvarianteHasVortailoring&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasEntscheidungspunkte.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainClass &apos;VModellvarianteHasEntscheidungspunkte&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasEntscheidungspunkte.DisplayName" xml:space="preserve">
+    <value>VModellvariante Has Entscheidungspunkte</value>
+    <comment>DisplayName for DomainClass &apos;VModellvarianteHasEntscheidungspunkte&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasEntscheidungspunkte/VModellvariante.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainRole &apos;VModellvariante&apos; on DomainRelationship &apos;VModellvarianteHasEntscheidungspunkte&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasEntscheidungspunkte/VModellvariante.DisplayName" xml:space="preserve">
+    <value>VModellvariante</value>
+    <comment>DisplayName for DomainRole &apos;VModellvariante&apos; on DomainRelationship &apos;VModellvarianteHasEntscheidungspunkte&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasEntscheidungspunkte/VModellvariante.PropertyDisplayName" xml:space="preserve">
+    <value>Entscheidungspunkte</value>
+    <comment>PropertyDisplayName for DomainRole &apos;VModellvariante&apos; on DomainRelationship &apos;VModellvarianteHasEntscheidungspunkte&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasEntscheidungspunkte/Entscheidungspunkte.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainRole &apos;Entscheidungspunkte&apos; on DomainRelationship &apos;VModellvarianteHasEntscheidungspunkte&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasEntscheidungspunkte/Entscheidungspunkte.DisplayName" xml:space="preserve">
+    <value>Entscheidungspunkte</value>
+    <comment>DisplayName for DomainRole &apos;Entscheidungspunkte&apos; on DomainRelationship &apos;VModellvarianteHasEntscheidungspunkte&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasEntscheidungspunkte/Entscheidungspunkte.PropertyDisplayName" xml:space="preserve">
+    <value>VModellvariante</value>
+    <comment>PropertyDisplayName for DomainRole &apos;Entscheidungspunkte&apos; on DomainRelationship &apos;VModellvarianteHasEntscheidungspunkte&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasProjektmerkmale.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainClass &apos;VModellvarianteHasProjektmerkmale&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasProjektmerkmale.DisplayName" xml:space="preserve">
+    <value>VModellvariante Has Projektmerkmale</value>
+    <comment>DisplayName for DomainClass &apos;VModellvarianteHasProjektmerkmale&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasProjektmerkmale/VModellvariante.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainRole &apos;VModellvariante&apos; on DomainRelationship &apos;VModellvarianteHasProjektmerkmale&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasProjektmerkmale/VModellvariante.DisplayName" xml:space="preserve">
+    <value>VModellvariante</value>
+    <comment>DisplayName for DomainRole &apos;VModellvariante&apos; on DomainRelationship &apos;VModellvarianteHasProjektmerkmale&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasProjektmerkmale/VModellvariante.PropertyDisplayName" xml:space="preserve">
+    <value>Projektmerkmale</value>
+    <comment>PropertyDisplayName for DomainRole &apos;VModellvariante&apos; on DomainRelationship &apos;VModellvarianteHasProjektmerkmale&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasProjektmerkmale/Projektmerkmale.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainRole &apos;Projektmerkmale&apos; on DomainRelationship &apos;VModellvarianteHasProjektmerkmale&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasProjektmerkmale/Projektmerkmale.DisplayName" xml:space="preserve">
+    <value>Projektmerkmale</value>
+    <comment>DisplayName for DomainRole &apos;Projektmerkmale&apos; on DomainRelationship &apos;VModellvarianteHasProjektmerkmale&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasProjektmerkmale/Projektmerkmale.PropertyDisplayName" xml:space="preserve">
+    <value>VModellvariante</value>
+    <comment>PropertyDisplayName for DomainRole &apos;Projektmerkmale&apos; on DomainRelationship &apos;VModellvarianteHasProjektmerkmale&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasKonventionsabbildungen.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainClass &apos;VModellvarianteHasKonventionsabbildungen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasKonventionsabbildungen.DisplayName" xml:space="preserve">
+    <value>VModellvariante Has Konventionsabbildungen</value>
+    <comment>DisplayName for DomainClass &apos;VModellvarianteHasKonventionsabbildungen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasKonventionsabbildungen/VModellvariante.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainRole &apos;VModellvariante&apos; on DomainRelationship &apos;VModellvarianteHasKonventionsabbildungen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasKonventionsabbildungen/VModellvariante.DisplayName" xml:space="preserve">
+    <value>VModellvariante</value>
+    <comment>DisplayName for DomainRole &apos;VModellvariante&apos; on DomainRelationship &apos;VModellvarianteHasKonventionsabbildungen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasKonventionsabbildungen/VModellvariante.PropertyDisplayName" xml:space="preserve">
+    <value>Konventionsabbildungen</value>
+    <comment>PropertyDisplayName for DomainRole &apos;VModellvariante&apos; on DomainRelationship &apos;VModellvarianteHasKonventionsabbildungen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasKonventionsabbildungen/Konventionsabbildungen.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainRole &apos;Konventionsabbildungen&apos; on DomainRelationship &apos;VModellvarianteHasKonventionsabbildungen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasKonventionsabbildungen/Konventionsabbildungen.DisplayName" xml:space="preserve">
+    <value>Konventionsabbildungen</value>
+    <comment>DisplayName for DomainRole &apos;Konventionsabbildungen&apos; on DomainRelationship &apos;VModellvarianteHasKonventionsabbildungen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasKonventionsabbildungen/Konventionsabbildungen.PropertyDisplayName" xml:space="preserve">
+    <value>VModellvariante</value>
+    <comment>PropertyDisplayName for DomainRole &apos;Konventionsabbildungen&apos; on DomainRelationship &apos;VModellvarianteHasKonventionsabbildungen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasMethodenreferenzen.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainClass &apos;VModellvarianteHasMethodenreferenzen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasMethodenreferenzen.DisplayName" xml:space="preserve">
+    <value>VModellvariante Has Methodenreferenzen</value>
+    <comment>DisplayName for DomainClass &apos;VModellvarianteHasMethodenreferenzen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasMethodenreferenzen/VModellvariante.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainRole &apos;VModellvariante&apos; on DomainRelationship &apos;VModellvarianteHasMethodenreferenzen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasMethodenreferenzen/VModellvariante.DisplayName" xml:space="preserve">
+    <value>VModellvariante</value>
+    <comment>DisplayName for DomainRole &apos;VModellvariante&apos; on DomainRelationship &apos;VModellvarianteHasMethodenreferenzen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasMethodenreferenzen/VModellvariante.PropertyDisplayName" xml:space="preserve">
+    <value>Methodenreferenzen</value>
+    <comment>PropertyDisplayName for DomainRole &apos;VModellvariante&apos; on DomainRelationship &apos;VModellvarianteHasMethodenreferenzen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasMethodenreferenzen/Methodenreferenzen.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainRole &apos;Methodenreferenzen&apos; on DomainRelationship &apos;VModellvarianteHasMethodenreferenzen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasMethodenreferenzen/Methodenreferenzen.DisplayName" xml:space="preserve">
+    <value>Methodenreferenzen</value>
+    <comment>DisplayName for DomainRole &apos;Methodenreferenzen&apos; on DomainRelationship &apos;VModellvarianteHasMethodenreferenzen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasMethodenreferenzen/Methodenreferenzen.PropertyDisplayName" xml:space="preserve">
+    <value>VModellvariante</value>
+    <comment>PropertyDisplayName for DomainRole &apos;Methodenreferenzen&apos; on DomainRelationship &apos;VModellvarianteHasMethodenreferenzen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasWerkzeugreferenzen.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainClass &apos;VModellvarianteHasWerkzeugreferenzen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasWerkzeugreferenzen.DisplayName" xml:space="preserve">
+    <value>VModellvariante Has Werkzeugreferenzen</value>
+    <comment>DisplayName for DomainClass &apos;VModellvarianteHasWerkzeugreferenzen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasWerkzeugreferenzen/VModellvariante.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainRole &apos;VModellvariante&apos; on DomainRelationship &apos;VModellvarianteHasWerkzeugreferenzen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasWerkzeugreferenzen/VModellvariante.DisplayName" xml:space="preserve">
+    <value>VModellvariante</value>
+    <comment>DisplayName for DomainRole &apos;VModellvariante&apos; on DomainRelationship &apos;VModellvarianteHasWerkzeugreferenzen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasWerkzeugreferenzen/VModellvariante.PropertyDisplayName" xml:space="preserve">
+    <value>Werkzeugreferenzen</value>
+    <comment>PropertyDisplayName for DomainRole &apos;VModellvariante&apos; on DomainRelationship &apos;VModellvarianteHasWerkzeugreferenzen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasWerkzeugreferenzen/Werkzeugreferenzen.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainRole &apos;Werkzeugreferenzen&apos; on DomainRelationship &apos;VModellvarianteHasWerkzeugreferenzen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasWerkzeugreferenzen/Werkzeugreferenzen.DisplayName" xml:space="preserve">
+    <value>Werkzeugreferenzen</value>
+    <comment>DisplayName for DomainRole &apos;Werkzeugreferenzen&apos; on DomainRelationship &apos;VModellvarianteHasWerkzeugreferenzen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasWerkzeugreferenzen/Werkzeugreferenzen.PropertyDisplayName" xml:space="preserve">
+    <value>VModellvariante</value>
+    <comment>PropertyDisplayName for DomainRole &apos;Werkzeugreferenzen&apos; on DomainRelationship &apos;VModellvarianteHasWerkzeugreferenzen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasGlossar.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainClass &apos;VModellvarianteHasGlossar&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasGlossar.DisplayName" xml:space="preserve">
+    <value>VModellvariante Has Glossar</value>
+    <comment>DisplayName for DomainClass &apos;VModellvarianteHasGlossar&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasGlossar/VModellvariante.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainRole &apos;VModellvariante&apos; on DomainRelationship &apos;VModellvarianteHasGlossar&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasGlossar/VModellvariante.DisplayName" xml:space="preserve">
+    <value>VModellvariante</value>
+    <comment>DisplayName for DomainRole &apos;VModellvariante&apos; on DomainRelationship &apos;VModellvarianteHasGlossar&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasGlossar/VModellvariante.PropertyDisplayName" xml:space="preserve">
+    <value>Glossar</value>
+    <comment>PropertyDisplayName for DomainRole &apos;VModellvariante&apos; on DomainRelationship &apos;VModellvarianteHasGlossar&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasGlossar/Glossar.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainRole &apos;Glossar&apos; on DomainRelationship &apos;VModellvarianteHasGlossar&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasGlossar/Glossar.DisplayName" xml:space="preserve">
+    <value>Glossar</value>
+    <comment>DisplayName for DomainRole &apos;Glossar&apos; on DomainRelationship &apos;VModellvarianteHasGlossar&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasGlossar/Glossar.PropertyDisplayName" xml:space="preserve">
+    <value>VModellvariante</value>
+    <comment>PropertyDisplayName for DomainRole &apos;Glossar&apos; on DomainRelationship &apos;VModellvarianteHasGlossar&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasAbkuerzungen.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainClass &apos;VModellvarianteHasAbkuerzungen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasAbkuerzungen.DisplayName" xml:space="preserve">
+    <value>VModellvariante Has Abkuerzungen</value>
+    <comment>DisplayName for DomainClass &apos;VModellvarianteHasAbkuerzungen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasAbkuerzungen/VModellvariante.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainRole &apos;VModellvariante&apos; on DomainRelationship &apos;VModellvarianteHasAbkuerzungen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasAbkuerzungen/VModellvariante.DisplayName" xml:space="preserve">
+    <value>VModellvariante</value>
+    <comment>DisplayName for DomainRole &apos;VModellvariante&apos; on DomainRelationship &apos;VModellvarianteHasAbkuerzungen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasAbkuerzungen/VModellvariante.PropertyDisplayName" xml:space="preserve">
+    <value>Abkuerzungen</value>
+    <comment>PropertyDisplayName for DomainRole &apos;VModellvariante&apos; on DomainRelationship &apos;VModellvarianteHasAbkuerzungen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasAbkuerzungen/Abkuerzungen.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainRole &apos;Abkuerzungen&apos; on DomainRelationship &apos;VModellvarianteHasAbkuerzungen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasAbkuerzungen/Abkuerzungen.DisplayName" xml:space="preserve">
+    <value>Abkuerzungen</value>
+    <comment>DisplayName for DomainRole &apos;Abkuerzungen&apos; on DomainRelationship &apos;VModellvarianteHasAbkuerzungen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasAbkuerzungen/Abkuerzungen.PropertyDisplayName" xml:space="preserve">
+    <value>VModellvariante</value>
+    <comment>PropertyDisplayName for DomainRole &apos;Abkuerzungen&apos; on DomainRelationship &apos;VModellvarianteHasAbkuerzungen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasQuellen.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainClass &apos;VModellvarianteHasQuellen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasQuellen.DisplayName" xml:space="preserve">
+    <value>VModellvariante Has Quellen</value>
+    <comment>DisplayName for DomainClass &apos;VModellvarianteHasQuellen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasQuellen/VModellvariante.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainRole &apos;VModellvariante&apos; on DomainRelationship &apos;VModellvarianteHasQuellen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasQuellen/VModellvariante.DisplayName" xml:space="preserve">
+    <value>VModellvariante</value>
+    <comment>DisplayName for DomainRole &apos;VModellvariante&apos; on DomainRelationship &apos;VModellvarianteHasQuellen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasQuellen/VModellvariante.PropertyDisplayName" xml:space="preserve">
+    <value>Quellen</value>
+    <comment>PropertyDisplayName for DomainRole &apos;VModellvariante&apos; on DomainRelationship &apos;VModellvarianteHasQuellen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasQuellen/Quellen.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainRole &apos;Quellen&apos; on DomainRelationship &apos;VModellvarianteHasQuellen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasQuellen/Quellen.DisplayName" xml:space="preserve">
+    <value>Quellen</value>
+    <comment>DisplayName for DomainRole &apos;Quellen&apos; on DomainRelationship &apos;VModellvarianteHasQuellen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasQuellen/Quellen.PropertyDisplayName" xml:space="preserve">
+    <value>VModellvariante</value>
+    <comment>PropertyDisplayName for DomainRole &apos;Quellen&apos; on DomainRelationship &apos;VModellvarianteHasQuellen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasAenderungsoperationen.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainClass &apos;VModellvarianteHasAenderungsoperationen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasAenderungsoperationen.DisplayName" xml:space="preserve">
+    <value>VModellvariante Has Aenderungsoperationen</value>
+    <comment>DisplayName for DomainClass &apos;VModellvarianteHasAenderungsoperationen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasAenderungsoperationen/VModellvariante.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainRole &apos;VModellvariante&apos; on DomainRelationship &apos;VModellvarianteHasAenderungsoperationen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasAenderungsoperationen/VModellvariante.DisplayName" xml:space="preserve">
+    <value>VModellvariante</value>
+    <comment>DisplayName for DomainRole &apos;VModellvariante&apos; on DomainRelationship &apos;VModellvarianteHasAenderungsoperationen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasAenderungsoperationen/VModellvariante.PropertyDisplayName" xml:space="preserve">
+    <value>Aenderungsoperationen</value>
+    <comment>PropertyDisplayName for DomainRole &apos;VModellvariante&apos; on DomainRelationship &apos;VModellvarianteHasAenderungsoperationen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasAenderungsoperationen/Aenderungsoperationen.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainRole &apos;Aenderungsoperationen&apos; on DomainRelationship &apos;VModellvarianteHasAenderungsoperationen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasAenderungsoperationen/Aenderungsoperationen.DisplayName" xml:space="preserve">
+    <value>Aenderungsoperationen</value>
+    <comment>DisplayName for DomainRole &apos;Aenderungsoperationen&apos; on DomainRelationship &apos;VModellvarianteHasAenderungsoperationen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasAenderungsoperationen/Aenderungsoperationen.PropertyDisplayName" xml:space="preserve">
+    <value>VModellvariante</value>
+    <comment>PropertyDisplayName for DomainRole &apos;Aenderungsoperationen&apos; on DomainRelationship &apos;VModellvarianteHasAenderungsoperationen&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasReferenzmodell.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainClass &apos;VModellvarianteHasReferenzmodell&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasReferenzmodell.DisplayName" xml:space="preserve">
+    <value>VModellvariante Has Referenzmodell</value>
+    <comment>DisplayName for DomainClass &apos;VModellvarianteHasReferenzmodell&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasReferenzmodell/VModellvariante.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainRole &apos;VModellvariante&apos; on DomainRelationship &apos;VModellvarianteHasReferenzmodell&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasReferenzmodell/VModellvariante.DisplayName" xml:space="preserve">
+    <value>VModellvariante</value>
+    <comment>DisplayName for DomainRole &apos;VModellvariante&apos; on DomainRelationship &apos;VModellvarianteHasReferenzmodell&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasReferenzmodell/VModellvariante.PropertyDisplayName" xml:space="preserve">
+    <value>Referenzmodell</value>
+    <comment>PropertyDisplayName for DomainRole &apos;VModellvariante&apos; on DomainRelationship &apos;VModellvarianteHasReferenzmodell&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasReferenzmodell/Referenzmodell.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainRole &apos;Referenzmodell&apos; on DomainRelationship &apos;VModellvarianteHasReferenzmodell&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasReferenzmodell/Referenzmodell.DisplayName" xml:space="preserve">
+    <value>Referenzmodell</value>
+    <comment>DisplayName for DomainRole &apos;Referenzmodell&apos; on DomainRelationship &apos;VModellvarianteHasReferenzmodell&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VModellvarianteHasReferenzmodell/Referenzmodell.PropertyDisplayName" xml:space="preserve">
+    <value>VModellvariante</value>
+    <comment>PropertyDisplayName for DomainRole &apos;Referenzmodell&apos; on DomainRelationship &apos;VModellvarianteHasReferenzmodell&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ReferenzmodellHasVModell.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainClass &apos;ReferenzmodellHasVModell&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ReferenzmodellHasVModell.DisplayName" xml:space="preserve">
+    <value>Referenzmodell Has VModell</value>
+    <comment>DisplayName for DomainClass &apos;ReferenzmodellHasVModell&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ReferenzmodellHasVModell/Referenzmodell.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainRole &apos;Referenzmodell&apos; on DomainRelationship &apos;ReferenzmodellHasVModell&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ReferenzmodellHasVModell/Referenzmodell.DisplayName" xml:space="preserve">
+    <value>Referenzmodell</value>
+    <comment>DisplayName for DomainRole &apos;Referenzmodell&apos; on DomainRelationship &apos;ReferenzmodellHasVModell&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ReferenzmodellHasVModell/Referenzmodell.PropertyDisplayName" xml:space="preserve">
+    <value>VModell</value>
+    <comment>PropertyDisplayName for DomainRole &apos;Referenzmodell&apos; on DomainRelationship &apos;ReferenzmodellHasVModell&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ReferenzmodellHasVModell/VModell.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainRole &apos;VModell&apos; on DomainRelationship &apos;ReferenzmodellHasVModell&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ReferenzmodellHasVModell/VModell.DisplayName" xml:space="preserve">
+    <value>VModell</value>
+    <comment>DisplayName for DomainRole &apos;VModell&apos; on DomainRelationship &apos;ReferenzmodellHasVModell&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ReferenzmodellHasVModell/VModell.PropertyDisplayName" xml:space="preserve">
+    <value>Referenzmodell</value>
+    <comment>PropertyDisplayName for DomainRole &apos;VModell&apos; on DomainRelationship &apos;ReferenzmodellHasVModell&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ReferenzmodellReferencesVModellvariante.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainClass &apos;ReferenzmodellReferencesVModellvariante&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ReferenzmodellReferencesVModellvariante.DisplayName" xml:space="preserve">
+    <value>Referenzmodell References VModellvariante</value>
+    <comment>DisplayName for DomainClass &apos;ReferenzmodellReferencesVModellvariante&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ReferenzmodellReferencesVModellvariante/Referenzmodell.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainRole &apos;Referenzmodell&apos; on DomainRelationship &apos;ReferenzmodellReferencesVModellvariante&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ReferenzmodellReferencesVModellvariante/Referenzmodell.DisplayName" xml:space="preserve">
+    <value>Referenzmodell</value>
+    <comment>DisplayName for DomainRole &apos;Referenzmodell&apos; on DomainRelationship &apos;ReferenzmodellReferencesVModellvariante&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ReferenzmodellReferencesVModellvariante/Referenzmodell.PropertyDisplayName" xml:space="preserve">
+    <value>VModellvariante</value>
+    <comment>PropertyDisplayName for DomainRole &apos;Referenzmodell&apos; on DomainRelationship &apos;ReferenzmodellReferencesVModellvariante&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ReferenzmodellReferencesVModellvariante/VModellvariante.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainRole &apos;VModellvariante&apos; on DomainRelationship &apos;ReferenzmodellReferencesVModellvariante&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ReferenzmodellReferencesVModellvariante/VModellvariante.DisplayName" xml:space="preserve">
+    <value>VModellvariante</value>
+    <comment>DisplayName for DomainRole &apos;VModellvariante&apos; on DomainRelationship &apos;ReferenzmodellReferencesVModellvariante&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ReferenzmodellReferencesVModellvariante/VModellvariante.PropertyDisplayName" xml:space="preserve">
+    <value>Referenzmodell</value>
+    <comment>PropertyDisplayName for DomainRole &apos;VModellvariante&apos; on DomainRelationship &apos;ReferenzmodellReferencesVModellvariante&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.MusterbibliothekHasMustergruppe.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainClass &apos;MusterbibliothekHasMustergruppe&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.MusterbibliothekHasMustergruppe.DisplayName" xml:space="preserve">
+    <value>Musterbibliothek Has Mustergruppe</value>
+    <comment>DisplayName for DomainClass &apos;MusterbibliothekHasMustergruppe&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.MusterbibliothekHasMustergruppe/Musterbibliothek.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainRole &apos;Musterbibliothek&apos; on DomainRelationship &apos;MusterbibliothekHasMustergruppe&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.MusterbibliothekHasMustergruppe/Musterbibliothek.DisplayName" xml:space="preserve">
+    <value>Musterbibliothek</value>
+    <comment>DisplayName for DomainRole &apos;Musterbibliothek&apos; on DomainRelationship &apos;MusterbibliothekHasMustergruppe&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.MusterbibliothekHasMustergruppe/Musterbibliothek.PropertyDisplayName" xml:space="preserve">
+    <value>Mustergruppe</value>
+    <comment>PropertyDisplayName for DomainRole &apos;Musterbibliothek&apos; on DomainRelationship &apos;MusterbibliothekHasMustergruppe&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.MusterbibliothekHasMustergruppe/Mustergruppe.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainRole &apos;Mustergruppe&apos; on DomainRelationship &apos;MusterbibliothekHasMustergruppe&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.MusterbibliothekHasMustergruppe/Mustergruppe.DisplayName" xml:space="preserve">
+    <value>Mustergruppe</value>
+    <comment>DisplayName for DomainRole &apos;Mustergruppe&apos; on DomainRelationship &apos;MusterbibliothekHasMustergruppe&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.MusterbibliothekHasMustergruppe/Mustergruppe.PropertyDisplayName" xml:space="preserve">
+    <value>Musterbibliothek</value>
+    <comment>PropertyDisplayName for DomainRole &apos;Mustergruppe&apos; on DomainRelationship &apos;MusterbibliothekHasMustergruppe&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.MustergruppeHasThemenmuster.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainClass &apos;MustergruppeHasThemenmuster&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.MustergruppeHasThemenmuster.DisplayName" xml:space="preserve">
+    <value>Mustergruppe Has Themenmuster</value>
+    <comment>DisplayName for DomainClass &apos;MustergruppeHasThemenmuster&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.MustergruppeHasThemenmuster/Mustergruppe.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainRole &apos;Mustergruppe&apos; on DomainRelationship &apos;MustergruppeHasThemenmuster&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.MustergruppeHasThemenmuster/Mustergruppe.DisplayName" xml:space="preserve">
+    <value>Mustergruppe</value>
+    <comment>DisplayName for DomainRole &apos;Mustergruppe&apos; on DomainRelationship &apos;MustergruppeHasThemenmuster&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.MustergruppeHasThemenmuster/Mustergruppe.PropertyDisplayName" xml:space="preserve">
+    <value>Themenmuster</value>
+    <comment>PropertyDisplayName for DomainRole &apos;Mustergruppe&apos; on DomainRelationship &apos;MustergruppeHasThemenmuster&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.MustergruppeHasThemenmuster/Themenmuster.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainRole &apos;Themenmuster&apos; on DomainRelationship &apos;MustergruppeHasThemenmuster&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.MustergruppeHasThemenmuster/Themenmuster.DisplayName" xml:space="preserve">
+    <value>Themenmuster</value>
+    <comment>DisplayName for DomainRole &apos;Themenmuster&apos; on DomainRelationship &apos;MustergruppeHasThemenmuster&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.MustergruppeHasThemenmuster/Themenmuster.PropertyDisplayName" xml:space="preserve">
+    <value>Mustergruppe</value>
+    <comment>PropertyDisplayName for DomainRole &apos;Themenmuster&apos; on DomainRelationship &apos;MustergruppeHasThemenmuster&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ThemenmusterReferencesThema.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainClass &apos;ThemenmusterReferencesThema&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ThemenmusterReferencesThema.DisplayName" xml:space="preserve">
+    <value>Themenmuster References Thema</value>
+    <comment>DisplayName for DomainClass &apos;ThemenmusterReferencesThema&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ThemenmusterReferencesThema/Themenmuster.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainRole &apos;Themenmuster&apos; on DomainRelationship &apos;ThemenmusterReferencesThema&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ThemenmusterReferencesThema/Themenmuster.DisplayName" xml:space="preserve">
+    <value>Themenmuster</value>
+    <comment>DisplayName for DomainRole &apos;Themenmuster&apos; on DomainRelationship &apos;ThemenmusterReferencesThema&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ThemenmusterReferencesThema/Themenmuster.PropertyDisplayName" xml:space="preserve">
+    <value>Thema</value>
+    <comment>PropertyDisplayName for DomainRole &apos;Themenmuster&apos; on DomainRelationship &apos;ThemenmusterReferencesThema&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ThemenmusterReferencesThema/Thema.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainRole &apos;Thema&apos; on DomainRelationship &apos;ThemenmusterReferencesThema&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ThemenmusterReferencesThema/Thema.DisplayName" xml:space="preserve">
+    <value>Thema</value>
+    <comment>DisplayName for DomainRole &apos;Thema&apos; on DomainRelationship &apos;ThemenmusterReferencesThema&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ThemenmusterReferencesThema/Thema.PropertyDisplayName" xml:space="preserve">
+    <value>Themenmuster</value>
+    <comment>PropertyDisplayName for DomainRole &apos;Thema&apos; on DomainRelationship &apos;ThemenmusterReferencesThema&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ThemenmusterReferencesUnterthema.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainClass &apos;ThemenmusterReferencesUnterthema&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ThemenmusterReferencesUnterthema.DisplayName" xml:space="preserve">
+    <value>Themenmuster References Unterthema</value>
+    <comment>DisplayName for DomainClass &apos;ThemenmusterReferencesUnterthema&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ThemenmusterReferencesUnterthema/Themenmuster.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainRole &apos;Themenmuster&apos; on DomainRelationship &apos;ThemenmusterReferencesUnterthema&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ThemenmusterReferencesUnterthema/Themenmuster.DisplayName" xml:space="preserve">
+    <value>Themenmuster</value>
+    <comment>DisplayName for DomainRole &apos;Themenmuster&apos; on DomainRelationship &apos;ThemenmusterReferencesUnterthema&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ThemenmusterReferencesUnterthema/Themenmuster.PropertyDisplayName" xml:space="preserve">
+    <value>Unterthema</value>
+    <comment>PropertyDisplayName for DomainRole &apos;Themenmuster&apos; on DomainRelationship &apos;ThemenmusterReferencesUnterthema&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ThemenmusterReferencesUnterthema/Unterthema.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainRole &apos;Unterthema&apos; on DomainRelationship &apos;ThemenmusterReferencesUnterthema&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ThemenmusterReferencesUnterthema/Unterthema.DisplayName" xml:space="preserve">
+    <value>Unterthema</value>
+    <comment>DisplayName for DomainRole &apos;Unterthema&apos; on DomainRelationship &apos;ThemenmusterReferencesUnterthema&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ThemenmusterReferencesUnterthema/Unterthema.PropertyDisplayName" xml:space="preserve">
+    <value>Themenmuster</value>
+    <comment>PropertyDisplayName for DomainRole &apos;Unterthema&apos; on DomainRelationship &apos;ThemenmusterReferencesUnterthema&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ThemenmusterHasMustertext.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainClass &apos;ThemenmusterHasMustertext&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ThemenmusterHasMustertext.DisplayName" xml:space="preserve">
+    <value>Themenmuster Has Mustertext</value>
+    <comment>DisplayName for DomainClass &apos;ThemenmusterHasMustertext&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ThemenmusterHasMustertext/Themenmuster.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainRole &apos;Themenmuster&apos; on DomainRelationship &apos;ThemenmusterHasMustertext&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ThemenmusterHasMustertext/Themenmuster.DisplayName" xml:space="preserve">
+    <value>Themenmuster</value>
+    <comment>DisplayName for DomainRole &apos;Themenmuster&apos; on DomainRelationship &apos;ThemenmusterHasMustertext&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ThemenmusterHasMustertext/Themenmuster.PropertyDisplayName" xml:space="preserve">
+    <value>Mustertext</value>
+    <comment>PropertyDisplayName for DomainRole &apos;Themenmuster&apos; on DomainRelationship &apos;ThemenmusterHasMustertext&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ThemenmusterHasMustertext/Mustertext.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainRole &apos;Mustertext&apos; on DomainRelationship &apos;ThemenmusterHasMustertext&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ThemenmusterHasMustertext/Mustertext.DisplayName" xml:space="preserve">
+    <value>Mustertext</value>
+    <comment>DisplayName for DomainRole &apos;Mustertext&apos; on DomainRelationship &apos;ThemenmusterHasMustertext&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ThemenmusterHasMustertext/Mustertext.PropertyDisplayName" xml:space="preserve">
+    <value>Themenmuster</value>
+    <comment>PropertyDisplayName for DomainRole &apos;Mustertext&apos; on DomainRelationship &apos;ThemenmusterHasMustertext&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ThemenmusterSourceHasThemenmusterTarget.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainClass &apos;ThemenmusterSourceHasThemenmusterTarget&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ThemenmusterSourceHasThemenmusterTarget.DisplayName" xml:space="preserve">
+    <value>Themenmuster Source Has Themenmuster Target</value>
+    <comment>DisplayName for DomainClass &apos;ThemenmusterSourceHasThemenmusterTarget&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ThemenmusterSourceHasThemenmusterTarget/ThemenmusterSource.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainRole &apos;ThemenmusterSource&apos; on DomainRelationship &apos;ThemenmusterSourceHasThemenmusterTarget&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ThemenmusterSourceHasThemenmusterTarget/ThemenmusterSource.DisplayName" xml:space="preserve">
+    <value>Themenmuster Source</value>
+    <comment>DisplayName for DomainRole &apos;ThemenmusterSource&apos; on DomainRelationship &apos;ThemenmusterSourceHasThemenmusterTarget&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ThemenmusterSourceHasThemenmusterTarget/ThemenmusterSource.PropertyDisplayName" xml:space="preserve">
+    <value>Themenmuster Target</value>
+    <comment>PropertyDisplayName for DomainRole &apos;ThemenmusterSource&apos; on DomainRelationship &apos;ThemenmusterSourceHasThemenmusterTarget&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ThemenmusterSourceHasThemenmusterTarget/ThemenmusterTarget.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainRole &apos;ThemenmusterTarget&apos; on DomainRelationship &apos;ThemenmusterSourceHasThemenmusterTarget&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ThemenmusterSourceHasThemenmusterTarget/ThemenmusterTarget.DisplayName" xml:space="preserve">
+    <value>Themenmuster Target</value>
+    <comment>DisplayName for DomainRole &apos;ThemenmusterTarget&apos; on DomainRelationship &apos;ThemenmusterSourceHasThemenmusterTarget&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ThemenmusterSourceHasThemenmusterTarget/ThemenmusterTarget.PropertyDisplayName" xml:space="preserve">
+    <value>Themenmuster Source</value>
+    <comment>PropertyDisplayName for DomainRole &apos;ThemenmusterTarget&apos; on DomainRelationship &apos;ThemenmusterSourceHasThemenmusterTarget&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ThemenmusterHasZusatzthema.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainClass &apos;ThemenmusterHasZusatzthema&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ThemenmusterHasZusatzthema.DisplayName" xml:space="preserve">
+    <value>Themenmuster Has Zusatzthema</value>
+    <comment>DisplayName for DomainClass &apos;ThemenmusterHasZusatzthema&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ThemenmusterHasZusatzthema/Themenmuster.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainRole &apos;Themenmuster&apos; on DomainRelationship &apos;ThemenmusterHasZusatzthema&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ThemenmusterHasZusatzthema/Themenmuster.DisplayName" xml:space="preserve">
+    <value>Themenmuster</value>
+    <comment>DisplayName for DomainRole &apos;Themenmuster&apos; on DomainRelationship &apos;ThemenmusterHasZusatzthema&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ThemenmusterHasZusatzthema/Themenmuster.PropertyDisplayName" xml:space="preserve">
+    <value>Zusatzthema</value>
+    <comment>PropertyDisplayName for DomainRole &apos;Themenmuster&apos; on DomainRelationship &apos;ThemenmusterHasZusatzthema&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ThemenmusterHasZusatzthema/Zusatzthema.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainRole &apos;Zusatzthema&apos; on DomainRelationship &apos;ThemenmusterHasZusatzthema&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ThemenmusterHasZusatzthema/Zusatzthema.DisplayName" xml:space="preserve">
+    <value>Zusatzthema</value>
+    <comment>DisplayName for DomainRole &apos;Zusatzthema&apos; on DomainRelationship &apos;ThemenmusterHasZusatzthema&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ThemenmusterHasZusatzthema/Zusatzthema.PropertyDisplayName" xml:space="preserve">
+    <value>Themenmuster</value>
+    <comment>PropertyDisplayName for DomainRole &apos;Zusatzthema&apos; on DomainRelationship &apos;ThemenmusterHasZusatzthema&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ZusatzthemaHasMustertext.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainClass &apos;ZusatzthemaHasMustertext&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ZusatzthemaHasMustertext.DisplayName" xml:space="preserve">
+    <value>Zusatzthema Has Mustertext</value>
+    <comment>DisplayName for DomainClass &apos;ZusatzthemaHasMustertext&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ZusatzthemaHasMustertext/Zusatzthema.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainRole &apos;Zusatzthema&apos; on DomainRelationship &apos;ZusatzthemaHasMustertext&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ZusatzthemaHasMustertext/Zusatzthema.DisplayName" xml:space="preserve">
+    <value>Zusatzthema</value>
+    <comment>DisplayName for DomainRole &apos;Zusatzthema&apos; on DomainRelationship &apos;ZusatzthemaHasMustertext&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ZusatzthemaHasMustertext/Zusatzthema.PropertyDisplayName" xml:space="preserve">
+    <value>Mustertext</value>
+    <comment>PropertyDisplayName for DomainRole &apos;Zusatzthema&apos; on DomainRelationship &apos;ZusatzthemaHasMustertext&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ZusatzthemaHasMustertext/Mustertext.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainRole &apos;Mustertext&apos; on DomainRelationship &apos;ZusatzthemaHasMustertext&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ZusatzthemaHasMustertext/Mustertext.DisplayName" xml:space="preserve">
+    <value>Mustertext</value>
+    <comment>DisplayName for DomainRole &apos;Mustertext&apos; on DomainRelationship &apos;ZusatzthemaHasMustertext&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ZusatzthemaHasMustertext/Mustertext.PropertyDisplayName" xml:space="preserve">
+    <value>Zusatzthema</value>
+    <comment>PropertyDisplayName for DomainRole &apos;Mustertext&apos; on DomainRelationship &apos;ZusatzthemaHasMustertext&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ZusatzthemaSourceHasZusatzthemaTarget.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainClass &apos;ZusatzthemaSourceHasZusatzthemaTarget&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ZusatzthemaSourceHasZusatzthemaTarget.DisplayName" xml:space="preserve">
+    <value>Zusatzthema Source Has Zusatzthema Target</value>
+    <comment>DisplayName for DomainClass &apos;ZusatzthemaSourceHasZusatzthemaTarget&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ZusatzthemaSourceHasZusatzthemaTarget/ZusatzthemaSource.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainRole &apos;ZusatzthemaSource&apos; on DomainRelationship &apos;ZusatzthemaSourceHasZusatzthemaTarget&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ZusatzthemaSourceHasZusatzthemaTarget/ZusatzthemaSource.DisplayName" xml:space="preserve">
+    <value>Zusatzthema Source</value>
+    <comment>DisplayName for DomainRole &apos;ZusatzthemaSource&apos; on DomainRelationship &apos;ZusatzthemaSourceHasZusatzthemaTarget&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ZusatzthemaSourceHasZusatzthemaTarget/ZusatzthemaSource.PropertyDisplayName" xml:space="preserve">
+    <value>Zusatzthema Target</value>
+    <comment>PropertyDisplayName for DomainRole &apos;ZusatzthemaSource&apos; on DomainRelationship &apos;ZusatzthemaSourceHasZusatzthemaTarget&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ZusatzthemaSourceHasZusatzthemaTarget/ZusatzthemaTarget.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainRole &apos;ZusatzthemaTarget&apos; on DomainRelationship &apos;ZusatzthemaSourceHasZusatzthemaTarget&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ZusatzthemaSourceHasZusatzthemaTarget/ZusatzthemaTarget.DisplayName" xml:space="preserve">
+    <value>Zusatzthema Target</value>
+    <comment>DisplayName for DomainRole &apos;ZusatzthemaTarget&apos; on DomainRelationship &apos;ZusatzthemaSourceHasZusatzthemaTarget&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.ZusatzthemaSourceHasZusatzthemaTarget/ZusatzthemaTarget.PropertyDisplayName" xml:space="preserve">
+    <value>Zusatzthema Source</value>
+    <comment>PropertyDisplayName for DomainRole &apos;ZusatzthemaTarget&apos; on DomainRelationship &apos;ZusatzthemaSourceHasZusatzthemaTarget&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.MusterbibliothekHasVModell.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainClass &apos;MusterbibliothekHasVModell&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.MusterbibliothekHasVModell.DisplayName" xml:space="preserve">
+    <value>Musterbibliothek Has VModell</value>
+    <comment>DisplayName for DomainClass &apos;MusterbibliothekHasVModell&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.MusterbibliothekHasVModell/Musterbibliothek.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainRole &apos;Musterbibliothek&apos; on DomainRelationship &apos;MusterbibliothekHasVModell&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.MusterbibliothekHasVModell/Musterbibliothek.DisplayName" xml:space="preserve">
+    <value>Musterbibliothek</value>
+    <comment>DisplayName for DomainRole &apos;Musterbibliothek&apos; on DomainRelationship &apos;MusterbibliothekHasVModell&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.MusterbibliothekHasVModell/Musterbibliothek.PropertyDisplayName" xml:space="preserve">
+    <value>VModell</value>
+    <comment>PropertyDisplayName for DomainRole &apos;Musterbibliothek&apos; on DomainRelationship &apos;MusterbibliothekHasVModell&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.MusterbibliothekHasVModell/VModell.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainRole &apos;VModell&apos; on DomainRelationship &apos;MusterbibliothekHasVModell&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.MusterbibliothekHasVModell/VModell.DisplayName" xml:space="preserve">
+    <value>VModell</value>
+    <comment>DisplayName for DomainRole &apos;VModell&apos; on DomainRelationship &apos;MusterbibliothekHasVModell&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.MusterbibliothekHasVModell/VModell.PropertyDisplayName" xml:space="preserve">
+    <value>Musterbibliothek</value>
+    <comment>PropertyDisplayName for DomainRole &apos;VModell&apos; on DomainRelationship &apos;MusterbibliothekHasVModell&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VariantenHasVariante.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainClass &apos;VariantenHasVariante&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VariantenHasVariante.DisplayName" xml:space="preserve">
+    <value>Varianten Has Variante</value>
+    <comment>DisplayName for DomainClass &apos;VariantenHasVariante&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VariantenHasVariante/Varianten.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainRole &apos;Varianten&apos; on DomainRelationship &apos;VariantenHasVariante&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VariantenHasVariante/Varianten.DisplayName" xml:space="preserve">
+    <value>Varianten</value>
+    <comment>DisplayName for DomainRole &apos;Varianten&apos; on DomainRelationship &apos;VariantenHasVariante&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VariantenHasVariante/Varianten.PropertyDisplayName" xml:space="preserve">
+    <value>Variante</value>
+    <comment>PropertyDisplayName for DomainRole &apos;Varianten&apos; on DomainRelationship &apos;VariantenHasVariante&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VariantenHasVariante/Variante.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainRole &apos;Variante&apos; on DomainRelationship &apos;VariantenHasVariante&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VariantenHasVariante/Variante.DisplayName" xml:space="preserve">
+    <value>Variante</value>
+    <comment>DisplayName for DomainRole &apos;Variante&apos; on DomainRelationship &apos;VariantenHasVariante&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VariantenHasVariante/Variante.PropertyDisplayName" xml:space="preserve">
+    <value>Varianten</value>
+    <comment>PropertyDisplayName for DomainRole &apos;Variante&apos; on DomainRelationship &apos;VariantenHasVariante&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VarianteSourceReferencesVarianteTarget.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainClass &apos;VarianteSourceReferencesVarianteTarget&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VarianteSourceReferencesVarianteTarget.DisplayName" xml:space="preserve">
+    <value>Variante Source References Variante Target</value>
+    <comment>DisplayName for DomainClass &apos;VarianteSourceReferencesVarianteTarget&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VarianteSourceReferencesVarianteTarget/VarianteSource.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainRole &apos;VarianteSource&apos; on DomainRelationship &apos;VarianteSourceReferencesVarianteTarget&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VarianteSourceReferencesVarianteTarget/VarianteSource.DisplayName" xml:space="preserve">
+    <value>Variante Source</value>
+    <comment>DisplayName for DomainRole &apos;VarianteSource&apos; on DomainRelationship &apos;VarianteSourceReferencesVarianteTarget&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VarianteSourceReferencesVarianteTarget/VarianteSource.PropertyDisplayName" xml:space="preserve">
+    <value>Referenzvariante</value>
+    <comment>PropertyDisplayName for DomainRole &apos;VarianteSource&apos; on DomainRelationship &apos;VarianteSourceReferencesVarianteTarget&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VarianteSourceReferencesVarianteTarget/VarianteTarget.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for DomainRole &apos;VarianteTarget&apos; on DomainRelationship &apos;VarianteSourceReferencesVarianteTarget&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VarianteSourceReferencesVarianteTarget/VarianteTarget.DisplayName" xml:space="preserve">
+    <value>Variante Target</value>
+    <comment>DisplayName for DomainRole &apos;VarianteTarget&apos; on DomainRelationship &apos;VarianteSourceReferencesVarianteTarget&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.VarianteSourceReferencesVarianteTarget/VarianteTarget.PropertyDisplayName" xml:space="preserve">
+    <value>Variante Source</value>
+    <comment>PropertyDisplayName for DomainRole &apos;VarianteTarget&apos; on DomainRelationship &apos;VarianteSourceReferencesVarianteTarget&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.TypStandard/Ja.DisplayName" xml:space="preserve">
+    <value>Ja</value>
+    <comment>Display name for EnumerationLiteral &apos;Ja&apos; on DomainEnumeration &apos;TypStandard&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.TypStandard/Ja.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for EnumerationLiteral &apos;Ja&apos; on DomainEnumeration &apos;TypStandard&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.TypStandard/Nein.DisplayName" xml:space="preserve">
+    <value>Nein</value>
+    <comment>Display name for EnumerationLiteral &apos;Nein&apos; on DomainEnumeration &apos;TypStandard&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.TypStandard/Nein.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for EnumerationLiteral &apos;Nein&apos; on DomainEnumeration &apos;TypStandard&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.DomainEnumeration1/EnumerationLiteral1.DisplayName" xml:space="preserve">
+    <value>Enumeration Literal1</value>
+    <comment>Display name for EnumerationLiteral &apos;EnumerationLiteral1&apos; on DomainEnumeration &apos;DomainEnumeration1&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.DomainEnumeration1/EnumerationLiteral1.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for EnumerationLiteral &apos;EnumerationLiteral1&apos; on DomainEnumeration &apos;DomainEnumeration1&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.DomainEnumeration1/EnumerationLiteral2.DisplayName" xml:space="preserve">
+    <value>Enumeration Literal2</value>
+    <comment>Display name for EnumerationLiteral &apos;EnumerationLiteral2&apos; on DomainEnumeration &apos;DomainEnumeration1&apos;</comment>
+  </data>
+  <data name="Tum.VModellXT.DomainEnumeration1/EnumerationLiteral2.Description" xml:space="preserve">
+    <value></value>
+    <comment>Description for EnumerationLiteral &apos;EnumerationLiteral2&apos; on DomainEnumeration &apos;DomainEnumeration1&apos;</comment>
+  </data>
+  <data name="UnrecognizedElementType" xml:space="preserve">
+    <value>ElementType {0} is not recognized as a type of domain class which belongs to this domain model.</value>
+    <comment>Incorrect ElementType passed in to Model.CreateElement method</comment>
+  </data>
+  <data name="UnrecognizedElementLinkType" xml:space="preserve">
+    <value>ElementLinkType {0} is not recognized as a type of domain relationship which belongs to this domain model.</value>
+    <comment>Incorrect ElementLinkType passed in to Model.CreateElementLink method</comment>
+  </data>
+  <data name="AmbiguousSchema" xml:space="preserve">
+    <value>More than one schema found for target namespace &apos;{0}&apos;, use the first one at &apos;{1}&apos;.</value>
+    <comment>Serialization Warning: AmbiguousSchema</comment>
+  </data>
+  <data name="ExpectingFullFormRelationship" xml:space="preserve">
+    <value>Element &apos;{0}&apos; is treated as the target role-player of a relationship &apos;{1}&apos; instance, which should be serialized in full-form.</value>
+    <comment>Serialization Warning: ExpectingFullFormRelationship</comment>
+  </data>
+  <data name="ExpectingShortFormRelationship" xml:space="preserve">
+    <value>Instances of relationship &apos;{0}&apos; should be serialized in short-form.</value>
+    <comment>Serialization Warning: ExpectingShortFormRelationship</comment>
+  </data>
+  <data name="IgnoredPropertyValue" xml:space="preserve">
+    <value>Invalid property value &apos;{0}&apos; for property &apos;{1}&apos; with type &apos;{2}&apos;, ignored.</value>
+    <comment>Serialization Warning: IgnoredPropertyValue</comment>
+  </data>
+  <data name="MissingId" xml:space="preserve">
+    <value>Missing &apos;Id&apos; attribute, a new Guid &apos;{0}&apos; is auto-generated.</value>
+    <comment>Serialization Warning: MissingId</comment>
+  </data>
+  <data name="MonikerResolvedToDuplicateLink" xml:space="preserve">
+    <value>Resolving moniker &apos;{0}&apos; causes a duplicate link to be created, so the link and the moniker are ignored.</value>
+    <comment>Serialization Warning: MonikerResolvedToDuplicateLink</comment>
+  </data>
+  <data name="NoSchema" xml:space="preserve">
+    <value>Cannot find a schema that defines target namespace &apos;{0}&apos;, schema validation skipped.</value>
+    <comment>Serialization Warning: NoSchema</comment>
+  </data>
+  <data name="UnexpectedXmlElement" xml:space="preserve">
+    <value>Unexpected XML element &apos;{0}&apos;, ignored.</value>
+    <comment>Serialization Warning: UnexpectedXmlElement</comment>
+  </data>
+  <data name="AmbiguousMoniker" xml:space="preserve">
+    <value>Ambiguous moniker &apos;{0}&apos; encountered. It is used for both &apos;{1}&apos; and &apos;{2}&apos;.</value>
+    <comment>Serialization Error: AmbiguousMoniker</comment>
+  </data>
+  <data name="CannotMonikerizeElement" xml:space="preserve">
+    <value>Instances of DomainClass &apos;{0}&apos; cannot be serialized as a moniker.
+A DomainClass can be serialized as a moniker only if 
+1) it has a defined/inherited DomainProperty marked as IsMonikerKey=true, or 
+2) it is marked/inherited with SerializeId=true.</value>
+    <comment>Serialization Error: CannotMonikerizeElement</comment>
+  </data>
+  <data name="CannotOpenDocument" xml:space="preserve">
+    <value>Error encountered, check Error List window for details.</value>
+    <comment>Serialization Error: CannotOpenDocument</comment>
+  </data>
+  <data name="CannotSaveDocument" xml:space="preserve">
+    <value>Error encountered, check Error List window for details.</value>
+    <comment>Serialization Error: CannotSaveDocument</comment>
+  </data>
+  <data name="DanglingRelationship" xml:space="preserve">
+    <value>Relationship &apos;{0}&apos; instance is missing target role-player.</value>
+    <comment>Serialization Error: DanglingRelationship</comment>
+  </data>
+  <data name="InvalidPropertyValue" xml:space="preserve">
+    <value>Invalid property value &apos;{0}&apos; for property &apos;{1}&apos; with type &apos;{2}&apos;.</value>
+    <comment>Serialization Error: InvalidPropertyValue</comment>
+  </data>
+  <data name="MissingMoniker" xml:space="preserve">
+    <value>Missing moniker. A moniker is expected in attribute &apos;{0}&apos;.</value>
+    <comment>Serialization Error: MissingMoniker</comment>
+  </data>
+  <data name="MissingTransaction" xml:space="preserve">
+    <value>This must be called within the context of an active transaction.</value>
+    <comment>Serialization Error: MissingTransaction</comment>
+  </data>
+  <data name="UnresolvedMoniker" xml:space="preserve">
+    <value>Cannot resolve moniker &apos;{0}&apos;.</value>
+    <comment>Serialization Error: UnresolvedMoniker</comment>
+  </data>
+  <data name="VersionMismatch" xml:space="preserve">
+    <value>Unsupported version &apos;{0}&apos;, can only support &apos;{1}&apos;.</value>
+    <comment>Serialization Error: VersionMismatch</comment>
+  </data>
+  <data name="CannotCloseExistingDiagramDocument" xml:space="preserve">
+    <value>Diagram file &apos;{0}&apos; cannot be closed.</value>
+    <comment>User cancel closing diagram file. Hence, the DSL model file cannot be opened</comment>
+  </data>
+  <data name="BindingErrorOccurred" xml:space="preserve">
+    <value>Extensions for this designer may not be found as a MEF binding error has occurred. The error that occurred was:
+{0}</value>
+    <comment>MEF binding error occurred - exception message being logged in the error window so the user is aware.</comment>
+  </data>
+  <data name="InvalidSaveRootElementType" xml:space="preserve">
+    <value>&apos;{0}&apos; is not a valid root element type.</value>
+    <comment>Exception message used if an invalid root element type is passed to IDomainModelSerializer.SaveModel / SaveModelAndDiagram</comment>
+  </data>
+  <data name="InvalidSaveDiagramType" xml:space="preserve">
+    <value>&apos;{0}&apos; is not a valid diagram type.</value>
+    <comment>Exception message used if an invalid diagram type is passed to IDomainModelSerializer.SaveModelAndDiagram</comment>
+  </data>
+  <data name="MinimumMultiplicityMissingLink" xml:space="preserve">
+    <value>{0} {1} has no {2}.</value>
+    <comment>Multiplicity underflow validation.</comment>
+  </data>
+  <data name="SaveOperationCancelled" xml:space="preserve">
+    <value>Save operation cancelled.</value>
+    <comment>Message when save is cancelled on validation errors</comment>
+  </data>
+  <data name="SaveValidationFailed" xml:space="preserve">
+    <value>There were validation errors, continue save?</value>
+    <comment>Message when validation errors are found on save</comment>
+  </data>
+  <data name="UnloadableSaveValidationFailed" xml:space="preserve">
+    <value>There were validation errors. Continuing to save may cause the file to become unloadable, do you want to continue?</value>
+    <comment>Message when validation errors are found on save that will cause file to become unloadable</comment>
+  </data>
+</root>

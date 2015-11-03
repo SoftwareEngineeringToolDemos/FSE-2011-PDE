@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DataTemplates>
+  <DataTemplate>
+    <DisplayName>Domain Element Property Grid</DisplayName>
+    <Description>This is a partial class that is generated for the property grid wrapper for this domain class. You can override certain methods to provide custom functionality.</Description>
+    <SyntaxHighlighting>C#</SyntaxHighlighting>
+    <Template>
+      <![CDATA[
+using Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel.PropertyGrid; 
+      
+namespace $CustomString1$.ViewModel.PropertyGrid
+{
+  public partial class PropertyGrid$CustomString0$ViewModel
+  {
+$CustomString2$
+  }
+}
+]]>
+    </Template>
+  </DataTemplate>
+</DataTemplates>

@@ -1,0 +1,279 @@
+﻿<#@ template language="C#" inherits="BaseTemplate"#> 
+<#@ import namespace="Tum.PDE.LanguageDSL"#>
+<#@ import namespace="Microsoft.VisualStudio.Modeling" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Collections.ObjectModel" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+using DslModeling = global::Microsoft.VisualStudio.Modeling;
+using DslEditorModeling = global::Tum.PDE.ToolFramework.Modeling;
+using DslEditorDiagrams = global::Tum.PDE.ToolFramework.Modeling.Diagrams;
+
+<#
+	GenerateDocumentData(this.MetaModel);
+#>
+<#+ 
+public void GenerateDocumentData(MetaModel dm)
+{
+#>
+namespace <#= dm.Namespace #>
+{
+	/// <summary>
+	/// Double-derived class to allow easier code customization.
+	/// </summary>
+	public partial class <#= dm.Name #>DocumentData : <#= dm.Name #>DocumentDataBase
+	{
+		#region Constructor
+		/// <summary>
+		/// Constructs a new <#= dm.Name #>DocumentData.
+		/// </summary>	
+		public <#= dm.Name #>DocumentData() : base()
+		{
+
+		}
+		#endregion
+		
+		/*
+		#region Singleton Instance
+        /// <summary>
+        /// Singleton instance.
+        /// </summary>
+        [global::System.Diagnostics.DebuggerBrowsable(global::System.Diagnostics.DebuggerBrowsableState.Never)] // Will trigger creation otherwise.
+        public static DslEditorModeling::ModelData Instance
+        {
+            [global::System.Diagnostics.DebuggerStepThrough]
+            get
+            {
+                if( modelDatainstance == null )
+				{
+					modelDatainstance = new <#= dm.Name #>DocumentData();
+				}
+				
+				return modelDatainstance;
+            }
+        }
+        #endregion*/
+	}
+	
+	/// <summary>
+	/// Class which represents a <#= dm.Name #> document in memory.
+	/// </summary>
+	public abstract partial class <#= dm.Name #>DocumentDataBase : DslEditorModeling::ModelData
+	{
+		/// <summary>
+		/// Singleton instance.
+        /// </summary>
+        protected static DslEditorModeling::ModelData modelDatainstance;
+		
+		#region Constructor
+		/// <summary>
+		/// Constructs a new <#= dm.Name #>DocumentDataBase.
+		/// </summary>	
+		[global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+		protected <#= dm.Name #>DocumentDataBase() : base(true, false)
+		{
+		}
+		#endregion
+
+		#region Initialization
+		///<Summary>
+		/// Defines a partial method that will be called from the constructor to
+		/// allow any necessary serialization setup to be done.
+		///</Summary>
+		///<remarks>
+		/// For a DSL created with the DSL Designer wizard, an implementation of this 
+		/// method will be generated in the GeneratedCode\SerializationHelper.cs class.
+		///</remarks>
+		partial void InitializeSerialization(DslModeling::Store store);
+
+        /// <summary>
+        /// Initializes services.
+        /// </summary>
+        protected override void InitializeServices()
+		{			
+			if( <#= dm.Name #>DomainModelExtensionServices.Instance == null )
+				throw new System.ArgumentNullException("ExtensionServices are not initialized");
+				
+			if( <#= dm.Name #>ValidationController.Instance == null )
+				throw new System.ArgumentNullException("ValidationController is not initialized");
+		}
+
+		/// <summary>
+        /// Initializes the model contexts collection.
+        /// </summary>
+        protected override void InitializeModelContexts()
+		{
+<#+
+		foreach(BaseModelContext modelContext in this.MetaModel.ModelContexts)	
+		{
+			bool bAdd = false;
+			if( modelContext is ModelContext)
+				bAdd = true;
+			else if( modelContext is ExternModelContext)
+			{
+				ExternModelContext e = modelContext as ExternModelContext;
+				if( e.ModelContext != null )
+					bAdd = true;
+			}			
+			if(!bAdd )
+				continue;
+			
+#>
+			
+			// <#= modelContext.Name #>
+			ModelContext<#= modelContext.Name #> = new <#= modelContext.Name #>ModelContext(this);
+			this.availableModelContexts.Add(ModelContext<#= modelContext.Name #>);
+<#+
+			if( modelContext.IsDefault)
+			{
+#>
+			this.currentModelContext = ModelContext<#= modelContext.Name #>;
+<#+
+			}
+		}
+#>
+		}	
+		
+        /// <summary>
+        /// Serialization initialization.
+        /// </summary>
+        protected override void InitializeSerializationForStore(DslEditorModeling.DomainModelStore store)
+		{
+			// Call the partial method to allow any required serialization setup to be done.
+			this.InitializeSerialization(store);
+			
+			// initiliaze serialization for the domains model
+			<#= dm.Name #>DiagramsDSLSerializationHelper.Instance.InitializeSerialization(store);
+			
+			// initialize serializers directory
+			<#= dm.Name #>SerializationHelper.InitializeSerializers(store.SerializerDirectory, store.DomainDataDirectory);
+		}
+		#endregion
+<#+ 
+		foreach(BaseModelContext modelContext in this.MetaModel.ModelContexts)	
+		{
+			bool bAdd = false;
+			if( modelContext is ModelContext)
+				bAdd = true;
+			else if( modelContext is ExternModelContext)
+			{
+				ExternModelContext e = modelContext as ExternModelContext;
+				if( e.ModelContext != null )
+					bAdd = true;
+			}			
+			if(!bAdd )
+				continue;
+#>
+
+		/// <summary>
+        /// Gets the model context <#= modelContext.Name #>.
+        /// </summary>
+		public <#= modelContext.Name #>ModelContext ModelContext<#= modelContext.Name #>
+		{
+			get;
+			private set;
+		}
+<#+
+		}
+#>
+
+		#region Properties
+		/// <summary>
+        /// Gets the DomainModel's ResourceManager.
+        /// </summary>
+        public override global::System.Resources.ResourceManager ResourceManager
+        {
+            get
+            {
+                return <#= dm.Name #>DomainModel.SingletonResourceManager;
+            }
+        }
+		#endregion
+		
+		#region Methods
+		/// <summary>
+        /// Returns a collection of domain models to load into the store.
+        /// </summary>
+        protected override System.Type[] GetDomainModels()
+        {
+			return new System.Type[]{
+				typeof(DslEditorDiagrams::DiagramsDSLDomainModel),
+				typeof(DslEditorModeling::DomainModelDslEditorModeling),
+				typeof(<#= dm.Name #>DomainModel),
+<#+
+	List<MetaModel> models = CodeGenerationUtilities.GetAllLibraries(this.MetaModel);
+	foreach(MetaModel importedModel in models)
+	{
+#>
+				typeof(<#= importedModel.GetFullName(true) #>DomainModel),
+<#+
+	}	
+#>
+			};
+        }
+		
+		/// <summary>
+        /// Resets the current document data.
+        /// </summary>
+        public override void Reset()
+        {
+			base.Reset();
+			
+			<#= dm.Name #>DomainModelIdProvider.Instance.Reset();
+        }
+		
+		/// <summary>
+        /// Gets the services, which belong to the current domain model.
+        /// </summary>
+        /// <returns>DomainModel services.</returns>
+        public override DslEditorModeling::IDomainModelServices GetDomainModelServices()
+		{
+			return <#= dm.Name #>DomainModelServices.Instance;
+		}
+
+        /// <summary>
+        /// Gets the services, which are specific to the current domain model that the given element belongs to.
+        /// </summary>
+		/// <param name="element">Element.</param>
+        /// <returns>DomainModel services</returns>
+        public override DslEditorModeling::IDomainModelServices GetDomainModelServices(DslEditorModeling::IDomainModelOwnable element)
+		{
+			return element.GetDomainModelServices();	
+		}
+		
+        /// <summary>
+        /// Dispose method.
+        /// </summary>
+        /// <param name="disposing"></param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                modelDatainstance = null;
+            }
+			
+			base.Dispose(disposing);
+        }		
+		#endregion
+		
+		#region Partition Support
+		/// <summary>
+		/// Get the Partition where model data will be loaded into.
+		/// Base implementation returns the default partition of the store.
+		/// </summary>
+		public override DslModeling::Partition GetModelPartition()
+		{
+			if (this.Store != null)
+			{
+				return this.Store.DefaultPartition;
+			}
+			
+			return null;
+		}
+		#endregion
+	}
+}
+<#+
+}
+#>

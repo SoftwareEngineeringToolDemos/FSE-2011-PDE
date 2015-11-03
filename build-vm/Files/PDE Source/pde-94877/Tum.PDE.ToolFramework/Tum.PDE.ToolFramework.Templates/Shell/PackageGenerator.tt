@@ -1,0 +1,280 @@
+﻿<#@ template language="C#" inherits="BaseTemplate"#> 
+<#@ import namespace="Tum.PDE.LanguageDSL"#>
+<#@ import namespace="Microsoft.VisualStudio.Modeling" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Collections.ObjectModel" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#
+	string dslName = this.MetaModel.Name;
+	string directiveName = this.MetaModel.Name;
+	string dslFullName = this.MetaModel.GetFullName(true);
+#>
+using VSShellInterop = global::Microsoft.VisualStudio.Shell.Interop;
+using VSShell = global::Microsoft.VisualStudio.Shell;
+using VSTextTemplatingHost = global::Microsoft.VisualStudio.TextTemplating.VSHost;
+
+using DslShell = global::Microsoft.VisualStudio.Modeling.Shell;
+using DslDesign = global::Microsoft.VisualStudio.Modeling.Design;
+using DslModeling = global::Microsoft.VisualStudio.Modeling;
+
+using DslEditorShell = global::Tum.PDE.ToolFramework.Modeling.Shell;
+
+namespace <#= this.MetaModel.Namespace #>
+{
+	/// <summary>
+	/// This class implements the VS package that integrates this DSL into Visual Studio.
+	/// </summary>
+	[VSShell::DefaultRegistryRoot("Software\\Microsoft\\VisualStudio\\10.0")]
+	[VSShell::PackageRegistration(RegisterUsing = VSShell::RegistrationMethod.Assembly, UseManagedResourcesOnly = true)]
+<#
+	if( this.MetaModel.View.CreateModelTree )
+	{
+#>
+	[VSShell::ProvideToolWindow(typeof(<#= this.MetaModel.Name #>ModelTreeToolWindow), MultiInstances = false, Style = VSShell::VsDockStyle.Tabbed, Orientation = VSShell::ToolWindowOrientation.Left, Window = "{3AE79031-E1BC-11D0-8F78-00A0C9110057}", Transient = true)]
+<#
+	}
+	if( this.MetaModel.View.CreatePropertyGrid )
+	{
+#>
+	[VSShell::ProvideToolWindow(typeof(<#= this.MetaModel.Name #>PropertyGridToolWindow), MultiInstances = false, Style = VSShell::VsDockStyle.Tabbed, Orientation = VSShell::ToolWindowOrientation.Right, Window = "{EEFA5220-E298-11D0-8F78-00A0C9110057}", Transient = true)]
+<#
+	}
+	if( this.MetaModel.View.CreateErrorList )
+	{
+#>
+	[VSShell::ProvideToolWindow(typeof(<#= this.MetaModel.Name #>ErrorListToolWindow), MultiInstances = false, Style = VSShell::VsDockStyle.Tabbed, Orientation = VSShell::ToolWindowOrientation.Bottom, Window = "{D78612C7-9962-4B83-95D9-268046DAD23A}", Transient = true)]
+<#
+	}
+	if( this.MetaModel.View.CreateDependenciesView )
+	{
+#>
+	[VSShell::ProvideToolWindow(typeof(<#= this.MetaModel.Name #>DependenciesToolWindow), MultiInstances = false, Style = VSShell::VsDockStyle.Tabbed, Orientation = VSShell::ToolWindowOrientation.Bottom, Window = "{D78612C7-9962-4B83-95D9-268046DAD23A}", Transient = true)]
+<#
+	}
+	foreach(DiagramClass diagramClass in this.MetaModel.AllDiagramClasses)
+	{
+#>
+	//[VSShell::ProvideToolWindow(typeof(<#= this.MetaModel.Name #><#= diagramClass.Name #>ToolWindow), MultiInstances = false, Style = VSShell::VsDockStyle.MDI, Orientation = VSShell::ToolWindowOrientation.none, Transient = true)]
+<#
+	}
+#>
+	//[VSShell::ProvideToolWindow(typeof(<#= this.MetaModel.Name #>PluginsVMToolWindow), MultiInstances = true, Style = VSShell::VsDockStyle.Tabbed)]
+	[VSShell::ProvideToolWindow(typeof(<#= this.MetaModel.Name #>SearchToolWindow), MultiInstances = false, Style = VSShell::VsDockStyle.Float)]
+	[VSShell::ProvideToolWindow(typeof(<#= this.MetaModel.Name #>SearchResultToolWindow), MultiInstances = false, Style = VSShell::VsDockStyle.Tabbed, Orientation = VSShell::ToolWindowOrientation.Bottom, Window = "{D78612C7-9962-4B83-95D9-268046DAD23A}", Transient = true)]
+	[VSShell::ProvideEditorFactory(typeof(<#= dslName #>EditorFactory), 103, TrustLevel = VSShellInterop::__VSEDITORTRUSTLEVEL.ETL_AlwaysTrusted)]
+	[VSShell::ProvideEditorExtension(typeof(<#= dslName #>EditorFactory), "." + Constants.DesignerFileExtension, 50)]
+	[DslShell::ProvideRelatedFile("." + Constants.DesignerFileExtension, Constants.DefaultDiagramExtension,
+		ProjectSystem = DslShell::ProvideRelatedFileAttribute.CSharpProjectGuid,
+		FileOptions = DslShell::RelatedFileType.FileName)]
+	[DslShell::ProvideRelatedFile("." + Constants.DesignerFileExtension, Constants.DefaultDiagramExtension,
+		ProjectSystem = DslShell::ProvideRelatedFileAttribute.VisualBasicProjectGuid,
+		FileOptions = DslShell::RelatedFileType.FileName)]
+	[DslShell::RegisterAsDslToolsEditor]
+	[global::System.Runtime.InteropServices.ComVisible(true)]
+	[DslShell::ProvideBindingPath]
+	[DslShell::ProvideXmlEditorChooserBlockSxSWithXmlEditor(@"<#= dslName #>", typeof(<#= dslName #>EditorFactory))]
+	internal abstract partial class <#= dslName #>PackageBase : DslEditorShell::ModelPackage
+	{
+		/// <summary>
+        /// Gets or sets the package controller.
+        /// </summary>
+        public <#= dslName #>ShellPackageController PackageController
+        {
+            get;
+            set;
+        }
+
+		/*
+		/// <summary>
+        /// Gets or sets the editor factory.
+        /// </summary>
+        public <#= dslName #>EditorFactory EditorFactory
+        {
+            get;
+            set;
+        }*/
+
+        /// <summary>
+        /// Create package controller.
+        /// </summary>
+        protected virtual void CreatePackageController()
+        {
+            this.PackageController = new <#= dslName #>ShellPackageController(this);
+        }	
+	
+		/// <summary>
+		/// Initialization method called by the package base class when this package is loaded.
+		/// </summary>
+		protected override void Initialize()
+		{
+			base.Initialize();
+
+		    // Register the editor factory used to create the DSL editor.
+            this.EditorFactory = new <#= dslName #>EditorFactory(this);
+            this.RegisterEditorFactory(this.EditorFactory);
+
+            // Create package controller.
+            this.CreatePackageController();
+
+			// Initialize Extension Registars
+			// this is a partial method call
+			this.InitializeExtensions();
+
+			// Add dynamic toolbox items
+			this.SetupDynamicToolbox();
+		}
+
+		/// <summary>
+		/// Partial method to initialize ExtensionRegistrars (if any) in the DslPackage
+		/// </summary>
+		partial void InitializeExtensions();
+				
+		#region Methods
+        /// <summary>
+        /// Gets the editor type id.
+        /// </summary>
+        public override System.Guid EditorTypeId
+        {
+            get
+			{
+				return new System.Guid(Constants.<#= dslName #>EditorFactoryId);
+			}
+        }
+
+        /// <summary>
+        /// Returns a list of guids identifying the tool windows contained in this package.
+        /// </summary>
+        /// <returns>List of guid of tool windows in this package.</returns>
+        public override System.Collections.Generic.List<System.Guid> GetToolWindowIdList()
+		{
+			System.Collections.Generic.List<System.Guid> lst = new System.Collections.Generic.List<System.Guid>();
+<#
+	if( this.MetaModel.View.CreateModelTree )
+	{
+#>
+			lst.Add(new System.Guid("<#= this.MetaModel.View.ModelTreeId #>"));	// ModelTree
+<#
+	}
+	if( this.MetaModel.View.CreatePropertyGrid )
+	{
+#>
+			lst.Add(new System.Guid("<#= this.MetaModel.View.PropertyGridId #>"));	// PropertyGrid
+<#
+	}
+	if( this.MetaModel.View.CreateErrorList )
+	{
+#>
+			lst.Add(new System.Guid("<#= this.MetaModel.View.ErrorListId #>"));	// ErrorList
+<#
+	}
+	if( this.MetaModel.View.CreateDependenciesView )
+	{
+#>
+			lst.Add(new System.Guid("<#= this.MetaModel.View.DependenciesViewId #>"));	// DependenciesView
+<#
+	}
+	foreach(DiagramClass diagramClass in this.MetaModel.AllDiagramClasses)
+	{
+		if( !CodeGenerationUtilities.IsDiagramGenerated(diagramClass) )
+			continue;
+#>
+			lst.Add(new System.Guid("<#= diagramClass.Id #>"));	// <#= diagramClass.Name #>
+<#
+	}
+#>
+			lst.Add(new System.Guid("<#= this.MetaModel.View.SearchId #>"));	// Search
+			lst.Add(new System.Guid("<#= this.MetaModel.View.SearchResultId #>"));	// SearchResult	
+			
+			//lst.Add(new System.Guid("<#= this.MetaModel.View.PluginWindowId #>"));	// Plugins			
+			return lst;
+		}
+
+        /// <summary>
+        /// Gets the tool window type for the given view model type if possible. Throws NotSupportedException otherwise.
+        /// </summary>
+        /// <param name="vmType"></param>
+        /// <returns></returns>
+        public override System.Type GetToolWindowType(System.Type vmType)
+		{
+<#
+	MetaModel dm = this.MetaModel;
+	if( this.MetaModel.View.CreateModelTree )
+	{
+#>
+			if( vmType == typeof(<#= this.MetaModel.Namespace #>.ViewModel.<#= this.MetaModel.Name #>ModelTreeViewModel) )
+				return typeof(<#= this.MetaModel.Name #>ModelTreeToolWindow);
+<#
+	}
+	if( this.MetaModel.View.CreatePropertyGrid )
+	{
+#>
+			if( vmType == typeof(<#= this.MetaModel.Namespace #>.ViewModel.<#= this.MetaModel.Name #>PropertyGridViewModel) )
+				return typeof(<#= this.MetaModel.Name #>PropertyGridToolWindow);
+<#
+	}
+	if( this.MetaModel.View.CreateErrorList )
+	{
+#>
+			if( vmType == typeof(<#= this.MetaModel.Namespace #>.ViewModel.<#= this.MetaModel.Name #>ErrorListViewModel) )
+				return typeof(<#= this.MetaModel.Name #>ErrorListToolWindow);
+<#
+	}
+	if( this.MetaModel.View.CreateDependenciesView )
+	{
+#>
+			if( vmType == typeof(<#= this.MetaModel.Namespace #>.ViewModel.<#= this.MetaModel.Name #>DependenciesViewModel) )
+				return typeof(<#= this.MetaModel.Name #>DependenciesToolWindow);
+<#
+	}
+	foreach(DiagramClass diagramClass in this.MetaModel.AllDiagramClasses)
+	{
+		if( !CodeGenerationUtilities.IsDiagramGenerated(diagramClass) )
+			continue;
+#>
+			if( vmType == typeof(<#= this.MetaModel.Namespace #>.ViewModel.<#= this.MetaModel.Name #><#= diagramClass.Name #>SurfaceViewModel) )
+				return typeof(<#= this.MetaModel.Name #><#= diagramClass.Name #>ToolWindow);
+<#
+	}
+#>
+			if( vmType == typeof(<#= this.MetaModel.Namespace #>.ViewModel.<#= this.MetaModel.Name #>SearchViewModel) )
+				return typeof(<#= this.MetaModel.Name #>SearchToolWindow);				
+			else if( vmType == typeof(<#= this.MetaModel.Namespace #>.ViewModel.<#= this.MetaModel.Name #>SearchResultViewModel) )
+				return typeof(<#= this.MetaModel.Name #>SearchResultToolWindow);				
+				
+			//return typeof(<#= this.MetaModel.Name #>PluginsVMToolWindow);
+			throw new System.NotSupportedException("GetToolWindowType for type: " + vmType.FullName);
+		}
+		
+		/// <summary>
+        /// Dispose.
+        /// </summary>
+        /// <param name="disposing"></param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+                this.PackageController.Dispose();
+            base.Dispose(disposing);
+        }
+		#endregion		
+	}
+}
+
+//
+// Package attributes which may need to change are placed on the partial class below, rather than in the main include file.
+//
+namespace <#= this.MetaModel.Namespace #>
+{
+	/// <summary>
+	/// Double-derived class to allow easier code customization.
+	/// </summary>
+	[VSShell::ProvideMenuResource("1000.ctmenu", 1)]
+	[VSShell::ProvideToolboxItems(1)]
+	[VSTextTemplatingHost::ProvideDirectiveProcessor(typeof(global::<#= this.MetaModel.Namespace #>.<#= directiveName #>DirectiveProcessor), global::<#= this.MetaModel.Namespace #>.<#= directiveName #>DirectiveProcessor.<#= directiveName #>DirectiveProcessorName, "A directive processor that provides access to <#= directiveName #> files")]
+	[global::System.Runtime.InteropServices.Guid(Constants.<#= dslName #>PackageId)]
+	internal sealed partial class <#= dslName #>Package : <#= dslName #>PackageBase
+	{
+	}
+}
+

@@ -1,0 +1,191 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Tum.PDE.ToolFramework.Modeling.Base</name>
+    </assembly>
+    <members>
+        <member name="T:Tum.PDE.ToolFramework.Modeling.Base.LogHelper">
+            <summary>
+            Log helper class.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Base.LogHelper.GetLog">
+            <summary>
+            Starts the timer.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Base.LogHelper.HasErrors">
+            <summary>
+            Gets whether errors have been logged.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Base.LogHelper.StartTimer">
+            <summary>
+            Starts the timer.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Base.LogHelper.StopTimer">
+            <summary>
+            Stops the timer.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Base.LogHelper.ResetLog">
+            <summary>
+            Resets the log.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Base.LogHelper.IsEmpty">
+            <summary>
+            Is log empty.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Base.LogHelper.LogError(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="desc"></param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Base.LogHelper.LogEvent(System.String)">
+            <summary>
+            Logs an event.
+            </summary>
+            <param name="desc">Description for the event.</param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Base.LogHelper.DumpLog(System.String)">
+            <summary>
+            Dumps the gathered log to a file.
+            </summary>
+            <param name="fileName"></param>
+        </member>
+        <member name="T:Tum.PDE.ToolFramework.Modeling.Base.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Base.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Base.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="T:Tum.PDE.ToolFramework.Modeling.Base.LinkItem">
+            <summary>
+            Class used to store information required for a link item. This consists of: Titel,
+            Description, Link and Category.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Base.LinkItem.#ctor(System.String)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="titel">Titel.</param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Base.LinkItem.#ctor(System.String,System.String)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="titel">Titel.</param>
+            <param name="description">Description.</param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Base.LinkItem.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="titel">Titel.</param>
+            <param name="description">Description.</param>
+            <param name="link">Link to navigate to.</param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Base.LinkItem.#ctor(System.String,System.String,System.String,System.String)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="titel">Titel.</param>
+            <param name="description">Description.</param>
+            <param name="link">Link to navigate to.</param>
+            <param name="category">Category.</param>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Base.LinkItem.Titel">
+            <summary>
+            Gets the titel of the link item.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Base.LinkItem.Description">
+            <summary>
+            Gets the description of the link item. Can be null or empty.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Base.LinkItem.Link">
+            <summary>
+            Gets the link of the link item. Can be null or empty.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Base.LinkItem.Category">
+            <summary>
+            Gets the category of the link item. Can be null or empty.
+            </summary>
+        </member>
+        <member name="T:Tum.PDE.ToolFramework.Modeling.Base.Contracts.IDocData">
+            <summary>
+            Interface identifying document data.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Base.Contracts.IDocData.InitAsync">
+            <summary>
+            Initialize asynchronous.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Base.Contracts.IDocData.Dispose">
+            <summary>
+            Dispose.
+            </summary>
+        </member>
+        <member name="T:Tum.PDE.ToolFramework.Modeling.Base.ModelState">
+            <summary>
+            Helper class identifying specific model features.
+            </summary>
+        </member>
+        <member name="F:Tum.PDE.ToolFramework.Modeling.Base.ModelState.IsInDebugState">
+            <summary>
+            Sets the type of the run. True for Debug.
+            </summary>
+        </member>
+        <member name="T:Tum.PDE.ToolFramework.Modeling.Base.MRUFileEntry">
+            <summary>
+            This class is used to represent a most recently used file.
+            </summary>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Base.MRUFileEntry.#ctor(System.String,System.String)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="fileName">File name.</param>
+            <param name="modelContextName">Model context name.</param>
+        </member>
+        <member name="M:Tum.PDE.ToolFramework.Modeling.Base.MRUFileEntry.#ctor">
+            <summary>
+            Constructor.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Base.MRUFileEntry.FileName">
+            <summary>
+            Gets or sets the file name (full path).
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Base.MRUFileEntry.ShortName">
+            <summary>
+            Gets the short name of the file.
+            </summary>
+        </member>
+        <member name="P:Tum.PDE.ToolFramework.Modeling.Base.MRUFileEntry.ModelContextName">
+            <summary>
+            Gets the short name of the file.
+            </summary>
+        </member>
+    </members>
+</doc>

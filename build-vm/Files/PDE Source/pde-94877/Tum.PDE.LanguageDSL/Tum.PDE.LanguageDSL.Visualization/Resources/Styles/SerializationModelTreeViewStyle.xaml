@@ -1,0 +1,403 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:ctrl="clr-namespace:Tum.PDE.LanguageDSL.Visualization.View.Controls"
+                    xmlns:conv="clr-namespace:Tum.PDE.LanguageDSL.Visualization.Converters"
+                    xmlns:selector="clr-namespace:Tum.PDE.LanguageDSL.Visualization.Selectors">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="DiagramItemStyle.xaml"/>
+        <ResourceDictionary Source="Expander.xaml"/>
+        <ResourceDictionary Source="SerializationExpander.xaml"/>
+        <ResourceDictionary Source="MenuItemStyle.xaml"/>        
+    </ResourceDictionary.MergedDictionaries>
+
+    <conv:RelationshipMultiplicityConverter x:Key="RelationshipMultiplicityConverterEmb"/>
+
+    <!-- a data template for domain model element -->
+    <DataTemplate x:Key="SerializationModelTreeHeaderDomainModelTemplate">
+        <ctrl:SerializationExpander x:Name="Expander" Style="{StaticResource SerializationTreeViewExpander}" IsExpanded="{Binding Path=IsExpanded,Mode=TwoWay}">
+            <ctrl:SerializationExpander.Header>
+                <ctrl:DesignerItem x:Name="TreeItem">
+                    <StackPanel x:Name="GroupPanel" Orientation="Horizontal" Margin="0,2,0,2">
+                        <Image Margin="2,0,0,0" x:Name="TypeImage" Width="16" Height="16" Source="/Tum.PDE.LanguageDSL.Visualization;component/Resources/Images/DomainModelElementImage.png" />
+                        <TextBlock x:Name="ElementSerializationName" Margin="4,2,0,0" Text="{Binding Path=SerializationName, Mode=OneWay}" />
+                        <TextBlock Margin="1,2,1,0" Text=" - " />
+                        <TextBlock x:Name="ElementName" Margin="0,2,0,0" Text="{Binding Path=DomainElementName, Mode=OneWay}" TextDecorations="Underline"/>
+                    </StackPanel>
+                </ctrl:DesignerItem>
+            </ctrl:SerializationExpander.Header>
+            <StackPanel Margin="20,0,0,0">
+                <ItemsControl x:Name="ChildrenControl" ItemsSource="{Binding Path=Children, Mode=OneWay}" ItemTemplateSelector="{DynamicResource SerializationModelTemplateSelector}"/>
+
+                <Rectangle x:Name="SplitterLine" Margin="23,0,0,0" Height="1" Stroke="Silver" Width="50" HorizontalAlignment="Left" />
+
+                <ItemsControl x:Name="AttributesControl" ItemsSource="{Binding Path=Attributes, Mode=OneWay}" ItemTemplateSelector="{DynamicResource SerializationModelTemplateSelector}"/>
+            </StackPanel>
+        </ctrl:SerializationExpander>
+        <DataTemplate.Triggers>
+            <DataTrigger Binding="{Binding Path=IsSelected, ElementName=TreeItem}" Value="True">
+                <Setter Property="Foreground" TargetName="ElementSerializationName" Value="White" />
+                <Setter Property="Foreground" TargetName="ElementName" Value="Black" />
+                <Setter Property="Effect" TargetName="ElementSerializationName">
+                    <Setter.Value>
+                        <DropShadowEffect ShadowDepth="0" Color="Black" BlurRadius="8" />
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Path=HasChildren}" Value="False">
+                <Setter Property="Visibility" TargetName="ChildrenControl" Value="Collapsed"/>
+                <Setter Property="Visibility" TargetName="SplitterLine" Value="Collapsed"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Path=HasAttributes}" Value="False">
+                <Setter Property="Visibility" TargetName="AttributesControl" Value="Collapsed"/>
+                <Setter Property="Visibility" TargetName="SplitterLine" Value="Collapsed"/>
+            </DataTrigger>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding HasChildren}" Value="False"/>
+                    <Condition Binding="{Binding HasAttributes}" Value="False"/>
+                </MultiDataTrigger.Conditions>
+                <Setter Property="IsItemsAreaDisabled" TargetName="Expander" Value="True"/>
+            </MultiDataTrigger>
+        </DataTemplate.Triggers>
+    </DataTemplate>
+        
+    <!-- a data template for domain class element -->
+    <DataTemplate x:Key="SerializationClassTreeHeaderDomainClassTemplate">
+        <ctrl:SerializationExpander x:Name="Expander" Style="{StaticResource SerializationTreeViewExpander}" IsExpanded="{Binding Path=IsExpanded,Mode=TwoWay}">
+            <ctrl:SerializationExpander.Header>
+                <ctrl:DesignerItem x:Name="TreeItem">
+                    <StackPanel x:Name="GroupPanel" Orientation="Horizontal" Margin="0,2,0,2">
+                        <Image Margin="2,0,0,0" x:Name="TypeImage" Width="16" Height="16" Source="/Tum.PDE.LanguageDSL.Visualization;component/Resources/Images/ElementImage.png" />
+                        <TextBlock x:Name="ElementSerializationName" Margin="4,2,0,0" Text="{Binding Path=SerializationName, Mode=OneWay}" />
+                        <TextBlock Margin="1,2,1,0" Text=" - " />
+                        <TextBlock x:Name="ElementName" Margin="0,2,0,0" Text="{Binding Path=DomainElementName, Mode=OneWay}" TextDecorations="Underline"/>
+                        <TextBlock x:Name="Multiplicity" Margin="5,2,0,0" Foreground="DarkGreen" Text="{Binding Path=Parent.SourceRole.Multiplicity, Mode=OneWay, Converter={StaticResource RelationshipMultiplicityConverterEmb}}"/>
+                    </StackPanel>
+                </ctrl:DesignerItem>
+            </ctrl:SerializationExpander.Header>
+            <StackPanel Margin="20,0,0,0">
+                <ItemsControl x:Name="ChildrenControl" ItemsSource="{Binding Path=Children, Mode=OneWay}" ItemTemplateSelector="{DynamicResource SerializationModelTemplateSelector}"/>
+                
+                <Rectangle x:Name="SplitterLine" Margin="23,0,0,0" Height="1" Stroke="Silver" Width="50" HorizontalAlignment="Left" />
+
+                <ItemsControl x:Name="AttributesControl" ItemsSource="{Binding Path=Attributes, Mode=OneWay}" ItemTemplateSelector="{DynamicResource SerializationModelTemplateSelector}"/>
+            </StackPanel>
+        </ctrl:SerializationExpander>
+        <DataTemplate.Triggers>
+            <DataTrigger Binding="{Binding Path=IsSelected, ElementName=TreeItem}" Value="True">
+                <Setter Property="Foreground" TargetName="ElementSerializationName" Value="White" />
+                <Setter Property="Foreground" TargetName="ElementName" Value="Black" />
+                <Setter Property="Effect" TargetName="ElementSerializationName">
+                    <Setter.Value>
+                        <DropShadowEffect ShadowDepth="0" Color="Black" BlurRadius="8" />
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Path=HasChildren}" Value="False">
+                <Setter Property="Visibility" TargetName="ChildrenControl" Value="Collapsed"/>
+                <Setter Property="Visibility" TargetName="SplitterLine" Value="Collapsed"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Path=HasAttributes}" Value="False">
+                <Setter Property="Visibility" TargetName="AttributesControl" Value="Collapsed"/>
+                <Setter Property="Visibility" TargetName="SplitterLine" Value="Collapsed"/>
+            </DataTrigger>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding HasChildren}" Value="False"/>
+                    <Condition Binding="{Binding HasAttributes}" Value="False"/>
+                </MultiDataTrigger.Conditions>
+                <Setter Property="IsItemsAreaDisabled" TargetName="Expander" Value="True"/>
+                
+            </MultiDataTrigger>
+            <!--<DataTrigger Binding="{Binding Path=ShowMultiplicity}" Value="True">
+                <Setter Property="Visibility" TargetName="Multiplicity" Value="Visible"/>
+            </DataTrigger>-->
+        </DataTemplate.Triggers>
+    </DataTemplate>
+
+    <!-- a data template for domain properties -->
+    <DataTemplate x:Key="SerializationModelTreeHeaderDomainPropertyTemplate">
+        <ctrl:DesignerItem x:Name="TreeItem" Margin="20,0,0,0">
+            <StackPanel x:Name="GroupPanel" Orientation="Horizontal" Margin="0,2,0,2">
+                <Image Margin="2,0,0,0" x:Name="TypeImage" Width="16" Height="16" Source="/Tum.PDE.LanguageDSL.Visualization;component/Resources/Images/AtImage.png" />
+                <TextBlock x:Name="ElementSerializationName" Margin="4,2,0,0" Text="{Binding Path=SerializationName, Mode=OneWay}" />
+                <TextBlock Margin="1,2,1,0" Text=" - " />
+                <TextBlock x:Name="ElementName" Margin="0,2,0,0" Text="{Binding Path=DomainPropertyName, Mode=OneWay}" TextDecorations="Underline"/>
+                <TextBlock x:Name="ElementType" Margin="4,2,0,0" Text="{Binding Path=DomainPropertyType, Mode=OneWay}" Foreground="Gray" />
+            </StackPanel>
+        </ctrl:DesignerItem>
+        <DataTemplate.Triggers>
+            <DataTrigger Binding="{Binding Path=IsSelected, ElementName=TreeItem}" Value="True">
+                <Setter Property="Foreground" TargetName="ElementSerializationName" Value="White" />
+                <Setter Property="Foreground" TargetName="ElementName" Value="Black" />
+                <Setter Property="Foreground" TargetName="ElementType" Value="Black" />
+                <Setter Property="Effect" TargetName="ElementSerializationName">
+                    <Setter.Value>
+                        <DropShadowEffect ShadowDepth="0" Color="Black" BlurRadius="8" />
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Path=OmitProperty}" Value="True">
+                <Setter Property="Foreground" TargetName="TreeItem" Value="Gray" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Path=SerializationRepresentationType}" Value="Element">
+                <Setter Property="Source" TargetName="TypeImage" Value="/Tum.PDE.LanguageDSL.Visualization;component/Resources/Images/SimpleElementImage.png"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Path=SerializationRepresentationType}" Value="InnerValue">
+                <Setter Property="Foreground" TargetName="TreeItem" Value="Gray" />
+                <Setter Property="Source" TargetName="TypeImage" Value="/Tum.PDE.LanguageDSL.Visualization;component/Resources/Images/blog-post-icon.png"/>
+            </DataTrigger>
+        </DataTemplate.Triggers>
+    </DataTemplate>
+
+    <!-- a data template for id property -->
+    <DataTemplate x:Key="SerializationModelTreeHeaderIdPropertyTemplate">
+        <ctrl:DesignerItem x:Name="TreeItem" Margin="20,0,0,0">
+            <StackPanel x:Name="GroupPanel" Orientation="Horizontal" Margin="0,2,0,2">
+                <Image Margin="2,0,0,0" x:Name="TypeImage" Width="16" Height="16" Source="/Tum.PDE.LanguageDSL.Visualization;component/Resources/Images/AtImage.png" />
+                <TextBlock x:Name="ElementSerializationName" Margin="4,2,0,0" Text="{Binding Path=SerializationName, Mode=OneWay}" />
+                <TextBlock Margin="1,2,1,0" Text=" - " />
+                <TextBlock x:Name="ElementName" Margin="0,2,0,0" Text="{Binding Path=Name, Mode=OneWay}" TextDecorations="Underline"/>
+            </StackPanel>
+        </ctrl:DesignerItem>
+        <DataTemplate.Triggers>
+            <DataTrigger Binding="{Binding Path=IsSelected, ElementName=TreeItem}" Value="True">
+                <Setter Property="Foreground" TargetName="ElementSerializationName" Value="White" />
+                <Setter Property="Foreground" TargetName="ElementName" Value="Black" />
+                <Setter Property="Effect" TargetName="ElementSerializationName">
+                    <Setter.Value>
+                        <DropShadowEffect ShadowDepth="0" Color="Black" BlurRadius="8" />
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Path=OmitIdProperty}" Value="True">
+                <Setter Property="Foreground" TargetName="TreeItem" Value="Gray" />
+            </DataTrigger>
+        </DataTemplate.Triggers>
+    </DataTemplate>
+
+    <!-- a data template for domain role -->
+    <DataTemplate x:Key="SerializationClassTreeHeaderDomainRoleTemplate">
+        <ctrl:DesignerItem x:Name="TreeItem" Margin="20,0,0,0">
+            <StackPanel x:Name="GroupPanel" Orientation="Horizontal" Margin="0,2,0,2">
+                <Image Margin="2,0,0,0" x:Name="TypeImage" Width="16" Height="16" Source="/Tum.PDE.LanguageDSL.Visualization;component/Resources/Images/ElementImage.png" />
+                <TextBlock x:Name="ElementSerializationName" Margin="4,2,0,0" Text="{Binding Path=SerializationName, Mode=OneWay}" />
+                <TextBlock Margin="1,2,1,0" Text=" - " />
+                <StackPanel x:Name="GridAttributeSerializationName" Orientation="Horizontal">
+                    <TextBlock x:Name="ElementSerializationAttributeString" Margin="0,2,0,0" Text="Attribute name: "/>
+                    <TextBlock x:Name="ElementSerializationAttributeName" Margin="4,2,0,0" Text="{Binding Path=SerializationAttributeName, Mode=OneWay}"/>
+                    <TextBlock Margin="1,2,1,0" Text=" - " />
+                </StackPanel>
+                <TextBlock x:Name="ElementName" Margin="0,2,0,0" Text="{Binding Path=RolePlayerName}" TextDecorations="Underline"/>
+            </StackPanel>
+        </ctrl:DesignerItem>
+        <DataTemplate.Triggers>
+            <DataTrigger Binding="{Binding Path=IsSelected, ElementName=TreeItem}" Value="True">
+                <Setter Property="Foreground" TargetName="ElementSerializationName" Value="White" />
+                <Setter Property="Foreground" TargetName="ElementName" Value="Black" />
+                <Setter Property="Foreground" TargetName="ElementSerializationAttributeString" Value="Black" />
+                <Setter Property="Foreground" TargetName="ElementSerializationAttributeName" Value="Black" />
+                <Setter Property="Effect" TargetName="ElementSerializationName">
+                    <Setter.Value>
+                        <DropShadowEffect ShadowDepth="0" Color="Black" BlurRadius="8" />
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Path=IsReferenceRelationship}" Value="True">
+                <Setter Property="Source" TargetName="TypeImage" Value="/Tum.PDE.LanguageDSL.Visualization;component/Resources/Images/Ref_16.png"/>
+            </DataTrigger>
+        </DataTemplate.Triggers>
+    </DataTemplate>
+
+    <!-- a data template for hidden elements -->
+    <DataTemplate x:Key="SerializationModelTreeHeaderHiddenElementTemplate">
+        <ContentControl Width="0" Height="0"/>
+    </DataTemplate>
+
+    <!-- a data template for embedding relationships -->
+    <DataTemplate x:Name="EmbeddingTemplate" x:Key="SerializationModelTreeHeaderEmbeddingTemplate">
+        <ctrl:SerializationExpander x:Name="Expander" Style="{StaticResource SerializationTreeViewExpander}">
+            <ctrl:SerializationExpander.Header>
+                <ctrl:DesignerItem x:Name="TreeItem">
+                    <StackPanel x:Name="GroupPanel" Orientation="Horizontal" Margin="0,2,0,2">
+                        <Image Margin="2,0,0,0" x:Name="TypeImage" Width="16" Height="16" Source="/Tum.PDE.LanguageDSL.Visualization;component/Resources/Images/Emb_16.png" />
+                        <TextBlock x:Name="ElementSerializationName" Margin="4,2,0,0" Text="{Binding Path=SerializationName, Mode=OneWay}" />
+                        <TextBlock Margin="1,2,1,0" Text=" - " />
+                        <TextBlock x:Name="ElementName" Margin="0,2,0,0" Text="{Binding Path=DomainElementName, Mode=OneWay}" TextDecorations="Underline"/>
+                        <!--<TextBlock x:Name="Multiplicity" Margin="5,2,0,0" Foreground="DarkGreen" Text="{Binding Path=SourceRole.Multiplicity, Mode=OneWay, Converter={StaticResource RelationshipMultiplicityConverterEmb}}"/>-->
+                    </StackPanel>
+                </ctrl:DesignerItem>
+            </ctrl:SerializationExpander.Header>
+            <StackPanel x:Name="Panel" Margin="20,0,0,0">
+                <ItemsControl x:Name="ChildrenControl" ItemsSource="{Binding Path=Children, Mode=OneWay}" ItemTemplateSelector="{DynamicResource SerializationModelTemplateSelector}"/>
+ 
+                <Rectangle x:Name="SplitterLine" Margin="23,0,0,0" Height="1" Stroke="Silver" Width="50" HorizontalAlignment="Left" />
+
+                <ItemsControl x:Name="AttributesControl" ItemsSource="{Binding Path=Attributes, Mode=OneWay}" ItemTemplateSelector="{DynamicResource SerializationModelTemplateSelector}"/>
+            </StackPanel>
+        </ctrl:SerializationExpander>
+        <DataTemplate.Triggers>
+            <DataTrigger Binding="{Binding Path=IsSelected, ElementName=TreeItem}" Value="True">
+                <Setter Property="Foreground" TargetName="ElementSerializationName" Value="White" />
+                <Setter Property="Foreground" TargetName="ElementName" Value="Black" />
+                <Setter Property="Effect" TargetName="ElementSerializationName">
+                    <Setter.Value>
+                        <DropShadowEffect ShadowDepth="0" Color="Black" BlurRadius="8" />
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Path=IsInFullSerialization}" Value="False">
+                <Setter Property="Visibility" TargetName="TreeItem" Value="Collapsed"/>
+                <Setter Property="Visibility" TargetName="AttributesControl" Value="Collapsed"/>
+                <Setter Property="Visibility" TargetName="SplitterLine" Value="Collapsed"/>
+                <Setter Property="Margin" TargetName="Panel" Value="0,-20,0,0"/>
+                <Setter Property="IsExpanded" TargetName="Expander" Value="True"/>
+                <Setter Property="IsHeaderAreaDisabled" TargetName="Expander" Value="True"/>
+                <Setter Property="ItemsControl.ItemTemplateSelector" TargetName="ChildrenControl" Value="{DynamicResource SerializationModelTemplateSelectorAdvanced}">
+                </Setter>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Path=OmitRelationship}" Value="True">
+                <Setter Property="Foreground" TargetName="Expander" Value="Gray" />
+                <Setter Property="Foreground" TargetName="TreeItem" Value="Gray" />
+                <Setter Property="Foreground" TargetName="ChildrenControl" Value="Gray" />
+                <Setter Property="Foreground" TargetName="AttributesControl" Value="Gray" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Path=HasChildren}" Value="False">
+                <Setter Property="Visibility" TargetName="ChildrenControl" Value="Collapsed"/>
+                <Setter Property="Visibility" TargetName="SplitterLine" Value="Collapsed"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Path=HasAttributes}" Value="False">
+                <Setter Property="Visibility" TargetName="AttributesControl" Value="Collapsed"/>
+                <Setter Property="Visibility" TargetName="SplitterLine" Value="Collapsed"/>
+            </DataTrigger>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding HasChildren}" Value="False"/>
+                    <Condition Binding="{Binding HasAttributes}" Value="False"/>
+                </MultiDataTrigger.Conditions>
+                <!--<Setter Property="Visibility" TargetName="Expander" Value="Collapsed"/>-->
+                <Setter Property="IsItemsAreaDisabled" TargetName="Expander" Value="True"/>
+            </MultiDataTrigger>
+        </DataTemplate.Triggers>
+    </DataTemplate>
+
+    <!-- a data template for reference relationships -->
+    <DataTemplate x:Key="SerializationModelTreeHeaderReferencingTemplate">
+        <ctrl:SerializationExpander x:Name="Expander" Style="{StaticResource SerializationTreeViewExpander}">
+            <ctrl:SerializationExpander.Header>
+                <ctrl:DesignerItem x:Name="TreeItem">
+                    <StackPanel x:Name="GroupPanel" Orientation="Horizontal" Margin="0,2,0,2">
+                        <Image Margin="2,0,0,0" x:Name="TypeImage" Width="16" Height="16" Source="/Tum.PDE.LanguageDSL.Visualization;component/Resources/Images/Ref_16.png" />
+                        <TextBlock x:Name="ElementSerializationName" Margin="4,2,0,0" Text="{Binding Path=SerializationName, Mode=OneWay}" />
+                        <TextBlock Margin="1,2,1,0" Text=" - " />
+                        <StackPanel x:Name="GridAttributeSerializationName" Orientation="Horizontal" Visibility="Collapsed">
+                            <TextBlock x:Name="ElementSerializationAttributeString" Margin="0,2,0,0" Text="Attribute name: "/>
+                            <TextBlock x:Name="ElementSerializationAttributeName" Margin="4,2,0,0" Text="{Binding Path=SerializationAttributeName, Mode=OneWay}"/>
+                            <TextBlock Margin="1,2,1,0" Text=" - " />
+                        </StackPanel>
+                        <TextBlock x:Name="ElementName" Margin="0,2,0,0" Text="{Binding Path=DomainElementName}" TextDecorations="Underline"/>
+                        <TextBlock x:Name="Multiplicity" Margin="5,2,0,0" Foreground="DarkGreen" Text="{Binding Path=SourceRole.Multiplicity, Mode=OneWay, Converter={StaticResource RelationshipMultiplicityConverterEmb}}"/>
+                    </StackPanel>
+                </ctrl:DesignerItem>
+            </ctrl:SerializationExpander.Header>
+            
+            <StackPanel Margin="20,0,0,0">
+                <ItemsControl x:Name="ChildrenControl" ItemsSource="{Binding Path=Children, Mode=OneWay}" ItemTemplateSelector="{DynamicResource SerializationModelTemplateSelector}"/>
+                
+                <Rectangle x:Name="SplitterLine" Margin="23,0,0,0" Height="1" Stroke="Silver" Width="50" HorizontalAlignment="Left" />
+
+                <ItemsControl x:Name="AttributesControl" ItemsSource="{Binding Path=Attributes, Mode=OneWay}" ItemTemplateSelector="{DynamicResource SerializationModelTemplateSelector}"/>
+            </StackPanel>
+        </ctrl:SerializationExpander>
+        
+        <DataTemplate.Triggers>
+            <DataTrigger Binding="{Binding Path=IsSelected, ElementName=TreeItem}" Value="True">
+                <Setter Property="Foreground" TargetName="ElementSerializationName" Value="White" />
+                <Setter Property="Foreground" TargetName="ElementName" Value="Black" />
+                <Setter Property="Foreground" TargetName="ElementSerializationAttributeString" Value="Black" />
+                <Setter Property="Foreground" TargetName="ElementSerializationAttributeName" Value="Black" />
+                <Setter Property="Effect" TargetName="ElementSerializationName">
+                    <Setter.Value>
+                        <DropShadowEffect ShadowDepth="0" Color="Black" BlurRadius="8" />
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
+            
+            <DataTrigger Binding="{Binding Path=IsInFullSerialization}" Value="False">
+                <Setter Property="Text" TargetName="ElementSerializationName" Value="{Binding Path=TargetRole.SerializationName}" />
+                <Setter Property="Text" TargetName="ElementName" Value="{Binding Path=TargetRole.RolePlayerName}" />
+                <Setter Property="Visibility" TargetName="ChildrenControl" Value="Collapsed"/>
+                <Setter Property="Visibility" TargetName="AttributesControl" Value="Collapsed"/>
+                <Setter Property="Visibility" TargetName="SplitterLine" Value="Collapsed"/>
+                <Setter Property="Visibility" TargetName="GridAttributeSerializationName" Value="Visible"/>
+                <Setter Property="IsItemsAreaDisabled" TargetName="Expander" Value="True"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Path=OmitRelationship}" Value="True">
+                <Setter Property="Foreground" TargetName="TreeItem" Value="Gray" />
+                <Setter Property="Foreground" TargetName="ChildrenControl" Value="Gray" />
+                <Setter Property="Foreground" TargetName="AttributesControl" Value="Gray" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Path=HasChildren}" Value="False">
+                <Setter Property="Visibility" TargetName="ChildrenControl" Value="Collapsed"/>
+                <Setter Property="Visibility" TargetName="SplitterLine" Value="Collapsed"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Path=HasAttributes}" Value="False">
+                <Setter Property="Visibility" TargetName="AttributesControl" Value="Collapsed"/>
+                <Setter Property="Visibility" TargetName="SplitterLine" Value="Collapsed"/>
+            </DataTrigger>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding HasChildren}" Value="False"/>
+                    <Condition Binding="{Binding HasAttributes}" Value="False"/>
+                </MultiDataTrigger.Conditions>
+                <!--<Setter Property="Visibility" TargetName="Expander" Value="Collapsed"/>-->
+                <Setter Property="IsItemsAreaDisabled" TargetName="Expander" Value="True"/>
+            </MultiDataTrigger>
+        </DataTemplate.Triggers>
+        
+    </DataTemplate>
+    
+    <!-- this is the style that is applied to the serialization model itemscontrol -->
+    <Style TargetType="{x:Type ItemsControl}" x:Key="SerializationModelTreeViewStyle">
+        <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
+        <Setter Property="BorderBrush" Value="#828790"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Padding" Value="1"/>
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ItemsControl}">
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                        <ctrl:DesignerCanvas SelectedItems="{Binding Path=SelectedItems, Mode=TwoWay}"
+                                             ContextMenuOptions="{Binding Path=Operations, Mode=OneWay}"
+                                             HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                             Background="Transparent">
+                            <ctrl:DesignerCanvas.ContextMenu>
+                                <ContextMenu ItemContainerStyleSelector="{StaticResource ContextMenuItemStyleSelector}"/>
+                            </ctrl:DesignerCanvas.ContextMenu>
+                            <ItemsPresenter Margin="0,0,1000,2000"/>
+                        </ctrl:DesignerCanvas>
+                    </ScrollViewer>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <selector:SerializationModelTemplateSelector x:Key="SerializationModelTemplateSelector"
+                        SerializationClassTreeHeaderDomainClassTemplate="{StaticResource SerializationClassTreeHeaderDomainClassTemplate}"
+                        SerializationClassTreeHeaderDomainRoleTemplate="{StaticResource SerializationClassTreeHeaderDomainRoleTemplate}"
+                        SerializationModelTreeHeaderDomainModelTemplate="{StaticResource SerializationModelTreeHeaderDomainModelTemplate}"
+                        SerializationModelTreeHeaderDomainPropertyTemplate="{StaticResource SerializationModelTreeHeaderDomainPropertyTemplate}"
+                        SerializationModelTreeHeaderEmbeddingTemplate="{StaticResource SerializationModelTreeHeaderEmbeddingTemplate}"
+                        SerializationModelTreeHeaderIdPropertyTemplate="{StaticResource SerializationModelTreeHeaderIdPropertyTemplate}"
+                        SerializationModelTreeHeaderReferencingTemplate="{StaticResource SerializationModelTreeHeaderReferencingTemplate}"/>
+    <selector:SerializationModelTemplateSelectorAdvanced x:Key="SerializationModelTemplateSelectorAdvanced" 
+                        SerializationClassTreeHeaderDomainClassTemplate="{StaticResource SerializationClassTreeHeaderDomainClassTemplate}"                                 
+                        SerializationModelTreeHeaderDomainModelTemplate="{StaticResource SerializationModelTreeHeaderDomainModelTemplate}"
+                        SerializationModelTreeHeaderHiddenElementTemplate="{StaticResource SerializationModelTreeHeaderHiddenElementTemplate}"
+                        SerializationModelTreeHeaderReferencingTemplate="{StaticResource SerializationModelTreeHeaderReferencingTemplate}"/>
+</ResourceDictionary>

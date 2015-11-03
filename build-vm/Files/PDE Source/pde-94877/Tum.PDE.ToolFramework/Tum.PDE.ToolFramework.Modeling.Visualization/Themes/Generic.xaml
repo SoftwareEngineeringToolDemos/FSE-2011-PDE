@@ -1,0 +1,27 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="clr-namespace:Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Tum.PDE.ToolFramework.Modeling.Visualization.Base;component/Themes/Default/LinkItemsStyle.xaml"/>
+        <ResourceDictionary Source="/Tum.PDE.ToolFramework.Modeling.Visualization.Base;component/Themes/Default/NoMouseOverButtonStyle.xaml"/>
+        <ResourceDictionary Source="/Tum.PDE.ToolFramework.Modeling.Visualization.Base;component/Themes/Default/RibbonRessources.xaml"/>
+        <ResourceDictionary Source="/Tum.PDE.ToolFramework.Modeling.Visualization;component/Themes/Default/DiagramSurfaceStyle.xaml"/>
+        <ResourceDictionary Source="/Tum.PDE.ToolFramework.Modeling.Visualization;component/Themes/Default/MenuItemStyle.xaml"/>
+        <ResourceDictionary Source="/Tum.PDE.ToolFramework.Modeling.Visualization;component/Themes/Default/ModelTreeViewStyle.xaml"/>
+        <ResourceDictionary Source="/Tum.PDE.ToolFramework.Modeling.Visualization;component/Themes/Default/PropertyGridStyle.xaml"/>
+        <ResourceDictionary Source="/Tum.PDE.ToolFramework.Modeling.Visualization.Base;component/Themes/Default/RibbonInGalleryItemStyle.xaml"/>
+        <ResourceDictionary Source="/Tum.PDE.ToolFramework.Modeling.Visualization;component/Themes/Default/GraphicalDependenciesStyle.xaml"/>
+        <ResourceDictionary Source="/Tum.PDE.ToolFramework.Modeling.Visualization;component/Themes/Default/SpecificDependenciesStyle.xaml"/>
+        <ResourceDictionary Source="/Tum.PDE.ToolFramework.Modeling.Visualization;component/Themes/Default/TemplatedDiagramSurfaceStyle.xaml"/>
+
+        <ResourceDictionary Source="/Tum.PDE.ToolFramework.Modeling.Visualization;component/Themes/Controls/EmbeddedRibbon.xaml"/>
+        <ResourceDictionary Source="/Tum.PDE.ToolFramework.Modeling.Visualization;component/Themes/Controls/TabControlAvalonDock.xaml"/>
+        <ResourceDictionary Source="/Tum.PDE.ToolFramework.Modeling.Visualization;component/Themes/Controls/ComboBoxWithDisplayText.xaml"/>        
+    </ResourceDictionary.MergedDictionaries>
+
+
+    <Style TargetType="{x:Type TabControl}" BasedOn="{StaticResource {x:Type TabControl}}"/>
+    <Style TargetType="{x:Type TabItem}" BasedOn="{StaticResource {x:Type TabItem}}"/>
+</ResourceDictionary>

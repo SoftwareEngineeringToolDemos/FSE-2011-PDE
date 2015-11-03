@@ -1,0 +1,48 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:pgV="clr-namespace:Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Path"
+                    xmlns:converters="clr-namespace:Tum.PDE.ToolFramework.Modeling.Visualization.Converters;assembly=Tum.PDE.ToolFramework.Modeling.Visualization">
+                    
+    <converters:BoolToUnderlineConverter x:Key="BoolToUnderlineConverter"/>
+    <converters:BoolToOppositeConverter x:Key="BoolToOppositeConverter"/>
+    <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+
+    <!-- VModell path editor template -->
+    <DataTemplate DataType="{x:Type pgV:ReferencedModelRoleViewModel}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Border  Margin="0,2,0,2" x:Name="HeaderBorder" BorderBrush="Transparent" BorderThickness="2.0" Grid.Column="0">
+                <TextBlock x:Name="HeaderTxtBlock" Margin="3,0,0,0" MinWidth="50" VerticalAlignment="Center"
+                           Text="{Binding Path=PropertyDisplayName, Mode=OneTime}" TextTrimming="WordEllipsis"
+                           ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=Text}"
+                           TextDecorations="{Binding Path=IsPropertyRequired, Converter={StaticResource BoolToUnderlineConverter}, Mode=OneWay}"/>
+            </Border>
+            <Grid Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Margin="0,2,0,2" x:Name="TxtBox" MinWidth="50" 
+                     Text="{Binding Path=PropertyValue, Mode=TwoWay}" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=Text}"/>
+                <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Margin="0,2,0,2" Width="16" Height="16" Focusable="False" Padding="0" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" 
+                    Command="{Binding Path=CreateNewReferencedModelCommand}" IsEnabled="{Binding Path=IsPropertyReadOnly, Mode=OneWay, Converter={StaticResource BoolToOppositeConverter}}">
+                        <Image Source="pack://application:,,,/Tum.PDE.ToolFramework.Images;component/Views/Add-16.png" Width="12" Height="12"/>
+                    </Button>
+                    <Button Margin="0,2,0,2" Width="16" Height="16" Focusable="False" Padding="0" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" 
+                        Command="{Binding Path=EditPathCommand}" IsEnabled="{Binding Path=IsPropertyReadOnly, Mode=OneWay, Converter={StaticResource BoolToOppositeConverter}}">
+                        <Image Source="pack://application:,,,/Tum.PDE.ToolFramework.Images;component/Views/Edit-16.png" Width="12" Height="12"/>
+                    </Button>
+                    <Button Margin="0,2,0,2" Width="16" Height="16" Focusable="False" Padding="0" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" 
+                    Command="{Binding Path=DeleteReferencedModelCommand}" IsEnabled="{Binding Path=IsPropertyReadOnly, Mode=OneWay, Converter={StaticResource BoolToOppositeConverter}}"
+                    Visibility="{Binding Path=IsReferencedModelSet, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}">
+                        <Image Source="pack://application:,,,/Tum.PDE.ToolFramework.Images;component/Views/Delete2-16.png" Width="12" Height="12"/>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </DataTemplate>
+</ResourceDictionary>

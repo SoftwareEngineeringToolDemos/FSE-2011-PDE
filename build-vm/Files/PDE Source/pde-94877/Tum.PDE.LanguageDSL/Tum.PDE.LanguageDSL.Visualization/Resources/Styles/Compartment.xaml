@@ -1,0 +1,84 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:ctrl="clr-namespace:Tum.PDE.LanguageDSL.Visualization.View.Controls">
+
+    <DataTemplate x:Key="CompartmentElementTemplate">
+        <ctrl:DesignerItem x:Name="DesignerItem">
+            <StackPanel Orientation="Horizontal" Margin="0,2,0,0">
+                <Image Source="/Tum.PDE.LanguageDSL.Visualization;component/Resources/Images/Properties-16x16.png" Margin="0,0,2,0" Width="16" Height="16" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                <ctrl:EditableTextBlock x:Name="DecoratorElem" FontWeight="Normal" FontFamily="Tahoma" FontSize="8pt" Text="{Binding Path=PropertyName, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                <TextBlock x:Name="SeparatorElem" FontWeight="Normal" FontFamily="Tahoma" FontSize="8pt" Margin="0,2,0,0" Text=" : " Background="Transparent" VerticalAlignment="Top" HorizontalAlignment="Left" TextWrapping="WrapWithOverflow"/>
+                <TextBlock x:Name="TypeElement" FontWeight="Normal" FontFamily="Tahoma" FontSize="8pt" Margin="0,2,0,0" Text="{Binding Path=PropertyType, Mode=OneWay}" Background="Transparent" VerticalAlignment="Top" HorizontalAlignment="Left" TextWrapping="WrapWithOverflow"/>
+            </StackPanel>
+        </ctrl:DesignerItem>
+        <DataTemplate.Triggers>
+            <!-- Is selected trigger -->
+            <DataTrigger Binding="{Binding ElementName=DesignerItem, Path=IsSelected}" Value="True">
+                <Setter Property="Foreground" TargetName="DecoratorElem" Value="White" />
+                <Setter Property="Effect">
+                    <Setter.Value>
+                        <DropShadowEffect ShadowDepth="0" Color="Black" BlurRadius="8" />
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
+            
+            <DataTrigger Binding="{Binding Path=IsRequired}" Value="True">
+                <Setter TargetName="DecoratorElem" Property="TextDecorations" Value="Underline"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Path=IsElementName}" Value="True">
+                <Setter TargetName="DecoratorElem" Property="FontWeight" Value="SemiBold"/>
+            </DataTrigger>
+        </DataTemplate.Triggers>
+    </DataTemplate>
+
+    <Style TargetType="{x:Type ListBoxItem}" x:Key="CompartmentElementStyle">
+        <Style.Resources>
+            <!-- override default brushes that show bad background colors -->
+            <Brush x:Key="{x:Static SystemColors.HighlightBrushKey}">Transparent</Brush>
+            <Brush x:Key="{x:Static SystemColors.ControlBrushKey}">Transparent</Brush>
+        </Style.Resources>        
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+        <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+        <Setter Property="Padding" Value="2,0,0,0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                    <Border x:Name="Bd" SnapsToDevicePixels="true" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type ContentControl}" x:Key="CompartmentStyle">
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ContentControl}">
+                    <Grid>
+                        <Border Margin="1,7,1,1" Name="Bd" BorderBrush="Black" Background="White" 
+                                BorderThickness="0, 0.6, 0, 0.6" CornerRadius="0" Padding="6" SnapsToDevicePixels="True">
+                            <StackPanel>
+                                <TextBlock FontWeight="Normal" FontFamily="Tahoma" FontSize="8pt" Text="Domain Properties" Margin="0,-2,0,0" Background="Transparent" VerticalAlignment="Center" HorizontalAlignment="Left"  TextWrapping="WrapWithOverflow"/>
+                                <ListBox SelectionMode="Extended" FontWeight="Normal" FontFamily="Tahoma" FontSize="7pt" ItemContainerStyle="{DynamicResource CompartmentElementStyle}" ItemsSource="{Binding Path=DomainProperties}"  Margin="0,0,0,0" BorderThickness="0" x:Name="Properties" ItemTemplate="{StaticResource CompartmentElementTemplate}"/>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <!-- List box visibility trigger -->
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=HasCompartmentItems}" Value="False">
+                            <Setter TargetName="Properties" Property="Visibility" Value="Collapsed"/>
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

@@ -1,0 +1,413 @@
+﻿<#@ template language="C#" inherits="BaseTemplate"#> 
+<#@ import namespace="Tum.PDE.LanguageDSL"#>
+<#@ import namespace="Microsoft.VisualStudio.Modeling" #>
+using DslModeling = global::Microsoft.VisualStudio.Modeling;
+using DslDesign = global::Microsoft.VisualStudio.Modeling.Design;
+using DslEditorModeling = global::Tum.PDE.ToolFramework.Modeling;
+
+<#
+foreach(DomainClass domainClass in this.MetaModel.AllClasses)
+{
+	GenerateDomainClass(domainClass);
+}
+#>
+<#+
+public void GenerateDomainClass(DomainClass domainClass)
+{
+	//string baseClass = "DslModeling::ModelElement";
+	string baseClass = "DslEditorModeling::DomainModelElement";
+	baseClass = CodeGenerationUtilities.GetBaseClass(domainClass, baseClass);
+	
+	string namespaceString = domainClass.Namespace;
+	if(!string.IsNullOrEmpty(namespaceString))
+	{
+#>
+namespace <#= namespaceString #>
+{
+<#+
+		PushIndent("\t");
+	}
+	
+	int inheritanceDepth = CodeGenerationUtilities.CalculateInheritanceDepth (domainClass);	
+	
+	this.Write(Utilities.Instance.GenerateSummary("DomainClass", domainClass, true));
+	if (domainClass.GeneratesDoubleDerived)
+	{
+		if (inheritanceDepth > 6)
+		{
+#>
+[global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1501:AvoidExcessiveInheritance", Justification = "Generated code.")]
+<#+
+		}
+	}
+	else if (inheritanceDepth > 5)
+	{
+#>
+[global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1501:AvoidExcessiveInheritance", Justification = "Generated code.")]
+<#+
+	}
+	this.Write(Utilities.Instance.GenerateResourceAttributes(domainClass, GeneratedResourceName));
+	this.Write(Utilities.Instance.GenerateDebuggerDisplayAttribute(domainClass)); 
+#>
+[DslModeling::DomainObjectId("<#= domainClass.Id.ToString("D") #>")]
+<#= CodeGenerationUtilities.GetAccessModifier(domainClass.AccessModifier) #><#= CodeGenerationUtilities.GetGenerationInheritanceModifier(domainClass) #> partial class <#= CodeGenerationUtilities.GetGenerationClassName(domainClass) #> : <#= baseClass #><#+ if(domainClass.IsDomainModel) {#>, DslEditorModeling::IParentModelElement  <#+ } #> 
+{
+	#region Constructors, domain class Id
+
+	/// <summary>
+	/// <#= domainClass.Name #> domain class Id.
+	/// </summary>
+	public static readonly new global::System.Guid DomainClassId = new System.Guid("<#= domainClass.Id.ToString("D") #>");
+<#+
+	PushIndent("\t");
+	GenerateDomainClassConstructors(domainClass, true);
+	PopIndent();
+#>
+	#endregion
+<#+
+	PushIndent("\t");
+	DomainProperty nameProperty = null;
+	foreach(DomainProperty property in domainClass.Properties)
+	{
+		this.Write(DomainPropertyGenerator.Instance.GenerateDomainProperty(property));
+		
+		if( property.IsElementName )
+			nameProperty = property;
+	}
+	
+	foreach(DomainRole role in domainClass.RolesPlayed)
+	{
+		this.Write(DomainRoleGenerator.Instance.GenerateOppositeRoleAccessor(role));
+	}
+	
+	this.Write(MergeGenerator.Instance.GenerateModelMergeMembers(domainClass));
+	
+	PopIndent();
+	
+	if( domainClass.IsDomainModel )
+	{
+#>
+	#region DomainFilePath
+	/// <summary>
+	/// Gets or sets the domain file path.
+	/// </summary>
+	public string DomainFilePath{ get; set; }
+	#endregion
+<#+
+	}
+	
+	string domainModelType = domainClass.GetMetaModel().GetFullName(true)+"DomainModel";
+	string modifier = "override ";
+#>
+	#region IDomainModelOwnable
+	/*
+ 	/// <summary>
+    /// Gets the document data
+    /// </summary>
+    public override DslEditorModeling::ModelData DocumentData
+    {
+        get
+		{
+<#+
+	if( this.EditorType == GenerationEditorType.VSPlugin )
+	{
+#>
+			// Null because in the visual studio plugin environment there can be multiple model datas present at once. Therefore there
+			// is no singleton accessor for the model data.
+			return null;
+<#+
+	}
+	else
+	{
+#>
+			return <#= domainClass.GetMetaModel().GetFullName(true) #>DocumentData.Instance;
+<#+
+	}
+#>
+		}
+    }*/
+		
+	/// <summary>
+    /// Gets the domain model type.
+    /// </summary>
+    /// <returns>Domain model type.</returns>
+    public <#= modifier #>System.Type GetDomainModelType()
+	{
+		return typeof(<#= domainModelType #>);
+	}
+
+    /// <summary>
+    /// Gets the domain model services.
+    /// </summary>
+    /// <returns>Domain model services.</returns>
+    public <#= modifier #>DslEditorModeling::IDomainModelServices GetDomainModelServices()
+	{
+		return <#= this.MetaModel.GetFullName(true) #>DomainModelServices.Instance;
+	}
+	
+    /// <summary>
+    /// Gets the domain model DomainClassId.
+    /// </summary>
+    /// <returns></returns>
+    public <#= modifier #>System.Guid GetDomainModelTypeId()
+	{
+		return <#= domainModelType #>.DomainModelId;
+	}	
+
+    /// <summary>
+    /// Gets or sets the value of the property (which is marked as element name)
+    /// </summary>
+    public <#= modifier #>string DomainElementName
+	{
+		get
+		{
+<#+
+		if( nameProperty != null )
+		{
+#>
+			return this.<#= nameProperty.Name #>;
+<#+
+		}
+		else
+		{
+			if( domainClass.BaseClass != null )
+			{
+#>
+			return base.DomainElementName;
+<#+				
+			}
+			else
+			{
+#>
+			return null;
+<#+
+			}
+		}
+#>
+		}
+		set
+		{
+<#+
+		if( nameProperty != null )
+		{
+#>
+			this.<#= nameProperty.Name #> = value;
+<#+
+		}
+		else
+		{
+			if( domainClass.BaseClass != null )
+			{
+#>
+			base.DomainElementName = value;
+<#+
+			}			
+		}
+#>
+		}
+	}
+	
+    /// <summary>
+    /// Gets whether the domain element has a property marked as element name.
+    /// </summary>
+    public <#= modifier #>bool DomainElementHasName 
+    {
+		get
+		{
+<#+
+		if( nameProperty != null )
+		{
+#>
+			return true;
+<#+
+		}
+		else
+		{
+			if( domainClass.BaseClass != null )
+			{
+#>
+			return base.DomainElementHasName;
+<#+
+			}
+			else
+			{
+#>
+			return false;
+<#+
+			}
+		}
+#>
+		}
+    }	
+	
+    /// <summary>
+    /// Gets the domain element name info if there is one; Null otherwise.
+    /// </summary>
+    public <#= modifier #>DslModeling::DomainPropertyInfo DomainElementNameInfo
+    {
+		get
+		{
+<#+
+		if( nameProperty != null )
+		{
+#>
+			return this.Store.DomainDataDirectory.GetDomainProperty(<#= domainClass.GetFullName(true) #>.<#= nameProperty.Name #>DomainPropertyId);
+<#+
+		}
+		else
+		{
+			if( domainClass.BaseClass != null )
+			{
+#>
+			return base.DomainElementNameInfo;
+<#+
+			}
+			else
+			{
+#>
+			return null;
+<#+
+		
+			}
+		}
+#>
+		}
+    }
+	
+	/// <summary>
+    /// Gets the type of the ModelElement as string.
+    /// </summary>
+    public <#= modifier #>string DomainElementType
+    {
+        get
+        {
+            return "<#= domainClass.Name #>";
+        }
+    }
+
+    /// <summary>
+    /// Gets the display name of the type of the ModelElement.
+    /// </summary>
+    public <#= modifier #>string DomainElementTypeDisplayName
+    {
+        get
+        {
+            return "<#= domainClass.DisplayName #>";
+        }
+    }		
+	#endregion
+
+	/// <summary>
+    /// Gets the domain class Id of this element.
+    /// </summary>
+    /// <returns>DomainClass Id.</returns>
+    public override System.Guid GetDomainClassId()
+    {
+        return <#= domainClass.GetFullName(true) #>.DomainClassId;
+    }
+}
+<#+
+	// If this class is double-derived, generate the skeleton derived class (with just the
+	// constructors)
+	if ( domainClass.GeneratesDoubleDerived )
+	{
+		this.Write(Utilities.Instance.GenerateSummary("DomainClass", domainClass, false));
+		if (inheritanceDepth > 5)
+		{
+#>
+[global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1501:AvoidExcessiveInheritance", Justification = "Generated code.")]
+<#+
+		}
+#>		
+<#= CodeGenerationUtilities.GetAccessModifier(domainClass.AccessModifier) #><#= CodeGenerationUtilities.GetInheritanceModifier(domainClass.InheritanceModifier) #> partial class <#= domainClass.Name #> : <#= CodeGenerationUtilities.GetGenerationClassName(domainClass) #>
+{
+	#region Constructors
+<#+ 
+		PushIndent("\t");
+		GenerateDomainClassConstructors(domainClass, false);
+		PopIndent();
+#>
+	#endregion
+}
+<#+
+	}
+	if(!string.IsNullOrEmpty(namespaceString))
+	{
+		PopIndent();
+#>
+}
+<#+
+	}
+}
+
+
+
+/// <summary>
+/// Generate the constructors for a DomainClass
+/// </summary>
+/// <param name="domainClass">the domain class to generate constructors for</param>
+/// <param name="generatedClass">Whether this is the class carrying the generated code or the derived class in a double-derived pair</param>
+private void GenerateDomainClassConstructors(DomainClass domainClass, bool generatedClass)
+{
+	if(domainClass.HasCustomConstructor && !(generatedClass && domainClass.GeneratesDoubleDerived))
+	{
+#>
+// Constructors were not generated for this class because it had HasCustomConstructor
+// set to true. Please provide the constructors below in a partial class.
+<#+
+		// We comment out the constructors if HasCustomConstructor is set to true
+		PushIndent("//");
+	}
+	string ctorName;
+	if ( generatedClass )
+	{
+		ctorName = CodeGenerationUtilities.GetGenerationClassName(domainClass);
+	}
+	else
+	{
+		ctorName = domainClass.Name;
+	}
+	if(domainClass.InheritanceModifier == InheritanceModifier.Abstract || (generatedClass && domainClass.GeneratesDoubleDerived ))
+	{
+#>
+/// <summary>
+/// Constructor.
+/// </summary>
+/// <param name="partition">Partition where new element is to be created.</param>
+/// <param name="propertyAssignments">List of domain property id/value pairs to set once the element is created.</param>
+protected <#= ctorName #>(DslModeling::Partition partition, DslModeling::PropertyAssignment[] propertyAssignments)
+	: base(partition, propertyAssignments)
+{
+}
+<#+
+	}
+	else
+	{
+#>
+/// <summary>
+/// Constructor
+/// </summary>
+/// <param name="store">Store where new element is to be created.</param>
+/// <param name="propertyAssignments">List of domain property id/value pairs to set once the element is created.</param>
+public <#= ctorName #>(DslModeling::Store store, params DslModeling::PropertyAssignment[] propertyAssignments)
+	: this(store != null ? store.DefaultPartitionForClass(DomainClassId) : null, propertyAssignments)
+{
+}
+
+/// <summary>
+/// Constructor
+/// </summary>
+/// <param name="partition">Partition where new element is to be created.</param>
+/// <param name="propertyAssignments">List of domain property id/value pairs to set once the element is created.</param>
+public <#= ctorName #>(DslModeling::Partition partition, params DslModeling::PropertyAssignment[] propertyAssignments)
+	: base(partition, <#= this.MetaModel.Namespace#>.<#= this.MetaModel.Name #>DomainModelIdProvider.Instance.AssignId(propertyAssignments))
+{
+}
+<#+
+	}
+	if(domainClass.HasCustomConstructor && !(generatedClass && domainClass.GeneratesDoubleDerived))
+	{
+		PopIndent();
+	}
+}
+#>

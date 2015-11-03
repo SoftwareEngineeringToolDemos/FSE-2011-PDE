@@ -1,0 +1,310 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<view Id="f145f38c-76d1-4660-bfa7-c8a98633b638" createModelTree="true" createPropertyGrid="true" createErrorList="true" createDependenciesView="true" modelTreeId="3d9e6936-da19-4297-b11c-6b33e56bd809" propertyGridId="1ad8fba6-4dd4-46b4-b4ae-41247299a601" errorListId="4777475e-ec7a-4c08-8553-554c58d9967f" dependenciesViewId="8851455b-1736-4954-a966-a6cdd2b77497" searchId="1ebdc816-a341-473b-b087-9daf3236551f" searchResultId="74b2f994-1872-4f3c-98ce-d1403908aac2" pluginWindowId="a6350808-7e05-491b-909f-7cb45c4b8107">
+  <viewContexts>
+    <viewHasViewContexts Id="d119399d-5e09-489e-9f0c-4cfb9e81e9cc">
+      <viewContext Id="8eb6ec7b-253c-4b1f-8354-2a66ee083a7d">
+        <domainModelTreeView>
+          <viewContextHasDomainModelTreeView Id="12036c17-6c4a-4844-9ec0-1eb5d553e96f">
+            <domainModelTreeView Id="5952ade6-f8c5-435b-9b55-8d93ad26227c">
+              <rootNodes>
+                <domainModelTreeViewReferencesRootNodes Id="54a42466-5bd0-4420-842f-b7988ea41fc7">
+                  <rootNodeMoniker Id="d872c95e-7327-45a6-bb2b-0f15dfd41c04" />
+                </domainModelTreeViewReferencesRootNodes>
+                <domainModelTreeViewReferencesRootNodes Id="195b931b-6391-4510-9842-1956f78a5ecd">
+                  <rootNodeMoniker Id="7dd7eeb8-d0a4-4661-b9e6-dcba8e43fc7a" />
+                </domainModelTreeViewReferencesRootNodes>
+              </rootNodes>
+              <modelTreeNodes>
+                <domainModelTreeViewHasModelTreeNodes Id="3dafa0a9-a8ed-4def-9ba8-d128a46e91c3">
+                  <rootNode Id="d872c95e-7327-45a6-bb2b-0f15dfd41c04" isEmbeddingTreeExpanded="true" isInheritanceTreeExpanded="false" isReferenceTreeExpanded="false" isShapeMappingTreeExpanded="false" isElementHolder="true" isExpanded="true">
+                    <domainElement>
+                      <treeNodeReferencesDomainElement Id="63508529-a300-4bd8-b3ac-92c5705fd2f1">
+                        <domainClassMoniker Id="711c0880-75fd-4e1e-af60-c319032f2d08" />
+                      </treeNodeReferencesDomainElement>
+                    </domainElement>
+                    <embeddingRSNodes>
+                      <treeNodeReferencesEmbeddingRSNodes Id="ad302838-4c3a-450e-a828-25c45049b737">
+                        <embeddingRSNodeMoniker Id="d5d17af1-1dc9-42ad-8dd1-3cbf631b34bd" />
+                      </treeNodeReferencesEmbeddingRSNodes>
+                      <treeNodeReferencesEmbeddingRSNodes Id="09a41c5c-4c1b-4fb0-91b3-6b0cf6828d92">
+                        <embeddingRSNodeMoniker Id="5d6ff22b-4515-44b7-839f-2bfb7a6547de" />
+                      </treeNodeReferencesEmbeddingRSNodes>
+                      <treeNodeReferencesEmbeddingRSNodes Id="5beb1b63-c6a6-44ee-b989-74e42d5703cd">
+                        <embeddingRSNodeMoniker Id="bce1b18a-8534-4406-b40b-4d9b8b6e9b4e" />
+                      </treeNodeReferencesEmbeddingRSNodes>
+                    </embeddingRSNodes>
+                  </rootNode>
+                </domainModelTreeViewHasModelTreeNodes>
+                <domainModelTreeViewHasModelTreeNodes Id="e9afc129-d2b6-432c-b493-32d67d497a73">
+                  <rootNode Id="7dd7eeb8-d0a4-4661-b9e6-dcba8e43fc7a" isEmbeddingTreeExpanded="true" isInheritanceTreeExpanded="true" isReferenceTreeExpanded="true" isShapeMappingTreeExpanded="true" isElementHolder="true" isExpanded="true">
+                    <domainElement>
+                      <treeNodeReferencesDomainElement Id="70ed1e3c-0a6b-4288-82e5-0fddf1f3a5d1">
+                        <domainClassMoniker Id="19afe24e-b335-4ddc-9a4d-87e0afa439b3" />
+                      </treeNodeReferencesDomainElement>
+                    </domainElement>
+                    <inheritanceNodes>
+                      <treeNodeReferencesInheritanceNodes Id="c54ae344-a7a1-4d95-9050-0a3d4b7b9a60">
+                        <inheritanceNodeMoniker Id="83128680-286e-4b83-b3dc-755bd3b239b1" />
+                      </treeNodeReferencesInheritanceNodes>
+                      <treeNodeReferencesInheritanceNodes Id="fd6a2a28-6f1f-4b59-b941-3ffd84449bfd">
+                        <inheritanceNodeMoniker Id="41ce9122-5fa3-4a47-bf6e-add1041e0bf0" />
+                      </treeNodeReferencesInheritanceNodes>
+                      <treeNodeReferencesInheritanceNodes Id="7d784cc0-0b6b-44a9-af6d-ed4b3941bbe4">
+                        <inheritanceNodeMoniker Id="53442f68-bc3b-4c07-a7dc-377b5f1eab88" />
+                      </treeNodeReferencesInheritanceNodes>
+                    </inheritanceNodes>
+                    <referenceRSNodes>
+                      <treeNodeReferencesReferenceRSNodes Id="b4547373-5c22-4139-972c-a03a85715ddc">
+                        <referenceRSNodeMoniker Id="8459913a-2e42-4be1-8a59-a343e943a734" />
+                      </treeNodeReferencesReferenceRSNodes>
+                    </referenceRSNodes>
+                  </rootNode>
+                </domainModelTreeViewHasModelTreeNodes>
+                <domainModelTreeViewHasModelTreeNodes Id="5c9c954d-1020-4d8b-b97f-327a7dcdbce8">
+                  <inheritanceNode Id="83128680-286e-4b83-b3dc-755bd3b239b1" isEmbeddingTreeExpanded="true" isInheritanceTreeExpanded="true" isReferenceTreeExpanded="true" isShapeMappingTreeExpanded="true" isElementHolder="true" isExpanded="true" inhRelationshipId="c3901fb6-90fd-4215-ac21-ab847fd5db3a">
+                    <domainElement>
+                      <treeNodeReferencesDomainElement Id="47f871ac-ae8f-41cf-bc27-42fea0ca46d3">
+                        <domainClassMoniker Id="50e3fb61-bd3d-4d87-b951-2161e67d5685" />
+                      </treeNodeReferencesDomainElement>
+                    </domainElement>
+                    <shapeClassNodes>
+                      <treeNodeReferencesShapeClassNodes Id="e17566ca-89ac-4bcb-92bf-fd6414e8a964">
+                        <shapeClassNodeMoniker Id="94177e96-5eeb-47a0-a785-94b7078ecbac" />
+                      </treeNodeReferencesShapeClassNodes>
+                    </shapeClassNodes>
+                  </inheritanceNode>
+                </domainModelTreeViewHasModelTreeNodes>
+                <domainModelTreeViewHasModelTreeNodes Id="f9a91ffd-bf62-46db-aba5-1232608a14ea">
+                  <inheritanceNode Id="41ce9122-5fa3-4a47-bf6e-add1041e0bf0" isEmbeddingTreeExpanded="true" isInheritanceTreeExpanded="true" isReferenceTreeExpanded="true" isShapeMappingTreeExpanded="true" isElementHolder="true" isExpanded="true" inhRelationshipId="2afb528b-4a62-4e61-897d-b3ae6c520a32">
+                    <domainElement>
+                      <treeNodeReferencesDomainElement Id="3d4217c5-d75f-45ac-b032-42a33d4c229f">
+                        <domainClassMoniker Id="2d02bccc-7fc9-424e-a732-679b8bde54e5" />
+                      </treeNodeReferencesDomainElement>
+                    </domainElement>
+                    <shapeClassNodes>
+                      <treeNodeReferencesShapeClassNodes Id="1c4cf80d-adf9-4ebd-bb6b-710154697db4">
+                        <shapeClassNodeMoniker Id="d3f51fef-ebb3-4742-b196-c53280ce0406" />
+                      </treeNodeReferencesShapeClassNodes>
+                    </shapeClassNodes>
+                  </inheritanceNode>
+                </domainModelTreeViewHasModelTreeNodes>
+                <domainModelTreeViewHasModelTreeNodes Id="01f76036-bb8a-4679-88b2-9b60ac7b492b">
+                  <inheritanceNode Id="53442f68-bc3b-4c07-a7dc-377b5f1eab88" isEmbeddingTreeExpanded="true" isInheritanceTreeExpanded="true" isReferenceTreeExpanded="true" isShapeMappingTreeExpanded="true" isElementHolder="true" isExpanded="true" inhRelationshipId="7a471439-c9f5-4524-a0a9-5e8783a31b7c">
+                    <domainElement>
+                      <treeNodeReferencesDomainElement Id="e20adfe1-9d29-4afe-a1ea-34b8e559c89f">
+                        <domainClassMoniker Id="d8cb27bd-e86e-4f9a-87f3-e824e22f174f" />
+                      </treeNodeReferencesDomainElement>
+                    </domainElement>
+                    <shapeClassNodes>
+                      <treeNodeReferencesShapeClassNodes Id="4f5ef22f-3273-41b2-adbc-83340d390f4a">
+                        <shapeClassNodeMoniker Id="b38b375c-1441-471c-9717-597c3daf247a" />
+                      </treeNodeReferencesShapeClassNodes>
+                    </shapeClassNodes>
+                  </inheritanceNode>
+                </domainModelTreeViewHasModelTreeNodes>
+                <domainModelTreeViewHasModelTreeNodes Id="86cd58d2-e3a3-4ee2-90b4-1ce713e7f20e">
+                  <embeddingRSNode Id="d5d17af1-1dc9-42ad-8dd1-3cbf631b34bd" isExpanded="false">
+                    <relationship>
+                      <embeddingRSNodeReferencesRelationship Id="5d1ed3a6-333b-4ee3-abdf-1fa5e1820320">
+                        <embeddingRelationshipMoniker Id="c4982a3d-9bfb-4d86-b3a1-064975706d2c" />
+                      </embeddingRSNodeReferencesRelationship>
+                    </relationship>
+                    <embeddingNode>
+                      <embeddingRSNodeReferencesEmbeddingNode Id="846527b8-1645-45a4-99d6-f16fc70d3f7f">
+                        <embeddingNodeMoniker Id="3ccd5b76-44ac-4a05-a806-4e3640c11c96" />
+                      </embeddingRSNodeReferencesEmbeddingNode>
+                    </embeddingNode>
+                  </embeddingRSNode>
+                </domainModelTreeViewHasModelTreeNodes>
+                <domainModelTreeViewHasModelTreeNodes Id="2696dd34-d5e7-416a-8ae7-c133792f5753">
+                  <embeddingNode Id="3ccd5b76-44ac-4a05-a806-4e3640c11c96" isEmbeddingTreeExpanded="true" isInheritanceTreeExpanded="true" isReferenceTreeExpanded="true" isShapeMappingTreeExpanded="true" isElementHolder="false" isExpanded="false">
+                    <domainElement>
+                      <treeNodeReferencesDomainElement Id="fd231972-7cde-423e-9fdd-604a2c1ddb63">
+                        <domainClassMoniker Id="50e3fb61-bd3d-4d87-b951-2161e67d5685" />
+                      </treeNodeReferencesDomainElement>
+                    </domainElement>
+                  </embeddingNode>
+                </domainModelTreeViewHasModelTreeNodes>
+                <domainModelTreeViewHasModelTreeNodes Id="5c340170-2241-4d5e-ba95-f687e321835b">
+                  <embeddingRSNode Id="5d6ff22b-4515-44b7-839f-2bfb7a6547de" isExpanded="false">
+                    <relationship>
+                      <embeddingRSNodeReferencesRelationship Id="78a6ecee-2432-403a-8bb4-cb45aa771f1c">
+                        <embeddingRelationshipMoniker Id="a33fdef0-aacc-483a-ac49-5aad70ad11e9" />
+                      </embeddingRSNodeReferencesRelationship>
+                    </relationship>
+                    <embeddingNode>
+                      <embeddingRSNodeReferencesEmbeddingNode Id="98f532be-ef2a-4574-a77a-491cc338ad78">
+                        <embeddingNodeMoniker Id="dcd60201-a285-4d5e-9956-abc6a648a977" />
+                      </embeddingRSNodeReferencesEmbeddingNode>
+                    </embeddingNode>
+                  </embeddingRSNode>
+                </domainModelTreeViewHasModelTreeNodes>
+                <domainModelTreeViewHasModelTreeNodes Id="d3f5925c-139f-4a14-a60c-57f5fb4068d6">
+                  <embeddingNode Id="dcd60201-a285-4d5e-9956-abc6a648a977" isEmbeddingTreeExpanded="true" isInheritanceTreeExpanded="true" isReferenceTreeExpanded="true" isShapeMappingTreeExpanded="true" isElementHolder="false" isExpanded="false">
+                    <domainElement>
+                      <treeNodeReferencesDomainElement Id="de3841d1-76b9-4bf8-bcbd-5e06d5cff06e">
+                        <domainClassMoniker Id="2d02bccc-7fc9-424e-a732-679b8bde54e5" />
+                      </treeNodeReferencesDomainElement>
+                    </domainElement>
+                  </embeddingNode>
+                </domainModelTreeViewHasModelTreeNodes>
+                <domainModelTreeViewHasModelTreeNodes Id="5e24c3ae-94c1-4779-af36-6a2b2d929649">
+                  <embeddingRSNode Id="bce1b18a-8534-4406-b40b-4d9b8b6e9b4e" isExpanded="false">
+                    <relationship>
+                      <embeddingRSNodeReferencesRelationship Id="f58ceb33-6d58-4c80-b594-02ac1cdc2024">
+                        <embeddingRelationshipMoniker Id="4b3b4933-75eb-48e4-9d42-a309b7f74a67" />
+                      </embeddingRSNodeReferencesRelationship>
+                    </relationship>
+                    <embeddingNode>
+                      <embeddingRSNodeReferencesEmbeddingNode Id="f2852879-b1f9-44ec-8e06-8f1634e6055d">
+                        <embeddingNodeMoniker Id="89e34e9f-48b2-468a-9e72-08eade10be82" />
+                      </embeddingRSNodeReferencesEmbeddingNode>
+                    </embeddingNode>
+                  </embeddingRSNode>
+                </domainModelTreeViewHasModelTreeNodes>
+                <domainModelTreeViewHasModelTreeNodes Id="c3b50ff6-a5d8-4b40-b035-97427b882737">
+                  <embeddingNode Id="89e34e9f-48b2-468a-9e72-08eade10be82" isEmbeddingTreeExpanded="true" isInheritanceTreeExpanded="true" isReferenceTreeExpanded="true" isShapeMappingTreeExpanded="true" isElementHolder="false" isExpanded="false">
+                    <domainElement>
+                      <treeNodeReferencesDomainElement Id="ad163952-a318-45e6-9bb1-be3d36e3ed87">
+                        <domainClassMoniker Id="d8cb27bd-e86e-4f9a-87f3-e824e22f174f" />
+                      </treeNodeReferencesDomainElement>
+                    </domainElement>
+                  </embeddingNode>
+                </domainModelTreeViewHasModelTreeNodes>
+                <domainModelTreeViewHasModelTreeNodes Id="f6f1f960-196c-4c96-b47f-a70576ebb0e4">
+                  <referenceRSNode Id="8459913a-2e42-4be1-8a59-a343e943a734" isShapeMappingTreeExpanded="true" isExpanded="false">
+                    <referenceRelationship>
+                      <referenceRSNodeReferencesReferenceRelationship Id="7563fbc4-a0f5-474b-8a6d-af70826c5f9b">
+                        <referenceRelationshipMoniker Id="58b1ee23-a4e1-4880-97e7-5a9fdf63ce74" />
+                      </referenceRSNodeReferencesReferenceRelationship>
+                    </referenceRelationship>
+                    <referenceNode>
+                      <referenceRSNodeReferencesReferenceNode Id="e15e0d48-cf03-4532-97e0-521f19f9d266">
+                        <referenceNodeMoniker Id="f7a1bb02-680a-43df-bc4f-9193c34c82c4" />
+                      </referenceRSNodeReferencesReferenceNode>
+                    </referenceNode>
+                    <shapeRelationshipNodes>
+                      <referenceRSNodeReferencesShapeRelationshipNodes Id="5502005b-c9a4-4e89-a5eb-8d6f8979b6e7">
+                        <shapeRelationshipNodeMoniker Id="5fc0b04b-31da-4304-b0ee-48f50b211388" />
+                      </referenceRSNodeReferencesShapeRelationshipNodes>
+                    </shapeRelationshipNodes>
+                  </referenceRSNode>
+                </domainModelTreeViewHasModelTreeNodes>
+                <domainModelTreeViewHasModelTreeNodes Id="491accba-9fb0-44d0-8f17-f2855f13dc5b">
+                  <referenceNode Id="f7a1bb02-680a-43df-bc4f-9193c34c82c4" isEmbeddingTreeExpanded="true" isInheritanceTreeExpanded="true" isReferenceTreeExpanded="true" isShapeMappingTreeExpanded="true" isElementHolder="false" isExpanded="false">
+                    <domainElement>
+                      <treeNodeReferencesDomainElement Id="57ab0751-2e2e-4a27-9e06-860e028d1b86">
+                        <domainClassMoniker Id="19afe24e-b335-4ddc-9a4d-87e0afa439b3" />
+                      </treeNodeReferencesDomainElement>
+                    </domainElement>
+                  </referenceNode>
+                </domainModelTreeViewHasModelTreeNodes>
+                <domainModelTreeViewHasModelTreeNodes Id="c318dd80-c4a5-4f31-96e1-daf12c9d9a5e">
+                  <shapeClassNode Id="94177e96-5eeb-47a0-a785-94b7078ecbac">
+                    <shapeClass>
+                      <shapeClassNodeReferencesShapeClass Id="ae6ed448-049b-4cac-a6b7-6eea41fc783f">
+                        <shapeClassMoniker Id="6c150462-4f97-4519-af77-9052c78a277c" />
+                      </shapeClassNodeReferencesShapeClass>
+                    </shapeClass>
+                  </shapeClassNode>
+                </domainModelTreeViewHasModelTreeNodes>
+                <domainModelTreeViewHasModelTreeNodes Id="54432f1a-8ddd-483a-ac5a-c38f58268f27">
+                  <shapeClassNode Id="d3f51fef-ebb3-4742-b196-c53280ce0406">
+                    <shapeClass>
+                      <shapeClassNodeReferencesShapeClass Id="c03cdbd2-8866-4ef2-a449-e3da961669fe">
+                        <shapeClassMoniker Id="52b9b6ee-1bb4-4337-a8c8-4c958bf08fb5" />
+                      </shapeClassNodeReferencesShapeClass>
+                    </shapeClass>
+                  </shapeClassNode>
+                </domainModelTreeViewHasModelTreeNodes>
+                <domainModelTreeViewHasModelTreeNodes Id="8f93b443-9304-4bee-a063-2b09aaeed504">
+                  <shapeClassNode Id="b38b375c-1441-471c-9717-597c3daf247a">
+                    <shapeClass>
+                      <shapeClassNodeReferencesShapeClass Id="084aa9af-010f-49a6-8337-23a4517b120a">
+                        <shapeClassMoniker Id="bcf88200-0138-42de-8e4d-437fe539040b" />
+                      </shapeClassNodeReferencesShapeClass>
+                    </shapeClass>
+                  </shapeClassNode>
+                </domainModelTreeViewHasModelTreeNodes>
+                <domainModelTreeViewHasModelTreeNodes Id="628dc1a4-ae71-4563-905c-e6865bc132b2">
+                  <shapeRelationshipNode Id="5fc0b04b-31da-4304-b0ee-48f50b211388">
+                    <relationshipShapeClass>
+                      <shapeRelationshipNodeReferencesRelationshipShapeClass Id="e59a0f80-a3f1-4f4d-9481-d862067d3207">
+                        <relationshipShapeClassMoniker Id="e72b7047-22fd-4432-b6c7-6dfa769e7499" />
+                      </shapeRelationshipNodeReferencesRelationshipShapeClass>
+                    </relationshipShapeClass>
+                  </shapeRelationshipNode>
+                </domainModelTreeViewHasModelTreeNodes>
+              </modelTreeNodes>
+            </domainModelTreeView>
+          </viewContextHasDomainModelTreeView>
+        </domainModelTreeView>
+        <diagramView>
+          <viewContextHasDiagramView Id="6329f6de-e2de-47fd-8ee2-28ba33235825">
+            <diagramView Id="ccab12b1-a9ed-4442-b263-444062df3715">
+              <diagramClassViews>
+                <diagramViewHasDiagramClassViews Id="d42b5035-9dff-40b7-bbb7-fddb6c5de262">
+                  <diagramClassView Id="cc75dbbd-c7af-453f-8a80-f7df2827d83f" isExpanded="true">
+                    <diagramClass>
+                      <diagramClassViewReferencesDiagramClass Id="7bb128af-b31d-4418-99e5-268614a90b54">
+                        <designerDiagramClassMoniker Id="dc2df77c-9c92-42a8-b657-de86bc8175a0" />
+                      </diagramClassViewReferencesDiagramClass>
+                    </diagramClass>
+                    <rootDiagramNodes>
+                      <diagramClassViewHasRootDiagramNodes Id="c205bef8-ccab-430e-b39f-d6f1d4a9485a">
+                        <rootDiagramNode Id="ca0c567f-3be7-450f-9297-ea204b77eacc" isExpanded="true" isChildrenTreeExpanded="true">
+                          <presentationElementClass>
+                            <diagramTreeNodeReferencesPresentationElementClass Id="4544da4b-50c4-434d-93d3-c8da458e5130">
+                              <shapeClassMoniker Id="6c150462-4f97-4519-af77-9052c78a277c" />
+                            </diagramTreeNodeReferencesPresentationElementClass>
+                          </presentationElementClass>
+                        </rootDiagramNode>
+                      </diagramClassViewHasRootDiagramNodes>
+                      <diagramClassViewHasRootDiagramNodes Id="a96dc6a3-4c69-44bc-8d76-b8698ce573aa">
+                        <rootDiagramNode Id="b4560ff3-9285-42af-8045-74c19d5505f0" isExpanded="true" isChildrenTreeExpanded="true">
+                          <presentationElementClass>
+                            <diagramTreeNodeReferencesPresentationElementClass Id="067d10e4-c69c-40e1-a163-68e9f72ea0c5">
+                              <shapeClassMoniker Id="52b9b6ee-1bb4-4337-a8c8-4c958bf08fb5" />
+                            </diagramTreeNodeReferencesPresentationElementClass>
+                          </presentationElementClass>
+                        </rootDiagramNode>
+                      </diagramClassViewHasRootDiagramNodes>
+                      <diagramClassViewHasRootDiagramNodes Id="f4f81a98-f637-45f9-b1f8-3ceb3ad7927d">
+                        <rootDiagramNode Id="8c77d50a-bab6-41ed-a18e-19a6fe7434d4" isExpanded="true" isChildrenTreeExpanded="true">
+                          <presentationElementClass>
+                            <diagramTreeNodeReferencesPresentationElementClass Id="b2beee14-509b-4d88-a73d-324af06b1943">
+                              <shapeClassMoniker Id="bcf88200-0138-42de-8e4d-437fe539040b" />
+                            </diagramTreeNodeReferencesPresentationElementClass>
+                          </presentationElementClass>
+                        </rootDiagramNode>
+                      </diagramClassViewHasRootDiagramNodes>
+                      <diagramClassViewHasRootDiagramNodes Id="3204fdf9-ac79-464f-895d-ade9b939b861">
+                        <rootDiagramNode Id="301d7fde-47ec-4068-8d6a-38e2d28b1c23" isExpanded="true" isChildrenTreeExpanded="true">
+                          <presentationElementClass>
+                            <diagramTreeNodeReferencesPresentationElementClass Id="fac18872-8828-4311-9a6b-e6b69378f73f">
+                              <relationshipShapeClassMoniker Id="e72b7047-22fd-4432-b6c7-6dfa769e7499" />
+                            </diagramTreeNodeReferencesPresentationElementClass>
+                          </presentationElementClass>
+                        </rootDiagramNode>
+                      </diagramClassViewHasRootDiagramNodes>
+                    </rootDiagramNodes>
+                  </diagramClassView>
+                </diagramViewHasDiagramClassViews>
+              </diagramClassViews>
+            </diagramView>
+          </viewContextHasDiagramView>
+        </diagramView>
+        <modelContext>
+          <viewContextReferencesModelContext Id="47de6356-e817-431b-bcd3-31759fb06b9a">
+            <modelContextMoniker Id="9c585556-0578-491d-8f04-2503f6e087e9" />
+          </viewContextReferencesModelContext>
+        </modelContext>
+      </viewContext>
+    </viewHasViewContexts>
+  </viewContexts>
+  <modelTree>
+    <viewHasModelTree Id="6ca7f218-5e8a-4d20-ac81-14f411bf5a68">
+      <modelTree Id="14761f62-2985-4544-aa97-1a09d3e62c05" sortingBehavior="Alphabetical" canMoveElements="false" />
+    </viewHasModelTree>
+  </modelTree>
+</view>

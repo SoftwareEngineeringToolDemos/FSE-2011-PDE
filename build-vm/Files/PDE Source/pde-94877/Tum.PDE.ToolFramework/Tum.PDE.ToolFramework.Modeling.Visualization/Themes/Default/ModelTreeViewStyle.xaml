@@ -1,0 +1,237 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:c="clr-namespace:Tum.PDE.ToolFramework.Modeling.Visualization.Controls.ModelTree">
+    <!-- Template and images from http://www.codeproject.com/KB/WPF/versatile_treeview.aspx-->
+    
+    <!-- a data template for model tree elements -->
+    <HierarchicalDataTemplate x:Key="ModelTreeHeaderTemplate" ItemsSource="{Binding Path=Children}">
+        <Grid>
+            <StackPanel x:Name="GroupPanel" Orientation="Horizontal" Margin="0,2,0,2">
+                <Image x:Name="Folder" Source="/Tum.PDE.ToolFramework.Images;component/Views/FolderClosed-16.png" />
+                <TextBlock x:Name="HeaderName" Margin="2,0,0,0" Text="{Binding Path=DomainElementFullName, Mode=OneWay}" />
+            </StackPanel>
+        </Grid>
+
+        <HierarchicalDataTemplate.Triggers>
+            <!-- IsInPasteMode -->
+            <DataTrigger Binding="{Binding Path=IsInMoveMode}" Value="True">
+                <Setter Property="Foreground" TargetName="HeaderName" Value="Gray" />
+            </DataTrigger>
+            
+           <!-- Folder open -->            
+            <DataTrigger Binding="{Binding Path=IsExpanded, RelativeSource={RelativeSource TemplatedParent}}" Value="True">
+                <Setter Property="Source" TargetName="Folder" Value="/Tum.PDE.ToolFramework.Images;component/Views/FolderOpen-16.png" />
+            </DataTrigger>
+                       
+            <!-- Folder selected -->
+            <!--
+            <DataTrigger Binding="{Binding Path=IsSelected, RelativeSource={RelativeSource TemplatedParent}}" Value="True">
+                <Setter Property="Foreground" TargetName="HeaderName" Value="White" />
+                <Setter Property="Source" TargetName="Folder" Value="/Tum.PDE.ToolFramework.Images;component/Views/FolderSelected-16.png" />
+                <Setter Property="Effect">
+                    <Setter.Value>
+                        <DropShadowEffect ShadowDepth="0" Color="Black" BlurRadius="8" />
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>-->
+           
+        </HierarchicalDataTemplate.Triggers>
+    </HierarchicalDataTemplate>
+
+    <SolidColorBrush x:Key="GlyphBrush" Color="#444" />
+    <LinearGradientBrush x:Key="SelectionBrush" EndPoint="0.5,1" StartPoint="0.5,0">
+        <GradientStop Color="#FFCEE7FF" Offset="0"/>
+        <GradientStop Color="#FFDDECFF" Offset="1"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="InactiveSelectionBrush" EndPoint="0.5,1" StartPoint="0.5,0">
+        <GradientStop Color="#FFE5E5E5" Offset="0"/>
+        <GradientStop Color="#FFF1F1F1" Offset="1"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="MouseOverBrush" EndPoint="0.5,1" StartPoint="0.5,0">
+        <GradientStop Color="#FFEAF3FD" Offset="0"/>
+        <GradientStop Color="#FFF4F9FF" Offset="1"/>
+    </LinearGradientBrush>
+
+    <!--=================================================================
+     TreeViewItem
+    ==================================================================-->
+    <Style x:Key="ExpandCollapseToggleStyle" TargetType="ToggleButton">
+        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToggleButton">
+                    <Grid Width="15" Height="13" Background="Transparent">
+                        <Path x:Name="ExpandPath" HorizontalAlignment="Left"  VerticalAlignment="Center" 
+                                Margin="1,1,1,1" Fill="{StaticResource GlyphBrush}" Data="M 4 0 L 8 4 L 4 8 Z"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter Property="Data" TargetName="ExpandPath" Value="M 0 4 L 8 4 L 4 8 Z"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="TreeViewItemFocusVisual">
+        <Setter Property="Control.Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Border>
+                        <Rectangle Margin="0,0,0,0" StrokeThickness="5" Stroke="Black" StrokeDashArray="1 2" Opacity="0"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type c:ModelTreeViewItem}">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="HorizontalContentAlignment" Value="{Binding Path=HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+        <Setter Property="VerticalContentAlignment" Value="{Binding Path=VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+        <Setter Property="Padding" Value="1,0,0,0"/>
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+        <Setter Property="FocusVisualStyle" Value="{StaticResource TreeViewItemFocusVisual}"/>
+        <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}" />
+        <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
+        <Setter Property="HeaderTemplate" Value="{StaticResource ModelTreeHeaderTemplate}" />        
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TreeViewItem}">
+                    <ControlTemplate.Resources>
+                        <c:LeftMarginMultiplierConverter Length="19" x:Key="lengthConverter" />
+                    </ControlTemplate.Resources>
+                    <StackPanel>
+                        <Border Name="Bd" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="1.0" Padding="{TemplateBinding Padding}">
+                            <Grid Margin="{Binding Converter={StaticResource lengthConverter}, Path=Depth, Mode=OneTime}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="19" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <ToggleButton x:Name="Expander" Style="{StaticResource ExpandCollapseToggleStyle}" IsChecked="{Binding Path=IsExpanded,
+                                              RelativeSource={RelativeSource TemplatedParent}}" ClickMode="Press"/>
+                                <ContentPresenter x:Name="PART_Header" Grid.Column="1" ContentSource="Header"
+                                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
+                            </Grid>
+                        </Border>
+                        <ItemsPresenter x:Name="ItemsHost" />
+                    </StackPanel>
+                    <ControlTemplate.Triggers>
+
+                        <Trigger Property="IsExpanded" Value="false">
+                            <Setter TargetName="ItemsHost" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                        <Trigger Property="HasItems" Value="false">
+                            <Setter TargetName="Expander" Property="Visibility" Value="Hidden"/>
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="HasHeader" Value="false"/>
+                                <Condition Property="Width" Value="Auto"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="PART_Header" Property="MinWidth" Value="75"/>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="HasHeader" Value="false"/>
+                                <Condition Property="Height" Value="Auto"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="PART_Header" Property="MinHeight" Value="19"/>
+                        </MultiTrigger>
+                        <Trigger Property="IsSelected" Value="true">
+                            <Setter TargetName="Bd" Property="BorderBrush" Value="#FF93C5F7"/>
+                            <Setter TargetName="Bd" Property="Background" Value="{StaticResource SelectionBrush}"/>
+                        </Trigger>
+
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=IsSelected}" Value="true"/>
+                                <Condition Binding="{Binding Path=MainModelTreeViewModel.IsActiveView}" Value="false"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter TargetName="Bd" Property="BorderBrush" Value="#FF7A7A7A"/>
+                            <Setter TargetName="Bd" Property="Background" Value="{StaticResource InactiveSelectionBrush}"/>
+                        </MultiDataTrigger>
+
+                        <Trigger SourceName="Bd" Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Bd" Property="BorderBrush" Value="#FF93C5F7"/>
+                            <Setter TargetName="Bd" Property="Background" Value="{StaticResource MouseOverBrush}"/>
+                        </Trigger>
+
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style TargetType="{x:Type c:ModelTreeViewScrollBar}" BasedOn="{StaticResource {x:Type ScrollBar}}"/>
+    <Style TargetType="{x:Type c:ModelTreeViewScrollViewer}" BasedOn="{StaticResource {x:Type ScrollViewer}}"/>
+    
+    <!-- this is the style that is applied to the tree scroll viewer -->
+    <ControlTemplate x:Key="ModelTreeViewScrollViewerTemplate" TargetType="{x:Type c:ModelTreeViewScrollViewer}">
+        <Grid x:Name="Grid" Background="{TemplateBinding Background}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Rectangle x:Name="Corner" Fill="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Grid.Column="1" Grid.Row="1"/>
+            <ScrollContentPresenter x:Name="PART_ScrollContentPresenter" Margin="{TemplateBinding Padding}" Grid.Column="0" Grid.Row="0" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" CanContentScroll="{TemplateBinding CanContentScroll}" CanHorizontallyScroll="False" CanVerticallyScroll="False"/>
+            <c:ModelTreeViewScrollBar x:Name="PART_VerticalScrollBar" Cursor="Arrow" Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}" Grid.Column="1" Grid.Row="0" ViewportSize="{TemplateBinding ViewportHeight}" Maximum="{TemplateBinding ScrollableHeight}" Minimum="0" Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" AutomationProperties.AutomationId="VerticalScrollBar"/>
+            <c:ModelTreeViewScrollBar x:Name="PART_HorizontalScrollBar" Cursor="Arrow" Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}" Grid.Column="0" Grid.Row="1" Orientation="Horizontal" ViewportSize="{TemplateBinding ViewportWidth}" Maximum="{TemplateBinding ScrollableWidth}" Minimum="0" Value="{Binding HorizontalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" AutomationProperties.AutomationId="HorizontalScrollBar"/>
+        </Grid>
+    </ControlTemplate>
+
+    <!-- this is the style that is applied to the tree -->
+    <SolidColorBrush x:Key="ListBorder" Color="#828790"/>
+    <Style TargetType="{x:Type c:ModelTreeView}">
+        <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource ListBorder}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Padding" Value="1"/>
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type c:ModelTreeView}">
+                    <Border x:Name="Bd" SnapsToDevicePixels="true" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                        <c:ModelTreeViewScrollViewer x:Name="_tv_scrollviewer_" 
+                                                     Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" Focusable="false" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" CanContentScroll="false" HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}" VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
+                                                     Template="{DynamicResource ModelTreeViewScrollViewerTemplate}">
+                            <ItemsPresenter/>
+                        </c:ModelTreeViewScrollViewer>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Background" TargetName="Bd" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
+                        </Trigger>
+                        <Trigger Property="VirtualizingStackPanel.IsVirtualizing" Value="true">
+                            <Setter Property="CanContentScroll" TargetName="_tv_scrollviewer_" Value="true"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="VirtualizingStackPanel.IsVirtualizing" Value="true">
+                <Setter Property="ItemsPanel">
+                    <Setter.Value>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel/>
+                        </ItemsPanelTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>

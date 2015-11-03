@@ -1,0 +1,797 @@
+﻿<#@ template language="C#" inherits="BaseTemplate"#> 
+<#@ import namespace="Tum.PDE.LanguageDSL"#>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Collections.ObjectModel" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+using DslModeling = global::Microsoft.VisualStudio.Modeling;
+using DslEditorModeling = global::Tum.PDE.ToolFramework.Modeling;
+using DslEditorDiagrams = global::Tum.PDE.ToolFramework.Modeling.Diagrams;
+
+<#
+	MetaModel dm = this.MetaModel;
+#>
+namespace <#= dm.Namespace #>
+{
+	/// <summary>
+    /// Domain model services specific to <#= dm.Name #>.
+    /// </summary>
+	public partial class <#= dm.Name #>DomainModelServices : DslEditorModeling::DomainModelServices
+	{
+		#region Singleton Instance
+		private static <#= dm.Name #>DomainModelServices dmainModelServices = null;
+		
+        /// <summary>
+        /// Singleton instance.
+        /// </summary>
+        [global::System.Diagnostics.DebuggerBrowsable(global::System.Diagnostics.DebuggerBrowsableState.Never)] // Will trigger creation otherwise.
+        public static <#= dm.Name #>DomainModelServices Instance
+        {
+            [global::System.Diagnostics.DebuggerStepThrough]
+            get
+            {
+                if( dmainModelServices == null )
+				{
+					dmainModelServices = new <#= dm.Name #>DomainModelServices();
+				}
+				
+				return dmainModelServices;
+            }
+        }
+		
+		private <#= dm.Name #>DomainModelServices()
+		{
+		}
+        #endregion
+		
+		#region Properties
+        /// <summary>
+        /// Gets the extension services.
+        /// </summary>
+		public override DslEditorModeling::IDomainModelExtensionServices ExtensionServices
+		{
+			get
+			{
+				return <#= dm.Name #>DomainModelExtensionServices.Instance;
+			}
+		}
+		
+		/// <summary>
+        /// Gets the element id provider for domain model elements.
+        /// </summary>
+        public override DslEditorModeling::IModelElementIdProvider ElementIdProvider
+		{
+			get
+			{
+				return <#= dm.Name #>DomainModelIdProvider.Instance;
+			}
+		}
+		
+		/// <summary>
+        /// Gets the element name provider for domain model elements.
+        /// </summary>
+        public override DslEditorModeling::IModelElementNameProvider ElementNameProvider 
+		{ 
+			get
+			{
+				return <#= dm.Name #>ElementNameProvider.Instance;
+			}
+		}
+
+        /// <summary>
+        /// Gets the element type provider for domain model elments.
+        /// </summary>
+        public override DslEditorModeling::IModelElementTypeProvider ElementTypeProvider 
+		{ 
+			get
+			{
+				return <#= dm.Name #>ElementTypeProvider.Instance;
+			}
+		}
+		
+		/// <summary>
+        /// Gets the element shape provider for domain model elments.
+        /// </summary>
+        public override DslEditorModeling::IModelElementShapeProvider ShapeProvider
+		{ 
+			get
+			{
+				return <#= dm.Name #>ElementShapeProvider.Instance;
+			}
+		}
+
+		/// <summary>
+        /// Gets the element parent provider for domain model elments.
+        /// </summary>
+        public override DslEditorModeling::IModelElementParentProvider ElementParentProvider
+		{ 
+			get
+			{
+				return <#= dm.Name #>ElementParentProvider.Instance;
+			}
+		}
+		
+		/// <summary>
+        /// Gets the element children provider for domain model elments.
+        /// </summary>
+        public override DslEditorModeling::IModelElementChildrenProvider ElementChildrenProvider
+		{ 
+			get
+			{
+				return <#= dm.Name #>ElementChildrenProvider.Instance;
+			}
+		}
+		
+		/// <summary>
+        /// Gets the dependency items provider for domain model elments.
+        /// </summary>
+        public override DslEditorModeling::IDependenciesItemsProvider DependenciesItemsProvider
+		{ 
+			get
+			{
+				return <#= dm.Name #>DependenciesItemsProvider.Instance;
+			}
+		}
+		
+		/// <summary>
+        /// Gets the model data options.
+        /// </summary>
+        public override DslEditorModeling::IModelDataOptions ModelDataOptions 
+		{ 
+			get
+			{
+				return <#= dm.Name #>ModelDataOptions.Instance;
+			} 
+		}
+		
+		/// <summary>
+        /// Gets the search processor for domain model elments.
+        /// </summary>
+        public override DslEditorModeling::IModelElementSearchProcessor SearchProcessor 
+		{ 
+			get
+			{
+				return <#= dm.Name #>SearchProcessor.Instance;
+			}
+		}
+
+		/// <summary>
+        /// Gets the search processor for domain model elments.
+        /// </summary>
+        public override DslEditorModeling::ModelValidationController ValidationController 
+		{ 
+			get
+			{
+				return <#= dm.Name #>ValidationController.Instance;
+			}
+		}	
+		#endregion
+	}
+
+	/// <summary>
+    /// Domain model extension services specific to <#= dm.Name #>.
+	///
+	/// Double derived to allow for easier customization.
+    /// </summary>
+	public partial class <#= dm.Name #>DomainModelExtensionServices : <#= dm.Name #>DomainModelExtensionServicesBase
+	{	
+		#region Singleton Instance
+		private static <#= dm.Name #>DomainModelExtensionServices dmainModelServices = null;
+        private static object domainModelServicesLock = new object();
+		
+        /// <summary>
+        /// Singleton instance.
+        /// </summary>
+        [global::System.Diagnostics.DebuggerBrowsable(global::System.Diagnostics.DebuggerBrowsableState.Never)] // Will trigger creation otherwise.
+        public static <#= dm.Name #>DomainModelExtensionServices Instance
+        {
+            [global::System.Diagnostics.DebuggerStepThrough]
+            get
+            {
+			 	lock (domainModelServicesLock)
+                {
+                    if (dmainModelServices == null)
+                        dmainModelServices = new <#= dm.Name #>DomainModelExtensionServices();
+                }
+				
+				return dmainModelServices;
+            }
+        }
+		
+		private <#= dm.Name #>DomainModelExtensionServices() : base()
+		{
+		}
+		
+	
+        #endregion	
+	}
+	
+	/// <summary>
+    /// Domain model extension services specific to <#= dm.Name #>.
+	///
+	/// This is the base abstract class.
+    /// </summary>
+	public abstract class <#= dm.Name #>DomainModelExtensionServicesBase : DslEditorModeling::DomainModelExtensionServices
+	{
+		#region Constructor
+        /// <summary>
+        /// Constructor.
+        /// </summary>		
+		protected <#= dm.Name #>DomainModelExtensionServicesBase() : base(<#= dm.Namespace #>.<#= dm.Name #>DomainModelServices.Instance)
+		{			
+			Intialize();
+		}
+		#endregion
+		
+		#region Methods
+        private bool isInitialized = false;
+        /// <summary>
+        /// Initialized known extern services.
+        /// </summary>
+        public override void Intialize()
+		{
+			if( isInitialized )
+				return;
+				
+			isInitialized = true;
+<#
+		
+		foreach(MetaModelLibrary lib in dm.MetaModelLibraries)
+			if( lib.ImportedLibrary != null )
+			{
+				MetaModel m = lib.ImportedLibrary as MetaModel;
+#>
+			this.AddExternModelService(<#= m.Namespace #>.<#= m.Name #>DomainModelServices.Instance);
+			<#= m.Namespace #>.<#= m.Name #>DomainModelExtensionServices.Instance.AddExternModelService(<#= dm.Name #>DomainModelServices.Instance);
+<#
+			}			
+#>
+
+			// set top most service
+			this.SetTopMostService(<#= dm.Namespace #>.<#= dm.Name #>DomainModelServices.Instance);
+		}	
+
+		#endregion
+	}
+
+	/// <summary>
+	/// Class which provides names and display names for domain classes as well as methods to create names for new domain classes.
+	///
+	/// Double derived to allow for easier customization.
+    /// </summary>
+	public partial class <#= dm.Name #>ElementNameProvider : DslEditorModeling::ModelElementNameProvider
+	{
+		#region Singleton Instance
+		private static <#= dm.Name #>ElementNameProvider elementNameProvider = null;
+		
+        /// <summary>
+        /// Singleton instance.
+        /// </summary>
+        [global::System.Diagnostics.DebuggerBrowsable(global::System.Diagnostics.DebuggerBrowsableState.Never)] // Will trigger creation otherwise.
+        public static <#= dm.Name #>ElementNameProvider Instance
+        {
+            [global::System.Diagnostics.DebuggerStepThrough]
+            get
+            {
+                if( elementNameProvider == null )
+				{
+					elementNameProvider = new <#= dm.Name #>ElementNameProvider();
+				}
+				
+				return elementNameProvider;
+            }
+        }
+		
+		private <#= dm.Name #>ElementNameProvider() : base()
+		{
+		}
+        #endregion
+	}
+	
+	/// <summary>
+	/// Class which provides type names and type display names for domain classes.
+	///
+	/// Double derived to allow for easier customization.
+    /// </summary>
+	public partial class <#= dm.Name #>ElementTypeProvider : DslEditorModeling::ModelElementTypeProvider
+    {
+		#region Singleton Instance
+		private static <#= dm.Name #>ElementTypeProvider elementTypeProvider = null;
+		
+        /// <summary>
+        /// Singleton instance.
+        /// </summary>
+        [global::System.Diagnostics.DebuggerBrowsable(global::System.Diagnostics.DebuggerBrowsableState.Never)] // Will trigger creation otherwise.
+        public static <#= dm.Name #>ElementTypeProvider Instance
+        {
+            [global::System.Diagnostics.DebuggerStepThrough]
+            get
+            {
+                if( elementTypeProvider == null )
+				{
+					elementTypeProvider = new <#= dm.Name #>ElementTypeProvider();
+				}
+				
+				return elementTypeProvider;
+            }
+        }
+		
+		private <#= dm.Name #>ElementTypeProvider() : base()
+		{
+		}
+        #endregion
+	}
+
+	/// <summary>
+	/// Class which retrieves parent elements for domain classes.
+	///
+	/// Double derived to allow for easier customization.
+    /// </summary>
+	public partial class <#= dm.Name #>ElementParentProvider : DslEditorModeling::ModelElementParentProvider
+    {
+		#region Singleton Instance
+		private static <#= dm.Name #>ElementParentProvider elementParentProvider = null;
+		
+        /// <summary>
+        /// Singleton instance.
+        /// </summary>
+        [global::System.Diagnostics.DebuggerBrowsable(global::System.Diagnostics.DebuggerBrowsableState.Never)] // Will trigger creation otherwise.
+        public static <#= dm.Name #>ElementParentProvider Instance
+        {
+            [global::System.Diagnostics.DebuggerStepThrough]
+            get
+            {
+                if( elementParentProvider == null )
+				{
+					elementParentProvider = new <#= dm.Name #>ElementParentProvider();
+				}
+				
+				return elementParentProvider;
+            }
+        }
+	
+		/// <summary>
+        /// Constructor.
+        /// </summary>
+		private <#= dm.Name #>ElementParentProvider() : base()
+		{
+		}
+        #endregion
+	}
+	
+	/// <summary>
+	/// Class which retrieves children elements domain classes.
+    /// </summary>
+	public partial class <#= dm.Name #>ElementChildrenProvider : DslEditorModeling::ModelElementChildrenProvider
+    {
+		#region Singleton Instance
+		private static <#= dm.Name #>ElementChildrenProvider elementChildrenProvider = null;
+		
+        /// <summary>
+        /// Singleton instance.
+        /// </summary>
+        [global::System.Diagnostics.DebuggerBrowsable(global::System.Diagnostics.DebuggerBrowsableState.Never)] // Will trigger creation otherwise.
+        public static <#= dm.Name #>ElementChildrenProvider Instance
+        {
+            [global::System.Diagnostics.DebuggerStepThrough]
+            get
+            {
+                if( elementChildrenProvider == null )
+				{
+					elementChildrenProvider = new <#= dm.Name #>ElementChildrenProvider();
+				}
+				
+				return elementChildrenProvider;
+            }
+        }
+		
+		private <#= dm.Name #>ElementChildrenProvider() : base()
+		{
+		}
+        #endregion
+	}	
+	
+	/// <summary>
+	/// Class which retrieves parent shape for domain classes.
+	///
+	/// Double derived to allow for easier customization.
+    /// </summary>
+	public partial class <#= dm.Name #>ElementShapeProvider : <#= dm.Name #>ElementShapeProviderBase
+    {
+		#region Singleton Instance
+		private static <#= dm.Name #>ElementShapeProvider elementShapeProvider = null;
+		
+        /// <summary>
+        /// Singleton instance.
+        /// </summary>
+        [global::System.Diagnostics.DebuggerBrowsable(global::System.Diagnostics.DebuggerBrowsableState.Never)] // Will trigger creation otherwise.
+        public static <#= dm.Name #>ElementShapeProvider Instance
+        {
+            [global::System.Diagnostics.DebuggerStepThrough]
+            get
+            {
+                if( elementShapeProvider == null )
+				{
+					elementShapeProvider = new <#= dm.Name #>ElementShapeProvider();
+				}
+				
+				return elementShapeProvider;
+            }
+        }
+	
+		/// <summary>
+        /// Constructor.
+        /// </summary>
+		private <#= dm.Name #>ElementShapeProvider() : base()
+		{
+		}
+        #endregion
+	}
+	
+	/// <summary>
+	/// Class which retrieves shape elements for domain classes.
+	///
+	/// This is the base abstract class.
+    /// </summary>
+	public partial class <#= dm.Name #>ElementShapeProviderBase : DslEditorModeling::ModelElementShapeProvider
+    {	
+		#region Constructor
+        /// <summary>
+        /// Constructor.
+        /// </summary>		
+		protected <#= dm.Name #>ElementShapeProviderBase()
+		{
+			
+		}
+		#endregion	
+<#
+		
+		List<ShapeClass> presentationshapeClasses = new List<ShapeClass>();
+		ReadOnlyCollection<ShapeClass> shapeClasses = dm.Store.ElementDirectory.FindElements<ShapeClass>();
+		foreach(ShapeClass shapeClass in shapeClasses)
+		{
+			if( shapeClass.DomainClass != null )
+				presentationshapeClasses.Add(shapeClass);
+		}
+		
+		List<PresentationElementClass> rsShapeClasses = new List<PresentationElementClass>();
+		ReadOnlyCollection<PresentationElementClass> peClasses = dm.Store.ElementDirectory.FindElements<PresentationElementClass>();
+		foreach(PresentationElementClass pe in peClasses)
+		{
+			if( pe is MappingRelationshipShapeClass)
+				if( (pe as MappingRelationshipShapeClass).DomainClass == null ||
+					(pe as MappingRelationshipShapeClass).Source == null ||
+					(pe as MappingRelationshipShapeClass).Target == null)
+					continue;
+						
+			if( pe is RelationshipShapeClass )
+				if( (pe as RelationshipShapeClass).ReferenceRelationship == null )
+					continue;
+				
+			if( pe is ShapeClass )
+				continue;
+			
+			rsShapeClasses.Add(pe);
+		}
+#>
+
+		#region Methods
+<#
+	if( presentationshapeClasses.Count > 0 )
+	{
+#>		
+		private static global::System.Collections.Generic.Dictionary<global::System.Guid, int> createShapeMap;
+		
+<#
+	}
+#>
+        /// <summary>
+        /// Create a shape of the given type for the given element type.
+        /// </summary>
+        /// <param name="modelElement">Model element.</param>
+        /// <param name="shapeTypeId">Shape type id.</param>
+        /// <param name="assignments">Properties for the shape.</param>
+        /// <returns>Shape if one could be created. Null otherwise.</returns>
+        public override DslModeling.ModelElement CreateShapeForElement(System.Guid shapeTypeId, DslModeling::ModelElement modelElement, params DslModeling::PropertyAssignment[] assignments)
+        {
+<#
+	if( presentationshapeClasses.Count > 0 )
+	{
+#>
+			DslEditorDiagrams::NodeShape nodeShape = null;	
+		
+			if( createShapeMap == null )
+			{
+				createShapeMap = new global::System.Collections.Generic.Dictionary<global::System.Guid, int>(<#= presentationshapeClasses.Count #>);
+<#
+		int counter = 0;
+		foreach(ShapeClass p in presentationshapeClasses )
+		{
+#>
+				createShapeMap.Add(<#= p.GetFullName(true) #>.DomainClassId, <#= counter #>);
+<#
+			counter++;
+		}
+#>
+			}
+			int index;
+			if (!createShapeMap.TryGetValue(shapeTypeId, out index))
+				throw new global::System.ArgumentException("Unrecognized shape type " + shapeTypeId.ToString());
+			switch (index)
+			{
+<#
+		counter = 0;
+		foreach(ShapeClass p in presentationshapeClasses )
+		{
+#>
+				case <#= counter #>: nodeShape = new <#= p.GetFullName(true) #>(modelElement.Store, assignments); break;
+<#
+			counter++;
+		}
+#>				
+			}
+
+			if( nodeShape == null )
+				throw new System.InvalidOperationException("Couldn't create shape of type " + shapeTypeId.ToString() + " for model element " + modelElement.ToString());
+			
+			nodeShape.Element = modelElement;
+			
+			return nodeShape;
+<#
+	}
+	else
+	{
+#>
+			return null;
+<#
+	}
+#>		
+        }
+		
+<#
+	if( rsShapeClasses.Count > 0 )
+	{
+#>		
+		private static global::System.Collections.Generic.Dictionary<global::System.Guid, int> createRSShapeMap;
+		
+<#
+	}
+#>		
+
+		/// <summary>
+        /// Create a shape of the given link shape type.
+        /// </summary>
+        /// <param name="shapeTypeId">Shape type id.</param>
+        /// <param name="modelElement">Model element.</param>
+        /// <param name="sourceShape">Source shape.</param>
+        /// <param name="targetShape">Target shape.</param>
+		/// <param name="assignments">Properties for the shape.</param>
+        /// <returns>Shape if one could be created. Null otherwise.</returns>
+        public override DslModeling::ModelElement CreateShapeForElementLink(System.Guid shapeTypeId, DslModeling::ModelElement modelElement, DslModeling::ModelElement sourceShape, DslModeling::ModelElement targetShape, params DslModeling::PropertyAssignment[] assignments)
+		{
+			if( !(sourceShape is DslEditorDiagrams::NodeShape) ||
+				!(targetShape is DslEditorDiagrams::NodeShape) )
+				return null;
+				
+			DslEditorDiagrams::LinkShape nodeShape = CreateShapeForElementLink(shapeTypeId, modelElement, assignments) as DslEditorDiagrams::LinkShape;
+			if( nodeShape == null )
+				return nodeShape;
+
+			nodeShape.SourceAnchor = new DslEditorDiagrams::SourceAnchor(modelElement.Store); 
+			nodeShape.SourceAnchor.FromShape = sourceShape as DslEditorDiagrams::NodeShape;
+			nodeShape.TargetAnchor = new DslEditorDiagrams::TargetAnchor(modelElement.Store); 
+        	nodeShape.TargetAnchor.ToShape = targetShape as DslEditorDiagrams::NodeShape;
+
+			return nodeShape;
+		}
+
+        /// <summary>
+        /// Create a shape of the given link shape type.
+        /// </summary>
+        /// <param name="shapeTypeId">Shape type id.</param>
+        /// <param name="modelElement">Model element.</param>
+		/// <param name="assignments">Properties for the shape.</param>
+        /// <returns>Shape if one could be created. Null otherwise.</returns>
+        public override DslModeling::ModelElement CreateShapeForElementLink(System.Guid shapeTypeId, DslModeling::ModelElement modelElement, params DslModeling::PropertyAssignment[] assignments)
+		{
+			
+<#
+	if( rsShapeClasses.Count > 0 )
+	{
+#>
+			DslEditorDiagrams::LinkShape nodeShape = null;	
+		
+			if( createRSShapeMap == null )
+			{
+				createRSShapeMap = new global::System.Collections.Generic.Dictionary<global::System.Guid, int>(<#= rsShapeClasses.Count #>);
+<#
+		int counter = 0;
+		foreach(PresentationElementClass p in rsShapeClasses )
+		{
+#>
+				createRSShapeMap.Add(<#= p.GetFullName(true) #>.DomainClassId, <#= counter #>);
+<#
+			counter++;
+		}
+#>
+			}
+			int index;
+			if (!createRSShapeMap.TryGetValue(shapeTypeId, out index))
+				throw new global::System.ArgumentException("Unrecognized shape type " + shapeTypeId.ToString());
+			switch (index)
+			{
+<#
+		counter = 0;
+		foreach(PresentationElementClass p in rsShapeClasses )
+		{
+#>
+				case <#= counter #>: nodeShape = new <#= p.GetFullName(true) #>(modelElement.Store, assignments); break;
+<#
+			counter++;
+		}
+#>				
+			}
+
+			if( nodeShape == null )
+				throw new System.InvalidOperationException("Couldn't create shape of type " + shapeTypeId.ToString() + " for element link " + modelElement.ToString());
+			
+			nodeShape.Element = modelElement;
+								
+			return nodeShape;
+<#
+	}
+	else
+	{
+#>
+			return null;
+<#
+	}
+#>		
+        }
+		
+		/// <summary>
+        /// Create a dependency shape for the given element type.
+        /// </summary>
+        /// <param name="modelElementTypeId">Model element type.</param>
+        /// <param name="modelElement">Model element.</param>
+        /// <param name="assignments">Properties for the shape.</param>
+        /// <returns>Shape if one could be created. Null otherwise.</returns>
+        public override DslModeling::ModelElement CreateDependenciesShapeForElement(System.Guid modelElementTypeId, DslModeling::ModelElement modelElement, params DslModeling::PropertyAssignment[] assignments)
+		{
+			System.Guid id;
+            if((modelElement as DslEditorModeling::DomainModelElement).Store.DomainDataAdvDirectory.ResolveExtensionDirectory<DslEditorDiagrams::DiagramDomainDataDirectory>().ClassShapesDependenciesMapping.TryGetValue(modelElementTypeId, out id))
+                return CreateShapeForElement(id, modelElement, assignments);
+
+            return null;
+		}
+		#endregion
+	}
+	
+	/// <summary>
+	/// This class is used to store common options. Double-derived class to allow easier code customization.
+	/// </summary>
+	public partial class <#= dm.Name #>ModelDataOptions : <#= dm.Name #>ModelDataOptionsBase
+	{
+		#region Singleton Instance
+		private static <#= dm.Name #>ModelDataOptions modelDataOptions = null;
+		
+        /// <summary>
+        /// Singleton instance.
+        /// </summary>
+        [global::System.Diagnostics.DebuggerBrowsable(global::System.Diagnostics.DebuggerBrowsableState.Never)] // Will trigger creation otherwise.
+        public static DslEditorModeling::IModelDataOptions Instance
+        {
+            [global::System.Diagnostics.DebuggerStepThrough]
+            get
+            {
+                if( modelDataOptions == null )
+				{
+					modelDataOptions = new <#= dm.Name #>ModelDataOptions();
+				}
+				
+				return modelDataOptions;
+            }
+        }
+		
+		private <#= dm.Name #>ModelDataOptions() : base()
+		{
+		}
+        #endregion
+	}
+	
+	/// <summary>
+    /// This class is used to store common options. 
+    /// </summary>
+	public abstract partial class <#= dm.Name #>ModelDataOptionsBase : DslEditorModeling::IModelDataOptions
+	{
+		#region Constructor
+		/// <summary>
+		/// Constructs a new <#= dm.Name #>ModelDataOptionsBase.
+		/// </summary>	
+		protected <#= dm.Name #>ModelDataOptionsBase()
+		{
+		}
+		#endregion
+		
+		#region Properties
+		/// <summary>
+        /// Gets the name of the current editor.
+        /// </summary>
+        public virtual string AppName
+        {
+            get
+            {
+                return "<#= dm.ApplicationName #>";
+            }
+        }
+		
+		/// <summary>
+        /// Gets the name of the company providing this editor.
+        /// </summary>
+        public virtual string Company
+		{
+	        get
+    	    {
+        	    return "<#= dm.CompanyName #>";
+        	}	
+		}
+		
+		/// <summary>
+        /// Gets the version of the editor.
+        /// </summary>
+        public virtual string Version
+        {
+            get
+            {
+<#
+			string version = "";
+			if( !String.IsNullOrEmpty(dm.MajorVersion) && !String.IsNullOrWhiteSpace(dm.MajorVersion))
+			{
+				version = dm.MajorVersion;
+				if( !String.IsNullOrEmpty(dm.MinorVersion) && !String.IsNullOrWhiteSpace(dm.MinorVersion))
+				{
+					version += "." + dm.MinorVersion;
+					if( !String.IsNullOrEmpty(dm.Build) && !String.IsNullOrWhiteSpace(dm.Build))
+					{
+						version += "." + dm.Build;
+						if( !String.IsNullOrEmpty(dm.Revision) && !String.IsNullOrWhiteSpace(dm.Revision))
+						{
+							version += "." + dm.Revision;
+						}
+					}					
+				}				
+			}
+#>			
+                return "<#= version #>";
+            }
+        }
+		
+		private string appDataDirectory = null;
+		/// <summary>
+        /// Gets the application data directory for the current editor.
+        /// </summary>
+		public virtual string AppDataDirectory
+		{
+			get
+			{
+				if( appDataDirectory == null )
+				{
+					appDataDirectory = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData) 
+										+ System.IO.Path.DirectorySeparatorChar 
+										+ Company
+										+ System.IO.Path.DirectorySeparatorChar
+										+  AppName;
+					
+					if( !System.String.IsNullOrEmpty(Version) && !System.String.IsNullOrWhiteSpace(Version) )
+						appDataDirectory += " " + Version;
+					
+	                if (!System.IO.Directory.Exists(appDataDirectory))
+    	                System.IO.Directory.CreateDirectory(appDataDirectory);
+				}
+                return appDataDirectory;
+			}
+		}
+		#endregion
+	}	
+}

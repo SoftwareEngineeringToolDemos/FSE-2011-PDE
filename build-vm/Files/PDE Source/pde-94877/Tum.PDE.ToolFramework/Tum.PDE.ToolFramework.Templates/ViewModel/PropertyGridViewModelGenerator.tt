@@ -1,0 +1,384 @@
+﻿<#@ template language="C#" inherits="BaseTemplate"#> 
+<#@ import namespace="Tum.PDE.LanguageDSL"#>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Collections.ObjectModel" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+using DslModeling = global::Microsoft.VisualStudio.Modeling;
+using DslEditorModeling = global::Tum.PDE.ToolFramework.Modeling;
+using DslEditorViewModelData = global::Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel.Data;
+using DslEditorViewModelEvents = global::Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel.Messaging.Events;
+using DslEditorViewModelPGrid = global::Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel.PropertyGrid;
+
+namespace <#= this.MetaModel.Namespace #>.ViewModel.PropertyGrid
+{
+<#
+	IEnumerable<AttributedDomainElement> domainElements = CodeGenerationUtilities.GetElementsForPropertyGridViewModelCreation(this.MetaModel);
+	foreach(AttributedDomainElement domainElement in domainElements)
+	{
+		GeneratePropertyGridViewModel(this.MetaModel, domainElement);
+	}
+#>
+}
+<#+ 
+public void GeneratePropertyGridViewModel(MetaModel dm, AttributedDomainElement domainElement)
+{
+		string name = "PropertyGrid" + domainElement.Name + "ViewModel";
+		string baseClass = "DslEditorViewModelPGrid::PropertyGridViewModel";
+		string constructorAccessor = "public";
+		string modifier = " partial";		
+		string classAccessor = "";
+		string classDoubleDerivedAccessor = "";
+
+		if( domainElement.GeneratesDoubleDerived )
+		{
+			name += "Base";
+			modifier = "";
+			constructorAccessor = "protected";
+			classAccessor = " abstract";
+		}
+		
+		if( domainElement.BaseElement != null )
+		{
+			baseClass = CodeGenerationUtilities.GetPropertyGridViewModelFullName(domainElement.BaseElement);	
+		}
+		
+		if( domainElement.InheritanceModifier == InheritanceModifier.Abstract )
+		{
+			classAccessor = " abstract";
+			classDoubleDerivedAccessor = " abstract";
+		}
+		
+		DomainProperty nameProperty = CodeGenerationUtilities.GetNameProperty(domainElement);
+		
+		List<DomainProperty> createEditorForProperty = new List<DomainProperty>();
+		List<DomainRole> createEditorForRole = new List<DomainRole>();
+		
+#>
+	/// <summary>
+    /// Property grid view model for <#= domainElement.Name #>
+<#+
+		if( domainElement.GeneratesDoubleDerived )
+		{
+#>
+	///
+	/// This is the base abstract class.
+<#+
+		}
+#>
+    /// </summary>
+	public<#= classAccessor #><#= modifier #> class <#= name #> : <#= baseClass #>
+	{
+		#region Constructor
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+		/// <param name="viewModelStore">The store this view model belongs to.</param>
+        /// <param name="element">Model element of type <#= domainElement.Name #> for which this property grid view model is created.</param>	
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+		<#= constructorAccessor #> <#= name #>(DslEditorViewModelData::ViewModelStore viewModelStore, <#= domainElement.GetFullName(true) #> element) : base(viewModelStore, element)
+		{
+<#+
+		if( nameProperty != null )
+		{
+#>
+			// subscribe to <#= domainElement.Name #>.<#= nameProperty.Name #> changes
+			this.EventManager.GetEvent<DslEditorViewModelEvents::ModelElementPropertyChangedEvent>().Subscribe(this.Store.DomainDataDirectory.GetDomainProperty(<#= domainElement.GetFullName(true) #>.<#= nameProperty.Name #>DomainPropertyId), this.Element.Id, new System.Action<DslModeling::ElementPropertyChangedEventArgs>(<#= nameProperty.Name #>PropertyChanged));
+			
+			// set name property value
+			this.elementFullNameStorage = element.<#= nameProperty.Name #> + " (<#= domainElement.DisplayName #>)";
+<#+
+		}
+#>
+		}
+		#endregion
+		
+		#region Properties
+<#+
+		if( nameProperty != null )
+		{
+#>
+		private void <#= nameProperty.Name #>PropertyChanged(DslModeling::ElementPropertyChangedEventArgs args)
+		{
+			if( args.NewValue != null )
+				this.ElementFullName = args.NewValue.ToString() + " (<#= domainElement.DisplayName #>)";
+			else
+				this.ElementFullName = "<#= domainElement.DisplayName #>";
+		}
+
+		private string elementFullNameStorage = string.Empty;
+		
+<#+
+		}
+#>
+		/// <summary>
+        /// Gets or set the full name of the element, which properties are to be added.
+        /// </summary>
+        public override string ElementFullName 
+		{ 
+<#+
+		if( nameProperty != null )
+		{
+#>
+			get
+			{
+				return elementFullNameStorage;
+			}
+			set
+			{
+				elementFullNameStorage = value;
+				OnPropertyChanged("ElementFullName");
+			}
+<#+
+		}
+		else
+		{
+#>
+			get{ return "<#= domainElement.DisplayName #>"; }
+			set{}
+<#+
+		}
+#>
+		}	
+
+
+        /// <summary>
+        /// Gets the description of the element, which properties are to be added.
+        /// </summary>
+        public override string ElementDescription 
+		{ 
+			get
+			{
+				return <#= dm.Name #>DomainModel.SingletonResourceManager.GetString("<#= domainElement.GetFullName(false) #>.Description");
+			}
+		}
+		#endregion
+		
+		#region Methods
+        /// <summary>
+        /// Returns the collection of editor view models.
+        /// </summary>
+        /// <returns></returns>
+        public override System.Collections.Generic.List<DslEditorViewModelPGrid::PropertyGridEditorViewModel> GetEditorViewModels()
+		{
+			System.Collections.Generic.List<DslEditorViewModelPGrid::PropertyGridEditorViewModel> collection = new System.Collections.Generic.List<DslEditorViewModelPGrid::PropertyGridEditorViewModel>();
+<#+
+	if( domainElement.BaseElement != null )
+	{
+#>
+			collection = base.GetEditorViewModels();
+<#+
+	}
+#>
+			
+<#+
+	
+		foreach(DomainProperty property in domainElement.Properties)
+		{
+			if( property.Type.PropertyGridEditor == null)
+				continue;
+			
+			if( !property.IsBrowsable )
+				continue;
+
+			createEditorForProperty.Add(property);
+#>
+			CreateEditorViewModelFor<#= property.Name #>(collection);
+<#+
+			
+		}
+		
+		foreach(DomainRole role in domainElement.RolesPlayed)
+		{
+			if( !role.IsPropertyBrowsable || !role.IsPropertyGenerator)
+				continue;
+			
+			if( role.Relationship is EmbeddingRelationship )
+			{
+				if( role.Relationship.Target.CustomPropertyGridEditor == null )
+					continue;
+				
+				if( role.Relationship.Source != role)
+					continue;
+
+				//if( role.Relationship.Source.RolePlayer != domainElement)
+				//	continue;
+			}
+			
+			createEditorForRole.Add(role);
+#>
+			CreateEditorViewModelFor<#= role.PropertyName #>Role(collection);
+<#+
+		}
+		
+#>
+
+			return collection;
+		}
+		#endregion
+<#+
+		if( createEditorForProperty.Count > 0 || createEditorForRole.Count > 0 )
+		{
+#>
+
+		#region Editor Creation
+<#+
+			foreach(DomainProperty property in createEditorForProperty)
+			{
+				string wpfPropertyEditor = property.Type.PropertyGridEditor.Namespace + "." + property.Type.PropertyGridEditor.Name;
+				string resourceKey = domainElement.GetFullName(false)+"/"+property.Name;
+#>
+		/// <summary>
+		/// Create property grid editor view model for <#= domainElement.Name #>.<#= property.Name #>
+		/// </summary>
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
+		protected virtual void CreateEditorViewModelFor<#= property.Name #>(System.Collections.Generic.List<DslEditorViewModelPGrid::PropertyGridEditorViewModel> collection)
+		{
+			<#= wpfPropertyEditor #> editor = new <#= wpfPropertyEditor #>(this.ViewModelStore<#+ if(property.Type is DomainEnumeration){#> , typeof(<#= property.Type.GetFullName(true) #>), <#= (property.Type as DomainEnumeration).IsFlags.ToString().ToLower() #><#+ } #>);
+			
+            editor.PropertyName = "<#= property.Name #>";
+			editor.PropertyDisplayName = <#= dm.Name #>DomainModel.SingletonResourceManager.GetString("<#= resourceKey #>.DisplayName");
+			editor.PropertyDescription = <#= dm.Name #>DomainModel.SingletonResourceManager.GetString("<#= resourceKey #>.Description");
+			editor.PropertyCategory = "<#= property.Category #>";
+			editor.IsPropertyRequired = <#= property.IsRequired.ToString().ToLower() #>;
+			editor.IsPropertyReadOnly = <#= property.IsUIReadOnly.ToString().ToLower() #>;		
+				
+			collection.Add(editor);
+		}
+		
+<#+
+			}
+			
+			foreach(DomainRole role in createEditorForRole)
+			{
+				string resourceKey = role.Relationship.GetFullName(false)+"/"+role.Opposite.Name;
+				string resourcePropertyKey = role.Relationship.GetFullName(false)+"/"+role.Name;
+				
+				bool bIsRequired = false;
+				if( role.Multiplicity == Tum.PDE.LanguageDSL.Multiplicity.OneMany || role.Multiplicity == Tum.PDE.LanguageDSL.Multiplicity.One )
+					bIsRequired = true;		
+				
+				if( role.Relationship.Target.CustomPropertyGridEditor != null )
+				{
+					if( role.Relationship.Target.CustomPropertyGridEditor.Name == "ReferencedModelRoleViewModel" && 
+						role.Relationship.Target.CustomPropertyGridEditor.Namespace == "Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Path" )
+					{						
+						if( role.Relationship.Source != role)
+							continue;
+#>
+		/// <summary>
+		/// Create property grid editor view model for <#= domainElement.Name #>.<#= role.PropertyName #>
+		/// </summary>
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
+		protected virtual void CreateEditorViewModelFor<#= role.PropertyName #>Role(System.Collections.Generic.List<DslEditorViewModelPGrid::PropertyGridEditorViewModel> collection)
+		{
+			<#= role.Relationship.Name #><#= role.Relationship.Target.Name #>RMRViewModel editor = new <#= role.Relationship.Name #><#= role.Relationship.Target.Name #>RMRViewModel(this.ViewModelStore);
+			
+			editor.PropertyName = "<#= role.PropertyName #>";
+			editor.PropertyDisplayName = <#= dm.Name #>DomainModel.SingletonResourceManager.GetString("<#= resourcePropertyKey #>.PropertyDisplayName");
+			editor.PropertyDescription = <#= dm.Name #>DomainModel.SingletonResourceManager.GetString("<#= resourceKey #>.Description");
+			editor.PropertyCategory = "<#= role.Opposite.Category #>";
+			editor.IsPropertyRequired = <#= bIsRequired.ToString().ToLower() #>;
+			editor.IsPropertyReadOnly = false;
+		
+			collection.Add(editor);
+		}
+<#+
+						
+						continue;
+					}
+					
+				}
+				
+				string wpfPropertyEditor = "Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel.PropertyGrid.UnaryRoleEditorViewModel";
+				
+				if( role.Multiplicity == Tum.PDE.LanguageDSL.Multiplicity.OneMany || role.Multiplicity == Tum.PDE.LanguageDSL.Multiplicity.ZeroMany )
+					wpfPropertyEditor = "Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel.PropertyGrid.MultipleRoleEditorViewModel";
+				
+				if( role.CustomPropertyGridEditor != null)
+					wpfPropertyEditor = role.CustomPropertyGridEditor.Namespace + "." + role.CustomPropertyGridEditor.Name;
+				
+				bool bIsReadOnly = role.IsPropertyUIReadOnly;
+				if( !(role.Opposite.RolePlayer is DomainClass) )
+					bIsReadOnly = true;
+#>
+		/// <summary>
+		/// Create property grid editor view model for <#= domainElement.Name #>.<#= role.PropertyName #>
+		/// </summary>
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
+		protected virtual void CreateEditorViewModelFor<#= role.PropertyName #>Role(System.Collections.Generic.List<DslEditorViewModelPGrid::PropertyGridEditorViewModel> collection)
+		{
+			<#= wpfPropertyEditor #> editor = new <#= wpfPropertyEditor #>(this.ViewModelStore, 
+									this.Store.DomainDataDirectory.GetDomainRelationship(<#= role.Relationship.GetFullName(true) #>.DomainClassId),
+					   				<#= role.Relationship.GetFullName(true) #>.<#= role.Name #>DomainRoleId);
+			
+			editor.PropertyName = "<#= role.PropertyName #>";
+			editor.PropertyDisplayName = <#= dm.Name #>DomainModel.SingletonResourceManager.GetString("<#= resourcePropertyKey #>.PropertyDisplayName");
+			editor.PropertyDescription = <#= dm.Name #>DomainModel.SingletonResourceManager.GetString("<#= resourceKey #>.Description");
+			editor.PropertyCategory = "<#= role.Opposite.Category #>";
+			editor.IsPropertyRequired = <#= bIsRequired.ToString().ToLower() #>;
+			editor.IsPropertyReadOnly = <#= bIsReadOnly.ToString().ToLower() #>;			
+		
+			collection.Add(editor);
+		}
+<#+
+			}
+#>				
+		#endregion		
+<#+
+		}
+		if( nameProperty != null )
+		{
+#>
+
+		#region Dispose
+		/// <summary>
+		/// Unregister from events although they are weak.
+		/// </summary>
+		protected override void OnDispose()
+		{
+<#+
+			if( nameProperty != null )
+			{
+#>
+			this.EventManager.GetEvent<DslEditorViewModelEvents::ModelElementPropertyChangedEvent>().Unsubscribe(this.Store.DomainDataDirectory.GetDomainProperty(<#= domainElement.GetFullName(true) #>.<#= nameProperty.Name #>DomainPropertyId), this.Element.Id, new System.Action<DslModeling::ElementPropertyChangedEventArgs>(<#= nameProperty.Name #>PropertyChanged));
+<#+
+			}
+#>
+			base.OnDispose();
+		}
+		#endregion
+<#+
+		}
+#>
+	}
+<#+
+		if( domainElement.GeneratesDoubleDerived )
+		{
+#>
+
+	/// <summary>
+    /// Property grid view model for <#= domainElement.Name #>
+	///
+	///	This is the double generated class for easier customization.
+	/// </summary>
+	public<#= classDoubleDerivedAccessor #> partial class PropertyGrid<#= domainElement.Name #>ViewModel : <#= name #>
+	{
+		#region Constructor
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+		/// <param name="viewModelStore">The store this view model belongs to.</param>
+        /// <param name="element">Model element of type <#= domainElement.Name #> for which this property grid view model is created.</param>		
+		public PropertyGrid<#= domainElement.Name #>ViewModel(DslEditorViewModelData::ViewModelStore viewModelStore, <#= domainElement.GetFullName(true) #> element) : base(viewModelStore, element)
+		{
+			
+		}
+		#endregion
+	}
+<#+
+		}
+}
+#>
+

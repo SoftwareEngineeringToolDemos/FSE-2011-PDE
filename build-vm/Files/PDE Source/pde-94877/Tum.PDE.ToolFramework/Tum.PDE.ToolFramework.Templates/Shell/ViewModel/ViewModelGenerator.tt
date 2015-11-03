@@ -1,0 +1,1015 @@
+﻿<#@ template language="C#" inherits="BaseTemplate"#> 
+<#@ import namespace="Tum.PDE.LanguageDSL"#>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Collections.ObjectModel" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+using DslModeling = global::Microsoft.VisualStudio.Modeling;
+using DslEditorModeling = global::Tum.PDE.ToolFramework.Modeling;
+using DslEditorVisualization = global::Tum.PDE.ToolFramework.Modeling.Visualization;
+using DslEditorViewModel = global::Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel;
+using DslEditorViewModelContracts = global::Tum.PDE.ToolFramework.Modeling.Visualization.Contracts.ViewModel;
+using DslEditorViewModelData = global::Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel.Data;
+using DslEditorViewModelModelTree = global::Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel.ModelTree;
+using DslEditorViewModelPropertyGrid = global::Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel.PropertyGrid;
+using DslEditorViewModelServices = global::Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel.Services;
+using DslEditorViewDiagrams = global::Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel.DiagramSurface;
+using DslEditorCommands = Tum.PDE.ToolFramework.Modeling.Visualization.Commands;
+
+using DslEditorShell = global::Tum.PDE.ToolFramework.Modeling.Shell;
+using DslEditorViewShell = global::Tum.PDE.ToolFramework.Modeling.Visualization.Shell;
+using DslEditorViewModelShell = global::Tum.PDE.ToolFramework.Modeling.Visualization.Shell.ViewModel;
+
+<#
+GenerateViewModel(this.MetaModel);
+#>
+<#+ 
+public void GenerateViewModel(MetaModel dm)
+{
+#>
+namespace <#= dm.Namespace #>.ViewModel
+{
+	/// <summary>
+	/// This class represents the main view model of the <#= dm.ApplicationName #>.
+	/// 
+	/// Double-derived class to allow easier code customization.
+	/// </summary>
+	public partial class <#= dm.Name #>MainViewModel : <#= dm.Name #>MainViewModelBase
+	{
+		#region Constructor
+		/// <summary>
+        /// Constuctor.
+        /// </summary>
+        /// <param name="modelData">Document data.</param>
+		/// <param name="package">Package.</param>
+        public <#= dm.Name #>MainViewModel(DslEditorModeling::ModelData modelData, DslEditorShell::ModelPackage package)
+            : this(new <#= dm.Name #>ViewModelStore(modelData), package)
+        {
+        }
+		
+		/// <summary>
+        /// Constuctor.
+        /// </summary>
+        /// <param name="viewModelStore">View model store containing this view model.</param>
+		/// <param name="package">Package.</param>
+        public <#= dm.Name #>MainViewModel(<#= dm.Name #>ViewModelStore viewModelStore, DslEditorShell::ModelPackage package)
+            : base(viewModelStore, package)
+        {
+        }
+		#endregion
+	}
+	
+	/// <summary>
+	/// This class represents the main view model of the <#= dm.ApplicationName #>.
+	/// 
+	/// This is the abstract base class.
+	/// </summary>
+	public abstract class <#= dm.Name #>MainViewModelBase : DslEditorViewModelShell::ShellMainViewModel
+	{
+		#region Constructor
+		/// <summary>
+        /// Constuctor.
+        /// </summary>
+        /// <param name="viewModelStore">View model store containing this view model.</param>
+		/// <param name="package">Package.</param>
+        protected <#= dm.Name #>MainViewModelBase(<#= dm.Name #>ViewModelStore viewModelStore, DslEditorShell::ModelPackage package)
+            : base(viewModelStore, package)
+        {
+
+        }
+		#endregion
+		
+		#region Initialization
+        /// <summary>
+        /// This method is used to initialize the view model and can be overriden for customization.
+        /// </summary>
+        protected override void Initialize()
+        {
+			base.Initialize();
+			RegisterImportedLibrariesRessources();
+			
+			// register services
+			<#= dm.Name #>ServiceRegistrar.Instance.RegisterServices(this.ViewModelStore);
+<#+
+			foreach(MetaModelLibrary lib in dm.MetaModelLibraries)
+			{
+				if( lib.ImportedLibrary == null )
+					continue;
+#>
+			<#= CodeGenerationUtilities.GetServiceRegistrarFullName(lib.ImportedLibrary as MetaModel) #>.Instance.RegisterServices(this.ViewModelStore);
+<#+
+			}
+#>
+
+			// ensure context menu provider are initialized
+			if( <#= dm.Namespace #>.ViewModel.ModelTree.<#= dm.Name #>ModelTreeContextMenuProvider.Instance == null )
+				throw new System.ArgumentNullException("Context menu provider");
+		
+<#+
+foreach(BaseModelContext modelContext in this.MetaModel.ModelContexts)	
+{
+	bool bAdd = false;
+	if( modelContext is ModelContext)
+		bAdd = true;
+	else if( modelContext is ExternModelContext)
+	{
+		ExternModelContext e = modelContext as ExternModelContext;
+		if( e.ModelContext != null )
+		{
+			bAdd = true;
+
+			}
+	}	
+	
+	if(!bAdd )
+		continue;
+#>
+
+			foreach(DslEditorModeling::ModelContext modelContext in this.ModelData.AvailableModelContexts)
+			{
+				if( modelContext.Name == "<#= modelContext.Name #>")
+				{
+					<#= modelContext.Name #>ModelContextViewModel m<#= modelContext.Name #> = new <#= modelContext.Name #>ModelContextViewModel(this.ViewModelStore, modelContext, this);
+					m<#= modelContext.Name #>.InitializeMC();
+					this.AvailableModelModelContextViewModels.Add(m<#= modelContext.Name #>);
+<#+
+	if(modelContext.IsDefault)
+	{
+#>
+					this.SelectedModelContextViewModel = m<#= modelContext.Name #>;
+<#+
+	}
+#>
+				}
+			}
+			
+<#+
+}
+
+	if( this.MetaModel.View.CreateModelTree )
+	{
+#>
+			this.ModelTreeModel = new <#= dm.Name #>ModelTreeViewModel(ViewModelStore as <#= dm.Name #>ViewModelStore);
+			AddViewModel(ModelTreeModel);
+<#+
+	}
+	if( this.MetaModel.View.CreateErrorList )
+	{
+#>
+
+			this.ErrorListModel = new <#= dm.Name #>ErrorListViewModel(ViewModelStore as <#= dm.Name #>ViewModelStore);
+			AddViewModel(ErrorListModel);
+<#+
+	}
+	if( this.MetaModel.View.CreatePropertyGrid )
+	{
+#>
+
+			this.PropertyGridModel = new <#= dm.Name #>PropertyGridViewModel(ViewModelStore as <#= dm.Name #>ViewModelStore);
+			AddViewModel(PropertyGridModel);
+<#+
+	}
+	if( this.MetaModel.View.CreateDependenciesView )
+	{
+#>
+
+			this.DependenciesModel = new <#= dm.Name #>DependenciesViewModel(ViewModelStore as <#= dm.Name #>ViewModelStore);
+			AddViewModel(DependenciesModel);
+<#+
+	}
+	
+#>
+
+			this.SearchModel = new <#= dm.Name #>SearchViewModel(ViewModelStore as <#= dm.Name #>ViewModelStore);			
+			AddViewModel(SearchModel);
+			AddViewModel(SearchModel.SearchResultViewModel);	
+
+			#region Credits + Further Readings
+			this.CreditsViewModel = new DslEditorViewModelData::CreditsViewModel(this.ViewModelStore);
+			this.FurtherReadingViewModel = new DslEditorViewModelData::FurtherReadingViewModel(this.ViewModelStore);
+
+<#+
+	if(dm.AdditionalInformation != null )
+	{
+		if( dm.AdditionalInformation.Credits != null )
+		{
+			foreach(CreditItem item in dm.AdditionalInformation.Credits.CreditItems)
+			{
+#>
+			this.CreditsViewModel.AddLinkItem(new DslEditorViewModelData::LinkItem("<#= item.Title #>", "<#= item.Description #>", "<#= item.Link #>", "<#= item.Category #>"));
+<#+
+			}
+
+		}
+		
+		if( dm.AdditionalInformation.FurtherInformation != null )
+		{
+			foreach(InformationItem item in dm.AdditionalInformation.FurtherInformation.InformationItems)
+			{
+#>
+			this.FurtherReadingViewModel.AddLinkItem(new DslEditorViewModelData::LinkItem("<#= item.Title #>", "<#= item.Description #>", "<#= item.Link #>", "<#= item.Category #>"));
+<#+
+			}
+
+		}
+	}
+#>	
+			#endregion
+		}	
+		
+        /// <summary>
+        /// Registers imported libraries main ressource dictionaries.
+        /// </summary>
+        protected virtual void RegisterImportedLibrariesRessources()
+        {
+            <#= dm.Name #>MainViewModelBase.RegisterImportedLibrariesRessources(new System.Collections.Generic.List<string>());
+        }		
+		
+		/// <summary>
+        /// Registers imported libraries main ressource dictionaries.
+        /// </summary>
+        /// <param name="handledLibraries">Already handled libraries.</param>
+        public static void RegisterImportedLibrariesRessources(System.Collections.Generic.List<string> handledLibraries)
+		{
+			if( handledLibraries.Contains("<#= dm.Name #>") )
+				return;
+			else
+				handledLibraries.Add("<#= dm.Name #>");
+			
+			System.Windows.Application.Current.Resources.MergedDictionaries.Add(new System.Windows.ResourceDictionary() 
+            {
+                Source = new System.Uri("pack://application:,,,/" + System.Reflection.Assembly.GetExecutingAssembly().GetName().Name + ";component/Resources.xaml") 
+            });			
+<#+
+	foreach(MetaModelLibrary lib in dm.MetaModelLibraries)
+	{
+		if( lib.ImportedLibrary != null )
+		{
+			MetaModel metaModel = lib.ImportedLibrary as MetaModel;
+#>
+			<#= metaModel.Namespace #>.ViewModel.<#= metaModel.Name #>MainViewModelBase.RegisterImportedLibrariesRessources(handledLibraries);
+<#+
+		}
+	}
+#>	
+		}
+		#endregion
+<#+
+	if( dm.Validation.UseSave )
+	{
+#>
+
+		#region Methods
+        /// <summary>
+        /// Called after the document has been saved.
+        /// </summary>
+		/// <remarks>
+		/// This was generated because of Validation.UseSave = true.
+		/// </remarks>
+        protected override void OnDocumentSaved()
+        {
+			this.ValidateAllCommandExecuted();
+
+            if (this.ErrorListModel != null)
+                if (this.ErrorListModel.ErrorsCount > 0)
+				{
+					DslEditorViewModelServices::IMessageBoxService messageBox = this.GlobalServiceProvider.Resolve<DslEditorViewModelServices::IMessageBoxService>();
+                    if (messageBox.ShowYesNoCancel("Validation founds errors. Are you sure you want to save the model?", DslEditorViewModelServices.CustomDialogIcons.Exclamation) != DslEditorViewModelServices.CustomDialogResults.Yes)
+                        return;
+                }
+			
+			base.OnDocumentSaved();
+		}
+		#endregion
+<#+
+	}
+	
+	if( !dm.Validation.UseMenu )
+	{
+#>
+
+		#region Properties
+		/// <summary>
+        /// Gets whether the validation menu is visible or not.
+        /// </summary>
+		/// <remarks>
+		/// This was generated because of Validation.UseMenu = false.
+		/// </remarks>
+        public override bool IsValidationMenuVisible
+        {
+            get
+            {
+                return false;
+            }
+        }	
+		#endregion
+<#+
+	}
+#>
+	}
+	
+<#+
+foreach(BaseModelContext modelContext in this.MetaModel.ModelContexts)	
+{
+	bool bAdd = false;
+	bool bExtern = false;
+	string baseClass = "DslEditorViewModel::ModelContextViewModel";
+	if( modelContext is ModelContext)
+		bAdd = true;
+	else if( modelContext is ExternModelContext)
+	{
+		ExternModelContext e = modelContext as ExternModelContext;
+		if( e.ModelContext != null )
+		{
+			bAdd = true;
+			baseClass = e.ModelContext.MetaModel.Namespace + ".ViewModel." + e.ModelContext.Name + "ModelContextViewModel";
+			bExtern = true;
+		}
+	}	
+	
+	if(!bAdd )
+		continue;
+#>
+	#region <#= modelContext.Name #>
+	/// <summary>
+    /// This is a view model for the model context <#= modelContext.Name #>.
+	/// 
+	/// Double-derived class to allow easier code customization.	
+    /// </summary>
+	public partial class <#= modelContext.Name #>ModelContextViewModel : <#= modelContext.Name #>ModelContextViewModelBase
+	{
+		#region Constructor
+        /// <summary>
+        /// Constuctor.
+        /// </summary>
+        /// <param name="viewModelStore">The store this view model belongs to.</param>
+        /// <param name="modelContext">Hosted model context.</param>
+        /// <param name="mainViewModel">Main view model.</param>	
+        public <#= modelContext.Name #>ModelContextViewModel(DslEditorViewModelData::ViewModelStore viewModelStore, DslEditorModeling::ModelContext modelContext, DslEditorViewModel::BaseMainViewModel mainViewModel)
+            : base(viewModelStore, modelContext, mainViewModel)
+        {
+
+        }	
+		#endregion
+	}
+	
+	/// <summary>
+    /// This is a view model for the model context <#= modelContext.Name #>.
+	/// 
+	/// This is the abstract base class.
+    /// </summary>
+	public abstract class <#= modelContext.Name #>ModelContextViewModelBase : <#= baseClass #>
+	{
+		#region Constructor
+        /// <summary>
+        /// Constuctor.
+        /// </summary>
+        /// <param name="viewModelStore">The store this view model belongs to.</param>
+        /// <param name="modelContext">Hosted model context.</param>
+        /// <param name="mainViewModel">Main view model.</param>	
+        public <#= modelContext.Name #>ModelContextViewModelBase(DslEditorViewModelData::ViewModelStore viewModelStore, DslEditorModeling::ModelContext modelContext, DslEditorViewModel::BaseMainViewModel mainViewModel)
+            : base(viewModelStore, modelContext, mainViewModel)
+        {
+
+        }	
+		#endregion
+	
+<#+
+	if( !bExtern )
+	{
+#>
+		#region Initialization
+        /// <summary>
+        /// This method is used to initialize the view model and can be overriden for customization.
+        /// </summary>
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
+        protected override void Initialize()
+        {
+			base.Initialize();
+			
+            this.EditorTitle = "<#= dm.ApplicationName #>";			
+			
+<#+
+			if( (modelContext as ModelContext).DiagramClasses.Count > 0 )
+			{
+#>
+			// diagram surface vm
+			this.DiagramSurfaceModel = new <#= dm.Name #><#= (modelContext as ModelContext).DiagramClasses[0].Name #>SurfaceViewModel(ViewModelStore as <#= dm.Name #>ViewModelStore, this.ModelContext);
+			AddAdditionalViewModel(DiagramSurfaceModel);
+			
+<#+
+
+				foreach(DiagramClass d in ((modelContext as ModelContext).DiagramClasses[0] as DesignerDiagramClass).ImportedDiagramClasses)
+				{
+					if( !CodeGenerationUtilities.IsDiagramGenerated(d) )
+						continue;
+					
+					string name = d.ModelContext.MetaModel.Namespace + ".ViewModel.";
+					name += d.ModelContext.MetaModel.Name  + d.Name + "SurfaceViewModel";
+					
+					string storyType = d.ModelContext.MetaModel.Namespace + ".ViewModel." + d.ModelContext.MetaModel.Name + "ViewModelStore";
+#>
+			
+			// imported diagram <#= d.Name #>
+			<#= name #> diagram<#= d.Name #> = new <#= name #>(this.ViewModelStore.GetExternViewModelStore(typeof(<#= storyType #>)) as <#= storyType #>, this.ModelContext);
+			AddAdditionalViewModel(diagram<#= d.Name #>);
+<#+
+				}
+			}
+#>		
+			
+<#+
+	for( int i=1; i < (modelContext as ModelContext).DiagramClasses.Count; i++ )
+	{
+		DiagramClass diagramClass = (modelContext as ModelContext).DiagramClasses[i];
+		
+		if( !CodeGenerationUtilities.IsDiagramGenerated(diagramClass) )
+			continue;
+		
+		if( diagramClass is TemplatedDiagramViewModelOnly )
+			continue;
+		
+		if( diagramClass is SpecificDependencyDiagram)
+		{
+			if( (diagramClass as SpecificDependencyDiagram).DomainClass == null )
+				continue;
+		}
+#>
+			<#= dm.Name #><#= (modelContext as ModelContext).DiagramClasses[i].Name #>SurfaceViewModel diagram<#= (modelContext as ModelContext).DiagramClasses[i].Name #> = new <#= dm.Name #><#= (modelContext as ModelContext).DiagramClasses[i].Name #>SurfaceViewModel(ViewModelStore as <#= dm.Name #>ViewModelStore, this.ModelContext);
+			AddAdditionalViewModel(diagram<#= (modelContext as ModelContext).DiagramClasses[i].Name #>);
+<#+
+	}
+	
+#>			
+		}
+		#endregion
+<#+
+	}
+#>
+	
+	}
+	#endregion
+<#+
+}
+#>
+	
+<#+
+	if( this.MetaModel.View.CreateModelTree )
+	{
+#>
+	#region ModelTree
+	/// <summary>
+	/// This class represents the model tree view model of the <#= dm.ApplicationName #>.
+	/// 
+	/// Double-derived class to allow easier code customization.
+	/// </summary>
+	public partial class <#= dm.Name #>ModelTreeViewModel : <#= dm.Name #>ModelTreeViewModelBase
+	{
+		#region Constructor
+		/// <summary>
+        /// Constuctor.
+        /// </summary>
+        /// <param name="viewModelStore">View model store containing this view model.</param>
+        public <#= dm.Name #>ModelTreeViewModel(<#= dm.Name #>ViewModelStore viewModelStore)
+            : base(viewModelStore)
+        {
+        }
+		#endregion
+	}
+	
+	/// <summary>
+	/// This class represents the model tree view model of the <#= dm.ApplicationName #>.
+	/// 
+	/// This is the abstract base class.
+	/// </summary>
+	public abstract class <#= dm.Name #>ModelTreeViewModelBase : DslEditorViewModel::MainModelTreeViewModel
+	{
+		#region Constructor
+		/// <summary>
+        /// Constuctor.
+        /// </summary>
+        /// <param name="viewModelStore">View model store containing this view model.</param>
+        protected <#= dm.Name #>ModelTreeViewModelBase(<#= dm.Name #>ViewModelStore viewModelStore)
+            : base(viewModelStore)
+        {
+        }
+		#endregion
+	
+		#region Initialize
+
+		
+		/// <summary>
+        /// Initialize.
+        /// </summary>
+        protected override void Initialize()
+        {
+            base.Initialize();
+        }
+		#endregion
+	
+	    #region IDockableViewModel
+		/// <summary>
+		/// Gets the docking pane anchor style. 
+		/// </summary>
+        public override DslEditorViewModel.DockingPaneAnchorStyle DockingPaneAnchorStyle
+        {
+            get
+            {
+                return DslEditorViewModel.DockingPaneAnchorStyle.Left;
+            }
+        }
+		
+		/// <summary>
+        /// Gets the context change kind. 
+        /// </summary>
+        public override DslEditorViewModel.DockingContextChangeKind DockingContextChangeKind
+        {
+            get
+            {
+                return DslEditorViewModel.DockingContextChangeKind.PreviewMouseUp;
+            }
+        }
+        #endregion
+	}
+	#endregion
+<#+
+	}
+	if( this.MetaModel.View.CreatePropertyGrid )
+	{
+#>
+
+	#region PropertyGrid
+	/// <summary>
+	/// This class represents the property grid view model of the <#= dm.ApplicationName #>.
+	/// 
+	/// Double-derived class to allow easier code customization.
+	/// </summary>
+	public partial class <#= dm.Name #>PropertyGridViewModel : <#= dm.Name #>PropertyGridViewModelBase
+	{
+		#region Constructor
+		/// <summary>
+        /// Constuctor.
+        /// </summary>
+        /// <param name="viewModelStore">View model store containing this view model.</param>
+        public <#= dm.Name #>PropertyGridViewModel(<#= dm.Name #>ViewModelStore viewModelStore)
+            : base(viewModelStore)
+        {	
+        }
+		#endregion
+	}
+	
+	/// <summary>
+	/// This class represents the property grid view model of the <#= dm.ApplicationName #>.
+	/// 
+	/// This is the abstract base class.
+	/// </summary>
+	public abstract class <#= dm.Name #>PropertyGridViewModelBase : DslEditorViewModel::MainPropertyGridViewModel
+	{
+		#region Constructor
+		/// <summary>
+        /// Constuctor.
+        /// </summary>
+        /// <param name="viewModelStore">View model store containing this view model.</param>
+        protected <#= dm.Name #>PropertyGridViewModelBase(<#= dm.Name #>ViewModelStore viewModelStore)
+            : base(viewModelStore)
+        {  
+        }
+		#endregion
+		
+        #region IDockableViewModel
+		/// <summary>
+		/// Gets the docking pane anchor style. 
+		/// </summary>
+        public override DslEditorViewModel.DockingPaneAnchorStyle DockingPaneAnchorStyle
+        {
+            get
+            {
+                return DslEditorViewModel.DockingPaneAnchorStyle.Right;
+            }
+        }
+        #endregion		
+		
+        /// <summary>
+        /// This method needs to overriden in the actual instances of this class to create contextual
+        /// or regular ribbon bars if required.
+        /// </summary>
+        /// <param name="ribbonMenu">Main ribbon menu.</param>
+        public override void CreateRibbonMenuBarForEditors(Fluent.Ribbon ribbonMenu)
+        {
+            base.CreateRibbonMenuBarForEditors(ribbonMenu);
+			
+<#+
+	foreach(MetaModelLibrary lib in dm.MetaModelLibraries)
+	{
+		if( lib.ImportedLibrary == null )
+			continue;
+#>
+			<#= CodeGenerationUtilities.GetMainPropertyGridViewModelFullName(lib.ImportedLibrary as MetaModel) #>.CreateRibbonMenuBarForEditorsHelper(ribbonMenu);
+<#+
+	}
+#>	
+        }
+		
+		/// <summary>
+        /// Creates ribbon menu for property grid editors.
+        /// </summary>
+        /// <param name="ribbonMenu">Main ribbon menu.</param>
+        public static void CreateRibbonMenuBarForEditorsHelper(Fluent.Ribbon ribbonMenu)
+		{
+<#+
+	foreach(PropertyGridEditor p in dm.PropertyGridEditors)
+	{
+		if( p.RequiresContextMenuBar)
+		{
+#>
+			<#= p.GetFullName(true) #>.<#= p.Name #>ContextMenuBarCreater.Instance.CreateRibbonMenuBar(ribbonMenu);
+<#+
+		}
+	}
+#>	
+		}
+	}
+	#endregion
+<#+
+	}
+	if( this.MetaModel.View.CreateErrorList )
+	{
+#>
+
+	#region ErrorList
+	/// <summary>
+	/// This class represents the error list view model of the <#= dm.ApplicationName #>.
+	/// 
+	/// Double-derived class to allow easier code customization.
+	/// </summary>
+	public partial class <#= dm.Name #>ErrorListViewModel : <#= dm.Name #>ErrorListViewModelBase
+	{
+		#region Constructor
+		/// <summary>
+        /// Constuctor.
+        /// </summary>
+        /// <param name="viewModelStore">View model store containing this view model.</param>
+        public <#= dm.Name #>ErrorListViewModel(<#= dm.Name #>ViewModelStore viewModelStore)
+            : base(viewModelStore)
+        {
+        }
+		#endregion
+	}
+	
+	/// <summary>
+	/// This class represents the error list view model of the <#= dm.ApplicationName #>.
+	/// 
+	/// This is the abstract base class.
+	/// </summary>
+	public abstract class <#= dm.Name #>ErrorListViewModelBase : DslEditorViewModel::MainErrorListViewModel
+	{
+		#region Constructor
+		/// <summary>
+        /// Constuctor.
+        /// </summary>
+        /// <param name="viewModelStore">View model store containing this view model.</param>
+        protected <#= dm.Name #>ErrorListViewModelBase(<#= dm.Name #>ViewModelStore viewModelStore)
+            : base(viewModelStore)
+        {
+        }
+		#endregion
+		
+        #region IDockableViewModel
+		/// <summary>
+		/// Gets the docking pane anchor style. 
+		/// </summary>
+        public override DslEditorViewModel.DockingPaneAnchorStyle DockingPaneAnchorStyle
+        {
+            get
+            {
+                return DslEditorViewModel.DockingPaneAnchorStyle.Bottom;
+            }
+        }
+        #endregion		
+	}
+	#endregion
+<#+
+	}
+	if( this.MetaModel.View.CreateDependenciesView )
+	{
+#>
+
+	#region Dependencies
+	/// <summary>
+	/// This class represents the dependencies view model of the <#= dm.ApplicationName #>.
+	/// 
+	/// Double-derived class to allow easier code customization.
+	/// </summary>
+	public partial class <#= dm.Name #>DependenciesViewModel : <#= dm.Name #>DependenciesViewModelBase
+	{
+		#region Constructor
+		/// <summary>
+        /// Constuctor.
+        /// </summary>
+        /// <param name="viewModelStore">View model store containing this view model.</param>
+        public <#= dm.Name #>DependenciesViewModel(<#= dm.Name #>ViewModelStore viewModelStore)
+            : base(viewModelStore)
+        {
+        }
+		#endregion
+	}
+	
+	/// <summary>
+	/// This class represents the dependencies view model of the <#= dm.ApplicationName #>.
+	/// 
+	/// This is the abstract base class.
+	/// </summary>
+	public abstract class <#= dm.Name #>DependenciesViewModelBase : DslEditorViewModel::MainDependenciesViewModel
+	{
+		#region Constructor
+		/// <summary>
+        /// Constuctor.
+        /// </summary>
+        /// <param name="viewModelStore">View model store containing this view model.</param>
+        protected <#= dm.Name #>DependenciesViewModelBase(<#= dm.Name #>ViewModelStore viewModelStore)
+            : base(viewModelStore)
+        {
+        }
+		#endregion
+		
+        #region IDockableViewModel
+		/// <summary>
+		/// Gets the docking pane anchor style. 
+		/// </summary>
+        public override DslEditorViewModel.DockingPaneAnchorStyle DockingPaneAnchorStyle
+        {
+            get
+            {
+                return DslEditorViewModel.DockingPaneAnchorStyle.Bottom;
+            }
+        }
+        #endregion		
+	}
+	#endregion
+<#+
+	}
+#>
+	
+	#region Search
+	/// <summary>
+	/// This class represents the search view model of the <#= dm.ApplicationName #>.
+	/// 
+	/// Double-derived class to allow easier code customization.
+	/// </summary>
+	public partial class <#= dm.Name #>SearchViewModel : <#= dm.Name #>SearchViewModelBase
+	{
+		#region Constructor
+		/// <summary>
+        /// Constuctor.
+        /// </summary>
+        /// <param name="viewModelStore">View model store containing this view model.</param>
+        public <#= dm.Name #>SearchViewModel(<#= dm.Name #>ViewModelStore viewModelStore)
+            : base(viewModelStore)
+        {
+        }
+		#endregion
+	}
+	
+	/// <summary>
+	/// This class represents the search view model of the <#= dm.ApplicationName #>.
+	/// 
+	/// This is the abstract base class.
+	/// </summary>
+	public abstract class <#= dm.Name #>SearchViewModelBase : DslEditorViewModel::MainSearchViewModel
+	{
+		#region Constructor
+		/// <summary>
+        /// Constuctor.
+        /// </summary>
+        /// <param name="viewModelStore">View model store containing this view model.</param>
+        protected <#= dm.Name #>SearchViewModelBase(<#= dm.Name #>ViewModelStore viewModelStore)
+            : base(viewModelStore)
+        {
+        }
+		#endregion
+		
+		#region Initialization
+        /// <summary>
+        /// This method is used to initialize the view model and can be overriden for customization.
+        /// </summary>
+        protected override void PreInitialize()
+        {
+			base.PreInitialize();
+			
+			this.SearchResultViewModel = new <#= dm.Name #>SearchResultViewModel(this.ViewModelStore as <#= dm.Name #>ViewModelStore);
+		}
+		#endregion
+		
+        #region IDockableViewModel
+		/// <summary>
+		/// Gets the docking pane anchor style. 
+		/// </summary>
+        public override DslEditorViewModel.DockingPaneAnchorStyle DockingPaneAnchorStyle
+        {
+            get
+            {
+                return DslEditorViewModel.DockingPaneAnchorStyle.Right;
+            }
+        }
+		
+		/*
+		/// <summary>
+		/// Gets the docking pane style. 
+		/// </summary>
+		public override DslEditorViewModel.DockingPaneStyle DockingPaneStyle
+        {
+            get
+            {
+                return DslEditorViewModel.DockingPaneStyle.Floating;
+            }
+        }*/
+        #endregion		
+	}
+	
+	/// <summary>
+	/// This class represents a search result view model of the <#= dm.ApplicationName #>.
+	/// 
+	/// Double-derived class to allow easier code customization.
+	/// </summary>
+	public partial class <#= dm.Name #>SearchResultViewModel : <#= dm.Name #>SearchResultViewModelBase
+	{
+		#region Constructor
+		/// <summary>
+        /// Constuctor.
+        /// </summary>
+        /// <param name="viewModelStore">View model store containing this view model.</param>
+        public <#= dm.Name #>SearchResultViewModel(<#= dm.Name #>ViewModelStore viewModelStore)
+            : base(viewModelStore)
+        {
+        }
+		#endregion
+	}
+	
+	/// <summary>
+	/// This class represents a search result view model of the <#= dm.ApplicationName #>.
+	/// 
+	/// This is the abstract base class.
+	/// </summary>
+	public abstract class <#= dm.Name #>SearchResultViewModelBase : DslEditorViewModel::Search.SearchResultViewModel
+	{
+		#region Constructor
+		/// <summary>
+        /// Constuctor.
+        /// </summary>
+        /// <param name="viewModelStore">View model store containing this view model.</param>
+        protected <#= dm.Name #>SearchResultViewModelBase(<#= dm.Name #>ViewModelStore viewModelStore)
+            : base(viewModelStore)
+        {
+        }
+		#endregion
+		
+        #region IDockableViewModel
+		/// <summary>
+		/// Gets the docking pane anchor style. 
+		/// </summary>
+        public override DslEditorViewModel.DockingPaneAnchorStyle DockingPaneAnchorStyle
+        {
+            get
+            {
+                return DslEditorViewModel.DockingPaneAnchorStyle.Bottom;
+            }
+        }
+        #endregion		
+	}
+	
+	#endregion
+}
+
+namespace <#= dm.Namespace #>.ViewModel
+{
+	/// <summary>
+    /// This class is used to create new as well as store and restore layout of existing avalondock windows.
+	///
+	/// Double-derived class to allow easier code customization.
+    /// </summary>
+	public class <#= dm.Name #>DockingLayoutManager : <#= dm.Name #>DockingLayoutManagerBase
+	{
+		#region Constructor
+		/// <summary>
+		/// Constructor.
+		/// </summary>
+		/// <param name="package">Package.</param>
+		/// <param name="c">Shell package controller.</param>
+		public <#= dm.Name #>DockingLayoutManager(DslEditorShell::ModelPackage package, DslEditorViewShell::ShellPackageController c)
+			: base(package, c)
+		{
+		}
+		#endregion
+		
+		/*
+		/// <summary>
+        /// Shows a docking window for a given view.  
+        /// If is has been shown before, restore its position. Otherwise dock it to the right side.
+        /// </summary>
+        /// <param name="view">View to dock.</param>
+        /// <param name="dockingStyle">Docking style.</param>
+        /// <param name="dockingAnchorStyle">Docking anchor style. Only usefull for DockingPaneStyle.Docked.</param>
+        /// <param name="dockedInDocumentPane">True if this view should be shown in the document pane window. False otherwise.</param>
+		public override void ShowWindow(DslEditorViewModelContracts.IDockableViewModel view, DslEditorViewModel.DockingPaneStyle dockingStyle, DslEditorViewModel.DockingPaneAnchorStyle dockingAnchorStyle, bool dockedInDocumentPane)
+        {
+            if( view is VSPluginDSLDesignerDiagramSurfaceViewModel || view is VSPluginDSLSpecificElementsDiagramTemplateSurfaceViewModel || 
+                view is VSPluginDSLModalDiagramTemplateSurfaceViewModel )
+                base.ShowWindow(view, dockingStyle, dockingAnchorStyle, false);
+            else
+                base.ShowWindow(view, dockingStyle, dockingAnchorStyle, dockedInDocumentPane);
+        }
+		*/
+	}
+
+	/// <summary>
+    /// This class is used to create new as well as store and restore layout of existing avalondock windows.
+	///
+	/// This is the abstract base class.
+    /// </summary>
+	public abstract class <#= dm.Name #>DockingLayoutManagerBase : DslEditorViewModelShell::ShellDockingManager
+	{
+		#region Constructor
+		/// <summary>
+		/// Constructor.
+		/// </summary>
+		/// <param name="package">Package.</param>
+		/// <param name="c">Shell package controller.</param>
+		protected <#= dm.Name #>DockingLayoutManagerBase(DslEditorShell::ModelPackage package, DslEditorViewShell::ShellPackageController c) 
+			: base(package, c)
+		{
+		}
+		#endregion
+		
+		#region Properties
+		/// <summary>
+        /// FilePath to save all the visible docking panes to.
+        /// </summary>
+        public override string SaveDockingPanesFilePath 
+		{
+			get
+			{
+				return <#= dm.Name #>ModelDataOptions.Instance.AppDataDirectory + System.IO.Path.DirectorySeparatorChar + "LayoutManagerDV.txt";
+			}
+		}
+
+        /// <summary>
+        /// FilePath to save the layout to.
+        /// </summary>
+        public override string SaveLayoutFilePath
+		{ 
+			get
+			{
+				return <#= dm.Name #>ModelDataOptions.Instance.AppDataDirectory + System.IO.Path.DirectorySeparatorChar + "LayoutManagerLayout.xml";
+			}
+		}
+		
+		/// <summary>
+        /// Directory to save the layouts to.
+        /// </summary>
+        public override string SaveLayoutDirectory
+		{ 
+			get
+			{
+				return <#= dm.Name #>ModelDataOptions.Instance.AppDataDirectory;
+			}
+		}
+		
+		/// <summary>
+        /// FilePath to save the layout to.
+        /// </summary>
+        public override string SaveConfigurationFilePath
+		{ 
+			get
+			{
+				return <#= dm.Name #>ModelDataOptions.Instance.AppDataDirectory + System.IO.Path.DirectorySeparatorChar + "LayoutManagerConfig.xml";
+			}
+		}
+		
+        /// <summary>
+        /// Path to the embedded default layout file. By default: /GeneratedCode/UI/LayoutManagerLayout.xml.
+        /// </summary>
+        public override string EmbeddedLayoutFilePath
+		{
+			get
+			{
+				return "<#= GeneratedNamespace #>." + "<#= dm.LayoutEmbeddedPath #>";
+			}
+		}
+
+        /// <summary>
+        /// Path to the embedded dfault visible docking panes files. By default: /GeneratedCode/UI/LayoutManagerDV.txt.
+        /// </summary>
+        public override string EmbeddedDockingPanesFilePath
+		{
+			get
+			{
+				return "<#= GeneratedNamespace #>." + "<#= dm.LayoutDVEmbeddedPath #>";
+			}
+		}
+		#endregion
+	}
+}
+<#+
+}
+#>

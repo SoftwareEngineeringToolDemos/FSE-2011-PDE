@@ -1,0 +1,70 @@
+﻿<#@ template language="C#" inherits="BaseTemplate"#>
+<#@ import namespace="Tum.PDE.LanguageDSL"#>
+<#@ import namespace="Microsoft.VisualStudio.Modeling" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Collections.ObjectModel" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#
+  	// The name of the Dsl Project - Must be updated if the project is renamed.
+  	//string dslProjectName = "Tum.PDE.VSPluginDSL";
+  	
+	// The name of the UI Project - Must be updated if the project is renamed.
+  	//string uiProjectName = "Tum.PDE.VSPluginDSL.UI";
+
+  	string localeId = "1033";
+
+  	string description = this.MetaModel.Description;
+  	if( String.IsNullOrEmpty(description) )
+		description = "Desciption of VSPluginDSL";
+	
+	string version = "";
+	if( !String.IsNullOrEmpty(this.MetaModel.MajorVersion) )
+		version += this.MetaModel.MajorVersion + ".";
+	else
+		version +="0" + ".";
+	
+	if( !String.IsNullOrEmpty(this.MetaModel.MinorVersion) )
+		version += this.MetaModel.MinorVersion + ".";
+	else
+		version +="0" + ".";
+	
+	if( !String.IsNullOrEmpty(this.MetaModel.Build) )
+		version += this.MetaModel.Build + ".";
+	else
+		version +="0" + ".";
+	
+	if( !String.IsNullOrEmpty(this.MetaModel.Revision) )
+		version += this.MetaModel.Revision;
+	else
+		version +="0";
+	
+#>
+<?xml version="1.0" encoding="utf-8"?>
+<Vsix xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2010">
+  <Identifier Id="<#= this.MetaModel.PackageGuid #>">
+    <Name><#= this.MetaModel.DisplayName #></Name>
+    <Author><#= this.MetaModel.CompanyName #></Author>
+    <Version><#= version #></Version>
+    <Description><#= description #></Description>
+    <Locale><#= localeId #></Locale>
+    <MoreInfoUrl></MoreInfoUrl>
+    <GettingStartedGuide></GettingStartedGuide>
+    <Icon></Icon>
+    <PreviewImage></PreviewImage>
+    <SupportedProducts>
+      <VisualStudio Version="10.0">
+        <Edition>Ultimate</Edition>
+        <Edition>Premium</Edition>
+        <Edition>Pro</Edition>
+      </VisualStudio>
+    </SupportedProducts>
+    <SupportedFrameworkRuntimeEdition MinVersion="4.0" MaxVersion="4.0" />
+  </Identifier>
+  <References/>
+  <Content>
+    <VsPackage>|%CurrentProject%;PkgdefProjectOutputGroup|</VsPackage>
+    <MefComponent>|%CurrentProject%|</MefComponent>
+  </Content>
+</Vsix>

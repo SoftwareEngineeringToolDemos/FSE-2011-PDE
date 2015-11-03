@@ -1,0 +1,290 @@
+<#@ template language="C#"#> 
+<#@ import namespace="Tum.PDE.LanguageDSL"#>
+<#@ import namespace="Microsoft.VisualStudio.Modeling" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Collections.ObjectModel" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#+
+public string GenerateSummary(string domainClassType, GeneratedDomainElement domainClass, bool generatedClass)
+{
+	this.GenerationEnvironment = null;
+	this.GenerateSummaryInternal(domainClassType, domainClass, generatedClass);
+	return this.GenerationEnvironment.ToString();
+}
+
+// Generate the Summary XML comment for a DomainClass-derived type.
+// generatedClass specifies whether this is the main generated code carrying class in a double-derived pair.
+private void GenerateSummaryInternal(string domainClassType, GeneratedDomainElement domainClass, bool generatedClass)
+{
+#>/// <summary>
+<#+
+	if ( generatedClass )
+	{
+		if ( !domainClass.GeneratesDoubleDerived )
+		{
+#>
+/// <#= domainClassType #> <#= domainClass.Name #>
+<#+
+		GenerateCommentsInternal(domainClass.Description);
+		}
+		else // Double-derived base class - no comments to avoid repetition
+		{
+#>
+/// Double-derived base class for <#= domainClassType #> <#= domainClass.Name #>
+<#+
+		}
+	}
+	else // Derived class in double-derived pair.
+	{
+#>
+/// <#= domainClassType #> <#= domainClass.Name #>
+<#+
+		GenerateCommentsInternal(domainClass.Description);
+	}
+#>
+/// </summary>
+<#+
+}
+
+public string GenerateComments(string comment)
+{
+	this.GenerationEnvironment = null;
+	this.GenerateCommentsInternal(comment);
+	return this.GenerationEnvironment.ToString();
+}
+
+private void GenerateCommentsInternal(string comment)
+{
+	if(string.IsNullOrEmpty(comment))
+	{
+		return;
+	}
+	for(int i=0; i<comment.Length;)
+	{
+		int subStringLength = Math.Min(80, comment.Length - i);
+		int pos = comment.LastIndexOf(" ", i + subStringLength, subStringLength, StringComparison.Ordinal);
+		if (i + subStringLength >= comment.Length)
+		{
+			pos=-1; // Don't split a short comment at all
+		}
+		string subString;
+		if (pos != -1)
+		{
+			subString = comment.Substring(i, pos - i);
+			i = pos + 1; // Skip space
+		}
+		else
+		{
+			subString = comment.Substring(i);
+			i = comment.Length;
+		}
+#>
+/// <#= subString #>
+<#+
+	}
+}
+
+public string GenerateResourceAttributes(ModelElement domainObj, string genResourceName)
+{
+	this.GenerationEnvironment = null;
+	this.GenerateResourceAttributesInternal(domainObj, genResourceName);
+	return this.GenerationEnvironment.ToString();
+}
+
+public string GenerateResourceAttributes(ModelElement domainObj)
+{
+	this.GenerationEnvironment = null;
+	this.GenerateResourceAttributesInternal(domainObj, "");
+	return this.GenerationEnvironment.ToString();
+}
+
+private void GenerateResourceAttributesInternal(ModelElement domainObj, string genResourceName)
+{
+	if( domainObj == null )
+		return;
+	
+	string resourceKey = "";
+	string domainModelType = "";
+	string className = "";
+	bool generateCategory = false;
+	bool generateDisplayName = false;
+
+	MetaModel dm = null;	
+	if(domainObj is DomainClass)
+	{
+		generateDisplayName = true;
+		DomainClass c = (DomainClass)domainObj;
+		resourceKey = c.GetFullName(false);
+		dm = c.GetMetaModel();
+		className = CodeGenerationUtilities.GetGenerationClassName(c);
+	}
+	else if(domainObj is DomainRelationship)
+	{
+		generateDisplayName = true;
+		DomainRelationship c = (DomainRelationship)domainObj;
+		resourceKey = c.GetFullName(false);
+		dm = c.GetMetaModel();
+		className = CodeGenerationUtilities.GetGenerationClassName(c);
+	}
+	else if(domainObj is DomainProperty)
+	{
+		generateDisplayName = true;
+		DomainProperty p = (DomainProperty)domainObj;
+		AttributedDomainElement c = p.Element;
+		resourceKey = c.GetFullName(false)+"/"+p.Name;
+		generateCategory = !String.IsNullOrEmpty(p.Category);
+		
+		dm = c.GetMetaModel();
+		
+		//if( c is DomainClass )
+		//	dm = (c as DomainClass).GetMetaModel();
+		//else
+		//	dm = (c as DomainRelationship).GetMetaModel();
+	}
+	else if(domainObj is DomainRole)
+	{
+		generateDisplayName = true;
+		DomainRole r = (DomainRole)domainObj;
+		generateCategory = !String.IsNullOrEmpty(r.Category);
+		DomainRelationship rel = r.Relationship;
+		resourceKey = rel.GetFullName(false)+"/"+r.Name;		
+		dm = rel.GetMetaModel();
+	}
+	else if(domainObj is EnumerationLiteral)
+	{
+		//generateDisplayName = true;
+		EnumerationLiteral literal = (EnumerationLiteral)domainObj;
+		DomainEnumeration domainEnum = literal.DomainEnumeration;
+		dm = domainEnum.MetaModel;
+		resourceKey = domainEnum.GetFullName(false)+"/"+literal.Name;
+	}
+	else if(domainObj is MetaModel)
+	{
+		generateDisplayName = true;
+		dm = (MetaModel)domainObj;
+		resourceKey = dm.GetFullName(false)+"DomainModel";
+	}
+	domainModelType = dm.GetFullName(true)+"DomainModel";
+	
+	// If no resource name specified for DslLibrary, don't generate any resource attributes.
+	if(String.IsNullOrEmpty(dm.GeneratedResourceName))
+	{
+		return;
+	}
+	
+	if(generateDisplayName)
+	{
+#>
+[DslDesign::DisplayNameResource("<#= resourceKey #>.DisplayName", typeof(<#= domainModelType #>), "<#= genResourceName #>")]
+<#+
+	}
+	if(generateCategory)
+	{
+#>
+[DslDesign::CategoryResource("<#= resourceKey #>.Category", typeof(<#= domainModelType #>), "<#= genResourceName #>")]
+<#+
+	}
+#>
+[DslDesign::DescriptionResource("<#= resourceKey #>.Description", typeof(<#= domainModelType #>), "<#= genResourceName #>")]
+<#+
+	if(domainObj is DomainClass)
+	{
+#>
+[DslModeling::DomainModelOwner(typeof(<#= domainModelType #>))]
+<#+
+	}
+}
+
+/*
+private void GenerateClsCompliantAttribute(AccessModifier modifier)
+{
+	if(modifier==AccessModifier.Public)
+	{
+#>
+[global::System.CLSCompliant(true)]
+<#+
+	}	
+}
+*/
+
+public System.Collections.Generic.IEnumerable<string> GetRequiredModelsList(MetaModel library)
+{
+	System.Collections.Generic.List<string> modelNames = new System.Collections.Generic.List<string>();
+	
+	// Every model uses "Core"
+	modelNames.Add("global::Microsoft.VisualStudio.Modeling.CoreDomainModel");
+	
+	List<MetaModel> models = CodeGenerationUtilities.GetAllLibraries(library);
+	foreach(MetaModel importedModel in models)
+	{
+		modelNames.Add(importedModel.GetFullName(true) + "DomainModel");
+	}
+	
+	/*
+	if (CodeGenerationUtilities.DefinesDiagramElements(library))
+	{
+		modelNames.Add("global::Microsoft.VisualStudio.Modeling.Diagrams.CoreDesignSurfaceDomainModel");
+	}
+	
+	
+	foreach(DslLibrary importedLib in library.AllLibraries)
+	{
+		modelNames.Add(importedLib.GetFullName(true) + "DomainModel");
+	}*/
+	
+	return modelNames.Distinct();
+}
+
+public string GenerateExtendsAttributes(MetaModel library)
+{
+	this.GenerationEnvironment = null;
+	this.GenerateExtendsAttributesInternal(library);
+	return this.GenerationEnvironment.ToString();
+}
+
+///<summary>
+/// Emit [DependsOnDomainModel] attributes for each model this library uses.
+///</summary>
+private void GenerateExtendsAttributesInternal(MetaModel library)
+{
+	foreach (string extendedModel in GetRequiredModelsList(library))
+	{
+		if (string.CompareOrdinal(library.GetFullName(true) + "DomainModel", extendedModel) != 0)
+		{
+#>
+[DslModeling::DependsOnDomainModel(typeof(<#= extendedModel #>))]
+<#+
+		}
+	}  
+}
+
+public string GenerateDebuggerDisplayAttribute(AttributedDomainElement domainClass)
+{
+	this.GenerationEnvironment = null;
+	this.GenerateDebuggerDisplayAttributeInternal(domainClass);
+
+	return this.GenerationEnvironment.ToString();
+}
+
+private void GenerateDebuggerDisplayAttributeInternal(AttributedDomainElement domainClass)
+{
+	foreach (DomainProperty domainProperty in domainClass.Properties)
+	{
+		if (domainProperty.IsElementName)
+		{
+#>
+[global::System.Diagnostics.DebuggerDisplay("{GetType().Name,nq} (<#= domainProperty.Name #> = {<#= CodeGenerationUtilities.GetCamelCase(domainProperty.Name) #>PropertyStorage})")]
+<#+
+			break;
+		}
+	}
+}
+
+public string GetDomainRoleResourceKey(DomainRole r)
+{
+	string resourceKey = r.Relationship.GetFullName(false)+"/"+r.Name;
+	return resourceKey;
+}
+#>

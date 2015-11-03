@@ -1,0 +1,958 @@
+﻿<#@ template language="C#" inherits="BaseTemplate"#> 
+<#@ import namespace="Tum.PDE.LanguageDSL"#>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Collections.ObjectModel" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+using DslModeling = global::Microsoft.VisualStudio.Modeling;
+using DslEditorModeling = global::Tum.PDE.ToolFramework.Modeling;
+using DslEditorViewDiagrams = global::Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel.DiagramSurface;
+using DslEditorMenuModel = global::Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel.Menu;
+using DslEditorCommands = global::Tum.PDE.ToolFramework.Modeling.Visualization.Commands;
+using DslEditorEvents = global::Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel.Messaging.Events;
+using DslEditorDiagrams = global::Tum.PDE.ToolFramework.Modeling.Diagrams;
+using DslEditorSelection = global::Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel.Selection;
+using DslEditorViewModels = global::Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel;
+using DslEditorDependencies = global::Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel.Dependencies;
+using DslEditorServices = global::Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel.Services;
+using DslEditorDD = global::Tum.PDE.ToolFramework.Modeling.Visualization.Controls.Attached.DragDrop;
+
+using DslEditorSelectionStruct = global::Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel.Selection.SearchElementWithRSType.SearchElementWithRSTypeStruct;
+
+<#
+	//this.Write(CodeExamplesGeneratorHelper.Instance.GenerateCodeExampleForDiagram(this.MetaModel));
+#>
+
+<#
+foreach(DiagramClass diagramClass in this.MetaModel.AllDiagramClasses)
+{
+	if( !(diagramClass is DependencyDiagram) && diagramClass is TemplatedDiagramClass )
+	{
+		this.Write(TemplatedDiagramGeneratorHelper.Instance.GenerateDiagramViewModel(this.MetaModel, diagramClass));
+	}
+	else
+		GenerateDiagramViewModel(this.MetaModel, diagramClass);
+}
+#>
+<#+ 
+public void GenerateDiagramViewModel(MetaModel dm, DiagramClass diagramClass)
+{
+		Dictionary<DomainClass, List<EmbeddingRelationship>> embeddingChildParentMapping = new Dictionary<DomainClass, List<EmbeddingRelationship>>();
+		foreach (PresentationElementClass element in diagramClass.PresentationElements)
+		{
+            if (element is ShapeClass)
+            {
+				ShapeClass shapeClass = element as ShapeClass;
+				DomainClass domainClass = shapeClass.DomainClass;
+
+				if( domainClass == null )
+					continue;
+				
+				if( !embeddingChildParentMapping.ContainsKey(domainClass) )
+					embeddingChildParentMapping.Add(domainClass, new List<EmbeddingRelationship>());
+				
+				foreach(DomainRole rolesPlayed in domainClass.RolesPlayed)
+				{
+					if( rolesPlayed.Relationship.Target == rolesPlayed && 
+						rolesPlayed.Relationship is EmbeddingRelationship && 
+						rolesPlayed.Relationship.InheritanceModifier != InheritanceModifier.Abstract )
+							if( !embeddingChildParentMapping[domainClass].Contains(rolesPlayed.Relationship as EmbeddingRelationship) )
+								embeddingChildParentMapping[domainClass].Add(rolesPlayed.Relationship as EmbeddingRelationship);
+				}
+				
+			}
+		}
+		
+	string baseClass = "DslEditorViewDiagrams::DiagramSurfaceViewModel";
+	if( diagramClass.IsCustom )
+		baseClass = "DslEditorViewDiagrams::BaseDiagramSurfaceViewModel";
+	
+	if( diagramClass is SpecificDependencyDiagram)
+	{
+		if( (diagramClass as SpecificDependencyDiagram).DomainClass == null )
+			return;
+		
+		baseClass = "DslEditorDependencies::SpecificDependenciesViewModel";
+	}
+	else if( diagramClass is DependencyDiagram)
+	{
+		baseClass = "DslEditorDependencies::GraphicalDependenciesViewModel";
+	}
+
+	if( diagramClass is SpecificDependencyDiagram )
+	{
+#>
+namespace <#= dm.Namespace #>.ViewModel
+{
+	/// <summary>
+	/// This class represents the specific dependencies item for <#= diagramClass.Name #>.
+	/// </summary>
+	public partial class <#= dm.Name #><#= diagramClass.Name #>ItemViewModel : DslEditorDependencies::SpecificDependenciesItemViewModel
+	{
+		/// <summary>
+        /// Constructor. The view model constructed this way does not react on model changes, as such DoHookUpEvents is false.
+        /// </summary>
+        /// <param name="viewModelStore">The store this view model belongs to.</param>
+        /// <param name="element">Element represented by this view model.</param>
+        public <#= dm.Name #><#= diagramClass.Name #>ItemViewModel(DslEditorViewModels.Data.ViewModelStore viewModelStore, DslModeling::ModelElement element)
+            : base(viewModelStore, element)
+        {
+
+        }
+	}
+}
+<#+
+	}
+#>
+namespace <#= dm.Namespace #>.ViewModel
+{
+	/// <summary>
+	/// This class represents the default diagram surface view model of the <#= dm.ApplicationName #>.
+	/// 
+	/// Double-derived class to allow easier code customization.
+	/// </summary>
+	public partial class <#= dm.Name #><#= diagramClass.Name #>SurfaceViewModel : <#= dm.Name #><#= diagramClass.Name #>SurfaceViewModelBase
+	{
+		#region Constructor
+		/// <summary>
+        /// Constuctor.
+        /// </summary>
+        /// <param name="viewModelStore">View model store containing this view model.</param>
+		/// <param name="modelContext">Model context.</param>
+        public <#= dm.Name #><#= diagramClass.Name #>SurfaceViewModel(<#= dm.Name #>ViewModelStore viewModelStore, DslEditorModeling::ModelContext modelContext)
+            : this(viewModelStore, null, modelContext)
+        {
+        }
+		
+		/// <summary>
+        /// Constuctor.
+        /// </summary>
+        /// <param name="viewModelStore">View model store containing this view model.</param>
+		/// <param name="diagram">Diagram.</param>
+		/// <param name="modelContext">Model context.</param>
+        public <#= dm.Name #><#= diagramClass.Name #>SurfaceViewModel(<#= dm.Name #>ViewModelStore viewModelStore, DslEditorDiagrams::Diagram diagram, DslEditorModeling::ModelContext modelContext)
+            : base(viewModelStore, diagram, modelContext)
+        {
+        }
+		
+<#+
+		if( !diagramClass.IsCustom )
+		{
+#>
+		/// <summary>
+        /// Constuctor.
+        /// </summary>
+        /// <param name="viewModelStore">View model store containing this view model.</param>
+		/// <param name="diagram">Diagram.</param>
+		/// <param name="modelContext">Model context.</param>
+		/// <param name="parentModelContext">Parent model context.</param>
+        public <#= dm.Name #><#= diagramClass.Name #>SurfaceViewModel(<#= dm.Name #>ViewModelStore viewModelStore, DslEditorDiagrams::Diagram diagram, DslEditorModeling::ModelContext modelContext, DslEditorModeling::ModelContext parentModelContext)
+            : base(viewModelStore, diagram, modelContext, parentModelContext)
+        {
+        }
+<#+
+		}
+#>
+		#endregion
+	}
+	
+	/// <summary>
+	/// This class represents the default diagram surface view model of the <#= dm.ApplicationName #>.
+	/// 
+	/// This is the abstract base class.
+	/// </summary>
+	public abstract partial class <#= dm.Name #><#= diagramClass.Name #>SurfaceViewModelBase : <#= baseClass #>
+	{
+<#+
+		if( !diagramClass.IsCustom )
+		{
+#>
+		DslEditorModeling::ModelContext parentModelContext = null;
+		
+<#+
+		}
+		
+		if( diagramClass is SpecificDependencyDiagram )
+		{
+#>
+		#region SpecificDependencyDiagram
+		/// <summary>
+        /// Gets the type of the model element that specifies the elements in the list of specific items.
+        /// </summary>
+        public override System.Guid ModelElementType
+        {
+            get 
+			{ 
+				return <#= (diagramClass as SpecificDependencyDiagram).DomainClass.GetFullName(true) #>.DomainClassId; 
+			}
+        }
+		
+		/// <summary>
+        /// Creates a specific view model for the given model element.
+        /// </summary>
+        /// <param name="store">Viewmodelstore.</param>
+        /// <param name="modelElement">Model element to create a specific VM for.</param>
+        /// <returns>Specific VM.</returns>
+        protected override DslEditorDependencies::SpecificDependenciesItemViewModel CreateSpecificViewModel(DslEditorViewModels.Data.ViewModelStore store, DslModeling::ModelElement modelElement)
+		{
+			<#= dm.Name #><#= diagramClass.Name #>ItemViewModel vm = new <#= dm.Name #><#= diagramClass.Name #>ItemViewModel(store, modelElement);
+			return vm;
+		}
+		#endregion
+<#+
+		}		
+#>
+		#region Constructor
+		/// <summary>
+        /// Constuctor.
+        /// </summary>
+        /// <param name="viewModelStore">View model store containing this view model.</param>
+		/// <param name="diagram">Diagram.</param>
+		/// <param name="modelContext">Model context.</param>
+        protected <#= dm.Name #><#= diagramClass.Name #>SurfaceViewModelBase(<#= dm.Name #>ViewModelStore viewModelStore, DslEditorDiagrams::Diagram diagram, DslEditorModeling::ModelContext modelContext)
+            : base(viewModelStore, diagram, modelContext)
+        {
+			
+        }
+
+<#+
+		if( !diagramClass.IsCustom )
+		{
+#>
+		/// <summary>
+        /// Constuctor.
+        /// </summary>
+        /// <param name="viewModelStore">View model store containing this view model.</param>
+		/// <param name="diagram">Diagram.</param>
+		/// <param name="modelContext">Model context.</param>
+		/// <param name="parentModelContext">Parent model context.</param>
+        protected <#= dm.Name #><#= diagramClass.Name #>SurfaceViewModelBase(<#= dm.Name #>ViewModelStore viewModelStore, DslEditorDiagrams::Diagram diagram, DslEditorModeling::ModelContext modelContext, DslEditorModeling::ModelContext parentModelContext)
+            : base(viewModelStore, diagram, modelContext)
+        {
+			this.parentModelContext = parentModelContext;
+        }
+<#+
+		}
+#>
+		#endregion
+		
+		#region IDockableViewModel
+<#+
+	if( diagramClass is DesignerDiagramClass )
+	{
+#>
+        /// <summary>
+        /// Gets the header image URI.
+        /// </summary>
+        public override string DockingPaneImageUri
+        {
+            get
+            {
+                return "pack://application:,,,/Tum.PDE.ToolFramework.Images;component/Ribbon/DiagramSurface-16.png";
+            }
+        }
+
+<#+
+	}
+#>
+		/// <summary>
+        /// Unique name of the property grid docking window.
+        /// </summary>
+        public override string DockingPaneName
+        {
+            get { return "<#= diagramClass.Name #>SurfaceDockWindowPane"; }
+        }
+
+		/// <summary>
+        /// Title of the docking windo.
+        /// </summary>
+        public override string DockingPaneTitle
+        {
+            get { return "<#= diagramClass.Title #>"; }
+        }
+        		
+		/// <summary>
+		/// Gets the docking pane style. 
+		/// </summary>
+		public override global::Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel.DockingPaneStyle DockingPaneStyle
+        {
+            get
+            {
+                return global::Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel.DockingPaneStyle.DockedInDocumentPane;
+            }
+        }
+        #endregion		
+		
+		#region Initialization
+        /// <summary>
+        /// Initialize.
+        /// </summary>
+        protected override void Initialize()
+        {
+            base.Initialize();
+			
+<#+
+		if( !diagramClass.IsCustom )
+		{
+#>
+            if (IsIncludedModelInstance)
+                return;
+
+			if( parentModelContext == null )
+			{
+				foreach(DslEditorModeling::BaseModelContext modelContext in this.ModelData.AvailableModelContexts)
+				{
+					if( modelContext.Name == "<#= diagramClass.ModelContext.Name #>")
+					{
+						parentModelContext = modelContext as DslEditorModeling::ModelContext;
+						//parentModelContext = modelContext as <#= dm.Namespace #>.<#= diagramClass.ModelContext.Name #>ModelContext;
+						break;
+					}
+				}
+			}
+			
+			// subscribe to changes of the diagram class, that is hosted by this view model.
+			if( parentModelContext != null && this.Diagram == null)
+			{
+				DslEditorDiagrams::Diagram diagram = parentModelContext.GetDiagram("<#= diagramClass.Name #>") as DslEditorDiagrams::Diagram;
+				if( diagram != null )
+				{
+					this.Reset();
+					InitIncludedDiagrams(diagram);
+					this.Diagram = diagram;
+				}
+
+				parentModelContext.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(ModelContext_PropertyChanged);
+			}
+<#+
+		}
+#>				
+        }
+<#+
+		if( !diagramClass.IsCustom )
+		{
+#>		
+        void ModelContext_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if( e.PropertyName == "<#= diagramClass.Name #>" )
+			{
+				this.Reset();
+				DslEditorDiagrams::Diagram diagram = parentModelContext.GetDiagram("<#= diagramClass.Name #>") as DslEditorDiagrams::Diagram;
+				InitIncludedDiagrams(diagram);
+				this.Diagram = diagram;
+				
+				//InitIncludedDiagrams(parentModelContext.<#= diagramClass.Name #>);
+				//this.Diagram = parentModelContext.<#= diagramClass.Name #>;				
+			}
+        }
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
+		void InitIncludedDiagrams(DslEditorDiagrams::Diagram includingDiagram)
+		{
+<#+
+	if( diagramClass is DesignerDiagramClass )
+	{
+		DesignerDiagramClass designerDiagramClass = diagramClass as DesignerDiagramClass;
+		if( designerDiagramClass.IncludedDiagramClasses.Count > 0 )
+		{
+#>
+			foreach(DslEditorDiagrams::Diagram diagram in includingDiagram.IncludedDiagrams)
+			{
+<#+
+		foreach(DiagramClass d in (diagramClass as DesignerDiagramClass).IncludedDiagramClasses )
+		{
+#>
+				if( diagram.UniqueName == "<#= d.ModelContext.MetaModel.Name #><#= d.Name #>")
+				{
+					DslEditorViewDiagrams::DiagramSurfaceViewModel dVm = new <#= d.ModelContext.MetaModel.Namespace #>.ViewModel.<#= d.ModelContext.MetaModel.Name #><#= d.Name #>SurfaceViewModel(
+						this.ViewModelStore.GetExternViewModelStore(typeof(<#= d.ModelContext.MetaModel.Namespace #>.ViewModel.<#= d.ModelContext.MetaModel.Name #>ViewModelStore)) as <#= d.ModelContext.MetaModel.Namespace #>.ViewModel.<#= d.ModelContext.MetaModel.Name #>ViewModelStore, diagram, this.ModelContext);
+					dVm.ParentDiagramSurfaceViewModel = this;
+					dVm.IsIncludedModelInstance = true;
+					this.AddIncludedSurfaceViewModels(dVm);
+				}
+<#+
+		}			
+#>
+			}
+<#+
+		}
+	}
+#>		
+		}
+<#+
+		}
+#>			
+        #endregion
+<#+
+		if( !diagramClass.IsCustom )
+		{
+#>
+
+		/// <summary>
+        /// Gets the diagram class type.
+        /// </summary>
+        /// <returns></returns>
+        public override System.Guid GetDiagramClassType()
+		{
+			return <#= dm.Namespace #>.<#= diagramClass.Name #>.DomainClassId;
+		}
+
+		
+		#region Methods
+		/// <summary>
+        /// Verifies if a relationship can be created based on the given data.
+        /// </summary>
+        /// <param name="info">Info specifying the relationship to create.</param>
+        /// <returns>True if a relationship can be created. False otherwise.</returns>
+        public override bool CanCreateRelationship(DslEditorViewDiagrams::ViewModelRelationshipCreationInfo info)
+		{
+			if( info.Source == null || info.Target == null )
+				return false;
+				
+			if( info.Source.ShapeElement == null || info.Target.ShapeElement == null )
+				return false;
+				
+			if( info.Source.ShapeElement.Element == null || info.Target.ShapeElement.Element == null )
+				return false;
+				
+			if (!info.Source.ShapeElement.TakesPartInRelationship)
+                return false;
+
+			bool bCanCreate = false;			
+<#+
+	foreach (PresentationElementClass element in diagramClass.PresentationElements)
+	{
+		if( element is RelationshipShapeClass )
+		{
+			RelationshipShapeClass rsShape = element as RelationshipShapeClass;
+			DomainRelationship con = rsShape.ReferenceRelationship;
+			if( con != null )
+			{
+#>
+
+			if( !bCanCreate )
+				bCanCreate = CanCreateRelationshipShape<#= rsShape.Name #>(info);
+<#+
+			}
+				//if( CodeGenerationUtilities.ShapeTakesPart(shapeClass, con) )
+		}
+		else if( element is MappingRelationshipShapeClass )
+		{
+			MappingRelationshipShapeClass rsShape = element as MappingRelationshipShapeClass;
+			if( rsShape.DomainClass != null )
+			{
+				ReferenceRelationship conSource = rsShape.Source;
+				ReferenceRelationship conTarget = rsShape.Target;
+				if( conSource != null && conTarget != null )
+				{
+					DomainClass source = conSource.Target.RolePlayer as DomainClass;
+					DomainClass target = conTarget.Target.RolePlayer as DomainClass;
+					if( source != null && target != null )
+					{
+#>
+			
+			if( !bCanCreate )
+				bCanCreate = CanCreateMappingRelationshipShape<#= rsShape.Name #>(info);
+<#+
+					}
+				}
+			}
+		}
+#>
+<#+
+	}
+#>
+
+			if( !bCanCreate )
+			{
+				foreach(DslEditorViewDiagrams::DiagramSurfaceViewModel vm in this.IncludedSurfaceViewModels)
+				{
+					if( vm.CanCreateRelationship(info) )
+						return true;
+				}
+			}
+
+            return bCanCreate;
+        }
+
+<#+
+	foreach (PresentationElementClass element in diagramClass.PresentationElements)
+	{
+		if( element is RelationshipShapeClass )
+		{
+			RelationshipShapeClass rsShape = element as RelationshipShapeClass;
+			DomainRelationship con = rsShape.ReferenceRelationship;
+			if( con != null )
+			{
+#>
+		/// <summary>
+        /// Verifies if a relationship shape of type <#= rsShape.Name #> can be created based on the given data.
+        /// </summary>
+        /// <param name="info">Info specifying the relationship to create.</param>
+        /// <returns>True if a relationship can be created. False otherwise.</returns>
+		protected virtual bool CanCreateRelationshipShape<#= rsShape.Name #>(DslEditorViewDiagrams::ViewModelRelationshipCreationInfo info)
+		{
+			if( info.Source.Element is <#= con.Source.RolePlayer.GetFullName(true) #> && info.Target.Element is <#= con.Target.RolePlayer.GetFullName(true) #> )
+			{
+<#+
+				// see if we can add relationship without breaking cardinality constraints
+				if(con.Target.Multiplicity == Tum.PDE.LanguageDSL.Multiplicity.One || con.Target.Multiplicity == Tum.PDE.LanguageDSL.Multiplicity.ZeroOne )
+				{
+#>
+				System.Collections.ObjectModel.ReadOnlyCollection<<#= con.GetFullName(true) #>> allM<#= con.Name #>Instances1 =  DslModeling::DomainRoleInfo.GetElementLinks<<#= con.GetFullName(true) #>>(info.Target.Element, <#= con.GetFullName(true) #>.<#= con.Target.Name #>DomainRoleId);
+				if(allM<#= con.Name #>Instances1.Count > 0 )
+					return false;
+
+<#+
+				}
+				/*if(con.Source.Multiplicity == Tum.PDE.LanguageDSL.Multiplicity.One || con.Source.Multiplicity == Tum.PDE.LanguageDSL.Multiplicity.ZeroOne )
+				{
+#>
+				System.Collections.ObjectModel.ReadOnlyCollection<<#= con.GetFullName(true) #>> allM<#= con.Name #>Instances2 =  DslModeling::DomainRoleInfo.GetElementLinks<<#= con.GetFullName(true) #>>(info.Source.Element, <#= con.GetFullName(true) #>.<#= con.Source.Name #>DomainRoleId);
+				if(allM<#= con.Name #>Instances2.Count > 0 )
+					return false;
+
+<#+
+				}
+				*/
+				if( !con.AllowsDuplicates )
+				{
+#>
+				// see if a relationship already exists (can not create new one of the same type as no duplicates are allowed)
+				if( <#= con.GetFullName(true) #>.GetLinks(info.Source.Element as <#= con.Source.RolePlayer.GetFullName(true) #>, info.Target.Element as <#= con.Target.RolePlayer.GetFullName(true) #>).Count > 0 )
+					return false;
+<#+
+				}
+#>
+
+				return true;
+			}
+			
+			return false;
+		}
+		
+<#+
+			}
+		}
+		else if( element is MappingRelationshipShapeClass )
+		{
+			MappingRelationshipShapeClass rsShape = element as MappingRelationshipShapeClass;
+			if( rsShape.DomainClass != null )
+			{
+			
+				ReferenceRelationship conSource = rsShape.Source;
+				ReferenceRelationship conTarget = rsShape.Target;
+				if( conSource != null && conTarget != null )
+				{
+					DomainClass source = conSource.Target.RolePlayer as DomainClass;
+					DomainClass target = conTarget.Target.RolePlayer as DomainClass;
+					if( source != null && target != null )
+					{
+#>
+		/// <summary>
+        /// Verifies if a mapping relationship of type <#= rsShape.Name #> can be created based on the given data.
+        /// </summary>
+        /// <param name="info">Info specifying the relationship to create.</param>
+        /// <returns>True if a relationship can be created. False otherwise.</returns>
+		protected virtual bool CanCreateMappingRelationshipShape<#= rsShape.Name #>(DslEditorViewDiagrams::ViewModelRelationshipCreationInfo info)
+		{
+			if( info.Source.Element is <#= source.GetFullName(true) #> && info.Target.Element is <#= target.GetFullName(true) #> )
+			{
+<#+
+					// see if we can add new element + relationships without breaking cardinality constraints
+					if(conSource.Target.Multiplicity == Tum.PDE.LanguageDSL.Multiplicity.One || conSource.Target.Multiplicity == Tum.PDE.LanguageDSL.Multiplicity.ZeroOne )
+					{
+#>
+				System.Collections.ObjectModel.ReadOnlyCollection<<#= conSource.GetFullName(true) #>> allM<#= conSource.Name #>Instances1 =  DslModeling::DomainRoleInfo.GetElementLinks<<#= conSource.GetFullName(true) #>>(info.Source.Element, <#= conSource.GetFullName(true) #>.<#= conSource.Target.Name #>DomainRoleId);
+				if(allM<#= conSource.Name #>Instances1.Count > 0 )
+					return false;
+<#+
+					}
+					if(conTarget.Target.Multiplicity == Tum.PDE.LanguageDSL.Multiplicity.One || conTarget.Target.Multiplicity == Tum.PDE.LanguageDSL.Multiplicity.ZeroOne )
+					{
+#>
+				System.Collections.ObjectModel.ReadOnlyCollection<<#= conTarget.GetFullName(true) #>> allM<#= conTarget.Name #>Instances2 =  DslModeling::DomainRoleInfo.GetElementLinks<<#= conTarget.GetFullName(true) #>>(info.Target.Element, <#= conTarget.GetFullName(true) #>.<#= conTarget.Target.Name #>DomainRoleId);
+				if(allM<#= conTarget.Name #>Instances2.Count > 0 )
+					return false;
+<#+
+					}
+#>
+	
+				return true;
+			}
+			
+			return false;
+		}
+		
+<#+
+					}
+				}
+			}
+		}
+#>
+<#+
+	}
+#>
+
+        /// <summary>
+        /// Creates a relationship based on the given data.
+        /// </summary>
+        /// <param name="info">Info specifying the relationship to create.</param>
+        public override void CreateRelationship(DslEditorViewDiagrams::ViewModelRelationshipCreationInfo info)
+		{
+			if( info.Source == null || info.Target == null )
+				return;
+				
+			if( info.Source.ShapeElement == null || info.Target.ShapeElement == null )
+				return;
+				
+			if( info.Source.ShapeElement.Element == null || info.Target.ShapeElement.Element == null )
+				return;
+				
+			if (!info.Source.ShapeElement.TakesPartInRelationship)
+                return;
+
+			// gather creatable shapes
+			System.Collections.Generic.List<DslEditorSelection::SearchRSType.SearchRSTypeStruct> shapesPossible = this.GetCreatableRelationships(info);
+			System.Guid shapeToCreate = System.Guid.Empty;
+
+			if( shapesPossible.Count == 0 )
+				return;
+			else if (shapesPossible.Count == 1)
+                shapeToCreate = shapesPossible[0].DomainClassId;
+			else
+			{
+				// let user choose what shape type he wants to create
+				DslEditorSelection::SelectGenericViewModel<DslEditorSelection::SearchRSType.SearchRSTypeStruct> selectionViewModel
+                            = new DslEditorSelection.SelectGenericViewModel<DslEditorSelection::SearchRSType.SearchRSTypeStruct>(
+                                this.ViewModelStore, shapesPossible,
+                                new DslEditorSelection.GenericSearchDelegate<DslEditorSelection::SearchRSType.SearchRSTypeStruct>(DslEditorSelection::SearchRSType.Search),
+                                new DslEditorSelection.GenericSortDelegate<DslEditorSelection::SearchRSType.SearchRSTypeStruct>(DslEditorSelection::SearchRSType.Sort));
+
+                // show dialog
+                bool? result = this.GlobalServiceProvider.Resolve<DslEditorServices::IUIVisualizerService>().ShowDialog("SelectRSTypePopup", selectionViewModel);
+                if (result == true && selectionViewModel.SelectedElement != null)
+                {
+                    shapeToCreate = selectionViewModel.SelectedElement.Value.DomainClassId;
+                }
+
+                selectionViewModel.Dispose();
+                System.GC.Collect();
+			}
+			
+			if( shapeToCreate == System.Guid.Empty )
+				return;
+				
+			this.CreateRelationship(info, shapeToCreate);
+			
+			
+        }
+
+        /// <summary>
+        /// Creates a relationship based on the given data.
+        /// </summary>
+        /// <param name="info">Info specifying the relationship to create.</param>
+        /// <param name="shapeToCreate">Type of the relationship shape</param>
+        public override void CreateRelationship(DslEditorViewDiagrams::ViewModelRelationshipCreationInfo info, System.Guid shapeToCreate)
+        {
+<#+
+	foreach (PresentationElementClass element in diagramClass.PresentationElements)
+	{
+		if( element is RelationshipShapeClass )
+		{
+			RelationshipShapeClass rsShape = element as RelationshipShapeClass;
+			DomainRelationship con = rsShape.ReferenceRelationship;
+			if( con != null )
+			{
+#>
+			if( shapeToCreate == <#= rsShape.GetFullName(true) #>.DomainClassId)
+			{
+				using(DslModeling::Transaction transaction = this.Store.TransactionManager.BeginTransaction("Add global::Tum.VModellXT.Dynamik.UebergangShape ") )
+				{
+<#+
+				if(con.Source.Multiplicity == Tum.PDE.LanguageDSL.Multiplicity.One || con.Source.Multiplicity == Tum.PDE.LanguageDSL.Multiplicity.ZeroOne )
+				{
+#>
+					System.Collections.ObjectModel.ReadOnlyCollection<<#= con.GetFullName(true) #>> allInstances =  DslModeling::DomainRoleInfo.GetElementLinks<<#= con.GetFullName(true) #>>(info.Source.Element, <#= con.GetFullName(true) #>.<#= con.Source.Name #>DomainRoleId);
+					if(allInstances.Count > 0 )
+					{
+						allInstances[0].Delete();
+					}
+<#+
+				}				
+#>
+			
+					CreateRelationship<<#= con.GetFullName(true) #>>(info.Source.ShapeElement.Element, info.Target.ShapeElement.Element);
+					
+					transaction.Commit();
+				}
+			}
+<#+
+			}
+		}
+		else if( element is MappingRelationshipShapeClass )
+		{
+			MappingRelationshipShapeClass rsShape = element as MappingRelationshipShapeClass;
+			if( rsShape.DomainClass != null )
+			{
+				DomainClass domainClass = rsShape.DomainClass;
+				ReferenceRelationship conSource = rsShape.Source;
+				ReferenceRelationship conTarget = rsShape.Target;
+				if( conSource != null && conTarget != null )
+				{
+					DomainClass source = conSource.Target.RolePlayer as DomainClass;
+					DomainClass target = conTarget.Target.RolePlayer as DomainClass;
+					if( source != null && target != null )
+					{
+#>
+			
+			if( shapeToCreate == <#= rsShape.GetFullName(true) #>.DomainClassId)
+			{
+				using(DslModeling::Transaction transaction = this.Store.TransactionManager.BeginTransaction("Add global::Tum.VModellXT.Dynamik.UebergangShape ") )
+				{
+					<#= domainClass.GetFullName(true) #> linkElement = new <#= domainClass.GetFullName(true) #>(this.Store);
+					new <#= conSource.GetFullName(true) #>(linkElement, info.Source.Element as <#= source.GetFullName(true) #>);
+					new <#= conTarget.GetFullName(true) #>(linkElement, info.Target.Element as <#= target.GetFullName(true) #>);					
+
+					DslModeling::ModelElement modelElementParent = EmbedElement(linkElement);
+					if( modelElementParent == null )
+					{
+						transaction.Rollback();
+					}
+					else
+					{
+						if (<#= dm.Name #>ElementNameProvider.Instance.HasName(linkElement))
+    						<#= dm.Name #>ElementNameProvider.Instance.CreateAndAssignName(modelElementParent, linkElement);
+						
+					}
+					
+					transaction.Commit();
+				}
+			}
+<#+
+					}
+				}
+			}
+		}
+#>
+<#+
+	}
+#>
+
+			foreach(DslEditorViewDiagrams::DiagramSurfaceViewModel vm in this.IncludedSurfaceViewModels)
+			{
+				vm.CreateRelationship(info, shapeToCreate);
+			}
+        }
+		
+        /// <summary>
+        /// Gets creatable relationship shapes.
+        /// </summary>
+        /// <param name="info">Info specifying the relationship to create.</param>
+        public override System.Collections.Generic.List<DslEditorSelection::SearchRSType.SearchRSTypeStruct> GetCreatableRelationships(DslEditorViewDiagrams::ViewModelRelationshipCreationInfo info)
+        {
+			System.Collections.Generic.List<DslEditorSelection::SearchRSType.SearchRSTypeStruct> shapesPossible = base.GetCreatableRelationships(info);
+			
+<#+
+	foreach (PresentationElementClass element in diagramClass.PresentationElements)
+	{
+		if( element is RelationshipShapeClass )
+		{
+			RelationshipShapeClass rsShape = element as RelationshipShapeClass;
+			DomainRelationship con = rsShape.ReferenceRelationship;
+			if( con != null )
+			{
+#>
+			if( CanCreateRelationshipShape<#= rsShape.Name #>(info) )
+			{
+				shapesPossible.Add(new DslEditorSelection::SearchRSType.SearchRSTypeStruct(
+					<#= rsShape.GetFullName(true) #>.DomainClassId, "<#= con.DisplayName #>", "<#= rsShape.DisplayName #>"));
+			}
+<#+
+			}
+		}
+		else if( element is MappingRelationshipShapeClass )
+		{
+			MappingRelationshipShapeClass rsShape = element as MappingRelationshipShapeClass;
+			if( rsShape.DomainClass != null )
+			{
+				DomainClass domainClass = rsShape.DomainClass;
+				ReferenceRelationship conSource = rsShape.Source;
+				ReferenceRelationship conTarget = rsShape.Target;
+				if( conSource != null && conTarget != null )
+				{
+					DomainClass source = conSource.Target.RolePlayer as DomainClass;
+					DomainClass target = conTarget.Target.RolePlayer as DomainClass;
+					if( source != null && target != null )
+					{
+#>
+			
+			if( CanCreateMappingRelationshipShape<#= rsShape.Name #>(info) )
+			{
+				shapesPossible.Add(new DslEditorSelection::SearchRSType.SearchRSTypeStruct(
+					<#= rsShape.GetFullName(true) #>.DomainClassId, "<#= domainClass.DisplayName #>", "<#= rsShape.DisplayName #>"));
+			}
+<#+				
+					}
+				}
+			}
+		}
+	}
+#>
+
+			foreach(DslEditorViewDiagrams::DiagramSurfaceViewModel vm in this.IncludedSurfaceViewModels)
+			{
+				shapesPossible.AddRange(vm.GetCreatableRelationships(info));
+			}
+			
+            return shapesPossible;
+        }		
+        #endregion		
+
+		#region Classes Embedding Methods
+<#+
+		List<PresentationElementClass> requireCustomEmbedMethods = new List<PresentationElementClass>();
+		foreach (PresentationElementClass element in diagramClass.PresentationElements)
+		{
+			if( element is MappingRelationshipShapeClass )
+			{
+				MappingRelationshipShapeClass shape = element as MappingRelationshipShapeClass;
+				DomainClass domainClass = shape.DomainClass;
+				if( domainClass == null )
+					continue;
+				
+				requireCustomEmbedMethods.Add(element);
+			}
+			else if( element is ShapeClass )
+			{
+				ShapeClass shapeClass = element as ShapeClass;
+				DomainClass domainClass = shapeClass.DomainClass;
+				if( domainClass == null )
+					continue;
+				
+				if( shapeClass.Parent != null )
+				{
+					bool bFound = false;
+					foreach(EmbeddingRelationship con in embeddingChildParentMapping[domainClass] )
+					{
+						if( con.Source.RolePlayer == shapeClass.Parent.DomainClass )
+							bFound = true;
+					}
+					
+					if( !bFound )
+					{
+						requireCustomEmbedMethods.Add(element);
+
+						continue;
+					}
+				}
+			}
+
+		}
+		
+		if( requireCustomEmbedMethods.Count > 0 )
+		{
+#>
+
+        /// <summary>
+        /// Tries to embed an element as the child of the selected element.
+        /// </summary>
+        /// <param name="modelElement">Model element to embed.</param>
+        /// <returns>Parent model element the child was embedded at on success. Null otherwise.</returns>
+        public override DslEditorModeling::DomainModelElement EmbedElement(DslEditorModeling::DomainModelElement modelElement)
+        {
+<#+
+			foreach (PresentationElementClass element in requireCustomEmbedMethods)
+			{
+				if( element is MappingRelationshipShapeClass )
+				{
+					MappingRelationshipShapeClass shape = element as MappingRelationshipShapeClass;
+					DomainClass domainClass = shape.DomainClass;
+#>
+			if( modelElement.GetDomainClassId() == <#= domainClass.GetFullName(true) #>.DomainClassId )
+				return Embed<#= domainClass.Name #>For<#= shape.Name #>(modelElement as <#= domainClass.GetFullName(true) #>);
+<#+
+				}
+				else if( element is ShapeClass )
+				{
+					ShapeClass shapeClass = element as ShapeClass;
+					DomainClass domainClass = shapeClass.DomainClass;
+#>
+			if( modelElement.GetDomainClassId() == <#= domainClass.GetFullName(true) #>.DomainClassId )
+				return Embed<#= domainClass.Name #>For<#= shapeClass.Name #>(modelElement as <#= domainClass.GetFullName(true) #>);
+<#+					
+				}
+
+			}
+#>
+
+			return base.EmbedElement(modelElement);
+		}
+<#+
+		}
+		
+		foreach (PresentationElementClass element in requireCustomEmbedMethods)
+		{
+			if( element is MappingRelationshipShapeClass )
+			{
+				MappingRelationshipShapeClass shape = element as MappingRelationshipShapeClass;
+				DomainClass domainClass = shape.DomainClass;
+#>
+
+		/// <summary>
+        /// Attempts to embedd the given element at its specific parent. If it fails, null is returned.
+        /// </summary>
+        /// <param name="linkElement">Element to embed.</param>
+        /// <returns>Parent element on success. Null on failure.</returns>
+		protected abstract DslEditorModeling::DomainModelElement Embed<#= domainClass.Name #>For<#= shape.Name #>(<#= domainClass.GetFullName(true) #> linkElement);
+<#+
+			}
+
+		
+			else if( element is ShapeClass )
+			{
+				ShapeClass shapeClass = element as ShapeClass;
+				DomainClass domainClass = shapeClass.DomainClass;
+#>
+
+		/// <summary>
+        /// Attempts to embedd the given element at its specific parent. If it fails, null is returned.
+        /// </summary>
+        /// <param name="info">Creation info.</param>
+        /// <param name="linkElement">Element to embed.</param>
+        /// <returns>Parent element on success. Null on failure.</returns>
+		protected abstract DslEditorModeling::DomainModelElement Embed<#= domainClass.Name #>For<#= shapeClass.Name #>(<#= domainClass.GetFullName(true) #> elementToEmbed);
+<#+
+			}
+		}
+#>
+		#endregion
+<#+
+		}
+#>
+		
+		#region Dispose
+        /// <summary>
+        /// Clean up.
+        /// </summary>
+        protected override void OnDispose()
+        {
+<#+
+		if( !diagramClass.IsCustom )
+		{
+#>			
+            if( parentModelContext != null )
+            	parentModelContext.PropertyChanged -= new System.ComponentModel.PropertyChangedEventHandler(ModelContext_PropertyChanged);
+<#+
+		}
+#>					
+				
+            base.OnDispose();
+        }
+        #endregion
+	}
+
+}
+<#+
+}
+#>

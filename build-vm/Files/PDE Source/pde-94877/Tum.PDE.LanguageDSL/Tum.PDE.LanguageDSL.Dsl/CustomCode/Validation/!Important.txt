@@ -1,0 +1,9 @@
+﻿There is a bug in the DSL-Tools validation handling, which prevents us to provide the source of an error:
+
+	e.g.: context.LogError("Message", "PropertyNameAlreadyUsed", this); 
+
+would result in a weird error (this beeing a domain class),
+
+	while: context.LogError("Message", "PropertyNameAlreadyUsed", null); 
+
+will function as expected.

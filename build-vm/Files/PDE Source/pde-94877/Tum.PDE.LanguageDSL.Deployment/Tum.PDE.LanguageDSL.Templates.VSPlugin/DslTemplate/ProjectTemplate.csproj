@@ -1,0 +1,479 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>10.0.20820</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2144DD38-5EA7-4174-85BE-FC1FD90AE2EC}</ProjectGuid>
+    <ProjectTypeGuids>{82b43b9b-a64c-4715-b499-d71e9ca2bd60};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <ApplicationIcon>Resources\File.ico</ApplicationIcon>
+    <RootNamespace>$safeprojectname$</RootNamespace>
+    <AssemblyName>$safeprojectname$</AssemblyName>
+    <StartupObject>
+    </StartupObject>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <AssemblyOriginatorKeyFile>..\Key.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyMode>File</AssemblyOriginatorKeyMode>
+    <SignAssembly>true</SignAssembly>    
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CopyVsixExtensionFiles>False</CopyVsixExtensionFiles>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <!-- Properties for VSSDK/DSL Targets: Must be defined before importing the targets -->
+  <PropertyGroup>
+    <RegisterOutputPackage>true</RegisterOutputPackage>
+    <UseCodebase>true</UseCodebase>
+    <GacTargetOutput>false</GacTargetOutput>
+    <TransformOnBuild>True</TransformOnBuild>
+  </PropertyGroup>
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  <ItemGroup>
+    <Reference Include="EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="EnvDTE80, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Fluent, Version=1.3.0.0, Culture=neutral, PublicKeyToken=3e436e32a8c5546f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(TumPDEDSL)\Fluent.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.DSLTools.Build.Tasks">
+      <HintPath>$(TumPDEDSL)\Microsoft.DSLTools.Build.Tasks.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Modeling.Sdk.10.0, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Modeling.Sdk.Shell.10.0, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" >
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.OLE.Interop, Version=7.1.40304.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="Microsoft.VisualStudio.Shell.10.0, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualStudio.Shell.Immutable.10.0, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualStudio.Shell.Interop, Version=7.1.40304.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="Microsoft.VisualStudio.Shell.Interop.8.0, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="Microsoft.VisualStudio.Shell.Interop.9.0, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="Microsoft.VisualStudio.Shell.Interop.10.0, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="Microsoft.VisualStudio.TextManager.Interop, Version=7.1.40304.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="Microsoft.VisualStudio.TextTemplating.10.0, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualStudio.TextTemplating.Interfaces.10.0, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualStudio.TextTemplating.VSHost.10.0, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="PresentationCore">
+    </Reference>
+    <Reference Include="PresentationFramework">
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.ComponentModel.Composition">
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(TumPDEDSL)\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="SStuff.FlowControls">
+      <HintPath>$(TumPDEDSL)\SStuff.FlowControls.dll</HintPath>
+    </Reference>
+    <Reference Include="SStuff.LayoutAlgorithms">
+      <HintPath>$(TumPDEDSL)\SStuff.LayoutAlgorithms.dll</HintPath>
+    </Reference>
+    <Reference Include="SStuff.WpfEffects">
+      <HintPath>$(TumPDEDSL)\SStuff.WpfEffects.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.XML" />
+
+    <Reference Include="Tum.PDE.ToolFramework.Images">
+      <HintPath>$(TumPDEDSL)\Tum.PDE.ToolFramework.Images.dll</HintPath>
+    </Reference>
+    <Reference Include="Tum.PDE.ToolFramework.Modeling">
+      <HintPath>$(TumPDEDSL)\Tum.PDE.ToolFramework.Modeling.dll</HintPath>
+    </Reference>
+    <Reference Include="Tum.PDE.ToolFramework.Modeling.Base">
+      <HintPath>$(TumPDEDSL)\Tum.PDE.ToolFramework.Modeling.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Tum.PDE.ToolFramework.Modeling.Shell">
+      <HintPath>$(TumPDEDSL)\Tum.PDE.ToolFramework.Modeling.Shell.dll</HintPath>
+    </Reference>
+    <Reference Include="Tum.PDE.ToolFramework.Modeling.Diagrams">
+      <HintPath>$(TumPDEDSL)\Tum.PDE.ToolFramework.Modeling.Diagrams.dll</HintPath>
+    </Reference>
+    <Reference Include="Tum.PDE.ToolFramework.Modeling.Visualization">
+      <HintPath>$(TumPDEDSL)\Tum.PDE.ToolFramework.Modeling.Visualization.dll</HintPath>
+    </Reference>
+    <Reference Include="Tum.PDE.ToolFramework.Modeling.Visualization.Base">
+      <HintPath>$(TumPDEDSL)\Tum.PDE.ToolFramework.Modeling.Visualization.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Tum.PDE.ToolFramework.Modeling.Visualization.Shell">
+      <HintPath>$(TumPDEDSL)\Tum.PDE.ToolFramework.Modeling.Visualization.Shell.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase">
+    </Reference>
+    <Reference Include="WindowsFormsIntegration" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CustomCode\SerializationHelper.cs" />
+    <Compile Include="GeneratedCode\Model\Diagrams.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GeneratedCode\Model\DiagramsLinkRules.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GeneratedCode\Model\DiagramsRules.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GeneratedCode\Model\DiagramsSerializer.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GeneratedCode\Model\DiagramsSerializerHelper.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GeneratedCode\Model\DirectiveProcessor.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GeneratedCode\Model\DocumentData.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GeneratedCode\Model\DomainClasses.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GeneratedCode\Model\DomainModel.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GeneratedCode\Model\DomainModelDependencies.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GeneratedCode\Model\DomainModelIdProvider.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GeneratedCode\Model\DomainModelServices.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GeneratedCode\Model\DomainRelationships.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GeneratedCode\Model\DomainValidation.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GeneratedCode\Model\HelpKeywordHelper.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GeneratedCode\Model\Model.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="GeneratedCode\Model\ModelContexts.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GeneratedCode\Model\SearchProcessor.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GeneratedCode\Model\SerializationHelper.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GeneratedCode\Model\SerializationHelperShell.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GeneratedCode\Model\Serializer.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GeneratedCode\Model\Shapes.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GeneratedCode\Model\ToolboxHelper.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GeneratedCode\Shell\Constants.cs">
+      <DependentUpon>Shell.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GeneratedCode\Shell\DocData.cs">
+      <DependentUpon>Shell.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GeneratedCode\Shell\DocView.cs">
+      <DependentUpon>Shell.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GeneratedCode\Shell\EditorFactory.cs">
+      <DependentUpon>Shell.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GeneratedCode\Shell\Package.cs">
+      <DependentUpon>Shell.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GeneratedCode\Shell\PackageController.cs">
+      <DependentUpon>Shell.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GeneratedCode\Shell\Shell.cs">
+      <DependentUpon>Shell.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="GeneratedCode\Shell\ToolWindow.cs">
+      <DependentUpon>Shell.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GeneratedCode\Resources.cs">
+      <DependentUpon>Resources.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="GeneratedCode\ViewModel\DiagramItemViewModel.cs">
+      <DependentUpon>ViewModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GeneratedCode\ViewModel\DiagramLinkViewModel.cs">
+      <DependentUpon>ViewModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GeneratedCode\ViewModel\DiagramViewModel.cs">
+      <DependentUpon>ViewModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GeneratedCode\ViewModel\PropertyGridEditorViewModel.cs">
+      <DependentUpon>ViewModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GeneratedCode\ViewModel\PropertyGridViewModel.cs">
+      <DependentUpon>ViewModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GeneratedCode\ViewModel\Services.cs">
+      <DependentUpon>ViewModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GeneratedCode\ViewModel\SpecificViewModel.cs">
+      <DependentUpon>ViewModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GeneratedCode\ViewModel\TreeViewModel.cs">
+      <DependentUpon>ViewModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GeneratedCode\ViewModel\ViewModel.cs">
+      <DependentUpon>ViewModel.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="GeneratedCode\ViewModel\ViewModelData.cs">
+      <DependentUpon>ViewModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GeneratedCode\ViewModel\ViewModelOptions.cs">
+      <DependentUpon>ViewModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GeneratedCode\ViewModel\ViewModels.cs">
+      <DependentUpon>ViewModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GeneratedCode\ViewModel\WPFApplication\App.cs">
+      <DependentUpon>App.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="GeneratedCode\ViewModel\WPFApplication\Ui.cs">
+      <DependentUpon>App.tt</DependentUpon>
+    </Compile>
+    <None Include="DomainMetaModel.diagram" />
+    <None Include="DomainMetaModel.lngdsl">
+    </None>
+    <None Include="Resources\ProjectItemTemplates\CSharp.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>CSharp.vstemplate</LastGenOutput>
+    </None>
+    <None Include="Resources\ProjectItemTemplates\$LanguageExtension$.$LanguageExtension$"/>
+    <None Include="source.extension.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>source.extension.vsixmanifest</LastGenOutput>
+    </None>
+    <Compile Include="MainViewControl.xaml.cs">
+      <DependentUpon>MainViewControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4df5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="GeneratedCode\DomainModelResx.resx">
+      <DependentUpon>Resources.tt</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VSPackage.resx">
+      <SubType>Designer</SubType>
+      <MergeWithCTO>true</MergeWithCTO>
+      <ManifestResourceName>VSPackage</ManifestResourceName>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\File.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <VSCTCompile Include="Commands.vsct">
+      <ResourceName>1000.ctmenu</ResourceName>
+    </VSCTCompile>
+  </ItemGroup>
+  <PropertyGroup>
+    <StartProgram>$(DevEnvDir)\devenv.exe</StartProgram>
+    <StartAction>Program</StartAction>
+    <StartArguments>/rootsuffix Exp ..\..\..\Debugging\Debugging.csproj</StartArguments>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="GeneratedCode\Model\Model.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Model.cs</LastGenOutput>
+    </None>
+    <None Include="GeneratedCode\Shell\Shell.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Shell.cs</LastGenOutput>
+    </None>
+    <None Include="GeneratedCode\Resources.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Resources.cs</LastGenOutput>
+    </None>
+    <None Include="GeneratedCode\ViewModel\ViewModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ViewModel.cs</LastGenOutput>
+    </None>
+    <None Include="GeneratedCode\ViewModel\WPFApplication\App.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>App.cs</LastGenOutput>
+    </None>
+    
+    <None Include="Resources\SearchAdvanced-16.png" />
+    <None Include="Resources\Search-16.png" />
+    <None Include="Resources\PropertyGrid-16.png" />
+    <None Include="Resources\ModelTree-16.png" />
+    <None Include="Resources\Refresh-16.png" />
+    <None Include="Resources\DiagramSurface-16.png" />
+    <None Include="Resources\ErrorList-16.png" />
+    <None Include="source.extension.vsixmanifest">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>source.extension.tt</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="GeneratedCode\ViewModel\WPFApplication\LayoutManagerDV.txt">
+      <DependentUpon>App.tt</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeneratedCode\ViewModel\WPFApplication\LayoutManagerLayout.xml">
+      <DependentUpon>App.tt</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="GeneratedCode\ViewModel\WPFApplication\UIResourceDictionary.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <DependentUpon>App.tt</DependentUpon>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MainViewControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <VSItemTemplate Include="Resources\ProjectItemTemplates\CSharp.vstemplate">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CSharp.tt</DependentUpon>
+    </VSItemTemplate>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v10.0\VSSDK\Microsoft.VsSDK.targets" />
+  <!-- <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\DSLTools\v10.0\Microsoft.DSLTools.targets" /> -->
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.-->
+  <PropertyGroup>
+    <GetVsixSourceItemsDependsOn>$(GetVsixSourceItemsDependsOn);GetVsixAllItems</GetVsixSourceItemsDependsOn>
+  </PropertyGroup>
+  <Target Name="GetVsixAllItems">
+    <ItemGroup>
+      <VSIXSourceItem Include="$(TargetDir)\*.*" />
+    </ItemGroup>
+  </Target>
+  <!-- 
+	  Targets for creating project item template zip archives. 
+	-->
+  <UsingTask TaskName="CreateProjectItemTemplate" AssemblyFile="$(TumPDEDSL)\Microsoft.DSLTools.Build.Tasks.dll" />
+  <UsingTask TaskName="GetProjectItemTemplateInfo" AssemblyFile="$(TumPDEDSL)\Microsoft.DSLTools.Build.Tasks.dll" />
+  <PropertyGroup>
+    <CompileDependsOn>$(CompileDependsOn);DSLToolsCreateProjectItemTemplates;DSLToolsDeployProjectItemTemplates;DSLToolsRecordProjectItemTemplateFileWrites</CompileDependsOn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ItemTemplateCleanFile Condition="'$(ItemTemplateCleanFile)'==''">$(MSBuildProjectFile).ItemTemplates.txt</ItemTemplateCleanFile>
+    <CleanDependsOn>$(CleanDependsOn);DSLToolsCleanProjectItemTemplates</CleanDependsOn>
+  </PropertyGroup>
+  <Target Name="DSLToolsGetProjectItemTemplateInfo" Condition="'@(VSItemTemplate)'!='' And '$(BuildingProject)'=='true'">
+    <GetProjectItemTemplateInfo TemplateFiles="@(VSItemTemplate)">
+      <Output TaskParameter="OutputFiles" ItemName="ItemTemplateOutputFiles" />
+      <Output TaskParameter="TemplateContentFiles" ItemName="ItemTemplateContentFiles" />
+      <Output TaskParameter="ItemTemplateRootDirectory" PropertyName="ItemTemplateRootDirectory" />
+    </GetProjectItemTemplateInfo>
+  </Target>
+  <Target Name="DSLToolsCreateProjectItemTemplates" Condition="'$(BuildingProject)'=='true'" Inputs="@(VSItemTemplate);@(ItemTemplateContentFiles)" Outputs="@(ItemTemplateOutputFiles->'$(OutDir)%(Identity)')" DependsOnTargets="DSLToolsGetProjectItemTemplateInfo">
+    <CreateProjectItemTemplate TemplateFiles="@(VSItemTemplate)" TemplateContentFiles="@(ItemTemplateContentFiles)" OutputFiles="@(ItemTemplateOutputFiles->'$(OutDir)%(Identity)')" />
+    <ItemGroup>
+      <VSIXSourceItem Include="@(ItemTemplateOutputFiles->'$(OutDir)%(Identity)')">
+        <VSIXSubPath>ItemTemplates\%(RelativeDir)</VSIXSubPath>
+      </VSIXSourceItem>
+    </ItemGroup>
+  </Target>
+  <!--
+	  Target for copying project item template to the appropriate VS installation directories.
+	  This target runs only if the RegisterOutputPackage property is set.
+	-->
+  <Target Name="DSLToolsDeployProjectItemTemplates" Condition="'$(BuildingProject)'=='true' And '$(RegisterOutputPackage)'=='true' And '$(ItemTemplateRootDirectory)'!=''" DependsOnTargets="DSLToolsCreateProjectItemTemplates" Inputs="@(VSItemTemplate);@(ItemTemplateContentFiles)" Outputs="@(ItemTemplateOutputFiles->'$(ItemTemplateRootDirectory)\%(Identity)')">
+    <Copy SourceFiles="@(ItemTemplateOutputFiles->'$(OutDir)%(Identity)')" DestinationFiles="@(ItemTemplateOutputFiles->'$(ItemTemplateRootDirectory)\%(Identity)')" />
+    <!-- implement our own clean mechanism for files in VS ItemTemplates directory.  Standard clean only cleans intermediate and/or output files. -->
+    <!-- Make sure the directory exists. -->
+    <MakeDir Directories="$(BaseIntermediateOutputPath)"/>
+    <!-- Write list of deployed item template files to disk. -->
+    <WriteLinesToFile File="$(BaseIntermediateOutputPath)$(ItemTemplateCleanFile)" Lines="@(ItemTemplateOutputFiles->'$(ItemTemplateRootDirectory)\%(Identity)')" Overwrite="true" />
+  </Target>
+  <!--
+	  Targets for cleaning project item template files.
+	  DSLToolsCleanProjectItemTemplates, which removes files from the VS installation,
+	  runs only if the RegisterOutputPackage property is set.
+	-->
+  <Target Name="DSLToolsRecordProjectItemTemplateFileWrites">
+    <!-- Use standard Microsoft.Common.Targets clean mechanism for files in output directory. -->
+    <CreateItem Include="@(ItemTemplateOutputFiles->'$(OutDir)%(Identity)')">
+      <Output ItemName="FileWrites" TaskParameter="Include"/>
+    </CreateItem>
+  </Target>
+  <Target Name="DSLToolsCleanProjectItemTemplates" Condition="'$(RegisterOutputPackage)'=='true'">
+    <!-- Read in list of item template files that were written to disk in past builds. -->
+    <ReadLinesFromFile File="$(BaseIntermediateOutputPath)$(ItemTemplateCleanFile)">
+      <Output TaskParameter="Lines" ItemName="_CleanPriorItemTemplateWrites"/>
+    </ReadLinesFromFile>
+    <!-- Delete those files. -->
+    <Delete Files="@(_CleanPriorItemTemplateWrites);$(BaseIntermediateOutputPath)$(ItemTemplateCleanFile)" TreatErrorsAsWarnings="false">
+    </Delete>
+  </Target>
+  <!--
+<Target Name="IncludeReferencedDlls" BeforeTargets="GetVsixSourceItems" AfterTargets="ResolveAssemblyReferences">
+    <ItemGroup>
+      <VSIXSourceItem Include="$(TargetDir)\*.*" />
+    </ItemGroup>
+  </Target>
+-->
+</Project>

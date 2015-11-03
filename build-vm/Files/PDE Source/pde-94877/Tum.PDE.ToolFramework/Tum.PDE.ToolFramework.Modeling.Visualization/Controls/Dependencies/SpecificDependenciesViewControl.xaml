@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="Tum.PDE.ToolFramework.Modeling.Visualization.Controls.Dependencies.SpecificDependenciesViewControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" TextOptions.TextFormattingMode="Display" 
+             xmlns:fl="clr-namespace:SStuff.FlowControls;assembly=SStuff.FlowControls"
+             xmlns:view="clr-namespace:Tum.PDE.ToolFramework.Modeling.Visualization.Controls.Dependencies"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" x:Key="BorderColor">
+                <GradientStop Color="#FFBBD7F6" Offset="0"/>
+                <GradientStop Color="#FFE5E8EC" Offset="1"/>
+            </LinearGradientBrush>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="150"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <fl:FlowItemsControl2D Grid.Row="0" ItemsSource="{Binding Path=SpecificItemVMs, Mode=OneWay}"
+                                            SelectedItem="{Binding Path=SelectedSpecificItemVM, Mode=TwoWay}" 
+                                            Background="{Binding ItemPanelBackground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type view:SpecificDependenciesViewControl}}}"/>
+
+        <StackPanel Grid.Row="1" Orientation="Vertical" OpacityMask="#FFA33939">
+            <Border Height="3" Background="{StaticResource BorderColor}"/>
+            <StackPanel Grid.Row="1" Orientation="Horizontal">
+                <TextBlock Margin="5" Text="Selected element: " />
+                <TextBlock Margin="5" Text="{Binding Path=SelectedSpecificItemVM.DomainElementFullName, Mode=OneWay}"/>
+            </StackPanel>
+            <Border Height="3" Background="{StaticResource BorderColor}"/>
+        </StackPanel>
+
+        <view:GraphDependenciesViewControl Grid.Row="2" DataContext="{Binding}"/>
+    </Grid>
+</UserControl>

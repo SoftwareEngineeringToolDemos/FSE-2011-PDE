@@ -1,0 +1,221 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{99C76F6A-A052-478D-97B4-F31A7540BC4D}</ProjectGuid>
+    <OutputType>library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions</RootNamespace>
+    <AssemblyName>Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Fluent">
+      <HintPath>..\..\Libraries\Fluent Ribbon Control Suite 1.3\Fluent.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="HtmlAgilityPack">
+      <HintPath>..\..\Libraries\HtmlAgilityPack\HtmlAgilityPack.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Modeling.Sdk.10.0, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\Blend\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Html\Converter\ConversionMessage.cs" />
+    <Compile Include="Html\Converter\ExtendedHtmlUtility.cs" />
+    <Compile Include="Html\Converter\HtmlToXamlConverter.cs" />
+    <Compile Include="Html\Converter\XamlToHtmlConverter.cs" />
+    <Compile Include="Html\Html.cs" />
+    <Compile Include="Html\HtmlFlowDocument.cs" />
+    <Compile Include="Html\HtmlHyperlink.cs" />
+    <Compile Include="Html\HtmlImage.cs" />
+    <Compile Include="KeyGenerator.cs" />
+    <Compile Include="Path\PathHelper.cs" />
+    <Compile Include="Path\ReferencedModelRoleViewModel.cs" />
+    <Compile Include="SerializationHelper.cs" />
+    <Compile Include="Services.cs" />
+    <Compile Include="Html\ViewModel\HtmlEditorViewModel.cs" />
+    <Compile Include="Html\ViewModel\HtmlInsertImageViewModel.cs" />
+    <Compile Include="Html\ViewModel\HtmlInsertTableViewModel.cs" />
+    <Compile Include="Html\ViewModel\HtmlSelectHyperlinkViewModel.cs" />
+    <Compile Include="Html\ViewModel\HtmlSelectWebHyperlinkViewModel.cs" />
+    <Compile Include="Html\ViewModel\IHtmlEditorViewModel.cs" />
+    <Compile Include="Html\ViewModel\PropertyGridEditorViewModel.cs" />
+    <Compile Include="Html\View\HtmlRichTextEditor.cs" />
+    <Compile Include="Html\View\HtmlSourceTextEditor.cs" />
+    <Compile Include="Html\View\IHtmlRichTextEditor.cs" />
+    <Compile Include="Html\View\InsertImagePopup.xaml.cs">
+      <DependentUpon>InsertImagePopup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Html\View\InsertTablePopup.xaml.cs">
+      <DependentUpon>InsertTablePopup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Html\View\SelectHyperlinkPopup.xaml.cs">
+      <DependentUpon>SelectHyperlinkPopup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+    <None Include="Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Tum.PDE.ToolFramework.Images\Tum.PDE.ToolFramework.Images.csproj">
+      <Project>{9163E59C-331C-4188-BC0B-99F86C49F661}</Project>
+      <Name>Tum.PDE.ToolFramework.Images</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Tum.PDE.ToolFramework.Modeling.Visualization\Tum.PDE.ToolFramework.Modeling.Visualization.csproj">
+      <Project>{E88CB333-AA56-476B-BEC5-2351457544EB}</Project>
+      <Name>Tum.PDE.ToolFramework.Modeling.Visualization</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Tum.PDE.ToolFramework.Modeling\Tum.PDE.ToolFramework.Modeling.csproj">
+      <Project>{AAC9B8A3-1E6C-4439-831C-CF8880075B08}</Project>
+      <Name>Tum.PDE.ToolFramework.Modeling</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Page Include="Html\View\InsertImagePopup.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Html\View\InsertTablePopup.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Html\View\SelectHyperlinkPopup.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\HtmlStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\ReferencedModelRoleVMStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Copy.png" />
+    <Resource Include="Resources\Images\Cut.png" />
+    <Resource Include="Resources\Images\Edit.png" />
+    <Resource Include="Resources\Images\Paste.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\HtmlEditor\format-indent-less-16.png" />
+    <Resource Include="Resources\Images\HtmlEditor\format-indent-less-32.png" />
+    <Resource Include="Resources\Images\HtmlEditor\format-indent-more-16.png" />
+    <Resource Include="Resources\Images\HtmlEditor\format-indent-more-32.png" />
+    <Resource Include="Resources\Images\HtmlEditor\format-justify-center-16.png" />
+    <Resource Include="Resources\Images\HtmlEditor\format-justify-center-32.png" />
+    <Resource Include="Resources\Images\HtmlEditor\format-justify-fill-16.png" />
+    <Resource Include="Resources\Images\HtmlEditor\format-justify-fill-32.png" />
+    <Resource Include="Resources\Images\HtmlEditor\format-justify-left-16.png" />
+    <Resource Include="Resources\Images\HtmlEditor\format-justify-left-32.png" />
+    <Resource Include="Resources\Images\HtmlEditor\format-justify-right-16.png" />
+    <Resource Include="Resources\Images\HtmlEditor\format-justify-right-32.png" />
+    <Resource Include="Resources\Images\HtmlEditor\format-text-bold-16.png" />
+    <Resource Include="Resources\Images\HtmlEditor\format-text-bold-32.png" />
+    <Resource Include="Resources\Images\HtmlEditor\format-text-italic-16.png" />
+    <Resource Include="Resources\Images\HtmlEditor\format-text-italic-32.png" />
+    <Resource Include="Resources\Images\HtmlEditor\format-text-underline-16.png" />
+    <Resource Include="Resources\Images\HtmlEditor\format-text-underline-32.png" />
+    <Resource Include="Resources\Images\HtmlEditor\Hyperlink.ico" />
+    <Resource Include="Resources\Images\HtmlEditor\image-16x16.png" />
+    <Resource Include="Resources\Images\HtmlEditor\insert-image-16.png" />
+    <Resource Include="Resources\Images\HtmlEditor\insert-image-32.png" />
+    <Resource Include="Resources\Images\HtmlEditor\insert-image.ico" />
+    <Resource Include="Resources\Images\HtmlEditor\list-16.png" />
+    <Resource Include="Resources\Images\HtmlEditor\list-32.png" />
+    <Resource Include="Resources\Images\HtmlEditor\List_BulletsHS.png" />
+    <Resource Include="Resources\Images\HtmlEditor\List_NumberedHS.png" />
+    <Resource Include="Resources\Images\HtmlEditor\table-16.png" />
+    <Resource Include="Resources\Images\HtmlEditor\table-32.png" />
+    <Resource Include="Resources\Images\HtmlEditor\table.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

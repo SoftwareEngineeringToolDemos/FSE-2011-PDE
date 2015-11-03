@@ -1,0 +1,119 @@
+﻿<UserControl x:Class="Tum.PDE.ToolFramework.Modeling.Visualization.Controls.SearchResultControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" TextOptions.TextFormattingMode="Display" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             xmlns:attached="clr-namespace:Tum.PDE.ToolFramework.Modeling.Visualization.Controls.Attached"
+             
+             xmlns:beh="clr-namespace:Tum.PDE.ToolFramework.Modeling.Visualization.Behaviors"
+             xmlns:inter="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:res="clr-namespace:Tum.PDE.ToolFramework.Modeling.Visualization.Localization"
+             xmlns:resFile="clr-namespace:Tum.PDE.ToolFramework.Modeling.Visualization.Localization.LocalResources">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="22"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="22"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Margin="3,3,0,0" Text="{Binding Path=SearchOptionsSummary, Mode=OneWay}" Grid.Row="0"/>
+
+        <ListView Margin="5,1,3,1" Grid.Row="1" ItemsSource="{Binding Path=SearchResults, Mode=OneWay}" 
+                  SelectedItem="{Binding Path=SelectedSearchResultItem, Mode=TwoWay}"
+                  attached:ListViewSortHelper.EnableSorting="True" IsSynchronizedWithCurrentItem="True"
+                  x:Name="ResultLstView">
+
+            <inter:Interaction.Behaviors>
+                <beh:ListViewColumnWidthBehavior/>
+            </inter:Interaction.Behaviors>
+                
+            <ListView.Resources>
+                <Style TargetType="{x:Type TextBlock}">
+                    <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=Text}"></Setter>
+                </Style>
+            </ListView.Resources>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="{x:Type ListViewItem}">
+                    <Setter Property="attached:CommandBehavior.Event" Value="MouseDoubleClick" />
+                    <Setter Property="attached:CommandBehavior.Command" Value="{Binding ElementName=ResultLstView, Path=DataContext.NavigateCommand}" />
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="150" DisplayMemberBinding="{Binding Path=DomainElementFullName, Mode=OneWay}"  
+                                    attached:ListViewSortHelper.SortingCommand="{Binding Path=SortByNameCommand}">
+                        <GridViewColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock x:Name="txtElementName" Text="{res:Res Static=resFile:SearchResultControl.txtElementName_Text, Default=_ElementName!}" Margin="2"/>
+                                    <Image x:Name="SortingImage" Width="8" Height="8" VerticalAlignment="Center" Margin="2" Source="/Tum.PDE.ToolFramework.Images;component/Views/Down-16.png" Visibility="Collapsed"/>
+                                </StackPanel>
+                                <DataTemplate.Triggers>
+                                    <DataTrigger Binding="{Binding Path=DataContext.SortOrder, ElementName=ResultLstView}" Value="Name">
+                                        <Setter TargetName="SortingImage" Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <Condition Binding="{Binding Path=DataContext.SortOrder, ElementName=ResultLstView}" Value="Name"/>
+                                            <Condition Binding="{Binding Path=DataContext.IsSortedAscending, ElementName=ResultLstView}" Value="False"/>
+                                        </MultiDataTrigger.Conditions>
+                                        <Setter TargetName="SortingImage" Property="Source" Value="/Tum.PDE.ToolFramework.Images;component/Views/Up-16.png"/>
+                                    </MultiDataTrigger>
+                                </DataTemplate.Triggers>
+                            </DataTemplate>
+                        </GridViewColumn.HeaderTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="250" DisplayMemberBinding="{Binding Path=Reason, Mode=OneWay}"  attached:ListViewSortHelper.SortingCommand="{Binding Path=SortByReasonCommand}">
+                        <GridViewColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock x:Name="txtSearchResultControlReason" Text="{res:Res Static=resFile:SearchResultControl.txtReason_Text, Default=_Reason!}" Margin="2"/>
+                                    <Image x:Name="SortingImage" Width="8" Height="8" VerticalAlignment="Center" Margin="2" Source="/Tum.PDE.ToolFramework.Images;component/Views/Down-16.png" Visibility="Collapsed"/>
+                                </StackPanel>
+                                <DataTemplate.Triggers>
+                                    <DataTrigger Binding="{Binding Path=DataContext.SortOrder, ElementName=ResultLstView}" Value="Reason">
+                                        <Setter TargetName="SortingImage" Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <Condition Binding="{Binding Path=DataContext.SortOrder, ElementName=ResultLstView}" Value="Reason"/>
+                                            <Condition Binding="{Binding Path=DataContext.IsSortedAscending, ElementName=ResultLstView}" Value="False"/>
+                                        </MultiDataTrigger.Conditions>
+                                        <Setter TargetName="SortingImage" Property="Source" Value="/Tum.PDE.ToolFramework.Images;component/Views/Up-16.png"/>
+                                    </MultiDataTrigger>
+                                </DataTemplate.Triggers>
+                            </DataTemplate>
+                        </GridViewColumn.HeaderTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=DomainElementParentFullPath, Mode=OneWay}"  attached:ListViewSortHelper.SortingCommand="{Binding Path=SortByNameCommand}">
+                        <GridViewColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock x:Name="txtPath" Text="{res:Res Static=resFile:SearchResultControl.txtPath_Text, Default=_Path!}" Margin="2"/>
+                                    <Image x:Name="SortingImage" Width="8" Height="8" VerticalAlignment="Center" Margin="2" Source="/Tum.PDE.ToolFramework.Images;component/Views/Down-16.png" Visibility="Collapsed"/>
+                                </StackPanel>
+                                <DataTemplate.Triggers>
+                                    <DataTrigger Binding="{Binding Path=DataContext.SortOrder, ElementName=ResultLstView}" Value="Path">
+                                        <Setter TargetName="SortingImage" Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <Condition Binding="{Binding Path=DataContext.SortOrder, ElementName=ResultLstView}" Value="Path"/>
+                                            <Condition Binding="{Binding Path=DataContext.IsSortedAscending, ElementName=ResultLstView}" Value="False"/>
+                                        </MultiDataTrigger.Conditions>
+                                        <Setter TargetName="SortingImage" Property="Source" Value="/Tum.PDE.ToolFramework.Images;component/Views/Up-16.png"/>
+                                    </MultiDataTrigger>
+                                </DataTemplate.Triggers>
+                            </DataTemplate>
+                        </GridViewColumn.HeaderTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <TextBlock Margin="3,3,0,0" Grid.Row="2" Text="{Binding Path=SearchResultSummary, Mode=OneWay}"/>
+        
+    </Grid>
+</UserControl>

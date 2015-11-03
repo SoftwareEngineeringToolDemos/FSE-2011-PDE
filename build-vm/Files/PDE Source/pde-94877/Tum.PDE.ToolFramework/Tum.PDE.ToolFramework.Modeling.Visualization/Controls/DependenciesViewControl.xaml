@@ -1,0 +1,202 @@
+﻿<UserControl x:Class="Tum.PDE.ToolFramework.Modeling.Visualization.Controls.DependenciesViewControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" TextOptions.TextFormattingMode="Display" 
+             d:DesignHeight="300" d:DesignWidth="300"
+
+             xmlns:conv="clr-namespace:Tum.PDE.ToolFramework.Modeling.Visualization.Converters"
+             xmlns:attached="clr-namespace:Tum.PDE.ToolFramework.Modeling.Visualization.Controls.Attached"
+             
+             xmlns:beh="clr-namespace:Tum.PDE.ToolFramework.Modeling.Visualization.Behaviors"
+             xmlns:inter="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <conv:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="28" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Display categories toggle buttons-->
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="4,4,0,0" MinHeight="20">
+            <!-- Embedded category -->
+            <ToggleButton Focusable="False" Command="{Binding Path=ToggleEmbeddedCategoryCommand}" Margin="0,0,0,0" 
+                          IsChecked="False" Background="Transparent" BorderThickness="0" BorderBrush="Transparent" Padding="0">
+                <StackPanel Orientation="Horizontal" Margin="4,0,4,0">
+                    <Image Width="16" Height="16" Source="/Tum.PDE.ToolFramework.Images;component/Views/Emb-16.png" />
+                    <TextBlock Margin="3,0,0,0" Text="{Binding Path=EmbeddedCount}"></TextBlock>
+                    <TextBlock Margin="0,0,0,0" Text=" Embedded"></TextBlock>
+                </StackPanel>
+            </ToggleButton>
+
+            <!-- Embedding category -->
+            <ToggleButton Focusable="False" Command="{Binding Path=ToggleEmbeddingCategoryCommand}" Margin="4,0,0,0" 
+                          IsChecked="False"  Background="Transparent" BorderThickness="0" BorderBrush="Transparent" Padding="0">
+                <StackPanel Orientation="Horizontal" Margin="4,0,4,0">
+                    <Image Width="16" Height="16" Source="/Tum.PDE.ToolFramework.Images;component/Views/EmbRotated-16.png" />
+                    <TextBlock Margin="3,0,0,0" Text="{Binding Path=EmbeddingCount}"></TextBlock>
+                    <TextBlock Margin="0,0,0,0" Text=" Embedding"></TextBlock>
+                </StackPanel>
+            </ToggleButton>
+
+            <!-- Referenced category -->
+            <ToggleButton Focusable="False" Command="{Binding Path=ToggleReferencedCategoryCommand}" Margin="4,0,0,0" 
+                          IsChecked="True"  Background="Transparent" BorderThickness="0" BorderBrush="Transparent" Padding="0">
+                <StackPanel Orientation="Horizontal" Margin="4,0,4,0">
+                    <Image Width="16" Height="16" Source="/Tum.PDE.ToolFramework.Images;component/Views/RefLeft-16.png" />
+                    <TextBlock Margin="3,0,0,0" Text="{Binding Path=ReferencedCount}"></TextBlock>
+                    <TextBlock Margin="0,0,0,0" Text=" Referenced"></TextBlock>
+                </StackPanel>
+            </ToggleButton>
+
+            <!-- Referencing category -->
+            <ToggleButton Focusable="False" Command="{Binding Path=ToggleReferencingCategoryCommand}" Margin="4,0,0,0" 
+                          IsChecked="True" Background="Transparent" BorderThickness="0" BorderBrush="Transparent" Padding="0">
+                <StackPanel Orientation="Horizontal" Margin="4,0,4,0">
+                    <Image Width="16" Height="16" Source="/Tum.PDE.ToolFramework.Images;component/Views/RefRight-16.png" />
+                    <TextBlock Margin="3,0,0,0" Text="{Binding Path=ReferencingCount}"></TextBlock>
+                    <TextBlock Margin="0,0,0,0" Text=" Referencing"></TextBlock>
+                </StackPanel>
+            </ToggleButton>
+        </StackPanel>
+
+        <!-- Dependencies list -->
+        <ListView Grid.Row="1" Margin="4" Padding="2" ScrollViewer.HorizontalScrollBarVisibility="Disabled" x:Name="DpndsLstView"
+                                  ItemsSource="{Binding Path=DisplayedDependencies, Mode=OneWay}" 
+                                  attached:ListViewSortHelper.EnableSorting="True" IsSynchronizedWithCurrentItem="True"
+                                  SelectedItem="{Binding Path=SelectedItem, Mode=TwoWay}">
+
+            <inter:Interaction.Behaviors>
+                <beh:ListViewContextMenuBehavior/>
+                <beh:ListViewColumnWidthBehavior/>                
+            </inter:Interaction.Behaviors>
+ 
+            <ListView.Resources>
+                <Style TargetType="{x:Type TextBlock}">
+                    <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=Text}"></Setter>
+                </Style>
+            </ListView.Resources>
+            <ListView.ContextMenu>
+                <ContextMenu ItemsSource="{Binding Path=MenuOptions}" ItemContainerStyleSelector="{StaticResource ContextMenuItemStyleSelector}" />
+            </ListView.ContextMenu>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="28" Header="" attached:ListViewSortHelper.SortingCommand="{Binding Path=SortByCategoryCommand}">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Image Source="/Tum.PDE.ToolFramework.Images;component/Views/Emb-16.png" x:Name="CategoryIcon" HorizontalAlignment="Left" VerticalAlignment="Center" Width="16" Height="16" />
+                                </Grid>
+                                <DataTemplate.Triggers>
+                                    <DataTrigger Value="Embedding" Binding="{Binding Category}">
+                                        <Setter Property="Source" TargetName="CategoryIcon" Value="/Tum.PDE.ToolFramework.Images;component/Views/EmbRotated-16.png" />
+                                    </DataTrigger>
+                                    <DataTrigger Value="Referenced" Binding="{Binding Category}">
+                                        <Setter Property="Source" TargetName="CategoryIcon" Value="/Tum.PDE.ToolFramework.Images;component/Views/RefLeft-16.png" />
+                                    </DataTrigger>
+                                    <DataTrigger Value="Referencing" Binding="{Binding Category}">
+                                        <Setter Property="Source" TargetName="CategoryIcon" Value="/Tum.PDE.ToolFramework.Images;component/Views/RefRight-16.png" />
+                                    </DataTrigger>
+                                </DataTemplate.Triggers>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="" Width="20" DisplayMemberBinding="{Binding Path=Number}" attached:ListViewSortHelper.SortingCommand="{Binding Path=SortByNumberCommand}"/>
+                    <GridViewColumn Width="100" DisplayMemberBinding="{Binding Path=Category}" attached:ListViewSortHelper.SortingCommand="{Binding Path=SortByCategoryCommand}">
+                        <GridViewColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Category" Margin="2"/>
+                                    <Image x:Name="SortingImage" Width="8" Height="8" VerticalAlignment="Center" Margin="2" Source="/Tum.PDE.ToolFramework.Images;component/Views/Down-16.png" Visibility="Collapsed"/>
+                                </StackPanel>
+                                <DataTemplate.Triggers>
+                                    <DataTrigger Binding="{Binding Path=DataContext.SortOrder, ElementName=DpndsLstView}" Value="DependencyCategory">
+                                        <Setter TargetName="SortingImage" Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <Condition Binding="{Binding Path=DataContext.SortOrder, ElementName=DpndsLstView}" Value="DependencyCategory"/>
+                                            <Condition Binding="{Binding Path=DataContext.IsSortedAscending, ElementName=DpndsLstView}" Value="False"/>
+                                        </MultiDataTrigger.Conditions>
+                                        <Setter TargetName="SortingImage" Property="Source" Value="/Tum.PDE.ToolFramework.Images;component/Views/Up-16.png"/>
+                                    </MultiDataTrigger>
+                                </DataTemplate.Triggers>
+                            </DataTemplate>
+                        </GridViewColumn.HeaderTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=SourceModelElementName}" attached:ListViewSortHelper.SortingCommand="{Binding Path=SortBySourceModelElementCommand}">
+                        <GridViewColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Source Element" Margin="2"/>
+                                    <Image x:Name="SortingImage" Width="8" Height="8" VerticalAlignment="Center" Margin="2" Source="/Tum.PDE.ToolFramework.Images;component/Views/Down-16.png" Visibility="Collapsed"/>
+                                </StackPanel>
+                                <DataTemplate.Triggers>
+                                    <DataTrigger Binding="{Binding Path=DataContext.SortOrder, ElementName=DpndsLstView}" Value="SourceModelElement">
+                                        <Setter TargetName="SortingImage" Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <Condition Binding="{Binding Path=DataContext.SortOrder, ElementName=DpndsLstView}" Value="SourceModelElement"/>
+                                            <Condition Binding="{Binding Path=DataContext.IsSortedAscending, ElementName=DpndsLstView}" Value="False"/>
+                                        </MultiDataTrigger.Conditions>
+                                        <Setter TargetName="SortingImage" Property="Source" Value="/Tum.PDE.ToolFramework.Images;component/Views/Up-16.png"/>
+                                    </MultiDataTrigger>
+                                </DataTemplate.Triggers>
+                            </DataTemplate>
+                        </GridViewColumn.HeaderTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=TargetModelElementName}" attached:ListViewSortHelper.SortingCommand="{Binding Path=SortByTargetModelElementCommand}">
+                        <GridViewColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Target Element" Margin="2"/>
+                                    <Image x:Name="SortingImage" Width="8" Height="8" VerticalAlignment="Center" Margin="2" Source="/Tum.PDE.ToolFramework.Images;component/Views/Down-16.png" Visibility="Collapsed"/>
+                                </StackPanel>
+                                <DataTemplate.Triggers>
+                                    <DataTrigger Binding="{Binding Path=DataContext.SortOrder, ElementName=DpndsLstView}" Value="TargetModelElement">
+                                        <Setter TargetName="SortingImage" Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <Condition Binding="{Binding Path=DataContext.SortOrder, ElementName=DpndsLstView}" Value="TargetModelElement"/>
+                                            <Condition Binding="{Binding Path=DataContext.IsSortedAscending, ElementName=DpndsLstView}" Value="False"/>
+                                        </MultiDataTrigger.Conditions>
+                                        <Setter TargetName="SortingImage" Property="Source" Value="/Tum.PDE.ToolFramework.Images;component/Views/Up-16.png"/>
+                                    </MultiDataTrigger>
+                                </DataTemplate.Triggers>
+                            </DataTemplate>
+                        </GridViewColumn.HeaderTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=LinkElementName}" attached:ListViewSortHelper.SortingCommand="{Binding Path=SortByLinkElementCommand}">
+                        <GridViewColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Relationship type" Margin="2"/>
+                                    <Image x:Name="SortingImage" Width="8" Height="8" VerticalAlignment="Center" Margin="2" Source="/Tum.PDE.ToolFramework.Images;component/Views/Down-16.png" Visibility="Collapsed"/>
+                                </StackPanel>
+                                <DataTemplate.Triggers>
+                                    <DataTrigger Binding="{Binding Path=DataContext.SortOrder, ElementName=DpndsLstView}" Value="LinkElement">
+                                        <Setter TargetName="SortingImage" Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <Condition Binding="{Binding Path=DataContext.SortOrder, ElementName=DpndsLstView}" Value="LinkElement"/>
+                                            <Condition Binding="{Binding Path=DataContext.IsSortedAscending, ElementName=DpndsLstView}" Value="False"/>
+                                        </MultiDataTrigger.Conditions>
+                                        <Setter TargetName="SortingImage" Property="Source" Value="/Tum.PDE.ToolFramework.Images;component/Views/Up-16.png"/>
+                                    </MultiDataTrigger>
+                                </DataTemplate.Triggers>
+                            </DataTemplate>
+                        </GridViewColumn.HeaderTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</UserControl>

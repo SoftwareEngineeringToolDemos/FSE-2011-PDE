@@ -1,0 +1,70 @@
+<#@ template language="C#" inherits="BaseTemplate"#> 
+<#@ import namespace="Tum.PDE.LanguageDSL"#>
+<#@ import namespace="Microsoft.VisualStudio.Modeling" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Collections.ObjectModel" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+using DslModeling = global::Microsoft.VisualStudio.Modeling;
+using DslEditorModeling = global::Tum.PDE.ToolFramework.Modeling;
+
+<#
+GenerateSearchProcessor(this.MetaModel);
+#>
+<#+ 
+private void GenerateSearchProcessor(MetaModel dm)
+{
+#>
+namespace <#= dm.Namespace #>
+{
+	/// <summary>
+	/// Class which provides search functionality.
+	/// </summary>
+	public partial class <#= dm.Name #>SearchProcessor : <#= dm.Name #>SearchProcessorBase
+	{
+		#region Singleton Instance
+		private static <#= dm.Name #>SearchProcessor elementSearchProcessor = null;
+		
+        /// <summary>
+        /// Singleton instance.
+        /// </summary>
+        [global::System.Diagnostics.DebuggerBrowsable(global::System.Diagnostics.DebuggerBrowsableState.Never)] // Will trigger creation otherwise.
+        public static <#= dm.Name #>SearchProcessor Instance
+        {
+            [global::System.Diagnostics.DebuggerStepThrough]
+            get
+            {
+                if( elementSearchProcessor == null )
+				{
+					elementSearchProcessor = new <#= dm.Name #>SearchProcessor();
+				}
+				
+				return elementSearchProcessor;
+            }
+        }
+		
+		private <#= dm.Name #>SearchProcessor() : base()
+		{
+		}
+        #endregion
+	}
+	
+	/// <summary>
+	/// Class which provides search functionality.
+	/// </summary>
+	public abstract class <#= dm.Name #>SearchProcessorBase : DslEditorModeling::ModelElementSearchProcessor
+	{
+		#region Constructor
+		/// <summary>
+        /// Constructor.
+        /// </summary>
+		protected <#= dm.Name #>SearchProcessorBase()
+		{
+		}
+        #endregion
+	}	
+}
+<#+
+}
+#>

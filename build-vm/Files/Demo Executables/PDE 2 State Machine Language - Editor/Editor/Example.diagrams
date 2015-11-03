@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<diagramsModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="1cc8ce06-bfec-4936-9428-776914d7a6bc" xmlns="http://schemas.microsoft.com/dsltools/DiagramsDSL">
+  <diagrams>
+    <StateMachineLanguagedesignerDiagram Id="93fc0c71-36e8-476e-a2df-a98ab4d65666" internalElementId="00000000-0000-0000-0000-000000000000" name="DesignerDiagram">
+      <children>
+        <StateMachineLanguagestateShape Id="e756a483-b436-44b2-902f-33272d43966f" internalElementId="c5fe444d-8d9e-41d6-ae4d-4e3d9d795bf9" location="167, 128" size="64, 84" absoluteLocation="167, 128" placementSide="Left" />
+        <StateMachineLanguagestartStateShape Id="dfb571fb-81ba-4acf-9604-aa12e8ebacf8" internalElementId="24b0dee0-1b97-4c70-9ef1-8b324aa132f1" location="374, 67" size="64, 64" absoluteLocation="374, 67" placementSide="Left" />
+        <StateMachineLanguageendStateShape Id="8984e6be-8db4-4e06-a2eb-5b11a545069a" internalElementId="63a59fd0-7e65-419c-8f0c-bed8c9e37dd4" location="976, 105" size="64, 64" absoluteLocation="976, 105" placementSide="Left" />
+        <StateMachineLanguagestateShape Id="1ee88f90-4e40-464a-9244-772979b7cb7f" internalElementId="9d03059a-4168-4ffa-ae74-b8909509062f" location="90, 293" size="64, 84" absoluteLocation="90, 293" placementSide="Left" />
+        <StateMachineLanguagestateShape Id="8a7b9b0d-3629-428c-b1dc-a55cb9d631cd" internalElementId="db7dfa29-599b-49b7-ac80-38000411ef62" location="266, 411" size="64, 84" absoluteLocation="266, 411" placementSide="Left" />
+        <StateMachineLanguagestateShape Id="348a79fc-718f-41bf-89a8-cbe765e65e30" internalElementId="38766668-8ff2-4cf2-83c0-6b499a5cf046" location="627, 401" size="64, 84" absoluteLocation="627, 401" placementSide="Left" />
+      </children>
+      <linkShapes>
+        <StateMachineLanguagetransitionShape Id="f756d647-64a1-4b85-92a5-f89f1cf32899" internalElementId="d5d29473-1e68-4cab-93d8-d9a8473dcfd9" sourceShapeId="e756a483-b436-44b2-902f-33272d43966f" targetShapeId="1ee88f90-4e40-464a-9244-772979b7cb7f">
+          <edgePoints>[(160 : 170 : Normal); (150 : 170 : Normal); (125 : 170 : Normal); (125 : 276 : Normal); (125 : 286 : Normal)]</edgePoints>
+          <sourceAnchor>
+            <linkShapeHasSourceAnchor>
+              <sourceAnchor Id="a08c596f-e982-4d8e-bbd1-7ea1e6176178" absoluteLocation="160, 170">
+                <fromShape>
+                  <sourceAnchorReferencesFromShape>
+                    <StateMachineLanguagestateShapeMoniker Id="e756a483-b436-44b2-902f-33272d43966f" />
+                  </sourceAnchorReferencesFromShape>
+                </fromShape>
+              </sourceAnchor>
+            </linkShapeHasSourceAnchor>
+          </sourceAnchor>
+          <targetAnchor>
+            <linkShapeHasTargetAnchor>
+              <targetAnchor Id="10266259-2eb4-4ac1-beda-2ac0e029d333" absoluteLocation="125, 286">
+                <toShape>
+                  <targetAnchorReferencesToShape>
+                    <StateMachineLanguagestateShapeMoniker Id="1ee88f90-4e40-464a-9244-772979b7cb7f" />
+                  </targetAnchorReferencesToShape>
+                </toShape>
+              </targetAnchor>
+            </linkShapeHasTargetAnchor>
+          </targetAnchor>
+        </StateMachineLanguagetransitionShape>
+        <StateMachineLanguagetransitionShape Id="ca457fb4-2459-4698-95be-8d1e149117ab" internalElementId="69f93434-e770-405d-b1a6-e6e978deebed" sourceShapeId="1ee88f90-4e40-464a-9244-772979b7cb7f" targetShapeId="8a7b9b0d-3629-428c-b1dc-a55cb9d631cd">
+          <edgePoints>[(134 : 384 : Normal); (134 : 394 : Normal); (134 : 453 : Normal); (249 : 453 : Normal); (259 : 453 : Normal)]</edgePoints>
+          <sourceAnchor>
+            <linkShapeHasSourceAnchor>
+              <sourceAnchor Id="86f8e541-ffc9-4c57-9485-e569d3b1b3aa" absoluteLocation="134, 384">
+                <fromShape>
+                  <sourceAnchorReferencesFromShape>
+                    <StateMachineLanguagestateShapeMoniker Id="1ee88f90-4e40-464a-9244-772979b7cb7f" />
+                  </sourceAnchorReferencesFromShape>
+                </fromShape>
+              </sourceAnchor>
+            </linkShapeHasSourceAnchor>
+          </sourceAnchor>
+          <targetAnchor>
+            <linkShapeHasTargetAnchor>
+              <targetAnchor Id="2249426b-a389-4ccc-a5ce-57035d103334" absoluteLocation="259, 453">
+                <toShape>
+                  <targetAnchorReferencesToShape>
+                    <StateMachineLanguagestateShapeMoniker Id="8a7b9b0d-3629-428c-b1dc-a55cb9d631cd" />
+                  </targetAnchorReferencesToShape>
+                </toShape>
+              </targetAnchor>
+            </linkShapeHasTargetAnchor>
+          </targetAnchor>
+        </StateMachineLanguagetransitionShape>
+        <StateMachineLanguagetransitionShape Id="c3bbeb0a-b128-44b5-9d47-c4f3f4bceb31" internalElementId="59018a5f-369f-4a10-895c-7946804a5880" sourceShapeId="8a7b9b0d-3629-428c-b1dc-a55cb9d631cd" targetShapeId="348a79fc-718f-41bf-89a8-cbe765e65e30">
+          <edgePoints>[(337 : 453 : Normal); (347 : 453 : Normal); (478.5 : 453 : Normal); (478.5 : 443 : Normal); (610 : 443 : Normal); (620 : 443 : Normal)]</edgePoints>
+          <sourceAnchor>
+            <linkShapeHasSourceAnchor>
+              <sourceAnchor Id="bfd7b59b-eb18-4149-9c17-e312ed415470" absoluteLocation="337, 453">
+                <fromShape>
+                  <sourceAnchorReferencesFromShape>
+                    <StateMachineLanguagestateShapeMoniker Id="8a7b9b0d-3629-428c-b1dc-a55cb9d631cd" />
+                  </sourceAnchorReferencesFromShape>
+                </fromShape>
+              </sourceAnchor>
+            </linkShapeHasSourceAnchor>
+          </sourceAnchor>
+          <targetAnchor>
+            <linkShapeHasTargetAnchor>
+              <targetAnchor Id="dd7ab775-ed1f-4e02-b944-7d6eead6e064" absoluteLocation="620, 443">
+                <toShape>
+                  <targetAnchorReferencesToShape>
+                    <StateMachineLanguagestateShapeMoniker Id="348a79fc-718f-41bf-89a8-cbe765e65e30" />
+                  </targetAnchorReferencesToShape>
+                </toShape>
+              </targetAnchor>
+            </linkShapeHasTargetAnchor>
+          </targetAnchor>
+        </StateMachineLanguagetransitionShape>
+        <StateMachineLanguagetransitionShape Id="c22ef26a-9f82-4c60-89d0-2de7283563cc" internalElementId="d3335dae-741b-43b5-8fd7-33a2e559933c" sourceShapeId="348a79fc-718f-41bf-89a8-cbe765e65e30" targetShapeId="8984e6be-8db4-4e06-a2eb-5b11a545069a">
+          <edgePoints>[(698 : 443 : Normal); (708 : 443 : Normal); (1003 : 443 : Normal); (1003 : 186 : Normal); (1003 : 176 : Normal)]</edgePoints>
+          <sourceAnchor>
+            <linkShapeHasSourceAnchor>
+              <sourceAnchor Id="2100ede6-8879-4087-85be-ac9f259ae0ca" absoluteLocation="698, 443">
+                <fromShape>
+                  <sourceAnchorReferencesFromShape>
+                    <StateMachineLanguagestateShapeMoniker Id="348a79fc-718f-41bf-89a8-cbe765e65e30" />
+                  </sourceAnchorReferencesFromShape>
+                </fromShape>
+              </sourceAnchor>
+            </linkShapeHasSourceAnchor>
+          </sourceAnchor>
+          <targetAnchor>
+            <linkShapeHasTargetAnchor>
+              <targetAnchor Id="ecb182db-2218-4eda-b6f8-573c7f159cea" absoluteLocation="1003, 176">
+                <toShape>
+                  <targetAnchorReferencesToShape>
+                    <StateMachineLanguageendStateShapeMoniker Id="8984e6be-8db4-4e06-a2eb-5b11a545069a" />
+                  </targetAnchorReferencesToShape>
+                </toShape>
+              </targetAnchor>
+            </linkShapeHasTargetAnchor>
+          </targetAnchor>
+        </StateMachineLanguagetransitionShape>
+        <StateMachineLanguagetransitionShape Id="0cc4a8ea-ffb8-4a56-a156-de3873c6af2c" internalElementId="633f63b1-6339-4013-906b-93b9d3e2c7a0" sourceShapeId="dfb571fb-81ba-4acf-9604-aa12e8ebacf8" targetShapeId="8984e6be-8db4-4e06-a2eb-5b11a545069a">
+          <edgePoints>[(445 : 99 : Normal); (455 : 99 : Normal); (707 : 99 : Normal); (707 : 137 : Normal); (959 : 137 : Normal); (969 : 137 : Normal)]</edgePoints>
+          <sourceAnchor>
+            <linkShapeHasSourceAnchor>
+              <sourceAnchor Id="ec5271cb-88e6-49e7-ae16-9fc7e1653ebe" absoluteLocation="445, 99">
+                <fromShape>
+                  <sourceAnchorReferencesFromShape>
+                    <StateMachineLanguagestartStateShapeMoniker Id="dfb571fb-81ba-4acf-9604-aa12e8ebacf8" />
+                  </sourceAnchorReferencesFromShape>
+                </fromShape>
+              </sourceAnchor>
+            </linkShapeHasSourceAnchor>
+          </sourceAnchor>
+          <targetAnchor>
+            <linkShapeHasTargetAnchor>
+              <targetAnchor Id="7648cf85-17ff-436c-b6f4-268735bc5d01" absoluteLocation="969, 137">
+                <toShape>
+                  <targetAnchorReferencesToShape>
+                    <StateMachineLanguageendStateShapeMoniker Id="8984e6be-8db4-4e06-a2eb-5b11a545069a" />
+                  </targetAnchorReferencesToShape>
+                </toShape>
+              </targetAnchor>
+            </linkShapeHasTargetAnchor>
+          </targetAnchor>
+        </StateMachineLanguagetransitionShape>
+        <StateMachineLanguagetransitionShape Id="fe93cd95-538a-4715-a063-eab94ba975a1" internalElementId="a34721f7-cdb6-4806-97a2-eb7ed04b1d8d" sourceShapeId="dfb571fb-81ba-4acf-9604-aa12e8ebacf8" targetShapeId="e756a483-b436-44b2-902f-33272d43966f">
+          <edgePoints>[(397 : 138 : Normal); (397 : 148 : Normal); (367 : 148 : Normal); (302.5 : 148 : Normal); (302.5 : 111 : Normal); (193 : 111 : Normal); (193 : 121 : Normal)]</edgePoints>
+          <sourceAnchor>
+            <linkShapeHasSourceAnchor>
+              <sourceAnchor Id="a0eb8cf9-baae-4dba-93cb-b246021b6a06" absoluteLocation="397, 138">
+                <fromShape>
+                  <sourceAnchorReferencesFromShape>
+                    <StateMachineLanguagestartStateShapeMoniker Id="dfb571fb-81ba-4acf-9604-aa12e8ebacf8" />
+                  </sourceAnchorReferencesFromShape>
+                </fromShape>
+              </sourceAnchor>
+            </linkShapeHasSourceAnchor>
+          </sourceAnchor>
+          <targetAnchor>
+            <linkShapeHasTargetAnchor>
+              <targetAnchor Id="dcdc21f5-f763-46fb-a4f7-9d77187c2e21" absoluteLocation="193, 121">
+                <toShape>
+                  <targetAnchorReferencesToShape>
+                    <StateMachineLanguagestateShapeMoniker Id="e756a483-b436-44b2-902f-33272d43966f" />
+                  </targetAnchorReferencesToShape>
+                </toShape>
+              </targetAnchor>
+            </linkShapeHasTargetAnchor>
+          </targetAnchor>
+        </StateMachineLanguagetransitionShape>
+        <StateMachineLanguagetransitionShape Id="fba53046-8bf2-42d4-84bb-ce9f58f98e0a" internalElementId="67b76a7d-53c7-40e2-9b76-c81d8a0f2c59" sourceShapeId="e756a483-b436-44b2-902f-33272d43966f" targetShapeId="8a7b9b0d-3629-428c-b1dc-a55cb9d631cd">
+          <edgePoints>[(199 : 219 : Normal); (199 : 229 : Normal); (199 : 311.5 : Normal); (298 : 311.5 : Normal); (298 : 394 : Normal); (298 : 404 : Normal)]</edgePoints>
+          <sourceAnchor>
+            <linkShapeHasSourceAnchor>
+              <sourceAnchor Id="30d31028-fc9b-4ded-bf78-8313cec0ad9c" absoluteLocation="199, 219">
+                <fromShape>
+                  <sourceAnchorReferencesFromShape>
+                    <StateMachineLanguagestateShapeMoniker Id="e756a483-b436-44b2-902f-33272d43966f" />
+                  </sourceAnchorReferencesFromShape>
+                </fromShape>
+              </sourceAnchor>
+            </linkShapeHasSourceAnchor>
+          </sourceAnchor>
+          <targetAnchor>
+            <linkShapeHasTargetAnchor>
+              <targetAnchor Id="70c79fb2-dc6b-4842-ab9d-398fd7b46646" absoluteLocation="298, 404">
+                <toShape>
+                  <targetAnchorReferencesToShape>
+                    <StateMachineLanguagestateShapeMoniker Id="8a7b9b0d-3629-428c-b1dc-a55cb9d631cd" />
+                  </targetAnchorReferencesToShape>
+                </toShape>
+              </targetAnchor>
+            </linkShapeHasTargetAnchor>
+          </targetAnchor>
+        </StateMachineLanguagetransitionShape>
+        <StateMachineLanguagetransitionShape Id="7190e7b2-d421-444f-b544-b5ccf0c8bb6e" internalElementId="ace299b8-1f22-4556-b6d5-dbf866bf35b2" sourceShapeId="e756a483-b436-44b2-902f-33272d43966f" targetShapeId="e756a483-b436-44b2-902f-33272d43966f">
+          <edgePoints>[(238 : 185 : Normal); (248 : 185 : Normal); (248 : 144 : Normal); (238 : 144 : Normal)]</edgePoints>
+          <sourceAnchor>
+            <linkShapeHasSourceAnchor>
+              <sourceAnchor Id="30d48f76-5780-45cd-86cf-0a9fe2e242b4" absoluteLocation="238, 185">
+                <fromShape>
+                  <sourceAnchorReferencesFromShape>
+                    <StateMachineLanguagestateShapeMoniker Id="e756a483-b436-44b2-902f-33272d43966f" />
+                  </sourceAnchorReferencesFromShape>
+                </fromShape>
+              </sourceAnchor>
+            </linkShapeHasSourceAnchor>
+          </sourceAnchor>
+          <targetAnchor>
+            <linkShapeHasTargetAnchor>
+              <targetAnchor Id="3355dd01-207e-4ce9-88bd-fca4978128c4" absoluteLocation="238, 144">
+                <toShape>
+                  <targetAnchorReferencesToShape>
+                    <StateMachineLanguagestateShapeMoniker Id="e756a483-b436-44b2-902f-33272d43966f" />
+                  </targetAnchorReferencesToShape>
+                </toShape>
+              </targetAnchor>
+            </linkShapeHasTargetAnchor>
+          </targetAnchor>
+        </StateMachineLanguagetransitionShape>
+        <StateMachineLanguagetransitionShape Id="df202ff0-d06a-4328-b8e8-7ca63912826d" internalElementId="67a85b57-d10f-4328-9a21-c2cf4dc57d97" sourceShapeId="1ee88f90-4e40-464a-9244-772979b7cb7f" targetShapeId="1ee88f90-4e40-464a-9244-772979b7cb7f">
+          <edgePoints>[(161 : 335 : Normal); (171 : 335 : Normal); (171 : 300 : Normal); (161 : 300 : Normal)]</edgePoints>
+          <sourceAnchor>
+            <linkShapeHasSourceAnchor>
+              <sourceAnchor Id="6dfc2f9c-5f4a-49e8-b39c-77923b5fdfc5" absoluteLocation="161, 335">
+                <fromShape>
+                  <sourceAnchorReferencesFromShape>
+                    <StateMachineLanguagestateShapeMoniker Id="1ee88f90-4e40-464a-9244-772979b7cb7f" />
+                  </sourceAnchorReferencesFromShape>
+                </fromShape>
+              </sourceAnchor>
+            </linkShapeHasSourceAnchor>
+          </sourceAnchor>
+          <targetAnchor>
+            <linkShapeHasTargetAnchor>
+              <targetAnchor Id="ecd43f61-a602-4b8d-a775-bb332da4c876" absoluteLocation="161, 300">
+                <toShape>
+                  <targetAnchorReferencesToShape>
+                    <StateMachineLanguagestateShapeMoniker Id="1ee88f90-4e40-464a-9244-772979b7cb7f" />
+                  </targetAnchorReferencesToShape>
+                </toShape>
+              </targetAnchor>
+            </linkShapeHasTargetAnchor>
+          </targetAnchor>
+        </StateMachineLanguagetransitionShape>
+      </linkShapes>
+    </StateMachineLanguagedesignerDiagram>
+  </diagrams>
+</diagramsModel>

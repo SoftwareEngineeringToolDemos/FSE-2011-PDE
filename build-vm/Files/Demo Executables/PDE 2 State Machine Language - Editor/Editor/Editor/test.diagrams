@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<diagramsModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="b480144f-144c-4cb8-8fa6-0197a26576fd" xmlns="http://schemas.microsoft.com/dsltools/DiagramsDSL">
+  <diagrams>
+    <StateMachineLanguagedesignerDiagram Id="0d75bb3b-24e3-4c46-bc5f-8d88cdc98664" internalElementId="00000000-0000-0000-0000-000000000000" name="DesignerDiagram">
+      <children>
+        <StateMachineLanguagestartStateShape Id="1a9b4588-a375-45dc-9805-6323d24327d7" internalElementId="7b2eb1bf-d8e9-4236-84a9-c197d1e37662" location="30, 30" size="64, 64" absoluteLocation="30, 30" placementSide="Left" />
+        <StateMachineLanguageendStateShape Id="4bc5f1ca-8767-4640-a2cd-ae90f90d7f48" internalElementId="b3b8815b-e985-4e48-a274-3e159938a90d" location="397, 30" size="64, 64" absoluteLocation="397, 30" placementSide="Left" />
+      </children>
+      <linkShapes>
+        <StateMachineLanguagetransitionShape Id="5fb1a9ae-69b2-4c6c-a5db-72efa6ec4a74" internalElementId="2e410032-3575-401f-841a-d9a5d9adb15f" sourceShapeId="1a9b4588-a375-45dc-9805-6323d24327d7" targetShapeId="4bc5f1ca-8767-4640-a2cd-ae90f90d7f48">
+          <edgePoints>[(101 : 62 : Normal); (111 : 62 : Normal); (380 : 62 : Normal); (390 : 62 : Normal)]</edgePoints>
+          <sourceAnchor>
+            <linkShapeHasSourceAnchor>
+              <sourceAnchor Id="62ebd196-8b9d-41c5-9fd1-d9828fc6d148" absoluteLocation="101, 62">
+                <fromShape>
+                  <sourceAnchorReferencesFromShape>
+                    <StateMachineLanguagestartStateShapeMoniker Id="1a9b4588-a375-45dc-9805-6323d24327d7" />
+                  </sourceAnchorReferencesFromShape>
+                </fromShape>
+              </sourceAnchor>
+            </linkShapeHasSourceAnchor>
+          </sourceAnchor>
+          <targetAnchor>
+            <linkShapeHasTargetAnchor>
+              <targetAnchor Id="d74d8fa3-a265-4a98-a04e-df2e5b4768a0" absoluteLocation="390, 62">
+                <toShape>
+                  <targetAnchorReferencesToShape>
+                    <StateMachineLanguageendStateShapeMoniker Id="4bc5f1ca-8767-4640-a2cd-ae90f90d7f48" />
+                  </targetAnchorReferencesToShape>
+                </toShape>
+              </targetAnchor>
+            </linkShapeHasTargetAnchor>
+          </targetAnchor>
+        </StateMachineLanguagetransitionShape>
+      </linkShapes>
+    </StateMachineLanguagedesignerDiagram>
+  </diagrams>
+</diagramsModel>

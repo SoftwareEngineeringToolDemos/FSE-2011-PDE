@@ -1,0 +1,61 @@
+﻿<Window x:Class="Tum.PDE.ToolFramework.Modeling.Visualization.Controls.Popups.SelectRSTypePopup"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"        
+                
+        xmlns:commands="clr-namespace:Tum.PDE.ToolFramework.Modeling.Visualization.Commands"
+        
+        xmlns:attached="clr-namespace:Tum.PDE.ToolFramework.Modeling.Visualization.Controls.Attached"
+        xmlns:viewAttached="clr-namespace:Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel.Attached"
+        
+        Width="500" Height="600" WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow"
+        Title="{Binding Path=Title}">
+    <Window.Resources>
+        <ResourceDictionary>
+
+            <commands:CommandReference x:Key="SearchCommand" Command="{Binding Path=SelectGenericSearchViewModel.SearchCommand}" />
+
+            <DataTemplate x:Key="FoundElementsRSTemplate">
+                <StackPanel Orientation="Vertical" Margin="0,5,0,5">
+                    <StackPanel x:Name="GroupPanel" Orientation="Horizontal" Margin="5">
+                        <TextBlock x:Name="HeaderRelationship" TextDecorations="Underline" Margin="2,0,0,0" Text="{Binding Path=FullName}"/>
+                    </StackPanel>
+                </StackPanel>
+            </DataTemplate>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" viewAttached:ViewModelAttachedCommands.Activated="{Binding Path=SelectGenericSearchViewModel.ActivatedCommand}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBox x:Name="TextBoxSearch" Text="{Binding Path=SelectGenericSearchViewModel.SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="3,3,3,3" Grid.Row="0">
+                <TextBox.InputBindings>
+                    <KeyBinding Command="{StaticResource SearchCommand}" Key="Enter" />
+                </TextBox.InputBindings>
+            </TextBox>
+
+            <Canvas HorizontalAlignment="Right" Grid.Row="0">
+                <Image Width="16" Height="16" Margin="-27, 6, 0, 0" Source="/Tum.PDE.ToolFramework.Images;component/Views/Search-16.png">
+                    <Image.InputBindings>
+                        <MouseBinding MouseAction="LeftClick" Command="{StaticResource SearchCommand}" />
+                    </Image.InputBindings>
+                </Image>
+            </Canvas>
+            <ListBox x:Name="ListBoxResults" Margin="3,0,3,3" Grid.Row="1" ItemsSource="{Binding Path=SelectGenericSearchViewModel.SearchResultViewModels, Mode=OneWay}"
+                             attached:ListBoxHelper.DoubleClickDialogResult="True"
+                             ItemTemplate="{StaticResource FoundElementsRSTemplate}"
+                             SelectedItem="{Binding Path=SelectGenericSearchViewModel.SearchSelectedElement, Mode=TwoWay}"/>
+        </Grid>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="1" Margin="3,8,3,5">
+            <Button x:Name="ButtonAdd" IsDefault="True"  Content="Ok" Width="70" Margin="0, 0, 3, 0" IsEnabled="{Binding Path=IsSelectionValid}" attached:ButtonHelper.DialogResult="True" />
+            <Button x:Name="ButtonCancel" Content="Cancel" Width="70" IsCancel="True"/>
+        </StackPanel>
+    </Grid>
+</Window>

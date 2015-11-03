@@ -1,0 +1,14 @@
+﻿<!--DSL Tools Language Template-->
+<VSTemplate Version="3.0.0" Type="Item" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<TemplateData>
+		<Name Package="{83177a70-f7d0-423b-a4ca-4150dccaf640}" ID="103"/>
+		<Description Package="{83177a70-f7d0-423b-a4ca-4150dccaf640}" ID="102"/>
+		<Icon Package="{83177a70-f7d0-423b-a4ca-4150dccaf640}" ID="201" />
+		<ProjectType>CSharp</ProjectType>
+		<SortOrder>360</SortOrder>
+		<DefaultName>VSPluginDSL.vsdsl</DefaultName>
+	</TemplateData>
+	<TemplateContent>
+		<ProjectItem TargetFileName="$fileinputname$.vsdsl">Sample.vsdsl</ProjectItem>
+	</TemplateContent>
+</VSTemplate>

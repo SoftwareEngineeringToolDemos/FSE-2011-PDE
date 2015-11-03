@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<DomainModel Id="dc6c80b4-630e-49f9-b2c1-b80412731d47">
+  <DomainClass2 Id="4288ab30-e817-452c-b876-a2d18388c2e4" Name="dsa" />
+  <DomainClass2 Id="255a8163-ea2c-44ca-9d4b-73622b3e8494" Name="asd" />
+  <DomainClass2 Id="0eb977c5-ec9c-47e7-b96b-4499410e3a7d" Name="Domain Class20" />
+  <DomainClass2 Id="453243c1-3bfe-455f-b196-b731f7628a21" Name="Domain Class21" />
+  <DomainClass2 Id="65a4bf62-6687-4444-9cd8-ca96f7732a82" Name="Domain Class22" />
+  <DomainClass2 Id="4e60b09b-c1a8-48ea-904d-60b8283c4d9c" Name="Domain Class23" />
+  <DomainClass2 Id="ba690b13-d0bd-4591-ac7e-9af6c6a316ce" Name="Domain Class24" />
+  <DomainClass2 Id="01c9b924-c8f9-488d-9d56-495db032e1a6" Name="Domain Class25" />
+</DomainModel>

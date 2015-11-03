@@ -1,0 +1,1871 @@
+﻿<#@ template language="C#" inherits="BaseTemplate"#> 
+<#@ import namespace="Tum.PDE.LanguageDSL"#>
+<#@ import namespace="Microsoft.VisualStudio.Modeling" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Collections.ObjectModel" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#+
+
+public string GenerateDomainClassSerializer(AttributedDomainElement domainClass, string namespaceString)
+{
+	this.GenerationEnvironment = null;
+	this.MetaModel = domainClass.GetMetaModel();
+	if( this.GenerateDomainClassSerializerInternal(domainClass, namespaceString) == null )
+		return null;
+	return this.GenerationEnvironment.ToString();	
+}
+
+private string GenerateDomainClassSerializerInternal(AttributedDomainElement domainClass, string namespaceString)
+{
+	string classTypeString = domainClass.GetFullName (true);
+	bool isRelationship = (domainClass is DomainRelationship);
+	bool isAbstract = (domainClass.InheritanceModifier == InheritanceModifier.Abstract);
+	bool isSealed = (domainClass.InheritanceModifier == InheritanceModifier.Sealed);
+	
+	string serializerGenerationClassName = this.MetaModel.Name + domainClass.Name + "Serializer";
+	if( domainClass.GeneratesDoubleDerived )
+		serializerGenerationClassName = this.MetaModel.Name + domainClass.Name + "BaseSerializer";
+	string serializerClassName = this.MetaModel.Name + domainClass.Name + "Serializer";
+	string baseSerializerClassName = CodeGenerationUtilities.GetSerializerBaseName(domainClass);
+
+	bool bContinue = true;
+	if( isRelationship )
+	{
+		if( !(domainClass as DomainRelationship).NeedsFullSerialization() )
+		{
+			if( domainClass is ReferenceRelationship )
+				if( !(domainClass as ReferenceRelationship).SerializedReferenceRelationship.IsInFullSerialization )
+					bContinue = false;
+				
+			if( domainClass is EmbeddingRelationship )
+				if( !(domainClass as EmbeddingRelationship).SerializedEmbeddingRelationship.IsInFullSerialization )
+					bContinue = false;				
+		}
+	}
+	
+	if( !bContinue )
+		return null;
+	
+	// calculate properties
+	DomainProperty propertySerializedAsInnerValue = null;
+	foreach(DomainProperty p in domainClass.Properties)
+	{
+		if(p.SerializationRepresentationType == SerializationRepresentationType.InnerValue )
+		{
+			propertySerializedAsInnerValue = p;
+			continue;
+		}
+	}
+			
+	bool bOmitIdProperty = false;
+	LinkedElementCollection<SerializationElement> Children = null;
+	LinkedElementCollection<SerializationAttributeElement> Attributes = null;
+	if( domainClass is DomainClass )
+	{
+		SerializedDomainClass d = (domainClass as DomainClass).SerializedDomainClass;
+		if( d.IdProperty.OmitIdProperty )
+			bOmitIdProperty = true;
+		Children = d.Children;
+		Attributes = d.Attributes;		
+	}
+	
+	if( domainClass is ReferenceRelationship )
+	{
+		SerializedReferenceRelationship d = (domainClass as ReferenceRelationship).SerializedReferenceRelationship;
+		if( d.IdProperty.OmitIdProperty )
+			bOmitIdProperty = true;
+		Children = d.Children;
+		Attributes = d.Attributes;		
+	}
+	
+	if( domainClass is EmbeddingRelationship )
+	{
+		SerializedEmbeddingRelationship d = (domainClass as EmbeddingRelationship).SerializedEmbeddingRelationship;
+		if( d.IdProperty.OmitIdProperty )
+			bOmitIdProperty = true;
+		Children = d.Children;
+		Attributes = d.Attributes;
+	}
+#>
+namespace <#= namespaceString #>
+{
+<#+	
+	PushIndent("\t");
+	int inheritanceDepth = CodeGenerationUtilities.CalculateInheritanceDepth (domainClass);
+#>
+/// <summary>
+/// Serializer <#= serializerGenerationClassName #> for DomainClass <#= domainClass.GetRelativeName(namespaceString, false) #>.
+/// </summary>
+<#+
+	if (domainClass.GeneratesDoubleDerived)
+	{
+		if (inheritanceDepth > 6)
+		{
+#>
+[global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1501:AvoidExcessiveInheritance", Justification = "Generated code.")]
+<#+
+		}
+	}
+	else if (inheritanceDepth > 5)
+	{
+#>
+[global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1501:AvoidExcessiveInheritance", Justification = "Generated code.")]
+<#+
+	}
+#>
+<#= CodeGenerationUtilities.GetAccessModifier(domainClass.AccessModifier) #><#= domainClass.GeneratesDoubleDerived ? " abstract" : (domainClass.InheritanceModifier == InheritanceModifier.Sealed ? " sealed" : string.Empty) #> partial class <#= serializerGenerationClassName #> : <#= baseSerializerClassName #>
+{
+	#region Constructor
+	/// <summary>
+	/// <#= serializerGenerationClassName #> Constructor
+	/// </summary>
+	<#= domainClass.GeneratesDoubleDerived ? "protected" : "public" #> <#= serializerGenerationClassName #> ()
+		: base ()
+	{
+	}
+	#endregion
+	
+	#region Public Properties
+<#+ 
+	if( !isAbstract )
+	{
+#>	
+	/// <summary>
+	/// This is the XML tag name used to serialize an instance of <#= domainClass.Name #>.
+	/// </summary>
+	public override string XmlTagName
+	{
+		get{
+			return "<#= domainClass.SerializationName #>";
+		}
+	}
+<#+
+	}
+	else
+	{
+#>	
+	/// <summary>
+	/// Cannot be serialized.
+	/// </summary>
+	public override string XmlTagName
+	{
+		[global::System.Diagnostics.DebuggerStepThrough]
+		get { return string.Empty; }
+	}
+<#+		
+	}
+#>		
+	#endregion
+<#+
+	
+#>
+
+	#region Read
+	/// <summary>
+	/// Public Read() method that deserializes one <#= domainClass.Name #> instance from XML.
+	/// </summary>
+	/// <remarks>
+	/// When this method is called, caller guarantees that the passed-in XML reader is positioned at the open XML tag
+	/// of the <#= domainClass.Name #> element that is about to be deserialized. 
+	/// The method needs to ensure that when it returns, the reader is positioned at the open XML tag of the next sibling element,
+	/// or the close tag of the parent element (or EOF).
+	/// </remarks>
+	/// <param name="serializationContext">Serialization context.</param>
+	/// <param name="element">In-memory <#= domainClass.Name #> instance that will get the deserialized data.</param>
+	/// <param name="reader">XmlReader to read serialized data from.</param>
+	public override void Read(DslModeling::SerializationContext serializationContext, DslModeling::ModelElement element, global::System.Xml.XmlReader reader)
+	{
+<#+ 
+	if( isAbstract )
+	{
+#>
+		throw new global::System.NotSupportedException();
+<#+
+	}
+	else
+	{
+#>
+		#region Check Parameters
+		global::System.Diagnostics.Debug.Assert (serializationContext != null);
+		if (serializationContext == null)
+			throw new global::System.ArgumentNullException ("serializationContext");
+		global::System.Diagnostics.Debug.Assert (element != null);
+		if (element == null)
+			throw new global::System.ArgumentNullException ("element");
+		global::System.Diagnostics.Debug.Assert (reader != null);
+		if (reader == null)
+			throw new global::System.ArgumentNullException ("reader");
+		#endregion
+
+  		// Read properties serialized as XML attributes.
+		ReadPropertiesFromAttributes(serializationContext, element, reader);
+		
+		// Read nested XML elements.
+		if (!serializationContext.Result.Failed)
+		{
+			if (!reader.IsEmptyElement)
+			{
+<#+
+			if( propertySerializedAsInnerValue != null )
+			{
+				string isReq = "false";
+				if( propertySerializedAsInnerValue.IsRequired )
+					isReq = "true";
+#>
+				// Read inner value property
+				<#= domainClass.GetFullName(true) #> instance = element as <#= domainClass.GetFullName(true) #>;	
+<#+
+				if( propertySerializedAsInnerValue.Type.SerializationStyle == SerializationStyle.CDATA )					
+				{
+#>
+				string str<#= propertySerializedAsInnerValue.Name #> = <#= this.MetaModel.Name #>SerializationHelper.Instance.ReadCDATAFromInnerXmlAsString(serializationContext, instance, reader);
+<#+
+				}
+				else
+				{
+#>
+				string str<#= propertySerializedAsInnerValue.Name #> = <#= this.MetaModel.Name #>SerializationHelper.Instance.ReadInnerXmlAsString(serializationContext, instance, reader);
+<#+
+				}
+#>
+				<#= CodeGenerationUtilities.GetDomainTypeFullName(propertySerializedAsInnerValue) #> valueOf<#= propertySerializedAsInnerValue.Name #> = <#= this.MetaModel.Name #>SerializationHelper.Instance.ConvertTypedObjectFrom(serializationContext, instance, "<#= propertySerializedAsInnerValue.Name #>",str<#= propertySerializedAsInnerValue.Name #>, typeof(<#= CodeGenerationUtilities.GetDomainTypeFullName(propertySerializedAsInnerValue) #>), <#= isReq #>) as <#= CodeGenerationUtilities.GetDomainTypeFullName(propertySerializedAsInnerValue) #>;
+				instance.<#= propertySerializedAsInnerValue.Name #> = valueOf<#= propertySerializedAsInnerValue.Name #>;						
+
+<#+
+			}
+#>
+				// Read to the start of the first child element.
+				DslModeling::SerializationUtilities.SkipToFirstChild(reader);
+								
+				// Read nested XML elements, they can be either properties serialized as XML elements, or child 
+				// model elements.
+				while (!serializationContext.Result.Failed && !reader.EOF && reader.NodeType == global::System.Xml.XmlNodeType.Element)
+				{
+					ReadElements(serializationContext, element, reader);
+			
+					if (!serializationContext.Result.Failed && !reader.EOF && reader.NodeType == global::System.Xml.XmlNodeType.Element)
+					{
+						// Encountered one unknown XML element, skip it and keep reading.
+						<#= this.MetaModel.Name #>SerializationBehaviorSerializationMessages.UnexpectedXmlElement(serializationContext, reader, "<#= domainClass.Name #>");
+						DslModeling::SerializationUtilities.Skip(reader);
+					}
+				}
+			}
+		}
+	
+		// Advance the reader to the next element (open tag of the next sibling, end tag of the parent, or EOF)
+		DslModeling::SerializationUtilities.Skip(reader);
+<#+
+	}
+#>	
+	}
+	
+	/// <summary>
+	/// This method deserializes all properties that are serialized as XML attributes.
+	/// </summary>
+	/// <remarks>
+	/// Because this method only handles properties serialized as XML attributes, the passed-in reader shouldn't be moved inside this method.
+	/// The caller will guarantee that the reader is positioned on the open XML tag of the current element being deserialized.
+	/// </remarks>
+	/// <param name="serializationContext">Serialization context.</param>
+	/// <param name="element">In-memory <#= domainClass.Name #> instance that will get the deserialized data.</param>
+	/// <param name="reader">XmlReader to read serialized data from.</param>
+	[global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Generated code.")]
+	protected override void ReadPropertiesFromAttributes(DslModeling::SerializationContext serializationContext, DslModeling::ModelElement element, global::System.Xml.XmlReader reader)
+	{
+		<#= domainClass.GetFullName(true) #> instanceOf<#= domainClass.Name #> = element as <#= domainClass.GetFullName(true) #>;
+<#+
+		List<SerializedDomainProperty> propertiesToReadInThisClass = new List<SerializedDomainProperty>();
+		if( Attributes != null )
+		{
+			foreach(SerializationAttributeElement attr in Attributes )
+			{
+				if( !(attr is SerializedDomainProperty ) )
+					continue;
+				
+				SerializedDomainProperty sP = attr as SerializedDomainProperty;
+				DomainProperty p = sP.DomainProperty;	
+				
+
+				if( p.Element.GetMetaModel() == this.MetaModel && p.Element == domainClass)
+					propertiesToReadInThisClass.Add(sP);
+
+#>
+		if (!serializationContext.Result.Failed)
+		{
+			ReadPropertyAsAttribute<#= p.Name #>(serializationContext, instanceOf<#= domainClass.Name #>, reader);
+		}
+<#+
+				
+
+			}
+		}
+#>
+	}
+	
+<#+
+			foreach(SerializedDomainProperty sP in propertiesToReadInThisClass)
+			{
+				DomainProperty p = sP.DomainProperty;
+				
+				string isReq = "false";
+				if( p.IsRequired )
+					isReq = "true";
+				
+				if( sP.SerializationRepresentationType != SerializationRepresentationType.Attribute )
+					continue;
+				
+				string modifier ="";
+				if( CodeGenerationUtilities.HasProperty(domainClass.BaseElement, p.Name))
+					modifier = "new ";
+#>
+	/// <summary>
+	/// Read property <#= p.Name #> that needed to be serialized as XML attribute.
+	/// </summary>
+	/// <param name="serializationContext">Serialization context.</param>
+	/// <param name="instance"><#= domainClass.Name #> instance to be serialized.</param>
+	/// <param name="reader">XmlReader.</param> 
+	[global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Generated code.")]
+	protected <#= modifier #>virtual void ReadPropertyAsAttribute<#= p.Name #>(DslModeling::SerializationContext serializationContext, <#= domainClass.GetFullName(true) #> instance, global::System.Xml.XmlReader reader)
+	{
+<#+
+				if( sP.SerializationName == "" )
+				{
+#>
+		Error because the SerializationName of SerializedDomainProperty (<#= p.Name #>) is empty.
+<#+
+				}
+				else
+				{
+#>
+		// <#= p.Name #>
+		if (!serializationContext.Result.Failed)
+		{
+			string attribValue = <#= this.MetaModel.Name #>SerializationHelper.Instance.ReadAttribute(serializationContext, instance, reader, "<#= sP.SerializationName #>");
+			if( attribValue != null )
+				instance.<#= p.Name #> = <#= p.Type.MetaModel.GetFullName(true) #>SerializationHelper.Instance.ConvertTypedObjectFrom(serializationContext, instance, "<#= p.Name #>", attribValue, typeof(<#= CodeGenerationUtilities.GetDomainTypeFullName(p) #>), <#= isReq #>) as <#= CodeGenerationUtilities.GetDomainTypeFullName(p) #>;
+		}
+<#+			
+				}				
+#>				
+	}
+<#+
+			}
+#>	
+	
+	/// <summary>
+	/// This methods deserializes nested XML elements inside the passed-in element.
+	/// </summary>
+	/// <remarks>
+	/// The caller will guarantee that the current element does have nested XML elements, and the call will position the 
+	/// reader at the open tag of the first child XML element.
+	/// This method will read as many child XML elements as it can. It returns under three circumstances:
+	/// 1) When an unknown child XML element is encountered. In this case, this method will position the reader at the open 
+	///    tag of the unknown element. This implies that if the first child XML element is unknown, this method should return 
+	///    immediately and do nothing.
+	/// 2) When all child XML elemnets are read. In this case, the reader will be positioned at the end tag of the parent element.
+	/// 3) EOF.
+	/// </remarks>
+	/// <param name="serializationContext">Serialization context.</param>
+	/// <param name="element">In-memory <#= domainClass.Name #> instance that will get the deserialized data.</param>
+	/// <param name="reader">XmlReader to read serialized data from.</param>
+	protected override void ReadElements(DslModeling::SerializationContext serializationContext, DslModeling::ModelElement element, global::System.Xml.XmlReader reader)
+	{
+<#+
+	if( Children != null)
+		if( Children.Count >  0 )
+		{
+#>
+		<#= domainClass.GetFullName(true) #> instance = element as <#= domainClass.GetFullName(true) #>;
+		global::System.Diagnostics.Debug.Assert(instance != null, "Expecting an instance of <#= domainClass.Name #>!");
+
+		while (!serializationContext.Result.Failed && !reader.EOF && reader.NodeType == global::System.Xml.XmlNodeType.Element)
+		{
+			if(! ReadElement(serializationContext, instance, reader, reader.LocalName) )
+				return;
+		}
+<#+
+		}
+#>
+	}
+	
+	/// <summary>
+	/// This methods deserializes nested XML elements inside the passed-in element.
+	/// </summary>
+	/// <param name="serializationContext">Serialization context.</param>
+	/// <param name="instance">In-memory <#= domainClass.Name #> instance that will get the deserialized data.</param>
+	/// <param name="reader">XmlReader to read serialized data from.</param>
+	/// <param name="readerLocalName">Current local name the xml reader is positioned at.</param>	
+	/// <returns>True if the element has been successfully deserialized. False otherwise.</returns>
+	protected virtual bool ReadElement(DslModeling::SerializationContext serializationContext, <#= domainClass.GetFullName(true) #> instance, global::System.Xml.XmlReader reader, string readerLocalName)
+	{
+<#+
+	int counter = 0;	
+	List<SerializedEmbeddingRelationship> embRelationshipsToRead = new List<SerializedEmbeddingRelationship>();
+	List<SerializedDomainClass> embRelationshipsTargetToRead = new List<SerializedDomainClass>();
+	List<SerializedReferenceRelationship> refRelationshipsToRead = new List<SerializedReferenceRelationship>();
+	List<SerializedDomainRole> refRelationshipsRoleToRead = new List<SerializedDomainRole>();
+	List<AttributedDomainElement> createDerivedClassLookupFor = new List<AttributedDomainElement>();
+	propertiesToReadInThisClass.Clear();
+	foreach(SerializationElement child in Children )
+	{
+		if( child is SerializedDomainProperty )
+		{
+			SerializedDomainProperty sP = child as SerializedDomainProperty;
+			DomainProperty p = sP.DomainProperty;
+				
+			if( sP.SerializationRepresentationType != SerializationRepresentationType.Element )
+				continue;
+				
+			if( p.Element.GetMetaModel() == this.MetaModel && p.Element == domainClass)
+				propertiesToReadInThisClass.Add(sP);
+
+			if( sP.SerializationName == "" )
+			{
+#>
+		Error because the SerializationName of SerializedDomainProperty (<#= p.Name #>) is empty.
+<#+
+			}
+			else
+			{			
+#>
+		if( readerLocalName == "<#= sP.SerializationName #>" )
+		{
+			ReadPropertyAsElement<#= p.Name #>(serializationContext, instance, reader);
+			return true;
+		}
+<#+
+			}				
+		}
+		else if( child is SerializedEmbeddingRelationship )
+		{
+			SerializedEmbeddingRelationship sCon = child as SerializedEmbeddingRelationship;
+			EmbeddingRelationship con = sCon.EmbeddingRelationship;
+			
+			if( sCon.OmitRelationship )
+				continue;
+			
+			if( con.GetMetaModel() == this.MetaModel && con.Source.RolePlayer == domainClass)
+				embRelationshipsToRead.Add(sCon);
+#>
+		if( ReadEmbeddingRelationship<#= con.Name #>(serializationContext, instance, reader, readerLocalName) )
+			return true;
+<#+
+		}
+		else if( child is SerializedReferenceRelationship && !(domainClass is EmbeddingRelationship))
+		{
+			SerializedReferenceRelationship sCon = child as SerializedReferenceRelationship;
+			ReferenceRelationship con = sCon.ReferenceRelationship;
+			
+			if( sCon.OmitRelationship )
+				continue;
+			
+			if( con.GetMetaModel() == this.MetaModel && con.Source.RolePlayer == domainClass)
+				refRelationshipsToRead.Add(sCon);
+#>
+		if( ReadReferenceRelationship<#= con.Name #>(serializationContext, instance, reader, readerLocalName) )
+			return true;
+<#+
+		}
+		else if( child is SerializedDomainClass && domainClass is EmbeddingRelationship )
+		{
+			SerializedDomainClass sDomainClass = child as SerializedDomainClass;
+			DomainClass d = sDomainClass.DomainClass;
+			EmbeddingRelationship con = domainClass as EmbeddingRelationship;
+						
+			if( d.GetMetaModel() == this.MetaModel )
+			{
+				embRelationshipsTargetToRead.Add(sDomainClass);
+
+				if( !createDerivedClassLookupFor.Contains(d) )
+					createDerivedClassLookupFor.Add(d );				
+			}
+#>
+		if( ReadEmbeddingRelationshipTarget<#= con.Name #><#= d.Name #>(serializationContext, instance, reader, readerLocalName) )
+			return true;
+<#+
+		}
+		else if( child is SerializedDomainRole && domainClass is ReferenceRelationship )
+		{
+			SerializedDomainRole dRole = child as SerializedDomainRole;
+			ReferenceRelationship con = domainClass as ReferenceRelationship;
+			
+			if( dRole.DomainRole.RolePlayer.GetMetaModel() == this.MetaModel )
+				refRelationshipsRoleToRead.Add(dRole);			
+#>
+		if( ReadReferenceRelationshipRole<#= con.Name #><#= dRole.DomainRole.Name #>(serializationContext, instance, reader, readerLocalName) )
+			return true;
+<#+
+		}
+	}
+#>
+
+		return false;  // Don't know this element.
+	}
+	
+<#+
+			foreach(SerializedDomainProperty sP in propertiesToReadInThisClass)
+			{
+				DomainProperty p = sP.DomainProperty;
+				
+				string isReq = "false";
+				if( p.IsRequired )
+					isReq = "true";
+				
+				if( sP.SerializationRepresentationType != SerializationRepresentationType.Element )
+					continue;
+				
+				string modifier = "virtual";
+				if( CodeGenerationUtilities.HasProperty(domainClass.BaseElement, p.Name))
+					modifier = "override";
+#>
+	/// <summary>
+	/// Write property <#= p.Name #> that need to be serialized as XML element.
+	/// </summary>
+	/// <param name="serializationContext">Serialization context.</param>
+	/// <param name="instance"><#= domainClass.Name #> instance to be serialized.</param>
+	/// <param name="reader">XmlWriter to write serialized data to.</param> 
+	[global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Generated code.")]
+	protected <#= modifier #> void ReadPropertyAsElement<#= p.Name #>(DslModeling::SerializationContext serializationContext, <#= domainClass.GetFullName(true) #> instance, global::System.Xml.XmlReader reader)
+	{
+		if (reader.IsEmptyElement)
+		{	// No serialized value, must be default one.
+			DslModeling::SerializationUtilities.Skip(reader);  // Skip this tag.
+		}
+		else
+		{
+<#+
+				if( p.Type.SerializationStyle == SerializationStyle.CDATA )					
+				{
+#>
+			string str<#= p.Name #> = <#= this.MetaModel.Name #>SerializationHelper.Instance.ReadElementCDATAContentAsString(serializationContext, instance, reader);
+<#+
+				}
+				else
+				{
+#>
+			string str<#= p.Name #> = <#= this.MetaModel.Name #>SerializationHelper.Instance.ReadElementContentAsString(serializationContext, instance, reader);
+<#+
+				}
+#>
+						
+			<#= CodeGenerationUtilities.GetDomainTypeFullName(p) #> valueOf<#= p.Name #> = <#= p.Type.MetaModel.GetFullName(true) #>SerializationHelper.Instance.ConvertTypedObjectFrom(serializationContext, instance, "<#= p.Name #>", str<#= p.Name #>, typeof(<#= CodeGenerationUtilities.GetDomainTypeFullName(p) #>), <#= isReq #>) as <#= CodeGenerationUtilities.GetDomainTypeFullName(p) #>;
+			instance.<#= p.Name #> = valueOf<#= p.Name #>;
+			//DslModeling::SerializationUtilities.SkipToNextElement(reader);
+			DslModeling::SerializationUtilities.Skip(reader);
+		}
+	}
+<#+
+			}
+			
+			foreach(SerializedEmbeddingRelationship sCon in embRelationshipsToRead)
+			{
+				EmbeddingRelationship con = sCon.EmbeddingRelationship;
+				string modifier ="virtual";
+				if( CodeGenerationUtilities.HasRelationship(domainClass.BaseElement, con.Name))
+					modifier = "override";				
+#>
+	/// <summary>
+	/// Read emb. rel <#= con.Name #> that needed to be serialized as XML element.
+	/// </summary>
+	/// <param name="serializationContext">Serialization context.</param>
+	/// <param name="instance"><#= domainClass.Name #> instance to be serialized.</param>
+	/// <param name="reader">XmlWriter to write serialized data to.</param> 
+	/// <param name="readerLocalName">Local name.</param>
+	[global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Generated code.")]
+	protected <#= modifier #> bool ReadEmbeddingRelationship<#= con.Name #>(DslModeling::SerializationContext serializationContext, <#= domainClass.GetFullName(true) #> instance, global::System.Xml.XmlReader reader, string readerLocalName)
+	{
+<#+
+		if( sCon.IsTargetIncludedSubmodel )
+		{
+			DomainClass targetClass = con.Target.RolePlayer as DomainClass;
+#>
+		if (reader.LocalName == "include")
+        {
+ 			string attributeValue = reader.GetAttribute("href");
+            if (attributeValue != null)
+            {
+				try 
+				{
+            	    // get parent's path
+   	    			DslEditorModeling::IParentModelElement parent = instance.GetDomainModelServices().ElementParentProvider.GetParentModelElement(instance);
+            		if (parent == null)
+                		throw new System.ArgumentNullException("Parent of element " + instance.ToString() + " can not be null");
+			
+					string path = parent.DomainFilePath;
+            		string vModellDirectory = new System.IO.FileInfo(path).DirectoryName;
+					
+            	    // get current's path
+            	    string curPath = attributeValue;
+            	    if( !curPath.Contains(System.IO.Path.VolumeSeparatorChar.ToString()))
+            	    {
+            	        curPath = vModellDirectory + System.IO.Path.DirectorySeparatorChar + curPath;
+            	    }
+
+            	    if (System.IO.File.Exists(curPath))
+            	    {
+            	        // load VModell file
+						<#= targetClass.GetFullName(true) #> target = <#= targetClass.GetMetaModel().GetFullName(true) #>SerializationHelper.Instance.LoadModel<#= targetClass.Name #>(serializationContext.Result, instance.Store.DefaultPartition, curPath, null, null, null);
+						new <#= con.GetFullName(true) #>(instance, target);
+            	    }
+            	    else
+            	    {
+            	        DslModeling::SerializationUtilities.AddMessage(serializationContext, DslModeling::SerializationMessageKind.Error,
+            	            "Could not include referenced Model: File not found", reader as global::System.Xml.IXmlLineInfo);
+            	    }
+			
+					DslModeling::SerializationUtilities.Skip(reader);
+					return true;
+				}
+				catch {}
+            }
+
+            DslModeling::SerializationUtilities.Skip(reader);
+		}
+<#+
+		}
+		else
+		{
+			
+				
+			bool bSerializeInFullForm = con.NeedsFullSerialization() || sCon.IsInFullSerialization;
+			if( !bSerializeInFullForm )
+			{
+				if( !createDerivedClassLookupFor.Contains(con.Target.RolePlayer) )
+					createDerivedClassLookupFor.Add(con.Target.RolePlayer);
+#>
+		System.Guid info;
+		if( readerLocalName == "<#= con.Target.RolePlayer.SerializationName #>" )
+		{
+			info = <#= con.Target.RolePlayer.GetFullName(true) #>.DomainClassId;
+		}
+		else // derived classes
+		{
+			info = DslEditorModeling::SerializationHelper.TryGetFirstEmbeddedDerivedNameType(<#= domainClass.GetFullName(true) #>.DomainClassId, <#= con.Target.RolePlayer.GetFullName(true) #>.DomainClassId, readerLocalName);
+		}
+		if( info != System.Guid.Empty )
+		{
+			if (!serializationContext.Result.Failed)
+			{
+				DslModeling::DomainClassXmlSerializer serializer<#= counter #> = serializationContext.Directory.GetSerializer(info);
+				global::System.Diagnostics.Debug.Assert(serializer<#= counter #> != null, "Cannot find serializer for " + info + "!");
+				<#= con.Target.RolePlayer.GetFullName(true) #> child<#= counter #> = serializer<#= counter #>.TryCreateInstance(serializationContext, reader, instance.Partition) as <#= con.Target.RolePlayer.GetFullName(true) #>;
+				if( child<#= counter #> != null )
+				{
+					new <#= con.GetFullName(true) #>(instance, child<#= counter #>);
+					serializer<#= counter #>.Read(serializationContext, child<#= counter #>, reader);
+				}
+				else
+					DslModeling::SerializationUtilities.Skip(reader);
+			}
+
+			return true;
+		}
+<#+
+				//List<string> usedElements = new List<string>();
+				//GenerateSaveEmbMethod(usedElements, con, con.Target.RolePlayer, ref counter);
+			}
+			else
+			{
+#>
+		if(readerLocalName == "<#= sCon.SerializationName #>" )
+		{
+			if (!serializationContext.Result.Failed)
+			{
+				DslModeling::DomainClassXmlSerializer serializer<#= counter #> = serializationContext.Directory.GetSerializer(<#= con.GetFullName(true) #>.DomainClassId);
+				global::System.Diagnostics.Debug.Assert(serializer<#= counter #> != null, "Cannot find serializer for <#= con.Name#>!");
+				<#= con.GetFullName(true) #> connection<#= counter #> = serializer<#= counter #>.TryCreateInstance(serializationContext, reader, instance.Partition) as <#= con.GetFullName(true) #>;
+				if( connection<#= counter #> != null )
+				{
+					connection<#= counter #>.<#= con.Source.Name #> = instance;
+					serializer<#= counter #>.Read(serializationContext, connection<#= counter #>, reader);
+					
+					if( connection<#= counter #>.<#= con.Source.Name #> == null ||
+						connection<#= counter #>.<#= con.Target.Name #> == null )
+						<#= domainClass.GetMetaModel().Namespace #>.<#= domainClass.GetMetaModel().Name #>SerializationPostProcessor.Instance.AddRelationshipTrackData(connection<#= counter #>.Id);					
+				}
+				else
+					DslModeling::SerializationUtilities.Skip(reader);
+			}
+			return true;
+		}
+<#+
+			}
+		}
+#>
+	
+		return false;
+	}
+<#+
+			}
+			
+			foreach(SerializedReferenceRelationship sCon in refRelationshipsToRead)
+			{
+				ReferenceRelationship con = sCon.ReferenceRelationship;
+				
+				string modifier ="";
+				if( CodeGenerationUtilities.HasRelationship(domainClass.BaseElement, con.Name))
+					modifier = "new ";
+#>
+	/// <summary>
+	/// Read ref. rel <#= con.Name #> that needed to be serialized as XML element.
+	/// </summary>
+	/// <param name="serializationContext">Serialization context.</param>
+	/// <param name="instance"><#= domainClass.Name #> instance to be serialized.</param>
+	/// <param name="readr">XmlWriter to write serialized data to.</param> 
+	/// <param name="readerLocalName">Local name.</param>
+	[global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Generated code.")]
+	protected <#= modifier #>virtual bool ReadReferenceRelationship<#= con.Name #>(DslModeling::SerializationContext serializationContext, <#= domainClass.GetFullName(true) #> instance, global::System.Xml.XmlReader reader, string readerLocalName)
+	{
+<#+
+			bool bSerializeInFullForm = con.NeedsFullSerialization() || sCon.IsInFullSerialization;
+			if( !bSerializeInFullForm )
+			{
+#>
+		if( readerLocalName == "<#= con.SerializationTargetName #>")
+		{
+			string attribValue<#= con.Target.Name #><#= counter #> = <#= this.MetaModel.Name #>SerializationHelper.Instance.ReadAttribute(serializationContext, instance, reader, "<#= con.SerializationAttributeName #>");
+			if( attribValue<#= con.Target.Name #><#= counter #> != null )
+			{
+				System.Guid id = <#= this.MetaModel.Name #>SerializationHelper.Instance.ConvertIdFrom(serializationContext, attribValue<#= con.Target.Name #><#= counter #>);
+				if( id != System.Guid.Empty)
+				{
+					<#= domainClass.GetMetaModel().Namespace #>.<#= domainClass.GetMetaModel().Name #>SerializationPostProcessor.Instance.AddPostProcessData(
+						<#= con.GetFullName(true) #>.DomainClassId, System.Guid.Empty, instance.Id, id);
+				}
+			}
+			DslModeling::SerializationUtilities.Skip(reader);
+			return true;
+		}
+<#+
+			}
+			else
+			{
+#>
+		if( readerLocalName == "<#= sCon.SerializationName #>")
+		{
+			DslModeling::DomainClassXmlSerializer serializer<#= counter #> = serializationContext.Directory.GetSerializer(<#= con.GetFullName(true) #>.DomainClassId);
+			global::System.Diagnostics.Debug.Assert(serializer<#= counter #> != null, "Cannot find serializer for <#= con.Name#>!");
+			<#= con.GetFullName(true) #> connection<#= counter #> = serializer<#= counter #>.TryCreateInstance(serializationContext, reader, instance.Partition) as <#= con.GetFullName(true) #>;
+			if( connection<#= counter #> != null )
+			{
+				connection<#= counter #>.<#= con.Source.Name #> = instance;
+				serializer<#= counter #>.Read(serializationContext, connection<#= counter #>, reader);
+				
+				if( connection<#= counter #>.<#= con.Source.Name #> == null ||
+					connection<#= counter #>.<#= con.Target.Name #> == null )
+						<#= domainClass.GetMetaModel().Namespace #>.<#= domainClass.GetMetaModel().Name #>SerializationPostProcessor.Instance.AddRelationshipTrackData(connection<#= counter #>.Id);
+			}
+			else
+				DslModeling::SerializationUtilities.Skip(reader);
+			return true;
+		}
+<#+
+			}
+#>
+
+		return false;
+	}
+<#+
+			}
+			
+			foreach(SerializedDomainClass dS in embRelationshipsTargetToRead)
+			{
+				EmbeddingRelationship con = domainClass as EmbeddingRelationship;
+				DomainClass d = dS.DomainClass;
+#>
+	/// <summary>
+	/// Read emb. rel <#= con.Name #> target <#= d.Name #> that needed to be serialized as XML element.
+	/// </summary>
+	/// <param name="serializationContext">Serialization context.</param>
+	/// <param name="instance"><#= domainClass.Name #> instance to be serialized.</param>
+	/// <param name="reader">XmlWriter to write serialized data to.</param> 
+	/// <param name="readerLocalName">Local name.</param>
+	[global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Generated code.")]
+	protected virtual bool ReadEmbeddingRelationshipTarget<#= con.Name #><#= d.Name #>(DslModeling::SerializationContext serializationContext, <#= domainClass.GetFullName(true) #> instance, global::System.Xml.XmlReader reader, string readerLocalName)
+	{
+		System.Guid info;
+		if( readerLocalName == "<#= con.Target.RolePlayer.SerializationName #>" )
+		{
+			info = <#= con.Target.RolePlayer.GetFullName(true) #>.DomainClassId;
+		}
+		else // derived classes
+		{
+<#+
+				if( domainClass is DomainRelationship )
+				{
+#>
+			info = DslEditorModeling::SerializationHelper.TryGetFirstEmbeddedDerivedNameType(<#= con.Source.RolePlayer.GetFullName(true)#>.DomainClassId, <#= con.Target.RolePlayer.GetFullName(true) #>.DomainClassId, readerLocalName);
+<#+					
+				}
+				else
+				{
+#>
+			info = DslEditorModeling::SerializationHelper.TryGetFirstEmbeddedDerivedNameType(<#= domainClass.GetFullName(true)#>.DomainClassId, <#= con.Target.RolePlayer.GetFullName(true) #>.DomainClassId, readerLocalName);
+<#+
+				}
+#>			
+		}
+		if( info != null )
+		{
+			if (!serializationContext.Result.Failed)
+			{
+				DslModeling::DomainClassXmlSerializer serializer<#= counter #> = serializationContext.Directory.GetSerializer(info);
+				global::System.Diagnostics.Debug.Assert(serializer<#= counter #> != null, "Cannot find serializer for " + info + "!");
+				<#= con.Target.RolePlayer.GetFullName(true) #> child<#= counter #> = serializer<#= counter #>.TryCreateInstance(serializationContext, reader, instance.Partition) as <#= con.Target.RolePlayer.GetFullName(true) #>;
+				if( child<#= counter #> != null )
+				{
+					serializer<#= counter #>.Read(serializationContext, child<#= counter #>, reader);
+					instance.<#= con.Target.Name #> = child<#= counter #>;	
+				}
+				else
+					DslModeling::SerializationUtilities.Skip(reader);
+			}
+
+			return true;
+		}	
+<#+
+//		List<string> usedElements2 = new List<string>();
+//		GenerateSaveEmbMethodTarget(usedElements2, con, d, ref counter);				
+#>
+		return false;
+	}
+<#+
+			}
+			
+			foreach(SerializedDomainRole dRole in refRelationshipsRoleToRead)
+			{
+				DomainRole role = dRole.DomainRole;
+				ReferenceRelationship con = domainClass as ReferenceRelationship;				
+				
+			
+				bool bSource = true;
+				string roleName = con.Source.Name;
+				if( con.Target == dRole.DomainRole )
+				{
+					bSource = false;
+					roleName = con.Target.Name;
+				}				
+#>
+	/// <summary>
+	/// Read ref. rel <#= con.Name #> role <#= role.Name #> that needed to be serialized as XML element.
+	/// </summary>
+	/// <param name="serializationContext">Serialization context.</param>
+	/// <param name="instance"><#= domainClass.Name #> instance to be serialized.</param>
+	/// <param name="reader">XmlWriter to write serialized data to.</param> 
+	/// <param name="readerLocalName">Local name.</param>
+	[global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Generated code.")]
+	protected virtual bool ReadReferenceRelationshipRole<#= con.Name #><#= role.Name #>(DslModeling::SerializationContext serializationContext, <#= domainClass.GetFullName(true) #> instance, global::System.Xml.XmlReader reader, string readerLocalName)
+	{
+		if( readerLocalName ==  "<#= dRole.SerializationName #>")
+		{
+			string attribValue<#= roleName #> = <#= this.MetaModel.Name #>SerializationHelper.Instance.ReadAttribute(serializationContext, instance, reader, "<#= dRole.SerializationAttributeName #>");
+			if( attribValue<#= roleName #> != null )
+			{
+				System.Guid id = <#= this.MetaModel.Name #>SerializationHelper.Instance.ConvertIdFrom(serializationContext, attribValue<#= roleName #>);
+				if( id != System.Guid.Empty)
+				{
+<#+
+			if( bSource )
+			{
+#>
+					<#= domainClass.GetMetaModel().Namespace #>.<#= domainClass.GetMetaModel().Name #>SerializationPostProcessor.Instance.AddPostProcessData(
+						<#= con.GetFullName(true) #>.DomainClassId, instance.Id, id, System.Guid.Empty);
+					<#= domainClass.GetMetaModel().Namespace #>.<#= domainClass.GetMetaModel().Name #>SerializationPostProcessor.Instance.AddRelationshipTrackData(instance.Id);
+<#+
+			}
+			else
+			{
+#>
+					<#= domainClass.GetMetaModel().Namespace #>.<#= domainClass.GetMetaModel().Name #>SerializationPostProcessor.Instance.AddPostProcessData(
+						<#= con.GetFullName(true) #>.DomainClassId, instance.Id, System.Guid.Empty, id);
+					<#= domainClass.GetMetaModel().Namespace #>.<#= domainClass.GetMetaModel().Name #>SerializationPostProcessor.Instance.AddRelationshipTrackData(instance.Id);
+<#+
+			}
+#>
+				}
+			}
+			DslModeling::SerializationUtilities.Skip(reader);
+			return true;	
+		}
+			
+		return false;
+	}
+<#+
+			}
+	bool privateHelper = false;
+#>
+	
+	#region TryCreateInstance<#= isRelationship ? " & TryCreateDerivedInstance" : string.Empty #>
+<#+
+	//string serInhModifier = "";
+	//if( domainClass.BaseElement != null && (domainClass is DomainClass))
+	//	if( (domainClass as DomainClass).GetMetaModel() == this.MetaModel )
+	//		serInhModifier = "new ";
+#>
+	/// <summary>
+	/// This method creates a correct instance of <#= domainClass.Name #> based on the tag currently pointed by the reader. If the reader
+	/// is positioned at a serialized <#= domainClass.Name #>, a new <#= domainClass.Name #> instance will be created in the given partition, otherwise 
+	/// null is returned.
+	/// </summary>
+	/// <remarks>
+	/// The caller will guarantee that the reader is positioned at open XML tag of the next element being read. This method should
+	/// not move the reader; the reader should remain at the same position when this method returns.
+	/// </remarks>
+	/// <param name="serializationContext">Serialization context.</param>
+	/// <param name="reader">XmlReader to read serialized data from.</param>
+	/// <param name="partition">Partition in which new elements should be created.</param>	
+	/// <returns>Created <#= domainClass.Name #> instance, or null if the reader is not pointing to a serialized <#= domainClass.Name #> instance.</returns>
+	public override DslModeling::ModelElement TryCreateInstance(DslModeling::SerializationContext serializationContext, global::System.Xml.XmlReader reader, DslModeling::Partition partition)
+	{
+		#region Check Parameters
+		global::System.Diagnostics.Debug.Assert (serializationContext != null);
+		if (serializationContext == null)
+			throw new global::System.ArgumentNullException ("serializationContext");
+		global::System.Diagnostics.Debug.Assert (reader != null);
+		if (reader == null)
+			throw new global::System.ArgumentNullException ("reader");
+		global::System.Diagnostics.Debug.Assert (partition != null);
+		if (partition == null)
+			throw new global::System.ArgumentNullException ("partition");
+		#endregion
+
+<#+
+		if (isRelationship && !isSealed && !isAbstract)
+		{	// For a non-abstract non-sealed relationship, the implementation of TryCreateDerivedInstance() is almost the same as 
+			// TryCreateInstance(). So we generate the actual implementation into a private helper method to re-use
+			// some code.
+			privateHelper = true;
+#>
+		return this.InternalTryCreateInstance(serializationContext, reader, partition, false /* include the type itself */);
+	}
+
+	/// <summary>
+	/// This method creates a correct derived instance of <#= domainClass.Name #> based on the tag currently pointed by the reader.
+	/// Note that the difference between this method and the above one is that this method will never create an instance of the
+	/// <#= domainClass.Name #> type itself, only derived types are checked.
+	/// </summary>
+	/// <remarks>
+	/// The caller will guarantee that the reader is positioned at open XML tag of the next element being read. This method should
+	/// not move the reader; the reader should remain at the same position when this method returns.
+	/// </remarks>		
+	/// <param name="serializationContext">Serialization context.</param>
+	/// <param name="reader">XmlReader to read serialized data from.</param>
+	/// <param name="partition">Partition in which new elements should be created.</param>
+	/// <returns>Created instance that derives from <#= domainClass.Name #>, or null if the reader is not pointing to such a serialized instance.</returns>
+	public override DslModeling::ElementLink TryCreateDerivedInstance (DslModeling::SerializationContext serializationContext, global::System.Xml.XmlReader reader, DslModeling::Partition partition)
+	{
+		#region Check Parameters
+		global::System.Diagnostics.Debug.Assert (serializationContext != null);
+		if (serializationContext == null)
+			throw new global::System.ArgumentNullException ("serializationContext");
+		global::System.Diagnostics.Debug.Assert (reader != null);
+		if (reader == null)
+			throw new global::System.ArgumentNullException ("reader");
+		global::System.Diagnostics.Debug.Assert (partition != null);
+		if (partition == null)
+			throw new global::System.ArgumentNullException ("partition");
+		#endregion
+
+		return this.InternalTryCreateInstance(serializationContext, reader, partition, true /* derived types only */) as DslModeling::ElementLink;
+	}
+
+	/// <summary>
+	/// Internal helper method for TryCreateInstance() and TryCreateDerivedInstance().
+	/// </summary>
+	/// <param name="serializationContext">Serialization context.</param>
+	/// <param name="reader">XmlReader to read serialized data from.</param>
+	/// <param name="partition">Partition in which new elements should be created.</param>
+	/// <param name="derivedTypesOnly">If true, this method will only check derived types, but not the domain class iitself.</param>
+	private DslModeling::ModelElement InternalTryCreateInstance (DslModeling::SerializationContext serializationContext, global::System.Xml.XmlReader reader, DslModeling::Partition partition, bool derivedTypesOnly)
+	{
+<#+
+		}
+#>
+		DslModeling::ModelElement result = null;
+		if (!serializationContext.Result.Failed && !reader.EOF && reader.NodeType == global::System.Xml.XmlNodeType.Element)
+		{
+			string localName = reader.LocalName;
+<#+
+		if (!isAbstract)
+		{
+#>
+			if (<#= privateHelper ? "!derivedTypesOnly && " : string.Empty #>string.Compare (localName, this.XmlTagName, global::System.StringComparison.CurrentCulture) == 0)
+			{	// New "<#= domainClass.Name #>" instance.
+				result = this.CreateInstance(serializationContext, reader, partition);
+			}
+<#+
+			if (!isSealed)
+			{
+#>
+			else
+			{	// Check for derived classes of "<#= domainClass.Name #>".
+				//if (derivedClasses == null)
+				//	ConstructDerivedClassesLookupTable<#= domainClass.Name #>(serializationContext.Directory, partition.DomainDataDirectory);
+				//global::System.Diagnostics.Debug.Assert (derivedClasses != null);
+				//DslModeling::DomainClassInfo derivedClass = null;
+				System.Guid derivedType = DslEditorModeling::SerializationHelper.TryGetDerivedNameType(<#= domainClass.GetFullName(true) #>.DomainClassId, localName);
+				if( derivedType != System.Guid.Empty )
+				//if (derivedClasses.TryGetValue (localName, out derivedClass) && derivedClass != null)
+				{	// New derived <#= isRelationship ? "relationship" : "class" #> instance.
+					//<#= serializerGenerationClassName #> derivedSerializer = serializationContext.Directory.GetSerializer(derivedClass.Id) as <#= serializerGenerationClassName #>;
+					<#= serializerGenerationClassName #> derivedSerializer = serializationContext.Directory.GetSerializer(derivedType) as <#= serializerGenerationClassName #>;
+					global::System.Diagnostics.Debug.Assert(derivedSerializer != null, "Cannot find serializer for " + derivedType + "!");
+					result = derivedSerializer.CreateInstance(serializationContext, reader, partition);
+				}
+			}
+<#+
+			}
+		}
+		else
+		{
+#>
+			// Check for derived classes of "<#= domainClass.Name #>".
+			//if (derivedClasses == null)
+			//	ConstructDerivedClassesLookupTable<#= domainClass.Name #>(serializationContext.Directory, partition.DomainDataDirectory);
+			//global::System.Diagnostics.Debug.Assert (derivedClasses != null);
+			//DslModeling::DomainClassInfo derivedClass = null;
+			System.Guid derivedType = DslEditorModeling::SerializationHelper.TryGetDerivedNameType(<#= domainClass.GetFullName(true) #>.DomainClassId, localName);
+			if( derivedType != System.Guid.Empty )
+			//if (derivedClasses.TryGetValue (localName, out derivedClass) && derivedClass != null)
+			{	// New derived <#= isRelationship ? "relationship" : "class" #> instance.
+				//<#= serializerGenerationClassName #> derivedSerializer = serializationContext.Directory.GetSerializer(derivedClass.Id) as <#= serializerGenerationClassName #>;
+				<#= serializerGenerationClassName #> derivedSerializer = serializationContext.Directory.GetSerializer(derivedType) as <#= serializerGenerationClassName #>;
+				global::System.Diagnostics.Debug.Assert(derivedSerializer != null, "Cannot find serializer for " + derivedType + "!");
+				result = derivedSerializer.CreateInstance(serializationContext, reader, partition);
+			}
+<#+
+		}
+#>
+		}
+
+		return result;
+	}
+
+	/// <summary>
+	/// This method creates an instance of <#= domainClass.Name #> based on the tag currently pointed by the reader. The reader is guaranteed (by the caller)
+	/// to be pointed at a serialized instance of <#= domainClass.Name #>.
+	/// </summary>
+	/// <remarks>
+	/// The caller will guarantee that the reader is positioned at open XML tag of the ModelRoot instance being read. This method should
+	/// not move the reader; the reader should remain at the same position when this method returns.
+	/// </remarks>
+	/// <param name="serializationContext">Serialization context.</param>
+	/// <param name="reader">XmlReader to read serialized data from.</param>
+	/// <param name="partition">Partition in which new <#= domainClass.Name #> instance should be created.</param>	
+	/// <returns>Created <#= domainClass.Name #> instance.</returns>
+	protected override DslModeling::ModelElement CreateInstance(DslModeling::SerializationContext serializationContext, global::System.Xml.XmlReader reader, DslModeling::Partition partition)
+	{
+<#+
+		if (isAbstract)
+		{
+#>
+		// Abstract class, cannot be serialized.
+		throw new global::System.NotSupportedException();
+<#+
+		}
+		else
+		{
+#>
+		string idStr = reader.GetAttribute (<#= this.MetaModel.Name #>SerializationBehavior.Instance.IdSerializationName<#= domainClass.ParentModelContext.Name #>);
+		try
+		{
+			global::System.Guid id;
+			if (string.IsNullOrEmpty(idStr))
+			{	// Create a default Id.
+				id = <#= this.MetaModel.Name #>DomainModelIdProvider.Instance.GenerateNewKey();
+<#+
+				if( !bOmitIdProperty )
+				{
+#>
+				DslModeling::SerializationUtilities.AddMessage(serializationContext,DslModeling::SerializationMessageKind.Warning,
+					"Missing 'Id' attribute, a new Guid " + id.ToString() + " is auto-generated. Element type (<#= domainClass.Name #>)",
+	    			reader as global::System.Xml.IXmlLineInfo);
+				//<#= this.MetaModel.Name #>SerializationBehaviorSerializationMessages.MissingId(serializationContext, reader, id);
+<#+
+				}
+#>
+			}
+			else
+			{
+				id = <#= this.MetaModel.Name #>SerializationHelper.Instance.ConvertIdFrom(serializationContext, idStr);
+			}
+<#+
+				if (!isRelationship)
+				{
+#>
+			return new <#= classTypeString #>(partition, new DslModeling::PropertyAssignment(DslModeling::ElementFactory.IdPropertyAssignment, id));
+<#+
+				}
+				else
+				{
+					DomainRole nonAnchorRole = (domainClass as DomainRelationship).Target;
+					DomainRole anchorRole = nonAnchorRole.Opposite;
+#>
+			
+			// Create the link with place-holder role-players.
+			return new <#= classTypeString #>(
+				partition,
+				new DslModeling::RoleAssignment[] {
+					DslModeling::RoleAssignment.CreatePlaceholderRoleAssignment (<#= classTypeString #>.<#= anchorRole.Name #>DomainRoleId), 
+					DslModeling::RoleAssignment.CreatePlaceholderRoleAssignment (<#= classTypeString #>.<#= nonAnchorRole.Name #>DomainRoleId)
+				},
+				new DslModeling::PropertyAssignment[] {
+					new DslModeling::PropertyAssignment(DslModeling::ElementFactory.IdPropertyAssignment, id)
+				}
+			);
+<#+
+				}
+#>
+		}
+		catch (global::System.ArgumentNullException /* anEx */)
+		{	
+			<#= this.MetaModel.Name #>SerializationBehaviorSerializationMessages.InvalidPropertyValue(serializationContext, reader, "Id", typeof(global::System.Guid), idStr);
+		}
+		catch (global::System.FormatException /* fEx */)
+		{
+			<#= this.MetaModel.Name #>SerializationBehaviorSerializationMessages.InvalidPropertyValue(serializationContext, reader, "Id", typeof(global::System.Guid), idStr);
+		}
+		catch (global::System.OverflowException /* ofEx */)
+		{
+			<#= this.MetaModel.Name #>SerializationBehaviorSerializationMessages.InvalidPropertyValue(serializationContext, reader, "Id", typeof(global::System.Guid), idStr);
+		}
+		return null;
+<#+
+			
+		}
+#>
+	}
+<#+
+		if (isRelationship && !privateHelper)
+		{
+#>
+
+	/// <summary>
+	/// This method creates a correct derived instance of <#= domainClass.Name #> based on the tag currently pointed by the reader.
+	/// Note that the difference between this method and the above one is that this method will never create an instance of the
+	/// <#= domainClass.Name #> type itself, only derived types are checked.
+	/// </summary>
+	/// <remarks>
+	/// The caller will guarantee that the reader is positioned at open XML tag of the next element being read. This method should
+	/// not move the reader; the reader should remain at the same position when this method returns.
+	/// </remarks>		
+	/// <param name="serializationContext">Serialization context.</param>
+	/// <param name="reader">XmlReader to read serialized data from.</param>
+	/// <param name="partition">Partition in which new elements should be created.</param>
+	/// <returns>Created instance that derives from <#= domainClass.Name #>, or null if the reader is not pointing to such a serialized instance.</returns>
+	public override DslModeling::ElementLink TryCreateDerivedInstance (DslModeling::SerializationContext serializationContext, global::System.Xml.XmlReader reader, DslModeling::Partition partition)
+<#+
+			if (isAbstract)
+			{	// For abstract relationship, TryCreateDerivedInstance() and TryCreateInstance() will be the same
+#>
+	{	// Abstract relationship, so it's the same as TryCreateInstance().
+		return this.TryCreateInstance(serializationContext, reader, partition) as DslModeling::ElementLink;
+<#+
+			}
+			else // Must be sealed.
+			{	// Sealed relationship won't have derived instances.		
+#>
+	{	// Sealed relationship, won't have any derived instances.
+		return null;
+<#+
+			}
+#>
+	}
+<#+
+		}
+#>
+	#endregion
+	#endregion
+
+	#region Write
+	/// <summary>
+	/// Public Write() method that serializes one <#= domainClass.Name #> instance into XML.
+	/// </summary>
+	/// <param name="serializationContext">Serialization context.</param>
+	/// <param name="element"><#= domainClass.Name #> instance to be serialized.</param>
+	/// <param name="writer">XmlWriter to write serialized data to.</param>
+	/// <param name="rootElementSettings">
+	/// The root element settings if the passed in element is serialized as a root element in the XML. The root element contains additional
+	/// information like schema target namespace, version, etc.
+	/// This should only be passed for root-level elements. Null should be passed for rest elements (and ideally call the Write() method 
+	/// without this parameter).
+	/// </param>
+	/// <param name="options">Serialization options.</param>
+	public override void Write(DslModeling::SerializationContext serializationContext, DslModeling::ModelElement element, global::System.Xml.XmlWriter writer, DslModeling::RootElementSettings rootElementSettings, DslEditorModeling::SerializationOptions options)
+	{
+<#+ 
+	if( isAbstract )
+	{
+#>
+		throw new global::System.NotSupportedException();
+<#+
+	}
+	else
+	{
+#>
+		#region Check Parameters
+		global::System.Diagnostics.Debug.Assert (serializationContext != null);
+		if (serializationContext == null)
+			throw new global::System.ArgumentNullException ("serializationContext");
+		global::System.Diagnostics.Debug.Assert (element != null);
+		if (element == null)
+			throw new global::System.ArgumentNullException ("element");
+		global::System.Diagnostics.Debug.Assert (writer != null);
+		if (writer == null)
+			throw new global::System.ArgumentNullException ("writer");
+		#endregion
+
+		// Write start of element, including schema target namespace if specified.
+		writer.WriteStartElement(this.XmlTagName);
+		
+<#+
+	if( domainClass is DomainClass )
+		if( (domainClass as DomainClass).IsDomainModel)
+		{
+#>		
+		if(rootElementSettings != null )
+			<#= this.MetaModel.Name #>SerializationHelper.Instance.WriteSchemaDefinitions(writer, "<#= (domainClass as DomainClass).ModelContext.Name #>", "<#= domainClass.Name #>");
+		
+<#+
+		}
+		if( propertySerializedAsInnerValue != null )
+		{
+			string isReq = "false";
+			if( propertySerializedAsInnerValue.IsRequired )
+				isReq = "true";
+#>
+		// Write inner value property
+		<#= domainClass.GetFullName(true) #> instance = element as <#= domainClass.GetFullName(true) #>;	
+		object value<#= propertySerializedAsInnerValue.Name #> = <#= this.MetaModel.Name #>SerializationHelper.Instance.ConvertTypedObjectTo(serializationContext,instance, "<#= propertySerializedAsInnerValue.Name #>" , instance.<#= propertySerializedAsInnerValue.Name #>, typeof(<#= CodeGenerationUtilities.GetDomainTypeFullName(propertySerializedAsInnerValue) #>), <#= isReq #>);		
+		if( value<#= propertySerializedAsInnerValue.Name #> != null )
+		{
+<#+
+			if( propertySerializedAsInnerValue.Type.SerializationStyle == SerializationStyle.CDATA )					
+			{
+#>
+		<#= this.MetaModel.Name #>SerializationHelper.Instance.WriteCDATAFromInnerXmlAsString(serializationContext, instance, writer, "<#= propertySerializedAsInnerValue.Name #>", value<#= propertySerializedAsInnerValue.Name #>.ToString());
+<#+
+			}
+			else
+			{
+#>
+		<#= this.MetaModel.Name #>SerializationHelper.Instance.WriteInnerXmlAsString(serializationContext, instance, writer, "<#= propertySerializedAsInnerValue.Name #>", value<#= propertySerializedAsInnerValue.Name #>.ToString());
+<#+
+			}
+#>
+		}
+<#+
+		}
+#>
+		if (!serializationContext.Result.Failed)
+		{
+			WritePropertiesAsAttributes(serializationContext, element, writer, options);
+		}
+
+		if (!serializationContext.Result.Failed)
+		{
+			// Write 1) properties serialized as nested XML elements and 2) child model elements into XML.
+			WriteElements(serializationContext, element, writer, options);
+		}
+		writer.WriteEndElement();
+<#+
+	}
+#>
+	}
+
+	/// <summary>
+	/// Write all properties that need to be serialized as XML attributes.
+	/// </summary>
+	/// <param name="serializationContext">Serialization context.</param>
+	/// <param name="element"><#= domainClass.Name #> instance to be serialized.</param>
+	/// <param name="writer">XmlWriter to write serialized data to.</param> 
+	/// <param name="options">Serialization options.</param>
+	[global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Generated code.")]
+	protected override void WritePropertiesAsAttributes(DslModeling::SerializationContext serializationContext, DslModeling::ModelElement element, global::System.Xml.XmlWriter writer, DslEditorModeling::SerializationOptions options)
+	{
+		<#= domainClass.GetFullName(true) #> instance = element as <#= domainClass.GetFullName(true) #>;
+		global::System.Diagnostics.Debug.Assert(instance != null, "Expecting an instance of <#= domainClass.Name #>");
+		
+<#+
+		List<SerializedDomainProperty> propertiesToWriteInThisClass = new List<SerializedDomainProperty>();
+		if( Attributes != null )
+			foreach(SerializationAttributeElement attr in Attributes)
+			{
+				if( attr is SerializedIdProperty)
+				{
+					if( !bOmitIdProperty )
+					{
+#>
+		// Domain Element Id
+		string valueId = <#= this.MetaModel.Name #>SerializationHelper.Instance.ConvertIdTo(serializationContext, element.Id);
+		writer.WriteAttributeString(<#=this.MetaModel.Name+"SerializationBehavior" #>.Instance.IdSerializationName<#= domainClass.ParentModelContext.Name #>, valueId);
+		
+<#+		
+					}					
+				}
+				else if( attr is SerializedDomainProperty)
+				{
+					SerializedDomainProperty sP = attr as SerializedDomainProperty;
+					DomainProperty p = sP.DomainProperty;
+					
+					if( sP.OmitProperty )
+						continue;
+					
+					if( p.Element.GetMetaModel() == this.MetaModel && p.Element == domainClass)
+						propertiesToWriteInThisClass.Add(sP);
+
+#>
+		if (!serializationContext.Result.Failed)
+		{
+			WritePropertyAsAttribute<#= p.Name #>(serializationContext, instance, writer, options);
+		}
+<#+					
+				}
+			}
+#>
+	}
+
+<#+
+			foreach(SerializedDomainProperty sP in propertiesToWriteInThisClass)
+			{
+				DomainProperty p = sP.DomainProperty;
+				
+				string isReq = "false";
+				if( p.IsRequired )
+					isReq = "true";
+				
+				if( sP.SerializationRepresentationType != SerializationRepresentationType.Attribute )
+					continue;
+
+				string modifier ="virtual";
+				if( CodeGenerationUtilities.HasProperty(domainClass.BaseElement, p.Name))
+					modifier = "override";
+#>
+	/// <summary>
+	/// Write property <#= p.Name #> that need to be serialized as XML attribute.
+	/// </summary>
+	/// <param name="serializationContext">Serialization context.</param>
+	/// <param name="instance"><#= domainClass.Name #> instance to be serialized.</param>
+	/// <param name="writer">XmlWriter to write serialized data to.</param> 
+	/// <param name="options">Serialization options.</param>
+	[global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Generated code.")]
+	protected <#= modifier #> void WritePropertyAsAttribute<#= p.Name #>(DslModeling::SerializationContext serializationContext, <#= domainClass.GetFullName(true) #> instance, global::System.Xml.XmlWriter writer, DslEditorModeling::SerializationOptions options)
+	{
+		// <#= p.Name #>
+		object value<#= p.Name #> = <#= p.Type.MetaModel.GetFullName(true) #>SerializationHelper.Instance.ConvertTypedObjectTo(serializationContext,instance, "<#= p.Name #>" ,instance.<#= p.Name #>, typeof(<#= CodeGenerationUtilities.GetDomainTypeFullName(p) #>), <#= isReq #>);
+<#+
+		if( String.IsNullOrEmpty(p.DefaultValue) )
+		{
+#>
+		if( value<#= p.Name #> != null )
+		{
+			<#= this.MetaModel.Name #>SerializationHelper.Instance.WriteAttributeString(serializationContext, instance, writer, "<#= sP.SerializationName #>", value<#= p.Name #>.ToString());
+		}
+<#+
+		}
+		else
+		{
+#>
+		if( value<#= p.Name #> != null )
+			<#= this.MetaModel.Name #>SerializationHelper.Instance.WriteAttributeString(serializationContext, instance, writer, "<#= sP.SerializationName #>", value<#= p.Name #>.ToString());
+		else
+			<#= this.MetaModel.Name #>SerializationHelper.Instance.WriteAttributeString(serializationContext, instance, writer, "<#= sP.SerializationName #>", "");
+<#+
+		}
+#>
+	}
+<#+
+			}
+#>
+	
+	/// <summary>
+	/// This methods serializes 1) properties serialized as nested XML elements and 2) child model elements into XML. 
+	/// </summary>
+	/// <param name="serializationContext">Serialization context.</param>
+	/// <param name="element"><#= domainClass.Name #> instance to be serialized.</param>
+	/// <param name="writer">XmlWriter to write serialized data to.</param>        
+	/// <param name="options">Serialization options.</param>
+	protected override void WriteElements(DslModeling::SerializationContext serializationContext, DslModeling::ModelElement element, global::System.Xml.XmlWriter writer, DslEditorModeling::SerializationOptions options)
+	{
+<#+
+	List<SerializedEmbeddingRelationship> embRelationshipsToWrite = new List<SerializedEmbeddingRelationship>();
+	List<SerializedDomainClass> embRelationshipsTargetToWrite = new List<SerializedDomainClass>();
+	List<SerializedReferenceRelationship> refRelationshipsToWrite = new List<SerializedReferenceRelationship>();
+	List<SerializedDomainRole> refRelationshipsRoleToWrite = new List<SerializedDomainRole>();			
+	if(Children != null )
+	{
+#>
+		<#= domainClass.GetFullName(true) #> instance = element as <#= domainClass.GetFullName(true) #>;
+		global::System.Diagnostics.Debug.Assert(instance != null, "Expecting an instance of <#= domainClass.Name #>");
+		
+<#+
+		propertiesToWriteInThisClass.Clear();
+		foreach(SerializationElement child in Children )
+		{
+			if( child is SerializedDomainProperty )
+			{
+				SerializedDomainProperty sP = child as SerializedDomainProperty;
+				DomainProperty p = sP.DomainProperty;
+				
+				if( sP.OmitProperty )
+					continue;				
+				
+				if( sP.SerializationRepresentationType != SerializationRepresentationType.Element )
+					continue;
+				
+				if( p.Element.GetMetaModel() == this.MetaModel && p.Element == domainClass)
+					propertiesToWriteInThisClass.Add(sP);
+#>
+		WritePropertyAsElement<#= p.Name #>(serializationContext, instance, writer, options);
+<#+
+			}
+			else if( child is SerializedEmbeddingRelationship)
+			{
+				SerializedEmbeddingRelationship sCon = child as SerializedEmbeddingRelationship;
+				EmbeddingRelationship con = sCon.EmbeddingRelationship;
+			
+				if( sCon.OmitRelationship )
+					continue;
+				
+				if( con.GetMetaModel() == this.MetaModel && con.Source.RolePlayer == domainClass)
+					embRelationshipsToWrite.Add(sCon);
+
+#>
+		WriteEmbeddingRelationship<#= con.Name #>(serializationContext, instance, writer, options);
+<#+
+			}
+			else if( child is SerializedReferenceRelationship && !(domainClass is EmbeddingRelationship))
+			{
+				SerializedReferenceRelationship sCon = child as SerializedReferenceRelationship;
+				ReferenceRelationship con = sCon.ReferenceRelationship;
+			
+				if( sCon.OmitRelationship )
+					continue;
+				
+				if( con.GetMetaModel() == this.MetaModel && con.Source.RolePlayer == domainClass )
+					refRelationshipsToWrite.Add(sCon);				
+#>
+		WriteReferenceRelationship<#= con.Name #>(serializationContext, instance, writer, options);
+<#+
+			}
+			else if( child is SerializedDomainClass && domainClass is EmbeddingRelationship )
+			{
+				EmbeddingRelationship con = domainClass as EmbeddingRelationship;
+				SerializedDomainClass dS = child as SerializedDomainClass;
+				DomainClass d = dS.DomainClass;
+				
+				if( d.GetMetaModel() == this.MetaModel)
+					embRelationshipsTargetToWrite.Add(dS);
+#>
+		WriteEmbeddingRelationshipTarget<#= con.Name #><#= d.Name #>(serializationContext, instance, writer, options);
+<#+	
+			}
+			else if( child is SerializedDomainRole && domainClass is ReferenceRelationship )
+			{
+				SerializedDomainRole sRole = child as SerializedDomainRole;
+				DomainRole role = sRole.DomainRole;
+				ReferenceRelationship con = domainClass as ReferenceRelationship;
+				
+				if( role.RolePlayer.GetMetaModel() == this.MetaModel )
+					refRelationshipsRoleToWrite.Add(sRole);				
+				
+#>
+		WriteReferenceRelationshipRole<#= con.Name #><#= role.Name #>(serializationContext, instance, writer, options);
+<#+
+			}
+		}
+	}
+#>
+	}
+	
+<#+
+			foreach(SerializedDomainProperty sP in propertiesToWriteInThisClass)
+			{
+				DomainProperty p = sP.DomainProperty;
+				
+				string isReq = "false";
+				if( p.IsRequired )
+					isReq = "true";
+				
+				if( sP.SerializationRepresentationType != SerializationRepresentationType.Element )
+					continue;
+				
+				string modifier ="virtual";
+				if( CodeGenerationUtilities.HasProperty(domainClass.BaseElement, p.Name))
+					modifier = "override";
+#>
+	/// <summary>
+	/// Write property <#= p.Name #> that need to be serialized as XML element.
+	/// </summary>
+	/// <param name="serializationContext">Serialization context.</param>
+	/// <param name="instance"><#= domainClass.Name #> instance to be serialized.</param>
+	/// <param name="writer">XmlWriter to write serialized data to.</param> 
+	/// <param name="options">Serialization options.</param>
+	[global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Generated code.")]
+	protected <#= modifier #> void WritePropertyAsElement<#= p.Name #>(DslModeling::SerializationContext serializationContext, <#= domainClass.GetFullName(true) #> instance, global::System.Xml.XmlWriter writer, DslEditorModeling::SerializationOptions options)
+	{
+		if (!serializationContext.Result.Failed)
+		{
+			// <#= p.Name #>
+			object value<#= p.Name #> = <#= p.Type.MetaModel.GetFullName(true) #>SerializationHelper.Instance.ConvertTypedObjectTo(serializationContext,instance, "<#= p.Name #>", instance.<#= p.Name #>, typeof(<#= CodeGenerationUtilities.GetDomainTypeFullName(p) #>), <#= isReq #>);
+
+<#+
+		if( String.IsNullOrEmpty(p.DefaultValue) )
+		{
+#>
+			if( value<#= p.Name #> != null )
+			{
+<#+
+				if( p.Type.SerializationStyle == SerializationStyle.CDATA )
+				{
+#>
+				<#= this.MetaModel.Name #>SerializationHelper.Instance.WriteElementCDATAString(serializationContext, instance, writer, "<#= sP.SerializationName #>", value<#= p.Name #>.ToString());				
+<#+
+				}
+				else
+				{
+#>
+				<#= this.MetaModel.Name #>SerializationHelper.Instance.WriteElementString(serializationContext, instance, writer, "<#= sP.SerializationName #>", value<#= p.Name #>.ToString());
+<#+
+				}
+#>
+			}
+<#+
+		}
+		else
+		{
+#>
+			if( value<#= p.Name #> != null )
+			{
+<#+
+				if( p.Type.SerializationStyle == SerializationStyle.CDATA )
+				{
+#>
+				<#= this.MetaModel.Name #>SerializationHelper.Instance.WriteElementCDATAString(serializationContext, instance, writer, "<#= sP.SerializationName #>", value<#= p.Name #>.ToString());				
+<#+
+				}
+				else
+				{
+#>
+				<#= this.MetaModel.Name #>SerializationHelper.Instance.WriteElementString(serializationContext, instance, writer, "<#= sP.SerializationName #>", value<#= p.Name #>.ToString());
+<#+
+				}
+#>
+			}
+			else
+			{
+<#+
+				if( p.Type.SerializationStyle == SerializationStyle.CDATA )
+				{
+#>
+				<#= this.MetaModel.Name #>SerializationHelper.Instance.WriteElementCDATAString(serializationContext, instance, writer, "<#= sP.SerializationName #>", "");
+<#+
+				}
+				else
+				{
+#>
+				<#= this.MetaModel.Name #>SerializationHelper.Instance.WriteElementString(serializationContext, instance, writer, "<#= sP.SerializationName #>", "");
+<#+
+				}
+#>				
+			}
+<#+			
+		}
+#>			
+		}		
+	}
+<#+
+			}
+			
+			foreach(SerializedEmbeddingRelationship sCon in embRelationshipsToWrite)
+			{
+				EmbeddingRelationship con = sCon.EmbeddingRelationship;
+				string modifier = "virtual";
+				if( CodeGenerationUtilities.HasRelationship(domainClass.BaseElement, con.Name))
+					modifier = "override";				
+#>
+	/// <summary>
+	/// Write emb. rel <#= con.Name #> that need to be serialized as XML element.
+	/// </summary>
+	/// <param name="serializationContext">Serialization context.</param>
+	/// <param name="instance"><#= domainClass.Name #> instance to be serialized.</param>
+	/// <param name="writer">XmlWriter to write serialized data to.</param> 
+	/// <param name="options">Serialization options.</param>
+	[global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Generated code.")]
+	protected <#= modifier #> void WriteEmbeddingRelationship<#= con.Name #>(DslModeling::SerializationContext serializationContext, <#= domainClass.GetFullName(true) #> instance, global::System.Xml.XmlWriter writer, DslEditorModeling::SerializationOptions options)
+	{
+<#+
+				if( sCon.IsTargetIncludedSubmodel )
+				{
+					DomainClass targetClass = con.Target.RolePlayer as DomainClass;
+#>
+		<#= con.GetFullName(true) #> allM<#= con.Name #>Instance = <#= con.GetFullName(true) #>.GetLinkTo<#= con.Source.PropertyName.TrimStart('@') #>(instance);
+        if( allM<#= con.Name #>Instance != null )
+		{
+			DslEditorModeling::IParentModelElement parent = instance.GetDomainModelServices().ElementParentProvider.GetParentModelElement(instance);
+            if (parent == null)
+                throw new System.ArgumentNullException("Parent of element " + instance.ToString() + " can not be null");
+			
+			string path = parent.DomainFilePath;
+            string vModellDirectory = new System.IO.FileInfo(path).DirectoryName;
+            
+			// get current path
+            string curPath = (allM<#= con.Name #>Instance.<#= con.Target.Name #> as DslEditorModeling::IParentModelElement).DomainFilePath;
+
+            // update v-modell path
+            string relPath = Tum.PDE.ToolFramework.Modeling.Visualization.VMXExtensions.Path.PathHelper.EvaluateRelativePath(
+                vModellDirectory, curPath);
+
+            // remove all DirectorySeparatorChars on the left, so we dont get a path like ////name/name.xml
+            while(relPath.Length > 0 )
+            {
+                if (relPath[0] == System.IO.Path.DirectorySeparatorChar)
+                    relPath = relPath.Remove(0, 1);
+                else
+                    break;
+            }
+			
+			writer.WriteStartElement("xi", "include", null);
+            writer.WriteAttributeString("href", relPath);
+            writer.WriteEndElement();
+
+            if (options.SerializationMode == DslEditorModeling::SerializationMode.Normal)
+            {
+                // save
+                <#= targetClass.GetMetaModel().GetFullName(true) #>SerializationHelper.Instance.SaveModel<#= targetClass.Name #>(serializationContext.Result, allM<#= con.Name #>Instance.<#= con.Target.Name #>, curPath, writer.Settings.Encoding, false);
+            }			
+		}
+<#+
+				}
+				else
+				{
+#>	
+		#region Save EmbeddingRelationship <#= con.Name #>
+<#+
+				bool bSerializeInFullForm = con.NeedsFullSerialization() || sCon.IsInFullSerialization;
+				if( con.Source.Multiplicity == Tum.PDE.LanguageDSL.Multiplicity.ZeroMany || con.Source.Multiplicity == Tum.PDE.LanguageDSL.Multiplicity.OneMany )
+				{
+#>
+		global::System.Collections.ObjectModel.ReadOnlyCollection<<#= con.GetFullName(true) #>> allM<#= con.Name #>Instances = <#= con.GetFullName(true) #>.GetLinksTo<#= con.Source.PropertyName.TrimStart('@') #>(instance);
+		foreach(<#= con.GetFullName(true)#> allM<#= con.Name #>Instance in allM<#= con.Name #>Instances)
+		{
+<#+
+				}
+				else
+				{
+#>
+		<#= con.GetFullName(true) #> allM<#= con.Name #>Instance = <#= con.GetFullName(true) #>.GetLinkTo<#= con.Source.PropertyName.TrimStart('@') #>(instance);
+		if( allM<#= con.Name #>Instance != null )
+		{
+<#+
+				}
+#>
+			if (!serializationContext.Result.Failed)
+			{
+<#+
+				if (bSerializeInFullForm)
+				{
+#>
+				// Relationship will be serialized in full-form.
+				DslModeling::ModelElement targetElement = allM<#= con.Name #>Instance;
+				DslEditorModeling::SerializationDomainClassXmlSerializer targetSerializer = serializationContext.Directory.GetSerializer(targetElement.GetDomainClass().Id) as DslEditorModeling::SerializationDomainClassXmlSerializer;
+				global::System.Diagnostics.Debug.Assert(targetSerializer != null, "Cannot find serializer for " + targetElement.GetDomainClass().Name + "!");			
+				targetSerializer.Write(serializationContext, targetElement, writer, options);
+<#+
+				}
+				else
+				{
+#>
+				// No need to serialize the relationship itself, just serialize the role-player directly.
+				DslModeling::ModelElement targetElement = allM<#= con.Name #>Instance.<#= con.Target.Name #>;
+				DslEditorModeling::SerializationDomainClassXmlSerializer targetSerializer = serializationContext.Directory.GetSerializer(targetElement.GetDomainClass().Id) as DslEditorModeling::SerializationDomainClassXmlSerializer;
+				global::System.Diagnostics.Debug.Assert(targetSerializer != null, "Cannot find serializer for " + targetElement.GetDomainClass().Name + "!");			
+				targetSerializer.Write(serializationContext, targetElement, writer, options);
+<#+
+				}
+#>
+			}
+		}
+		#endregion		
+<#+
+				}
+#>
+	}
+<#+
+			}
+			
+			foreach(SerializedReferenceRelationship sCon in refRelationshipsToWrite)
+			{
+				ReferenceRelationship con = sCon.ReferenceRelationship;
+				string modifier = "virtual";
+				if( CodeGenerationUtilities.HasRelationship(domainClass.BaseElement, con.Name))
+					modifier = "override";	
+#>
+	/// <summary>
+	/// Write ref. rel <#= con.Name #> that need to be serialized as XML element.
+	/// </summary>
+	/// <param name="serializationContext">Serialization context.</param>
+	/// <param name="instance"><#= domainClass.Name #> instance to be serialized.</param>
+	/// <param name="writer">XmlWriter to write serialized data to.</param> 
+	/// <param name="options">Serialization options.</param>
+	[global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Generated code.")]
+	protected <#= modifier #> void WriteReferenceRelationship<#= con.Name #>(DslModeling::SerializationContext serializationContext, <#= domainClass.GetFullName(true) #> instance, global::System.Xml.XmlWriter writer, DslEditorModeling::SerializationOptions options)
+	{
+		#region Save ReferenceRelationship <#= con.Name #>
+<#+				
+				bool bSerializeInFullForm = con.NeedsFullSerialization() || sCon.IsInFullSerialization;
+				if( con.Source.Multiplicity == Tum.PDE.LanguageDSL.Multiplicity.ZeroMany || con.Source.Multiplicity == Tum.PDE.LanguageDSL.Multiplicity.OneMany )
+				{
+#>
+		global::System.Collections.ObjectModel.ReadOnlyCollection<<#= con.GetFullName(true) #>> allM<#= con.Name #>Instances = <#= con.GetFullName(true) #>.GetLinksTo<#= con.Source.PropertyName.TrimStart('@') #>(instance);
+		foreach(<#= con.GetFullName(true)#> allM<#= con.Name #>Instance in allM<#= con.Name #>Instances)
+		{
+<#+
+				}
+				else
+				{
+#>
+		<#= con.GetFullName(true) #> allM<#= con.Name #>Instance = <#= con.GetFullName(true) #>.GetLinkTo<#= con.Source.PropertyName.TrimStart('@') #>(instance);
+		if( allM<#= con.Name #>Instance != null )
+		{
+<#+
+				}
+#>
+			if (!serializationContext.Result.Failed)
+			{
+<#+
+				if( bSerializeInFullForm )
+				{
+#>
+				// Full serialization mode
+				DslModeling::ModelElement targetElement = allM<#= con.Name #>Instance;
+				DslEditorModeling::SerializationDomainClassXmlSerializer targetSerializer = serializationContext.Directory.GetSerializer(targetElement.GetDomainClass().Id) as DslEditorModeling::SerializationDomainClassXmlSerializer;
+				global::System.Diagnostics.Debug.Assert(targetSerializer != null, "Cannot find serializer for " + targetElement.GetDomainClass().Name + "!");			
+				targetSerializer.Write(serializationContext, targetElement, writer, options);
+<#+
+				}
+				else
+				{
+#>
+				// Write target link
+				writer.WriteStartElement("<#= con.SerializationTargetName #>");
+				string valueId = <#= this.MetaModel.Name #>SerializationHelper.Instance.ConvertIdTo(serializationContext, (allM<#= con.Name #>Instance ).<#= con.Target.Name #>.Id);
+				writer.WriteAttributeString("<#= con.SerializationAttributeName #>", valueId);
+				writer.WriteEndElement();
+<#+
+				}
+#>
+			}
+		}
+		#endregion	
+	}
+<#+
+			}
+			
+			foreach(SerializedDomainClass dS in embRelationshipsTargetToWrite)
+			{
+				EmbeddingRelationship con = domainClass as EmbeddingRelationship;
+				DomainClass d = dS.DomainClass;
+#>
+	/// <summary>
+	/// Write emb. rel <#= con.Name #> target <#= d.Name #> that need to be serialized as XML element.
+	/// </summary>
+	/// <param name="serializationContext">Serialization context.</param>
+	/// <param name="instance"><#= domainClass.Name #> instance to be serialized.</param>
+	/// <param name="writer">XmlWriter to write serialized data to.</param> 
+	/// <param name="options">Serialization options.</param>
+	[global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Generated code.")]
+	protected virtual void WriteEmbeddingRelationshipTarget<#= con.Name #><#= d.Name #>(DslModeling::SerializationContext serializationContext, <#= domainClass.GetFullName(true) #> instance, global::System.Xml.XmlWriter writer, DslEditorModeling::SerializationOptions options)
+	{
+		#region Save EmbeddingRelationship Target Element (<#= d.Name #>)
+		if (!serializationContext.Result.Failed)
+		{
+			<#= con.GetFullName(true) #> rs = instance;
+			
+			// Write target link
+			//DslModeling::ModelElement targetElement = rs.<#= d.Name #>;
+			DslModeling::ModelElement targetElement = DslModeling::DomainRoleInfo.GetTargetRolePlayer(rs);
+			DslEditorModeling::SerializationDomainClassXmlSerializer targetSerializer = serializationContext.Directory.GetSerializer(targetElement.GetDomainClass().Id) as DslEditorModeling::SerializationDomainClassXmlSerializer;
+			global::System.Diagnostics.Debug.Assert(targetSerializer != null, "Cannot find serializer for " + targetElement.GetDomainClass().Name + "!");			
+			targetSerializer.Write(serializationContext, targetElement, writer, options);
+		}
+		#endregion		
+	}
+<#+
+			}
+			
+			foreach(SerializedDomainRole sRole in refRelationshipsRoleToWrite)
+			{
+				DomainRole role = sRole.DomainRole;
+				ReferenceRelationship con = domainClass as ReferenceRelationship;				
+#>
+	/// <summary>
+	/// Write ref. rel <#= con.Name #> role <#= role.Name #> that need to be serialized as XML element.
+	/// </summary>
+	/// <param name="serializationContext">Serialization context.</param>
+	/// <param name="instance"><#= domainClass.Name #> instance to be serialized.</param>
+	/// <param name="writer">XmlWriter to write serialized data to.</param> 
+	/// <param name="options">Serialization options.</param>
+	[global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Generated code.")]
+	protected virtual void WriteReferenceRelationshipRole<#= con.Name #><#= role.Name #>(DslModeling::SerializationContext serializationContext, <#= domainClass.GetFullName(true) #> instance, global::System.Xml.XmlWriter writer, DslEditorModeling::SerializationOptions options)
+	{
+		#region Save ReferenceRelationship <#= domainClass.Name #> Roles
+		if (!serializationContext.Result.Failed)
+		{
+			// Write <#= role.Name #> link id
+			writer.WriteStartElement("<#= sRole.SerializationName #>");
+			string valueId = <#= this.MetaModel.Name #>SerializationHelper.Instance.ConvertIdTo(serializationContext, instance.<#= role.Name #>.Id);
+			writer.WriteAttributeString("<#= sRole.SerializationAttributeName #>", valueId);
+			writer.WriteEndElement();
+		}
+		#endregion		
+	}
+<#+
+			}
+#>	
+	
+	#endregion
+}
+<#+ 
+	if (domainClass.GeneratesDoubleDerived)
+	{
+#>
+
+/// <summary>
+/// Serializer <#= serializerClassName #> for DomainClass <#= domainClass.GetRelativeName(namespaceString, false) #>.
+/// </summary>
+<#+
+		if (inheritanceDepth > 5)
+		{
+#>
+[global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1501:AvoidExcessiveInheritance", Justification = "Generated code.")]
+<#+
+		}
+#>
+<#= CodeGenerationUtilities.GetAccessModifier(domainClass.AccessModifier) #><#= domainClass.InheritanceModifier == InheritanceModifier.Sealed ? " sealed" : string.Empty #> partial class <#= serializerClassName #> : <#= serializerGenerationClassName #>
+{
+	#region Constructor
+	/// <summary>
+	/// <#= serializerClassName #> Constructor
+	/// </summary>
+	public <#= serializerClassName #> ()
+		: base ()
+	{
+	}
+	#endregion
+}
+<#+
+	}	
+#>
+
+<#+	
+	PopIndent();
+#>
+}
+<#+
+	return this.MetaModel.Name + domainClass.Name + "Serializer";
+}
+#>

@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VSPluginDSL", "Tum.FamilyTreeDSL\VSPluginDSL\VSPluginDSL.csproj", "{D1935D76-0E95-4902-A95F-88DE00B0358F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Debugging", "Tum.FamilyTreeDSL\Debugging\Debugging.csproj", "{908CD047-2E99-41CD-B04F-A355B85BC4AB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D1935D76-0E95-4902-A95F-88DE00B0358F}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{D1935D76-0E95-4902-A95F-88DE00B0358F}.Debug|Any CPU.Build.0 = Debug|x86
+		{D1935D76-0E95-4902-A95F-88DE00B0358F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1935D76-0E95-4902-A95F-88DE00B0358F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{908CD047-2E99-41CD-B04F-A355B85BC4AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{908CD047-2E99-41CD-B04F-A355B85BC4AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{908CD047-2E99-41CD-B04F-A355B85BC4AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{908CD047-2E99-41CD-B04F-A355B85BC4AB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

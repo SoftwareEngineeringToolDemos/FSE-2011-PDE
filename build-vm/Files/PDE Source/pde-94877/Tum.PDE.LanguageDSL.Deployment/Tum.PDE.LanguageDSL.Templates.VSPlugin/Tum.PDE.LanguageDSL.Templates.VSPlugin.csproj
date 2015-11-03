@@ -1,0 +1,197 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectTypeGuids>{82b43b9b-a64c-4715-b499-d71e9ca2bd60};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <ProjectGuid>{F4728D9A-D616-4115-B07F-B07486EF4FD2}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Tum.PDE.LanguageDSL.Templates.VSPlugin</RootNamespace>
+    <AssemblyName>Tum.PDE.LanguageDSL.Templates.VSPlugin</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <GeneratePkgDefFile>false</GeneratePkgDefFile>
+    <IncludeAssemblyInVSIXContainer>false</IncludeAssemblyInVSIXContainer>
+    <IncludeDebugSymbolsInVSIXContainer>false</IncludeDebugSymbolsInVSIXContainer>
+    <IncludeDebugSymbolsInLocalVSIXDeployment>false</IncludeDebugSymbolsInLocalVSIXDeployment>
+    <CreateVsixContainer>false</CreateVsixContainer>
+    <DeployExtension>false</DeployExtension>
+    <DeployVSTemplates>false</DeployVSTemplates>
+    <CopyVsixManifestToOutput>false</CopyVsixManifestToOutput>
+    <CopyBuildOutputToOutputDirectory>false</CopyBuildOutputToOutputDirectory>
+    <CopyOutputSymbolsToOutputDirectory>false</CopyOutputSymbolsToOutputDirectory>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualStudio.CoreUtility">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DslTemplate\CustomCode\SerializationHelper.cs" />
+    <None Include="DslTemplate\DomainMetaModel.diagram" />
+    <None Include="DslTemplate\DomainMetaModel.lngdsl">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DslTemplate\GeneratedCode\Model\Model.tt" />
+    <None Include="DslTemplate\GeneratedCode\Resources.tt" />
+    <None Include="DslTemplate\GeneratedCode\Shell\Shell.tt" />
+    <None Include="DslTemplate\GeneratedCode\ViewModel\ViewModel.tt" />
+    <None Include="DslTemplate\GeneratedCode\ViewModel\WPFApplication\App.tt" />
+    <None Include="DslTemplate\MainViewControl.xaml.cs">
+      <DependentUpon>MainViewControl.xaml</DependentUpon>
+    </None>
+    <None Include="DebuggingTemplate\AssemblyInfo.cs" />
+    <None Include="DebuggingTemplate\Sample.mydsl" />
+    <None Include="DebuggingTemplate\Test.mydsl" />
+    <None Include="DslTemplate\GeneratedCode\Model\Diagrams.cs" />
+    <None Include="DslTemplate\GeneratedCode\Model\DiagramsLinkRules.cs" />
+    <None Include="DslTemplate\GeneratedCode\Model\DiagramsRules.cs" />
+    <None Include="DslTemplate\GeneratedCode\Model\DiagramsSerializer.cs" />
+    <None Include="DslTemplate\GeneratedCode\Model\DiagramsSerializerHelper.cs" />
+    <None Include="DslTemplate\GeneratedCode\Model\DirectiveProcessor.cs" />
+    <None Include="DslTemplate\GeneratedCode\Model\DocumentData.cs" />
+    <None Include="DslTemplate\GeneratedCode\Model\DomainClasses.cs" />
+    <None Include="DslTemplate\GeneratedCode\Model\DomainModel.cs" />
+    <None Include="DslTemplate\GeneratedCode\Model\DomainModelDependencies.cs" />
+    <None Include="DslTemplate\GeneratedCode\Model\DomainModelIdProvider.cs" />
+    <None Include="DslTemplate\GeneratedCode\Model\DomainModelServices.cs" />
+    <None Include="DslTemplate\GeneratedCode\Model\DomainRelationships.cs" />
+    <None Include="DslTemplate\GeneratedCode\Model\DomainValidation.cs" />
+    <None Include="DslTemplate\GeneratedCode\Model\HelpKeywordHelper.cs" />
+    <None Include="DslTemplate\GeneratedCode\Model\Model.cs" />
+    <None Include="DslTemplate\GeneratedCode\Model\ModelContexts.cs" />
+    <None Include="DslTemplate\GeneratedCode\Model\SearchProcessor.cs" />
+    <None Include="DslTemplate\GeneratedCode\Model\SerializationHelper.cs" />
+    <None Include="DslTemplate\GeneratedCode\Model\SerializationHelperShell.cs" />
+    <None Include="DslTemplate\GeneratedCode\Model\Serializer.cs" />
+    <None Include="DslTemplate\GeneratedCode\Model\Shapes.cs" />
+    <None Include="DslTemplate\GeneratedCode\Model\ToolboxHelper.cs" />
+    <None Include="DslTemplate\GeneratedCode\Resources.cs" />
+    <None Include="DslTemplate\GeneratedCode\Shell\Constants.cs" />
+    <None Include="DslTemplate\GeneratedCode\Shell\DocData.cs" />
+    <None Include="DslTemplate\GeneratedCode\Shell\DocView.cs" />
+    <None Include="DslTemplate\GeneratedCode\Shell\EditorFactory.cs" />
+    <None Include="DslTemplate\GeneratedCode\Shell\Package.cs" />
+    <None Include="DslTemplate\GeneratedCode\Shell\PackageController.cs" />
+    <None Include="DslTemplate\GeneratedCode\Shell\Shell.cs" />
+    <None Include="DslTemplate\GeneratedCode\Shell\ToolWindow.cs" />
+    <None Include="DslTemplate\GeneratedCode\ViewModel\DiagramItemViewModel.cs" />
+    <None Include="DslTemplate\GeneratedCode\ViewModel\DiagramLinkViewModel.cs" />
+    <None Include="DslTemplate\GeneratedCode\ViewModel\DiagramViewModel.cs" />
+    <None Include="DslTemplate\GeneratedCode\ViewModel\PropertyGridEditorViewModel.cs" />
+    <None Include="DslTemplate\GeneratedCode\ViewModel\PropertyGridViewModel.cs" />
+    <None Include="DslTemplate\GeneratedCode\ViewModel\Services.cs" />
+    <None Include="DslTemplate\GeneratedCode\ViewModel\SpecificViewModel.cs" />
+    <None Include="DslTemplate\GeneratedCode\ViewModel\TreeViewModel.cs" />
+    <None Include="DslTemplate\GeneratedCode\ViewModel\ViewModel.cs" />
+    <None Include="DslTemplate\GeneratedCode\ViewModel\ViewModelData.cs" />
+    <None Include="DslTemplate\GeneratedCode\ViewModel\ViewModelOptions.cs" />
+    <None Include="DslTemplate\GeneratedCode\ViewModel\ViewModels.cs" />
+    <None Include="DslTemplate\GeneratedCode\ViewModel\WPFApplication\App.cs" />
+    <None Include="DslTemplate\GeneratedCode\ViewModel\WPFApplication\Ui.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DslTemplate\AssemblyInfo.cs" />
+    <None Include="DslTemplate\ProjectTemplate.csproj" />
+    <None Include="DslTemplate\Resources\ProjectItemTemplates\CSharp.tt" />
+    <None Include="DslTemplate\Resources\ProjectItemTemplates\Sample.mydsl" />
+    <None Include="DslTemplate\source.extension.tt" />
+    <None Include="Tum.PDE.LanguageDSL.Templates.VSPlugin.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <VSTemplate Include="Tum.PDE.LanguageDSL.Templates.VSPlugin.vstemplate">
+      <SubType>Designer</SubType>
+    </VSTemplate>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DslTemplate\Resources\DiagramSurface-16.png" />
+    <None Include="DslTemplate\Resources\ErrorList-16.png" />
+    <None Include="DslTemplate\Resources\File.ico" />
+    <None Include="DslTemplate\Resources\ModelTree-16.png" />
+    <None Include="DslTemplate\Resources\PropertyGrid-16.png" />
+    <None Include="DslTemplate\Resources\Refresh-16.png" />
+    <None Include="DslTemplate\Resources\Search-16.png" />
+    <None Include="DslTemplate\Resources\SearchAdvanced-16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DslTemplate\Commands.vsct" />
+    <None Include="DslTemplate\source.extension.vsixmanifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DslTemplate\VSPackage.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DslTemplate\Resources\ProjectItemTemplates\CSharp.vstemplate" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DslTemplate\MainViewControl.xaml">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DslTemplate\Resources.xaml">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DslTemplate\VSPluginDSL.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DslTemplate\VSPluginDSL.vstemplate">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DebuggingTemplate\Debugging.csproj" />
+    <None Include="DebuggingTemplate\Debugging.vstemplate">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DebuggingTemplate\Debugging.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DslTemplate\GeneratedCode\DomainModelResx.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DslTemplate\GeneratedCode\ViewModel\WPFApplication\LayoutManagerDV.txt" />
+    <None Include="DslTemplate\GeneratedCode\ViewModel\WPFApplication\LayoutManagerLayout.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DslTemplate\GeneratedCode\ViewModel\WPFApplication\UIResourceDictionary.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v10.0\VSSDK\Microsoft.VsSDK.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

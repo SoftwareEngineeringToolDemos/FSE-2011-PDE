@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<StateMachineDomainModel Id="b898174e-539a-439f-9760-ababc11b6944">
+  <StartState Id="7b2eb1bf-d8e9-4236-84a9-c197d1e37662">
+    <Transition Id="2e410032-3575-401f-841a-d9a5d9adb15f" Condition="Done">
+      <StateBaseSourceRef link="7b2eb1bf-d8e9-4236-84a9-c197d1e37662" />
+      <StateBaseTargetRef link="b3b8815b-e985-4e48-a274-3e159938a90d" />
+    </Transition>
+  </StartState>
+  <EndState Id="b3b8815b-e985-4e48-a274-3e159938a90d" />
+</StateMachineDomainModel>

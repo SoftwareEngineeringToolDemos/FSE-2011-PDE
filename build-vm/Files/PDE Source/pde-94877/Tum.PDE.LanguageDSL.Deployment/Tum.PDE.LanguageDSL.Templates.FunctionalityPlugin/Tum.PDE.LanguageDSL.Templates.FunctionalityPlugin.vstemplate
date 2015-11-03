@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VSTemplate Version="3.0.0" Type="Project" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005">
+  <TemplateData>
+    <Name>A new PDE-based Plugin (Functionality Extension)</Name>
+    <Description>Plugin extending the functionality of a PDE-based DSL</Description>
+    <Icon>Tum.PDE.LanguageDSL.Templates.FunctionalityPlugin.ico</Icon>
+    <ProjectType>CSharp</ProjectType>
+    <RequiredFrameworkVersion>2.0</RequiredFrameworkVersion>
+    <SortOrder>1000</SortOrder>
+    <TemplateID>0eff33a3-3996-4fad-9596-2da84eb577b0</TemplateID>
+    <CreateNewFolder>true</CreateNewFolder>
+    <DefaultName>PDEFunctionalityPlugin</DefaultName>
+    <ProvideDefaultName>true</ProvideDefaultName>
+  </TemplateData>
+  <TemplateContent>
+    <Project File="ProjectTemplate.csproj" ReplaceParameters="true">
+      <ProjectItem ReplaceParameters="true" TargetFileName="Properties\AssemblyInfo.cs">AssemblyInfo.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" OpenInEditor="true">ExamplePlugin.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" OpenInEditor="true">ExampleElementViewModel.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" OpenInEditor="true">ExampleWindow.xaml</ProjectItem>
+      <ProjectItem ReplaceParameters="true" OpenInEditor="true">ExampleWindow.xaml.cs</ProjectItem>
+      <ProjectItem>ExampleImage.png</ProjectItem>
+    </Project>
+  </TemplateContent>
+</VSTemplate>

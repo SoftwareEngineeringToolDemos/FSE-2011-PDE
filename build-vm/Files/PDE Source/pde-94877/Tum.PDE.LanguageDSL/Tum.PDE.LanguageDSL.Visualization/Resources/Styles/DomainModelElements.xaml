@@ -1,0 +1,451 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:ctrl="clr-namespace:Tum.PDE.LanguageDSL.Visualization.View.Controls">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="DiagramItemStyle.xaml"/>
+        <ResourceDictionary Source="Compartment.xaml"/>
+        <ResourceDictionary Source="Button.xaml"/>        
+    </ResourceDictionary.MergedDictionaries>
+
+    <!-- Brushes -->
+    <LinearGradientBrush x:Key="EmbElementBackgroundBrush" EndPoint="0.5,1" StartPoint="0.5,0" MappingMode="RelativeToBoundingBox">
+        <GradientStop Color="White"/>
+        <GradientStop Color="#22949391" Offset="1"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="RefElementBackgroundBrush" EndPoint="0.5,1" StartPoint="0.5,0" MappingMode="RelativeToBoundingBox">
+        <GradientStop Color="#FFF8DDAD" Offset="0" />
+        <GradientStop Color="#FFF6F2EB" Offset="1" />
+    </LinearGradientBrush>
+
+    <ctrl:DecoratorLeftPositionConverter x:Key="DecoratorLeftPositionConverter"/>
+    <ctrl:DecoratorWidthConverter x:Key="DecoratorWidthConverter"/>
+
+    <SolidColorBrush Color="#FF00A8FF" x:Key="SelectionBorderBrush"/>
+    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" x:Key="SelectionBrush">
+        <GradientStop Color="White"/>
+        <GradientStop Color="#FF99CCFF" Offset="1"/>
+    </LinearGradientBrush>
+
+    <!-- Connector styles -->
+    <Style x:Key="ConnectorItemStyle" TargetType="Path">
+        <Setter Property="Fill" Value="{StaticResource SelectionBrush}"/>
+        <Setter Property="Stroke" Value="{StaticResource SelectionBorderBrush}"/>
+        <Setter Property="StrokeThickness" Value="1"/>
+        <Setter Property="StrokeLineJoin" Value="Round"/>
+        <Setter Property="Stretch" Value="Fill"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+    </Style>
+    <Style x:Key="RightConnectorItemStyle" TargetType="Path" BasedOn="{StaticResource ConnectorItemStyle}">
+        <Setter Property="Width" Value="6"/>
+        <Setter Property="Height" Value="11"/>
+        <Setter Property="Data" Value="M 30,20 L 30 0 L 60,20 L 30,40 Z"/>
+        <Setter Property="Cursor" Value="Cross"/>
+        <Setter Property="SnapsToDevicePixels" Value="true"/>        
+    </Style>
+
+    <!-- ConnectorDecoratorTemplate Default Template -->
+    <ControlTemplate x:Key="ConnectorDecoratorTemplate" TargetType="{x:Type Control}">
+            <!--<ctrl:DiagramConnector x:Name="Right" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 -15 0" Cursor="Cross">-->
+        <ctrl:DiagramConnector x:Name="Right" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 -15 0">
+            <ctrl:DiagramConnector.Template>
+                <ControlTemplate>
+                    <Grid>
+                        <Rectangle Fill="Transparent" Margin="-2"/>
+                        <Path Style="{StaticResource RightConnectorItemStyle}"/>                        
+                    </Grid>
+                </ControlTemplate>
+            </ctrl:DiagramConnector.Template>
+        </ctrl:DiagramConnector>
+    </ControlTemplate>
+
+    <!-- Domain class style. -->
+    <Style TargetType="{x:Type ctrl:DesignerItem}" x:Key="DomainClassStyle" BasedOn="{StaticResource {x:Type ctrl:DesignerItem}}">
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ctrl:DesignerItem}">
+                    <Grid>
+                        <StackPanel Orientation="Horizontal">
+                            <StackPanel>
+                                <Border Margin="12" Name="BdSelected" BorderBrush="Transparent" BorderThickness="2.0" CornerRadius="8" Padding="1" SnapsToDevicePixels="True">
+                                    <Border MinWidth="154" Name="Bd" MinHeight="50" Margin="0" BorderBrush="Black" BorderThickness="0.6" CornerRadius="8" Padding="0" SnapsToDevicePixels="True">
+                                        <Border.Background>
+                                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                <GradientStop Color="#FFCADCF6" Offset="0"/>
+                                                <GradientStop Color="#FFF4F5F8" Offset="1"/>
+                                            </LinearGradientBrush>
+                                        </Border.Background>
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+                                            <Expander IsExpanded="{Binding Path=IsExpanded, Mode=TwoWay}" Grid.Row="0">
+                                                <Expander.Header>
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="16"/>
+                                                            <ColumnDefinition Width="*"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <Image x:Name="ElementImage" Grid.Column="0" Source="/Tum.PDE.LanguageDSL.Visualization;component/Resources/Images/Class_16.png"/>
+                                                        <ctrl:EditableTextBlock ToolTip="{Binding Path=DomainElementToolTip, Mode=OneWay}" x:Name="DecoratorElementName" IsLocked="{Binding Path=IsLocked, Mode=OneWay}" MinWidth="100" MaxWidth="250" TextTrimming="CharacterEllipsis" FontWeight="SemiBold" FontFamily="Tahoma" FontSize="8pt" Margin="4,0,4,0" Grid.Column="1" Text="{Binding Path=DomainElementName, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                                        <!--<TextBlock x:Name="DecoratorElementName" MaxWidth="250" TextTrimming="CharacterEllipsis" ToolTip="{Binding Path=DomainElementName, Mode=OneWay}" FontWeight="SemiBold" FontFamily="Tahoma" FontSize="8pt" Margin="4,0,4,0" Grid.Column="1" Text="{Binding Path=DomainElementName, Mode=OneWay}" VerticalAlignment="Center" HorizontalAlignment="Left"/>-->
+                                                    </Grid>
+                                                </Expander.Header>
+
+                                                <!-- COMPARTMENT-->
+                                                <ContentControl Margin="0,-3,0,7" x:Name="Compartment" Style="{StaticResource CompartmentStyle}"/>
+                                                <!--
+                                                <c:CompartmentElement Margin="0,-3,0,7" x:Name="Compartment" DataContext="{Binding Path=DomainElement}" />
+                                                -->
+                                            </Expander>
+
+                                            <Border x:Name="DomainPropertiesDescription" Height="20" Margin="0,5,1,5" Grid.Row="1" Visibility="Collapsed" Background="White" BorderBrush="Gray" BorderThickness="0, 1, 0, 1">
+                                                <TextBlock Margin="5,2,5,0" Text="{Binding Path=PropertiesDescription, Mode=OneWay}"/>
+                                            </Border>
+
+                                            <!-- PART_ConnectorDecorator -->
+                                            <Control x:Name="PART_ConnectorDecorator" Visibility="Hidden" Template="{StaticResource ConnectorDecoratorTemplate}"/>
+                                        </Grid>
+                                    </Border>
+                                </Border>
+                                <Grid Margin="20,-15,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="16"/>
+                                        <ColumnDefinition Width="16"/>
+                                        <ColumnDefinition Width="16"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Button x:Name="InheritanceToggleButton" Width="15" Grid.Column="0" Command="{Binding CollapseExpandInheritingCommand}" Style="{StaticResource ToggleButtonStyle}">
+                                        <Image x:Name="InheritanceImage" Source="/Tum.PDE.LanguageDSL.Visualization;component/Resources/Images/CollapseSubTree.bmp"/>
+                                    </Button>
+                                    <Button x:Name="ReferencingToggleButton" Width="15" Grid.Column="1" Command="{Binding CollapseExpandReferencingCommand}" Style="{StaticResource ToggleButtonStyle}">
+                                        <Image x:Name="ReferencingImage" Source="/Tum.PDE.LanguageDSL.Visualization;component/Resources/Images/CollapseSubTree.bmp"/>
+                                    </Button>
+                                    <Button x:Name="EmbeddingToggleButton" Width="15" Grid.Column="2" Command="{Binding CollapseExpandEmbeddingCommand}" Style="{StaticResource ToggleButtonStyle}">
+                                        <Image x:Name="EmbeddingImage" Source="/Tum.PDE.LanguageDSL.Visualization;component/Resources/Images/CollapseSubTree.bmp"/>
+                                    </Button>
+                                </Grid>
+                            </StackPanel>
+                            <Button Command="{Binding CollapseExpandClassShapeMappingCommand}" x:Name="ShapeMappingToggleButton" Margin="-10, 8,0,0" Width="15" Height="15" VerticalAlignment="Top" HorizontalAlignment="Left" Style="{StaticResource ToggleButtonStyle}">
+                                <Image x:Name="ShapeMappingImage" Source="/Tum.PDE.LanguageDSL.Visualization;component/Resources/Images/CollapseSubTree.bmp"/>
+                            </Button>
+                        </StackPanel>
+                       
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <DataTrigger Binding="{Binding Path=IsExpanded}" Value="False">
+                            <Setter TargetName="DomainPropertiesDescription" Property="Visibility" Value="Visible"/>
+                        </DataTrigger>
+
+                        <!-- Image displayed trigger -->
+                        <DataTrigger Binding="{Binding Path=IsInheritanceTreeExpanded}" Value="False">
+                            <Setter TargetName="InheritanceImage" Property="Source" Value="/Tum.PDE.LanguageDSL.Visualization;component/Resources/Images/ExpandSubTree.bmp"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=IsEmbeddingTreeExpanded}" Value="False">
+                            <Setter TargetName="EmbeddingImage" Property="Source" Value="/Tum.PDE.LanguageDSL.Visualization;component/Resources/Images/ExpandSubTree.bmp"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=IsReferenceTreeExpanded}" Value="False">
+                            <Setter TargetName="ReferencingImage" Property="Source" Value="/Tum.PDE.LanguageDSL.Visualization;component/Resources/Images/ExpandSubTree.bmp"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=IsShapeMappingTreeExpanded}" Value="False">
+                            <Setter TargetName="ShapeMappingImage" Property="Source" Value="/Tum.PDE.LanguageDSL.Visualization;component/Resources/Images/ExpandSubTree.bmp"/>
+                        </DataTrigger>
+
+                        <!-- Toggle button visibility trigger -->
+                        <DataTrigger Binding="{Binding Path=HasEmbeddingRSNodes}" Value="False">
+                            <Setter TargetName="EmbeddingToggleButton" Property="Visibility" Value="Collapsed"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=HasInheritanceNodes}" Value="False">
+                            <Setter TargetName="InheritanceToggleButton" Property="Visibility" Value="Collapsed"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=HasReferenceNodes}" Value="False">
+                            <Setter TargetName="ReferencingToggleButton" Property="Visibility" Value="Collapsed"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=HasShapeMappingNodes}" Value="False">
+                            <Setter TargetName="ShapeMappingToggleButton" Property="Visibility" Value="Collapsed"/>
+                        </DataTrigger>
+
+                        <!-- Is selected trigger -->
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self},Path=IsSelected}" Value="True">
+                            <Setter TargetName="BdSelected" Property="BorderBrush" Value="Black"/>
+                            <!--<Setter TargetName="PART_ConnectorDecorator" Property="Visibility" Value="Visible"/>-->
+                        </DataTrigger>
+
+                        <!-- Inheritance Trigger -->
+                        <DataTrigger Binding="{Binding Path=InheritanceModifier}" Value="Abstract">
+                            <Setter TargetName="DecoratorElementName" Property="FontStyle" Value="Italic"/>
+                            <Setter TargetName="DecoratorElementName" Property="FontWeight" Value="Normal"/>
+                        </DataTrigger>
+
+                        <!-- IsEmbeddingRelationship trigger
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsEmbeddingRelationship}" Value="True">
+                            <Setter TargetName="ElementImage" Property="Source" Value="/Tum.PDE.LanguageDSL.Visualization;component/Resources/Images/Emb_16.png"/>
+                            <Setter TargetName="Bd" Property="BorderBrush" Value="#FF5D5A55"/>
+                            <Setter TargetName="Bd" Property="Background" Value="{StaticResource EmbElementBackgroundBrush}"/>
+                            <Setter TargetName="Bd" Property="CornerRadius" Value="0"/>
+                        </DataTrigger>-->
+
+                        <!-- IsReferenceRelationship trigger -->
+                        <DataTrigger Binding="{Binding Path=IsReferenceRelationship, Mode=OneTime}" Value="True">
+                            <Setter TargetName="ElementImage" Property="Source" Value="/Tum.PDE.LanguageDSL.Visualization;component/Resources/Images/Ref_16.png"/>
+                            <Setter TargetName="Bd" Property="BorderBrush" Value="#FFCF9312"/>
+                            <Setter TargetName="Bd" Property="Background" Value="{StaticResource RefElementBackgroundBrush}"/>
+                            <Setter TargetName="Bd" Property="CornerRadius" Value="0"/>
+                        </DataTrigger>
+
+                        <DataTrigger Binding="{Binding Path=IsElementHolder}" Value="False">
+                            <Setter TargetName="Bd" Property="BorderBrush" Value="Silver"/>
+                            <Setter TargetName="DecoratorElementName" Property="Foreground" Value="Gray"/>                            
+                        </DataTrigger>
+
+                        <!--<DataTrigger Binding="{Binding Path=IsLocked}" Value="True">
+                            <Setter TargetName="Bd" Property="BorderBrush" Value="Gray"/>
+                        </DataTrigger>-->
+
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding RelativeSource={RelativeSource Self},Path=IsSelected}" Value="True"/>
+                                <Condition Binding="{Binding Path=IsLocked}" Value="False"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter TargetName="PART_ConnectorDecorator" Property="Visibility" Value="Visible"/>
+                        </MultiDataTrigger>
+                        
+                        <!-- Add mouse over trigger ?-->
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Embedding relationship style. -->
+    <Style TargetType="{x:Type ctrl:DesignerItem}" x:Key="EmbeddingRelationshipStyle" BasedOn="{StaticResource {x:Type ctrl:DesignerItem}}">
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ctrl:DesignerItem}">
+                    <Grid>
+                        <StackPanel Margin="0,12,0,0">
+                            <Border Margin="2" Name="BdSelected" BorderBrush="Transparent" BorderThickness="2" CornerRadius="0" Padding="1" SnapsToDevicePixels="True">
+                                <Border Margin="0" Name="Bd" BorderBrush="#FF5D5A55" BorderThickness="0.6" CornerRadius="0" Padding="0" SnapsToDevicePixels="True">
+                                    <Border.Background>
+                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" MappingMode="RelativeToBoundingBox">
+                                            <GradientStop Color="White"/>
+                                            <GradientStop Color="#22949391" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Border.Background>
+
+                                    <Grid>
+                                        <!-- Display name above this shape -->
+                                        <Canvas IsHitTestVisible="False" Focusable="False">
+                                            <TextBlock Width="{Binding ElementName=BdSelected, Path=ActualWidth, Converter={StaticResource DecoratorWidthConverter}}" x:Name="DecoratorElementName" FontWeight="Normal" FontFamily="Tahoma" FontSize="8pt"
+                                                        Text="{Binding Path=DomainElementName, Mode=OneWay}" TextAlignment="Center" TextTrimming="CharacterEllipsis"
+                                                        Canvas.Top="-16"
+                                                        Canvas.Left="{Binding ElementName=BdSelected, Path=ActualWidth, Converter={StaticResource DecoratorLeftPositionConverter}}"/>
+                                        </Canvas>
+
+                                        <Expander IsExpanded="{Binding Path=IsExpanded, Mode=TwoWay}">
+                                            <Expander.Header>
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="16"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <Image x:Name="ElementImage" Grid.Column="0" Source="/Tum.PDE.LanguageDSL.Visualization;component/Resources/Images/Emb_16.png"/>
+                                                    <TextBlock Grid.Column="1" FontWeight="Normal" FontFamily="Tahoma" FontSize="7pt"  Text="Embedding Rel." Margin="4,0,4,0" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                                                </Grid>
+                                            </Expander.Header>
+
+                                            <!-- COMPARTMENT -->
+                                            <ContentControl Margin="0,-3,0,7" x:Name="Compartment" Style="{StaticResource CompartmentStyle}"/>
+                                        </Expander>
+                                    </Grid>
+                                </Border>
+                            </Border>
+                        </StackPanel>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <!-- Is selected trigger -->
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self},Path=IsSelected}" Value="True">
+                            <Setter TargetName="BdSelected" Property="BorderBrush" Value="Gray"/>
+                        </DataTrigger>
+
+                        <!-- Inheritance Trigger -->
+                        <DataTrigger Binding="{Binding Path=InheritanceModifier}" Value="Abstract">
+                            <Setter TargetName="DecoratorElementName" Property="FontStyle" Value="Italic"/>
+                            <Setter TargetName="DecoratorElementName" Property="FontWeight" Value="Normal"/>
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Reference relationship style. -->
+    <Style TargetType="{x:Type ctrl:DesignerItem}" x:Key="ReferenceRelationshipStyle" BasedOn="{StaticResource {x:Type ctrl:DesignerItem}}">
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ctrl:DesignerItem}">
+                    <Grid>
+                        <StackPanel Margin="0,12,0,0">
+                            <Border Margin="2" Name="BdSelected" BorderBrush="Transparent" BorderThickness="2" CornerRadius="0" Padding="1" SnapsToDevicePixels="True">
+                                <Border Margin="0" Name="Bd" BorderBrush="#FFCF9312" BorderThickness="0.6" CornerRadius="0" Padding="0" SnapsToDevicePixels="True">
+                                    <Border.Background>
+                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" MappingMode="RelativeToBoundingBox">
+                                            <GradientStop Color="#FFF8DDAD"/>
+                                            <GradientStop Color="#FFF6F2EB" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Border.Background>
+                                    <Grid>
+                                        <!-- Display name above this shape -->
+                                        <Canvas IsHitTestVisible="False" Focusable="False">
+                                            <TextBlock Width="{Binding ElementName=BdSelected, Path=ActualWidth, Converter={StaticResource DecoratorWidthConverter}}" x:Name="DecoratorElementName" FontWeight="Normal" FontFamily="Tahoma" FontSize="8pt"
+                                                        Text="{Binding Path=DomainElementName, Mode=OneWay}" TextAlignment="Center" TextTrimming="CharacterEllipsis"
+                                                        Canvas.Top="-16"
+                                                        Canvas.Left="{Binding ElementName=BdSelected, Path=ActualWidth, Converter={StaticResource DecoratorLeftPositionConverter}}"/>
+                                        </Canvas>
+                                        <Expander x:Name="ExpanderElement" IsExpanded="{Binding Path=IsExpanded, Mode=TwoWay}">
+                                            <Expander.Header>
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="16"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <Image Grid.Column="0" Source="/Tum.PDE.LanguageDSL.Visualization;component/Resources/Images/Ref_16.png"/>
+                                                    <TextBlock Grid.Column="1" x:Name="TextBoxName" TextTrimming="CharacterEllipsis" FontWeight="Normal" FontFamily="Tahoma" FontSize="7pt" Margin="4,0,4,0" Text="Reference Rel." VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                                </Grid>
+                                            </Expander.Header>
+
+                                            <!-- COMPARTMENT -->
+                                            <ContentControl Margin="0,-3,0,7" x:Name="Compartment" Style="{StaticResource CompartmentStyle}"/>
+                                        </Expander>
+                                    </Grid>
+                                </Border>
+                            </Border>
+                            <Grid Margin="10,-7,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="17"/>
+                                </Grid.ColumnDefinitions>
+                                <Button Command="{Binding Path=CollapseExpandRelationshipShapeMappingCommand}" x:Name="RSShapeToggleButton" Width="15" Grid.Column="0" Style="{StaticResource ToggleButtonStyle}">
+                                    <Image x:Name="RSShapeImage" Source="/Tum.PDE.LanguageDSL.Visualization;component/Resources/Images/CollapseSubTree.bmp"/>
+                                </Button>
+                            </Grid>
+                        </StackPanel>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <!-- Image displayed trigger -->
+                        <DataTrigger Binding="{Binding Path=IsShapeMappingTreeExpanded}" Value="False">
+                            <Setter TargetName="RSShapeImage" Property="Source" Value="/Tum.PDE.LanguageDSL.Visualization;component/Resources/Images/ExpandSubTree.bmp"/>
+                        </DataTrigger>
+
+                        <!-- Toggle button visibility trigger -->
+                        <DataTrigger Binding="{Binding Path=HasShapeMappingNodes}" Value="False">
+                            <Setter TargetName="RSShapeToggleButton" Property="Visibility" Value="Collapsed"/>
+                        </DataTrigger>
+
+                        <!-- Is selected trigger -->
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self},Path=IsSelected}" Value="True">
+                            <Setter TargetName="BdSelected" Property="BorderBrush" Value="#FFCF9312"/>
+                        </DataTrigger>
+
+                        <!-- Inheritance Trigger -->
+                        <DataTrigger Binding="{Binding Path=InheritanceModifier}" Value="Abstract">
+                            <Setter TargetName="DecoratorElementName" Property="FontStyle" Value="Italic"/>
+                            <Setter TargetName="DecoratorElementName" Property="FontWeight" Value="Normal"/>
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Domain class shape style. -->
+    <Style TargetType="{x:Type ctrl:DesignerItem}" x:Key="ModelTreeClassShapeElement" BasedOn="{StaticResource {x:Type ctrl:DesignerItem}}">
+        <Setter Property="MinHeight" Value="40"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ctrl:DesignerItem}">
+                    <Grid>
+                        <StackPanel>
+                            <Border Margin="7,7,7,7" Name="BdSelected" BorderBrush="Transparent" BorderThickness="1.0" CornerRadius="8" Padding="1" SnapsToDevicePixels="True">
+                                <Border Name="Bd" Margin="0" BorderBrush="Black" BorderThickness="0.6" CornerRadius="8" Padding="0" SnapsToDevicePixels="True">
+                                    <Border.Background>
+                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" MappingMode="RelativeToBoundingBox">
+                                            <GradientStop Color="#FFE2EDF4"/>
+                                            <GradientStop Color="#FFAED0E8" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Border.Background>
+                                    <Grid Margin="5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="16"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Image x:Name="ElementImage" Grid.Column="0" Source="/Tum.PDE.LanguageDSL.Visualization;component/Resources/Images/Diagram/shape-16.png"/>
+                                        <ctrl:EditableTextBlock Text="{Binding Path=DomainElementName, Mode=TwoWay}" IsLocked="{Binding Path=IsLocked, Mode=OneWay}" MaxWidth="150" Grid.Column="1" Background="Transparent" VerticalAlignment="Center" Margin="5,0,0,0"  HorizontalAlignment="Left" TextTrimming="CharacterEllipsis" x:Name="TextBoxName"/>
+                                    </Grid>
+
+                                </Border>
+                            </Border>
+                        </StackPanel>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self},Path=IsSelected}" Value="True">
+                            <Setter TargetName="BdSelected" Property="BorderBrush" Value="Black"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=ShapeType}" Value="MappingRelationshipShapeClass">
+                            <Setter TargetName="ElementImage" Property="Source" Value="/Tum.PDE.LanguageDSL.Visualization;component/Resources/Images/Diagram/shape_map-16.png"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=ShapeType}" Value="MappingMultipleRelationshipShapeClass">
+                            <Setter TargetName="ElementImage" Property="Source" Value="/Tum.PDE.LanguageDSL.Visualization;component/Resources/Images/Diagram/shape_mapmulti-16.png"/>
+                        </DataTrigger>
+
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Reference relationship shape style. -->
+    <Style TargetType="{x:Type ctrl:DesignerItem}" x:Key="ModelTreeRelationshipShapeElement" BasedOn="{StaticResource {x:Type ctrl:DesignerItem}}">
+        <Setter Property="MinHeight" Value="40"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ctrl:DesignerItem}">
+                    <Grid>
+                        <StackPanel>
+                            <Border Margin="7,7,7,7" Name="BdSelected" BorderBrush="Transparent" BorderThickness="1.0" CornerRadius="8" Padding="1" SnapsToDevicePixels="True">
+                                <Border Name="Bd" Margin="0" BorderBrush="Black" BorderThickness="0.6" CornerRadius="8" Padding="0" SnapsToDevicePixels="True">
+                                    <Border.Background>
+                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" MappingMode="RelativeToBoundingBox">
+                                            <GradientStop Color="#FFF4EFE6"/>
+                                            <GradientStop Color="#FFF2D393" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Border.Background>
+                                    <Grid Margin="5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="16"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Image x:Name="ElementImage" Grid.Column="0" Source="/Tum.PDE.LanguageDSL.Visualization;component/Resources/Images/Diagram/shape_rs-link-16.png"/>
+                                        <ctrl:EditableTextBlock Grid.Column="1" Text="{Binding Path=DomainElementName, Mode=TwoWay}" IsLocked="{Binding Path=IsLocked, Mode=OneWay}" MaxWidth="150" Background="Transparent" VerticalAlignment="Center" Margin="5,0,0,0"
+                                            HorizontalAlignment="Left" TextTrimming="CharacterEllipsis"  x:Name="TextBoxName"/>
+                                    </Grid>
+
+                                </Border>
+                            </Border>
+                        </StackPanel>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self},Path=IsSelected}" Value="True">
+                            <Setter TargetName="BdSelected" Property="BorderBrush" Value="Black"/>
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

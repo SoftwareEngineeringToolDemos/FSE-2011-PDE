@@ -1,0 +1,18 @@
+<#@ template inherits="Microsoft.VisualStudio.TextTemplating.VSHost.ModelingTextTransformation" #>
+<#@ output extension=".vstemplate" #>
+<#@ LanguageDSL processor="LanguageDSLDirectiveProcessor" requires="fileName='..\..\DomainMetaModel.lngdsl'" #>
+<#@ VolatileAssembly processor="T4Toolbox.VolatileAssemblyProcessor" name="$(SolutionDir)..\Tum.PDE.ToolFramework\Tum.PDE.ToolFramework.Templates\bin\Debug\Tum.PDE.ToolFramework.Templates.dll" #>
+<!--DSL Tools Language Template-->
+<VSTemplate Version="3.0.0" Type="Item" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<TemplateData>
+		<Name Package="{<#= this.MetaModel.PackageGuid #>}" ID="103"/>
+		<Description Package="{<#= this.MetaModel.PackageGuid #>}" ID="102"/>
+		<Icon Package="{<#= this.MetaModel.PackageGuid #>}" ID="201" />
+		<ProjectType>CSharp</ProjectType>
+		<SortOrder>360</SortOrder>
+		<DefaultName><#=  this.MetaModel.Name #>.<#=this.MetaModel.CustomExtension#></DefaultName>
+	</TemplateData>
+	<TemplateContent>
+		<ProjectItem TargetFileName="$fileinputname$.<#=this.MetaModel.CustomExtension#>"><#=this.MetaModel.CustomExtension#>.<#=this.MetaModel.CustomExtension#></ProjectItem>
+	</TemplateContent>
+</VSTemplate>

@@ -1,0 +1,60 @@
+﻿<#@ template language="C#" inherits="BaseTemplate"#> 
+<#@ import namespace="Tum.PDE.LanguageDSL"#>
+<#@ import namespace="Microsoft.VisualStudio.Modeling" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Collections.ObjectModel" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#
+	string dslName = this.MetaModel.Name;
+#>
+namespace <#= this.MetaModel.Namespace #>
+{
+	/// <summary>
+    /// Constants.
+    /// </summary>
+	internal static partial class Constants
+	{
+		/// <summary>
+        /// Extension of this DSL.
+        /// </summary>
+		[global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+		public const string DesignerFileExtension = "<#= this.MetaModel.CustomExtension #>";
+		
+		/// <summary>
+        /// Product name.
+        /// </summary>
+		[global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+		public const string ProductName = @"<#= this.MetaModel.ProductName.Replace("\"","\"\"") #>";
+		
+		/// <summary>
+        /// Company name.
+        /// </summary>
+		[global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+		public const string CompanyName = @"<#= this.MetaModel.CompanyName.Replace("\"","\"\"") #>";
+		
+		/// <summary>
+        /// Product version.
+        /// </summary>
+		[global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+		public const string ProductVersion = "<#= this.MetaModel.MajorVersion #>.<#= this.MetaModel.MinorVersion #>.<#= this.MetaModel.Build #>.<#= this.MetaModel.Revision #>";
+
+		/// <summary>
+        /// Package identifier 
+        /// </summary>
+		public const string <#= dslName #>PackageId = "<#= this.MetaModel.PackageGuid #>";
+		
+		/// <summary>
+        /// Editor factory identifier 
+        /// </summary>
+		public const string <#= dslName #>EditorFactoryId = "<#= this.MetaModel.CustomExtensionGuid #>";
+		
+		
+		/// <summary>
+        /// Editor factory identifier 
+        /// </summary>
+		public const string DefaultDiagramExtension = ".diagram";
+		
+	}
+}

@@ -1,0 +1,2 @@
+﻿1. InRibbonGallery: in InRibbonGallery.xaml
+<Fluent:RibbonListBox MinWidth="{TemplateBinding MinWidth}"

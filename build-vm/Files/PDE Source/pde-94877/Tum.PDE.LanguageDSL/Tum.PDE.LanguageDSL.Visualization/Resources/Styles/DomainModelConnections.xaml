@@ -1,0 +1,377 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:ctrl="clr-namespace:Tum.PDE.LanguageDSL.Visualization.View.Controls"
+                    xmlns:conv="clr-namespace:Tum.PDE.LanguageDSL.Visualization.Converters">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="DiagramItemStyle.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <!-- Embedding source connection. -->
+    <conv:MultiplicityConverter x:Key="MultiplicityConverterEmb"/>
+
+    <Style TargetType="{x:Type ctrl:DesignerItem}" x:Key="EmbeddingRelationshipSource" BasedOn="{StaticResource {x:Type ctrl:DesignerItem}}">
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ctrl:DesignerItem}">
+                    <Canvas>
+                        <Path Name="PART_ConnectionPath"
+                              StrokeThickness="1"
+                              Stroke="Black"
+                              StrokeStartLineCap="Round"
+                              StrokeEndLineCap="Round"
+                              StrokeLineJoin="Round"
+                              SnapsToDevicePixels="True">
+                            <Path.Data>
+                                <PathGeometry>
+                                    <PathFigure StartPoint="70,30">
+                                        <LineSegment Point="150,30"/>
+                                    </PathFigure>
+                                </PathGeometry>
+                            </Path.Data>
+                        </Path>
+
+                        <!-- Invisible connection to make selection easier -->
+                        <Path Name="PART_ConnectionPathForSelection"
+                              StrokeThickness="6"
+                              Stroke="Transparent"
+                              StrokeStartLineCap="Round"
+                              StrokeEndLineCap="Round"
+                              StrokeLineJoin="Round"
+                              SnapsToDevicePixels="True">
+                            <Path.Data>
+                                <PathGeometry>
+                                    <PathFigure StartPoint="70,30">
+                                        <LineSegment Point="150,30"/>
+                                    </PathFigure>
+                                </PathGeometry>
+                            </Path.Data>
+                        </Path>
+
+                        <!-- Show source role property name -->
+                        <TextBlock x:Name="DecoratorSourceRole" TextTrimming="CharacterEllipsis" TextAlignment="Right" FontWeight="SemiBold" FontFamily="Tahoma" FontSize="7pt"  Width="77" Height="20" Text="{Binding Path=PropertyName, Mode=OneWay}"
+                                     Canvas.Left="73"
+                                     Canvas.Top="17">
+                        </TextBlock>
+
+                        <!-- Show source role multiplicity -->
+                        <TextBlock x:Name="DecoratorSourceRoleM" TextTrimming="CharacterEllipsis" TextAlignment="Right" FontWeight="SemiBold" FontFamily="Tahoma" FontSize="7pt" Width="30" Height="20" Text="{Binding Path=Multiplicity, Mode=OneWay, Converter={StaticResource MultiplicityConverterEmb}}"
+                                     Canvas.Left="120"
+                                     Canvas.Top="33">
+                        </TextBlock>
+                    </Canvas>
+                    <ControlTemplate.Triggers>
+                        <!-- Is selected trigger -->
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self},Path=IsSelected}" Value="True">
+                            <Setter TargetName="PART_ConnectionPath" Property="StrokeThickness" Value="2"/>
+                        </DataTrigger>
+
+                        <!-- Font trigger -->
+                        <DataTrigger Binding="{Binding Path=IsPropertyGenerator}" Value="False">
+                            <Setter TargetName="DecoratorSourceRole" Property="FontWeight" Value="UltraLight"/>
+                            <Setter TargetName="DecoratorSourceRoleM" Property="FontWeight" Value="UltraLight"/>
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Embedding target connection-->
+    <Style TargetType="{x:Type ctrl:DesignerItem}" x:Key="EmbeddingRelationshipTarget" BasedOn="{StaticResource {x:Type ctrl:DesignerItem}}">
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ctrl:DesignerItem}">
+                    <Canvas>
+                        <Path Name="PART_ConnectionPath"
+                              StrokeThickness="1"
+                              Stroke="Black"
+                              StrokeStartLineCap="Round"
+                              StrokeEndLineCap="Round"
+                              StrokeLineJoin="Round"
+                              SnapsToDevicePixels="True">
+                            <Path.Data>
+                                <PathGeometry>
+                                    <PathFigure StartPoint="0,30">
+                                        <LineSegment Point="100,30" />
+                                    </PathFigure>
+                                </PathGeometry>
+                            </Path.Data>
+                        </Path>
+                        <!-- Invisible connection to make selection easier -->
+                        <Path Name="PART_ConnectionPathForSelection"
+                              StrokeThickness="6"
+                              Stroke="Transparent"
+                              StrokeStartLineCap="Round"
+                              StrokeEndLineCap="Round"
+                              StrokeLineJoin="Round"
+                              SnapsToDevicePixels="True">
+                            <Path.Data>
+                                <PathGeometry>
+                                    <PathFigure StartPoint="0,30">
+                                        <LineSegment Point="100,30" />
+                                    </PathFigure>
+                                </PathGeometry>
+                            </Path.Data>
+                        </Path>
+
+                        <!-- Show source role property name -->
+                        <TextBlock x:Name="DecoratorTargetRole" FontWeight="SemiBold" FontFamily="Tahoma" FontSize="7pt"  Width="90" Height="20" Text="{Binding Path=PropertyName, Mode=OneWay}" TextAlignment="Left"
+                                     Canvas.Left="5" TextTrimming="CharacterEllipsis"
+                                     Canvas.Top="17">
+                        </TextBlock>
+
+                        <!-- Show source role multiplicity -->
+                        <TextBlock x:Name="DecoratorTargetRoleM" FontWeight="SemiBold" FontFamily="Tahoma" FontSize="7pt"  Width="30" Height="20"  Text="{Binding Path=Multiplicity, Mode=OneWay, Converter={StaticResource MultiplicityConverterEmb}}"
+                                     Canvas.Left="5" TextAlignment="Left" TextTrimming="CharacterEllipsis"
+                                     Canvas.Top="33">
+                        </TextBlock>
+
+                    </Canvas>
+                    <ControlTemplate.Triggers>
+                        <!-- Is selected trigger -->
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self},Path=IsSelected}" Value="True">
+                            <Setter TargetName="PART_ConnectionPath" Property="StrokeThickness" Value="2"/>
+                        </DataTrigger>
+
+                        <!-- Font trigger -->
+                        <DataTrigger Binding="{Binding Path=IsPropertyGenerator}" Value="False">
+                            <Setter TargetName="DecoratorTargetRole" Property="FontWeight" Value="UltraLight"/>
+                            <Setter TargetName="DecoratorTargetRoleM" Property="FontWeight" Value="UltraLight"/>
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Inheritance connection. -->
+    <Style TargetType="{x:Type ctrl:DesignerItem}" x:Key="InheritedConnectionStyle" BasedOn="{StaticResource {x:Type ctrl:DesignerItem}}">
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ctrl:DesignerItem}">
+                    <Canvas DataContext="{Binding RelativeSource={RelativeSource TemplatedParent}}">
+                        <Path Name="PART_ConnectionPath"
+                              StrokeThickness="1"
+                              Stroke="Silver"
+                              StrokeStartLineCap="Round"
+                              StrokeEndLineCap="Round"
+                              StrokeLineJoin="Round"
+                              SnapsToDevicePixels="True">
+                            <Path.Data>
+                                <PathGeometry>
+                                    <PathFigure StartPoint="38,30">
+                                        <LineSegment Point="100,30"/>
+                                    </PathFigure>
+                                </PathGeometry>
+                            </Path.Data>
+                        </Path>
+                    </Canvas>
+                    <ControlTemplate.Triggers>
+                        <!-- Is selected trigger -->
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self},Path=IsSelected}" Value="True">
+                            <Setter TargetName="PART_ConnectionPath" Property="StrokeThickness" Value="2"/>
+                        </DataTrigger>
+
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Reference source connection -->
+    <conv:MultiplicityConverter x:Key="MultiplicityConverterRef"/>
+    <Style TargetType="{x:Type ctrl:DesignerItem}" x:Key="ReferenceRelationshipSource" BasedOn="{StaticResource {x:Type ctrl:DesignerItem}}">
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ctrl:DesignerItem}">
+                    <Canvas>
+                        <Path Name="PART_ConnectionPath"
+                              StrokeThickness="1"
+                              Stroke="#FFCF9312"
+                              StrokeStartLineCap="Round"
+                              StrokeEndLineCap="Round"
+                              StrokeLineJoin="Round"
+                              SnapsToDevicePixels="True">
+                            <Path.Data>
+                                <PathGeometry>
+                                    <PathFigure StartPoint="55,30">
+                                        <LineSegment Point="150,30"/>
+                                    </PathFigure>
+                                </PathGeometry>
+                            </Path.Data>
+                        </Path>
+                        <!-- Invisible connection to make selection easier -->
+                        <Path Name="PART_ConnectionPathForSelection"
+                              StrokeThickness="6"
+                              Stroke="Transparent"
+                              StrokeStartLineCap="Round"
+                              StrokeEndLineCap="Round"
+                              StrokeLineJoin="Round"
+                              SnapsToDevicePixels="True">
+                            <Path.Data>
+                                <PathGeometry>
+                                    <PathFigure StartPoint="55,30">
+                                        <LineSegment Point="150,30"/>
+                                    </PathFigure>
+                                </PathGeometry>
+                            </Path.Data>
+                        </Path>
+
+                        <!-- Show source role property name -->
+                        <TextBlock x:Name="DecoratorSourceRole" Width="90" Height="20" FontWeight="SemiBold" FontFamily="Tahoma" FontSize="7pt" Text="{Binding Path=PropertyName, Mode=OneWay}"
+                                     Canvas.Left="60" TextAlignment="Right" TextTrimming="CharacterEllipsis"
+                                     Canvas.Top="17">
+                        </TextBlock>
+
+                        <!-- Show source role multiplicity -->
+                        <TextBlock x:Name="DecoratorSourceRoleM" Width="30" Height="20"  FontWeight="SemiBold" FontFamily="Tahoma" FontSize="7pt" Text="{Binding Path=Multiplicity, Mode=OneWay, Converter={StaticResource MultiplicityConverterRef}}"
+                                     Canvas.Left="120"  TextAlignment="Right" TextTrimming="CharacterEllipsis"
+                                     Canvas.Top="33">
+                       </TextBlock>
+                    </Canvas>
+                    <ControlTemplate.Triggers>
+                        <!-- Is selected trigger -->
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self},Path=IsSelected}" Value="True">
+                            <Setter TargetName="PART_ConnectionPath" Property="StrokeThickness" Value="2"/>
+                        </DataTrigger>
+
+                        <!-- Font trigger -->
+                        <DataTrigger Binding="{Binding Path=IsPropertyGenerator}" Value="False">
+                            <Setter TargetName="DecoratorSourceRole" Property="FontWeight" Value="UltraLight"/>
+                            <Setter TargetName="DecoratorSourceRoleM" Property="FontWeight" Value="UltraLight"/>
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Reference target connection-->
+    <Style TargetType="{x:Type ctrl:DesignerItem}" x:Key="ReferenceRelationshipTarget" BasedOn="{StaticResource {x:Type ctrl:DesignerItem}}">
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ctrl:DesignerItem}">
+                    <Canvas>
+                        <Path Name="PART_ConnectionPath"
+                              StrokeThickness="1"
+                              Stroke="#FFCF9312"
+                              StrokeStartLineCap="Round"
+                              StrokeEndLineCap="Round"
+                              StrokeLineJoin="Round"
+                              SnapsToDevicePixels="True">
+                            <Path.Data>
+                                <PathGeometry>
+                                    <PathFigure StartPoint="0,30">
+                                        <LineSegment Point="100,30"/>
+                                    </PathFigure>
+                                </PathGeometry>
+                            </Path.Data>
+                        </Path>
+                        <!-- Invisible connection to make selection easier -->
+                        <Path Name="PART_ConnectionPathForSelection"
+                              StrokeThickness="6"
+                              Stroke="Transparent"
+                              StrokeStartLineCap="Round"
+                              StrokeEndLineCap="Round"
+                              StrokeLineJoin="Round"
+                              SnapsToDevicePixels="True">
+                            <Path.Data>
+                                <PathGeometry>
+                                    <PathFigure StartPoint="0,30">
+                                        <LineSegment Point="100,30"/>
+                                    </PathFigure>
+                                </PathGeometry>
+                            </Path.Data>
+                        </Path>
+
+                        <!-- Show source role property name -->
+                        <TextBlock x:Name="DecoratorTargetRole" Width="90" Height="20" FontWeight="SemiBold" FontFamily="Tahoma" FontSize="7pt"  Text="{Binding Path=PropertyName, Mode=OneWay}" TextAlignment="Left"
+                                     Canvas.Left="5" TextTrimming="CharacterEllipsis"
+                                     Canvas.Top="17">
+                        </TextBlock>
+
+                        <!-- Show source role multiplicity -->
+                        <TextBlock x:Name="DecoratorTargetRoleM" Width="30" Height="20" FontWeight="SemiBold" FontFamily="Tahoma" FontSize="7pt"  Text="{Binding Path=Multiplicity, Mode=OneWay, Converter={StaticResource MultiplicityConverterRef}}"
+                                     Canvas.Left="5" TextAlignment="Left"
+                                     Canvas.Top="33" TextTrimming="CharacterEllipsis">
+                        </TextBlock>
+                    </Canvas>
+                    <ControlTemplate.Triggers>
+                        <!-- Is selected trigger -->
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self},Path=IsSelected}" Value="True">
+                            <Setter TargetName="PART_ConnectionPath" Property="StrokeThickness" Value="2"/>
+                        </DataTrigger>
+
+                        <!-- Font trigger -->
+                        <DataTrigger Binding="{Binding Path=IsPropertyGenerator}" Value="False">
+                            <Setter TargetName="DecoratorTargetRole" Property="FontWeight" Value="UltraLight"/>
+                            <Setter TargetName="DecoratorTargetRoleM" Property="FontWeight" Value="UltraLight"/>
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Class shape mapping connection -->
+    <Style TargetType="{x:Type ctrl:DesignerItem}" x:Key="ClassShapeMappingConnection" BasedOn="{StaticResource {x:Type ctrl:DesignerItem}}">
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ctrl:DesignerItem}">
+                    <Canvas DataContext="{Binding RelativeSource={RelativeSource TemplatedParent}}">
+                        <Path Name="PART_ConnectionPath"
+                              StrokeThickness="1"
+                              Stroke="Gray"
+                              StrokeStartLineCap="Round"
+                              StrokeEndLineCap="Round"
+                              StrokeLineJoin="Round"
+                              SnapsToDevicePixels="True">
+                            <Path.Data>
+                                <PathGeometry>
+                                    <PathFigure StartPoint="25,0">
+                                        <LineSegment Point="25, 15"/>
+                                    </PathFigure>
+                                </PathGeometry>
+                            </Path.Data>
+                        </Path>
+                    </Canvas>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Relationship shape mapping connection-->
+    <Style TargetType="{x:Type ctrl:DesignerItem}" x:Key="RelationshipShapeMappingConnection" BasedOn="{StaticResource {x:Type ctrl:DesignerItem}}">
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ctrl:DesignerItem}">
+                    <Canvas DataContext="{Binding RelativeSource={RelativeSource TemplatedParent}}">
+                        <Path Name="PART_ConnectionPath"
+                              StrokeThickness="1"
+                              Stroke="Gray"
+                              StrokeStartLineCap="Round"
+                              StrokeEndLineCap="Round"
+                              StrokeLineJoin="Round"
+                              SnapsToDevicePixels="True">
+                            <Path.Data>
+                                <PathGeometry>
+                                    <PathFigure StartPoint="68,20">
+                                        <LineSegment Point="150,20"/>
+                                    </PathFigure>
+                                </PathGeometry>
+                            </Path.Data>
+                        </Path>
+                    </Canvas>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

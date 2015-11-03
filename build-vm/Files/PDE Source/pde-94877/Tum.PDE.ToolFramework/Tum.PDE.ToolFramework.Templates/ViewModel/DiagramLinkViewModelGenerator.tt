@@ -1,0 +1,97 @@
+﻿<#@ template language="C#" inherits="BaseTemplate"#> 
+<#@ import namespace="Tum.PDE.LanguageDSL"#>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Collections.ObjectModel" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+using DslModeling = global::Microsoft.VisualStudio.Modeling;
+using DslEditorViewDiagrams = global::Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel.DiagramSurface;
+using DslEditorMenuModel = global::Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel.Menu;
+using DslEditorCommands = global::Tum.PDE.ToolFramework.Modeling.Visualization.Commands;
+using DslEditorViewModelData = global::Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel.Data;
+using DslEditorDiagrams = global::Tum.PDE.ToolFramework.Modeling.Diagrams;
+using DslEditorEvents = global::Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel.Messaging.Events;
+
+<#
+foreach(DiagramClass diagramClass in this.MetaModel.AllDiagramClasses)
+{
+	GenerateDiagramLinkViewModel(this.MetaModel, diagramClass);
+}
+#>
+<#+ 
+public void GenerateDiagramLinkViewModel(MetaModel dm, DiagramClass diagramClass)
+{
+#>
+// <#= diagramClass.Name #>
+namespace <#= dm.Namespace #>.ViewModel
+{
+<#+
+
+	foreach(PresentationElementClass presentationElement in diagramClass.PresentationElements)
+	{
+		string baseClass = "DslEditorViewDiagrams::BaseDiagramItemLinkViewModel";
+		if( (presentationElement is ShapeClass) )
+		{
+			continue;
+		}
+		
+#>
+	/// <summary>
+    /// View model for <#= presentationElement.Name #>.
+	///
+	/// Double-derived class to allow easier code customization.
+    /// </summary>
+	public partial class <#= presentationElement.Name #>DiagramItemLinkViewModel : <#= presentationElement.Name #>DiagramItemLinkViewModelBase
+	{
+		#region Constructor
+		/// <summary>
+        /// Constuctor.
+        /// </summary>
+        /// <param name="viewModelStore">The store this view model belongs to.</param>
+        /// <param name="diagram">The Diagram this item belongs to.</param>
+        /// <param name="shapeElement">Model element, that is hosted by this view model.</param>
+        public <#= presentationElement.Name #>DiagramItemLinkViewModel(DslEditorViewModelData::ViewModelStore viewModelStore, DslEditorViewDiagrams::DiagramSurfaceViewModel diagram, DslEditorDiagrams::LinkShape shapeElement)
+            : base(viewModelStore, diagram, shapeElement)
+        {
+        }
+		#endregion
+	}
+
+	/// <summary>
+    /// View model for <#= presentationElement.Name #>.
+	///
+	/// This is the abstract base class.
+    /// </summary>
+	public partial class <#= presentationElement.Name #>DiagramItemLinkViewModelBase : <#= baseClass #>
+	{
+		#region Constructor
+		/// <summary>
+        /// Constuctor.
+        /// </summary>
+        /// <param name="viewModelStore">The store this view model belongs to.</param>
+        /// <param name="diagram">The Diagram this item belongs to.</param>
+        /// <param name="shapeElement">Model element, that is hosted by this view model.</param>
+        protected <#= presentationElement.Name #>DiagramItemLinkViewModelBase(DslEditorViewModelData::ViewModelStore viewModelStore, DslEditorViewDiagrams::DiagramSurfaceViewModel diagram, DslEditorDiagrams::LinkShape shapeElement)
+            : base(viewModelStore, diagram, shapeElement)
+        {
+        }
+		#endregion
+
+<#+
+		this.PushIndent("\t\t");
+		if( presentationElement is PresentationDomainClassElement )
+			this.Write(DiagramGeneratorHelper.Instance.CreatePropertyHandlers(presentationElement, (presentationElement as PresentationDomainClassElement).DomainClass, false));
+		else if( presentationElement is RelationshipShapeClass )
+			this.Write(DiagramGeneratorHelper.Instance.CreatePropertyHandlers(presentationElement, (presentationElement as RelationshipShapeClass).ReferenceRelationship, false));
+		this.PopIndent();		
+#>		
+	}
+	
+<#+
+	}
+#>		
+}
+<#+
+}
+#>

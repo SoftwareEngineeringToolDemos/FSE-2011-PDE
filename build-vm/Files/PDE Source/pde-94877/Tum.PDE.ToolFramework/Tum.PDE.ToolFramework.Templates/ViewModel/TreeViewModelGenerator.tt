@@ -1,0 +1,388 @@
+﻿<#@ template language="C#" inherits="BaseTemplate"#> 
+<#@ import namespace="Tum.PDE.LanguageDSL"#>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Collections.ObjectModel" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+using DslModeling = global::Microsoft.VisualStudio.Modeling;
+using DslEditorModeling = global::Tum.PDE.ToolFramework.Modeling;
+using DslEditorCommands = global::Tum.PDE.ToolFramework.Modeling.Visualization.Commands;
+using DslEditorViewModelData = global::Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel.Data;
+using DslEditorViewModelEvents = global::Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel.Messaging.Events;
+using DslEditorTreeViewModel = global::Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel.ModelTree;
+using DslEditorMenuModel = global::Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel.Menu;
+using DslEditorViewModel = global::Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel;
+using DslEditorViewModelContracts = global::Tum.PDE.ToolFramework.Modeling.Visualization.Contracts.ViewModel;
+using DslEditorViewModelDeletion = global::Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel.Deletion;
+using DslEditorViewModelServices = global::Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel.Services;
+using DslEditorViewModelDependencies = global::Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel.Dependencies;
+
+<#
+GenerateTreeViewModel(this.MetaModel);
+#>
+<#+ 
+public void GenerateTreeViewModel(MetaModel dm)
+{
+#>
+namespace <#= dm.Namespace #>.ViewModel.ModelTree
+{
+	/// <summary>
+    /// Context menu provider used to process and create additional menu items.
+	///
+    /// This is the double generated class for easier customization.	
+    /// </summary>
+	public class <#= dm.Name #>ModelTreeContextMenuProvider : <#= dm.Name #>ModelTreeContextMenuProviderBase
+	{
+		#region Singleton Instance
+		private static <#= dm.Name #>ModelTreeContextMenuProvider contextMenuProvider = null;
+		
+        /// <summary>
+        /// Singleton instance.
+        /// </summary>
+        [global::System.Diagnostics.DebuggerBrowsable(global::System.Diagnostics.DebuggerBrowsableState.Never)] // Will trigger creation otherwise.
+        public static <#= dm.Name #>ModelTreeContextMenuProvider Instance
+        {
+            [global::System.Diagnostics.DebuggerStepThrough]
+            get
+            {
+                if( contextMenuProvider == null )
+				{
+					contextMenuProvider = new <#= dm.Name #>ModelTreeContextMenuProvider();
+				}
+				
+				return contextMenuProvider;
+            }
+        }
+		
+		private <#= dm.Name #>ModelTreeContextMenuProvider() : base()
+		{
+		}
+		#endregion
+	}
+
+	/// <summary>
+    /// Context menu provider used to process and create additional menu items.
+	///
+    /// This is the base abstract class.	
+    /// </summary>
+	public class <#= dm.Name #>ModelTreeContextMenuProviderBase : DslEditorTreeViewModel::ModelTreeContextMenuProvider
+	{
+<#+
+		List<ModalDiagram> modalDiagrams = new List<ModalDiagram>();
+		foreach(DiagramClass diagramClass in this.MetaModel.AllDiagramClasses)
+		{
+			if(diagramClass is ModalDiagram)
+				if( (diagramClass as ModalDiagram).DomainClass != null )
+				{
+					modalDiagrams.Add(diagramClass as ModalDiagram);
+				}
+		}	
+#>
+
+		#region Constructor
+		/// <summary>
+        /// Constructor.
+        /// </summary>
+		protected <#= dm.Name #>ModelTreeContextMenuProviderBase() : base()
+		{
+			// add injectred context menu provider
+<#+
+		foreach(MetaModelLibrary lib in dm.MetaModelLibraries)
+			if( lib.ImportedLibrary != null )
+			{
+				MetaModel m = lib.ImportedLibrary as MetaModel;
+#>
+			this.AddInjectedInContextMenuProvider(<#= m.Namespace #>.ViewModel.ModelTree.<#= m.Name #>ModelTreeContextMenuProvider.Instance);	
+<#+
+			}
+#>
+		}
+		#endregion
+<#+
+		
+			if( modalDiagrams.Count > 0 )
+			{
+#>
+		#region Methods
+	    /// <summary>
+        /// Modify the context menu view model by adding custom menu items.
+        /// </summary>
+        /// <param name="contextMenu">Context menu view model containing automatically added menu items.</param>
+        /// <param name="element">Host element.</param>
+        public override void ProcessContextMenu(DslEditorMenuModel::MenuItemViewModel contextMenu, DslEditorTreeViewModel::ModelElementTreeViewModel element, System.Collections.Generic.List<DslEditorViewModelContracts::IModelTreeContextMenuProvider> processedProviders)
+        {
+			base.ProcessContextMenu(contextMenu, element, processedProviders);
+			
+<#+
+			int counter = modalDiagrams.Count;
+#>
+			if(<#+
+			foreach(ModalDiagram modalDiagram in modalDiagrams)
+			{
+#>	element.Element is <#= modalDiagram.DomainClass.GetFullName(true) #><#+
+			
+				counter--;
+				if( counter == 0 )
+				{
+#>	)
+<#+
+				}
+				else
+				{
+#> ||
+			<#+
+				}
+			}
+#>
+			{
+				DslEditorMenuModel::MenuItemViewModel openModalVMs = this.FindMenuViewModel(contextMenu, "OpenModalViewsFromModelTreeId");
+				if( openModalVMs == null )
+				{
+					openModalVMs = new DslEditorMenuModel::MenuItemViewModel(contextMenu.ViewModelStore);
+					openModalVMs.Text = "Open";
+					openModalVMs.UserData = "OpenModalViewsFromModelTreeId";
+				
+					contextMenu.Children.Insert(0, openModalVMs);
+					contextMenu.Children.Insert(1, new DslEditorMenuModel::SeparatorMenuItemViewModel(contextMenu.ViewModelStore));
+				}				
+			
+<#+
+				foreach(ModalDiagram modalDiagram in modalDiagrams)
+				{
+#>
+				if( element.Element is <#= modalDiagram.DomainClass.GetFullName(true) #> )
+				{
+					DslEditorMenuModel::MenuItemViewModel<DslEditorTreeViewModel::ModelElementTreeViewModel> openVM = new DslEditorMenuModel::MenuItemViewModel<DslEditorTreeViewModel::ModelElementTreeViewModel>(contextMenu.ViewModelStore);
+                	openVM.Text = "Open " + "<#= modalDiagram.Title #>";
+                	openVM.Command = new DslEditorCommands::DelegateCommand<DslEditorTreeViewModel::ModelElementTreeViewModel>(Open<#= modalDiagram.Name #>);
+					openVM.CommandParameter = element;
+
+                	openModalVMs.Children.Add(openVM);
+				}
+
+<#+
+					
+				}
+#>
+			}
+        }
+<#+
+				foreach(ModalDiagram modalDiagram in modalDiagrams)
+				{
+#>
+		
+		/// <summary>
+		/// Opens the view model for the <#= modalDiagram.Name #>.
+		/// </summary>
+		/// <param name="treeVM">Tree vm executing this command.</param>
+		public virtual void Open<#= modalDiagram.Name #>(DslEditorTreeViewModel::ModelElementTreeViewModel treeVM)
+		{
+			<#= dm.Name #><#= modalDiagram.Name #>SurfaceViewModel vm = new <#= dm.Name #><#= modalDiagram.Name #>SurfaceViewModel(treeVM.ViewModelStore, treeVM.Element as DslEditorModeling::DomainModelElement);
+		
+			DslEditorViewModelEvents::OpenViewModelEventArgs args = new DslEditorViewModelEvents::OpenViewModelEventArgs(vm);
+			args.DockingPaneStyle = Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel.DockingPaneStyle.DockedInDocumentPane;
+            treeVM.EventManager.GetEvent<DslEditorViewModelEvents::OpenViewModelEvent>().Publish(args);
+ 
+		}
+<#+
+				}
+#>
+		#endregion	
+<#+
+
+			}
+#>			
+	}
+	
+	/// <summary>
+    /// Model Tree sorting provider.
+    /// 
+    /// This is the double generated class for easier customization.
+    /// </summary>
+	public partial class <#= dm.Name #>ModelTreeSortingProvider : <#= dm.Name #>ModelTreeSortingProviderBase
+	{
+		#region Singleton Instance
+		private static <#= dm.Name #>ModelTreeSortingProvider sortingProvider = null;
+		
+        /// <summary>
+        /// Singleton instance.
+        /// </summary>
+        [global::System.Diagnostics.DebuggerBrowsable(global::System.Diagnostics.DebuggerBrowsableState.Never)] // Will trigger creation otherwise.
+        public static <#= dm.Name #>ModelTreeSortingProvider Instance
+        {
+            [global::System.Diagnostics.DebuggerStepThrough]
+            get
+            {
+                if( sortingProvider == null )
+				{
+					sortingProvider = new <#= dm.Name #>ModelTreeSortingProvider();
+				}
+				
+				return sortingProvider;
+            }
+        }
+		
+		private <#= dm.Name #>ModelTreeSortingProvider()
+		{
+		}
+        #endregion
+	}
+	
+	/// <summary>
+    /// Model Tree sorting provider.
+    /// 
+    /// This is the abstract base class.
+    /// </summary>
+	public abstract class <#= dm.Name #>ModelTreeSortingProviderBase : DslEditorTreeViewModel::ModelTreeSortingProvider
+	{
+		#region Constructor
+		/// <summary>
+        /// Constructor.
+        /// </summary>
+		protected <#= dm.Name #>ModelTreeSortingProviderBase()
+		{
+<#+
+		if( dm.View.ModelTree.SortingBehavior == SortingBehavior.None )
+		{
+#>
+			this.ModelTreeSortingState = DslEditorTreeViewModel::ModelTreeSortingState.None;
+<#+
+		}
+#>
+		}
+		#endregion
+<#+
+		if( dm.View.ModelTree.SortingBehavior == SortingBehavior.None )
+		{
+#>
+
+		#region Methods
+		        /// <summary>
+        /// Method used to add a element into a sorted collection without destroying the sorting order.
+        /// </summary>
+        /// <param name="typeIndex">Index in the collection at which the link type's elements start.</param>
+        /// <param name="collection">Sorted collection to add the new view models to.</param>
+        /// <param name="link">Embedding relationship including the model element as the child (target).</param>
+        /// <param name="c">View model representing the model element to be added to the collection.</param>
+        protected virtual void InsertElement(int typeIndex, DslEditorTreeViewModel::BaseModelElementTreeViewModel parent, System.Collections.ObjectModel.ObservableCollection<DslEditorTreeViewModel::BaseModelElementTreeViewModel> collection, DslModeling::ElementLink link, DslEditorTreeViewModel::BaseModelElementTreeViewModel c)
+        {
+            System.Collections.ObjectModel.ReadOnlyCollection<DslModeling::ElementLink> lllinks = DslModeling::DomainRoleInfo.GetElementLinks<DslModeling::ElementLink>(parent.Element, DslEditorModeling::DomainModelElement.GetSourceDomainRole(link.GetDomainRelationship()).Id);
+            int indexOfLink = lllinks.IndexOf(link) + typeIndex;
+            if (indexOfLink >= collection.Count)
+                collection.Add(c);
+            else
+                collection.Insert(indexOfLink, c);
+        }
+
+		/// <summary>
+        /// Method used to add a element into a sorted collection without destroying the sorting order.
+        /// </summary>
+        /// <param name="collection">Sorted collection to add the new view models to.</param>
+        /// <param name="link">Embedding relationship including the model element as the child (target).</param>
+        /// <param name="c">View model representing the model element to be added to the collection.</param>
+        public override void InsertElement(DslEditorTreeViewModel::BaseModelElementTreeViewModel parent, System.Collections.ObjectModel.ObservableCollection<DslEditorTreeViewModel::BaseModelElementTreeViewModel> collection, DslModeling::ElementLink link, DslEditorTreeViewModel::BaseModelElementTreeViewModel c)
+        {
+            if (parent.ElementLinkOrder.Count <= 1)
+                InsertElement(0, parent, collection, link, c);
+            else
+            {
+                int index = 0;
+                System.Collections.Generic.List<System.Guid> typesBeforeCurrent = new System.Collections.Generic.List<System.Guid>();
+                System.Guid currentType = c.ElementLinkDomainClassId;
+                for (int i = 0; i < parent.ElementLinkOrder.Count; i++)
+                    if (parent.ElementLinkOrder[i] == currentType)
+                    {
+                        index = i;
+                        break;
+                    }
+                    else
+                        typesBeforeCurrent.Add(parent.ElementLinkOrder[i]);
+
+                if (index > 0)
+                {
+                    for (int i = 0; i < collection.Count; i++)
+                    {
+                        if (typesBeforeCurrent.Contains(collection[i].ElementLinkDomainClassId))
+                            continue;
+
+                        InsertElement(i, parent, collection, link, c);
+                        return;
+                    }
+                    InsertElement(collection.Count, parent, collection, link, c);
+                    return;
+                }
+                InsertElement(index, parent, collection, link, c);
+			}
+        }
+		#endregion
+		
+<#+
+		}
+#>
+	}	
+}
+namespace <#= dm.Namespace #>.ViewModel.ModelTree
+{
+	/// <summary>
+    /// Tree view model for the tree view.
+	///
+	/// This is the double generated class for easier customization.
+    /// </summary>
+	public partial class ModelTree<#= dm.Name #>ViewModel : DslEditorTreeViewModel::ModelElementTreeViewModel
+	{
+		/// <summary>
+		/// Constructor.
+		/// </summary>
+		/// <param name="viewModelStore">View model store containing this view model.</param>
+		/// <param name="element">Element represented by this view model.</param>
+		/// <param name="link">Element link, targeting the hosted element.</param>
+		/// <param name="domainRoleId">Domain role id of the role that the hosted element belongs to.</param>
+		/// <param name="parent">Parent of this view model.</param>
+		/// <param name="bHookUpEvents">Hook up into model events to update the created view model on changes in model if true.</param>
+		/// <param name="bCreateContextMenus">Creates context menus for adding and deleting model elements if true.</param>
+		/// <param name="mainModelTreeVm">Model tree view model, this element vm belongs to.</param>
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+		public ModelTree<#= dm.Name #>ViewModel(DslEditorViewModelData::ViewModelStore viewModelStore, DslModeling::ModelElement element, DslModeling::ElementLink link, System.Guid domainRoleId, DslEditorTreeViewModel::ModelElementTreeViewModel parent, bool bHookUpEvents, bool bCreateContextMenus, DslEditorViewModel::MainModelTreeViewModel mainModelTreeVm) 
+			: base(viewModelStore, element, link, domainRoleId, parent, bHookUpEvents, bCreateContextMenus, mainModelTreeVm)
+		{
+		}
+		
+		/// <summary>
+        /// Gets whether elements can be moved within the tree or not.
+        /// </summary>
+        public override bool CanMoveElements
+        {
+            get
+            {
+                return <#= dm.View.ModelTree.CanMoveElements.ToString().ToLower() #>;
+            }
+        }
+		
+				/// <summary>
+        /// Gets the sorting provider which is to be used to apply a specific sorting order while inserting new elements into the children collection.
+        /// </summary>
+        public override DslEditorViewModelContracts::IModelTreeSortingProvider SortingProvider
+		{ 
+			get
+			{
+				return <#= dm.Name #>ModelTreeSortingProvider.Instance;
+			}
+		}
+		
+        /// <summary>
+        /// Gets or sets the global context menu provider.
+        /// </summary>
+        public override DslEditorViewModelContracts::IModelTreeContextMenuProvider ContextMenuProvider 
+		{ 
+			get
+			{
+				return <#= dm.Name #>ModelTreeContextMenuProvider.Instance;
+			}
+		}
+	}
+}
+
+<#+
+}
+#>

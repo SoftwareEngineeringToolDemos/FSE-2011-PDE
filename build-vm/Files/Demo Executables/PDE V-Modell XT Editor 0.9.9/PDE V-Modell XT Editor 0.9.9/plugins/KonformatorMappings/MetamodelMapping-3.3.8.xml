@@ -1,0 +1,1758 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Änderungsoperationen xsi:noNamespaceSchemaLocation="MetamodelMapping.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<!-- Änderungsgruppen Start  -->
+  <Änderungsgruppen>
+  <!-- XPathName Start  -->
+    <XPathName>/V-Modell/V-Modellvariante/Änderungsoperationen</XPathName>
+    <!-- XPathName Ende  -->
+    <!-- Änderungsgruppe Start  -->
+    <Änderungsgruppe id="3e9e11aca44f7ae">
+    <!-- Name Start 3e9e11aca44f7ae -->
+      <Name>Disziplinänderungen</Name><!-- 3e9e11aca44f7ae -->
+      <!-- Name Ende 3e9e11aca44f7ae -->
+      <!-- Beschreibung Start 3e9e11aca44f7ae -->
+      <Beschreibung><![CDATA[ &#196;nderungen an Disziplinen. ]]></Beschreibung><!-- 3e9e11aca44f7ae -->
+      <!-- Beschreibung Ende 3e9e11aca44f7ae -->
+    </Änderungsgruppe><!-- 3e9e11aca44f7ae -->
+    <Änderungsgruppe id="dbc511aca44abb1">
+    <!-- Name Start dbc511aca44abb1 -->
+      <Name>Produktänderungen</Name><!-- dbc511aca44abb1 -->
+      <!-- Name Ende dbc511aca44abb1 -->
+      <!-- Beschreibung Start dbc511aca44abb1 -->
+      <Beschreibung><![CDATA[Änderungen an Produkten.]]></Beschreibung><!-- dbc511aca44abb1 -->
+      <!-- Beschreibung Ende dbc511aca44abb1 -->
+    </Änderungsgruppe><!-- dbc511aca44abb1 -->
+    <Änderungsgruppe id="1125011aca44e714">
+    <!-- Name Start 1125011aca44e714 -->
+      <Name>Themenänderungen</Name><!-- 1125011aca44e714 -->
+      <!-- Name Ende 1125011aca44e714 -->
+      <!-- Beschreibung Start 1125011aca44e714 -->
+      <Beschreibung><![CDATA[Änderungen an Themen.]]></Beschreibung><!-- 1125011aca44e714 -->
+      <!-- Beschreibung Ende 1125011aca44e714 -->
+    </Änderungsgruppe><!-- 1125011aca44e714 -->
+    <Änderungsgruppe id="14af411aca451d76">
+    <!-- Name Start 14af411aca451d76 -->
+      <Name>Aktivitätenänderungen</Name><!-- 14af411aca451d76 -->
+      <!-- Name Ende 14af411aca451d76 -->
+      <!-- Beschreibung Start 14af411aca451d76 -->
+      <Beschreibung><![CDATA[Änderungen an Aktivitäten.]]></Beschreibung><!-- 14af411aca451d76 -->
+      <!-- Beschreibung Ende 14af411aca451d76 -->
+    </Änderungsgruppe><!-- 14af411aca451d76 -->
+    <Änderungsgruppe id="ba1f11aca4498e5">
+    <!-- Name Start ba1f11aca4498e5 -->
+      <Name>Rollenänderungen</Name><!-- ba1f11aca4498e5 -->
+      <!-- Name Ende ba1f11aca4498e5 -->
+      <!-- Beschreibung Start ba1f11aca4498e5 -->
+      <Beschreibung><![CDATA[Änderungen an Rollen.]]></Beschreibung><!-- ba1f11aca4498e5 -->
+      <!-- Beschreibung Ende ba1f11aca4498e5 -->
+    </Änderungsgruppe><!-- ba1f11aca4498e5 -->
+    <Änderungsgruppe id="1853811d51e52302">
+    <!-- Name Start 1853811d51e52302 -->
+      <Name>Tailoringänderungen</Name><!-- 1853811d51e52302 -->
+      <!-- Name Ende 1853811d51e52302 -->
+      <!-- Beschreibung Start 1853811d51e52302 -->
+      <Beschreibung><![CDATA[<p style="margin-top: 0">&#196;nderungen am Tailoringverhalten.</p>]]></Beschreibung><!-- 1853811d51e52302 -->
+      <!-- Beschreibung Ende 1853811d51e52302 -->
+    </Änderungsgruppe><!-- 1853811d51e52302 -->
+    <Änderungsgruppe id="add211aca44bbce">
+    <!-- Name Start add211aca44bbce -->
+      <Name>Entscheidungspunktänderungen</Name><!-- add211aca44bbce -->
+      <!-- Name Ende add211aca44bbce -->
+      <!-- Beschreibung Start add211aca44bbce -->
+      <Beschreibung><![CDATA[Änderungen an Entscheidungspunkten.]]></Beschreibung><!-- add211aca44bbce -->
+      <!-- Beschreibung Ende add211aca44bbce -->
+    </Änderungsgruppe><!-- add211aca44bbce -->
+    <Änderungsgruppe id="13bf011aca45532c">
+    <!-- Name Start 13bf011aca45532c -->
+      <Name>Beschreibungstextersetzungen</Name><!-- 13bf011aca45532c -->
+      <!-- Name Ende 13bf011aca45532c -->
+      <!-- Beschreibung Start 13bf011aca45532c -->
+      <Beschreibung><![CDATA[ Ersetzungen von Beschreibungstexten in der Dokumentation. Beschreibungstextersetzungen sind bei der Konformit&#228;tspr&#252;fung als besonders kritisch zu betrachten. ]]></Beschreibung><!-- 13bf011aca45532c -->
+      <!-- Beschreibung Ende 13bf011aca45532c -->
+    </Änderungsgruppe><!-- 13bf011aca45532c -->
+    <Änderungsgruppe id="1723f11ad394aecd">
+    <!-- Name Start 1723f11ad394aecd -->
+      <Name>Beschreibungstextergänzungen</Name><!-- 1723f11ad394aecd -->
+      <!-- Name Ende 1723f11ad394aecd -->
+      <!-- Beschreibung Start 1723f11ad394aecd -->
+      <Beschreibung><![CDATA[ Errg&#228;nzungen von Beschreibungstexten in der Dokumentation. Beschreibungstexterg&#228;nzungen sind bei der Konformit&#228;tspr&#252;fung zu pr&#252;fen, da sichergestellt werden muss, dass erg&#228;nzte Beschreibungstexte die zuvor bereits vorhandenen Texte nicht unzul&#228;ssig au&#223;er Kraft setzen. ]]></Beschreibung><!-- 1723f11ad394aecd -->
+      <!-- Beschreibung Ende 1723f11ad394aecd -->
+    </Änderungsgruppe><!-- 1723f11ad394aecd -->
+    <Änderungsgruppe id="2b0c11d49af0f2c">
+    <!-- Name Start 2b0c11d49af0f2c -->
+      <Name>Beschreibungstextverschiebungen</Name><!-- 2b0c11d49af0f2c -->
+      <!-- Name Ende 2b0c11d49af0f2c -->
+      <!-- Beschreibung Start 2b0c11d49af0f2c -->
+      <Beschreibung><![CDATA[<p style="margin-top: 0">Dienen dem Zweck, Beschreibungstexte aus den Teilen, Kapiteln und Abschnitten aus dem Erweiterungsmodell unter die Beschreibungstexte des Referenzmodells zu mischen.</p>]]></Beschreibung><!-- 2b0c11d49af0f2c -->
+      <!-- Beschreibung Ende 2b0c11d49af0f2c -->
+    </Änderungsgruppe><!-- 2b0c11d49af0f2c -->
+    <Änderungsgruppe id="98ed11ae8725526">
+    <!-- Name Start 98ed11ae8725526 -->
+      <Name>WerkzeugMethodenÄnderungen</Name><!-- 98ed11ae8725526 -->
+      <!-- Name Ende 98ed11ae8725526 -->
+      <!-- Beschreibung Start 98ed11ae8725526 -->
+      <Beschreibung><![CDATA[<p style="margin-top: 0">&#196;nderungen an Werkzeugen und Methoden.</p>]]></Beschreibung><!-- 98ed11ae8725526 -->
+      <!-- Beschreibung Ende 98ed11ae8725526 -->
+    </Änderungsgruppe><!-- 98ed11ae8725526 -->
+    <!-- Änderungsgruppe Ende  -->
+  </Änderungsgruppen>
+  <!-- Änderungsgruppen Ende  -->
+  <!-- Änderungsoperation Start  -->
+  <Änderungsoperation konformitätsrelevant="unkritisch">
+  <!-- Name Start  -->
+    <Name>DisziplinUmbenennen</Name>
+    <!-- Name Ende  -->
+    <!-- Beschreibung Start  -->
+    <Beschreibung><![CDATA[<p style="margin-top: 0">Das Umbenennen einer Disziplin ist unkritisch, da eine &#196;nderung des Namens den Zweck, der durch die Beschreibung festgelegt wird, nicht ver&#228;ndern kann. Bei Umbenennungen muss sich der Anpasser dar&#252;ber im Klaren sein, dass er sich zugunsten organisationsspezifischer Begriffe von der Standardnomenklatur entfernt, wodurch es zu Missverst&#228;ndnissen kommen kann.</p>]]></Beschreibung>
+    <!-- Beschreibung Ende  -->
+    <!-- ÄnderungsgruppeRef Start  -->
+    <ÄnderungsgruppeRef link="3e9e11aca44f7ae" />
+    <!-- ÄnderungsgruppeRef Ende  -->
+    <!-- ReferenzenTausch Start  -->
+    <!-- ReferenzenTausch Ende  -->
+    <!-- ReferenzErgänzen Start  -->
+    <!-- ReferenzErgänzen Ende  -->
+    <!-- ElementUmbenennen Start  -->
+    <ElementUmbenennen>
+    <!-- Name Start  -->
+      <Name>Austausch des Attributs &apos;Name&apos; einer Disziplin</Name>
+      <!-- Name Ende  -->
+      <!-- EingabewertBetroffenesElement Start  -->
+      <EingabewertBetroffenesElement>DisziplinRef</EingabewertBetroffenesElement>
+      <!-- EingabewertBetroffenesElement Ende  -->
+      <!-- EingabeNeuerWert Start  -->
+      <EingabeNeuerWert>NeuerName</EingabeNeuerWert>
+      <!-- EingabeNeuerWert Ende  -->
+      <!-- ZuÄnderndesElement Start  -->
+      <ZuÄnderndesElement>Name</ZuÄnderndesElement>
+      <!-- ZuÄnderndesElement Ende  -->
+    </ElementUmbenennen>
+    <!-- ElementUmbenennen Ende  -->
+    <!-- TextAnhängen Start  -->
+    <!-- TextAnhängen Ende  -->
+    <!-- TextErsetzen Start  -->
+    <!-- TextErsetzen Ende  -->
+    <!-- ElementTexteKonkatenieren Start  -->
+    <!-- ElementTexteKonkatenieren Ende  -->
+    <!-- ElementErsetzen Start  -->
+    <!-- ElementErsetzen Ende  -->
+    <!-- ElementEntfernen Start  -->
+    <!-- ElementEntfernen Ende  -->
+    <!-- ElementVerschieben Start  -->
+    <!-- ElementVerschieben Ende  -->
+  </Änderungsoperation>
+  <Änderungsoperation konformitätsrelevant="zuPrüfen">
+  <!-- Name Start  -->
+    <Name>DisziplintextVoranstellen</Name>
+    <!-- Name Ende  -->
+    <!-- Beschreibung Start  -->
+    <Beschreibung><![CDATA[<p style="margin-top: 0">Erg&#228;nzungen am Beschreibungstext einer Disziplin sind prinzipiell gestattet und gef&#228;hrden die Konformit&#228;t nur in dem Fall, in dem der erg&#228;nzende Beschreibungstext Inhalte aus dem zuvor vorhandenen Beschreibungstext au&#223;er Kraft setzt. Es ist bei der Konformit&#228;tspr&#252;fung sicherzustellen, dass durch die Erg&#228;nzung keine Verf&#228;lschung der urspr&#252;nglichen Bedeutung zustandekommt.</p>]]></Beschreibung>
+    <!-- Beschreibung Ende  -->
+    <!-- ÄnderungsgruppeRef Start  -->
+    <ÄnderungsgruppeRef link="3e9e11aca44f7ae" />
+    <!-- ÄnderungsgruppeRef Ende  -->
+    <!-- ReferenzenTausch Start  -->
+    <!-- ReferenzenTausch Ende  -->
+    <!-- ReferenzErgänzen Start  -->
+    <!-- ReferenzErgänzen Ende  -->
+    <!-- ElementUmbenennen Start  -->
+    <!-- ElementUmbenennen Ende  -->
+    <!-- TextAnhängen Start  -->
+    <TextAnhängen>
+    <!-- Name Start  -->
+      <Name>Text vor die Beschreibung einer Disziplin stellen</Name>
+      <!-- Name Ende  -->
+      <!-- EingabewertBetroffenesElement Start  -->
+      <EingabewertBetroffenesElement>DisziplinRef</EingabewertBetroffenesElement>
+      <!-- EingabewertBetroffenesElement Ende  -->
+      <!-- EingabeNeuerWert Start  -->
+      <EingabeNeuerWert>ZuErgänzenderText</EingabeNeuerWert>
+      <!-- EingabeNeuerWert Ende  -->
+      <!-- ZuÄnderndesElement Start  -->
+      <ZuÄnderndesElement>Sinn_und_Zweck</ZuÄnderndesElement>
+      <!-- ZuÄnderndesElement Ende  -->
+      <!-- Lokation Start  -->
+      <Lokation>vorneanstellen</Lokation>
+      <!-- Lokation Ende  -->
+    </TextAnhängen>
+    <!-- TextAnhängen Ende  -->
+    <!-- TextErsetzen Start  -->
+    <!-- TextErsetzen Ende  -->
+    <!-- ElementTexteKonkatenieren Start  -->
+    <!-- ElementTexteKonkatenieren Ende  -->
+    <!-- ElementErsetzen Start  -->
+    <!-- ElementErsetzen Ende  -->
+    <!-- ElementEntfernen Start  -->
+    <!-- ElementEntfernen Ende  -->
+    <!-- ElementVerschieben Start  -->
+    <!-- ElementVerschieben Ende  -->
+  </Änderungsoperation>
+  <Änderungsoperation konformitätsrelevant="zuPrüfen">
+  <!-- Name Start  -->
+    <Name>DisziplintextHintenanstellen</Name>
+    <!-- Name Ende  -->
+    <!-- Beschreibung Start  -->
+    <Beschreibung><![CDATA[<p style="margin-top: 0">Erg&#228;nzungen am Beschreibungstext einer Disziplin sind prinzipiell gestattet und gef&#228;hrden die Konformit&#228;t nur in dem Fall, in dem der erg&#228;nzende Beschreibungstext Inhalte aus dem zuvor vorhandenen Beschreibungstext au&#223;er Kraft setzt. Es ist bei der Konformit&#228;tspr&#252;fung sicherzustellen, dass durch die Erg&#228;nzung keine Verf&#228;lschung der urspr&#252;nglichen Bedeutung zustandekommt.</p>]]></Beschreibung>
+    <!-- Beschreibung Ende  -->
+    <!-- ÄnderungsgruppeRef Start  -->
+    <ÄnderungsgruppeRef link="3e9e11aca44f7ae" />
+    <!-- ÄnderungsgruppeRef Ende  -->
+    <!-- ReferenzenTausch Start  -->
+    <!-- ReferenzenTausch Ende  -->
+    <!-- ReferenzErgänzen Start  -->
+    <!-- ReferenzErgänzen Ende  -->
+    <!-- ElementUmbenennen Start  -->
+    <!-- ElementUmbenennen Ende  -->
+    <!-- TextAnhängen Start  -->
+    <TextAnhängen>
+    <!-- Name Start  -->
+      <Name>Text an Beschreibung einer Disziplin anhängen</Name>
+      <!-- Name Ende  -->
+      <!-- EingabewertBetroffenesElement Start  -->
+      <EingabewertBetroffenesElement>DisziplinRef</EingabewertBetroffenesElement>
+      <!-- EingabewertBetroffenesElement Ende  -->
+      <!-- EingabeNeuerWert Start  -->
+      <EingabeNeuerWert>ZuErgänzenderText</EingabeNeuerWert>
+      <!-- EingabeNeuerWert Ende  -->
+      <!-- ZuÄnderndesElement Start  -->
+      <ZuÄnderndesElement>Sinn_und_Zweck</ZuÄnderndesElement>
+      <!-- ZuÄnderndesElement Ende  -->
+      <!-- Lokation Start  -->
+      <Lokation>hintenanstellen</Lokation>
+      <!-- Lokation Ende  -->
+    </TextAnhängen>
+    <!-- TextAnhängen Ende  -->
+    <!-- TextErsetzen Start  -->
+    <!-- TextErsetzen Ende  -->
+    <!-- ElementTexteKonkatenieren Start  -->
+    <!-- ElementTexteKonkatenieren Ende  -->
+    <!-- ElementErsetzen Start  -->
+    <!-- ElementErsetzen Ende  -->
+    <!-- ElementEntfernen Start  -->
+    <!-- ElementEntfernen Ende  -->
+    <!-- ElementVerschieben Start  -->
+    <!-- ElementVerschieben Ende  -->
+  </Änderungsoperation>
+  <Änderungsoperation konformitätsrelevant="unkritisch">
+  <!-- Name Start  -->
+    <Name>ProduktUmbenennen</Name>
+    <!-- Name Ende  -->
+    <!-- Beschreibung Start  -->
+    <Beschreibung><![CDATA[<p style="margin-top: 0">Das Umbenennen eines Produkts ist unkritisch, da eine &#196;nderung des Namens den Zweck, der durch die Beschreibung festgelegt wird, nicht ver&#228;ndern kann. Bei Umbenennungen muss sich der Anpasser dar&#252;ber im Klaren sein, dass er sich zugunsten organisationsspezifischer Begriffe von der Standardnomenklatur entfernt, wodurch es zu Missverst&#228;ndnissen kommen kann.</p>]]></Beschreibung>
+    <!-- Beschreibung Ende  -->
+    <!-- ÄnderungsgruppeRef Start  -->
+    <ÄnderungsgruppeRef link="dbc511aca44abb1" />
+    <!-- ÄnderungsgruppeRef Ende  -->
+    <!-- ReferenzenTausch Start  -->
+    <!-- ReferenzenTausch Ende  -->
+    <!-- ReferenzErgänzen Start  -->
+    <!-- ReferenzErgänzen Ende  -->
+    <!-- ElementUmbenennen Start  -->
+    <ElementUmbenennen>
+    <!-- Name Start  -->
+      <Name>Austausch des Attributs &apos;Name&apos; eines Produkts</Name>
+      <!-- Name Ende  -->
+      <!-- EingabewertBetroffenesElement Start  -->
+      <EingabewertBetroffenesElement>ProduktRef</EingabewertBetroffenesElement>
+      <!-- EingabewertBetroffenesElement Ende  -->
+      <!-- EingabeNeuerWert Start  -->
+      <EingabeNeuerWert>NeuerName</EingabeNeuerWert>
+      <!-- EingabeNeuerWert Ende  -->
+      <!-- ZuÄnderndesElement Start  -->
+      <ZuÄnderndesElement>Name</ZuÄnderndesElement>
+      <!-- ZuÄnderndesElement Ende  -->
+    </ElementUmbenennen>
+    <!-- ElementUmbenennen Ende  -->
+    <!-- TextAnhängen Start  -->
+    <!-- TextAnhängen Ende  -->
+    <!-- TextErsetzen Start  -->
+    <!-- TextErsetzen Ende  -->
+    <!-- ElementTexteKonkatenieren Start  -->
+    <!-- ElementTexteKonkatenieren Ende  -->
+    <!-- ElementErsetzen Start  -->
+    <!-- ElementErsetzen Ende  -->
+    <!-- ElementEntfernen Start  -->
+    <!-- ElementEntfernen Ende  -->
+    <!-- ElementVerschieben Start  -->
+    <!-- ElementVerschieben Ende  -->
+  </Änderungsoperation>
+  <Änderungsoperation konformitätsrelevant="zuPrüfen">
+  <!-- Name Start  -->
+    <Name>ProdukttextVoranstellen</Name>
+    <!-- Name Ende  -->
+    <!-- Beschreibung Start  -->
+    <Beschreibung><![CDATA[<p style="margin-top: 0">Erg&#228;nzungen am Beschreibungstext eines Produkts sind prinzipiell gestattet und gef&#228;hrden die Konformit&#228;t nur in dem Fall, in dem der erg&#228;nzende Beschreibungstext Inhalte aus dem zuvor vorhandenen Beschreibungstext au&#223;er Kraft setzt. Es ist bei der Konformit&#228;tspr&#252;fung sicherzustellen, dass durch die Erg&#228;nzung keine Verf&#228;lschung der urspr&#252;nglichen Bedeutung zustandekommt.</p>]]></Beschreibung>
+    <!-- Beschreibung Ende  -->
+    <!-- ÄnderungsgruppeRef Start  -->
+    <ÄnderungsgruppeRef link="dbc511aca44abb1" />
+    <!-- ÄnderungsgruppeRef Ende  -->
+    <!-- ReferenzenTausch Start  -->
+    <!-- ReferenzenTausch Ende  -->
+    <!-- ReferenzErgänzen Start  -->
+    <!-- ReferenzErgänzen Ende  -->
+    <!-- ElementUmbenennen Start  -->
+    <!-- ElementUmbenennen Ende  -->
+    <!-- TextAnhängen Start  -->
+    <TextAnhängen>
+    <!-- Name Start  -->
+      <Name>Text vor die Beschreibung eines Produkts stellen</Name>
+      <!-- Name Ende  -->
+      <!-- EingabewertBetroffenesElement Start  -->
+      <EingabewertBetroffenesElement>ProduktRef</EingabewertBetroffenesElement>
+      <!-- EingabewertBetroffenesElement Ende  -->
+      <!-- EingabeNeuerWert Start  -->
+      <EingabeNeuerWert>ZuErgänzenderText</EingabeNeuerWert>
+      <!-- EingabeNeuerWert Ende  -->
+      <!-- ZuÄnderndesElement Start  -->
+      <ZuÄnderndesElement>Sinn_und_Zweck</ZuÄnderndesElement>
+      <!-- ZuÄnderndesElement Ende  -->
+      <!-- Lokation Start  -->
+      <Lokation>vorneanstellen</Lokation>
+      <!-- Lokation Ende  -->
+    </TextAnhängen>
+    <!-- TextAnhängen Ende  -->
+    <!-- TextErsetzen Start  -->
+    <!-- TextErsetzen Ende  -->
+    <!-- ElementTexteKonkatenieren Start  -->
+    <!-- ElementTexteKonkatenieren Ende  -->
+    <!-- ElementErsetzen Start  -->
+    <!-- ElementErsetzen Ende  -->
+    <!-- ElementEntfernen Start  -->
+    <!-- ElementEntfernen Ende  -->
+    <!-- ElementVerschieben Start  -->
+    <!-- ElementVerschieben Ende  -->
+  </Änderungsoperation>
+  <Änderungsoperation konformitätsrelevant="zuPrüfen">
+  <!-- Name Start  -->
+    <Name>ProdukttextHintenanstellen</Name>
+    <!-- Name Ende  -->
+    <!-- Beschreibung Start  -->
+    <Beschreibung><![CDATA[<p style="margin-top: 0">Erg&#228;nzungen am Beschreibungstext eines Produkts sind prinzipiell gestattet und gef&#228;hrden die Konformit&#228;t nur in dem Fall, in dem der erg&#228;nzende Beschreibungstext Inhalte aus dem zuvor vorhandenen Beschreibungstext au&#223;er Kraft setzt. Es ist bei der Konformit&#228;tspr&#252;fung sicherzustellen, dass durch die Erg&#228;nzung keine Verf&#228;lschung der urspr&#252;nglichen Bedeutung zustandekommt.</p>]]></Beschreibung>
+    <!-- Beschreibung Ende  -->
+    <!-- ÄnderungsgruppeRef Start  -->
+    <ÄnderungsgruppeRef link="dbc511aca44abb1" />
+    <!-- ÄnderungsgruppeRef Ende  -->
+    <!-- ReferenzenTausch Start  -->
+    <!-- ReferenzenTausch Ende  -->
+    <!-- ReferenzErgänzen Start  -->
+    <!-- ReferenzErgänzen Ende  -->
+    <!-- ElementUmbenennen Start  -->
+    <!-- ElementUmbenennen Ende  -->
+    <!-- TextAnhängen Start  -->
+    <TextAnhängen>
+    <!-- Name Start  -->
+      <Name>Text an Beschreibungstext eines Produkts anhängen</Name>
+      <!-- Name Ende  -->
+      <!-- EingabewertBetroffenesElement Start  -->
+      <EingabewertBetroffenesElement>ProduktRef</EingabewertBetroffenesElement>
+      <!-- EingabewertBetroffenesElement Ende  -->
+      <!-- EingabeNeuerWert Start  -->
+      <EingabeNeuerWert>ZuErgänzenderText</EingabeNeuerWert>
+      <!-- EingabeNeuerWert Ende  -->
+      <!-- ZuÄnderndesElement Start  -->
+      <ZuÄnderndesElement>Sinn_und_Zweck</ZuÄnderndesElement>
+      <!-- ZuÄnderndesElement Ende  -->
+      <!-- Lokation Start  -->
+      <Lokation>hintenanstellen</Lokation>
+      <!-- Lokation Ende  -->
+    </TextAnhängen>
+    <!-- TextAnhängen Ende  -->
+    <!-- TextErsetzen Start  -->
+    <!-- TextErsetzen Ende  -->
+    <!-- ElementTexteKonkatenieren Start  -->
+    <!-- ElementTexteKonkatenieren Ende  -->
+    <!-- ElementErsetzen Start  -->
+    <!-- ElementErsetzen Ende  -->
+    <!-- ElementEntfernen Start  -->
+    <!-- ElementEntfernen Ende  -->
+    <!-- ElementVerschieben Start  -->
+    <!-- ElementVerschieben Ende  -->
+  </Änderungsoperation>
+  <Änderungsoperation konformitätsrelevant="unkritisch">
+  <!-- Name Start  -->
+    <Name>ThemaUmbenennen</Name>
+    <!-- Name Ende  -->
+    <!-- Beschreibung Start  -->
+    <Beschreibung><![CDATA[<p style="margin-top: 0">Das Umbenennen eines Themas ist unkritisch, da eine &#196;nderung des Namens den Zweck, der durch die Beschreibung festgelegt wird, nicht ver&#228;ndern kann. Bei Umbenennungen muss sich der Anpasser dar&#252;ber im Klaren sein, dass er sich zugunsten organisationsspezifischer Begriffe von der Standardnomenklatur entfernt, wodurch es zu Missverst&#228;ndnissen kommen kann.</p>]]></Beschreibung>
+    <!-- Beschreibung Ende  -->
+    <!-- ÄnderungsgruppeRef Start  -->
+    <ÄnderungsgruppeRef link="1125011aca44e714" />
+    <!-- ÄnderungsgruppeRef Ende  -->
+    <!-- ReferenzenTausch Start  -->
+    <!-- ReferenzenTausch Ende  -->
+    <!-- ReferenzErgänzen Start  -->
+    <!-- ReferenzErgänzen Ende  -->
+    <!-- ElementUmbenennen Start  -->
+    <ElementUmbenennen>
+    <!-- Name Start  -->
+      <Name>Austausch des Attributs &apos;Name&apos; eines Themas</Name>
+      <!-- Name Ende  -->
+      <!-- EingabewertBetroffenesElement Start  -->
+      <EingabewertBetroffenesElement>ThemaRef</EingabewertBetroffenesElement>
+      <!-- EingabewertBetroffenesElement Ende  -->
+      <!-- EingabeNeuerWert Start  -->
+      <EingabeNeuerWert>NeuerName</EingabeNeuerWert>
+      <!-- EingabeNeuerWert Ende  -->
+      <!-- ZuÄnderndesElement Start  -->
+      <ZuÄnderndesElement>Name</ZuÄnderndesElement>
+      <!-- ZuÄnderndesElement Ende  -->
+    </ElementUmbenennen>
+    <!-- ElementUmbenennen Ende  -->
+    <!-- TextAnhängen Start  -->
+    <!-- TextAnhängen Ende  -->
+    <!-- TextErsetzen Start  -->
+    <!-- TextErsetzen Ende  -->
+    <!-- ElementTexteKonkatenieren Start  -->
+    <!-- ElementTexteKonkatenieren Ende  -->
+    <!-- ElementErsetzen Start  -->
+    <!-- ElementErsetzen Ende  -->
+    <!-- ElementEntfernen Start  -->
+    <!-- ElementEntfernen Ende  -->
+    <!-- ElementVerschieben Start  -->
+    <!-- ElementVerschieben Ende  -->
+  </Änderungsoperation>
+  <Änderungsoperation konformitätsrelevant="zuPrüfen">
+  <!-- Name Start  -->
+    <Name>ThematextVoranstellen</Name>
+    <!-- Name Ende  -->
+    <!-- Beschreibung Start  -->
+    <Beschreibung><![CDATA[<p style="margin-top: 0">Erg&#228;nzungen am Beschreibungstext eines Themas sind prinzipiell gestattet und gef&#228;hrden die Konformit&#228;t nur in dem Fall, in dem der erg&#228;nzende Beschreibungstext Inhalte aus dem zuvor vorhandenen Beschreibungstext au&#223;er Kraft setzt. Es ist bei der Konformit&#228;tspr&#252;fung sicherzustellen, dass durch die Erg&#228;nzung keine Verf&#228;lschung der urspr&#252;nglichen Bedeutung zustandekommt.</p>]]></Beschreibung>
+    <!-- Beschreibung Ende  -->
+    <!-- ÄnderungsgruppeRef Start  -->
+    <ÄnderungsgruppeRef link="1125011aca44e714" />
+    <!-- ÄnderungsgruppeRef Ende  -->
+    <!-- ReferenzenTausch Start  -->
+    <!-- ReferenzenTausch Ende  -->
+    <!-- ReferenzErgänzen Start  -->
+    <!-- ReferenzErgänzen Ende  -->
+    <!-- ElementUmbenennen Start  -->
+    <!-- ElementUmbenennen Ende  -->
+    <!-- TextAnhängen Start  -->
+    <TextAnhängen>
+    <!-- Name Start  -->
+      <Name>Text vor die Beschreibung eines Themas stellen</Name>
+      <!-- Name Ende  -->
+      <!-- EingabewertBetroffenesElement Start  -->
+      <EingabewertBetroffenesElement>ThemaRef</EingabewertBetroffenesElement>
+      <!-- EingabewertBetroffenesElement Ende  -->
+      <!-- EingabeNeuerWert Start  -->
+      <EingabeNeuerWert>ZuErgänzenderText</EingabeNeuerWert>
+      <!-- EingabeNeuerWert Ende  -->
+      <!-- ZuÄnderndesElement Start  -->
+      <ZuÄnderndesElement>Beschreibung</ZuÄnderndesElement>
+      <!-- ZuÄnderndesElement Ende  -->
+      <!-- Lokation Start  -->
+      <Lokation>vorneanstellen</Lokation>
+      <!-- Lokation Ende  -->
+    </TextAnhängen>
+    <!-- TextAnhängen Ende  -->
+    <!-- TextErsetzen Start  -->
+    <!-- TextErsetzen Ende  -->
+    <!-- ElementTexteKonkatenieren Start  -->
+    <!-- ElementTexteKonkatenieren Ende  -->
+    <!-- ElementErsetzen Start  -->
+    <!-- ElementErsetzen Ende  -->
+    <!-- ElementEntfernen Start  -->
+    <!-- ElementEntfernen Ende  -->
+    <!-- ElementVerschieben Start  -->
+    <!-- ElementVerschieben Ende  -->
+  </Änderungsoperation>
+  <Änderungsoperation konformitätsrelevant="zuPrüfen">
+  <!-- Name Start  -->
+    <Name>ThematextHintenanstellen</Name>
+    <!-- Name Ende  -->
+    <!-- Beschreibung Start  -->
+    <Beschreibung><![CDATA[<p style="margin-top: 0">Erg&#228;nzungen am Beschreibungstext eines Themas sind prinzipiell gestattet und gef&#228;hrden die Konformit&#228;t nur in dem Fall, in dem der erg&#228;nzende Beschreibungstext Inhalte aus dem zuvor vorhandenen Beschreibungstext au&#223;er Kraft setzt. Es ist bei der Konformit&#228;tspr&#252;fung sicherzustellen, dass durch die Erg&#228;nzung keine Verf&#228;lschung der urspr&#252;nglichen Bedeutung zustandekommt.</p>]]></Beschreibung>
+    <!-- Beschreibung Ende  -->
+    <!-- ÄnderungsgruppeRef Start  -->
+    <ÄnderungsgruppeRef link="1125011aca44e714" />
+    <!-- ÄnderungsgruppeRef Ende  -->
+    <!-- ReferenzenTausch Start  -->
+    <!-- ReferenzenTausch Ende  -->
+    <!-- ReferenzErgänzen Start  -->
+    <!-- ReferenzErgänzen Ende  -->
+    <!-- ElementUmbenennen Start  -->
+    <!-- ElementUmbenennen Ende  -->
+    <!-- TextAnhängen Start  -->
+    <TextAnhängen>
+    <!-- Name Start  -->
+      <Name>Text an Beschreibung eines Themas anhängen</Name>
+      <!-- Name Ende  -->
+      <!-- EingabewertBetroffenesElement Start  -->
+      <EingabewertBetroffenesElement>ThemaRef</EingabewertBetroffenesElement>
+      <!-- EingabewertBetroffenesElement Ende  -->
+      <!-- EingabeNeuerWert Start  -->
+      <EingabeNeuerWert>ZuErgänzenderText</EingabeNeuerWert>
+      <!-- EingabeNeuerWert Ende  -->
+      <!-- ZuÄnderndesElement Start  -->
+      <ZuÄnderndesElement>Beschreibung</ZuÄnderndesElement>
+      <!-- ZuÄnderndesElement Ende  -->
+      <!-- Lokation Start  -->
+      <Lokation>hintenanstellen</Lokation>
+      <!-- Lokation Ende  -->
+    </TextAnhängen>
+    <!-- TextAnhängen Ende  -->
+    <!-- TextErsetzen Start  -->
+    <!-- TextErsetzen Ende  -->
+    <!-- ElementTexteKonkatenieren Start  -->
+    <!-- ElementTexteKonkatenieren Ende  -->
+    <!-- ElementErsetzen Start  -->
+    <!-- ElementErsetzen Ende  -->
+    <!-- ElementEntfernen Start  -->
+    <!-- ElementEntfernen Ende  -->
+    <!-- ElementVerschieben Start  -->
+    <!-- ElementVerschieben Ende  -->
+  </Änderungsoperation>
+  <Änderungsoperation konformitätsrelevant="unkritisch">
+  <!-- Name Start  -->
+    <Name>UnterthemaEinordnen</Name>
+    <!-- Name Ende  -->
+    <!-- Beschreibung Start  -->
+    <Beschreibung><![CDATA[<p style="margin-top: 0">Gliedert ein Unterthema in ein Thema ein.</p>]]></Beschreibung>
+    <!-- Beschreibung Ende  -->
+    <!-- ÄnderungsgruppeRef Start  -->
+    <ÄnderungsgruppeRef link="1125011aca44e714" />
+    <!-- ÄnderungsgruppeRef Ende  -->
+    <!-- ReferenzenTausch Start  -->
+    <!-- ReferenzenTausch Ende  -->
+    <!-- ReferenzErgänzen Start  -->
+    <!-- ReferenzErgänzen Ende  -->
+    <!-- ElementUmbenennen Start  -->
+    <!-- ElementUmbenennen Ende  -->
+    <!-- TextAnhängen Start  -->
+    <!-- TextAnhängen Ende  -->
+    <!-- TextErsetzen Start  -->
+    <!-- TextErsetzen Ende  -->
+    <!-- ElementTexteKonkatenieren Start  -->
+    <!-- ElementTexteKonkatenieren Ende  -->
+    <!-- ElementErsetzen Start  -->
+    <!-- ElementErsetzen Ende  -->
+    <!-- ElementEntfernen Start  -->
+    <!-- ElementEntfernen Ende  -->
+    <!-- ElementVerschieben Start  -->
+    <ElementVerschieben>
+    <!-- Name Start  -->
+      <Name>Einordnung eines Unterthemas unter ein Thema</Name>
+      <!-- Name Ende  -->
+      <!-- EingabewertVerschobenesElement Start  -->
+      <EingabewertVerschobenesElement>UnterthemaRef</EingabewertVerschobenesElement>
+      <!-- EingabewertVerschobenesElement Ende  -->
+      <!-- EingabewertNeuesVaterElement Start  -->
+      <EingabewertNeuesVaterElement>ThemaRef</EingabewertNeuesVaterElement>
+      <!-- EingabewertNeuesVaterElement Ende  -->
+    </ElementVerschieben>
+    <!-- ElementVerschieben Ende  -->
+  </Änderungsoperation>
+  <Änderungsoperation konformitätsrelevant="unkritisch">
+  <!-- Name Start  -->
+    <Name>AktivitätUmbenennen</Name>
+    <!-- Name Ende  -->
+    <!-- Beschreibung Start  -->
+    <Beschreibung><![CDATA[<p style="margin-top: 0">Das Umbenennen einer Aktivit&#228;t ist unkritisch, da eine &#196;nderung des Namens den Zweck, der durch die Beschreibung festgelegt wird, nicht ver&#228;ndern kann. Bei Umbenennungen muss sich der Anpasser dar&#252;ber im Klaren sein, dass er sich zugunsten organisationsspezifischer Begriffe von der Standardnomenklatur entfernt, wodurch es zu Missverst&#228;ndnissen kommen kann.</p>]]></Beschreibung>
+    <!-- Beschreibung Ende  -->
+    <!-- ÄnderungsgruppeRef Start  -->
+    <ÄnderungsgruppeRef link="14af411aca451d76" />
+    <!-- ÄnderungsgruppeRef Ende  -->
+    <!-- ReferenzenTausch Start  -->
+    <!-- ReferenzenTausch Ende  -->
+    <!-- ReferenzErgänzen Start  -->
+    <!-- ReferenzErgänzen Ende  -->
+    <!-- ElementUmbenennen Start  -->
+    <ElementUmbenennen>
+    <!-- Name Start  -->
+      <Name>Austausch des Attributs &apos;Name&apos; einer Aktivität</Name>
+      <!-- Name Ende  -->
+      <!-- EingabewertBetroffenesElement Start  -->
+      <EingabewertBetroffenesElement>AktivitätRef</EingabewertBetroffenesElement>
+      <!-- EingabewertBetroffenesElement Ende  -->
+      <!-- EingabeNeuerWert Start  -->
+      <EingabeNeuerWert>NeuerName</EingabeNeuerWert>
+      <!-- EingabeNeuerWert Ende  -->
+      <!-- ZuÄnderndesElement Start  -->
+      <ZuÄnderndesElement>Name</ZuÄnderndesElement>
+      <!-- ZuÄnderndesElement Ende  -->
+    </ElementUmbenennen>
+    <!-- ElementUmbenennen Ende  -->
+    <!-- TextAnhängen Start  -->
+    <!-- TextAnhängen Ende  -->
+    <!-- TextErsetzen Start  -->
+    <!-- TextErsetzen Ende  -->
+    <!-- ElementTexteKonkatenieren Start  -->
+    <!-- ElementTexteKonkatenieren Ende  -->
+    <!-- ElementErsetzen Start  -->
+    <!-- ElementErsetzen Ende  -->
+    <!-- ElementEntfernen Start  -->
+    <!-- ElementEntfernen Ende  -->
+    <!-- ElementVerschieben Start  -->
+    <!-- ElementVerschieben Ende  -->
+  </Änderungsoperation>
+  <Änderungsoperation konformitätsrelevant="zuPrüfen">
+  <!-- Name Start  -->
+    <Name>AktivitättextVoranstellen</Name>
+    <!-- Name Ende  -->
+    <!-- Beschreibung Start  -->
+    <Beschreibung><![CDATA[<p style="margin-top: 0">Erg&#228;nzungen am Beschreibungstext einer Aktivit&#228;t sind prinzipiell gestattet und gef&#228;hrden die Konformit&#228;t nur in dem Fall, in dem der erg&#228;nzende Beschreibungstext Inhalte aus dem zuvor vorhandenen Beschreibungstext au&#223;er Kraft setzt. Es ist bei der Konformit&#228;tspr&#252;fung sicherzustellen, dass durch die Erg&#228;nzung keine Verf&#228;lschung der urspr&#252;nglichen Bedeutung zustandekommt.</p>]]></Beschreibung>
+    <!-- Beschreibung Ende  -->
+    <!-- ÄnderungsgruppeRef Start  -->
+    <ÄnderungsgruppeRef link="14af411aca451d76" />
+    <!-- ÄnderungsgruppeRef Ende  -->
+    <!-- ReferenzenTausch Start  -->
+    <!-- ReferenzenTausch Ende  -->
+    <!-- ReferenzErgänzen Start  -->
+    <!-- ReferenzErgänzen Ende  -->
+    <!-- ElementUmbenennen Start  -->
+    <!-- ElementUmbenennen Ende  -->
+    <!-- TextAnhängen Start  -->
+    <TextAnhängen>
+    <!-- Name Start  -->
+      <Name>Text vor die Beschreibung einer Aktivität stellen</Name>
+      <!-- Name Ende  -->
+      <!-- EingabewertBetroffenesElement Start  -->
+      <EingabewertBetroffenesElement>AktivitätRef</EingabewertBetroffenesElement>
+      <!-- EingabewertBetroffenesElement Ende  -->
+      <!-- EingabeNeuerWert Start  -->
+      <EingabeNeuerWert>ZuErgänzenderText</EingabeNeuerWert>
+      <!-- EingabeNeuerWert Ende  -->
+      <!-- ZuÄnderndesElement Start  -->
+      <ZuÄnderndesElement>Sinn_und_Zweck</ZuÄnderndesElement>
+      <!-- ZuÄnderndesElement Ende  -->
+      <!-- Lokation Start  -->
+      <Lokation>vorneanstellen</Lokation>
+      <!-- Lokation Ende  -->
+    </TextAnhängen>
+    <!-- TextAnhängen Ende  -->
+    <!-- TextErsetzen Start  -->
+    <!-- TextErsetzen Ende  -->
+    <!-- ElementTexteKonkatenieren Start  -->
+    <!-- ElementTexteKonkatenieren Ende  -->
+    <!-- ElementErsetzen Start  -->
+    <!-- ElementErsetzen Ende  -->
+    <!-- ElementEntfernen Start  -->
+    <!-- ElementEntfernen Ende  -->
+    <!-- ElementVerschieben Start  -->
+    <!-- ElementVerschieben Ende  -->
+  </Änderungsoperation>
+  <Änderungsoperation konformitätsrelevant="zuPrüfen">
+  <!-- Name Start  -->
+    <Name>AktivitättextHintenanstellen</Name>
+    <!-- Name Ende  -->
+    <!-- Beschreibung Start  -->
+    <Beschreibung><![CDATA[<p style="margin-top: 0">Erg&#228;nzungen am Beschreibungstext einer Aktivit&#228;t sind prinzipiell gestattet und gef&#228;hrden die Konformit&#228;t nur in dem Fall, in dem der erg&#228;nzende Beschreibungstext Inhalte aus dem zuvor vorhandenen Beschreibungstext au&#223;er Kraft setzt. Es ist bei der Konformit&#228;tspr&#252;fung sicherzustellen, dass durch die Erg&#228;nzung keine Verf&#228;lschung der urspr&#252;nglichen Bedeutung zustandekommt.</p>]]></Beschreibung>
+    <!-- Beschreibung Ende  -->
+    <!-- ÄnderungsgruppeRef Start  -->
+    <ÄnderungsgruppeRef link="14af411aca451d76" />
+    <!-- ÄnderungsgruppeRef Ende  -->
+    <!-- ReferenzenTausch Start  -->
+    <!-- ReferenzenTausch Ende  -->
+    <!-- ReferenzErgänzen Start  -->
+    <!-- ReferenzErgänzen Ende  -->
+    <!-- ElementUmbenennen Start  -->
+    <!-- ElementUmbenennen Ende  -->
+    <!-- TextAnhängen Start  -->
+    <TextAnhängen>
+    <!-- Name Start  -->
+      <Name>Text an Beschreibungstext einer Aktivität anhängen</Name>
+      <!-- Name Ende  -->
+      <!-- EingabewertBetroffenesElement Start  -->
+      <EingabewertBetroffenesElement>AktivitätRef</EingabewertBetroffenesElement>
+      <!-- EingabewertBetroffenesElement Ende  -->
+      <!-- EingabeNeuerWert Start  -->
+      <EingabeNeuerWert>ZuErgänzenderText</EingabeNeuerWert>
+      <!-- EingabeNeuerWert Ende  -->
+      <!-- ZuÄnderndesElement Start  -->
+      <ZuÄnderndesElement>Sinn_und_Zweck</ZuÄnderndesElement>
+      <!-- ZuÄnderndesElement Ende  -->
+      <!-- Lokation Start  -->
+      <Lokation>hintenanstellen</Lokation>
+      <!-- Lokation Ende  -->
+    </TextAnhängen>
+    <!-- TextAnhängen Ende  -->
+    <!-- TextErsetzen Start  -->
+    <!-- TextErsetzen Ende  -->
+    <!-- ElementTexteKonkatenieren Start  -->
+    <!-- ElementTexteKonkatenieren Ende  -->
+    <!-- ElementErsetzen Start  -->
+    <!-- ElementErsetzen Ende  -->
+    <!-- ElementEntfernen Start  -->
+    <!-- ElementEntfernen Ende  -->
+    <!-- ElementVerschieben Start  -->
+    <!-- ElementVerschieben Ende  -->
+  </Änderungsoperation>
+  <Änderungsoperation konformitätsrelevant="zuPrüfen">
+  <!-- Name Start  -->
+    <Name>VerantwortlichkeitÄndern</Name>
+    <!-- Name Ende  -->
+    <!-- Beschreibung Start  -->
+    <Beschreibung><![CDATA[<p style="margin-top: 0">Das Ver&#228;ndern der Verantwortlichkeit f&#252;r ein Produkt in prinzipiell erlaubt. Allerdings ist zu pr&#252;fen ob die Befugnisse und das F&#228;higkeitsprofil der eingetragenen Rolle den Anforderungen f&#252;r die Verantwortung des Produkts gen&#252;gen.</p>]]></Beschreibung>
+    <!-- Beschreibung Ende  -->
+    <!-- ÄnderungsgruppeRef Start  -->
+    <ÄnderungsgruppeRef link="ba1f11aca4498e5" />
+    <!-- ÄnderungsgruppeRef Ende  -->
+    <!-- ReferenzenTausch Start  -->
+    <ReferenzenTausch>
+    <!-- Name Start  -->
+      <Name>Austausch der Verantwortlichkeitsbeziehung eines Produkts</Name>
+      <!-- Name Ende  -->
+      <!-- EingabewertBetroffenesElement Start  -->
+      <EingabewertBetroffenesElement>VerantwortlichkeitsbeziehungRef</EingabewertBetroffenesElement>
+      <!-- EingabewertBetroffenesElement Ende  -->
+      <!-- EingabeNeuerWert Start  -->
+      <EingabeNeuerWert>RolleRef</EingabeNeuerWert>
+      <!-- EingabeNeuerWert Ende  -->
+      <!-- ZuÄnderndesElement Start  -->
+      <ZuÄnderndesElement>RolleRef</ZuÄnderndesElement>
+      <!-- ZuÄnderndesElement Ende  -->
+    </ReferenzenTausch>
+    <!-- ReferenzenTausch Ende  -->
+    <!-- ReferenzErgänzen Start  -->
+    <!-- ReferenzErgänzen Ende  -->
+    <!-- ElementUmbenennen Start  -->
+    <!-- ElementUmbenennen Ende  -->
+    <!-- TextAnhängen Start  -->
+    <!-- TextAnhängen Ende  -->
+    <!-- TextErsetzen Start  -->
+    <!-- TextErsetzen Ende  -->
+    <!-- ElementTexteKonkatenieren Start  -->
+    <!-- ElementTexteKonkatenieren Ende  -->
+    <!-- ElementErsetzen Start  -->
+    <!-- ElementErsetzen Ende  -->
+    <!-- ElementEntfernen Start  -->
+    <!-- ElementEntfernen Ende  -->
+    <!-- ElementVerschieben Start  -->
+    <!-- ElementVerschieben Ende  -->
+  </Änderungsoperation>
+  <Änderungsoperation konformitätsrelevant="zuPrüfen">
+  <!-- Name Start  -->
+    <Name>VerantwortlichkeitEntfernen</Name>
+    <!-- Name Ende  -->
+    <!-- Beschreibung Start  -->
+    <Beschreibung><![CDATA[<p style="margin-top: 0">Das Entfernen einer Verantwortlichkeit f&#252;r ein Produkt in prinzipiell erlaubt. Allerdings ist sicherzustellen, dass dem Modell eine &#228;quivalente Verantwortlichkeit hinzugef&#252;gt wird. Dabei muss gepr&#252;ft werden, ob die Befugnisse und das F&#228;higkeitsprofil der eingetragenen Rolle den Anforderungen f&#252;r die Verantwortung des Produkts gen&#252;gen.</p>]]></Beschreibung>
+    <!-- Beschreibung Ende  -->
+    <!-- ÄnderungsgruppeRef Start  -->
+    <ÄnderungsgruppeRef link="ba1f11aca4498e5" />
+    <!-- ÄnderungsgruppeRef Ende  -->
+    <!-- ReferenzenTausch Start  -->
+    <!-- ReferenzenTausch Ende  -->
+    <!-- ReferenzErgänzen Start  -->
+    <!-- ReferenzErgänzen Ende  -->
+    <!-- ElementUmbenennen Start  -->
+    <!-- ElementUmbenennen Ende  -->
+    <!-- TextAnhängen Start  -->
+    <!-- TextAnhängen Ende  -->
+    <!-- TextErsetzen Start  -->
+    <!-- TextErsetzen Ende  -->
+    <!-- ElementTexteKonkatenieren Start  -->
+    <!-- ElementTexteKonkatenieren Ende  -->
+    <!-- ElementErsetzen Start  -->
+    <!-- ElementErsetzen Ende  -->
+    <!-- ElementEntfernen Start  -->
+    <ElementEntfernen>
+    <!-- Name Start  -->
+      <Name>Entfernen der Verantwortlichkeitsbeziehung eines Produkts</Name>
+      <!-- Name Ende  -->
+      <!-- EingabewertEntferntesElement Start  -->
+      <EingabewertEntferntesElement>VerantwortlichkeitsbeziehungRef</EingabewertEntferntesElement>
+      <!-- EingabewertEntferntesElement Ende  -->
+    </ElementEntfernen>
+    <!-- ElementEntfernen Ende  -->
+    <!-- ElementVerschieben Start  -->
+    <!-- ElementVerschieben Ende  -->
+  </Änderungsoperation>
+  <Änderungsoperation konformitätsrelevant="unkritisch">
+  <!-- Name Start  -->
+    <Name>RolleUmbenennen</Name>
+    <!-- Name Ende  -->
+    <!-- Beschreibung Start  -->
+    <Beschreibung><![CDATA[<p style="margin-top: 0">Das Umbenennen einer Rolle ist unkritisch, da eine &#196;nderung des Namens den Zweck, der durch die Beschreibung festgelegt wird, nicht ver&#228;ndern kann. Bei Umbenennungen muss sich der Anpasser dar&#252;ber im Klaren sein, dass er sich zugunsten organisationsspezifischer Begriffe von der Standardnomenklatur entfernt, wodurch es zu Missverst&#228;ndnissen kommen kann.</p>]]></Beschreibung>
+    <!-- Beschreibung Ende  -->
+    <!-- ÄnderungsgruppeRef Start  -->
+    <ÄnderungsgruppeRef link="ba1f11aca4498e5" />
+    <!-- ÄnderungsgruppeRef Ende  -->
+    <!-- ReferenzenTausch Start  -->
+    <!-- ReferenzenTausch Ende  -->
+    <!-- ReferenzErgänzen Start  -->
+    <!-- ReferenzErgänzen Ende  -->
+    <!-- ElementUmbenennen Start  -->
+    <ElementUmbenennen>
+    <!-- Name Start  -->
+      <Name>Austausch des Attributs &apos;Name&apos; einer Rolle</Name>
+      <!-- Name Ende  -->
+      <!-- EingabewertBetroffenesElement Start  -->
+      <EingabewertBetroffenesElement>RolleRef</EingabewertBetroffenesElement>
+      <!-- EingabewertBetroffenesElement Ende  -->
+      <!-- EingabeNeuerWert Start  -->
+      <EingabeNeuerWert>NeuerName</EingabeNeuerWert>
+      <!-- EingabeNeuerWert Ende  -->
+      <!-- ZuÄnderndesElement Start  -->
+      <ZuÄnderndesElement>Name</ZuÄnderndesElement>
+      <!-- ZuÄnderndesElement Ende  -->
+    </ElementUmbenennen>
+    <!-- ElementUmbenennen Ende  -->
+    <!-- TextAnhängen Start  -->
+    <!-- TextAnhängen Ende  -->
+    <!-- TextErsetzen Start  -->
+    <!-- TextErsetzen Ende  -->
+    <!-- ElementTexteKonkatenieren Start  -->
+    <!-- ElementTexteKonkatenieren Ende  -->
+    <!-- ElementErsetzen Start  -->
+    <!-- ElementErsetzen Ende  -->
+    <!-- ElementEntfernen Start  -->
+    <!-- ElementEntfernen Ende  -->
+    <!-- ElementVerschieben Start  -->
+    <!-- ElementVerschieben Ende  -->
+  </Änderungsoperation>
+  <Änderungsoperation konformitätsrelevant="zuPrüfen">
+  <!-- Name Start  -->
+    <Name>RollenbeschreibungenVoranstellen</Name>
+    <!-- Name Ende  -->
+    <!-- Beschreibung Start  -->
+    <Beschreibung><![CDATA[<p style="margin-top: 0">Erg&#228;nzungen an den Beschreibungstexten einer Rolle sind prinzipiell gestattet und gef&#228;hrden die Konformit&#228;t nur in dem Fall, in dem der erg&#228;nzende Beschreibungstext Inhalte aus dem zuvor vorhandenen Beschreibungstext au&#223;er Kraft setzt. Es ist bei der Konformit&#228;tspr&#252;fung sicherzustellen, dass durch die Erg&#228;nzung keine Verf&#228;lschung der urspr&#252;nglichen Bedeutung zustandekommt.</p>]]></Beschreibung>
+    <!-- Beschreibung Ende  -->
+    <!-- ÄnderungsgruppeRef Start  -->
+    <ÄnderungsgruppeRef link="ba1f11aca4498e5" />
+    <!-- ÄnderungsgruppeRef Ende  -->
+    <!-- ReferenzenTausch Start  -->
+    <!-- ReferenzenTausch Ende  -->
+    <!-- ReferenzErgänzen Start  -->
+    <!-- ReferenzErgänzen Ende  -->
+    <!-- ElementUmbenennen Start  -->
+    <!-- ElementUmbenennen Ende  -->
+    <!-- TextAnhängen Start  -->
+    <TextAnhängen>
+    <!-- Name Start  -->
+      <Name>Beschreibung voranstellen</Name>
+      <!-- Name Ende  -->
+      <!-- EingabewertBetroffenesElement Start  -->
+      <EingabewertBetroffenesElement>RolleRef</EingabewertBetroffenesElement>
+      <!-- EingabewertBetroffenesElement Ende  -->
+      <!-- EingabeNeuerWert Start  -->
+      <EingabeNeuerWert>Beschreibung</EingabeNeuerWert>
+      <!-- EingabeNeuerWert Ende  -->
+      <!-- ZuÄnderndesElement Start  -->
+      <ZuÄnderndesElement>Beschreibung</ZuÄnderndesElement>
+      <!-- ZuÄnderndesElement Ende  -->
+      <!-- Lokation Start  -->
+      <Lokation>vorneanstellen</Lokation>
+      <!-- Lokation Ende  -->
+    </TextAnhängen>
+    <TextAnhängen>
+    <!-- Name Start  -->
+      <Name>Aufgaben_und_Befugnisse voranstellen</Name>
+      <!-- Name Ende  -->
+      <!-- EingabewertBetroffenesElement Start  -->
+      <EingabewertBetroffenesElement>RolleRef</EingabewertBetroffenesElement>
+      <!-- EingabewertBetroffenesElement Ende  -->
+      <!-- EingabeNeuerWert Start  -->
+      <EingabeNeuerWert>Aufgaben_und_Befugnisse</EingabeNeuerWert>
+      <!-- EingabeNeuerWert Ende  -->
+      <!-- ZuÄnderndesElement Start  -->
+      <ZuÄnderndesElement>Aufgaben_und_Befugnisse</ZuÄnderndesElement>
+      <!-- ZuÄnderndesElement Ende  -->
+      <!-- Lokation Start  -->
+      <Lokation>vorneanstellen</Lokation>
+      <!-- Lokation Ende  -->
+    </TextAnhängen>
+    <TextAnhängen>
+    <!-- Name Start  -->
+      <Name>Fähigkeitsprofil voranstellen</Name>
+      <!-- Name Ende  -->
+      <!-- EingabewertBetroffenesElement Start  -->
+      <EingabewertBetroffenesElement>RolleRef</EingabewertBetroffenesElement>
+      <!-- EingabewertBetroffenesElement Ende  -->
+      <!-- EingabeNeuerWert Start  -->
+      <EingabeNeuerWert>Fähigkeitsprofil</EingabeNeuerWert>
+      <!-- EingabeNeuerWert Ende  -->
+      <!-- ZuÄnderndesElement Start  -->
+      <ZuÄnderndesElement>Fähigkeitsprofil</ZuÄnderndesElement>
+      <!-- ZuÄnderndesElement Ende  -->
+      <!-- Lokation Start  -->
+      <Lokation>vorneanstellen</Lokation>
+      <!-- Lokation Ende  -->
+    </TextAnhängen>
+    <TextAnhängen>
+    <!-- Name Start  -->
+      <Name>Rollenbesetzung voranstellen</Name>
+      <!-- Name Ende  -->
+      <!-- EingabewertBetroffenesElement Start  -->
+      <EingabewertBetroffenesElement>RolleRef</EingabewertBetroffenesElement>
+      <!-- EingabewertBetroffenesElement Ende  -->
+      <!-- EingabeNeuerWert Start  -->
+      <EingabeNeuerWert>Rollenbesetzung</EingabeNeuerWert>
+      <!-- EingabeNeuerWert Ende  -->
+      <!-- ZuÄnderndesElement Start  -->
+      <ZuÄnderndesElement>Rollenbesetzung</ZuÄnderndesElement>
+      <!-- ZuÄnderndesElement Ende  -->
+      <!-- Lokation Start  -->
+      <Lokation>vorneanstellen</Lokation>
+      <!-- Lokation Ende  -->
+    </TextAnhängen>
+    <!-- TextAnhängen Ende  -->
+    <!-- TextErsetzen Start  -->
+    <!-- TextErsetzen Ende  -->
+    <!-- ElementTexteKonkatenieren Start  -->
+    <!-- ElementTexteKonkatenieren Ende  -->
+    <!-- ElementErsetzen Start  -->
+    <!-- ElementErsetzen Ende  -->
+    <!-- ElementEntfernen Start  -->
+    <!-- ElementEntfernen Ende  -->
+    <!-- ElementVerschieben Start  -->
+    <!-- ElementVerschieben Ende  -->
+  </Änderungsoperation>
+  <Änderungsoperation konformitätsrelevant="zuPrüfen">
+  <!-- Name Start  -->
+    <Name>RollenbeschreibungenHintenanstellen</Name>
+    <!-- Name Ende  -->
+    <!-- Beschreibung Start  -->
+    <Beschreibung><![CDATA[<p style="margin-top: 0">Erg&#228;nzungen an den Beschreibungstexten einer Rolle sind prinzipiell gestattet und gef&#228;hrden die Konformit&#228;t nur in dem Fall, in dem der erg&#228;nzende Beschreibungstext Inhalte aus dem zuvor vorhandenen Beschreibungstext au&#223;er Kraft setzt. Es ist bei der Konformit&#228;tspr&#252;fung sicherzustellen, dass durch die Erg&#228;nzung keine Verf&#228;lschung der urspr&#252;nglichen Bedeutung zustandekommt.</p>]]></Beschreibung>
+    <!-- Beschreibung Ende  -->
+    <!-- ÄnderungsgruppeRef Start  -->
+    <ÄnderungsgruppeRef link="ba1f11aca4498e5" />
+    <!-- ÄnderungsgruppeRef Ende  -->
+    <!-- ReferenzenTausch Start  -->
+    <!-- ReferenzenTausch Ende  -->
+    <!-- ReferenzErgänzen Start  -->
+    <!-- ReferenzErgänzen Ende  -->
+    <!-- ElementUmbenennen Start  -->
+    <!-- ElementUmbenennen Ende  -->
+    <!-- TextAnhängen Start  -->
+    <TextAnhängen>
+    <!-- Name Start  -->
+      <Name>Beschreibung konkatenieren</Name>
+      <!-- Name Ende  -->
+      <!-- EingabewertBetroffenesElement Start  -->
+      <EingabewertBetroffenesElement>RolleRef</EingabewertBetroffenesElement>
+      <!-- EingabewertBetroffenesElement Ende  -->
+      <!-- EingabeNeuerWert Start  -->
+      <EingabeNeuerWert>Beschreibung</EingabeNeuerWert>
+      <!-- EingabeNeuerWert Ende  -->
+      <!-- ZuÄnderndesElement Start  -->
+      <ZuÄnderndesElement>Beschreibung</ZuÄnderndesElement>
+      <!-- ZuÄnderndesElement Ende  -->
+      <!-- Lokation Start  -->
+      <Lokation>hintenanstellen</Lokation>
+      <!-- Lokation Ende  -->
+    </TextAnhängen>
+    <TextAnhängen>
+    <!-- Name Start  -->
+      <Name>Aufgaben_und_Befugnisse konkatenieren</Name>
+      <!-- Name Ende  -->
+      <!-- EingabewertBetroffenesElement Start  -->
+      <EingabewertBetroffenesElement>RolleRef</EingabewertBetroffenesElement>
+      <!-- EingabewertBetroffenesElement Ende  -->
+      <!-- EingabeNeuerWert Start  -->
+      <EingabeNeuerWert>Aufgaben_und_Befugnisse</EingabeNeuerWert>
+      <!-- EingabeNeuerWert Ende  -->
+      <!-- ZuÄnderndesElement Start  -->
+      <ZuÄnderndesElement>Aufgaben_und_Befugnisse</ZuÄnderndesElement>
+      <!-- ZuÄnderndesElement Ende  -->
+      <!-- Lokation Start  -->
+      <Lokation>hintenanstellen</Lokation>
+      <!-- Lokation Ende  -->
+    </TextAnhängen>
+    <TextAnhängen>
+    <!-- Name Start  -->
+      <Name>Fähigkeitsprofil konkatenieren</Name>
+      <!-- Name Ende  -->
+      <!-- EingabewertBetroffenesElement Start  -->
+      <EingabewertBetroffenesElement>RolleRef</EingabewertBetroffenesElement>
+      <!-- EingabewertBetroffenesElement Ende  -->
+      <!-- EingabeNeuerWert Start  -->
+      <EingabeNeuerWert>Fähigkeitsprofil</EingabeNeuerWert>
+      <!-- EingabeNeuerWert Ende  -->
+      <!-- ZuÄnderndesElement Start  -->
+      <ZuÄnderndesElement>Fähigkeitsprofil</ZuÄnderndesElement>
+      <!-- ZuÄnderndesElement Ende  -->
+      <!-- Lokation Start  -->
+      <Lokation>hintenanstellen</Lokation>
+      <!-- Lokation Ende  -->
+    </TextAnhängen>
+    <TextAnhängen>
+    <!-- Name Start  -->
+      <Name>Rollenbesetzung konkatenieren</Name>
+      <!-- Name Ende  -->
+      <!-- EingabewertBetroffenesElement Start  -->
+      <EingabewertBetroffenesElement>RolleRef</EingabewertBetroffenesElement>
+      <!-- EingabewertBetroffenesElement Ende  -->
+      <!-- EingabeNeuerWert Start  -->
+      <EingabeNeuerWert>Rollenbesetzung</EingabeNeuerWert>
+      <!-- EingabeNeuerWert Ende  -->
+      <!-- ZuÄnderndesElement Start  -->
+      <ZuÄnderndesElement>Rollenbesetzung</ZuÄnderndesElement>
+      <!-- ZuÄnderndesElement Ende  -->
+      <!-- Lokation Start  -->
+      <Lokation>hintenanstellen</Lokation>
+      <!-- Lokation Ende  -->
+    </TextAnhängen>
+    <!-- TextAnhängen Ende  -->
+    <!-- TextErsetzen Start  -->
+    <!-- TextErsetzen Ende  -->
+    <!-- ElementTexteKonkatenieren Start  -->
+    <!-- ElementTexteKonkatenieren Ende  -->
+    <!-- ElementErsetzen Start  -->
+    <!-- ElementErsetzen Ende  -->
+    <!-- ElementEntfernen Start  -->
+    <!-- ElementEntfernen Ende  -->
+    <!-- ElementVerschieben Start  -->
+    <!-- ElementVerschieben Ende  -->
+  </Änderungsoperation>
+  <Änderungsoperation konformitätsrelevant="zuPrüfen">
+  <!-- Name Start  -->
+    <Name>RolleSpezialisieren</Name>
+    <!-- Name Ende  -->
+    <!-- Beschreibung Start  -->
+    <Beschreibung><![CDATA[<p style="margin-top: 0">Beim Spezialisieren einer Rolle wird die spezialisierte Rolle durch die spezialisierende Rolle ersetzt. Die Beschreibungstexte werden allerdings hintereinandergestellt und die spezialisierende Rolle erh&#228;lt zus&#228;tzlich alle Mitwirkungen und Verantwortlichkeiten der spezialisierten Rolle. Bei der Konformit&#228;tspr&#252;fung ist darauf zu achten, ob es bei der Kombination der beiden Rollen zu Unstimmigkeiten oder unzul&#228;ssigen &#220;berschneidungen des Verantwortlichkeitsbereichs kommt.</p>]]></Beschreibung>
+    <!-- Beschreibung Ende  -->
+    <!-- ÄnderungsgruppeRef Start  -->
+    <ÄnderungsgruppeRef link="ba1f11aca4498e5" />
+    <!-- ÄnderungsgruppeRef Ende  -->
+    <!-- ReferenzenTausch Start  -->
+    <!-- ReferenzenTausch Ende  -->
+    <!-- ReferenzErgänzen Start  -->
+    <!-- ReferenzErgänzen Ende  -->
+    <!-- ElementUmbenennen Start  -->
+    <!-- ElementUmbenennen Ende  -->
+    <!-- TextAnhängen Start  -->
+    <!-- TextAnhängen Ende  -->
+    <!-- TextErsetzen Start  -->
+    <!-- TextErsetzen Ende  -->
+    <!-- ElementTexteKonkatenieren Start  -->
+    <ElementTexteKonkatenieren>
+    <!-- Name Start  -->
+      <Name>Beschreibung konkatenieren</Name>
+      <!-- Name Ende  -->
+      <!-- EingabewertBetroffenesElement Start  -->
+      <EingabewertBetroffenesElement>SpezialisierendeRolleRef</EingabewertBetroffenesElement>
+      <!-- EingabewertBetroffenesElement Ende  -->
+      <!-- EingabewertZuBerücksichtigendesElement Start  -->
+      <EingabewertZuBerücksichtigendesElement>SpezialisierteRolleRef</EingabewertZuBerücksichtigendesElement>
+      <!-- EingabewertZuBerücksichtigendesElement Ende  -->
+      <!-- ZuÄnderndesElement Start  -->
+      <ZuÄnderndesElement>Beschreibung</ZuÄnderndesElement>
+      <!-- ZuÄnderndesElement Ende  -->
+      <!-- Lokation Start  -->
+      <Lokation>hintenanstellen</Lokation>
+      <!-- Lokation Ende  -->
+    </ElementTexteKonkatenieren>
+    <ElementTexteKonkatenieren>
+    <!-- Name Start  -->
+      <Name>Aufgaben_und_Befugnisse konkatenieren</Name>
+      <!-- Name Ende  -->
+      <!-- EingabewertBetroffenesElement Start  -->
+      <EingabewertBetroffenesElement>SpezialisierendeRolleRef</EingabewertBetroffenesElement>
+      <!-- EingabewertBetroffenesElement Ende  -->
+      <!-- EingabewertZuBerücksichtigendesElement Start  -->
+      <EingabewertZuBerücksichtigendesElement>SpezialisierteRolleRef</EingabewertZuBerücksichtigendesElement>
+      <!-- EingabewertZuBerücksichtigendesElement Ende  -->
+      <!-- ZuÄnderndesElement Start  -->
+      <ZuÄnderndesElement>Aufgaben_und_Befugnisse</ZuÄnderndesElement>
+      <!-- ZuÄnderndesElement Ende  -->
+      <!-- Lokation Start  -->
+      <Lokation>hintenanstellen</Lokation>
+      <!-- Lokation Ende  -->
+    </ElementTexteKonkatenieren>
+    <ElementTexteKonkatenieren>
+    <!-- Name Start  -->
+      <Name>Fähigkeitsprofil konkatenieren</Name>
+      <!-- Name Ende  -->
+      <!-- EingabewertBetroffenesElement Start  -->
+      <EingabewertBetroffenesElement>SpezialisierendeRolleRef</EingabewertBetroffenesElement>
+      <!-- EingabewertBetroffenesElement Ende  -->
+      <!-- EingabewertZuBerücksichtigendesElement Start  -->
+      <EingabewertZuBerücksichtigendesElement>SpezialisierteRolleRef</EingabewertZuBerücksichtigendesElement>
+      <!-- EingabewertZuBerücksichtigendesElement Ende  -->
+      <!-- ZuÄnderndesElement Start  -->
+      <ZuÄnderndesElement>Fähigkeitsprofil</ZuÄnderndesElement>
+      <!-- ZuÄnderndesElement Ende  -->
+      <!-- Lokation Start  -->
+      <Lokation>hintenanstellen</Lokation>
+      <!-- Lokation Ende  -->
+    </ElementTexteKonkatenieren>
+    <ElementTexteKonkatenieren>
+    <!-- Name Start  -->
+      <Name>Rollenbesetzung konkatenieren</Name>
+      <!-- Name Ende  -->
+      <!-- EingabewertBetroffenesElement Start  -->
+      <EingabewertBetroffenesElement>SpezialisierendeRolleRef</EingabewertBetroffenesElement>
+      <!-- EingabewertBetroffenesElement Ende  -->
+      <!-- EingabewertZuBerücksichtigendesElement Start  -->
+      <EingabewertZuBerücksichtigendesElement>SpezialisierteRolleRef</EingabewertZuBerücksichtigendesElement>
+      <!-- EingabewertZuBerücksichtigendesElement Ende  -->
+      <!-- ZuÄnderndesElement Start  -->
+      <ZuÄnderndesElement>Rollenbesetzung</ZuÄnderndesElement>
+      <!-- ZuÄnderndesElement Ende  -->
+      <!-- Lokation Start  -->
+      <Lokation>hintenanstellen</Lokation>
+      <!-- Lokation Ende  -->
+    </ElementTexteKonkatenieren>
+    <!-- ElementTexteKonkatenieren Ende  -->
+    <!-- ElementErsetzen Start  -->
+    <ElementErsetzen>
+    <!-- Name Start  -->
+      <Name>Rolle ersetzen</Name>
+      <!-- Name Ende  -->
+      <!-- EingabewertErsetzendesElement Start  -->
+      <EingabewertErsetzendesElement>SpezialisierendeRolleRef</EingabewertErsetzendesElement>
+      <!-- EingabewertErsetzendesElement Ende  -->
+      <!-- EingabewertErsetztesElement Start  -->
+      <EingabewertErsetztesElement>SpezialisierteRolleRef</EingabewertErsetztesElement>
+      <!-- EingabewertErsetztesElement Ende  -->
+    </ElementErsetzen>
+    <!-- ElementErsetzen Ende  -->
+    <!-- ElementEntfernen Start  -->
+    <!-- ElementEntfernen Ende  -->
+    <!-- ElementVerschieben Start  -->
+    <!-- ElementVerschieben Ende  -->
+  </Änderungsoperation>
+  <Änderungsoperation konformitätsrelevant="unkritisch">
+  <!-- Name Start  -->
+    <Name>StandardWertÄndern</Name>
+    <!-- Name Ende  -->
+    <!-- Beschreibung Start  -->
+    <Beschreibung><![CDATA[<p style="margin-top: 0">&#196;ndert die Standardbelegung eines Projektmerkmals. Diese Operation ist unkritisch, da sie lediglich eine organisationsspezifische Pr&#228;ferenz ausdr&#252;ckt.</p>]]></Beschreibung>
+    <!-- Beschreibung Ende  -->
+    <!-- ÄnderungsgruppeRef Start  -->
+    <ÄnderungsgruppeRef link="1853811d51e52302" />
+    <!-- ÄnderungsgruppeRef Ende  -->
+    <!-- ReferenzenTausch Start  -->
+    <ReferenzenTausch>
+    <!-- Name Start  -->
+      <Name>Neuen Standardwert setzen</Name>
+      <!-- Name Ende  -->
+      <!-- EingabewertBetroffenesElement Start  -->
+      <EingabewertBetroffenesElement>ProjektmerkmalRef</EingabewertBetroffenesElement>
+      <!-- EingabewertBetroffenesElement Ende  -->
+      <!-- EingabeNeuerWert Start  -->
+      <EingabeNeuerWert>ProjektmerkmalWertRef</EingabeNeuerWert>
+      <!-- EingabeNeuerWert Ende  -->
+      <!-- ZuÄnderndesElement Start  -->
+      <ZuÄnderndesElement>StandardwertRef</ZuÄnderndesElement>
+      <!-- ZuÄnderndesElement Ende  -->
+    </ReferenzenTausch>
+    <!-- ReferenzenTausch Ende  -->
+    <!-- ReferenzErgänzen Start  -->
+    <!-- ReferenzErgänzen Ende  -->
+    <!-- ElementUmbenennen Start  -->
+    <!-- ElementUmbenennen Ende  -->
+    <!-- TextAnhängen Start  -->
+    <!-- TextAnhängen Ende  -->
+    <!-- TextErsetzen Start  -->
+    <!-- TextErsetzen Ende  -->
+    <!-- ElementTexteKonkatenieren Start  -->
+    <!-- ElementTexteKonkatenieren Ende  -->
+    <!-- ElementErsetzen Start  -->
+    <!-- ElementErsetzen Ende  -->
+    <!-- ElementEntfernen Start  -->
+    <!-- ElementEntfernen Ende  -->
+    <!-- ElementVerschieben Start  -->
+    <!-- ElementVerschieben Ende  -->
+  </Änderungsoperation>
+  <Änderungsoperation konformitätsrelevant="unkritisch">
+  <!-- Name Start  -->
+    <Name>VorgehensbausteinErgänzen</Name>
+    <!-- Name Ende  -->
+    <!-- Beschreibung Start  -->
+    <Beschreibung><![CDATA[<p style="margin-top: 0">Das Erg&#228;nzen eines Vorgehensbausteins zu einer Projekttypvariante ist unkritisch, da es sich um eine rein additive Erg&#228;nzung handelt.</p>]]></Beschreibung>
+    <!-- Beschreibung Ende  -->
+    <!-- ÄnderungsgruppeRef Start  -->
+    <ÄnderungsgruppeRef link="1853811d51e52302" />
+    <!-- ÄnderungsgruppeRef Ende  -->
+    <!-- ReferenzenTausch Start  -->
+    <!-- ReferenzenTausch Ende  -->
+    <!-- ReferenzErgänzen Start  -->
+    <ReferenzErgänzen>
+    <!-- Name Start  -->
+      <Name>Ergänzen eines bedingten Vorgehensbausteins zu einer Projekttypvariante</Name>
+      <!-- Name Ende  -->
+      <!-- EingabewertBetroffenesElement Start  -->
+      <EingabewertBetroffenesElement>ProjekttypvarianteRef</EingabewertBetroffenesElement>
+      <!-- EingabewertBetroffenesElement Ende  -->
+      <!-- EingabeNeuerWert Start  -->
+      <EingabeNeuerWert>VorgehensbausteinRef</EingabeNeuerWert>
+      <!-- EingabeNeuerWert Ende  -->
+      <!-- ZuÄnderndeElementUnterklasse Start  -->
+      <ZuÄnderndeElementUnterklasse>BedingteVorgehensbausteine</ZuÄnderndeElementUnterklasse>
+      <!-- ZuÄnderndeElementUnterklasse Ende  -->
+      <!-- ZuErgänzendesUnterelement Start  -->
+      <ZuErgänzendesUnterelement>BedingterVorgehensbaustein</ZuErgänzendesUnterelement>
+      <!-- ZuErgänzendesUnterelement Ende  -->
+      <!-- ZuÄnderndesElement Start  -->
+      <ZuÄnderndesElement>VorgehensbausteinRef</ZuÄnderndesElement>
+      <!-- ZuÄnderndesElement Ende  -->
+    </ReferenzErgänzen>
+    <!-- ReferenzErgänzen Ende  -->
+    <!-- ElementUmbenennen Start  -->
+    <!-- ElementUmbenennen Ende  -->
+    <!-- TextAnhängen Start  -->
+    <!-- TextAnhängen Ende  -->
+    <!-- TextErsetzen Start  -->
+    <!-- TextErsetzen Ende  -->
+    <!-- ElementTexteKonkatenieren Start  -->
+    <!-- ElementTexteKonkatenieren Ende  -->
+    <!-- ElementErsetzen Start  -->
+    <!-- ElementErsetzen Ende  -->
+    <!-- ElementEntfernen Start  -->
+    <!-- ElementEntfernen Ende  -->
+    <!-- ElementVerschieben Start  -->
+    <!-- ElementVerschieben Ende  -->
+  </Änderungsoperation>
+  <Änderungsoperation konformitätsrelevant="unkritisch">
+  <!-- Name Start  -->
+    <Name>EntscheidungspunktUmbenennen</Name>
+    <!-- Name Ende  -->
+    <!-- Beschreibung Start  -->
+    <Beschreibung><![CDATA[<p style="margin-top: 0">Das Umbenennen eines Entscheidungspunkts ist unkritisch, da eine &#196;nderung des Namens den Zweck, der durch die Beschreibung festgelegt wird, nicht ver&#228;ndern kann. Bei Umbenennungen muss sich der Anpasser dar&#252;ber im Klaren sein, dass er sich zugunsten organisationsspezifischer Begriffe von der Standardnomenklatur entfernt, wodurch es zu Missverst&#228;ndnissen kommen kann.</p>]]></Beschreibung>
+    <!-- Beschreibung Ende  -->
+    <!-- ÄnderungsgruppeRef Start  -->
+    <ÄnderungsgruppeRef link="add211aca44bbce" />
+    <!-- ÄnderungsgruppeRef Ende  -->
+    <!-- ReferenzenTausch Start  -->
+    <!-- ReferenzenTausch Ende  -->
+    <!-- ReferenzErgänzen Start  -->
+    <!-- ReferenzErgänzen Ende  -->
+    <!-- ElementUmbenennen Start  -->
+    <ElementUmbenennen>
+    <!-- Name Start  -->
+      <Name>Austausch des Attributs &apos;Name&apos; eines Entscheidungspunkts</Name>
+      <!-- Name Ende  -->
+      <!-- EingabewertBetroffenesElement Start  -->
+      <EingabewertBetroffenesElement>EntscheidungspunktRef</EingabewertBetroffenesElement>
+      <!-- EingabewertBetroffenesElement Ende  -->
+      <!-- EingabeNeuerWert Start  -->
+      <EingabeNeuerWert>NeuerName</EingabeNeuerWert>
+      <!-- EingabeNeuerWert Ende  -->
+      <!-- ZuÄnderndesElement Start  -->
+      <ZuÄnderndesElement>Name</ZuÄnderndesElement>
+      <!-- ZuÄnderndesElement Ende  -->
+    </ElementUmbenennen>
+    <!-- ElementUmbenennen Ende  -->
+    <!-- TextAnhängen Start  -->
+    <!-- TextAnhängen Ende  -->
+    <!-- TextErsetzen Start  -->
+    <!-- TextErsetzen Ende  -->
+    <!-- ElementTexteKonkatenieren Start  -->
+    <!-- ElementTexteKonkatenieren Ende  -->
+    <!-- ElementErsetzen Start  -->
+    <!-- ElementErsetzen Ende  -->
+    <!-- ElementEntfernen Start  -->
+    <!-- ElementEntfernen Ende  -->
+    <!-- ElementVerschieben Start  -->
+    <!-- ElementVerschieben Ende  -->
+  </Änderungsoperation>
+  <Änderungsoperation konformitätsrelevant="zuPrüfen">
+  <!-- Name Start  -->
+    <Name>EntscheidungspunkttextVoranstellen</Name>
+    <!-- Name Ende  -->
+    <!-- Beschreibung Start  -->
+    <Beschreibung><![CDATA[<p style="margin-top: 0">Erg&#228;nzungen am Beschreibungstext eines Entscheidungspunkts sind prinzipiell gestattet und gef&#228;hrden die Konformit&#228;t nur in dem Fall, in dem der erg&#228;nzende Beschreibungstext Inhalte aus dem zuvor vorhandenen Beschreibungstext au&#223;er Kraft setzt. Es ist bei der Konformit&#228;tspr&#252;fung sicherzustellen, dass durch die Erg&#228;nzung keine Verf&#228;lschung der urspr&#252;nglichen Bedeutung zustandekommt.</p>]]></Beschreibung>
+    <!-- Beschreibung Ende  -->
+    <!-- ÄnderungsgruppeRef Start  -->
+    <ÄnderungsgruppeRef link="add211aca44bbce" />
+    <!-- ÄnderungsgruppeRef Ende  -->
+    <!-- ReferenzenTausch Start  -->
+    <!-- ReferenzenTausch Ende  -->
+    <!-- ReferenzErgänzen Start  -->
+    <!-- ReferenzErgänzen Ende  -->
+    <!-- ElementUmbenennen Start  -->
+    <!-- ElementUmbenennen Ende  -->
+    <!-- TextAnhängen Start  -->
+    <TextAnhängen>
+    <!-- Name Start  -->
+      <Name>Text vor die Beschreibung eines Entscheidungspunkts stellen</Name>
+      <!-- Name Ende  -->
+      <!-- EingabewertBetroffenesElement Start  -->
+      <EingabewertBetroffenesElement>EntscheidungspunktRef</EingabewertBetroffenesElement>
+      <!-- EingabewertBetroffenesElement Ende  -->
+      <!-- EingabeNeuerWert Start  -->
+      <EingabeNeuerWert>ZuErgänzenderText</EingabeNeuerWert>
+      <!-- EingabeNeuerWert Ende  -->
+      <!-- ZuÄnderndesElement Start  -->
+      <ZuÄnderndesElement>Sinn_und_Zweck</ZuÄnderndesElement>
+      <!-- ZuÄnderndesElement Ende  -->
+      <!-- Lokation Start  -->
+      <Lokation>vorneanstellen</Lokation>
+      <!-- Lokation Ende  -->
+    </TextAnhängen>
+    <!-- TextAnhängen Ende  -->
+    <!-- TextErsetzen Start  -->
+    <!-- TextErsetzen Ende  -->
+    <!-- ElementTexteKonkatenieren Start  -->
+    <!-- ElementTexteKonkatenieren Ende  -->
+    <!-- ElementErsetzen Start  -->
+    <!-- ElementErsetzen Ende  -->
+    <!-- ElementEntfernen Start  -->
+    <!-- ElementEntfernen Ende  -->
+    <!-- ElementVerschieben Start  -->
+    <!-- ElementVerschieben Ende  -->
+  </Änderungsoperation>
+  <Änderungsoperation konformitätsrelevant="zuPrüfen">
+  <!-- Name Start  -->
+    <Name>EntscheidungspunkttextHintenanstellen</Name>
+    <!-- Name Ende  -->
+    <!-- Beschreibung Start  -->
+    <Beschreibung><![CDATA[<p style="margin-top: 0">Erg&#228;nzungen am Beschreibungstext eines Entscheidungspunkts sind prinzipiell gestattet und gef&#228;hrden die Konformit&#228;t nur in dem Fall, in dem der erg&#228;nzende Beschreibungstext Inhalte aus dem zuvor vorhandenen Beschreibungstext au&#223;er Kraft setzt. Es ist bei der Konformit&#228;tspr&#252;fung sicherzustellen, dass durch die Erg&#228;nzung keine Verf&#228;lschung der urspr&#252;nglichen Bedeutung zustandekommt.</p>]]></Beschreibung>
+    <!-- Beschreibung Ende  -->
+    <!-- ÄnderungsgruppeRef Start  -->
+    <ÄnderungsgruppeRef link="add211aca44bbce" />
+    <!-- ÄnderungsgruppeRef Ende  -->
+    <!-- ReferenzenTausch Start  -->
+    <!-- ReferenzenTausch Ende  -->
+    <!-- ReferenzErgänzen Start  -->
+    <!-- ReferenzErgänzen Ende  -->
+    <!-- ElementUmbenennen Start  -->
+    <!-- ElementUmbenennen Ende  -->
+    <!-- TextAnhängen Start  -->
+    <TextAnhängen>
+    <!-- Name Start  -->
+      <Name>Text an Beschreibung eines Entscheidungspunkts anhängen</Name>
+      <!-- Name Ende  -->
+      <!-- EingabewertBetroffenesElement Start  -->
+      <EingabewertBetroffenesElement>EntscheidungspunktRef</EingabewertBetroffenesElement>
+      <!-- EingabewertBetroffenesElement Ende  -->
+      <!-- EingabeNeuerWert Start  -->
+      <EingabeNeuerWert>ZuErgänzenderText</EingabeNeuerWert>
+      <!-- EingabeNeuerWert Ende  -->
+      <!-- ZuÄnderndesElement Start  -->
+      <ZuÄnderndesElement>Sinn_und_Zweck</ZuÄnderndesElement>
+      <!-- ZuÄnderndesElement Ende  -->
+      <!-- Lokation Start  -->
+      <Lokation>hintenanstellen</Lokation>
+      <!-- Lokation Ende  -->
+    </TextAnhängen>
+    <!-- TextAnhängen Ende  -->
+    <!-- TextErsetzen Start  -->
+    <!-- TextErsetzen Ende  -->
+    <!-- ElementTexteKonkatenieren Start  -->
+    <!-- ElementTexteKonkatenieren Ende  -->
+    <!-- ElementErsetzen Start  -->
+    <!-- ElementErsetzen Ende  -->
+    <!-- ElementEntfernen Start  -->
+    <!-- ElementEntfernen Ende  -->
+    <!-- ElementVerschieben Start  -->
+    <!-- ElementVerschieben Ende  -->
+  </Änderungsoperation>
+  <Änderungsoperation konformitätsrelevant="zuPrüfen">
+  <!-- Name Start  -->
+    <Name>KapiteltextVoranstellen</Name>
+    <!-- Name Ende  -->
+    <!-- Beschreibung Start  -->
+    <Beschreibung><![CDATA[<p style="margin-top: 0">Erg&#228;nzungen am Beschreibungstext eines Kapitels sind prinzipiell gestattet und gef&#228;hrden die Konformit&#228;t nur in dem Fall, in dem der erg&#228;nzende Beschreibungstext Inhalte aus dem zuvor vorhandenen Beschreibungstext au&#223;er Kraft setzt. Es ist bei der Konformit&#228;tspr&#252;fung sicherzustellen, dass durch die Erg&#228;nzung keine Verf&#228;lschung der urspr&#252;nglichen Bedeutung zustandekommt.</p>]]></Beschreibung>
+    <!-- Beschreibung Ende  -->
+    <!-- ÄnderungsgruppeRef Start  -->
+    <ÄnderungsgruppeRef link="1723f11ad394aecd" />
+    <!-- ÄnderungsgruppeRef Ende  -->
+    <!-- ReferenzenTausch Start  -->
+    <!-- ReferenzenTausch Ende  -->
+    <!-- ReferenzErgänzen Start  -->
+    <!-- ReferenzErgänzen Ende  -->
+    <!-- ElementUmbenennen Start  -->
+    <!-- ElementUmbenennen Ende  -->
+    <!-- TextAnhängen Start  -->
+    <TextAnhängen>
+    <!-- Name Start  -->
+      <Name>Text vor die Beschreibung eines Kapiteltexts stellen</Name>
+      <!-- Name Ende  -->
+      <!-- EingabewertBetroffenesElement Start  -->
+      <EingabewertBetroffenesElement>KapitelRef</EingabewertBetroffenesElement>
+      <!-- EingabewertBetroffenesElement Ende  -->
+      <!-- EingabeNeuerWert Start  -->
+      <EingabeNeuerWert>ZuErgänzenderText</EingabeNeuerWert>
+      <!-- EingabeNeuerWert Ende  -->
+      <!-- ZuÄnderndesElement Start  -->
+      <ZuÄnderndesElement>Text</ZuÄnderndesElement>
+      <!-- ZuÄnderndesElement Ende  -->
+      <!-- Lokation Start  -->
+      <Lokation>vorneanstellen</Lokation>
+      <!-- Lokation Ende  -->
+    </TextAnhängen>
+    <!-- TextAnhängen Ende  -->
+    <!-- TextErsetzen Start  -->
+    <!-- TextErsetzen Ende  -->
+    <!-- ElementTexteKonkatenieren Start  -->
+    <!-- ElementTexteKonkatenieren Ende  -->
+    <!-- ElementErsetzen Start  -->
+    <!-- ElementErsetzen Ende  -->
+    <!-- ElementEntfernen Start  -->
+    <!-- ElementEntfernen Ende  -->
+    <!-- ElementVerschieben Start  -->
+    <!-- ElementVerschieben Ende  -->
+  </Änderungsoperation>
+  <Änderungsoperation konformitätsrelevant="zuPrüfen">
+  <!-- Name Start  -->
+    <Name>KapiteltextHintenanstellen</Name>
+    <!-- Name Ende  -->
+    <!-- Beschreibung Start  -->
+    <Beschreibung><![CDATA[<p style="margin-top: 0">Erg&#228;nzungen am Beschreibungstext eines Kapitels sind prinzipiell gestattet und gef&#228;hrden die Konformit&#228;t nur in dem Fall, in dem der erg&#228;nzende Beschreibungstext Inhalte aus dem zuvor vorhandenen Beschreibungstext au&#223;er Kraft setzt. Es ist bei der Konformit&#228;tspr&#252;fung sicherzustellen, dass durch die Erg&#228;nzung keine Verf&#228;lschung der urspr&#252;nglichen Bedeutung zustandekommt.</p>]]></Beschreibung>
+    <!-- Beschreibung Ende  -->
+    <!-- ÄnderungsgruppeRef Start  -->
+    <ÄnderungsgruppeRef link="1723f11ad394aecd" />
+    <!-- ÄnderungsgruppeRef Ende  -->
+    <!-- ReferenzenTausch Start  -->
+    <!-- ReferenzenTausch Ende  -->
+    <!-- ReferenzErgänzen Start  -->
+    <!-- ReferenzErgänzen Ende  -->
+    <!-- ElementUmbenennen Start  -->
+    <!-- ElementUmbenennen Ende  -->
+    <!-- TextAnhängen Start  -->
+    <TextAnhängen>
+    <!-- Name Start  -->
+      <Name>Text an Beschreibungstext anhängen</Name>
+      <!-- Name Ende  -->
+      <!-- EingabewertBetroffenesElement Start  -->
+      <EingabewertBetroffenesElement>KapitelRef</EingabewertBetroffenesElement>
+      <!-- EingabewertBetroffenesElement Ende  -->
+      <!-- EingabeNeuerWert Start  -->
+      <EingabeNeuerWert>ZuErgänzenderText</EingabeNeuerWert>
+      <!-- EingabeNeuerWert Ende  -->
+      <!-- ZuÄnderndesElement Start  -->
+      <ZuÄnderndesElement>Text</ZuÄnderndesElement>
+      <!-- ZuÄnderndesElement Ende  -->
+      <!-- Lokation Start  -->
+      <Lokation>hintenanstellen</Lokation>
+      <!-- Lokation Ende  -->
+    </TextAnhängen>
+    <!-- TextAnhängen Ende  -->
+    <!-- TextErsetzen Start  -->
+    <!-- TextErsetzen Ende  -->
+    <!-- ElementTexteKonkatenieren Start  -->
+    <!-- ElementTexteKonkatenieren Ende  -->
+    <!-- ElementErsetzen Start  -->
+    <!-- ElementErsetzen Ende  -->
+    <!-- ElementEntfernen Start  -->
+    <!-- ElementEntfernen Ende  -->
+    <!-- ElementVerschieben Start  -->
+    <!-- ElementVerschieben Ende  -->
+  </Änderungsoperation>
+  <Änderungsoperation konformitätsrelevant="zuPrüfen">
+  <!-- Name Start  -->
+    <Name>AbschnitttextVoranstellen</Name>
+    <!-- Name Ende  -->
+    <!-- Beschreibung Start  -->
+    <Beschreibung><![CDATA[<p style="margin-top: 0">Erg&#228;nzungen am Beschreibungstext eines Abschnitts sind prinzipiell gestattet und gef&#228;hrden die Konformit&#228;t nur in dem Fall, in dem der erg&#228;nzende Beschreibungstext Inhalte aus dem zuvor vorhandenen Beschreibungstext au&#223;er Kraft setzt. Es ist bei der Konformit&#228;tspr&#252;fung sicherzustellen, dass durch die Erg&#228;nzung keine Verf&#228;lschung der urspr&#252;nglichen Bedeutung zustandekommt.</p>]]></Beschreibung>
+    <!-- Beschreibung Ende  -->
+    <!-- ÄnderungsgruppeRef Start  -->
+    <ÄnderungsgruppeRef link="1723f11ad394aecd" />
+    <!-- ÄnderungsgruppeRef Ende  -->
+    <!-- ReferenzenTausch Start  -->
+    <!-- ReferenzenTausch Ende  -->
+    <!-- ReferenzErgänzen Start  -->
+    <!-- ReferenzErgänzen Ende  -->
+    <!-- ElementUmbenennen Start  -->
+    <!-- ElementUmbenennen Ende  -->
+    <!-- TextAnhängen Start  -->
+    <TextAnhängen>
+    <!-- Name Start  -->
+      <Name>Text vor die Beschreibung eines Abschnitts stellen</Name>
+      <!-- Name Ende  -->
+      <!-- EingabewertBetroffenesElement Start  -->
+      <EingabewertBetroffenesElement>AbschnittRef</EingabewertBetroffenesElement>
+      <!-- EingabewertBetroffenesElement Ende  -->
+      <!-- EingabeNeuerWert Start  -->
+      <EingabeNeuerWert>ZuErgänzenderText</EingabeNeuerWert>
+      <!-- EingabeNeuerWert Ende  -->
+      <!-- ZuÄnderndesElement Start  -->
+      <ZuÄnderndesElement>Text</ZuÄnderndesElement>
+      <!-- ZuÄnderndesElement Ende  -->
+      <!-- Lokation Start  -->
+      <Lokation>vorneanstellen</Lokation>
+      <!-- Lokation Ende  -->
+    </TextAnhängen>
+    <!-- TextAnhängen Ende  -->
+    <!-- TextErsetzen Start  -->
+    <!-- TextErsetzen Ende  -->
+    <!-- ElementTexteKonkatenieren Start  -->
+    <!-- ElementTexteKonkatenieren Ende  -->
+    <!-- ElementErsetzen Start  -->
+    <!-- ElementErsetzen Ende  -->
+    <!-- ElementEntfernen Start  -->
+    <!-- ElementEntfernen Ende  -->
+    <!-- ElementVerschieben Start  -->
+    <!-- ElementVerschieben Ende  -->
+  </Änderungsoperation>
+  <Änderungsoperation konformitätsrelevant="zuPrüfen">
+  <!-- Name Start  -->
+    <Name>AbschnitttextHintenanstellen</Name>
+    <!-- Name Ende  -->
+    <!-- Beschreibung Start  -->
+    <Beschreibung><![CDATA[<p style="margin-top: 0">Erg&#228;nzungen am Beschreibungstext eines Abschnitts sind prinzipiell gestattet und gef&#228;hrden die Konformit&#228;t nur in dem Fall, in dem der erg&#228;nzende Beschreibungstext Inhalte aus dem zuvor vorhandenen Beschreibungstext au&#223;er Kraft setzt. Es ist bei der Konformit&#228;tspr&#252;fung sicherzustellen, dass durch die Erg&#228;nzung keine Verf&#228;lschung der urspr&#252;nglichen Bedeutung zustandekommt.</p>]]></Beschreibung>
+    <!-- Beschreibung Ende  -->
+    <!-- ÄnderungsgruppeRef Start  -->
+    <ÄnderungsgruppeRef link="1723f11ad394aecd" />
+    <!-- ÄnderungsgruppeRef Ende  -->
+    <!-- ReferenzenTausch Start  -->
+    <!-- ReferenzenTausch Ende  -->
+    <!-- ReferenzErgänzen Start  -->
+    <!-- ReferenzErgänzen Ende  -->
+    <!-- ElementUmbenennen Start  -->
+    <!-- ElementUmbenennen Ende  -->
+    <!-- TextAnhängen Start  -->
+    <TextAnhängen>
+    <!-- Name Start  -->
+      <Name>Text an Beschreibungstext anhängen</Name>
+      <!-- Name Ende  -->
+      <!-- EingabewertBetroffenesElement Start  -->
+      <EingabewertBetroffenesElement>AbschnittRef</EingabewertBetroffenesElement>
+      <!-- EingabewertBetroffenesElement Ende  -->
+      <!-- EingabeNeuerWert Start  -->
+      <EingabeNeuerWert>ZuErgänzenderText</EingabeNeuerWert>
+      <!-- EingabeNeuerWert Ende  -->
+      <!-- ZuÄnderndesElement Start  -->
+      <ZuÄnderndesElement>Text</ZuÄnderndesElement>
+      <!-- ZuÄnderndesElement Ende  -->
+      <!-- Lokation Start  -->
+      <Lokation>hintenanstellen</Lokation>
+      <!-- Lokation Ende  -->
+    </TextAnhängen>
+    <!-- TextAnhängen Ende  -->
+    <!-- TextErsetzen Start  -->
+    <!-- TextErsetzen Ende  -->
+    <!-- ElementTexteKonkatenieren Start  -->
+    <!-- ElementTexteKonkatenieren Ende  -->
+    <!-- ElementErsetzen Start  -->
+    <!-- ElementErsetzen Ende  -->
+    <!-- ElementEntfernen Start  -->
+    <!-- ElementEntfernen Ende  -->
+    <!-- ElementVerschieben Start  -->
+    <!-- ElementVerschieben Ende  -->
+  </Änderungsoperation>
+  <Änderungsoperation konformitätsrelevant="kritisch">
+  <!-- Name Start  -->
+    <Name>KapiteltextErsetzen</Name>
+    <!-- Name Ende  -->
+    <!-- Beschreibung Start  -->
+    <Beschreibung><![CDATA[<p style="margin-top: 0">Die vollst&#228;ndige Ersetzung von Beschreibungstexten ist aus Konformit&#228;tssicht besonders kritisch zu betrachten. Es ist anhand des neuen Texten zu pr&#252;fen, ob mit der Ersetzung lediglich eine organisationsspezifische Anpassung einzelner Teilbereiche der Beschreibung vorgenommen wurde oder die Beschreibung in unzul&#228;ssiger Weise gegen&#252;ber der urspr&#252;nglichen Bedeutung verf&#228;lscht wurde.</p>]]></Beschreibung>
+    <!-- Beschreibung Ende  -->
+    <!-- ÄnderungsgruppeRef Start  -->
+    <ÄnderungsgruppeRef link="13bf011aca45532c" />
+    <!-- ÄnderungsgruppeRef Ende  -->
+    <!-- ReferenzenTausch Start  -->
+    <!-- ReferenzenTausch Ende  -->
+    <!-- ReferenzErgänzen Start  -->
+    <!-- ReferenzErgänzen Ende  -->
+    <!-- ElementUmbenennen Start  -->
+    <!-- ElementUmbenennen Ende  -->
+    <!-- TextAnhängen Start  -->
+    <!-- TextAnhängen Ende  -->
+    <!-- TextErsetzen Start  -->
+    <TextErsetzen>
+    <!-- Name Start  -->
+      <Name>Beschreibungstext ersetzen</Name>
+      <!-- Name Ende  -->
+      <!-- EingabewertBetroffenesElement Start  -->
+      <EingabewertBetroffenesElement>KapitelRef</EingabewertBetroffenesElement>
+      <!-- EingabewertBetroffenesElement Ende  -->
+      <!-- EingabeNeuerWert Start  -->
+      <EingabeNeuerWert>NeuerText</EingabeNeuerWert>
+      <!-- EingabeNeuerWert Ende  -->
+      <!-- ZuÄnderndesElement Start  -->
+      <ZuÄnderndesElement>Text</ZuÄnderndesElement>
+      <!-- ZuÄnderndesElement Ende  -->
+    </TextErsetzen>
+    <!-- TextErsetzen Ende  -->
+    <!-- ElementTexteKonkatenieren Start  -->
+    <!-- ElementTexteKonkatenieren Ende  -->
+    <!-- ElementErsetzen Start  -->
+    <!-- ElementErsetzen Ende  -->
+    <!-- ElementEntfernen Start  -->
+    <!-- ElementEntfernen Ende  -->
+    <!-- ElementVerschieben Start  -->
+    <!-- ElementVerschieben Ende  -->
+  </Änderungsoperation>
+  <Änderungsoperation konformitätsrelevant="kritisch">
+  <!-- Name Start  -->
+    <Name>AbschnitttextErsetzen</Name>
+    <!-- Name Ende  -->
+    <!-- Beschreibung Start  -->
+    <Beschreibung><![CDATA[<p style="margin-top: 0">Die vollst&#228;ndige Ersetzung von Beschreibungstexten ist aus Konformit&#228;tssicht besonders kritisch zu betrachten. Es ist anhand des neuen Texten zu pr&#252;fen, ob mit der Ersetzung lediglich eine organisationsspezifische Anpassung einzelner Teilbereiche der Beschreibung vorgenommen wurde oder die Beschreibung in unzul&#228;ssiger Weise gegen&#252;ber der urspr&#252;nglichen Bedeutung verf&#228;lscht wurde.</p>]]></Beschreibung>
+    <!-- Beschreibung Ende  -->
+    <!-- ÄnderungsgruppeRef Start  -->
+    <ÄnderungsgruppeRef link="13bf011aca45532c" />
+    <!-- ÄnderungsgruppeRef Ende  -->
+    <!-- ReferenzenTausch Start  -->
+    <!-- ReferenzenTausch Ende  -->
+    <!-- ReferenzErgänzen Start  -->
+    <!-- ReferenzErgänzen Ende  -->
+    <!-- ElementUmbenennen Start  -->
+    <!-- ElementUmbenennen Ende  -->
+    <!-- TextAnhängen Start  -->
+    <!-- TextAnhängen Ende  -->
+    <!-- TextErsetzen Start  -->
+    <TextErsetzen>
+    <!-- Name Start  -->
+      <Name>Beschreibungstext ersetzen</Name>
+      <!-- Name Ende  -->
+      <!-- EingabewertBetroffenesElement Start  -->
+      <EingabewertBetroffenesElement>AbschnittRef</EingabewertBetroffenesElement>
+      <!-- EingabewertBetroffenesElement Ende  -->
+      <!-- EingabeNeuerWert Start  -->
+      <EingabeNeuerWert>NeuerText</EingabeNeuerWert>
+      <!-- EingabeNeuerWert Ende  -->
+      <!-- ZuÄnderndesElement Start  -->
+      <ZuÄnderndesElement>Text</ZuÄnderndesElement>
+      <!-- ZuÄnderndesElement Ende  -->
+    </TextErsetzen>
+    <!-- TextErsetzen Ende  -->
+    <!-- ElementTexteKonkatenieren Start  -->
+    <!-- ElementTexteKonkatenieren Ende  -->
+    <!-- ElementErsetzen Start  -->
+    <!-- ElementErsetzen Ende  -->
+    <!-- ElementEntfernen Start  -->
+    <!-- ElementEntfernen Ende  -->
+    <!-- ElementVerschieben Start  -->
+    <!-- ElementVerschieben Ende  -->
+  </Änderungsoperation>
+  <Änderungsoperation konformitätsrelevant="zuPrüfen">
+  <!-- Name Start  -->
+    <Name>KapitelEinordnen</Name>
+    <!-- Name Ende  -->
+    <!-- Beschreibung Start  -->
+    <Beschreibung><![CDATA[<p style="margin-top: 0">Gliedert ein Kapitel in einen Teil ein.</p>]]></Beschreibung>
+    <!-- Beschreibung Ende  -->
+    <!-- ÄnderungsgruppeRef Start  -->
+    <ÄnderungsgruppeRef link="2b0c11d49af0f2c" />
+    <!-- ÄnderungsgruppeRef Ende  -->
+    <!-- ReferenzenTausch Start  -->
+    <!-- ReferenzenTausch Ende  -->
+    <!-- ReferenzErgänzen Start  -->
+    <!-- ReferenzErgänzen Ende  -->
+    <!-- ElementUmbenennen Start  -->
+    <!-- ElementUmbenennen Ende  -->
+    <!-- TextAnhängen Start  -->
+    <!-- TextAnhängen Ende  -->
+    <!-- TextErsetzen Start  -->
+    <!-- TextErsetzen Ende  -->
+    <!-- ElementTexteKonkatenieren Start  -->
+    <!-- ElementTexteKonkatenieren Ende  -->
+    <!-- ElementErsetzen Start  -->
+    <!-- ElementErsetzen Ende  -->
+    <!-- ElementEntfernen Start  -->
+    <!-- ElementEntfernen Ende  -->
+    <!-- ElementVerschieben Start  -->
+    <ElementVerschieben>
+    <!-- Name Start  -->
+      <Name>Einordnung eines Kapitels unter einem Teil</Name>
+      <!-- Name Ende  -->
+      <!-- EingabewertVerschobenesElement Start  -->
+      <EingabewertVerschobenesElement>KapitelRef</EingabewertVerschobenesElement>
+      <!-- EingabewertVerschobenesElement Ende  -->
+      <!-- EingabewertNeuesVaterElement Start  -->
+      <EingabewertNeuesVaterElement>TeilRef</EingabewertNeuesVaterElement>
+      <!-- EingabewertNeuesVaterElement Ende  -->
+    </ElementVerschieben>
+    <!-- ElementVerschieben Ende  -->
+  </Änderungsoperation>
+  <Änderungsoperation konformitätsrelevant="zuPrüfen">
+  <!-- Name Start  -->
+    <Name>AbschnittEinordnen</Name>
+    <!-- Name Ende  -->
+    <!-- Beschreibung Start  -->
+    <Beschreibung><![CDATA[<p style="margin-top: 0">Gliedert einen Abschnitt in ein Kapitel ein.</p>]]></Beschreibung>
+    <!-- Beschreibung Ende  -->
+    <!-- ÄnderungsgruppeRef Start  -->
+    <ÄnderungsgruppeRef link="2b0c11d49af0f2c" />
+    <!-- ÄnderungsgruppeRef Ende  -->
+    <!-- ReferenzenTausch Start  -->
+    <!-- ReferenzenTausch Ende  -->
+    <!-- ReferenzErgänzen Start  -->
+    <!-- ReferenzErgänzen Ende  -->
+    <!-- ElementUmbenennen Start  -->
+    <!-- ElementUmbenennen Ende  -->
+    <!-- TextAnhängen Start  -->
+    <!-- TextAnhängen Ende  -->
+    <!-- TextErsetzen Start  -->
+    <!-- TextErsetzen Ende  -->
+    <!-- ElementTexteKonkatenieren Start  -->
+    <!-- ElementTexteKonkatenieren Ende  -->
+    <!-- ElementErsetzen Start  -->
+    <!-- ElementErsetzen Ende  -->
+    <!-- ElementEntfernen Start  -->
+    <!-- ElementEntfernen Ende  -->
+    <!-- ElementVerschieben Start  -->
+    <ElementVerschieben>
+    <!-- Name Start  -->
+      <Name>Einordnung eines Kapitels unter einem Teil</Name>
+      <!-- Name Ende  -->
+      <!-- EingabewertVerschobenesElement Start  -->
+      <EingabewertVerschobenesElement>AbschnittRef</EingabewertVerschobenesElement>
+      <!-- EingabewertVerschobenesElement Ende  -->
+      <!-- EingabewertNeuesVaterElement Start  -->
+      <EingabewertNeuesVaterElement>KapitelRef</EingabewertNeuesVaterElement>
+      <!-- EingabewertNeuesVaterElement Ende  -->
+    </ElementVerschieben>
+    <!-- ElementVerschieben Ende  -->
+  </Änderungsoperation>
+  <Änderungsoperation konformitätsrelevant="zuPrüfen">
+  <!-- Name Start  -->
+    <Name>WerkzeugreferenzEntfernen</Name>
+    <!-- Name Ende  -->
+    <!-- Beschreibung Start  -->
+    <Beschreibung><![CDATA[<p style="margin-top: 0">Ein Werkzeug kann werden. Dabei ist sicherzustellen, dass f&#252;r das entfernte Werkzeug ein Ersatz zur Verf&#252;gung steht, der die Mindestanforderungen erf&#252;llt.</p>]]></Beschreibung>
+    <!-- Beschreibung Ende  -->
+    <!-- ÄnderungsgruppeRef Start  -->
+    <ÄnderungsgruppeRef link="98ed11ae8725526" />
+    <!-- ÄnderungsgruppeRef Ende  -->
+    <!-- ReferenzenTausch Start  -->
+    <!-- ReferenzenTausch Ende  -->
+    <!-- ReferenzErgänzen Start  -->
+    <!-- ReferenzErgänzen Ende  -->
+    <!-- ElementUmbenennen Start  -->
+    <!-- ElementUmbenennen Ende  -->
+    <!-- TextAnhängen Start  -->
+    <!-- TextAnhängen Ende  -->
+    <!-- TextErsetzen Start  -->
+    <!-- TextErsetzen Ende  -->
+    <!-- ElementTexteKonkatenieren Start  -->
+    <!-- ElementTexteKonkatenieren Ende  -->
+    <!-- ElementErsetzen Start  -->
+    <!-- ElementErsetzen Ende  -->
+    <!-- ElementEntfernen Start  -->
+    <ElementEntfernen>
+    <!-- Name Start  -->
+      <Name>Werkzeug entfernen</Name>
+      <!-- Name Ende  -->
+      <!-- EingabewertEntferntesElement Start  -->
+      <EingabewertEntferntesElement>WerkzeugreferenzRef</EingabewertEntferntesElement>
+      <!-- EingabewertEntferntesElement Ende  -->
+    </ElementEntfernen>
+    <!-- ElementEntfernen Ende  -->
+    <!-- ElementVerschieben Start  -->
+    <!-- ElementVerschieben Ende  -->
+  </Änderungsoperation>
+  <Änderungsoperation konformitätsrelevant="kritisch">
+  <!-- Name Start  -->
+    <Name>MethodenreferenzEntfernen</Name>
+    <!-- Name Ende  -->
+    <!-- Beschreibung Start  -->
+    <Beschreibung><![CDATA[<p style="margin-top: 0">Eine Methode kann werden. Dabei ist sicherzustellen, dass f&#252;r die entfernte Methode ein Ersatz zur Verf&#252;gung steht, der die Mindestanforderungen erf&#252;llt.</p>]]></Beschreibung>
+    <!-- Beschreibung Ende  -->
+    <!-- ÄnderungsgruppeRef Start  -->
+    <ÄnderungsgruppeRef link="98ed11ae8725526" />
+    <!-- ÄnderungsgruppeRef Ende  -->
+    <!-- ReferenzenTausch Start  -->
+    <!-- ReferenzenTausch Ende  -->
+    <!-- ReferenzErgänzen Start  -->
+    <!-- ReferenzErgänzen Ende  -->
+    <!-- ElementUmbenennen Start  -->
+    <!-- ElementUmbenennen Ende  -->
+    <!-- TextAnhängen Start  -->
+    <!-- TextAnhängen Ende  -->
+    <!-- TextErsetzen Start  -->
+    <!-- TextErsetzen Ende  -->
+    <!-- ElementTexteKonkatenieren Start  -->
+    <!-- ElementTexteKonkatenieren Ende  -->
+    <!-- ElementErsetzen Start  -->
+    <!-- ElementErsetzen Ende  -->
+    <!-- ElementEntfernen Start  -->
+    <ElementEntfernen>
+    <!-- Name Start  -->
+      <Name>Methode entfernen</Name>
+      <!-- Name Ende  -->
+      <!-- EingabewertEntferntesElement Start  -->
+      <EingabewertEntferntesElement>MethodenreferenzRef</EingabewertEntferntesElement>
+      <!-- EingabewertEntferntesElement Ende  -->
+    </ElementEntfernen>
+    <!-- ElementEntfernen Ende  -->
+    <!-- ElementVerschieben Start  -->
+    <!-- ElementVerschieben Ende  -->
+  </Änderungsoperation>
+  <!-- Änderungsoperation Ende  -->
+</Änderungsoperationen>

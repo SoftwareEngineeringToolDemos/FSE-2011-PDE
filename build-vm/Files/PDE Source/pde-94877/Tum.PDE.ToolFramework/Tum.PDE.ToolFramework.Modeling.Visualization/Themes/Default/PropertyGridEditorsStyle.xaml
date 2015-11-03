@@ -1,0 +1,251 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:pg="clr-namespace:Tum.PDE.ToolFramework.Modeling.Visualization.Controls.PropertyGrid"
+                    xmlns:pgV="clr-namespace:Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel.PropertyGrid"
+                    xmlns:converters="clr-namespace:Tum.PDE.ToolFramework.Modeling.Visualization.Converters"
+                    xmlns:attached="clr-namespace:Tum.PDE.ToolFramework.Modeling.Visualization.Controls.Attached"
+                    xmlns:controls="clr-namespace:Tum.PDE.ToolFramework.Modeling.Visualization.Controls.Common"
+                    
+                    xmlns:inter="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+                    xmlns:beh="clr-namespace:Tum.PDE.ToolFramework.Modeling.Visualization.Behaviors">
+    
+    <converters:DoubleToGridLengthConverter x:Key="GridLengthConverter"/>
+    <converters:BoolToUnderlineConverter x:Key="BoolToUnderlineConverter"/>
+    <converters:BoolToOppositeConverter x:Key="BoolToOppositeConverter"/>
+    <converters:BoolToDisabledVisibilityConverter x:Key="BoolToDisabledVisibilityConverter"/>
+    <converters:ICollectionToVisibilityConverter x:Key="ICollectionToVisibilityConverter"/>
+    <converters:ICollectionToNumberConverter x:Key="ICollectionToNumberConverter" AppendValueOnEmpty="Elements" AppendValueOnMultipleElements="Elements" AppendValueOnOneElement="Element"/>
+    
+    <!-- String editor template -->
+    <DataTemplate DataType="{x:Type pgV:StringEditorViewModel}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <!--<ColumnDefinition x:Name="ColumnDefinitionHeader" Width="{Binding Path=HeaderWidth, Converter={StaticResource GridLengthConverter}, RelativeSource={RelativeSource AncestorType={x:Type pg:PropertyGrid}}, Mode=TwoWay}"/>-->
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Border  Margin="0,2,0,2" x:Name="HeaderBorder" BorderBrush="Transparent" BorderThickness="2.0" Grid.Column="0">
+                <TextBlock x:Name="HeaderTxtBlock" Margin="3,0,0,0" MinWidth="50" VerticalAlignment="Center"
+                           Text="{Binding Path=PropertyDisplayName, Mode=OneTime}" TextTrimming="WordEllipsis"
+                           TextDecorations="{Binding Path=IsPropertyRequired, Converter={StaticResource BoolToUnderlineConverter}, Mode=OneWay}"
+                           ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=Text}"/>
+            </Border>
+            <TextBox Grid.Column="1" Margin="0,2,0,2" x:Name="TxtBox" MinWidth="50" 
+                     Text="{Binding Path=PropertyValue, Mode=TwoWay}"
+                     IsReadOnly="{Binding Path=IsPropertyReadOnly, Mode=OneWay}">
+                <inter:Interaction.Behaviors>
+                    <beh:TextBoxEnterBehavior/>
+                </inter:Interaction.Behaviors>
+            </TextBox>
+        </Grid>
+    </DataTemplate>
+    
+    <!-- Combobox editor template -->
+    <DataTemplate DataType="{x:Type pgV:BooleanEditorViewModel}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Border  Margin="0,2,0,2" x:Name="HeaderBorder" BorderBrush="Transparent" BorderThickness="2.0" Grid.Column="0">
+                <TextBlock x:Name="HeaderTxtBlock" Margin="3,0,0,0" MinWidth="50" VerticalAlignment="Center"
+                           Text="{Binding Path=PropertyDisplayName, Mode=OneTime}" TextTrimming="WordEllipsis"
+                           TextDecorations="{Binding Path=IsPropertyRequired, Converter={StaticResource BoolToUnderlineConverter}, Mode=OneWay}"
+                           ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=Text}"/>
+            </Border>
+            <ComboBox Grid.Column="1" x:Name="CmbBox" Margin="0,2,0,2" MinWidth="50" VerticalAlignment="Center" 
+                      ItemsSource="{Binding Path=DefaultValues, Mode=OneWay}"
+                      SelectedItem="{Binding Path=PropertyValue, Mode=TwoWay}"
+                      IsReadOnly="True"
+                      IsEnabled="{Binding Path=IsPropertyReadOnly, Mode=OneWay, Converter={StaticResource BoolToOppositeConverter}}"/>
+        </Grid>
+    </DataTemplate>
+    
+    <!-- Enumeration editor template -->
+    <DataTemplate DataType="{x:Type pgV:EnumerationEditorViewModel}">
+        <DataTemplate.Resources>
+           <ControlTemplate x:Key="DefaultTemplate">
+                <ComboBox x:Name="CmbBox" Margin="0,2,0,2" MinWidth="50" VerticalAlignment="Center" 
+                      ItemsSource="{Binding Path=DefaultValues, Mode=OneWay}"
+                      SelectedItem="{Binding Path=PropertyValue, Mode=TwoWay}"
+                      IsReadOnly="True" 
+                      IsEnabled="{Binding Path=IsPropertyReadOnly, Mode=OneWay, Converter={StaticResource BoolToOppositeConverter}}">
+                </ComboBox>
+
+            </ControlTemplate>
+            <ControlTemplate x:Key="IsFlagsTemplate">
+                <controls:ComboBoxWithDisplayText x:Name="CmbBoxOsFlags" Margin="0,2,0,2" MinWidth="50" VerticalAlignment="Center" 
+                      ItemsSource="{Binding Path=DefaultValues, Mode=OneWay}"
+                      IsReadOnly="True" DisplayText="{Binding Path=DisplayText, Mode=OneWay}"
+                      IsEnabled="{Binding Path=IsPropertyReadOnly, Mode=OneWay, Converter={StaticResource BoolToOppositeConverter}}">
+                    <controls:ComboBoxWithDisplayText.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" Margin="3">
+                                <CheckBox IsChecked="{Binding IsChecked, Mode=TwoWay}" Width="20"/>
+                                <TextBlock Text="{Binding Object}" TextTrimming="CharacterEllipsis"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </controls:ComboBoxWithDisplayText.ItemTemplate>
+                </controls:ComboBoxWithDisplayText>
+            </ControlTemplate>
+        </DataTemplate.Resources>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Border Margin="0,2,0,2" x:Name="HeaderBorder" BorderBrush="Transparent" BorderThickness="2.0" Grid.Column="0">
+                <TextBlock x:Name="HeaderTxtBlock" Margin="3,0,0,0" MinWidth="50" VerticalAlignment="Center"
+                           Text="{Binding Path=PropertyDisplayName, Mode=OneTime}" TextTrimming="WordEllipsis"
+                           TextDecorations="{Binding Path=IsPropertyRequired, Converter={StaticResource BoolToUnderlineConverter}, Mode=OneWay}"
+                           ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=Text}"/>
+            </Border>
+            <ContentControl x:Name="CntControl" Template="{StaticResource DefaultTemplate}" Grid.Column="1">
+            </ContentControl>
+            
+        </Grid>
+        <DataTemplate.Triggers>
+            <DataTrigger Binding="{Binding Path=IsFlags}" Value="True">
+                <Setter TargetName="CntControl" Property="Template" Value="{StaticResource IsFlagsTemplate}"/>
+                <!--
+                <Setter TargetName="CmbBox" Property="ItemTemplate" Value="{StaticResource ComboBoxWithCheckboxes}"/>
+                <Setter TargetName="CmbBox" Property="Template" Value="{StaticResource ComboBoxWithDisplayName}"/>                
+                <Setter TargetName="CmbBox" Property="SelectedItem" Value="{x:Null}"/>                
+                -->
+            </DataTrigger>
+        </DataTemplate.Triggers>
+    </DataTemplate>
+
+    <!-- Unary role editor template -->
+    <DataTemplate DataType="{x:Type pgV:UnaryRoleEditorViewModel}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Border Margin="0,2,0,2" x:Name="HeaderBorder" BorderBrush="Transparent" BorderThickness="2.0" Grid.Column="0">
+                <TextBlock x:Name="HeaderTxtBlock" Margin="3,0,0,0" MinWidth="50" VerticalAlignment="Center"
+                           Text="{Binding Path=PropertyDisplayName, Mode=OneTime}" TextTrimming="WordEllipsis"
+                           TextDecorations="{Binding Path=IsPropertyRequired, Converter={StaticResource BoolToUnderlineConverter}, Mode=OneWay}"
+                           ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=Text}"/>
+            </Border>
+            <Grid Grid.Column="1" Margin="0,2,0,2" MinWidth="50" VerticalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" Text="{Binding Path=PropertyValue.DomainElementFullName, Mode=OneWay}" VerticalAlignment="Center" Margin="0,0,2,0" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=Text}"/>
+                <StackPanel Orientation="Horizontal" Grid.Column="1" IsEnabled="{Binding Path=IsPropertyReadOnly, Mode=OneWay, Converter={StaticResource BoolToOppositeConverter}}">
+                    <Button Focusable="False" Width="16" Height="16" Padding="0" Background="Transparent" BorderThickness="0" BorderBrush="Transparent" Margin="0,0,2,0"
+                            Visibility="{Binding Path=PropertyValue.IsSentinelDomainElementItem, Mode=OneWay, Converter={StaticResource BoolToDisabledVisibilityConverter}}"
+                                        Command="{Binding Path=NavigateToElementCommand}">
+                        <Image Width="12" Height="12" Source="/Tum.PDE.ToolFramework.Images;component/Views/GoPrevious-16.png"/>
+                    </Button>
+                    <Button Focusable="False" Width="16" Height="16" Padding="0" Background="Transparent" BorderThickness="0" BorderBrush="Transparent" Margin="2,0,2,0"
+                                Command="{Binding Path=EditElementCommand}">
+                        <Image Width="12" Height="12" Source="/Tum.PDE.ToolFramework.Images;component/Views/Edit-16.png"/>
+                    </Button>
+                    <Button Focusable="False" Width="16" Height="16" Padding="0" Background="Transparent" BorderThickness="0" BorderBrush="Transparent"
+                                Visibility="{Binding Path=PropertyValue.IsSentinelDomainElementItem, Mode=OneWay, Converter={StaticResource BoolToDisabledVisibilityConverter}}"
+                                Command="{Binding Path=DeleteElementCommand}">
+                        <Image Width="12" Height="12" Source="/Tum.PDE.ToolFramework.Images;component/Views/Delete2-16.png"/>
+                    </Button>
+                </StackPanel>
+            </Grid>
+
+        </Grid>
+        
+    </DataTemplate>
+
+    <!-- Multiple role editor template -->
+    <Style x:Key="MultipleRoleEditorListBoxItem" TargetType="ListBoxItem">
+        <Setter Property="SnapsToDevicePixels" Value="true"/>
+        <Setter Property="OverridesDefaultStyle" Value="true"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBoxItem">
+                    <Border Name="Border" Padding="2" SnapsToDevicePixels="true">
+                        <ContentPresenter />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <DataTemplate DataType="{x:Type pgV:MultipleRoleEditorViewModel}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Border Grid.Row="0" Margin="0,2,0,2" x:Name="HeaderBorder" BorderBrush="Transparent" BorderThickness="2.0" Grid.Column="0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" x:Name="HeaderTxtBlock" Margin="3,0,0,0" MinWidth="50" VerticalAlignment="Center"
+                           Text="{Binding Path=PropertyDisplayName, Mode=OneTime}" TextTrimming="WordEllipsis"
+                           TextDecorations="{Binding Path=IsPropertyRequired, Converter={StaticResource BoolToUnderlineConverter}, Mode=OneWay}"
+                           ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=Text}"/>
+                    
+                    <Grid Grid.Column="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="{Binding Path=PropertyValue, Converter={StaticResource ICollectionToNumberConverter}, Mode=OneWay}" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=Text}"/>
+                        
+                        <Button Grid.Column="1" Focusable="False" Width="16" Height="16" Padding="0" Background="Transparent" BorderThickness="0" BorderBrush="Transparent" Margin="0,0,2,0"
+                            Command="{Binding Path=AddElementCommand}"
+                            IsEnabled="{Binding Path=IsPropertyReadOnly, Mode=OneWay, Converter={StaticResource BoolToOppositeConverter}}">
+                            <Image Width="12" Height="12" Source="/Tum.PDE.ToolFramework.Images;component/Views/Add-16.png"/>
+                        </Button>
+                    </Grid>
+                </Grid>                
+            </Border>
+
+            <ListBox x:Name="ListBoxElements" Grid.Row="1" Margin="0,2,0,2" MinWidth="50" ItemsSource="{Binding Path=PropertyValue, Mode=OneWay}"
+                     Background="Transparent" ItemContainerStyle="{StaticResource MultipleRoleEditorListBoxItem}"
+                     Visibility="{Binding Path=PropertyValue, Mode=OneWay, Converter={StaticResource ICollectionToVisibilityConverter}}"
+                     attached:ListBoxHelper.DisgardsScrollViewOnMouseWheel="True">
+                
+                <inter:Interaction.Behaviors>
+                    <beh:ListBoxSelectedItemBehavior SelectedItem="{Binding Path=SelectedObject, Mode=TwoWay}"/>
+                </inter:Interaction.Behaviors>
+                
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="2,3,2,3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock VerticalAlignment="Center" Grid.Column="0" Text="{Binding Path=DomainElementFullName, Mode=OneWay}" Margin="2,0,2,0" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=Text}"/>
+
+                            <StackPanel Orientation="Horizontal" Grid.Column="1">
+                                <Button Focusable="False" Width="16" Height="16" Padding="0" Background="Transparent" BorderThickness="0" BorderBrush="Transparent" Margin="0,0,2,0"
+                                        Command="{Binding Path=DataContext.NavigateToElementCommand, ElementName=ListBoxElements}">
+                                    <Image Width="12" Height="12" Source="/Tum.PDE.ToolFramework.Images;component/Views/GoPrevious-16.png"/>
+                                </Button>
+
+                                <Button Margin="2,0,2,0" VerticalAlignment="Center" Focusable="False" Width="16" Height="16" Padding="0" Background="Transparent" BorderThickness="0" BorderBrush="Transparent" 
+                                    Visibility="{Binding Path=DataContext.IsPropertyReadOnly, ElementName=ListBoxElements,Mode=OneTime, Converter={StaticResource BoolToDisabledVisibilityConverter}}"
+                                    Command="{Binding Path=DataContext.DeleteElementCommand, ElementName=ListBoxElements}"
+                                    IsEnabled="{Binding Path=IsPropertyReadOnly, Mode=OneWay, Converter={StaticResource BoolToOppositeConverter}}">
+                                    <Image Width="12" Height="12" Source="/Tum.PDE.ToolFramework.Images;component/Views/Delete2-16.png"/>
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+        </Grid>
+
+    </DataTemplate>
+
+
+</ResourceDictionary>

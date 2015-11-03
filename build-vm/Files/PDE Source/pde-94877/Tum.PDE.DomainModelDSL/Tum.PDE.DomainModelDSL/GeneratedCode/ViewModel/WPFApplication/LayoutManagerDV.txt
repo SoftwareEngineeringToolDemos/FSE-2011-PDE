@@ -1,0 +1,2 @@
+ 
+DefaultContext:::ModelTreeViewDockWindow,ErrorListDockWindow,PropertiesDockWindowPane,DependenciesDockWindowPane,DesignerDiagramSurfaceDockWindowPane,SearchResultViewModel,SearchViewModel

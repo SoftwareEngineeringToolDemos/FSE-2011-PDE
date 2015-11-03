@@ -1,0 +1,286 @@
+﻿<pluginView:DslPluginMainControl x:Class="Tum.FamilyTreeDSL.MainViewControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="558" 
+             TextOptions.TextFormattingMode="Display"             
+             
+             xmlns:pluginView ="clr-namespace:Tum.FamilyTreeDSL.View"
+             
+             xmlns:attached="clr-namespace:Tum.PDE.ToolFramework.Modeling.Visualization.Controls.Attached;assembly=Tum.PDE.ToolFramework.Modeling.Visualization"
+             xmlns:converters="clr-namespace:Tum.PDE.ToolFramework.Modeling.Visualization.Converters;assembly=Tum.PDE.ToolFramework.Modeling.Visualization"
+             xmlns:commands="clr-namespace:Tum.PDE.ToolFramework.Modeling.Visualization.Commands;assembly=Tum.PDE.ToolFramework.Modeling.Visualization"
+             xmlns:fluent="clr-namespace:Fluent;assembly=Fluent"
+             xmlns:ribbonHelper="clr-namespace:Tum.PDE.ToolFramework.Modeling.Visualization.Controls.Ribbon;assembly=Tum.PDE.ToolFramework.Modeling.Visualization"
+             xmlns:ribbonHelperBase="clr-namespace:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Controls.Ribbon;assembly=Tum.PDE.ToolFramework.Modeling.Visualization.Base"
+             xmlns:shellCommonCtrls="clr-namespace:Tum.PDE.ToolFramework.Modeling.Visualization.Shell.Controls.Common;assembly=Tum.PDE.ToolFramework.Modeling.Visualization.Shell">
+    <pluginView:DslPluginMainControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <!-- Converters -->
+            <converters:BoolToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+            <converters:ICollectionToVisibilityConverter x:Key="CollectionToVisibilityConverter"/>
+        </ResourceDictionary>
+    </pluginView:DslPluginMainControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <ribbonHelper:EmbeddedRibbon Grid.Row="0" x:Name="ribbonControl">
+            <!-- Contextual Tabs -->
+            <fluent:Ribbon.ContextualGroups>
+                <fluent:RibbonContextualTabGroup x:Name="tabGroupDiagramDesigner" BorderBrush="Navy" Background="Navy" Header="Diagram Designer"
+                    Visibility="{Binding Path=ActiveViewModel.IsDiagramDesignerViewModelVisible, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+            </fluent:Ribbon.ContextualGroups>
+
+            <!-- Tab: Home -->
+            <fluent:RibbonTabItem Header="Home">
+                <fluent:RibbonGroupBox Header="Common">
+                    <fluent:Button Text="Delete" Command="{Binding Path=ActiveViewModel.DeleteCommand}" LargeIcon="/Tum.PDE.ToolFramework.Images;component/Ribbon/Delete-32.png" SizeDefinition="Large">
+                        <fluent:Button.ToolTip>
+                            <fluent:ScreenTip Title="Delete (Del)" Text="Delete the selected content." Width="190"/>
+                        </fluent:Button.ToolTip>
+                    </fluent:Button>
+                    <fluent:Button Text="Cut" Command="{Binding Path=ActiveViewModel.CutCommand, Mode=OneWay}" Icon="/Tum.PDE.ToolFramework.Images;component/Ribbon/Cut-16.png" SizeDefinition="Middle" >
+                        <fluent:Button.ToolTip>
+                            <fluent:ScreenTip Title="Cut (Ctrl+C)" Text="Cut the contents to the Clipboard." Width="190"/>
+                        </fluent:Button.ToolTip>
+                    </fluent:Button>
+                    <fluent:Button Text="Copy" Command="{Binding Path=ActiveViewModel.CopyCommand, Mode=OneWay}" Icon="/Tum.PDE.ToolFramework.Images;component/Ribbon/Copy-16.png" SizeDefinition="Middle">
+                        <fluent:Button.ToolTip>
+                            <fluent:ScreenTip Title="Copy (Ctrl+C)" Text="Copy the contents to the Clipboard." Width="190"/>
+                        </fluent:Button.ToolTip>
+                    </fluent:Button>
+                    <fluent:Button Text="Paste" Command="{Binding Path=ActiveViewModel.PasteCommand, Mode=OneWay}" Icon="/Tum.PDE.ToolFramework.Images;component/Ribbon/Paste-16.png" SizeDefinition="Middle" >
+                        <fluent:Button.ToolTip>
+                            <fluent:ScreenTip Title="Paste (Ctrl+V)" Text="Paste the contents of the Clipboard." Width="190"/>
+                        </fluent:Button.ToolTip>
+                    </fluent:Button>
+                </fluent:RibbonGroupBox>
+                <fluent:RibbonGroupBox Header="Commands">
+                    <fluent:Button Text="Undo" Command="{Binding Path=ActiveViewModel.UndoCommand}" LargeIcon="/Tum.PDE.ToolFramework.Images;component/Ribbon/Undo-32.png" SizeDefinition="Large">
+                        <fluent:Button.ToolTip>
+                            <fluent:ScreenTip Title="Undo (Ctrl+Z)" Text="Undo last action." Width="190"/>
+                        </fluent:Button.ToolTip>
+                    </fluent:Button>
+                    <fluent:Button Text="Redo" Command="{Binding Path=ActiveViewModel.RedoCommand}" LargeIcon="/Tum.PDE.ToolFramework.Images;component/Ribbon/Redo-32.png" SizeDefinition="Large">
+                        <fluent:Button.ToolTip>
+                            <fluent:ScreenTip Title="Redo (Ctrl+Y)" Text="Redo last undone action." Width="190"/>
+                        </fluent:Button.ToolTip>
+                    </fluent:Button>
+                </fluent:RibbonGroupBox>
+                <fluent:RibbonGroupBox Header="Navigation">
+                    <fluent:Button Text="Back" Command="{Binding Path=NavigateBackwardCommand}" LargeIcon="/Tum.PDE.ToolFramework.Images;component/Ribbon/Back-32.png" SizeDefinition="Large"/>
+                    <fluent:Button Text="Forward" Command="{Binding Path=NavigateForwardCommand}" LargeIcon="/Tum.PDE.ToolFramework.Images;component/Ribbon/Forward-32.png" SizeDefinition="Large"/>
+                </fluent:RibbonGroupBox>
+
+                <!-- View items: For the default views-->
+                <fluent:RibbonGroupBox Header="View">
+                    <fluent:ToggleButton Text="Model Tree" Command="{Binding Path=ShowModelTreeCommand}" Margin="2,0,0,0" IsChecked="{Binding ModelTreeModel.IsDockingPaneVisible, Mode=TwoWay}" LargeIcon="/Tum.PDE.ToolFramework.Images;component/Ribbon/ModelTree-32.png" SizeDefinition="Large"/>
+                    <fluent:ToggleButton Text="Property Window" Command="{Binding Path=ShowPropertiesCommand}" Margin="2,0,0,0" IsChecked="{Binding PropertyGridModel.IsDockingPaneVisible, Mode=TwoWay}" LargeIcon="/Tum.PDE.ToolFramework.Images;component/Ribbon/PropertyGrid-32.png" SizeDefinition="Large"/>
+                    <fluent:ToggleButton Text="Error List" Command="{Binding Path=ShowErrorListCommand}" Margin="2,0,0,0" IsChecked="{Binding ErrorListModel.IsDockingPaneVisible, Mode=TwoWay}" LargeIcon="/Tum.PDE.ToolFramework.Images;component/Ribbon/ErrorList-32.png" SizeDefinition="Large"/>
+                    <fluent:ToggleButton Text="Dependencies   " Command="{Binding Path=ShowDependenciesCommand}" Margin="2,0,0,0" IsChecked="{Binding DependenciesModel.IsDockingPaneVisible, Mode=TwoWay}" Icon="/Tum.PDE.ToolFramework.Images;component/Ribbon/Refresh-16.png" SizeDefinition="Middle"/>
+                    <fluent:ToggleButton Text="Diagram Surface" Command="{Binding Path=ShowDiagramSurfaceCommand}" Margin="2,2,0,0" IsChecked="{Binding SelectedModelContextViewModel.DiagramSurfaceModel.IsDockingPaneVisible, Mode=TwoWay}" Icon="/Tum.PDE.ToolFramework.Images;component/Ribbon/DiagramSurface-16.png" SizeDefinition="Middle" />
+                </fluent:RibbonGroupBox>
+
+                <!-- Validation -->
+                <fluent:RibbonGroupBox Header="Validation" Visibility="{Binding IsValidationMenuVisible, Mode=OneTime, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <fluent:Button Text="Validate" Command="{Binding Path=ActiveViewModel.ValidateCommand}" LargeIcon="/Tum.PDE.ToolFramework.Images;component/Ribbon/Validate-32.png" SizeDefinition="Large"/>
+                    <fluent:Button Text="Validate All" Command="{Binding Path=ValidateAllCommand}" LargeIcon="/Tum.PDE.ToolFramework.Images;component/Ribbon/ValidateAll-32.png" SizeDefinition="Large"/>
+                </fluent:RibbonGroupBox>
+
+                <!-- Languages -->
+                <!--
+                <fluent:RibbonGroupBox Header="Languages" DataContext="{Binding Path=LanguagesViewModel}">
+                    <fluent:ComboBox ItemsSource="{Binding Path=Languages, Mode=OneWay}" Width="200" Height="23" HorizontalAlignment="Stretch"
+                                      SelectedItem="{Binding Path=SelectedLanguage, Mode=TwoWay}" Text="Language"
+                                      IsReadOnly="True"
+                                      DisplayMemberPath="DisplayName"/>
+                </fluent:RibbonGroupBox>-->
+            </fluent:RibbonTabItem>
+
+            <!-- Tab: Edit -->
+            <fluent:RibbonTabItem Header="Edit" DataContext="{Binding Path=SearchModel}">
+                <fluent:RibbonGroupBox Header="Find Advanced">
+                    <fluent:Button Text="Find Advanced" Command="{Binding Path=SearchAdvancedCommand}" LargeIcon="/Tum.PDE.ToolFramework.Images;component/Ribbon/SearchAdvanced-32.png" SizeDefinition="Large"/>
+                    <!--<fluent:Button Text="Find and Replace" Command="{Binding Path=SearchAndReplaceCommand}" LargeIcon="/Tum.PDE.ToolFramework.Images;component/Ribbon/FindAndReplace-32.png" SizeDefinition="Large" />                    -->
+                </fluent:RibbonGroupBox>
+                <fluent:RibbonGroupBox Header="Quick Find">
+                    <TextBox Text="{Binding Path=SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="250" Margin="0,0,0,1">
+                        <TextBox.InputBindings>
+                            <KeyBinding Key="Enter" Command="{Binding Path=SearchCommand}"/>
+                        </TextBox.InputBindings>
+                    </TextBox>
+                    <fluent:ComboBox ItemsSource="{Binding Path=SearchSource, Mode=OneWay}" Width="250" Height="23" HorizontalAlignment="Stretch"
+                                      SelectedItem="{Binding Path=SelectedSearchSource, Mode=TwoWay}" Text="Find where "
+                                      IsReadOnly="True"
+                                      DisplayMemberPath="DisplayName"/>
+                    <fluent:ComboBox ItemsSource="{Binding Path=SearchCriteria, Mode=OneWay}" Width="250" Height="23" HorizontalAlignment="Stretch"
+                                      SelectedItem="{Binding Path=SelectedSearchCriteria, Mode=TwoWay}" Text="Find criteria"
+                                      IsReadOnly="True"
+                                      DisplayMemberPath="DisplayName"/>
+                    <fluent:Button Text="Find" Command="{Binding Path=SearchCommand}" HorizontalAlignment="Right" LargeIcon="/Tum.PDE.ToolFramework.Images;component/Ribbon/Search-32.png" SizeDefinition="Large"/>
+                </fluent:RibbonGroupBox>
+            </fluent:RibbonTabItem>
+
+            <!-- Tab: View -->
+            <fluent:RibbonTabItem Header="View">
+                <!-- Additional Views -->
+                <fluent:RibbonGroupBox Header="Additional Views" Visibility="{Binding Path=SelectedModelContextViewModel.HasAdditionalDiagramSurfaceModels, Mode=OneTime, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <fluent:InRibbonGallery ItemWidth="200" ItemHeight="24" ResizeMode="Both" 
+                                      MinItemsInRow="2" MaxItemsInRow="3"  Selectable="False"
+                                      ItemsSource="{Binding Path=SelectedModelContextViewModel.AdditionalDiagramSurfaceModels, Mode=OneWay}"
+                                      Focusable="False" MinWidth="150" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch">
+                        <fluent:InRibbonGallery.ItemTemplate>
+                            <DataTemplate>
+                                <ribbonHelperBase:RibbonInGalleryItem IsSelectedItem="{Binding Path=IsDockingPaneVisible, Mode=OneWay}">
+                                    <Button Command="{Binding Path=ShowDockingPaneCommand}" BorderBrush="Transparent" Background="Transparent" BorderThickness="0">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Margin="3,0,0,0" Text="{Binding Path=DockingPaneTitle, Mode=OneWay}" VerticalAlignment="Center" HorizontalAlignment="Left"
+                                                   ToolTip="{Binding Path=DockingPaneTitle, Mode=OneWay}"/>
+                                        </StackPanel>
+                                    </Button>
+                                </ribbonHelperBase:RibbonInGalleryItem>
+                            </DataTemplate>
+                        </fluent:InRibbonGallery.ItemTemplate>
+                    </fluent:InRibbonGallery>
+                </fluent:RibbonGroupBox>
+            </fluent:RibbonTabItem>
+
+            <!-- Tab: Plugins -->
+            <!--
+            <fluent:RibbonTabItem Header="Plugins">
+                <fluent:RibbonGroupBox Header="Information">
+                    <fluent:Button Text="Info" Command="{Binding Path=PluginInformationCommand}" LargeIcon="/Tum.PDE.ToolFramework.Images;component/Ribbon/Information-32x32.png" SizeDefinition="Large">
+                    </fluent:Button>
+                </fluent:RibbonGroupBox>
+
+                Simple plugins
+                <fluent:RibbonGroupBox Header="Functionality Plugins" Visibility="{Binding Path=SelectedModelContextViewModel.HasPlugins, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <ListBox ItemsSource="{Binding Path=SelectedModelContextViewModel.Plugins, Mode=OneWay}" x:Name="pluginsList"
+                             Background="Transparent" BorderThickness="0" BorderBrush="Transparent"
+                             ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                             ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <fluent:Button Text="{Binding Path=MenuName, Mode=OneTime}" LargeIcon="{Binding Path=MenuImage.Source, Mode=OneTime}" SizeDefinition="Large"
+                                               Command="{Binding Path=DataContext.SelectedModelContextViewModel.ExecutePluginCommand, ElementName=pluginsList}" 
+                                               CommandParameter="{Binding}"
+                                               ToolTip="{Binding Path=MenuName, Mode=OneTime}">
+                                </fluent:Button>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                    </ListBox>
+                </fluent:RibbonGroupBox>
+
+                Plugin Views
+                <fluent:RibbonGroupBox Header="View Plugins" Visibility="{Binding Path=SelectedModelContextViewModel.HasPluginDiagramSurfaceModels, Mode=OneTime, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <fluent:InRibbonGallery ItemWidth="200" ItemHeight="24" ResizeMode="Both"
+                                      MinItemsInRow="2" MaxItemsInRow="3" Selectable="False"
+                                      ItemsSource="{Binding Path=SelectedModelContextViewModel.PluginDiagramSurfaceModels, Mode=OneWay}"
+                                      Focusable="False" MinWidth="150" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch">
+                        <fluent:InRibbonGallery.ItemTemplate>
+                            <DataTemplate>
+                                <ribbonHelper:RibbonInGalleryItem IsSelectedItem="{Binding Path=IsDockingPaneVisible, Mode=OneWay}">
+                                    <Button Command="{Binding Path=ShowDockingPaneCommand}" Style="{StaticResource NoMouseOverButtonStyle}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Margin="3,0,0,0" Text="{Binding Path=DockingPaneTitle, Mode=OneWay}" VerticalAlignment="Center" HorizontalAlignment="Left"
+                                                   ToolTip="{Binding Path=DockingPaneTitle, Mode=OneWay}"/>
+                                        </StackPanel>
+                                    </Button>
+                                </ribbonHelper:RibbonInGalleryItem>
+                            </DataTemplate>
+                        </fluent:InRibbonGallery.ItemTemplate>
+                    </fluent:InRibbonGallery>
+                </fluent:RibbonGroupBox>
+            </fluent:RibbonTabItem>
+            -->
+            
+            <!-- Tab: Diagram Designer -->
+            <fluent:RibbonTabItem Header="Design" Group="{Binding ElementName=tabGroupDiagramDesigner, Mode=OneWay}">
+                <fluent:RibbonGroupBox Header="Common">
+                    <fluent:Button Text="Copy as Image" Command="{Binding Path=ActiveViewModel.CopyAsImageCommand, Mode=OneWay}" LargeIcon="/Tum.PDE.ToolFramework.Images;component/Ribbon/CopyAsImage-32.png" SizeDefinition="Large">
+                        <fluent:Button.ToolTip>
+                            <fluent:ScreenTip Title="Copy as Image" Text="Copy the contents to the Clipboard." Width="190"/>
+                        </fluent:Button.ToolTip>
+                    </fluent:Button>
+                    <fluent:Button Text="Cut" Command="{Binding Path=ActiveViewModel.CutCommand, Mode=OneWay}" Icon="/Tum.PDE.ToolFramework.Images;component/Ribbon/Cut-16.png" SizeDefinition="Middle" >
+                        <fluent:Button.ToolTip>
+                            <fluent:ScreenTip Title="Cut (Ctrl+C)" Text="Cut the contents to the Clipboard." Width="190"/>
+                        </fluent:Button.ToolTip>
+                    </fluent:Button>
+                    <fluent:Button Text="Copy" Command="{Binding Path=ActiveViewModel.CopyCommand, Mode=OneWay}" Icon="/Tum.PDE.ToolFramework.Images;component/Ribbon/Copy-16.png" SizeDefinition="Middle">
+                        <fluent:Button.ToolTip>
+                            <fluent:ScreenTip Title="Copy (Ctrl+C)" Text="Copy the contents to the Clipboard." Width="190"/>
+                        </fluent:Button.ToolTip>
+                    </fluent:Button>
+                    <fluent:Button Text="Paste" Command="{Binding Path=ActiveViewModel.PasteCommand, Mode=OneWay}" Icon="/Tum.PDE.ToolFramework.Images;component/Ribbon/Paste-16.png" SizeDefinition="Middle" >
+                        <fluent:Button.ToolTip>
+                            <fluent:ScreenTip Title="Paste (Ctrl+V)" Text="Paste the contents of the Clipboard." Width="190"/>
+                        </fluent:Button.ToolTip>
+                    </fluent:Button>
+                </fluent:RibbonGroupBox>
+                
+                <fluent:RibbonGroupBox Header="Delete">
+                    <fluent:SplitButton Text="Delete" LargeIcon="/Tum.PDE.ToolFramework.Images;component/Ribbon/Delete-32.png" Command="{Binding Path=ActiveViewModel.DeleteCommand, Mode=OneWay}" SizeDefinition="Large">
+                        <fluent:Button Text="Delete Shape(s)" Command="{Binding Path=ActiveViewModel.DeleteCommand, Mode=OneWay}" Icon="/Tum.PDE.ToolFramework.Images;component/Ribbon/Delete-16.png" SizeDefinition="Middle"/>
+                        <fluent:Button Text="Delete Shape(s) and Element(s)" Command="{Binding Path=ActiveViewModel.DeleteShapesAndElementsCommand, Mode=OneWay}" Icon="/Tum.PDE.ToolFramework.Images;component/Ribbon/Delete-16.png" SizeDefinition="Middle"/>
+                    </fluent:SplitButton>
+                </fluent:RibbonGroupBox>
+                <fluent:RibbonGroupBox Header="Commands">
+                    <fluent:Button Text="Undo" Command="{Binding Path=ActiveViewModel.UndoCommand}" LargeIcon="/Tum.PDE.ToolFramework.Images;component/Ribbon/Undo-32.png" SizeDefinition="Large">
+                        <fluent:Button.ToolTip>
+                            <fluent:ScreenTip Title="Undo (Ctrl+Z)" Text="Undo last action." Width="190"/>
+                        </fluent:Button.ToolTip>
+                    </fluent:Button>
+                    <fluent:Button Text="Redo" Command="{Binding Path=ActiveViewModel.RedoCommand}" LargeIcon="/Tum.PDE.ToolFramework.Images;component/Ribbon/Redo-32.png" SizeDefinition="Large">
+                        <fluent:Button.ToolTip>
+                            <fluent:ScreenTip Title="Redo (Ctrl+Y)" Text="Redo last undone action." Width="190"/>
+                        </fluent:Button.ToolTip>
+                    </fluent:Button>
+                </fluent:RibbonGroupBox>
+                <fluent:RibbonGroupBox Header="Insert">
+                    <fluent:InRibbonGallery ItemWidth="200" ItemHeight="24" ResizeMode="Both"
+                                      MinItemsInRow="2" MaxItemsInRow="3"
+                                      ItemsSource="{Binding ActiveViewModel.InsertableElements, Mode=OneWay}"
+                                      Focusable="False" MinWidth="150" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch">
+                        <fluent:InRibbonGallery.ItemTemplate>
+                            <DataTemplate>
+                                <Button Command="{Binding Path=Command}" CommandParameter="{Binding Path=CommandParameter}" BorderBrush="Transparent" Background="Transparent" BorderThickness="0">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image x:Name="insertableItemImage" Margin="3,0,3,0"
+                                               Stretch="None" Width="16" Height="16" VerticalAlignment="Center" Visibility="Collapsed"/>
+                                        <TextBlock Margin="3,0,0,0" Text="{Binding Path=Text, Mode=OneWay}" VerticalAlignment="Center" HorizontalAlignment="Left"
+                                                   ToolTip="{Binding Path=Text, Mode=OneWay}"/>
+                                    </StackPanel>
+                                </Button>
+                                <DataTemplate.Triggers>
+                                    <DataTrigger Binding="{Binding Path=HasIcon, Mode=OneTime}" Value="True">
+                                        <Setter Property="Visibility" TargetName="insertableItemImage" Value="Visible" />
+                                        <Setter Property="Source" TargetName="insertableItemImage" Value="{Binding Path=IconUrl, Mode=OneTime}" />
+                                    </DataTrigger>
+                                </DataTemplate.Triggers>
+                            </DataTemplate>
+                        </fluent:InRibbonGallery.ItemTemplate>
+                    </fluent:InRibbonGallery>
+                </fluent:RibbonGroupBox>
+                
+
+            </fluent:RibbonTabItem>
+        </ribbonHelper:EmbeddedRibbon>
+
+        <shellCommonCtrls:ShellTabControlAvalonDock DataContext="{Binding Path=.}" Grid.Row="1" />
+    </Grid>
+</pluginView:DslPluginMainControl>

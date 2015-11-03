@@ -1,0 +1,234 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<MetaModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="adbcb32f-6ad7-4855-b8ca-3f14f4c4593a" name="VSPluginDSL" companyName="Tum" namespace="Tum.PDE.VSPluginDSL" productName="VSPluginDSL" displayName="VSPluginDSL" applicationName="VSPluginDSL" layoutEmbeddedPath="GeneratedCode.ViewModel.WPFApplication.LayoutManagerLayout.xml" layoutDVEmbeddedPath="GeneratedCode.ViewModel.WPFApplication.LayoutManagerDV.txt" packageGuid="83177a70-f7d0-423b-a4ca-4150dccaf640" customExtensionGuid="d3d6a8a4-9b68-4e31-a142-d020767b7dcf" customExtension="vsdsl" xmlns="http://schemas.microsoft.com/dsltools/LanguageDSL">
+  <domainTypes>
+    <externalType namespace="System" serializationStyle="Normal" name="String" displayName="String" isDisplayNameTracking="True" requiresSerializationConversion="false">
+      <propertyGridEditor>
+        <propertyGridEditorMoniker name="StringEditorViewModel" />
+      </propertyGridEditor>
+    </externalType>
+    <externalType namespace="System" serializationStyle="Normal" name="Boolean?" displayName="Boolean" isDisplayNameTracking="True" requiresSerializationConversion="false">
+      <propertyGridEditor>
+        <propertyGridEditorMoniker name="BooleanEditorViewModel" />
+      </propertyGridEditor>
+    </externalType>
+    <externalType namespace="System" serializationStyle="Normal" name="Guid?" displayName="Guid" isDisplayNameTracking="True" requiresSerializationConversion="false" />
+    <externalType namespace="System" serializationStyle="Normal" name="Int32?" displayName="Integer" isDisplayNameTracking="True" requiresSerializationConversion="true">
+      <propertyGridEditor>
+        <propertyGridEditorMoniker name="IntegerEditorViewModel" />
+      </propertyGridEditor>
+    </externalType>
+    <externalType namespace="System" serializationStyle="Normal" name="Double?" displayName="Double" isDisplayNameTracking="True" requiresSerializationConversion="true">
+      <propertyGridEditor>
+        <propertyGridEditorMoniker name="DoubleEditorViewModel" />
+      </propertyGridEditor>
+    </externalType>
+  </domainTypes>
+  <validation>
+    <metaModelHasValidation Id="ba89da38-afbb-4862-9811-f195df4d7119">
+      <validation Id="ce682531-d51e-4e2b-8ee7-d00bdba92aa6" useLoad="true" useMenu="true" useOpen="true" useSave="true" useAutoValidation="true" />
+    </metaModelHasValidation>
+  </validation>
+  <modelContexts>
+    <metaModelHasModelContexts Id="0dc104bf-b5eb-4915-9edf-6b0805dc01d5">
+      <modelContext Id="15ae33c0-6c1f-41c0-b1d8-7cddfb0aca13" displayName="Default Context" isDisplayNameTracking="True" name="DefaultContext" isDefault="true">
+        <classes>
+          <libraryModelContextHasClasses Id="fcd8751d-6c0b-4f9e-bad2-d24470eb9c32">
+            <domainClass Id="a765e3bd-666d-49f2-8e77-d1796069ebf6" displayName="DomainModel" isDisplayNameTracking="True" name="DomainModel" generatesDoubleDerived="false" hasCustomConstructor="false" accessModifier="Public" inheritanceModifier="None" namespace="Tum.PDE.VSPluginDSL" serializationName="DomainModel" isSerializationNameTracking="True" isDomainModel="true" canCopy="true" canMove="true" canPaste="true" generateSpecificViewModel="false" generateSpecificViewModelProperties="true" generateSpecificViewModelReferences="true" generateSpecificViewModelEmbeddings="true" />
+          </libraryModelContextHasClasses>
+          <libraryModelContextHasClasses Id="b75a8c98-2030-4ae5-8ed7-95176c6aabaa">
+            <domainClass Id="707894f5-2908-4f4a-8d22-86efbe4a13bb" displayName="Domain Class2" isDisplayNameTracking="True" name="DomainClass2" generatesDoubleDerived="false" hasCustomConstructor="false" accessModifier="Public" inheritanceModifier="None" namespace="Tum.PDE.VSPluginDSL" serializationName="DomainClass2" isSerializationNameTracking="True" isDomainModel="false" canCopy="true" canMove="true" canPaste="true" generateSpecificViewModel="false" generateSpecificViewModelProperties="true" generateSpecificViewModelReferences="true" generateSpecificViewModelEmbeddings="true">
+              <properties>
+                <attributedDomainElementHasProperties Id="5388ae4c-9006-4c6d-8ecb-03b51c2182c6">
+                  <domainProperty Id="82e507c0-b3d6-42de-85e7-375a11303495" name="Name" isElementName="true" isRequired="true" displayName="Name" isBrowsable="true" getterAccessModifier="Public" setterAccessModifier="Public" isDisplayNameTracking="True" serializationName="Name" isSerializationNameTracking="True" serializationRepresentationType="Attribute" isUIReadOnly="false" propertyKind="Normal" isCustomCreated="false">
+                    <type>
+                      <externalTypeMoniker name="/VSPluginDSL/System/String" />
+                    </type>
+                  </domainProperty>
+                </attributedDomainElementHasProperties>
+              </properties>
+            </domainClass>
+          </libraryModelContextHasClasses>
+        </classes>
+        <diagramClasses>
+          <libraryModelContextHasDiagramClasses Id="cee1e1cc-dbfa-42c7-a872-143395773b9e">
+            <designerDiagramClass Id="ee637228-f59a-4ab2-b309-1756eb2bef95" name="DesignerDiagram" title="Designer" isCustom="false" visualizationBehavior="Extended">
+              <presentationElements>
+                <diagramClassHasPresentationElements Id="b97a09eb-3e0f-463b-a3a5-c2f65eeab567">
+                  <shapeClass Id="7b4698d6-a6a3-43d7-9327-738976f58cc6" displayName="Domain Class2 Shape" isDisplayNameTracking="True" name="DomainClass2Shape" generatesDoubleDerived="false" hasCustomConstructor="false" accessModifier="Public" inheritanceModifier="None" namespace="Tum.PDE.VSPluginDSL" serializationName="DomainClass2Shape" isSerializationNameTracking="True" generatePropertiesVM="true" generateShapePropertiesVM="false" defaultWidth="150" defaultHeight="50" isFixedWidth="false" isFixedHeight="false" isRelativeChild="false" relativeChildBehaviour="PositionRelativeToParent" isAutoGenerated="true" borderThickness="1" backgroundBrush="White" borderBrush="Black" borderOuterBrush="White" borderOuterSize="3" borderCornerRadius="1" borderIsHitTestVisible="true" borderFocusable="true" useInDependencyView="false">
+                    <domainClass>
+                      <shapeClassReferencesDomainClass Id="cbcff015-0c50-4c3f-9bff-f01e2db920e5">
+                        <domainClassMoniker Id="707894f5-2908-4f4a-8d22-86efbe4a13bb" />
+                      </shapeClassReferencesDomainClass>
+                    </domainClass>
+                  </shapeClass>
+                </diagramClassHasPresentationElements>
+              </presentationElements>
+            </designerDiagramClass>
+          </libraryModelContextHasDiagramClasses>
+          <libraryModelContextHasDiagramClasses Id="b3ca688a-084c-43b0-8270-d319c796703b">
+            <specificElementsDiagram Id="4c700bc9-73ff-4f10-92ad-71d9e7d4d683" name="SpecificElementsDiagramTemplate" title="Specific Elements View" isCustom="true" visualizationBehavior="Extended" uniqueId="SpecificElementsDiagramTemplate" description="The 'Specific Elements View' is a diagram that is designed to react visually on the selection of certain elements. Those elements need to be specified in the designer. The view itself can be opened from the ribbon menu (Views).">
+              <domainClasses>
+                <specificElementsDiagramReferencesDomainClasses Id="cdc40a86-5058-44d3-99c6-647fd26198fd">
+                  <domainClassMoniker Id="707894f5-2908-4f4a-8d22-86efbe4a13bb" />
+                </specificElementsDiagramReferencesDomainClasses>
+              </domainClasses>
+            </specificElementsDiagram>
+          </libraryModelContextHasDiagramClasses>
+          <libraryModelContextHasDiagramClasses Id="e8c9d634-6d8e-4992-aacf-1bb2c774c4ad">
+            <modalDiagram Id="157b7e5c-da1c-494f-a445-bb16467c9c6a" name="ModalDiagramTemplate" title="Modal View" isCustom="true" visualizationBehavior="Extended" uniqueId="ModalDiagramTemplate" description="A modal diagram in PDE is a diagram that can be opened to host a specific element. There can be multiple instances of modal diagrams at the same time. Additionally, a context menu is automatically added to the ModelTree to open the diagrams for their hosted elements.">
+              <domainClass>
+                <modalDiagramReferencesDomainClass Id="5ee75467-2e20-42a2-9deb-bed776bd0cf7">
+                  <domainClassMoniker Id="707894f5-2908-4f4a-8d22-86efbe4a13bb" />
+                </modalDiagramReferencesDomainClass>
+              </domainClass>
+            </modalDiagram>
+          </libraryModelContextHasDiagramClasses>
+        </diagramClasses>
+        <relationships>
+          <libraryModelContextHasRelationships Id="e03ba8ca-6b21-46a8-82d0-71408a8e2516">
+            <embeddingRelationship Id="a38427f0-4388-4c2e-a3e4-ea5952570bb5" displayName="Domain Model Has Domain Class2" isDisplayNameTracking="True" name="DomainModelHasDomainClass2" generatesDoubleDerived="false" hasCustomConstructor="false" accessModifier="Public" inheritanceModifier="None" namespace="Tum.PDE.VSPluginDSL" serializationName="DomainModelHasDomainClass2" isSerializationNameTracking="True" isNameTracking="True" allowsDuplicates="false" propagatesCopyToChild="true">
+              <roles>
+                <domainRelationshipHasRoles Id="751b0508-bb27-48eb-9013-cb479c80a2ff">
+                  <domainRole Id="21e7aecb-4204-4f77-bcc2-cdc65a1287af" displayName="Domain Model" isDisplayNameTracking="True" name="DomainModel" multiplicity="ZeroMany" propertyName="DomainClass2" propertyDisplayName="Domain Class2" isPropertyNameTracking="True" isPropertyDisplayNameTracking="True" propertyGetterAccessModifier="Public" propertySetterAccessModifier="Public" isPropertyBrowsable="true" isPropertyGenerator="true" propagatesDelete="false" isNameTracking="True" isPropertyUIReadOnly="false">
+                    <opposite>
+                      <domainRoleReferencesOpposite Id="907f04ff-2f85-4743-9792-46f68208d39b">
+                        <domainRoleMoniker Id="874f595f-d0da-4507-9386-9af3e8411f15" />
+                      </domainRoleReferencesOpposite>
+                    </opposite>
+                    <rolePlayer>
+                      <domainRoleReferencesRolePlayer Id="02c758df-d6c8-4348-a58c-9fa368939c84">
+                        <domainClassMoniker Id="a765e3bd-666d-49f2-8e77-d1796069ebf6" />
+                      </domainRoleReferencesRolePlayer>
+                    </rolePlayer>
+                  </domainRole>
+                </domainRelationshipHasRoles>
+                <domainRelationshipHasRoles Id="90462898-0e5a-4514-bb99-fca3d3275a0b">
+                  <domainRole Id="874f595f-d0da-4507-9386-9af3e8411f15" displayName="Domain Class2" isDisplayNameTracking="True" name="DomainClass2" multiplicity="One" propertyName="DomainModel" propertyDisplayName="Domain Model" isPropertyNameTracking="True" isPropertyDisplayNameTracking="True" propertyGetterAccessModifier="Public" propertySetterAccessModifier="Public" isPropertyBrowsable="true" isPropertyGenerator="true" propagatesDelete="true" isNameTracking="True" isPropertyUIReadOnly="false">
+                    <opposite>
+                      <domainRoleReferencesOpposite Id="33a293d2-9956-4de0-a31a-0e98cfc170fb">
+                        <domainRoleMoniker Id="21e7aecb-4204-4f77-bcc2-cdc65a1287af" />
+                      </domainRoleReferencesOpposite>
+                    </opposite>
+                    <rolePlayer>
+                      <domainRoleReferencesRolePlayer Id="41fef4e6-ff8c-4cb2-9ef2-de8f0ae1fcb0">
+                        <domainClassMoniker Id="707894f5-2908-4f4a-8d22-86efbe4a13bb" />
+                      </domainRoleReferencesRolePlayer>
+                    </rolePlayer>
+                  </domainRole>
+                </domainRelationshipHasRoles>
+              </roles>
+              <source>
+                <domainRelationshipReferencesSource Id="4fcc5e5e-3ef5-40f7-a5a8-0b271258df71">
+                  <domainRoleMoniker Id="21e7aecb-4204-4f77-bcc2-cdc65a1287af" />
+                </domainRelationshipReferencesSource>
+              </source>
+              <target>
+                <domainRelationshipReferencesTarget Id="146c13c0-ebc5-49e4-867b-e06d699c32a9">
+                  <domainRoleMoniker Id="874f595f-d0da-4507-9386-9af3e8411f15" />
+                </domainRelationshipReferencesTarget>
+              </target>
+            </embeddingRelationship>
+          </libraryModelContextHasRelationships>
+        </relationships>
+        <serializationModel>
+          <libraryModelContextHasSerializationModel Id="153b1d3c-6f23-44a8-8f07-025ce5ba64bf">
+            <serializationModel Id="a8e98a41-e0c4-4bfe-bd46-4ef7a0bf217b" serializedIdAttributeName="Id">
+              <serializedDomainModel>
+                <serializationModelHasSerializedDomainModel Id="995f439e-741f-49ec-90ed-bfe8471e4fef">
+                  <serializedDomainModel Id="6473d784-d6f9-4d6d-87ee-3a7edccd4f49" isSerializationNameTracking="True" serializationName="DomainModel" serializedIdAttributeName="Id">
+                    <children>
+                      <serializationClassReferencesChildren Id="07f50d36-f499-4db6-b819-4f11aade2d13">
+                        <serializedEmbeddingRelationshipMoniker Id="b19b60f1-1ac5-4371-a3c0-a302a157129c" />
+                      </serializationClassReferencesChildren>
+                    </children>
+                    <attributes>
+                      <serializationClassReferencesAttributes Id="a0d3d738-3ce6-492e-9e16-3735b30cd210">
+                        <serializedIdPropertyMoniker Id="477d04d4-7dec-4eea-8e2f-edd31289bff2" />
+                      </serializationClassReferencesAttributes>
+                    </attributes>
+                    <idProperty>
+                      <serializationClassHasIdProperty Id="4f62ed1c-7eae-4645-b898-7a4afc481d07">
+                        <serializedIdProperty Id="477d04d4-7dec-4eea-8e2f-edd31289bff2" name="Id" serializationName="Id" omitIdProperty="false" />
+                      </serializationClassHasIdProperty>
+                    </idProperty>
+                    <domainClass>
+                      <serializedDomainClassReferencesDomainClass Id="a88055ab-ba15-4e9c-adf7-82284e08e91c">
+                        <domainClassMoniker Id="a765e3bd-666d-49f2-8e77-d1796069ebf6" />
+                      </serializedDomainClassReferencesDomainClass>
+                    </domainClass>
+                  </serializedDomainModel>
+                </serializationModelHasSerializedDomainModel>
+              </serializedDomainModel>
+              <children>
+                <serializationModelHasChildren Id="eb2a19ad-83b7-4130-913f-dec53283ec18">
+                  <serializedDomainClass Id="b6ada690-4f74-4e42-8eec-c52bee02ab06" isSerializationNameTracking="True" serializationName="DomainClass2">
+                    <attributes>
+                      <serializationClassReferencesAttributes Id="e0fbcafa-c978-4425-ba25-82ae451acc74">
+                        <serializedIdPropertyMoniker Id="914970d3-ad46-4c5c-9edd-46ba692074d3" />
+                      </serializationClassReferencesAttributes>
+                      <serializationClassReferencesAttributes Id="51e50dd3-5cd7-4371-bd77-a50725269c5e">
+                        <serializedDomainPropertyMoniker Id="7a2b9c47-955f-46b2-8199-0cc45bd52cf1" />
+                      </serializationClassReferencesAttributes>
+                    </attributes>
+                    <idProperty>
+                      <serializationClassHasIdProperty Id="4bc10ece-4f5a-461e-b8a1-de8d239a66c5">
+                        <serializedIdProperty Id="914970d3-ad46-4c5c-9edd-46ba692074d3" name="Id" serializationName="Id" omitIdProperty="false" />
+                      </serializationClassHasIdProperty>
+                    </idProperty>
+                    <properties>
+                      <serializationClassHasProperties Id="8d61f7ef-a12a-4e61-a6a5-ea7ea90b1643">
+                        <serializedDomainProperty Id="7a2b9c47-955f-46b2-8199-0cc45bd52cf1" serializationName="Name" serializationRepresentationType="Attribute" isSerializationNameTracking="True" omitProperty="false">
+                          <domainProperty>
+                            <serializedDomainPropertyReferencesDomainProperty Id="417b4377-85e5-4ff6-ad44-cb08e52b888a">
+                              <domainPropertyMoniker Id="82e507c0-b3d6-42de-85e7-375a11303495" />
+                            </serializedDomainPropertyReferencesDomainProperty>
+                          </domainProperty>
+                        </serializedDomainProperty>
+                      </serializationClassHasProperties>
+                    </properties>
+                    <domainClass>
+                      <serializedDomainClassReferencesDomainClass Id="86d832c3-65f1-4ad3-903e-eae4d7f95178">
+                        <domainClassMoniker Id="707894f5-2908-4f4a-8d22-86efbe4a13bb" />
+                      </serializedDomainClassReferencesDomainClass>
+                    </domainClass>
+                  </serializedDomainClass>
+                </serializationModelHasChildren>
+                <serializationModelHasChildren Id="f0ff43a7-3476-46a1-aeca-6cf20e752a71">
+                  <serializedEmbeddingRelationship Id="b19b60f1-1ac5-4371-a3c0-a302a157129c" isSerializationNameTracking="True" serializationName="DomainModelHasDomainClass2" isInFullSerialization="false" omitRelationship="false" isTargetIncludedSubmodel="false">
+                    <children>
+                      <serializationClassReferencesChildren Id="4a8b391a-9dc2-40f4-9ab5-1c3003c64568">
+                        <serializedDomainClassMoniker Id="b6ada690-4f74-4e42-8eec-c52bee02ab06" />
+                      </serializationClassReferencesChildren>
+                    </children>
+                    <attributes>
+                      <serializationClassReferencesAttributes Id="5fb1a93a-400e-42d6-a49a-acbd14b2670f">
+                        <serializedIdPropertyMoniker Id="48818791-6ac0-4a00-b916-afc3a76e8dc6" />
+                      </serializationClassReferencesAttributes>
+                    </attributes>
+                    <idProperty>
+                      <serializationClassHasIdProperty Id="c5fa3d32-9c9c-436e-af5e-4e06faefaedf">
+                        <serializedIdProperty Id="48818791-6ac0-4a00-b916-afc3a76e8dc6" name="Id" serializationName="Id" omitIdProperty="false" />
+                      </serializationClassHasIdProperty>
+                    </idProperty>
+                    <embeddingRelationship>
+                      <serializedEmbeddingRelationshipReferencesEmbeddingRelationship Id="a26953f3-072f-4ce1-bbae-a3d84a2ca388">
+                        <embeddingRelationshipMoniker Id="a38427f0-4388-4c2e-a3e4-ea5952570bb5" />
+                      </serializedEmbeddingRelationshipReferencesEmbeddingRelationship>
+                    </embeddingRelationship>
+                  </serializedEmbeddingRelationship>
+                </serializationModelHasChildren>
+              </children>
+            </serializationModel>
+          </libraryModelContextHasSerializationModel>
+        </serializationModel>
+      </modelContext>
+    </metaModelHasModelContexts>
+  </modelContexts>
+  <propertyGridEditors>
+    <propertyGridEditor name="StringEditorViewModel" namespace="Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel.PropertyGrid" shouldBeGenerated="false" editorBaseType="PropertyEditorViewModel" requiresContextMenuBar="false" />
+    <propertyGridEditor name="BooleanEditorViewModel" namespace="Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel.PropertyGrid" shouldBeGenerated="false" editorBaseType="PropertyEditorViewModel" requiresContextMenuBar="false" />
+    <propertyGridEditor name="EnumerationEditorViewModel" namespace="Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel.PropertyGrid" shouldBeGenerated="false" editorBaseType="PropertyEditorViewModel" requiresContextMenuBar="false" />
+    <propertyGridEditor name="IntegerEditorViewModel" namespace="Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel.PropertyGrid" shouldBeGenerated="false" editorBaseType="StringEditorViewModel" requiresContextMenuBar="false" />
+    <propertyGridEditor name="DoubleEditorViewModel" namespace="Tum.PDE.ToolFramework.Modeling.Visualization.ViewModel.PropertyGrid" shouldBeGenerated="false" editorBaseType="StringEditorViewModel" requiresContextMenuBar="false" />
+  </propertyGridEditors>
+</MetaModel>

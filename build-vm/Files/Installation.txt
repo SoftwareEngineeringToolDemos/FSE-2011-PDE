@@ -1,0 +1,10 @@
+Instructions for creating a development environment for PDE on another machine:
+
+1. Install Visual Studio 2010 Standard
+2. Install Visual Studio 2010 SP1
+3. Install Visual Studio 2010 SDK
+4. Install Visual Studio 2010 SDK SP1
+5. Install Visual Suodio 2010 Visualization and Modeling SDK
+6. Install PDE 0.9.9
+7. Install T4 Toolkit
+

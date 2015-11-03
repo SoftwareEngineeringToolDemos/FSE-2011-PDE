@@ -1,0 +1,15 @@
+﻿<!--DSL Tools Language Template-->
+<VSTemplate Version="3.0.0" Type="Item" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<TemplateData>
+		<Name Package="{6f31046d-5aa5-4b80-99c5-27733698eb6d}" ID="103"/>
+		<Description Package="{6f31046d-5aa5-4b80-99c5-27733698eb6d}" ID="102"/>
+		<Icon Package="{6f31046d-5aa5-4b80-99c5-27733698eb6d}" ID="201" />
+		<ProjectType>CSharp</ProjectType>
+		<SortOrder>360</SortOrder>
+		<DefaultName>FamilyTreeDSL.myfamilytree</DefaultName>
+	</TemplateData>
+	<TemplateContent>
+		<ProjectItem TargetFileName="$fileinputname$.myfamilytree">myfamilytree.myfamilytree</ProjectItem>
+	</TemplateContent>
+</VSTemplate>
+

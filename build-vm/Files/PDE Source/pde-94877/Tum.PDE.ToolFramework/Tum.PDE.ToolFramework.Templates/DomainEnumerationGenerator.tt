@@ -1,0 +1,160 @@
+﻿<#@ import namespace="Tum.PDE.LanguageDSL"#>
+<#@ import namespace="Microsoft.VisualStudio.Modeling" #>
+<#+
+public string GenerateDomainEnumeration(MetaModel dm, DomainEnumeration domainEnum) 
+{
+	this.GenerationEnvironment = null;
+	this.GenerateDomainEnumerationInternal(dm, domainEnum);
+	return this.GenerationEnvironment.ToString();
+}
+
+// Generate an enum for each DomainEnumeration in the model
+private void GenerateDomainEnumerationInternal(MetaModel dm, DomainEnumeration domainEnum) 
+{
+	if(!string.IsNullOrEmpty(domainEnum.Namespace))
+	{
+#>
+namespace <#= domainEnum.Namespace #>
+{
+<#+
+		PushIndent("\t");
+	}
+#>
+/// <summary>
+/// DomainEnumeration: <#= domainEnum.Name #>
+<#+
+	this.Write(Utilities.Instance.GenerateComments(domainEnum.Description));
+#>
+/// </summary>
+[System.ComponentModel.TypeConverter(typeof(<#= domainEnum.Name #>EnumConverter))]
+<#+
+	if(domainEnum.IsFlags)
+	{
+#>
+[global::System.Flags]
+<#+
+	}	
+#>
+<#= CodeGenerationUtilities.GetAccessModifier(domainEnum.AccessModifier) #> enum <#= domainEnum.Name #>
+{
+<#+
+	double startVal = 1;
+	foreach(EnumerationLiteral literal in domainEnum.Literals)
+	{
+#>
+	/// <summary>
+	/// <#= literal.Name #>
+<#+
+		PushIndent("\t");
+		this.Write(Utilities.Instance.GenerateComments(literal.Description));
+		PopIndent();
+#>
+	/// </summary>
+<#+
+		PushIndent("\t");
+		this.Write(Utilities.Instance.GenerateResourceAttributes(literal));
+		PopIndent();
+		
+		if(literal.Value.Trim() != string.Empty)
+		{
+#>
+	<#= literal.Name #> = <#= literal.Value #>,
+<#+
+		}
+		else
+		{
+			if( domainEnum.IsFlags )
+			{
+#>
+	<#= literal.Name #> = <#= startVal.ToString() #>,
+<#+
+				startVal = startVal * 2;
+			}
+			else
+			{
+#>
+	<#= literal.Name #>,
+<#+
+			}
+		}
+	}
+#>
+}
+/// <summary>
+/// Type converter for <#= domainEnum.Name #> enumeration.
+/// </summary>
+public class <#= domainEnum.Name #>EnumConverter : System.ComponentModel.EnumConverter
+{
+	System.Collections.Generic.Dictionary<<#= domainEnum.Name #>, string> dictionary;
+	
+	/// <summary>
+    /// Constructor.
+    /// </summary>
+    public <#= domainEnum.Name #>EnumConverter() : base(typeof(<#= domainEnum.Name #>))
+    {
+        // create lookup dictionary
+        dictionary = new System.Collections.Generic.Dictionary<<#= domainEnum.Name #>, string>();
+<#+
+		foreach(EnumerationLiteral literal in domainEnum.Literals)
+		{
+			string resourceKey = domainEnum.GetFullName(false)+"/"+literal.Name;
+#>
+		dictionary.Add(<#= domainEnum.Name #>.<#= literal.Name #>, <#= dm.GetFullName(true) #>DomainModel.SingletonResourceManager.GetString("<#= resourceKey #>.DisplayName"));
+<#+
+		}
+#>
+    }
+
+	/// <summary>
+    /// Converts the specified value object to <#= domainEnum.Name #>.
+    /// </summary>
+    /// <param name="context">An System.ComponentModel.ITypeDescriptorContext that provides a format context.</param>
+    /// <param name="culture">An optional System.Globalization.CultureInfo. If not supplied, the current culture is assumed.</param>
+    /// <param name="value">The System.Object to convert.</param>
+    /// <returns><#= domainEnum.Name #> object that represents the converted value.</returns>
+    public override object ConvertFrom(System.ComponentModel.ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value)
+    {
+		string strValue = value as string;
+		if( strValue != null )
+		{
+			foreach(<#= domainEnum.Name #> d in dictionary.Keys )
+			{
+				if( dictionary[d] == strValue )
+					return d;
+			}
+
+		}
+        return base.ConvertFrom(context, culture, value);
+    }
+
+	/// <summary>
+    /// Converts the given value object to the specified destination type.
+    /// </summary>
+    /// <param name="context">An System.ComponentModel.ITypeDescriptorContext that provides a format context.</param>
+    /// <param name="culture">An optional System.Globalization.CultureInfo. If not supplied, the current culture is assumed.</param>
+    /// <param name="value"> System.Object to convert.</param>
+    /// <param name="destinationType">The System.Type to convert the value to.</param>
+    /// <returns>An System.Object that represents the converted value.</returns>
+    public override object ConvertTo(System.ComponentModel.ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, System.Type destinationType)
+    {
+		<#= domainEnum.Name #>? strValue = value as <#= domainEnum.Name #>?;
+		if( strValue != null )
+		{
+			return dictionary[strValue.Value];
+		}
+
+        return base.ConvertTo(context, culture, value, destinationType);
+    }
+}
+<#+
+	if(!string.IsNullOrEmpty(domainEnum.Namespace))
+	{
+		PopIndent();
+#>
+}
+<#+
+	}
+#>
+<#+
+}
+#>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<StateMachineDomainModel Id="2ab2c8e3-2d76-40e7-a9b2-bb7eb368f75e">
+  <State Id="c5fe444d-8d9e-41d6-ae4d-4e3d9d795bf9" Name="State0">
+    <Transition Id="d5d29473-1e68-4cab-93d8-d9a8473dcfd9" Condition="c">
+      <StateBaseSourceRef link="c5fe444d-8d9e-41d6-ae4d-4e3d9d795bf9" />
+      <StateBaseTargetRef link="9d03059a-4168-4ffa-ae74-b8909509062f" />
+    </Transition>
+    <Transition Id="67b76a7d-53c7-40e2-9b76-c81d8a0f2c59" Condition="a">
+      <StateBaseSourceRef link="c5fe444d-8d9e-41d6-ae4d-4e3d9d795bf9" />
+      <StateBaseTargetRef link="db7dfa29-599b-49b7-ac80-38000411ef62" />
+    </Transition>
+    <Transition Id="ace299b8-1f22-4556-b6d5-dbf866bf35b2" Condition="b">
+      <StateBaseSourceRef link="c5fe444d-8d9e-41d6-ae4d-4e3d9d795bf9" />
+      <StateBaseTargetRef link="c5fe444d-8d9e-41d6-ae4d-4e3d9d795bf9" />
+    </Transition>
+  </State>
+  <State Id="9d03059a-4168-4ffa-ae74-b8909509062f" Name="State1">
+    <Transition Id="69f93434-e770-405d-b1a6-e6e978deebed" Condition="F">
+      <StateBaseSourceRef link="9d03059a-4168-4ffa-ae74-b8909509062f" />
+      <StateBaseTargetRef link="db7dfa29-599b-49b7-ac80-38000411ef62" />
+    </Transition>
+    <Transition Id="67a85b57-d10f-4328-9a21-c2cf4dc57d97" Condition="T">
+      <StateBaseSourceRef link="9d03059a-4168-4ffa-ae74-b8909509062f" />
+      <StateBaseTargetRef link="9d03059a-4168-4ffa-ae74-b8909509062f" />
+    </Transition>
+  </State>
+  <State Id="db7dfa29-599b-49b7-ac80-38000411ef62" Name="State2">
+    <Transition Id="59018a5f-369f-4a10-895c-7946804a5880" Condition="x">
+      <StateBaseSourceRef link="db7dfa29-599b-49b7-ac80-38000411ef62" />
+      <StateBaseTargetRef link="38766668-8ff2-4cf2-83c0-6b499a5cf046" />
+    </Transition>
+  </State>
+  <State Id="38766668-8ff2-4cf2-83c0-6b499a5cf046" Name="State3">
+    <Transition Id="d3335dae-741b-43b5-8fd7-33a2e559933c" Condition="2">
+      <StateBaseSourceRef link="38766668-8ff2-4cf2-83c0-6b499a5cf046" />
+      <StateBaseTargetRef link="63a59fd0-7e65-419c-8f0c-bed8c9e37dd4" />
+    </Transition>
+  </State>
+  <StartState Id="24b0dee0-1b97-4c70-9ef1-8b324aa132f1">
+    <Transition Id="633f63b1-6339-4013-906b-93b9d3e2c7a0" Condition="1">
+      <StateBaseSourceRef link="24b0dee0-1b97-4c70-9ef1-8b324aa132f1" />
+      <StateBaseTargetRef link="63a59fd0-7e65-419c-8f0c-bed8c9e37dd4" />
+    </Transition>
+    <Transition Id="a34721f7-cdb6-4806-97a2-eb7ed04b1d8d" Condition="2">
+      <StateBaseSourceRef link="24b0dee0-1b97-4c70-9ef1-8b324aa132f1" />
+      <StateBaseTargetRef link="c5fe444d-8d9e-41d6-ae4d-4e3d9d795bf9" />
+    </Transition>
+  </StartState>
+  <EndState Id="63a59fd0-7e65-419c-8f0c-bed8c9e37dd4" />
+</StateMachineDomainModel>

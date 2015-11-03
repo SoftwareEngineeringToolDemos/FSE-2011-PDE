@@ -1,0 +1,675 @@
+﻿<#@ template language="C#" inherits="BaseTemplate"#> 
+<#@ import namespace="Tum.PDE.LanguageDSL"#>
+<#@ import namespace="Microsoft.VisualStudio.Modeling" #>
+<#@ import namespace="System.Collections" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Collections.ObjectModel" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+using DslModeling = global::Microsoft.VisualStudio.Modeling;
+using DslEditorDiagrams = global::Tum.PDE.ToolFramework.Modeling.Diagrams;
+
+<#
+GenerateDiagramsSerializer(this.MetaModel);
+#>
+
+<#+ 
+public void GenerateDiagramsSerializer(MetaModel dm)
+{
+	foreach(DiagramClass diagram in dm.AllDiagramClasses)
+	{
+		if( diagram is TemplatedDiagramViewModelOnly )
+			continue;		
+#>
+namespace <#= dm.Namespace #>
+{
+	/// <summary>
+	/// Serializer <#= diagram.Name #>Serializer for <#= diagram.Name #>.
+	///
+	/// This is the double derived class for easier customization.
+	/// </summary>
+	public partial class <#= this.MetaModel.Name #><#= diagram.Name #>Serializer : <#= this.MetaModel.Name #><#= diagram.Name #>SerializerBase
+	{
+		#region Constructor
+		/// <summary>
+		/// <#= diagram.Name #>Serializer Constructor
+		/// </summary>
+		public <#= this.MetaModel.Name #><#= diagram.Name #>Serializer ()
+			: base ()
+		{
+		}
+		#endregion
+	}
+	
+	/// <summary>
+	/// Serializer <#= diagram.Name #>SerializerBase for <#= diagram.Name #>.
+	/// </summary>
+	public abstract partial class <#= this.MetaModel.Name #><#= diagram.Name #>SerializerBase : DslEditorDiagrams::DiagramSerializer
+	{
+		#region Constructor
+		/// <summary>
+		/// <#= diagram.Name #>SerializerBase Constructor
+		/// </summary>
+		protected <#= this.MetaModel.Name #><#= diagram.Name #>SerializerBase ()
+			: base ()
+		{
+		}
+		#endregion
+	
+		#region Create Instance
+		/// <summary>
+		/// This method creates an instance of <#= diagram.Name #> based on the tag currently pointed by the reader. The reader is guaranteed (by the caller)
+		/// to be pointed at a serialized instance of <#= diagram.Name #>.
+		/// </summary>
+		/// <remarks>
+		/// The caller will guarantee that the reader is positioned at open XML tag of the ModelRoot instance being read. This method should
+		/// not move the reader; the reader should remain at the same position when this method returns.
+		/// </remarks>
+		/// <param name="serializationContext">Serialization context.</param>
+		/// <param name="reader">XmlReader to read serialized data from.</param>
+		/// <param name="partition">Partition in which new <#= diagram.Name #> instance should be created.</param>	
+		/// <returns>Created <#= diagram.Name #> instance.</returns>
+		protected override DslModeling::ModelElement CreateInstance(DslModeling::SerializationContext serializationContext, global::System.Xml.XmlReader reader, DslModeling::Partition partition)
+		{
+			string idStr = reader.GetAttribute ("Id");
+			try
+			{
+				global::System.Guid id;
+				if (string.IsNullOrEmpty(idStr))
+				{	// Create a default Id.
+					id = global::System.Guid.NewGuid();
+					<#= this.MetaModel.Name #>SerializationBehaviorSerializationMessages.MissingId(serializationContext, reader, id);
+				}
+				else
+				{
+					id = new global::System.Guid (idStr);
+				}
+				return new <#= diagram.Name #>(partition, new DslModeling::PropertyAssignment(DslModeling::ElementFactory.IdPropertyAssignment, id));
+			}
+		catch (global::System.ArgumentNullException /* anEx */)
+		{	
+			<#= this.MetaModel.Name #>SerializationBehaviorSerializationMessages.InvalidPropertyValue(serializationContext, reader, "Id", typeof(global::System.Guid), idStr);
+		}
+		catch (global::System.FormatException /* fEx */)
+		{
+			<#= this.MetaModel.Name #>SerializationBehaviorSerializationMessages.InvalidPropertyValue(serializationContext, reader, "Id", typeof(global::System.Guid), idStr);
+		}
+		catch (global::System.OverflowException /* ofEx */)
+		{
+			<#= this.MetaModel.Name #>SerializationBehaviorSerializationMessages.InvalidPropertyValue(serializationContext, reader, "Id", typeof(global::System.Guid), idStr);
+		}
+			return null;
+		}		
+		#endregion
+		
+		#region Public Properties
+<#+
+			string nameCamelCased = CodeGenerationUtilities.GetCamelCase(diagram.Name);
+#>			
+		/// <summary>
+		/// This is the XML tag name used to serialize an instance of <#= diagram.Name #>.
+		/// </summary>
+		public override string XmlTagName
+		{
+			[global::System.Diagnostics.DebuggerStepThrough]
+			get { return @"<#= this.MetaModel.Name #><#= nameCamelCased #>"; }
+		}
+	
+		/// <summary>
+		/// This is the XML tag name used to serialize a monikerized instance of <#= diagram.Name #>.
+		/// </summary>
+		public override string MonikerTagName
+		{
+			[global::System.Diagnostics.DebuggerStepThrough]
+			get { return @"<#= this.MetaModel.Name #><#= nameCamelCased #>Moniker"; }
+		}
+		
+		/// <summary>
+		/// This is the name of the XML attribute that stores the moniker of <#= diagram.Name #> in a serialized monikerized instance.
+		/// </summary>
+		public override string MonikerAttributeName
+		{
+			[global::System.Diagnostics.DebuggerStepThrough]
+			get { return @"Id"; }
+		}
+		#endregion		
+	}
+}
+
+<#+
+		
+		foreach (PresentationElementClass element in diagram.PresentationElements)
+		{
+			string baseClass = "DslEditorDiagrams::NodeShapeSerializer";
+			if( !(element is ShapeClass) )
+				baseClass = "DslEditorDiagrams::LinkShapeSerializer";
+			else if( element is ShapeClass )
+			{
+				if( (element as ShapeClass).BaseShape != null )
+					baseClass = (element as ShapeClass).BaseShape.GetMetaModel().Namespace + "." + (element as ShapeClass).BaseShape.GetMetaModel().Name + (element as ShapeClass).BaseShape.Name + "Serializer";
+			}
+#>
+namespace <#= dm.Namespace #>
+{
+	/// <summary>
+	/// Serializer <#= element.Name #>Serializer for <#= element.Name #>.
+	///
+	/// This is the double derived class for easier customization.
+	/// </summary>
+	public partial class <#= this.MetaModel.Name #><#= element.Name #>Serializer : <#= this.MetaModel.Name #><#= element.Name #>SerializerBase
+	{
+		#region Constructor
+		/// <summary>
+		/// <#= element.Name #>Serializer Constructor
+		/// </summary>
+		public <#= this.MetaModel.Name #><#= element.Name #>Serializer ()
+			: base ()
+		{
+		}
+		#endregion
+	}
+	
+	/// <summary>
+	/// Serializer <#= element.Name #>SerializerBase for <#= element.Name #>.
+	/// </summary>
+	public abstract partial class <#= this.MetaModel.Name #><#= element.Name #>SerializerBase : <#= baseClass #>
+	{
+		#region Constructor
+		/// <summary>
+		/// <#= element.Name #>SerializerBase Constructor
+		/// </summary>
+		protected <#= this.MetaModel.Name #><#= element.Name #>SerializerBase ()
+			: base ()
+		{
+		}
+		#endregion
+
+		#region Public Properties
+<#+
+			nameCamelCased = CodeGenerationUtilities.GetCamelCase(element.Name);
+#>			
+		/// <summary>
+		/// This is the XML tag name used to serialize an instance of <#= element.Name #>.
+		/// </summary>
+		public override string XmlTagName
+		{
+			[global::System.Diagnostics.DebuggerStepThrough]
+			get { return @"<#= this.MetaModel.Name #><#= nameCamelCased #>"; }
+		}
+	
+		/// <summary>
+		/// This is the XML tag name used to serialize a monikerized instance of <#= element.Name #>.
+		/// </summary>
+		public override string MonikerTagName
+		{
+			[global::System.Diagnostics.DebuggerStepThrough]
+			get { return @"<#= this.MetaModel.Name #><#= nameCamelCased #>Moniker"; }
+		}
+		
+		/// <summary>
+		/// This is the name of the XML attribute that stores the moniker of <#= element.Name #> in a serialized monikerized instance.
+		/// </summary>
+		public override string MonikerAttributeName
+		{
+			[global::System.Diagnostics.DebuggerStepThrough]
+			get { return @"Id"; }
+		}
+		
+        /// <summary>
+        /// Gets the shape class Id.
+        /// </summary>
+        /// <returns></returns>
+        public override System.Guid GetShapeClassId()
+        {
+            return <#= element.GetFullName(true) #>.DomainClassId;
+        }		
+		#endregion		
+	
+        #region Read Methods
+        /// <summary>
+        /// This method deserializes all properties that are serialized as XML attributes.
+        /// </summary>
+        /// <remarks>
+        /// Because this method only handles properties serialized as XML attributes, the passed-in reader shouldn't be moved inside this method.
+        /// The caller will guarantee that the reader is positioned on the open XML tag of the current element being deserialized.
+        /// </remarks>
+        /// <param name="serializationContext">Serialization context.</param>
+        /// <param name="element">In-memory NodeShape instance that will get the deserialized data.</param>
+        /// <param name="reader">XmlReader to read serialized data from.</param>
+        protected override void ReadPropertiesFromAttributes(DslModeling.SerializationContext serializationContext, DslModeling.ModelElement element, System.Xml.XmlReader reader)
+        {
+            base.ReadPropertiesFromAttributes(serializationContext, element, reader);
+
+<#+
+			foreach(DomainProperty p in element.Properties)
+			{
+				if( p.SerializationRepresentationType != SerializationRepresentationType.Attribute )
+					continue;
+#>
+			if (!serializationContext.Result.Failed)
+			{
+				ReadPropertyAsAttribute<#= p.Name #>(serializationContext, element as <#= element.GetFullName(true) #>, reader);
+			}
+<#+
+			}
+#>
+        }
+		
+<#+
+			foreach(DomainProperty p in element.Properties)
+			{				
+				string isReq = "false";
+				if( p.IsRequired )
+					isReq = "true";
+				
+				if( p.SerializationRepresentationType != SerializationRepresentationType.Attribute )
+					continue;
+				
+				string modifier = "";
+				if( element is ShapeClass )
+					if( CodeGenerationUtilities.HasProperty((element as ShapeClass).BaseShape, p.Name))
+						modifier = "new ";
+#>
+		/// <summary>
+		/// Read property <#= p.Name #> that needed to be serialized as XML attribute.
+		/// </summary>
+		/// <param name="serializationContext">Serialization context.</param>
+		/// <param name="instance"><#= element.Name #> instance to be serialized.</param>
+		/// <param name="reader">XmlReader.</param> 
+		[global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Generated code.")]
+		protected <#= modifier #>virtual void ReadPropertyAsAttribute<#= p.Name #>(DslModeling::SerializationContext serializationContext, <#= element.GetFullName(true) #> instance, global::System.Xml.XmlReader reader)
+		{
+<#+
+				if( p.SerializationName == "" )
+				{
+#>
+			Error because the SerializationName of DomainProperty (<#= p.Name #>) is empty.
+<#+
+				}
+				else
+				{
+#>
+			// <#= p.Name #>
+			if (!serializationContext.Result.Failed)
+			{
+				string attribValue = <#= this.MetaModel.Name #>SerializationHelper.Instance.ReadAttribute(serializationContext, instance, reader, "<#= p.SerializationName #>");
+				if( attribValue != null )
+					instance.<#= p.Name #> = <#= p.Type.MetaModel.GetFullName(true) #>SerializationHelper.Instance.ConvertTypedObjectFrom(serializationContext, instance, "<#= p.Name #>", attribValue, typeof(<#= CodeGenerationUtilities.GetDomainTypeFullName(p) #>), <#= isReq #>) as <#= CodeGenerationUtilities.GetDomainTypeFullName(p) #>;
+			}
+<#+			
+				}				
+#>				
+		}
+<#+
+			}
+#>
+
+        /// <summary>
+        /// This methods deserializes nested XML elements inside the passed-in element.
+        /// </summary>
+        /// <remarks>
+        /// The caller will guarantee that the current element does have nested XML elements, and the call will position the 
+        /// reader at the open tag of the first child XML element.
+        /// This method will read as many child XML elements as it can. It returns under three circumstances:
+        /// 1) When an unknown child XML element is encountered. In this case, this method will position the reader at the open 
+        ///    tag of the unknown element. This implies that if the first child XML element is unknown, this method should return 
+        ///    immediately and do nothing.
+        /// 2) When all child XML elemnets are read. In this case, the reader will be positioned at the end tag of the parent element.
+        /// 3) EOF.
+        /// </remarks>
+        /// <param name="serializationContext">Serialization context.</param>
+        /// <param name="element">In-memory NodeShape instance that will get the deserialized data.</param>
+        /// <param name="reader">XmlReader to read serialized data from.</param>
+        protected override void ReadElements(DslModeling.SerializationContext serializationContext, DslModeling.ModelElement element, System.Xml.XmlReader reader)
+        {
+            base.ReadElements(serializationContext, element, reader);
+			
+			while (!serializationContext.Result.Failed && !reader.EOF && reader.NodeType == global::System.Xml.XmlNodeType.Element)
+			{
+				switch (reader.LocalName)
+				{			
+<#+
+			foreach(DomainProperty p in element.Properties)
+			{
+				if( p.SerializationRepresentationType != SerializationRepresentationType.Element )
+					continue;
+				
+				if( p.SerializationName == "" )
+				{
+#>
+		Error because the SerializationName of SerializedDomainProperty (<#= p.Name #>) is empty.
+<#+
+				}
+				else
+				{			
+#>
+					case "<#= p.SerializationName #>":
+						ReadPropertyAsElement<#= p.Name #>(serializationContext, element as <#= element.GetFullName(true) #>, reader);
+						break;
+<#+
+				}
+			}
+#>
+					default:
+						return;  // Don't know this element.
+				}
+			}
+        }
+		
+<#+
+			foreach(DomainProperty p in element.Properties)
+			{
+				string isReq = "false";
+				if( p.IsRequired )
+					isReq = "true";
+				
+				if( p.SerializationRepresentationType != SerializationRepresentationType.Element )
+					continue;
+				
+				string modifier = "virtual";
+				if( element is ShapeClass )
+					if( CodeGenerationUtilities.HasProperty((element as ShapeClass).BaseShape, p.Name))
+						modifier = "override";
+#>
+		/// <summary>
+		/// Write property <#= p.Name #> that need to be serialized as XML element.
+		/// </summary>
+		/// <param name="serializationContext">Serialization context.</param>
+		/// <param name="instance"><#= element.Name #> instance to be serialized.</param>
+		/// <param name="reader">XmlWriter to write serialized data to.</param> 
+		[global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Generated code.")]
+		protected <#= modifier #> void ReadPropertyAsElement<#= p.Name #>(DslModeling::SerializationContext serializationContext, <#= element.GetFullName(true) #> instance, global::System.Xml.XmlReader reader)
+		{
+			if (reader.IsEmptyElement)
+			{	// No serialized value, must be default one.
+				DslModeling::SerializationUtilities.Skip(reader);  // Skip this tag.
+			}
+			else
+			{
+<#+
+				if( p.Type.SerializationStyle == SerializationStyle.CDATA )					
+				{
+#>
+				string str<#= p.Name #> = <#= this.MetaModel.Name #>SerializationHelper.Instance.ReadElementCDATAContentAsString(serializationContext, instance, reader);
+<#+
+				}
+				else
+				{
+#>
+				string str<#= p.Name #> = <#= this.MetaModel.Name #>SerializationHelper.Instance.ReadElementContentAsString(serializationContext, instance, reader);
+<#+
+				}
+#>
+						
+				<#= CodeGenerationUtilities.GetDomainTypeFullName(p) #> valueOf<#= p.Name #> = <#= p.Type.MetaModel.GetFullName(true) #>SerializationHelper.Instance.ConvertTypedObjectFrom(serializationContext, instance, "<#= p.Name #>", str<#= p.Name #>, typeof(<#= CodeGenerationUtilities.GetDomainTypeFullName(p) #>), <#= isReq #>) as <#= CodeGenerationUtilities.GetDomainTypeFullName(p) #>;
+				instance.<#= p.Name #> = valueOf<#= p.Name #>;
+				DslModeling::SerializationUtilities.Skip(reader);
+			}
+		}
+<#+
+			}
+#>
+        #endregion
+
+        #region Write Methods
+        /// <summary>
+        /// Write all properties that need to be serialized as XML attributes.
+        /// </summary>
+        /// <param name="serializationContext">Serialization context.</param>
+        /// <param name="element">NodeShape instance to be serialized.</param>
+        /// <param name="writer">XmlWriter to write serialized data to.</param> 
+        protected override void WritePropertiesAsAttributes(DslModeling.SerializationContext serializationContext, DslModeling.ModelElement element, System.Xml.XmlWriter writer)
+        {
+            base.WritePropertiesAsAttributes(serializationContext, element, writer);
+
+<#+
+			foreach(DomainProperty p in element.Properties )
+			{
+				if( p.SerializationRepresentationType != SerializationRepresentationType.Attribute )
+					continue;
+#>
+			if (!serializationContext.Result.Failed)
+			{
+				WritePropertyAsAttribute<#= p.Name #>(serializationContext, element as <#= element.GetFullName(true) #>, writer);
+			}
+<#+					
+			}
+#>
+        }
+
+<#+
+			foreach(DomainProperty p in element.Properties )
+			{
+				string isReq = "false";
+				if( p.IsRequired )
+					isReq = "true";
+				
+				if( p.SerializationRepresentationType != SerializationRepresentationType.Attribute )
+					continue;
+
+				string modifier ="virtual";
+				if( element is ShapeClass )
+					if( CodeGenerationUtilities.HasProperty((element as ShapeClass).BaseShape, p.Name))
+						modifier = "override";
+#>
+		/// <summary>
+		/// Write property <#= p.Name #> that need to be serialized as XML attribute.
+		/// </summary>
+		/// <param name="serializationContext">Serialization context.</param>
+		/// <param name="instance"><#= element.Name #> instance to be serialized.</param>
+		/// <param name="writer">XmlWriter to write serialized data to.</param> 
+		[global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Generated code.")]
+		protected <#= modifier #> void WritePropertyAsAttribute<#= p.Name #>(DslModeling::SerializationContext serializationContext, <#= element.GetFullName(true) #> instance, global::System.Xml.XmlWriter writer)
+		{
+			// <#= p.Name #>
+			object value<#= p.Name #> = <#= p.Type.MetaModel.GetFullName(true) #>SerializationHelper.Instance.ConvertTypedObjectTo(serializationContext,instance, "<#= p.Name #>" ,instance.<#= p.Name #>, typeof(<#= CodeGenerationUtilities.GetDomainTypeFullName(p) #>), <#= isReq #>);
+<#+
+		if( String.IsNullOrEmpty(p.DefaultValue) )
+		{
+#>
+			if( value<#= p.Name #> != null )
+			{
+				<#= this.MetaModel.Name #>SerializationHelper.Instance.WriteAttributeString(serializationContext, instance, writer, "<#= p.SerializationName #>", value<#= p.Name #>.ToString());
+			}
+<#+
+		}
+		else
+		{
+#>
+			if( value<#= p.Name #> != null )
+				<#= this.MetaModel.Name #>SerializationHelper.Instance.WriteAttributeString(serializationContext, instance, writer, "<#= p.SerializationName #>", value<#= p.Name #>.ToString());
+			else
+				<#= this.MetaModel.Name #>SerializationHelper.Instance.WriteAttributeString(serializationContext, instance, writer, "<#= p.SerializationName #>", "");
+<#+
+		}
+#>
+		}
+<#+
+			}
+#>
+		
+        /// <summary>
+        /// This methods serializes 1) properties serialized as nested XML elements and 2) child model elements into XML. 
+        /// </summary>
+        /// <param name="serializationContext">Serialization context.</param>
+        /// <param name="element">NodeShape instance to be serialized.</param>
+        /// <param name="writer">XmlWriter to write serialized data to.</param>        
+        protected override void WriteElements(DslModeling.SerializationContext serializationContext, DslModeling.ModelElement element, System.Xml.XmlWriter writer)
+        {
+            base.WriteElements(serializationContext, element, writer);
+			
+<#+
+			foreach(DomainProperty p in element.Properties )
+			{
+				if(p.SerializationRepresentationType != SerializationRepresentationType.Element )
+					continue;
+#>
+			WritePropertyAsElement<#= p.Name #>(serializationContext, element as <#= element.GetFullName(true) #>, writer);
+<#+
+			}
+#>
+		}
+		
+<#+
+			foreach(DomainProperty p in element.Properties )
+			{
+				string isReq = "false";
+				if( p.IsRequired )
+					isReq = "true";
+				
+				if( p.SerializationRepresentationType != SerializationRepresentationType.Element )
+					continue;
+				
+				string modifier ="virtual";
+				if(element is ShapeClass )
+					if( CodeGenerationUtilities.HasProperty((element as ShapeClass).BaseShape, p.Name))
+						modifier = "override";
+#>
+		/// <summary>
+		/// Write property <#= p.Name #> that need to be serialized as XML element.
+		/// </summary>
+		/// <param name="serializationContext">Serialization context.</param>
+		/// <param name="instance"><#= element.Name #> instance to be serialized.</param>
+		/// <param name="writer">XmlWriter to write serialized data to.</param> 
+		[global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "Generated code.")]
+		protected <#= modifier #> void WritePropertyAsElement<#= p.Name #>(DslModeling::SerializationContext serializationContext, <#= element.GetFullName(true) #> instance, global::System.Xml.XmlWriter writer)
+		{
+			if (!serializationContext.Result.Failed)
+			{
+				// <#= p.Name #>
+				object value<#= p.Name #> = <#= p.Type.MetaModel.GetFullName(true) #>SerializationHelper.Instance.ConvertTypedObjectTo(serializationContext,instance, "<#= p.Name #>", instance.<#= p.Name #>, typeof(<#= CodeGenerationUtilities.GetDomainTypeFullName(p) #>), <#= isReq #>);
+
+<#+
+		if( String.IsNullOrEmpty(p.DefaultValue) )
+		{
+#>
+				if( value<#= p.Name #> != null )
+				{
+<#+
+				if( p.Type.SerializationStyle == SerializationStyle.CDATA )
+				{
+#>
+					<#= this.MetaModel.Name #>SerializationHelper.Instance.WriteElementCDATAString(serializationContext, instance, writer, "<#= p.SerializationName #>", value<#= p.Name #>.ToString());				
+<#+
+				}
+				else
+				{
+#>
+					<#= this.MetaModel.Name #>SerializationHelper.Instance.WriteElementString(serializationContext, instance, writer, "<#= p.SerializationName #>", value<#= p.Name #>.ToString());
+<#+
+				}
+#>
+				}
+<#+
+		}
+		else
+		{
+#>
+				if( value<#= p.Name #> != null )
+				{
+<#+
+				if( p.Type.SerializationStyle == SerializationStyle.CDATA )
+				{
+#>
+					<#= this.MetaModel.Name #>SerializationHelper.Instance.WriteElementCDATAString(serializationContext, instance, writer, "<#= p.SerializationName #>", value<#= p.Name #>.ToString());				
+<#+
+				}
+				else
+				{
+#>
+					<#= this.MetaModel.Name #>SerializationHelper.Instance.WriteElementString(serializationContext, instance, writer, "<#= p.SerializationName #>", value<#= p.Name #>.ToString());
+<#+
+				}
+#>
+				}
+				else
+				{
+<#+
+				if( p.Type.SerializationStyle == SerializationStyle.CDATA )
+				{
+#>
+					<#= this.MetaModel.Name #>SerializationHelper.Instance.WriteElementCDATAString(serializationContext, instance, writer, "<#= p.SerializationName #>", "");
+<#+
+				}
+				else
+				{
+#>
+					<#= this.MetaModel.Name #>SerializationHelper.Instance.WriteElementString(serializationContext, instance, writer, "<#= p.SerializationName #>", "");
+<#+
+				}
+#>				
+				}
+<#+			
+		}
+#>			
+			}		
+	}
+<#+
+			}			
+#>
+        #endregion	
+	
+<#+
+		if( element is RelationshipShapeClass )
+		{
+			RelationshipShapeClass shape = element as RelationshipShapeClass;
+			DomainRelationship con = shape.ReferenceRelationship;
+			
+#>
+		#region Shape Helpers
+
+        /// <summary>
+        /// Finds out if a relationship can be assigned automatically between the given source
+		/// and target element.
+        /// </summary>
+        /// <remarks>
+        /// This method is required becase reference relationship do not need to be serialized
+		/// with an id. But shapes still need to be created for them if a visual information
+		/// is provided in the diagrams model.
+        /// </remarks>
+        protected override DslModeling::ModelElement CanAssignRelationship(DslModeling::ModelElement source, DslModeling::ModelElement target)
+        {
+			if( source == null || target == null )
+				return null;
+<#+
+			if( con != null )
+			{			
+#>
+
+			<#= con.GetFullName(true) #> instanceToReturn = null;
+
+			System.Collections.ObjectModel.ReadOnlyCollection<<#= con.GetFullName(true) #>> allM<#= con.Name #>Instances =  DslModeling::DomainRoleInfo.GetElementLinks<<#= con.GetFullName(true) #>>(source, <#= con.GetFullName(true) #>.<#= con.Source.Name #>DomainRoleId);
+			foreach(<#= con.GetFullName(true) #> instance in allM<#= con.Name #>Instances )
+			{
+				if( instance.<#= con.Target.Name #>.Id == target.Id )
+				{
+					if( instanceToReturn == null )
+						instanceToReturn = instance;
+					else
+						return null;
+				}
+			}
+			
+			return instanceToReturn;
+<#+
+			}
+			else
+			{
+#>
+			return null;
+<#+
+			}
+#>
+        }		
+		#endregion
+<#+
+		}
+#>				
+	}
+}
+
+<#+
+		}
+	}
+}
+#>

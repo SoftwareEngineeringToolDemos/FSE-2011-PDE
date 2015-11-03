@@ -1,0 +1,714 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{3DDCE872-AB94-4FFF-BF50-7BF8BE841505}</ProjectGuid>
+    <OutputType>library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Tum.PDE.ToolFramework.Templates</RootNamespace>
+    <AssemblyName>Tum.PDE.ToolFramework.Templates</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>Tum.PDE.ToolFramework.Templates.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualStudio.Modeling.Sdk.10.0, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualStudio.TextTemplating.10.0, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="T4Toolbox.10.0, Version=10.3.7.1, Culture=neutral, PublicKeyToken=7e313accbcce84dc, processorArchitecture=x86" />
+    <Reference Include="Tum.PDE.LanguageDSL.Dsl">
+      <HintPath>..\..\Tum.PDE.LanguageDSL\Tum.PDE.LanguageDSL.Dsl\bin\Debug\Tum.PDE.LanguageDSL.Dsl.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BaseTemplate.cs" />
+    <Compile Include="BaseTemplatePartial.cs" />
+    <Compile Include="ClosuresGenerator.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClosuresGenerator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClosuresGeneratorPartial.cs" />
+    <Compile Include="DiagramGenerator.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DiagramGenerator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DiagramsLinkRulesGenerator.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DiagramsLinkRulesGenerator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DiagramsRulesGenerator.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DiagramsRulesGenerator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DiagramsSerializerGenerator.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DiagramsSerializerGenerator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DiagramsSerializerHelperGenerator.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DiagramsSerializerHelperGenerator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DocumentDataGenerator.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DocumentDataGenerator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DomainClassGenerator.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DomainClassGenerator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DomainClassSerializer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DomainClassSerializer.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DomainClassSerializerPartial.cs" />
+    <Compile Include="DomainEnumerationGenerator.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DomainEnumerationGenerator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DomainEnumerationGeneratorPartial.cs" />
+    <Compile Include="DomainModelDependenciesGenerator.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DomainModelDependenciesGenerator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DomainModelGenerator.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DomainModelGenerator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DomainModelIdProviderGenerator.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DomainModelIdProviderGenerator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DomainModelResxGenerator.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DomainModelResxGenerator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DomainModelServicesGenerator.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DomainModelServicesGenerator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DomainPropertyGenerator.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DomainPropertyGenerator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DomainPropertyGeneratorPartial.cs" />
+    <Compile Include="DomainRelationshipGenerator.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DomainRelationshipGenerator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DomainRoleGenerator.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DomainRoleGenerator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DomainRoleGeneratorPartial.cs" />
+    <Compile Include="DomainValidationGenerator.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DomainValidationGenerator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Generator\BaseGenerator.cs" />
+    <Compile Include="Generator\VSResxGenerator.cs" />
+    <Compile Include="Generator\VSAppGenerator.cs" />
+    <Compile Include="Generator\VSViewModelGenerator.cs" />
+    <Compile Include="Generator\VSModelGenerator.cs" />
+    <Compile Include="Generator\DefaultAppGenerator.cs" />
+    <Compile Include="Generator\DefaultModelGenerator.cs" />
+    <Compile Include="Generator\DefaultViewModelGenerator.cs" />
+    <Compile Include="Generator\LibraryAppGenerator.cs" />
+    <Compile Include="Generator\VSShellGenerator.cs" />
+    <Compile Include="MergeGenerator.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MergeGenerator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MergeGeneratorPartial.cs" />
+    <Compile Include="ModelContextGenerator.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelContextGenerator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="SearchProcessorGenerator.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SearchProcessorGenerator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SerializationHelperGenerator.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SerializationHelperGenerator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SerializerGenerator.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SerializerGenerator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ShapesGenerator.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ShapesGenerator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Shell\ConstantsGenerator.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ConstantsGenerator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Shell\PackageControllerGenerator.cs">
+      <DependentUpon>PackageControllerGenerator.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Shell\Model\DocumentDataGenerator.cs">
+      <DependentUpon>DocumentDataGenerator.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Shell\SourceExtensionGenerator.cs">
+      <DependentUpon>SourceExtensionGenerator.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Shell\Model\ToolboxHelperGenerator.cs">
+      <DependentUpon>ToolboxHelperGenerator.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Shell\Model\SerializationHelperGenerator.cs">
+      <DependentUpon>SerializationHelperGenerator.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Shell\Model\HelpKeywordHelperGenerator.cs">
+      <DependentUpon>HelpKeywordHelperGenerator.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Shell\Model\DirectiveProcessorGenerator.cs">
+      <DependentUpon>DirectiveProcessorGenerator.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Shell\ToolWindowGenerator.cs">
+      <DependentUpon>ToolWindowGenerator.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Shell\PackageGenerator.cs">
+      <DependentUpon>PackageGenerator.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Shell\EditorFactoryGenerator.cs">
+      <DependentUpon>EditorFactoryGenerator.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Shell\DocViewGenerator.cs">
+      <DependentUpon>DocViewGenerator.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Shell\DocDataGenerator.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DocDataGenerator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Shell\ViewModel\WPFApplication\UIGenerator.cs">
+      <DependentUpon>UIGenerator.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Utilities.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Utilities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UtilitiesPartial.cs" />
+    <Compile Include="Utilities\CodeGenerationUtilities.cs" />
+    <Compile Include="Utilities\AttributedDomainElementUtilities.cs" />
+    <Compile Include="Utilities\DiagramUtilities.cs" />
+    <Compile Include="Utilities\DomainClassInheritanceComparer.cs" />
+    <Compile Include="Utilities\DomainPropertyUtilities.cs" />
+    <Compile Include="Utilities\DomainRoleInheritanceComparer.cs" />
+    <Compile Include="Utilities\DomainTypeUtilities.cs" />
+    <Compile Include="Utilities\MetaModelLibraryUtilities.cs" />
+    <Compile Include="Utilities\MetaModelUtilities.cs" />
+    <Compile Include="Utilities\ModelTreeChildElementCreationInfo.cs" />
+    <Compile Include="Utilities\ModelTreeViewModelUtilities.cs" />
+    <None Include="Shell\ConstantsGenerator.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>ConstantsGenerator.cs</LastGenOutput>
+    </None>
+    <None Include="Shell\PackageControllerGenerator.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>PackageControllerGenerator.cs</LastGenOutput>
+    </None>
+    <None Include="Shell\Model\DocumentDataGenerator.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>DocumentDataGenerator.cs</LastGenOutput>
+    </None>
+    <None Include="Shell\SourceExtensionGenerator.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>SourceExtensionGenerator.cs</LastGenOutput>
+    </None>
+    <None Include="Shell\Model\ToolboxHelperGenerator.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>ToolboxHelperGenerator.cs</LastGenOutput>
+    </None>
+    <None Include="Shell\Model\SerializationHelperGenerator.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>SerializationHelperGenerator.cs</LastGenOutput>
+    </None>
+    <None Include="Shell\Model\HelpKeywordHelperGenerator.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>HelpKeywordHelperGenerator.cs</LastGenOutput>
+    </None>
+    <None Include="Shell\Model\DirectiveProcessorGenerator.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>DirectiveProcessorGenerator.cs</LastGenOutput>
+    </None>
+    <None Include="Shell\ToolWindowGenerator.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>ToolWindowGenerator.cs</LastGenOutput>
+    </None>
+    <None Include="Shell\PackageGenerator.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>PackageGenerator.cs</LastGenOutput>
+    </None>
+    <None Include="Shell\EditorFactoryGenerator.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>EditorFactoryGenerator.cs</LastGenOutput>
+    </None>
+    <None Include="Shell\DocViewGenerator.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>DocViewGenerator.cs</LastGenOutput>
+    </None>
+    <None Include="Shell\DocDataGenerator.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>DocDataGenerator.cs</LastGenOutput>
+    </None>
+    <None Include="Shell\ViewModel\WPFApplication\UIGenerator.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>UIGenerator.cs</LastGenOutput>
+    </None>
+    <None Include="ViewModel\CodeExamplesGeneratorHelper.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>CodeExamplesGeneratorHelper1.cs</LastGenOutput>
+    </None>
+    <Compile Include="Utilities\SpecificViewModelsUtilities.cs" />
+    <Compile Include="ViewModel\CodeExamplesGeneratorHelper1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CodeExamplesGeneratorHelper.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\CodeExamplesGeneratorHelperPartial.cs" />
+    <Compile Include="ViewModel\DiagramGeneratorHelper.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DiagramGeneratorHelper.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\DiagramGeneratorHelperPartial.cs" />
+    <Compile Include="ViewModel\DiagramItemViewModelGenerator.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DiagramItemViewModelGenerator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\DiagramLinkViewModelGenerator.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DiagramLinkViewModelGenerator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\DiagramViewModelGenerator.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DiagramViewModelGenerator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\PropertyGridEditorViewModelGenerator.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PropertyGridEditorViewModelGenerator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\PropertyGridViewModelGenerator.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PropertyGridViewModelGenerator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\ServiceRegistrarGenerator.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ServiceRegistrarGenerator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\SpecificViewModelGenerator.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SpecificViewModelGenerator.tt</DependentUpon>
+    </Compile>
+    <None Include="ViewModel\TemplatedDiagramGeneratorHelper.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>TemplatedDiagramGeneratorHelper1.cs</LastGenOutput>
+    </None>
+    <Compile Include="ViewModel\TemplatedDiagramGeneratorHelper1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TemplatedDiagramGeneratorHelper.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\TemplatedDiagramGeneratorHelperPartial.cs" />
+    <Compile Include="ViewModel\TreeViewModelGenerator.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TreeViewModelGenerator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\ViewModelDataGenerator.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ViewModelDataGenerator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Shell\ViewModel\ViewModelGenerator.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ViewModelGenerator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\ViewModelGenerator.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ViewModelGenerator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\ViewModelOptionsGenerator.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ViewModelOptionsGenerator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Shell\ViewModel\WPFApplication\LayoutManagerLayoutGenerator.cs">
+      <DependentUpon>LayoutManagerLayoutGenerator.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Shell\ViewModel\WPFApplication\LayoutManagerDVGenerator.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LayoutManagerDVGenerator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\WPFApplication\AppGenerator.cs">
+      <DependentUpon>AppGenerator.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ViewModel\WPFApplication\RibbonGeneratorHelperPartial.cs" />
+    <Compile Include="ViewModel\WPFApplication\RibbonGeneratorHelper.cs">
+      <DependentUpon>RibbonGeneratorHelper.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="ViewModel\WPFApplication\LayoutManagerDVGenerator.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LayoutManagerDVGenerator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\WPFApplication\LayoutManagerLayoutGenerator.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LayoutManagerLayoutGenerator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\WPFApplication\ResourceDictionaryGenerator.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ResourceDictionaryGenerator.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\WPFApplication\UIGenerator.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UIGenerator.tt</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="ClosuresGenerator.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>ClosuresGenerator.cs</LastGenOutput>
+    </None>
+    <None Include="DiagramGenerator.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>DiagramGenerator.cs</LastGenOutput>
+    </None>
+    <None Include="DiagramsLinkRulesGenerator.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>DiagramsLinkRulesGenerator.cs</LastGenOutput>
+    </None>
+    <None Include="DiagramsRulesGenerator.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>DiagramsRulesGenerator.cs</LastGenOutput>
+    </None>
+    <None Include="DiagramsSerializerGenerator.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>DiagramsSerializerGenerator.cs</LastGenOutput>
+    </None>
+    <None Include="DiagramsSerializerHelperGenerator.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>DiagramsSerializerHelperGenerator.cs</LastGenOutput>
+    </None>
+    <None Include="DocumentDataGenerator.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>DocumentDataGenerator.cs</LastGenOutput>
+    </None>
+    <None Include="DomainClassSerializer.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>DomainClassSerializer.cs</LastGenOutput>
+    </None>
+    <None Include="DomainEnumerationGenerator.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>DomainEnumerationGenerator.cs</LastGenOutput>
+    </None>
+    <None Include="DomainModelDependenciesGenerator.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>DomainModelDependenciesGenerator.cs</LastGenOutput>
+    </None>
+    <None Include="DomainModelGenerator.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>DomainModelGenerator.cs</LastGenOutput>
+    </None>
+    <None Include="DomainModelIdProviderGenerator.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>DomainModelIdProviderGenerator.cs</LastGenOutput>
+    </None>
+    <None Include="DomainModelResxGenerator.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>DomainModelResxGenerator.cs</LastGenOutput>
+    </None>
+    <None Include="DomainModelServicesGenerator.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>DomainModelServicesGenerator.cs</LastGenOutput>
+    </None>
+    <None Include="DomainPropertyGenerator.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>DomainPropertyGenerator.cs</LastGenOutput>
+    </None>
+    <None Include="DomainRelationshipGenerator.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>DomainRelationshipGenerator.cs</LastGenOutput>
+    </None>
+    <None Include="DomainRoleGenerator.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>DomainRoleGenerator.cs</LastGenOutput>
+    </None>
+    <None Include="DomainValidationGenerator.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>DomainValidationGenerator.cs</LastGenOutput>
+    </None>
+    <None Include="MergeGenerator.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>MergeGenerator.cs</LastGenOutput>
+    </None>
+    <None Include="ModelContextGenerator.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>ModelContextGenerator.cs</LastGenOutput>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+    <None Include="DomainClassGenerator.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>DomainClassGenerator.cs</LastGenOutput>
+    </None>
+    <None Include="SearchProcessorGenerator.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>SearchProcessorGenerator.cs</LastGenOutput>
+    </None>
+    <None Include="SerializationHelperGenerator.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>SerializationHelperGenerator.cs</LastGenOutput>
+    </None>
+    <None Include="SerializerGenerator.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>SerializerGenerator.cs</LastGenOutput>
+    </None>
+    <None Include="ShapesGenerator.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>ShapesGenerator.cs</LastGenOutput>
+    </None>
+    <None Include="Tum.PDE.ToolFramework.Templates.snk" />
+    <None Include="Utilities.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>Utilities.cs</LastGenOutput>
+    </None>
+    <None Include="ViewModel\DiagramGeneratorHelper.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>DiagramGeneratorHelper.cs</LastGenOutput>
+    </None>
+    <None Include="ViewModel\DiagramItemViewModelGenerator.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>DiagramItemViewModelGenerator.cs</LastGenOutput>
+    </None>
+    <None Include="ViewModel\DiagramLinkViewModelGenerator.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>DiagramLinkViewModelGenerator.cs</LastGenOutput>
+    </None>
+    <None Include="ViewModel\DiagramViewModelGenerator.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>DiagramViewModelGenerator.cs</LastGenOutput>
+    </None>
+    <None Include="ViewModel\PropertyGridEditorViewModelGenerator.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>PropertyGridEditorViewModelGenerator.cs</LastGenOutput>
+    </None>
+    <None Include="ViewModel\PropertyGridViewModelGenerator.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>PropertyGridViewModelGenerator.cs</LastGenOutput>
+    </None>
+    <None Include="ViewModel\ServiceRegistrarGenerator.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>ServiceRegistrarGenerator.cs</LastGenOutput>
+    </None>
+    <None Include="ViewModel\SpecificViewModelGenerator.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>SpecificViewModelGenerator.cs</LastGenOutput>
+    </None>
+    <None Include="ViewModel\TreeViewModelGenerator.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>TreeViewModelGenerator.cs</LastGenOutput>
+    </None>
+    <None Include="ViewModel\ViewModelDataGenerator.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>ViewModelDataGenerator.cs</LastGenOutput>
+    </None>
+    <None Include="Shell\ViewModel\ViewModelGenerator.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>ViewModelGenerator.cs</LastGenOutput>
+    </None>
+    <None Include="ViewModel\ViewModelGenerator.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>ViewModelGenerator.cs</LastGenOutput>
+    </None>
+    <None Include="Shell\ViewModel\WPFApplication\LayoutManagerLayoutGenerator.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>LayoutManagerLayoutGenerator.cs</LastGenOutput>
+    </None>
+    <None Include="Shell\ViewModel\WPFApplication\LayoutManagerDVGenerator.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>LayoutManagerDVGenerator.cs</LastGenOutput>
+    </None>
+    <None Include="ViewModel\WPFApplication\AppGenerator.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>AppGenerator.cs</LastGenOutput>
+    </None>
+    <None Include="ViewModel\WPFApplication\RibbonGeneratorHelper.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>RibbonGeneratorHelper.cs</LastGenOutput>
+    </None>
+    <None Include="ViewModel\WPFApplication\LayoutManagerDVGenerator.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>LayoutManagerDVGenerator.cs</LastGenOutput>
+    </None>
+    <None Include="ViewModel\WPFApplication\LayoutManagerLayoutGenerator.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>LayoutManagerLayoutGenerator.cs</LastGenOutput>
+    </None>
+    <None Include="ViewModel\WPFApplication\ResourceDictionaryGenerator.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>ResourceDictionaryGenerator.cs</LastGenOutput>
+    </None>
+    <None Include="ViewModel\WPFApplication\UIGenerator.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>UIGenerator.cs</LastGenOutput>
+    </None>
+    <None Include="ViewModel\ViewModelOptionsGenerator.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>ViewModelOptionsGenerator.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

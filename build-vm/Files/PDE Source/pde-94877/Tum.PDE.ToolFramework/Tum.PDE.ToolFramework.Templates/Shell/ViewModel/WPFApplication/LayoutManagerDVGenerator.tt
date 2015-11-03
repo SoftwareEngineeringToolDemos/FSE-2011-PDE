@@ -1,0 +1,44 @@
+﻿<#@ template language="C#" inherits="BaseTemplate"#> 
+<#@ import namespace="Tum.PDE.LanguageDSL"#>
+<#@ output extension=".txt" #>
+<# 
+	GenerateLayoutManagerDV(this.MetaModel);
+#>
+<#+ 
+public void GenerateLayoutManagerDV(MetaModel dm)
+{
+	foreach(BaseModelContext modelContext in this.MetaModel.ModelContexts)	
+		if( modelContext is ModelContext)
+		{	
+			string diagramDesignerClassName = "DesignerDiagramSurfaceDockWindowPane";
+			foreach( DiagramClass diagramClass in (modelContext as ModelContext).DiagramClasses)
+				if( diagramClass is DesignerDiagramClass )
+					diagramDesignerClassName = diagramClass.Name + "SurfaceDockWindowPane";
+	
+/*string strAdd = "";
+for(int i = 1; i < this.MetaModel.AllDiagramClasses.Count; i++)
+{
+	DiagramClass diagramClass = this.MetaModel.AllDiagramClasses[i];
+	strAdd +="," + diagramClass.Name + "SurfaceDockWindowPane";
+}*/
+
+			string strDef = "";
+
+			if( this.MetaModel.View.CreateModelTree )
+				strDef +="ModelTreeViewDockWindow";
+			if( this.MetaModel.View.CreateErrorList )
+				strDef +=",ErrorListDockWindow";
+			if( this.MetaModel.View.CreatePropertyGrid )
+				strDef +=",PropertiesDockWindowPane";
+			//if( this.MetaModel.View.CreateDependenciesView )
+			//	strDef +=",DependenciesDockWindowPane";
+
+			strDef +="," + diagramDesignerClassName; // + ",SearchResultViewModel,SearchViewModel";
+		
+
+#>
+<#= modelContext.Name #>:::<#= strDef #>
+<#+
+		}
+}
+#>

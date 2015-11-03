@@ -1,0 +1,110 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Style TargetType="{x:Type ListBoxItem}" x:Key="BackstageListBoxItem">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                    <Grid Margin="0,3">
+                        <Border x:Name="border" BorderBrush="{DynamicResource TransparentBrush}" BorderThickness="1" Margin="0" CornerRadius="3" Background="{DynamicResource TransparentBrush}">
+                            <Border x:Name="border1" BorderBrush="{DynamicResource TransparentBrush}" BorderThickness="1" CornerRadius="2" Background="{DynamicResource TransparentBrush}">
+                                <ContentPresenter Margin="5,5,15,5"/>
+                            </Border>
+                        </Border>
+                        <Path x:Name="path" Data="M1,0L0,1 1,2" Fill="#FFF4F4F5" HorizontalAlignment="Right" Height="11" Margin="0,0,-0.4,0" StrokeStartLineCap="Flat" Stretch="Fill" StrokeEndLineCap="Flat" Stroke="{DynamicResource RibbonTopBorderBrush}" StrokeThickness="1" StrokeMiterLimit="10" StrokeLineJoin="Miter" VerticalAlignment="Center" Width="6" Visibility="Collapsed"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Selector.IsSelected" Value="True">
+                            <Setter Property="Visibility" TargetName="path" Value="Visible"/>
+                            <Setter Property="Background" TargetName="border" Value="{DynamicResource ButtonPressedOuterBackgroundBrush}"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource ButtonPressedOuterBorderBrush}"/>
+                            <Setter Property="BorderBrush" TargetName="border1" Value="{DynamicResource ButtonPressedInnerBorderBrush}"/>
+                            <Setter Property="Background" TargetName="border1" Value="{DynamicResource ButtonPressedInnerBackgroundBrush}"/>
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True"/>
+                                <Condition Property="Selector.IsSelected" Value="False"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Background" TargetName="border" Value="{DynamicResource ButtonHoverOuterBackgroundBrush}"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource ButtonHoverOuterBorderBrush}"/>
+                            <Setter Property="BorderBrush" TargetName="border1" Value="{DynamicResource ButtonHoverInnerBorderBrush}"/>
+                            <Setter Property="Background" TargetName="border1" Value="{DynamicResource ButtonHoverInnerBackgroundBrush}"/>
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type ListBoxItem}" x:Key="BackstageListBoxItemNoSelection">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                    <Grid Margin="0,3">
+                        <Border x:Name="border" BorderBrush="{DynamicResource TransparentBrush}" BorderThickness="1" Margin="0" CornerRadius="3" Background="{DynamicResource TransparentBrush}">
+                            <Border x:Name="border1" BorderBrush="{DynamicResource TransparentBrush}" BorderThickness="1" CornerRadius="2" Background="{DynamicResource TransparentBrush}">
+                                <ContentPresenter Margin="5,5,15,5"/>
+                            </Border>
+                        </Border>
+                        <Path x:Name="path" Data="M1,0L0,1 1,2" Fill="#FFF4F4F5" HorizontalAlignment="Right" Height="11" Margin="0,0,-0.4,0" StrokeStartLineCap="Flat" Stretch="Fill" StrokeEndLineCap="Flat" Stroke="{DynamicResource RibbonTopBorderBrush}" StrokeThickness="1" StrokeMiterLimit="10" StrokeLineJoin="Miter" VerticalAlignment="Center" Width="6" Visibility="Collapsed"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <!--<Trigger Property="Selector.IsSelected" Value="True">
+                            <Setter Property="Visibility" TargetName="path" Value="Visible"/>
+                            <Setter Property="Background" TargetName="border" Value="{DynamicResource ButtonPressedOuterBackgroundBrush}"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource ButtonPressedOuterBorderBrush}"/>
+                            <Setter Property="BorderBrush" TargetName="border1" Value="{DynamicResource ButtonPressedInnerBorderBrush}"/>
+                            <Setter Property="Background" TargetName="border1" Value="{DynamicResource ButtonPressedInnerBackgroundBrush}"/>
+                        </Trigger>-->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True"/>
+                                <!--<Condition Property="Selector.IsSelected" Value="False"/>-->
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Background" TargetName="border" Value="{DynamicResource ButtonHoverOuterBackgroundBrush}"/>
+                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource ButtonHoverOuterBorderBrush}"/>
+                            <Setter Property="BorderBrush" TargetName="border1" Value="{DynamicResource ButtonHoverInnerBorderBrush}"/>
+                            <Setter Property="Background" TargetName="border1" Value="{DynamicResource ButtonHoverInnerBackgroundBrush}"/>
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <DataTemplate x:Key="LinkItemUncategorizedTemplate">
+        <Grid TextOptions.TextFormattingMode="Display">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="48"/>
+                <ColumnDefinition Width="370"/>
+                <ColumnDefinition Width="22"/>
+            </Grid.ColumnDefinitions>
+
+            <Image Source="/Tum.PDE.ToolFramework.Images;component/Views/Information-32.png" Width="32" Height="32" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            
+            <StackPanel Orientation="Vertical" Grid.Column="1">
+                <TextBlock Text="{Binding Path=Titel, Mode=OneWay}" TextTrimming="CharacterEllipsis" FontWeight="Bold"/>
+                <TextBlock Margin="0,2,0,0" Text="{Binding Path=Description, Mode=OneWay}" TextWrapping="WrapWithOverflow"/>
+                <TextBlock Margin="0,2,0,0" Text="{Binding Path=Link, Mode=OneWay}" TextWrapping="WrapWithOverflow" TextDecorations="Underline"/>
+            </StackPanel>
+
+            <Button Width="18" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" Focusable="False" 
+                               BorderBrush="Transparent" BorderThickness="0" Background="Transparent" Padding="0"
+                               Command="{Binding Path=NavigateCommand}">
+                <Image Source="/Tum.PDE.ToolFramework.Images;component/Views/Right-16.png"/>
+            </Button>
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="LinkItemsCategorizedTemplate">
+        <Expander Header="{Binding Path=Category, Mode=OneTime}" IsExpanded="True">
+            <ListBox Width="490" Margin="0, 10, 0, 0" BorderThickness="0" BorderBrush="Transparent" Background="Transparent"
+                         ItemsSource="{Binding Path=LinkItemVMs, Mode=OneWay}"
+                         ItemTemplate="{StaticResource LinkItemUncategorizedTemplate}"
+                         ItemContainerStyle="{DynamicResource BackstageListBoxItemNoSelection}">
+            </ListBox>
+        </Expander>
+    </DataTemplate>
+
+</ResourceDictionary>

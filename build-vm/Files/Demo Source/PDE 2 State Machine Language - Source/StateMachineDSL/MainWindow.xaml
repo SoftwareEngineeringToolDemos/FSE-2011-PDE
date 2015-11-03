@@ -1,0 +1,51 @@
+﻿<mainWnd:DslEditorMainWindow x:Class="Tum.StateMachineDSL.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mainWnd="clr-namespace:Tum.StateMachineDSL.View"
+                             
+    
+    TextOptions.TextFormattingMode="Display" 
+    Height="800" Width="1100" WindowStartupLocation="CenterScreen" WindowState="Maximized"
+                             
+    Title="{Binding Path=WindowTitle, Mode=OneWay}"
+                             
+    xmlns:commands="clr-namespace:Tum.PDE.ToolFramework.Modeling.Visualization.Base.Commands;assembly=Tum.PDE.ToolFramework.Modeling.Visualization.Base">
+    <Window.Resources>
+        <ResourceDictionary>
+            <commands:CommandReference x:Key="DeleteCommandRef" Command="{Binding Path=ActiveViewModel.DeleteCommand}"/>
+            <commands:CommandReference x:Key="CutDeleteCommandRef" Command="{Binding Path=ActiveViewModel.CutCommand}"/>
+            <commands:CommandReference x:Key="CopyCommandRef" Command="{Binding Path=ActiveViewModel.CopyCommand}"/>
+            <commands:CommandReference x:Key="PasteCommandRef" Command="{Binding Path=ActiveViewModel.PasteCommand}"/>
+            <commands:CommandReference x:Key="UndoCommandRef" Command="{Binding Path=ActiveViewModel.UndoCommand}"/>
+            <commands:CommandReference x:Key="RedoCommandRef" Command="{Binding Path=ActiveViewModel.RedoCommand}"/>
+            <commands:CommandReference x:Key="NewModelCommandRef" Command="{Binding Path=NewModelCommand}"/>
+            <commands:CommandReference x:Key="OpenModelCommandRef" Command="{Binding Path=OpenModelCommand}"/>
+            <commands:CommandReference x:Key="SaveModelCommandRef" Command="{Binding Path=SaveModelCommand}"/>
+            <commands:CommandReference x:Key="SaveAsModelCommandRef" Command="{Binding Path=SaveAsModelCommand}"/>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Window.InputBindings>
+        <KeyBinding Command="{StaticResource DeleteCommandRef}" Key="Delete"/>
+
+        <KeyBinding Command="{StaticResource CutDeleteCommandRef}" Key="X" Modifiers="Control"/>
+        <KeyBinding Command="{StaticResource CopyCommandRef}" Key="C" Modifiers="Control"/>
+        <KeyBinding Command="{StaticResource PasteCommandRef}" Key="V" Modifiers="Control"/>
+
+        <KeyBinding Command="{StaticResource UndoCommandRef}" Key="Z" Modifiers="Control"/>
+        <KeyBinding Command="{StaticResource RedoCommandRef}" Key="Y" Modifiers="Control"/>
+
+        <KeyBinding Command="{StaticResource NewModelCommandRef}" Key="N" Modifiers="Control"/>
+        <KeyBinding Command="{StaticResource OpenModelCommandRef}" Key="O" Modifiers="Control"/>
+        <KeyBinding Command="{StaticResource SaveModelCommandRef}" Key="S" Modifiers="Control"/>
+        <KeyBinding Command="{StaticResource SaveAsModelCommandRef}" Key="S" Modifiers="Control+Shift"/>
+    </Window.InputBindings>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <ContentControl x:Name="ribbonContentCtrl" Grid.Row="0"/>
+        <ContentControl x:Name="dockingCtrl" Grid.Row="1"/>
+    </Grid>
+</mainWnd:DslEditorMainWindow>
