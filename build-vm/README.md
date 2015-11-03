@@ -3,7 +3,7 @@ This folder contains files and scripts used to build a virtual machine using Vag
 This VM will contain the "PDE" (Process Development Environment) Tool.
 
 A vagrant tutorial can be found [here] (https://docs.vagrantup.com/v2/getting-started/index.html)  
-The binaries for vagrant can be found [here] (https://www.vagrantup.com/downloads.html) 
+The binaries for vagrant can be found [here] (https://www.vagrantup.com/downloads.html)  
 The binaries and documentation for Oracle Virtual Box can be found [here] (https://www.virtualbox.org/) 
 
 The PDE tool web site is [here] (http://pde.codeplex.com/)
